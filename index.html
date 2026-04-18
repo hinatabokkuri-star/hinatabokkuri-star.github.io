@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hinatabokkuri</title>
+  <meta name="description" content="hinatabokkuri — sound novel, music, game assets">
+  <meta property="og:title" content="hinatabokkuri">
+  <meta property="og:description" content="sound novel / retro RPG / music / assets">
+  <meta property="og:type" content="website">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0e0c0b;
+      --bg2:      #161210;
+      --border:   #2a2420;
+      --amber:    #c8933a;
+      --amber-dim:#8a6127;
+      --text:     #e8e0d4;
+      --text-dim: #8a8078;
+      --green:    #4a7c59;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 56px;
+      background: rgba(14, 12, 11, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: var(--amber);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(200,147,58,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 20% 80%, rgba(74,124,89,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-sub {
+      font-size: 0.78rem;
+      letter-spacing: 0.35em;
+      color: var(--amber);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name span { color: var(--amber); }
+
+    .hero-tagline {
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      margin-bottom: 3rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+    }
+
+    .tag {
+      padding: 0.3rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .tag.accent {
+      border-color: var(--amber-dim);
+      color: var(--amber);
+    }
+
+    /* ── SECTION ── */
+    section {
+      padding: 6rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.4em;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: var(--text);
+    }
+
+    /* ── WORKS GRID ── */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .work-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .work-card:hover {
+      border-color: var(--amber-dim);
+      transform: translateY(-2px);
+    }
+
+    .work-type {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      color: var(--amber);
+      text-transform: uppercase;
+    }
+
+    .work-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .work-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .work-status {
+      margin-top: auto;
+      font-size: 0.72rem;
+      color: var(--green);
+      letter-spacing: 0.1em;
+    }
+
+    .work-status.wip { color: var(--text-dim); }
+
+    /* ── MUSIC ── */
+    .music-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .music-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1rem 1.2rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .music-item:hover { border-color: var(--amber-dim); }
+
+    .music-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 2px;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--amber);
+      font-size: 1rem;
+    }
+
+    .music-info { flex: 1; }
+
+    .music-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .music-meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }
+
+    .music-platform {
+      font-size: 0.7rem;
+      color: var(--amber-dim);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ABOUT ── */
+    .about-body {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      max-width: 600px;
+    }
+
+    .about-body p + p { margin-top: 1em; }
+
+    .about-body strong { color: var(--text); }
+
+    /* ── LINKS ── */
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .link-btn:hover {
+      border-color: var(--amber);
+      color: var(--text);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .lang-toggle:hover { border-color: var(--amber); color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1.2rem; }
+      section { padding: 4rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">hinatabokkuri</a>
+  <ul class="nav-links">
+    <li><a href="#works" data-ja="作品" data-en="Works">作品</a></li>
+    <li><a href="#music" data-ja="音楽" data-en="Music">音楽</a></li>
+    <li><a href="#about" data-ja="About" data-en="About">About</a></li>
+    <li><a href="#links" data-ja="リンク" data-en="Links">リンク</a></li>
+  </ul>
+  <button class="lang-toggle" id="langBtn">EN</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-sub">indie creator</div>
+  <h1 class="hero-name">hinata<span>bokkuri</span></h1>
+  <p class="hero-tagline" data-ja="ゲーム・音楽・素材をつくっています" data-en="making games, music & assets">
+    ゲーム・音楽・素材をつくっています
+  </p>
+  <div class="hero-tags">
+    <span class="tag accent" data-ja="サウンドノベル" data-en="Sound Novel">サウンドノベル</span>
+    <span class="tag accent" data-ja="レトロRPG" data-en="Retro RPG">レトロRPG</span>
+    <span class="tag" data-ja="Godot 4" data-en="Godot 4">Godot 4</span>
+    <span class="tag" data-ja="フリー素材" data-en="Free Assets">フリー素材</span>
+    <span class="tag" data-ja="Music" data-en="Music">Music</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="section-label" data-ja="作品" data-en="Works">作品</div>
+  <h2 class="section-title" data-ja="ゲーム" data-en="Games">ゲーム</h2>
+  <div class="works-grid">
+
+    <div class="work-card">
+      <div class="work-type" data-ja="サウンドノベル" data-en="Sound Novel">サウンドノベル</div>
+      <div class="work-title">— タイトル未定 —</div>
+      <div class="work-desc" data-ja="ミステリー×ホラー。Godot 4 + Dialogic で制作中のサウンドノベル。" data-en="Mystery × horror sound novel built with Godot 4 + Dialogic.">
+        ミステリー×ホラー。Godot 4 + Dialogic で制作中のサウンドノベル。
+      </div>
+      <div class="work-status wip" data-ja="制作中" data-en="In development">制作中</div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-type" data-ja="レトロRPG" data-en="Retro JRPG">レトロRPG</div>
+      <div class="work-title">— タイトル未定 —</div>
+      <div class="work-desc" data-ja="8/16bit スタイルのターン制RPG。Godot 4 で制作予定。" data-en="Turn-based RPG with 8/16-bit aesthetics, built in Godot 4.">
+        8/16bit スタイルのターン制RPG。Godot 4 で制作予定。
+      </div>
+      <div class="work-status wip" data-ja="企画中" data-en="Planned">企画中</div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-type" data-ja="Wizardry風RPG" data-en="Dungeon RPG">Wizardry風RPG</div>
+      <div class="work-title">— タイトル未定 —</div>
+      <div class="work-desc" data-ja="3Dダンジョン探索RPG。クラシックWizardryにインスパイア。" data-en="3D dungeon crawler inspired by classic Wizardry.">
+        3Dダンジョン探索RPG。クラシックWizardryにインスパイア。
+      </div>
+      <div class="work-status wip" data-ja="企画中" data-en="Planned">企画中</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MUSIC -->
+<section id="music">
+  <div class="section-label" data-ja="音楽" data-en="Music">音楽</div>
+  <h2 class="section-title" data-ja="ミュージックビデオ" data-en="Music Videos">ミュージックビデオ</h2>
+  <div class="music-list">
+
+    <a class="music-item" href="https://www.youtube.com/@hinatabokkuri" target="_blank" rel="noopener">
+      <div class="music-icon">▶</div>
+      <div class="music-info">
+        <div class="music-title" data-ja="YouTube チャンネル" data-en="YouTube Channel">YouTube チャンネル</div>
+        <div class="music-meta" data-ja="MV・楽曲を公開中" data-en="Music videos &amp; tracks">MV・楽曲を公開中</div>
+      </div>
+      <div class="music-platform">YouTube</div>
+    </a>
+
+    <a class="music-item" href="https://x.com/yhhinabon" target="_blank" rel="noopener">
+      <div class="music-icon">𝕏</div>
+      <div class="music-info">
+        <div class="music-title" data-ja="X (Twitter)" data-en="X (Twitter)">X (Twitter)</div>
+        <div class="music-meta" data-ja="制作の裏側・新作情報" data-en="Behind the scenes &amp; updates">制作の裏側・新作情報</div>
+      </div>
+      <div class="music-platform">X</div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <h2 class="section-title">hinatabokkuri</h2>
+  <div class="about-body">
+    <p data-ja="ゲーム・音楽・フリー素材を制作しているインディーゲームクリエイターです。" data-en="Indie game creator making games, music, and free assets.">
+      ゲーム・音楽・フリー素材を制作しているインディーゲームクリエイターです。
+    </p>
+    <p data-ja="<strong>Godot 4</strong> でミステリーサウンドノベル、レトロJRPG、Wizardry風ダンジョンRPGの3作品を同時開発中。素材・BGMは制作後にフリー配布する予定です。" data-en="Currently developing three titles simultaneously in <strong>Godot 4</strong>: a mystery sound novel, a retro JRPG, and a Wizardry-style dungeon RPG. Assets and BGM will be released for free after production.">
+      <strong>Godot 4</strong> でミステリーサウンドノベル、レトロJRPG、Wizardry風ダンジョンRPGの3作品を同時開発中。素材・BGMは制作後にフリー配布する予定です。
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LINKS -->
+<section id="links">
+  <div class="section-label" data-ja="リンク" data-en="Links">リンク</div>
+  <h2 class="section-title" data-ja="ソーシャル" data-en="Social">ソーシャル</h2>
+  <div class="links-row">
+    <a class="link-btn" href="https://www.youtube.com/@hinatabokkuri" target="_blank" rel="noopener">▶ YouTube</a>
+    <a class="link-btn" href="https://x.com/yhhinabon" target="_blank" rel="noopener">𝕏 X / Twitter</a>
+    <a class="link-btn" href="https://github.com/hinatabokkuri-star" target="_blank" rel="noopener">⌥ GitHub</a>
+    <!-- itch.io は必要になったら追加 -->
+  </div>
+</section>
+
+<footer>
+  © 2026 hinatabokkuri — all rights reserved
+</footer>
+
+<script>
+  const langBtn = document.getElementById('langBtn');
+  let lang = 'ja';
+
+  langBtn.addEventListener('click', () => {
+    lang = lang === 'ja' ? 'en' : 'ja';
+    langBtn.textContent = lang === 'ja' ? 'EN' : 'JP';
+    document.querySelectorAll('[data-ja]').forEach(el => {
+      el.innerHTML = el.dataset[lang];
+    });
+  });
+</script>
+
+</body>
+</html>
