@@ -215,6 +215,32 @@
 
     .work-status.wip { color: var(--text-dim); }
 
+    /* ── MV EMBED ── */
+    .mv-embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 1.2rem;
+    }
+
+    .mv-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── X FEED ── */
+    .x-feed {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      max-height: 560px;
+    }
+
     /* ── MUSIC ── */
     .music-list {
       display: flex;
@@ -421,8 +447,14 @@
 <section id="music">
   <div class="section-label" data-ja="音楽" data-en="Music">音楽</div>
   <h2 class="section-title" data-ja="ミュージックビデオ" data-en="Music Videos">ミュージックビデオ</h2>
-  <div class="music-list">
 
+  <div class="mv-embed">
+    <iframe src="https://www.youtube.com/embed/v2vuBKkNf_s" title="MV" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </div>
+
+  <div class="music-list">
     <a class="music-item" href="https://www.youtube.com/@hinatabokkuri" target="_blank" rel="noopener">
       <div class="music-icon">▶</div>
       <div class="music-info">
@@ -431,16 +463,23 @@
       </div>
       <div class="music-platform">YouTube</div>
     </a>
+  </div>
+</section>
 
-    <a class="music-item" href="https://x.com/yhhinabon" target="_blank" rel="noopener">
-      <div class="music-icon">𝕏</div>
-      <div class="music-info">
-        <div class="music-title" data-ja="X (Twitter)" data-en="X (Twitter)">X (Twitter)</div>
-        <div class="music-meta" data-ja="制作の裏側・新作情報" data-en="Behind the scenes &amp; updates">制作の裏側・新作情報</div>
-      </div>
-      <div class="music-platform">X</div>
+<div class="divider"></div>
+
+<!-- X FEED -->
+<section id="x-feed">
+  <div class="section-label" data-ja="最新投稿" data-en="Latest Posts">最新投稿</div>
+  <h2 class="section-title" data-ja="X / Twitter" data-en="X / Twitter">X / Twitter</h2>
+  <div class="x-feed">
+    <a class="twitter-timeline"
+       data-theme="dark"
+       data-tweet-limit="3"
+       data-chrome="noheader nofooter noborders"
+       href="https://twitter.com/yhhinabon">
+      Tweets by yhhinabon
     </a>
-
   </div>
 </section>
 
@@ -478,6 +517,7 @@
   © 2026 hinatabokkuri — all rights reserved
 </footer>
 
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
   const langBtn = document.getElementById('langBtn');
   let lang = 'ja';
