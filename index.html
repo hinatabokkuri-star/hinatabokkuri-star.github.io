@@ -562,9 +562,8 @@
       z-index: 1;
     }
 
-    /* スピンドル穴（中央の小さな黒い点） */
-    .player-cover::after {
-      content: '';
+    /* スピンドル穴 — 専用要素（::after は pulse に使うため分離） */
+    .player-cover .spindle {
       position: absolute;
       top: 50%; left: 50%;
       width: 9px; height: 9px;
@@ -572,7 +571,8 @@
       border-radius: 50%;
       background: radial-gradient(circle, #000 35%, #222 70%, #050505 100%);
       box-shadow: 0 0 0 1.5px rgba(255,255,255,0.4), 0 0 6px rgba(0,0,0,0.9) inset;
-      z-index: 2;
+      z-index: 10;
+      pointer-events: none;
     }
 
     /* 回転（再生中のみ） */
@@ -1109,6 +1109,107 @@
       transform: translateY(-1px);
     }
 
+    /* ── MINI PLAYER（スマホ固定） ── */
+    #miniPlayer {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 300;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(14px);
+      border-top: 1.5px solid var(--border);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
+      padding: 0.55rem 1rem;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    }
+
+    #miniPlayer.visible {
+      transform: translateY(0);
+    }
+
+    .mini-cover {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background-color: #111;
+      background-image: var(--cover-img, linear-gradient(135deg, var(--coral), var(--amber)));
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .mini-cover.playing { animation: spinDisc 6s linear infinite; }
+
+    .mini-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mini-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .mini-sub {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    .mini-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .mini-controls button {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.3rem;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .mini-controls .mini-play-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--coral), var(--amber));
+      color: #fff;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(255,107,122,0.35);
+    }
+
+    .mini-progress {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .mini-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--coral), var(--amber));
+      transition: width 0.1s linear;
+    }
+
+    /* スマホのみ表示 */
+    @media (max-width: 768px) {
+      #miniPlayer { display: flex; }
+      body.mini-visible { padding-bottom: 68px; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       nav { padding: 0 1rem; }
@@ -1214,7 +1315,7 @@
   <h3 class="music-subtitle" data-ja="楽曲（歌）" data-en="Songs">楽曲（歌）</h3>
   <div id="songPlayer" class="player">
     <div class="player-main">
-      <div class="player-cover" data-cover><span class="cover-fallback">♪</span></div>
+      <div class="player-cover" data-cover><span class="cover-fallback">♪</span><span class="spindle"></span></div>
       <div class="player-info">
         <div class="player-title" data-title>—</div>
         <div class="player-sub">hinatabokkuri</div>
@@ -1240,7 +1341,7 @@
   </p>
   <div id="bgmPlayer" class="player">
     <div class="player-main">
-      <div class="player-cover" data-cover><span class="cover-fallback">♪</span></div>
+      <div class="player-cover" data-cover><span class="cover-fallback">♪</span><span class="spindle"></span></div>
       <div class="player-info">
         <div class="player-title" data-title>—</div>
         <div class="player-sub">hinatabokkuri</div>
@@ -1319,12 +1420,103 @@
   </div>
 </section>
 
+<div id="miniPlayer">
+  <div class="mini-progress"><div class="mini-progress-bar" id="miniBar"></div></div>
+  <div class="mini-cover" id="miniCover"></div>
+  <div class="mini-info">
+    <div class="mini-title" id="miniTitle">—</div>
+    <div class="mini-sub">hinatabokkuri</div>
+  </div>
+  <div class="mini-controls">
+    <button id="miniPrev" title="Previous">⏮</button>
+    <button class="mini-play-btn" id="miniPlay" title="Play/Pause">▶</button>
+    <button id="miniNext" title="Next">⏭</button>
+  </div>
+</div>
+
 <footer>
   © 2026 hinatabokkuri — all rights reserved
 </footer>
 
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
+  // ── ミニプレイヤー ──────────────────────────────────────
+  (() => {
+    const mini      = document.getElementById('miniPlayer');
+    const miniCover = document.getElementById('miniCover');
+    const miniTitle = document.getElementById('miniTitle');
+    const miniPlay  = document.getElementById('miniPlay');
+    const miniPrev  = document.getElementById('miniPrev');
+    const miniNext  = document.getElementById('miniNext');
+    const miniBar   = document.getElementById('miniBar');
+    let activeApi   = null;
+
+    const isMobile = () => window.matchMedia('(max-width:768px)').matches;
+
+    const sync = () => {
+      if (!activeApi) return;
+      const audio = activeApi.audio;
+      miniPlay.textContent = audio.paused ? '▶' : '❚❚';
+      miniCover.classList.toggle('playing', !audio.paused);
+      if (audio.duration) miniBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
+    };
+
+    const show = (api) => {
+      activeApi = api;
+      mini.classList.add('visible');
+      document.body.classList.add('mini-visible');
+    };
+
+    const hide = () => {
+      mini.classList.remove('visible');
+      document.body.classList.remove('mini-visible');
+    };
+
+    allPlayers.forEach(api => {
+      api.audio.addEventListener('play', () => {
+        if (!isMobile()) return;
+        // カバー・タイトルを更新（initPlayer の tracks を参照できないため cover CSS変数で取得）
+        const playerRoot = api.audio.closest('.player');
+        if (playerRoot) {
+          const cover = playerRoot.querySelector('[data-cover]');
+          const title = playerRoot.querySelector('[data-title]');
+          const img = cover?.style.getPropertyValue('--cover-img') || '';
+          miniCover.style.setProperty('--cover-img', img);
+          if (img) miniCover.style.backgroundImage = img;
+          miniTitle.textContent = title?.textContent || '—';
+        }
+        show(api);
+        sync();
+      });
+      api.audio.addEventListener('pause', () => { sync(); if (allPlayers.every(p => p.audio.paused)) hide(); });
+      api.audio.addEventListener('timeupdate', sync);
+    });
+
+    miniPlay.addEventListener('click', () => {
+      if (!activeApi) return;
+      activeApi.audio.paused ? activeApi.audio.play() : activeApi.audio.pause();
+    });
+
+    miniPrev.addEventListener('click', () => {
+      if (!activeApi) return;
+      const playerRoot = activeApi.audio.closest('.player');
+      playerRoot?.querySelector('[data-prev]')?.click();
+    });
+
+    miniNext.addEventListener('click', () => {
+      if (!activeApi) return;
+      const playerRoot = activeApi.audio.closest('.player');
+      playerRoot?.querySelector('[data-next]')?.click();
+    });
+
+    // タップでプレイヤーへスクロール
+    mini.addEventListener('click', e => {
+      if (e.target.tagName === 'BUTTON') return;
+      if (!activeApi) return;
+      activeApi.audio.closest('.player')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
+
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(() => {});
     // 新しいSWがアクティブになったらリロード
