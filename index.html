@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EN8WSRB7TL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EN8WSRB7TL');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>hinatabokkuri</title>
@@ -1806,6 +1814,9 @@
       audio.play().catch(() => {});
       updateActive();
       updateMediaSession(i);
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'play_track', { track_title: tracks[i].title, player_id: rootId });
+      }
     };
 
     const pause = () => audio.pause();
