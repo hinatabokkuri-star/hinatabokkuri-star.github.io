@@ -8,6 +8,11 @@
   <meta property="og:title" content="hinatabokkuri">
   <meta property="og:description" content="sound novel / retro RPG / music / assets">
   <meta property="og:type" content="website">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#f59e2b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="hinatabokkuri">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
@@ -1318,6 +1323,15 @@
 </footer>
 
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+    // 新しいSWがアクティブになったらリロード
+    navigator.serviceWorker.addEventListener('message', e => {
+      if (e.data?.type === 'RELOAD') location.reload();
+    });
+  }
+</script>
 <script>
   const langBtn = document.getElementById('langBtn');
   let lang = 'ja';

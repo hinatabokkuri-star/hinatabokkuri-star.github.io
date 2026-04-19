@@ -1,0 +1,11 @@
+{
+  "name": "hinatabokkuri",
+  "short_name": "hinatabokkuri",
+  "description": "sound novel / music / game assets",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf6ef",
+  "theme_color": "#f59e2b",
+  "lang": "ja",
+  "icons": []
+}
