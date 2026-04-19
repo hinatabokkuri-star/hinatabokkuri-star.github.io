@@ -1,9 +1,7 @@
-const CACHE = 'hina-v1';
+const CACHE = 'hina-v2';
 
-// インストール時：即座に待機をスキップして次のSWへ
 self.addEventListener('install', () => self.skipWaiting());
 
-// アクティベート時：古いキャッシュ削除 → 全クライアントをリロード
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
@@ -18,18 +16,23 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // ナビゲーション（HTML）：ネットワーク優先 → 失敗時はキャッシュ
-  if (request.mode === 'navigate') {
+  // HTML（ナビゲーション）はSWを素通りさせて常にブラウザが直接取得
+  // → sw.js が変わらなくても常に最新HTMLが来る
+  if (request.mode === 'navigate') return;
+
+  // 音楽ファイル・Suno CDN：キャッシュ優先（大容量）
+  if (url.pathname.startsWith('/music/') || url.hostname.includes('suno.ai')) {
     event.respondWith(
-      fetch(request)
-        .then(res => { caches.open(CACHE).then(c => c.put(request, res.clone())); return res; })
-        .catch(() => caches.match(request))
+      caches.match(request).then(cached => cached || fetch(request).then(res => {
+        caches.open(CACHE).then(c => c.put(request, res.clone()));
+        return res;
+      }))
     );
     return;
   }
 
-  // 音楽ファイル・外部CDN：キャッシュ優先（大容量のため）
-  if (url.pathname.startsWith('/music/') || url.hostname.includes('suno.ai')) {
+  // アイコン・その他静的アセット：キャッシュ優先
+  if (url.pathname.startsWith('/icons/')) {
     event.respondWith(
       caches.match(request).then(cached => cached || fetch(request).then(res => {
         caches.open(CACHE).then(c => c.put(request, res.clone()));

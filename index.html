@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>hinatabokkuri</title>
   <meta name="description" content="hinatabokkuri — sound novel, music, game assets">
   <meta property="og:title" content="hinatabokkuri">
@@ -1120,6 +1120,7 @@
       border-top: 1.5px solid var(--border);
       box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
       padding: 0.55rem 1rem;
+      padding-bottom: calc(0.55rem + env(safe-area-inset-bottom));
       align-items: center;
       gap: 0.75rem;
       transform: translateY(100%);
@@ -1207,7 +1208,7 @@
     /* スマホのみ表示 */
     @media (max-width: 768px) {
       #miniPlayer { display: flex; }
-      body.mini-visible { padding-bottom: 68px; }
+      body.mini-visible { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
     }
 
     /* ── RESPONSIVE ── */
