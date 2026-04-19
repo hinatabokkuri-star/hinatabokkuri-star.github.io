@@ -1336,9 +1336,14 @@
   const allPlayers = [];
   const EQ_BARS = 18;
 
+  // iOS では Web Audio を使わない（バックグラウンド再生が止まるため）
+  const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
   // 共有 AudioContext（最初のクリックで作成）
   let audioCtx = null;
   const ensureCtx = () => {
+    if (isIOS) return null;
     if (!audioCtx) {
       const Ctx = window.AudioContext || window.webkitAudioContext;
       if (Ctx) audioCtx = new Ctx();
@@ -1463,11 +1468,26 @@
       playBtn.textContent = audio.paused ? '▶' : '❚❚';
     };
 
+    const updateMediaSession = (i) => {
+      if (!('mediaSession' in navigator)) return;
+      const t = tracks[i];
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: t.title,
+        artist: 'hinatabokkuri',
+        artwork: t.cover ? [{ src: t.cover, sizes: '512x512', type: 'image/jpeg' }] : []
+      });
+      navigator.mediaSession.setActionHandler('play',     () => { audio.play(); });
+      navigator.mediaSession.setActionHandler('pause',    () => { audio.pause(); });
+      navigator.mediaSession.setActionHandler('previoustrack', () => playIndex(prevIdx()));
+      navigator.mediaSession.setActionHandler('nexttrack',     () => { const n = nextIdx(); if (n >= 0) playIndex(n); });
+    };
+
     const playIndex = (i) => {
       index = i;
       audio.src = `${RELEASE}/${tracks[i].file}`;
       audio.play().catch(() => {});
       updateActive();
+      updateMediaSession(i);
     };
 
     const pause = () => audio.pause();
