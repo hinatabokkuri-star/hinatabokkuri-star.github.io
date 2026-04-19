@@ -749,6 +749,29 @@
       color: var(--coral);
     }
 
+    .share-x-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      margin-top: 0.6rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: none;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .share-x-btn:hover { border-color: var(--text); color: var(--text); }
+
+    .mini-controls .mini-share-x {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      padding: 0.3rem 0.4rem;
+    }
+    .mini-controls .mini-share-x:hover { color: var(--text); }
+
     .track-comment {
       font-size: 0.78rem;
       color: var(--text-dim);
@@ -1424,6 +1447,7 @@
       <button data-loop title="Loop">🔁</button>
     </div>
     <div class="track-comment" data-comment></div>
+    <button class="share-x-btn" data-share-x>𝕏 この曲をシェア</button>
     <ol class="playlist" data-list></ol>
     <audio data-audio preload="metadata"></audio>
   </div>
@@ -1524,6 +1548,7 @@
     <button id="miniPrev" title="Previous">⏮</button>
     <button class="mini-play-btn" id="miniPlay" title="Play/Pause">▶</button>
     <button id="miniNext" title="Next">⏭</button>
+    <button class="mini-share-x" id="miniShareX" title="Share on X">𝕏</button>
   </div>
 </div>
 
@@ -1806,6 +1831,16 @@
     shuffleBtn.addEventListener('click', () => { shuffle = !shuffle; shuffleBtn.classList.toggle('active', shuffle); });
     loopBtn.addEventListener('click', () => { loop = !loop; loopBtn.classList.toggle('active', loop); });
 
+    const shareXBtn = q('[data-share-x]');
+    if (shareXBtn) {
+      shareXBtn.addEventListener('click', () => {
+        const title = tracks[index]?.title || '—';
+        const text = `🎵 「${title}」/ hinatabokkuri`;
+        const url = 'https://hinatabokkuri-star.github.io';
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener');
+      });
+    }
+
     audio.addEventListener('play', () => {
       // 他のインスタンスを止める
       allPlayers.forEach(p => { if (p.audio !== audio) p.pause(); });
@@ -1982,6 +2017,12 @@
     });
     miniNext.addEventListener('click', () => {
       activeApi?.audio.closest('.player')?.querySelector('[data-next]')?.click();
+    });
+    document.getElementById('miniShareX').addEventListener('click', () => {
+      const title = miniTitle.textContent || '—';
+      const text = `🎵 「${title}」/ hinatabokkuri`;
+      const url = 'https://hinatabokkuri-star.github.io';
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener');
     });
     mini.addEventListener('click', e => {
       if (e.target.tagName === 'BUTTON') return;
