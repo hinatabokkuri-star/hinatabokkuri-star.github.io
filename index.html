@@ -749,6 +749,20 @@
       color: var(--coral);
     }
 
+    .track-comment {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      font-style: italic;
+      line-height: 1.6;
+      min-height: 1.2em;
+      margin: 0.8rem 0 0;
+      padding: 0.6rem 0.8rem;
+      border-left: 2px solid var(--coral);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .track-comment.visible { opacity: 1; }
+
     .playlist {
       list-style: none;
       display: grid;
@@ -1409,6 +1423,7 @@
       <button data-next title="Next">⏭</button>
       <button data-loop title="Loop">🔁</button>
     </div>
+    <div class="track-comment" data-comment></div>
     <ol class="playlist" data-list></ol>
     <audio data-audio preload="metadata"></audio>
   </div>
@@ -1642,6 +1657,7 @@
     const loopBtn = q('[data-loop]');
     const coverEl = q('[data-cover]');
     const eqEl = q('[data-eq]');
+    const commentEl = q('[data-comment]');
 
     let index = 0, shuffle = false, loop = false;
     let analyser = null, sourceNode = null, eqBars = [], rafId = null;
@@ -1734,6 +1750,11 @@
       [...listEl.children].forEach((li, i) => li.classList.toggle('active', i === index));
       titleEl.textContent = tracks[index].title;
       setCover(tracks[index].cover);
+      if (commentEl) {
+        const c = tracks[index].comment || '';
+        commentEl.textContent = c;
+        commentEl.classList.toggle('visible', !!c);
+      }
       const playing = !audio.paused && audio.src;
       coverEl.classList.toggle('playing', playing);
       root.classList.toggle('playing', playing);
@@ -1819,7 +1840,7 @@
   };
 
   initPlayer('songPlayer', [
-    { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2') },
+    { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2'), comment: 'ノベルゲーム「二時の既読」のエンディング曲。トロッコ問題をモチーフに——どちらを選んでも誰かが死ぬ、その避けられない喪失を音にした。' },
     { title: 'fly away buttfly ①',   file: 'fly_away_buttfly_1.mp3',   cover: IMG('1c6f9b95-40d1-4ebc-8b7f-5a4c24a39ffd') },
     { title: 'fly away buttfly ②',   file: 'fly_away_buttfly_2.mp3',   cover: IMG('cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2') },
     { title: '真夜中のカーニバル ①', file: 'mayonaka_carnival_1.mp3',  cover: IMG('8f0eb688-ccb6-436b-affd-d7ef6e35e6cf') },
