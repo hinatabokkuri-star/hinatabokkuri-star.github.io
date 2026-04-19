@@ -800,6 +800,78 @@
     }
     .track-comment.visible { opacity: 1; }
 
+    .lyrics-panel {
+      margin: 0.8rem 0 0;
+      border-radius: 8px;
+      overflow: hidden;
+      opacity: 0;
+      max-height: 0;
+      transition: opacity 0.4s ease, max-height 0.4s ease;
+    }
+    .lyrics-panel.visible {
+      opacity: 1;
+      max-height: 60px;
+    }
+    .lyrics-ticker {
+      position: relative;
+      min-height: 52px;
+      overflow: hidden;
+      background: rgba(0,0,0,0.28);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+    }
+    .lyrics-ticker::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--coral);
+      border-radius: 0 2px 2px 0;
+    }
+    .lyric-slot {
+      position: absolute;
+      left: 14px; right: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      white-space: normal;
+      will-change: transform, opacity;
+      padding: 0.55rem 0;
+    }
+    .lyric-slot.enter {
+      animation: lyric-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .lyric-slot.exit {
+      animation: lyric-exit 0.35s ease-in forwards;
+    }
+    @keyframes lyric-enter {
+      from { transform: translateX(60px); opacity: 0; }
+      to   { transform: translateX(0);   opacity: 1; }
+    }
+    @keyframes lyric-exit {
+      from { transform: translateX(0);    opacity: 1; }
+      to   { transform: translateX(-50px); opacity: 0; }
+    }
+    .lyric-text ruby {
+      ruby-align: center;
+      display: ruby;
+    }
+    .lyric-text rt {
+      display: rt;
+      font-size: 0.5em;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0;
+      line-height: 1;
+    }
+    .lyric-text {
+      font-size: 1.05rem;
+      color: #fff;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1.5;
+    }
+
     .playlist {
       list-style: none;
       display: grid;
@@ -1461,6 +1533,9 @@
       <button data-loop title="Loop">🔁</button>
     </div>
     <div class="track-comment" data-comment></div>
+    <div class="lyrics-panel" data-lyrics-panel>
+      <div class="lyrics-ticker" data-lyrics-ticker></div>
+    </div>
     <button class="share-x-btn" data-share-x>𝕏 この曲をシェア</button>
     <ol class="playlist" data-list></ol>
     <audio data-audio preload="metadata"></audio>
@@ -1696,7 +1771,79 @@
     const loopBtn = q('[data-loop]');
     const coverEl = q('[data-cover]');
     const eqEl = q('[data-eq]');
-    const commentEl = q('[data-comment]');
+    const commentEl     = q('[data-comment]');
+    const lyricsPanelEl = q('[data-lyrics-panel]');
+    const lyricsTickerEl = q('[data-lyrics-ticker]');
+
+    const parseLRC = (lrc) => {
+      const lines = [];
+      for (const raw of lrc.trim().split('\n')) {
+        const m = raw.match(/^\[(\d+):(\d+)(?:\.(\d+))?\](.*)/);
+        if (m) {
+          lines.push({
+            t: parseInt(m[1]) * 60 + parseInt(m[2]) + (m[3] ? parseInt(m[3]) / 100 : 0),
+            text: m[4].trim(),
+            isSection: /^\[[A-Za-z]/.test(m[4].trim()),
+          });
+        }
+      }
+      return lines;
+    };
+
+    let lyricsData = null;
+    let lastLyricIdx = -1;
+    let currentSection = '';
+
+    const buildLyricsDOM = (lrc) => {
+      lyricsData = null;
+      lastLyricIdx = -1;
+      currentSection = '';
+      if (lyricsTickerEl) lyricsTickerEl.innerHTML = '';
+      if (!lrc) return;
+      lyricsData = parseLRC(lrc);
+    };
+
+    const renderRuby = (text) => {
+      // {漢字|ふりがな} → <ruby>漢字<rt>ふりがな</rt></ruby>
+      return text.replace(/\{([^|]+)\|([^}]+)\}/g, '<ruby>$1<rt>$2</rt></ruby>');
+    };
+
+    const showLyricLine = (line) => {
+      if (!lyricsTickerEl) return;
+      const old = lyricsTickerEl.querySelector('.lyric-slot');
+      if (old) {
+        old.classList.remove('enter');
+        old.classList.add('exit');
+        old.addEventListener('animationend', () => old.remove(), { once: true });
+      }
+      const slot = document.createElement('div');
+      slot.className = 'lyric-slot enter';
+      const txt = document.createElement('span');
+      txt.className = 'lyric-text';
+      txt.innerHTML = renderRuby(line.text);
+      slot.appendChild(txt);
+      lyricsTickerEl.appendChild(slot);
+    };
+
+    const updateLyricHighlight = (currentTime) => {
+      if (!lyricsData || !lyricsData.length) return;
+      let idx = 0;
+      for (let i = 0; i < lyricsData.length; i++) {
+        if (lyricsData[i].t <= currentTime) idx = i;
+      }
+      if (idx === lastLyricIdx) return;
+      lastLyricIdx = idx;
+      const line = lyricsData[idx];
+      if (line.isSection) {
+        currentSection = line.text.replace(/[\[\]]/g, '');
+        // セクションだけの行はスキップして次の歌詞行を表示
+        if (idx + 1 < lyricsData.length && !lyricsData[idx + 1].isSection) {
+          return;
+        }
+      } else {
+        showLyricLine(line);
+      }
+    };
 
     let index = 0, shuffle = false, loop = false;
     let analyser = null, sourceNode = null, eqBars = [], rafId = null;
@@ -1794,6 +1941,11 @@
         commentEl.textContent = c;
         commentEl.classList.toggle('visible', !!c);
       }
+      if (lyricsPanelEl) {
+        const lyr = tracks[index].lyrics || '';
+        buildLyricsDOM(lyr);
+        lyricsPanelEl.classList.toggle('visible', !!lyr);
+      }
       const playing = !audio.paused && audio.src;
       coverEl.classList.toggle('playing', playing);
       root.classList.toggle('playing', playing);
@@ -1869,6 +2021,7 @@
     audio.addEventListener('timeupdate', () => {
       curEl.textContent = fmt(audio.currentTime);
       if (audio.duration) barEl.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      updateLyricHighlight(audio.currentTime);
     });
     audio.addEventListener('loadedmetadata', () => { totEl.textContent = fmt(audio.duration); });
     audio.addEventListener('ended', () => {
@@ -1876,11 +2029,24 @@
       if (n >= 0) playIndex(n); else updateActive();
     });
 
-    progressEl.addEventListener('click', (e) => {
+    let seeking = false;
+    const seekTo = (clientX) => {
       if (!audio.duration) return;
       const rect = progressEl.getBoundingClientRect();
-      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+      const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      audio.currentTime = ratio * audio.duration;
+      barEl.style.width = (ratio * 100) + '%';
+    };
+    progressEl.addEventListener('pointerdown', (e) => {
+      seeking = true;
+      progressEl.setPointerCapture(e.pointerId);
+      seekTo(e.clientX);
     });
+    progressEl.addEventListener('pointermove', (e) => {
+      if (seeking) seekTo(e.clientX);
+    });
+    progressEl.addEventListener('pointerup',   () => { seeking = false; });
+    progressEl.addEventListener('pointercancel', () => { seeking = false; });
 
     titleEl.textContent = tracks[0].title;
     setCover(tracks[0].cover);
@@ -1892,7 +2058,7 @@
   };
 
   initPlayer('songPlayer', [
-    { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2'), comment: 'ノベルゲーム「二時の既読」のエンディング曲。トロッコ問題をモチーフに——どちらを選んでも誰かが死ぬ、その避けられない喪失を音にした。' },
+    { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2'), comment: 'ノベルゲーム「二時の既読」のエンディング曲。トロッコ問題をモチーフに——どちらを選んでも誰かが死ぬ、その避けられない喪失を音にした。', lyrics: `[0:13.0][Verse 1]\n[0:13.0]午前2時のLINEに 既読だけを残して\n[0:19.5]震える手で駆けつけた あの鉄橋の欄干\n[0:27.1][Pre-Chorus]\n[0:27.1]呼ばれたのは僕だった 知ってる声だった\n[0:39.1][Chorus]\n[0:39.1]選べなかった方の 扉の向こうで\n[0:47.1]誰かが静かに息を止めた\n[0:54.1]届いた声に 応えられなかった\n[1:01.1]息の残り香が 雪になって\n[1:10.1][Verse 2]\n[1:10.1]午前2時の音声に 呼吸の音が滲んで\n[1:16.1]合鍵で開けた扉 冷えたリノリウムの床\n[1:24.1][Pre-Chorus]\n[1:24.1]呼ばれたのは僕だった 知らない声だった\n[1:36.1][Chorus]\n[1:36.1]選べなかった方の 鉄橋の欄干で\n[1:44.1]誰かが静かに {水面|みなも}を見つめた\n[1:51.1]既読のまま止まった ありがとうが\n[1:58.1]二月の朝に 凍っていく\n[2:05.1][Bridge]\n[2:05.1]トロッコは止まらない 呼ばれた声は二つ\n[2:12.1]差し伸べた手は 一つしかなかった\n[2:21.1][Outro]\n[2:21.1]選ばれなかった声が 雪の底で眠っている\n[2:35.1]選ばれた声は 今も僕を抱きしめて\n[2:42.1]既読のまま 返せないまま\n[2:46.1]返せないまま\n[2:49.1]二月の朝 雪の底` },
     { title: 'fly away buttfly ①',   file: 'fly_away_buttfly_1.mp3',   cover: IMG('1c6f9b95-40d1-4ebc-8b7f-5a4c24a39ffd'), comment: '90年代ユーロビートへのオマージュ。一度聴いたら頭から離れない、そんなフレーズを目指した。' },
     { title: 'fly away buttfly ②',   file: 'fly_away_buttfly_2.mp3',   cover: IMG('cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2'), comment: '90年代ユーロビートへのオマージュ。一度聴いたら頭から離れない、そんなフレーズを目指した。' },
     { title: '真夜中のカーニバル ①', file: 'mayonaka_carnival_1.mp3',  cover: IMG('8f0eb688-ccb6-436b-affd-d7ef6e35e6cf') },
