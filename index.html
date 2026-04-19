@@ -1210,11 +1210,65 @@
       body.mini-visible .hero { padding-top: 8rem; }
     }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem;
+      z-index: 1;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-drawer {
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      z-index: 250;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1.5px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      padding: 0.8rem 1.6rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transform: translateY(-110%);
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+    }
+    .nav-drawer.open { transform: translateY(0); pointer-events: auto; }
+    .nav-drawer a {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      display: block;
+      transition: color 0.2s;
+    }
+    .nav-drawer a:last-of-type { border-bottom: none; }
+    .nav-drawer a:hover { color: var(--coral); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       nav { padding: 0 1rem; }
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: 0.82rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
       section { padding: 3.5rem 1.1rem; }
       .about-body { padding: 1.4rem 1.3rem; }
     }
@@ -1231,8 +1285,19 @@
     <li><a href="#about" data-ja="About" data-en="About">About</a></li>
     <li><a href="#links" data-ja="リンク" data-en="Links">リンク</a></li>
   </ul>
-  <button class="lang-toggle" id="langBtn">EN</button>
+  <div style="display:flex;align-items:center;gap:0.6rem">
+    <button class="lang-toggle" id="langBtn">EN</button>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+<div class="nav-drawer" id="navDrawer">
+  <a href="#works" data-ja="作品" data-en="Works">作品</a>
+  <a href="#music" data-ja="音楽" data-en="Music">音楽</a>
+  <a href="#about" data-ja="About" data-en="About">About</a>
+  <a href="#links" data-ja="リンク" data-en="Links">リンク</a>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -1439,92 +1504,6 @@
 </footer>
 
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<script>
-  // ── ミニプレイヤー ──────────────────────────────────────
-  (() => {
-    const mini      = document.getElementById('miniPlayer');
-    const miniCover = document.getElementById('miniCover');
-    const miniTitle = document.getElementById('miniTitle');
-    const miniPlay  = document.getElementById('miniPlay');
-    const miniPrev  = document.getElementById('miniPrev');
-    const miniNext  = document.getElementById('miniNext');
-    const miniBar   = document.getElementById('miniBar');
-    let activeApi   = null;
-
-    const isMobile = () => window.matchMedia('(max-width:768px)').matches;
-
-    const sync = () => {
-      if (!activeApi) return;
-      const audio = activeApi.audio;
-      miniPlay.textContent = audio.paused ? '▶' : '❚❚';
-      miniCover.classList.toggle('playing', !audio.paused);
-      if (audio.duration) miniBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
-    };
-
-    const show = (api) => {
-      activeApi = api;
-      mini.classList.add('visible');
-      document.body.classList.add('mini-visible');
-    };
-
-    const hide = () => {
-      mini.classList.remove('visible');
-      document.body.classList.remove('mini-visible');
-    };
-
-    allPlayers.forEach(api => {
-      api.audio.addEventListener('play', () => {
-        if (!isMobile()) return;
-        // カバー・タイトルを更新（initPlayer の tracks を参照できないため cover CSS変数で取得）
-        const playerRoot = api.audio.closest('.player');
-        if (playerRoot) {
-          const cover = playerRoot.querySelector('[data-cover]');
-          const title = playerRoot.querySelector('[data-title]');
-          const img = cover?.style.getPropertyValue('--cover-img') || '';
-          miniCover.style.setProperty('--cover-img', img);
-          if (img) miniCover.style.backgroundImage = img;
-          miniTitle.textContent = title?.textContent || '—';
-        }
-        show(api);
-        sync();
-      });
-      api.audio.addEventListener('pause', () => { sync(); if (allPlayers.every(p => p.audio.paused)) hide(); });
-      api.audio.addEventListener('timeupdate', sync);
-    });
-
-    miniPlay.addEventListener('click', () => {
-      if (!activeApi) return;
-      activeApi.audio.paused ? activeApi.audio.play() : activeApi.audio.pause();
-    });
-
-    miniPrev.addEventListener('click', () => {
-      if (!activeApi) return;
-      const playerRoot = activeApi.audio.closest('.player');
-      playerRoot?.querySelector('[data-prev]')?.click();
-    });
-
-    miniNext.addEventListener('click', () => {
-      if (!activeApi) return;
-      const playerRoot = activeApi.audio.closest('.player');
-      playerRoot?.querySelector('[data-next]')?.click();
-    });
-
-    // タップでプレイヤーへスクロール
-    mini.addEventListener('click', e => {
-      if (e.target.tagName === 'BUTTON') return;
-      if (!activeApi) return;
-      activeApi.audio.closest('.player')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-  })();
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
-    // 新しいSWがアクティブになったらリロード
-    navigator.serviceWorker.addEventListener('message', e => {
-      if (e.data?.type === 'RELOAD') location.reload();
-    });
-  }
-</script>
 <script>
   const langBtn = document.getElementById('langBtn');
   let lang = 'ja';
@@ -1811,6 +1790,104 @@
       }, 0);
     });
   })();
+
+  // ── ハンバーガーメニュー ────────────────────────────────
+  (() => {
+    const btn    = document.getElementById('hamburger');
+    const drawer = document.getElementById('navDrawer');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      drawer.classList.toggle('open');
+    });
+    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      btn.classList.remove('open');
+      drawer.classList.remove('open');
+    }));
+    document.addEventListener('click', e => {
+      if (!drawer.contains(e.target) && !btn.contains(e.target)) {
+        btn.classList.remove('open');
+        drawer.classList.remove('open');
+      }
+    });
+  })();
+
+  // ── ミニプレイヤー（allPlayers 定義後に実行） ───────────
+  (() => {
+    const mini      = document.getElementById('miniPlayer');
+    const miniCover = document.getElementById('miniCover');
+    const miniTitle = document.getElementById('miniTitle');
+    const miniPlay  = document.getElementById('miniPlay');
+    const miniPrev  = document.getElementById('miniPrev');
+    const miniNext  = document.getElementById('miniNext');
+    const miniBar   = document.getElementById('miniBar');
+    let activeApi   = null;
+
+    const isMobile = () => window.matchMedia('(max-width:768px)').matches;
+
+    const sync = () => {
+      if (!activeApi) return;
+      const audio = activeApi.audio;
+      miniPlay.textContent = audio.paused ? '▶' : '❚❚';
+      miniCover.classList.toggle('playing', !audio.paused);
+      if (audio.duration) miniBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
+    };
+
+    const show = (api) => {
+      activeApi = api;
+      mini.classList.add('visible');
+      document.body.classList.add('mini-visible');
+    };
+
+    const hide = () => {
+      mini.classList.remove('visible');
+      document.body.classList.remove('mini-visible');
+    };
+
+    allPlayers.forEach(api => {
+      api.audio.addEventListener('play', () => {
+        if (!isMobile()) return;
+        const playerRoot = api.audio.closest('.player');
+        if (playerRoot) {
+          const cover = playerRoot.querySelector('[data-cover]');
+          const title = playerRoot.querySelector('[data-title]');
+          const img = cover?.style.getPropertyValue('--cover-img') || '';
+          if (img) miniCover.style.backgroundImage = img;
+          miniTitle.textContent = title?.textContent || '—';
+        }
+        show(api);
+        sync();
+      });
+      api.audio.addEventListener('pause', () => {
+        sync();
+        if (allPlayers.every(p => p.audio.paused)) hide();
+      });
+      api.audio.addEventListener('timeupdate', sync);
+    });
+
+    miniPlay.addEventListener('click', () => {
+      if (!activeApi) return;
+      activeApi.audio.paused ? activeApi.audio.play() : activeApi.audio.pause();
+    });
+    miniPrev.addEventListener('click', () => {
+      activeApi?.audio.closest('.player')?.querySelector('[data-prev]')?.click();
+    });
+    miniNext.addEventListener('click', () => {
+      activeApi?.audio.closest('.player')?.querySelector('[data-next]')?.click();
+    });
+    mini.addEventListener('click', e => {
+      if (e.target.tagName === 'BUTTON') return;
+      activeApi?.audio.closest('.player')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
+
+  // ── Service Worker ──────────────────────────────────────
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+    navigator.serviceWorker.addEventListener('message', e => {
+      if (e.data?.type === 'RELOAD') location.reload();
+    });
+  }
 </script>
 
 </body>
