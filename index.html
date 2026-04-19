@@ -1113,17 +1113,16 @@
     #miniPlayer {
       display: none;
       position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 300;
+      top: 60px; left: 0; right: 0;
+      z-index: 200;
       background: rgba(255,255,255,0.96);
       backdrop-filter: blur(14px);
-      border-top: 1.5px solid var(--border);
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
-      padding: 0.55rem 1rem;
-      padding-bottom: calc(0.55rem + env(safe-area-inset-bottom));
+      border-bottom: 1.5px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      padding: 0.5rem 1rem;
       align-items: center;
       gap: 0.75rem;
-      transform: translateY(100%);
+      transform: translateY(-100%);
       transition: transform 0.3s cubic-bezier(.4,0,.2,1);
     }
 
@@ -1193,7 +1192,7 @@
 
     .mini-progress {
       position: absolute;
-      top: 0; left: 0; right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 2px;
       background: var(--border);
     }
@@ -1208,7 +1207,7 @@
     /* スマホのみ表示 */
     @media (max-width: 768px) {
       #miniPlayer { display: flex; }
-      body.mini-visible { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+      body.mini-visible .hero { padding-top: 8rem; }
     }
 
     /* ── RESPONSIVE ── */
