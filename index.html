@@ -1246,11 +1246,19 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      transform: translateY(-110%);
-      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.22s, transform 0.22s, visibility 0s 0.22s;
       pointer-events: none;
     }
-    .nav-drawer.open { transform: translateY(0); pointer-events: auto; }
+    .nav-drawer.open {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.22s, transform 0.22s, visibility 0s 0s;
+      pointer-events: auto;
+    }
     .nav-drawer a {
       font-size: 1.05rem;
       font-weight: 700;
@@ -1265,10 +1273,12 @@
     .nav-drawer a:hover { color: var(--coral); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       nav { padding: 0 1rem; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
       section { padding: 3.5rem 1.1rem; }
       .about-body { padding: 1.4rem 1.3rem; }
     }
