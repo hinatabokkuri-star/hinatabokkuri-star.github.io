@@ -1973,7 +1973,6 @@
     const playIndex = (i) => {
       index = i;
       audio.src = `${RELEASE}/${tracks[i].file}`;
-      audio.load();
       audio.play().catch(() => { pendingPlay = true; });
       updateActive();
       updateMediaSession(i);
@@ -2031,7 +2030,12 @@
     audio.addEventListener('loadedmetadata', () => { totEl.textContent = fmt(audio.duration); });
     audio.addEventListener('ended', () => {
       const n = nextIdx();
-      if (n >= 0) playIndex(n); else updateActive();
+      if (n >= 0) {
+        playIndex(n);
+        // iOSバックグラウンドでは新srcのplay()が成功扱いでも音が出ないケースがある
+        // → バックグラウンド時は必ずpendingPlayをセットして復帰時にリトライ保証
+        if (document.hidden) pendingPlay = true;
+      } else updateActive();
     });
     // 復帰時: 歌詞位置の再同期 & バックグラウンドで失敗した再生のリトライ
     document.addEventListener('visibilitychange', () => {
