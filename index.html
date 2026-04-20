@@ -1810,14 +1810,14 @@
 
     const showLyricLine = (line) => {
       if (!lyricsTickerEl) return;
-      const old = lyricsTickerEl.querySelector('.lyric-slot');
-      if (old) {
+      lyricsTickerEl.querySelectorAll('.lyric-slot').forEach(old => {
+        if (old.classList.contains('exit')) return;
         old.classList.remove('enter');
         old.classList.add('exit');
         const removeOld = () => { if (old.parentNode) old.remove(); };
         old.addEventListener('animationend', removeOld, { once: true });
-        setTimeout(removeOld, 600); // バックグラウンド時にanimationendが発火しない場合のフォールバック
-      }
+        setTimeout(removeOld, 600);
+      });
       const slot = document.createElement('div');
       slot.className = 'lyric-slot enter';
       const txt = document.createElement('span');
