@@ -353,6 +353,32 @@
 
     .music-subtitle:first-of-type { margin-top: 0; }
 
+    .playlist-tabs {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .playlist-tabs .tab-btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text-dim);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .playlist-tabs .tab-btn:hover { border-color: var(--amber); color: var(--text); }
+    .playlist-tabs .tab-btn.active {
+      background: var(--amber);
+      color: #fff;
+      border-color: var(--amber);
+    }
+
     .suno-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -1484,6 +1510,10 @@
   </div>
 
   <h3 class="music-subtitle" data-ja="楽曲（歌）" data-en="Songs">楽曲（歌）</h3>
+  <div class="playlist-tabs" id="songPlayerTabs">
+    <button type="button" data-tab="all" class="tab-btn active" data-ja="全曲" data-en="All">全曲</button>
+    <button type="button" data-tab="dance" class="tab-btn" data-ja="ダンスアルバム" data-en="Dance Album">ダンスアルバム</button>
+  </div>
   <div id="songPlayer" class="player">
     <div class="player-main">
       <div class="player-cover" data-cover><span class="cover-fallback">♪</span><span class="spindle"></span></div>
@@ -1723,9 +1753,10 @@
     return audioCtx;
   };
 
-  const initPlayer = (rootId, tracks) => {
+  const initPlayer = (rootId, initialTracks) => {
     const root = document.getElementById(rootId);
     if (!root) return null;
+    let tracks = initialTracks;
     const q = sel => root.querySelector(sel);
     const audio = q('[data-audio]');
     const listEl = q('[data-list]');
@@ -1871,28 +1902,32 @@
       return `${m}:${sec.toString().padStart(2, '0')}`;
     };
 
-    tracks.forEach((t, i) => {
-      const li = document.createElement('li');
-      li.className = 'playlist-item';
-      li.innerHTML = `
-        <span class="pl-thumb" style="background-image:url('${t.cover}')"></span>
-        <span class="pl-num">${i + 1}</span>
-        <span class="pl-title">${t.title}</span>
-        <span class="pl-dur" data-dur>–:–</span>
-        <a class="pl-dl" href="${RELEASE}/${t.file}" download title="Download">DL</a>
-      `;
-      li.addEventListener('click', (e) => {
-        if (e.target.classList.contains('pl-dl')) return;
-        playIndex(i);
+    const renderList = () => {
+      listEl.innerHTML = '';
+      tracks.forEach((t, i) => {
+        const li = document.createElement('li');
+        li.className = 'playlist-item';
+        li.innerHTML = `
+          <span class="pl-thumb" style="background-image:url('${t.cover}')"></span>
+          <span class="pl-num">${i + 1}</span>
+          <span class="pl-title">${t.title}</span>
+          <span class="pl-dur" data-dur>–:–</span>
+          <a class="pl-dl" href="${RELEASE}/${t.file}" download title="Download">DL</a>
+        `;
+        li.addEventListener('click', (e) => {
+          if (e.target.classList.contains('pl-dl')) return;
+          playIndex(i);
+        });
+        listEl.appendChild(li);
+        const a = new Audio();
+        a.preload = 'metadata';
+        a.src = `${RELEASE}/${t.file}`;
+        a.addEventListener('loadedmetadata', () => {
+          li.querySelector('[data-dur]').textContent = fmt(a.duration);
+        });
       });
-      listEl.appendChild(li);
-      const a = new Audio();
-      a.preload = 'metadata';
-      a.src = `${RELEASE}/${t.file}`;
-      a.addEventListener('loadedmetadata', () => {
-        li.querySelector('[data-dur]').textContent = fmt(a.duration);
-      });
-    });
+    };
+    renderList();
 
     const setCover = (url) => {
       if (url) {
@@ -2041,7 +2076,23 @@
     setCover(tracks[0].cover);
     listEl.firstChild.classList.add('active');
 
-    const api = { audio, pause, getCurrentLyricText: () => {
+    const setTracks = (newTracks) => {
+      const currentFile = tracks[index]?.file;
+      tracks = newTracks;
+      renderList();
+      const matchIdx = tracks.findIndex(t => t.file === currentFile);
+      if (matchIdx >= 0) {
+        // 再生中曲が新リストに存在→その位置をアクティブ表示
+        index = matchIdx;
+        updateActive();
+      } else {
+        // 再生中曲が新リストに無い→プレイヤー表示は触らず、次曲で新リスト先頭に飛ぶ
+        index = -1;
+        [...listEl.children].forEach(li => li.classList.remove('active'));
+      }
+    };
+
+    const api = { audio, pause, setTracks, getCurrentLyricText: () => {
       if (!lyricsData || lastLyricIdx < 0) return '';
       const line = lyricsData[lastLyricIdx];
       return line ? line.text.replace(/\{([^|]+)\|[^}]+\}/g, '$1') : '';
@@ -2050,7 +2101,7 @@
     return api;
   };
 
-  initPlayer('songPlayer', [
+  const allSongs = [
     { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2'), comment: 'ノベルゲーム「二時の既読」のエンディング曲。トロッコ問題をモチーフに——どちらを選んでも誰かが死ぬ、その避けられない喪失を音にした。', lyrics: `[0:13.0][Verse 1]\n[0:13.0]午前2時のLINEに 既読だけを残して\n[0:19.5]震える手で駆けつけた あの鉄橋の欄干\n[0:27.1][Pre-Chorus]\n[0:27.1]呼ばれたのは僕だった 知ってる声だった\n[0:39.1][Chorus]\n[0:39.1]選べなかった方の 扉の向こうで\n[0:47.1]誰かが静かに息を止めた\n[0:54.1]届いた声に 応えられなかった\n[1:01.1]息の残り香が 雪になって\n[1:10.1][Verse 2]\n[1:10.1]午前2時の音声に 呼吸の音が滲んで\n[1:16.1]合鍵で開けた扉 冷えたリノリウムの床\n[1:24.1][Pre-Chorus]\n[1:24.1]呼ばれたのは僕だった 知らない声だった\n[1:36.1][Chorus]\n[1:36.1]選べなかった方の 鉄橋の欄干で\n[1:44.1]誰かが静かに {水面|みなも}を見つめた\n[1:51.1]既読のまま止まった ありがとうが\n[1:58.1]二月の朝に 凍っていく\n[2:05.1][Bridge]\n[2:05.1]トロッコは止まらない 呼ばれた声は二つ\n[2:12.1]差し伸べた手は 一つしかなかった\n[2:21.1][Outro]\n[2:21.1]選ばれなかった声が 雪の底で眠っている\n[2:35.1]選ばれた声は 今も僕を抱きしめて\n[2:42.1]既読のまま 返せないまま\n[2:46.1]返せないまま\n[2:49.1]二月の朝 雪の底` },
     { title: 'fly away buttfly ①',   file: 'fly_away_buttfly_1.mp3',   cover: IMG('1c6f9b95-40d1-4ebc-8b7f-5a4c24a39ffd'), comment: '90年代ユーロビートへのオマージュ。一度聴いたら頭から離れない、そんなフレーズを目指した。', lyrics: `[0:30.0][Verse 1]\n[0:30.0]夜が始まる neon lights are glowing\n[0:33.2]心が躍る feel the music flowing\n[0:36.5]止まらないで don't you slow it down\n[0:39.6]このビートに乗って spin me around\n[0:43.3][Pre-Chorus]\n[0:43.3]Higher and higher, もっと上へ\n[0:48.5]Feel it inside, 離さないで\n[0:50.0][Chorus]\n[0:50.0]Dance with me tonight, fly away\n[0:53.5]Butterfly, butterfly, いつまでも\n[0:57.0]Can't stop the rhythm, here to stay\n[1:00.3]Butterfly, fly, fly, fly away\n[1:15.8][Verse 2]\n[1:15.8]汗が光る strobe lights flashing bright\n[1:19.3]二人だけの world on fire tonight\n[1:22.8]声が重なる echo in the crowd\n[1:26.0]このまま踊ろう scream it out loud\n[1:29.6][Pre-Chorus]\n[1:29.6]Higher and higher, もっと上へ\n[1:34.8]Feel it inside, 離さないで\n[1:36.3][Chorus]\n[1:36.3]Dance with me tonight, fly away\n[1:39.7]Butterfly, butterfly, いつまでも\n[1:43.2]Can't stop the rhythm, here to stay\n[1:46.3]Butterfly, fly, fly, fly away\n[1:56.0]Can't stop the rhythm, here to stay\n[1:58.0]Butterfly, fly, fly, fly away\n[2:27.0][Outro]\n[2:27.0]Butterfly, butterfly, fly away` },
     { title: 'fly away buttfly ②',   file: 'fly_away_buttfly_2.mp3',   cover: IMG('cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2'), comment: '90年代ユーロビートへのオマージュ。一度聴いたら頭から離れない、そんなフレーズを目指した。', lyrics: `[0:00.0]Butterfly, butterfly, fly away\n[0:39.0][Verse 1]\n[0:39.0]夜が始まる neon lights are glowing\n[0:43.0]心が躍る feel the music flowing\n[0:46.0]止まらないで don't you slow it down\n[0:49.0]このビートに乗って spin me around\n[0:53.0][Pre-Chorus]\n[0:53.0]Higher and higher, もっと上へ\n[0:57.0]Feel it inside, 離さないで\n[0:59.0][Chorus]\n[0:59.0]Dance with me tonight, fly away\n[1:02.0]Butterfly, butterfly, いつまでも\n[1:06.0]Can't stop the rhythm, here to stay\n[1:09.0]Butterfly, fly, fly, fly away\n[1:26.0][Verse 2]\n[1:26.0]汗が光る strobe lights flashing bright\n[1:29.0]二人だけの world on fire tonight\n[1:33.0]声が重なる echo in the crowd\n[1:35.0]このまま踊ろう scream it out loud\n[1:39.0][Pre-Chorus]\n[1:39.0]Higher and higher, もっと上へ\n[1:44.0]Feel it inside, 離さないで\n[1:46.0][Chorus]\n[1:46.0]Dance with me tonight, fly away\n[1:49.0]Butterfly, butterfly, いつまでも\n[1:52.0]Can't stop the rhythm, here to stay\n[1:55.0]Butterfly, fly, fly, fly away\n[2:22.0][Outro]\n[2:22.0]Butterfly, butterfly, fly away` },
@@ -2067,7 +2118,28 @@
     { title: '病みDOKI',                file: 'yami_doki.mp3',           cover: IMG('dc5efdfa-5e41-4cdb-b1db-56ef509a53e9'), comment: '地雷女×オタク男の深夜ダンスデュエット。女声はSunoで歌唱生成、オタク男の「ボイスメモ」部分はElevenLabs v3 TTS（LIAM）で別生成してffmpegオーバーレイ合成。歌えないキャラの非対称性そのものがテーマ。170BPM・メンヘラコア・Hyperpop。', lyrics: `[0:00.0]ねえ、見てる?\n[0:03.0](男) え、あ、はい…見てます…\n[0:09.8]ねえ、見てる?\n[0:13.0]今日もLINE 既読スルー?\n[0:15.9]3時間も待たせてさ\n[0:18.1]私より 推し優先?\n[0:20.4]ねえ、答えてよ ねえ、ねえ、ねえ\n[0:24.0](男) ち、違うんだ、配信で…ご、ごめん、俺が悪い\n[0:32.0]強ゼロ3本目 回ってきたの\n[0:34.6]もう無理よ 無理なの もう無理だって\n[0:37.3]ねえ、今夜だけは\n[0:41.6]私を見て\n[0:42.9]ヘラって踊れ ヘラって踊れ\n[0:45.8]フロアで泣け 叫べ 壊れろ\n[0:48.4]一緒に踊って 拒否は無理\n[0:53.6]Dokidoki 病みdoki\n[0:55.8]今夜だけは 私を推して\n[0:58.6]私を\n[1:01.2]私を\n[1:05.5](男) ぼ、僕、きみを推してる\n[1:08.7]は?\n[1:14.5]もっかい言ってよ\n[1:17.3]嘘じゃないでしょ?\n[1:19.3]ヘラって踊れ ヘラって踊れ\n[1:21.8]地雷でもいい オタクでもいい\n[1:24.4]一生推して 拒否は無理\n[1:29.0]Dokidoki 病みdoki\n[1:31.9]今夜からは キミだけのファン\n[1:35.1]キミだけ キミだけ キミだけ\n[1:40.2]明日も会える?\n[1:42.0](男) は、はい…!\n[1:43.8]じゃあ、踊ろっか` },
     { title: 'NIGHT DRIVER',           file: 'night_driver.mp3',          cover: IMG('7df14270-1864-488f-b1f3-b3c98115020e'), comment: '80s Italo Discoへのオマージュ。Giorgio Moroder・Kavinsky系のレトロフューチャー。深夜の東京高速、ネオンとクロームの中を一人で走る男のバリトンボイス。130BPM。', lyrics: `[0:03.1]Tokyo, 3 A.M.\n[0:10.0]Midnight... velocity...\n[0:20.0]Highway lights are falling down\n[0:30.0]Neon signs still call my name\n[0:40.0]I was driving nowhere fast\n[0:50.0]Chasing ghosts that never came\n[0:55.0]Rear-view mirror, your silhouette\n[1:00.0]Fade away into the night\n[1:04.7]Night driver, night driver\n[1:09.0]Tokyo's burning, chrome and fire\n[1:12.6]Night driver, night driver\n[1:16.3]君を乗せて どこまでも\n[1:21.0]Tonight, tonight, tonight\n[1:35.7]1985, the radio plays\n[1:38.6]A song we used to know by heart\n[1:42.8]Engine hums like a lullaby\n[1:45.8]Tearing this city apart\n[1:49.9]Rear-view mirror, your silhouette\n[1:52.8]Gone before the morning light\n[1:58.2]Night driver, night driver\n[2:01.8]Tokyo's burning, chrome and fire\n[2:05.7]Night driver, night driver\n[2:09.4]君を乗せて どこまでも\n[2:14.2]Tonight, tonight, tonight\n[2:19.8]She said "don't look back"\n[2:22.9]She said "just keep driving"\n[2:26.8]But the road ends at dawn\n[2:31.6]And I'm still arriving\n[3:04.0]Night driver, night driver\n[3:07.8]Chrome and fire, chrome and fire\n[3:11.6]Night driver, night driver\n[3:15.0]二度と戻れない あの夜へ\n[3:20.7]Forever, forever, forever\n[3:29.9]Tokyo, 3 A.M.\n[3:32.6]Night... driver...` },
     { title: 'HANABI ☆ KISS',          file: 'hanabi_kiss.mp3',           cover: IMG('54f6f930-22f3-4eeb-99e1-56f90965bb45'), comment: '1996-2000年、パラパラ全盛期J-POPユーロビートへのオマージュ。夏祭りの夜、好きなクラスメイトに声もかけられない、あの甘くて苦い青春を158BPMに閉じ込めた。', lyrics: `[0:01.2]Hanabi\n[0:04.6]Kiss me tonight\n[0:18.9]教室の窓越しに キミを見ていた\n[0:25.2]夏休み前 最後のチャイム\n[0:30.7]浴衣姿で 待ち合わせ\n[0:37.3]声が出ない 胸が鳴る\n[0:43.9]Tonight, tonight, tonight\n[0:46.6]夜店の灯りで\n[0:50.0]キミの横顔が 揺れてる\n[0:55.5]Hanabi\n[0:57.1]Kiss me tonight\n[0:58.7]消えないでね この瞬間(とき)を\n[1:02.5]ドキドキ 止まらない\n[1:07.9]キミの隣が 世界のすべて\n[1:14.6]Hanabi hanabi hanabi\n[1:17.2]Kiss 打ち上がれ この気持ち\n[1:23.3]ラムネの泡が 弾ける音と\n[1:29.6]金魚すくいの 水の匂い\n[1:35.7]「これ、好きなの？」って聞かれて\n[1:38.9]うなずくだけで 精一杯\n[1:42.0]Tonight, tonight, tonight\n[1:44.6]屋台の向こうで\n[1:48.0]キミが笑った その一瞬\n[1:53.9]Hanabi\n[1:55.2]Kiss me tonight\n[1:56.7]消えないでね この瞬間(とき)を\n[2:00.5]ドキドキ 止まらない\n[2:06.0]キミの隣が 世界のすべて\n[2:12.6]Hanabi hanabi hanabi\n[2:15.2]Kiss 打ち上がれ\n[2:17.4]この気持ち\n[2:21.6]一番大きな花火が 空に咲いた\n[2:27.6]キミが振り向いた その瞬間\n[2:33.3]Say it, say it, say it, say it\n[2:36.7]言えないまま\n[2:40.8]夏が 終わっていく\n[2:45.7]Hanabi\n[2:47.0]Kiss me tonight\n[2:48.5]離さないでね この夜を\n[2:52.4]ドキドキ 止まらない\n[2:57.8]キミとだけ 踊っていたい\n[3:04.5]Hanabi hanabi hanabi\n[3:07.1]Kiss 夏の魔法よ\n[3:09.8]消えないで\n[3:11.4]Hanabi hanabi hanabi\n[3:13.9]Kiss me tonight\n[3:17.4]Hanabi hanabi hanabi\n[3:20.3]Kiss me tonight\n[3:23.4]La la la la la la la\n[3:27.6]Hanabi Kiss` },
+  ];
+
+  const pickTracks = (titles) => titles.map(t => allSongs.find(s => s.title === t)).filter(Boolean);
+  const danceAlbum = pickTracks([
+    'fly away buttfly ①',
+    'HANABI ☆ KISS',
+    '踊れ踊れ!',
+    'NIGHT DRIVER',
+    'Ngoma Ya Mwitu',
+    '病みDOKI',
+    "U'LDU'L ①",
   ]);
+
+  const songPlayerApi = initPlayer('songPlayer', allSongs);
+
+  document.querySelectorAll('#songPlayerTabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#songPlayerTabs .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      songPlayerApi.setTracks(btn.dataset.tab === 'dance' ? danceAlbum : allSongs);
+    });
+  });
 
   initPlayer('bgmPlayer', [
     { title: 'aftermath ①',         file: 'aftermath_1.mp3',        cover: IMG('b9f2f1cf-1f17-440d-9d9c-451d399d8d68') },
