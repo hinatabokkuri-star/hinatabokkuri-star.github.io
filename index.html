@@ -1283,9 +1283,15 @@
       white-space: nowrap;
     }
 
-    .mini-sub {
+    .mini-lyric {
       font-size: 0.72rem;
       color: var(--text-dim);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.4;
+      min-height: 2em;
     }
 
     .mini-controls {
@@ -1333,7 +1339,7 @@
     /* スマホのみ表示 */
     @media (max-width: 768px) {
       #miniPlayer { display: flex; }
-      body.mini-visible .hero { padding-top: 8rem; }
+      body.mini-visible .hero { padding-top: 10rem; }
     }
 
     /* ── HAMBURGER ── */
@@ -1631,7 +1637,7 @@
   <div class="mini-cover" id="miniCover"></div>
   <div class="mini-info">
     <div class="mini-title" id="miniTitle">—</div>
-    <div class="mini-sub">hinatabokkuri</div>
+    <div class="mini-lyric" id="miniLyric"></div>
   </div>
   <div class="mini-controls">
     <button id="miniPrev" title="Previous">⏮</button>
@@ -2071,7 +2077,11 @@
     setCover(tracks[0].cover);
     listEl.firstChild.classList.add('active');
 
-    const api = { audio, pause };
+    const api = { audio, pause, getCurrentLyricText: () => {
+      if (!lyricsData || lastLyricIdx < 0) return '';
+      const line = lyricsData[lastLyricIdx];
+      return line ? line.text.replace(/\{([^|]+)\|[^}]+\}/g, '$1') : '';
+    } };
     allPlayers.push(api);
     return api;
   };
@@ -2170,6 +2180,7 @@
     const miniPrev  = document.getElementById('miniPrev');
     const miniNext  = document.getElementById('miniNext');
     const miniBar   = document.getElementById('miniBar');
+    const miniLyric = document.getElementById('miniLyric');
     let activeApi        = null;
     let trackChanging    = false;
 
@@ -2181,6 +2192,7 @@
       miniPlay.textContent = audio.paused ? '▶' : '❚❚';
       miniCover.classList.toggle('playing', !audio.paused);
       if (audio.duration) miniBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      if (miniLyric) miniLyric.textContent = activeApi.getCurrentLyricText?.() || '';
     };
 
     const show = (api) => {
