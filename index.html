@@ -2028,6 +2028,10 @@
       const n = nextIdx();
       if (n >= 0) playIndex(n); else updateActive();
     });
+    // 復帰時に歌詞位置を再同期（バックグラウンド中はtimeupdateが止まるため）
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) updateLyricHighlight(audio.currentTime);
+    });
 
     let seeking = false;
     const seekTo = (clientX) => {
@@ -2152,6 +2156,7 @@
     const miniNext  = document.getElementById('miniNext');
     const miniBar   = document.getElementById('miniBar');
     let activeApi   = null;
+    let hideTimer   = null;
 
     const isMobile = () => window.matchMedia('(max-width:768px)').matches;
 
@@ -2177,6 +2182,7 @@
     allPlayers.forEach(api => {
       api.audio.addEventListener('play', () => {
         if (!isMobile()) return;
+        clearTimeout(hideTimer);
         const playerRoot = api.audio.closest('.player');
         if (playerRoot) {
           const cover = playerRoot.querySelector('[data-cover]');
@@ -2190,7 +2196,10 @@
       });
       api.audio.addEventListener('pause', () => {
         sync();
-        if (allPlayers.every(p => p.audio.paused)) hide();
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => {
+          if (allPlayers.every(p => p.audio.paused)) hide();
+        }, 400);
       });
       api.audio.addEventListener('timeupdate', sync);
     });
