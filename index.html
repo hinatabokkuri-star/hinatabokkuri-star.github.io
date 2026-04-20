@@ -1814,7 +1814,9 @@
       if (old) {
         old.classList.remove('enter');
         old.classList.add('exit');
-        old.addEventListener('animationend', () => old.remove(), { once: true });
+        const removeOld = () => { if (old.parentNode) old.remove(); };
+        old.addEventListener('animationend', removeOld, { once: true });
+        setTimeout(removeOld, 600); // バックグラウンド時にanimationendが発火しない場合のフォールバック
       }
       const slot = document.createElement('div');
       slot.className = 'lyric-slot enter';
@@ -2155,8 +2157,8 @@
     const miniPrev  = document.getElementById('miniPrev');
     const miniNext  = document.getElementById('miniNext');
     const miniBar   = document.getElementById('miniBar');
-    let activeApi   = null;
-    let hideTimer   = null;
+    let activeApi        = null;
+    let trackChanging    = false;
 
     const isMobile = () => window.matchMedia('(max-width:768px)').matches;
 
@@ -2180,9 +2182,12 @@
     };
 
     allPlayers.forEach(api => {
+      api.audio.addEventListener('ended', () => {
+        trackChanging = true; // トラック切り替え中はpauseでhideしない
+      });
       api.audio.addEventListener('play', () => {
         if (!isMobile()) return;
-        clearTimeout(hideTimer);
+        trackChanging = false;
         const playerRoot = api.audio.closest('.player');
         if (playerRoot) {
           const cover = playerRoot.querySelector('[data-cover]');
@@ -2196,10 +2201,7 @@
       });
       api.audio.addEventListener('pause', () => {
         sync();
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(() => {
-          if (allPlayers.every(p => p.audio.paused)) hide();
-        }, 400);
+        if (!trackChanging && allPlayers.every(p => p.audio.paused)) hide();
       });
       api.audio.addEventListener('timeupdate', sync);
     });
