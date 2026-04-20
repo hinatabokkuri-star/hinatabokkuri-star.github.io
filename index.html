@@ -1968,10 +1968,13 @@
       navigator.mediaSession.setActionHandler('nexttrack',     () => { const n = nextIdx(); if (n >= 0) playIndex(n); });
     };
 
+    let pendingPlay = false;
+
     const playIndex = (i) => {
       index = i;
       audio.src = `${RELEASE}/${tracks[i].file}`;
-      audio.play().catch(() => {});
+      audio.load();
+      audio.play().catch(() => { pendingPlay = true; });
       updateActive();
       updateMediaSession(i);
       if (typeof gtag !== 'undefined') {
@@ -2030,9 +2033,15 @@
       const n = nextIdx();
       if (n >= 0) playIndex(n); else updateActive();
     });
-    // 復帰時に歌詞位置を再同期（バックグラウンド中はtimeupdateが止まるため）
+    // 復帰時: 歌詞位置の再同期 & バックグラウンドで失敗した再生のリトライ
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) updateLyricHighlight(audio.currentTime);
+      if (!document.hidden) {
+        if (pendingPlay && audio.paused && audio.src) {
+          pendingPlay = false;
+          audio.play().catch(() => {});
+        }
+        updateLyricHighlight(audio.currentTime);
+      }
     });
 
     let seeking = false;
