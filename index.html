@@ -1993,6 +1993,11 @@ function shuffle(arr) {
 
 function playCurrent() {
   if (currentIdx < 0 || currentIdx >= queue.length) return;
+  // Auto-dismiss resume banner 10 seconds after any playback starts
+  const resumeBanner = document.getElementById('resumeBanner');
+  if (resumeBanner?.classList.contains('show')) {
+    setTimeout(() => resumeBanner.classList.remove('show'), 10000);
+  }
   const s = queue[currentIdx];
   npCover.style.backgroundImage = `url('${s.cover}')`;
   npTitle.textContent = s.title;
