@@ -233,6 +233,75 @@
   }
   .np-lyrics-full .lyric-line.past { opacity: 0.35; }
 
+  /* Update notification */
+  .update-banner {
+    position: fixed;
+    top: 1rem; left: 50%;
+    transform: translateX(-50%);
+    background: var(--amber);
+    color: #000;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    z-index: 200;
+    box-shadow: 0 6px 20px rgba(255,166,0,0.4);
+  }
+  .update-banner.show { display: flex; }
+  .update-banner button {
+    appearance: none; border: none;
+    background: #000; color: #fff;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-weight: 700; font-size: 0.75rem;
+    cursor: pointer; font-family: inherit;
+  }
+  .update-banner .dismiss {
+    background: transparent; color: rgba(0,0,0,0.6);
+    padding: 0.3rem 0.5rem;
+  }
+
+  /* Search */
+  .search-box {
+    position: relative;
+    flex: 0 1 240px;
+  }
+  .search-box input {
+    width: 100%;
+    appearance: none;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text);
+    padding: 0.4rem 0.8rem 0.4rem 2rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-family: inherit;
+  }
+  .search-box input:focus { outline: 1px solid var(--amber); border-color: var(--amber); }
+  .search-box::before {
+    content: '🔍';
+    position: absolute;
+    left: 0.6rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    pointer-events: none;
+  }
+
+  /* Time display */
+  .np-time {
+    display: flex; justify-content: space-between;
+    font-size: 0.7rem; color: var(--text-dim);
+    margin-top: 0.3rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Clickable lyric */
+  .np-lyrics-full .lyric-line { cursor: pointer; }
+  .np-lyrics-full .lyric-line:hover { background: var(--bg2); border-radius: 4px; }
+
   @media (max-width: 600px) {
     .grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
     .tile-title { font-size: 0.75rem; }
@@ -241,6 +310,7 @@
     .list .tile-cover { width: 80px; }
     .hero { flex-wrap: wrap; }
     .hero-text { width: 100%; }
+    .search-box { flex: 1 1 100%; order: -1; }
   }
 </style>
 </head>
@@ -259,6 +329,7 @@
   </div>
 
   <div class="controls">
+    <div class="search-box"><input id="searchInput" type="text" placeholder="タイトル・歌詞を検索"></div>
     <button class="chip active" data-genre="all">全曲 (22)</button>
     <button class="chip" data-genre="dance">ダンス</button>
     <button class="chip" data-genre="anime">アニソン</button>
@@ -274,6 +345,13 @@
   <div id="songs" class="grid"></div>
 </div>
 
+<!-- Update notification banner -->
+<div id="updateBanner" class="update-banner">
+  <span>🎵 新バージョンあり</span>
+  <button id="updateNow">今すぐ更新</button>
+  <button class="dismiss" id="updateLater">あとで</button>
+</div>
+
 <div id="nowPlaying" class="now-playing">
   <div class="np-row">
     <img id="npCover" class="np-cover" src="" alt="">
@@ -286,11 +364,16 @@
       <button class="np-btn" id="btnPrev" title="前へ">⏮</button>
       <button class="np-btn primary" id="btnPlayPause" title="再生/停止">⏸</button>
       <button class="np-btn" id="btnNext" title="次へ">⏭</button>
+      <button class="np-btn" id="btnShare" title="Xでシェア">📤</button>
       <button class="np-btn" id="btnExpand" title="歌詞展開">📝</button>
     </div>
   </div>
   <div class="np-progress" id="npProgress">
     <div class="np-progress-fill" id="npProgressFill"></div>
+  </div>
+  <div class="np-time">
+    <span id="npTimeCurrent">0:00</span>
+    <span id="npTimeTotal">0:00</span>
   </div>
   <div class="np-lyrics-full" id="npLyricsFull"></div>
 </div>
@@ -363,15 +446,35 @@ const npInfoClick = document.getElementById('npInfoClick');
 
 let currentFilter = 'all';
 let currentView = 'grid';
+let searchQuery = '';
 let queue = [];
 let currentIdx = -1;
 let shuffleMode = false;
 let parsedLyrics = [];
 
+const fmtTime = s => {
+  if (!isFinite(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${String(sec).padStart(2, '0')}`;
+};
+
 function render() {
   grid.innerHTML = '';
   grid.className = currentView;
-  const filtered = currentFilter === 'all' ? SONGS : SONGS.filter(s => s.genre === currentFilter);
+  let filtered = currentFilter === 'all' ? SONGS : SONGS.filter(s => s.genre === currentFilter);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    filtered = filtered.filter(s =>
+      s.title.toLowerCase().includes(q) ||
+      s.comment.toLowerCase().includes(q) ||
+      (s.lyrics || '').toLowerCase().includes(q)
+    );
+  }
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="grid-column:1/-1;color:var(--text-dim);text-align:center;padding:2rem;">該当なし</p>';
+    return;
+  }
   filtered.forEach(s => {
     const tile = document.createElement('div');
     tile.className = 'tile';
@@ -476,7 +579,11 @@ audio.addEventListener('ended', playNext);
 audio.addEventListener('timeupdate', () => {
   const pct = (audio.currentTime / audio.duration) * 100 || 0;
   npProgressFill.style.width = pct + '%';
+  document.getElementById('npTimeCurrent').textContent = fmtTime(audio.currentTime);
   updateLyric(audio.currentTime);
+});
+audio.addEventListener('loadedmetadata', () => {
+  document.getElementById('npTimeTotal').textContent = fmtTime(audio.duration);
 });
 npProgress.addEventListener('click', (e) => {
   const r = npProgress.getBoundingClientRect();
@@ -519,8 +626,17 @@ function renderFullLyrics() {
     return;
   }
   npLyricsFull.innerHTML = parsedLyrics.map((l, i) =>
-    `<div class="lyric-line" data-idx="${i}">${l.text}</div>`
+    `<div class="lyric-line" data-idx="${i}" data-time="${l.time}">${l.text}</div>`
   ).join('');
+  npLyricsFull.querySelectorAll('.lyric-line').forEach(el => {
+    el.addEventListener('click', () => {
+      const t = parseFloat(el.dataset.time);
+      if (!isNaN(t)) {
+        audio.currentTime = t;
+        if (audio.paused) audio.play();
+      }
+    });
+  });
 }
 
 function updateLyric(t) {
@@ -541,15 +657,79 @@ function updateLyric(t) {
   }
 }
 
+// Search input
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchQuery = e.target.value;
+  render();
+});
+
+// Share to X
+document.getElementById('btnShare').addEventListener('click', () => {
+  if (currentIdx < 0) return;
+  const s = queue[currentIdx];
+  const text = `いま聴いてる: ${s.title} by hinatabokkuri`;
+  const url = 'https://hinatabokkuri-star.github.io/';
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener');
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // Skip if focused on input
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (currentIdx < 0) return;
+  switch (e.code) {
+    case 'Space':
+      e.preventDefault();
+      if (audio.paused) audio.play(); else audio.pause();
+      break;
+    case 'ArrowRight':
+      if (e.shiftKey) playNext();
+      else audio.currentTime = Math.min(audio.duration, audio.currentTime + 15);
+      break;
+    case 'ArrowLeft':
+      if (e.shiftKey) playPrev();
+      else audio.currentTime = Math.max(0, audio.currentTime - 15);
+      break;
+    case 'KeyS':
+      shuffleMode = !shuffleMode;
+      btnShuffle.classList.toggle('active', shuffleMode);
+      break;
+  }
+});
+
 render();
 
-// ── Service Worker update polling (open tab auto-reload on push) ──
+// ── Service Worker update: notification-based (not forced reload) ──
+const updateBanner = document.getElementById('updateBanner');
+const updateNow = document.getElementById('updateNow');
+const updateLater = document.getElementById('updateLater');
+const DISMISS_KEY = 'hb_dismissed_version';
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').then(reg => {
     setInterval(() => reg.update().catch(() => {}), 30000);
   }).catch(() => {});
   navigator.serviceWorker.addEventListener('message', e => {
-    if (e.data?.type === 'RELOAD') location.reload();
+    if (e.data?.type === 'RELOAD') {
+      const version = e.data?.version || Date.now();
+      const dismissed = localStorage.getItem(DISMISS_KEY);
+      if (dismissed === String(version)) return;
+      // If audio not actively playing, reload silently
+      if (!audio || audio.paused) {
+        location.reload();
+        return;
+      }
+      // Otherwise show notification banner
+      updateBanner.classList.add('show');
+      updateNow.onclick = () => {
+        localStorage.removeItem(DISMISS_KEY);
+        location.reload();
+      };
+      updateLater.onclick = () => {
+        localStorage.setItem(DISMISS_KEY, String(version));
+        updateBanner.classList.remove('show');
+      };
+    }
   });
 }
 </script>
