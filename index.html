@@ -1170,6 +1170,9 @@
   <h2 class="section-title" id="recentSection" style="display:none;">🕐 最近聴いた</h2>
   <div id="recentRow" class="recent-row" style="display:none;"></div>
 
+  <h2 class="section-title">🎲 今日のオススメ</h2>
+  <div id="dailyPick" class="featured-row"></div>
+
   <h2 class="section-title">✨ New Drops</h2>
   <div id="featuredRow" class="featured-row"></div>
 
@@ -1545,7 +1548,7 @@ function render() {
     const liked = isLiked(s.file);
     tile.innerHTML = `
       <button class="tile-like ${liked ? 'liked' : ''}" aria-label="お気に入り" title="お気に入り">${liked ? '❤️' : '🤍'}</button>
-      <div class="tile-cover" style="background-image: url('${s.cover}')"></div>
+      <div class="tile-cover" data-lazy-bg="${s.cover}"></div>
       <div class="tile-meta">
         <span class="genre-tag">${s.genre}</span>
         <div class="tile-title">${s.title}</div>
@@ -1565,7 +1568,34 @@ function render() {
     });
     grid.appendChild(tile);
   });
+  lazyLoadCovers();
   markPlayingTile();
+}
+
+// Lazy load cover images via IntersectionObserver
+const lazyObserver = ('IntersectionObserver' in window) ? new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const bg = el.dataset.lazyBg;
+      if (bg) {
+        el.style.backgroundImage = `url('${bg}')`;
+        el.removeAttribute('data-lazy-bg');
+        lazyObserver.unobserve(el);
+      }
+    }
+  });
+}, { rootMargin: '200px' }) : null;
+
+function lazyLoadCovers() {
+  if (!lazyObserver) {
+    document.querySelectorAll('[data-lazy-bg]').forEach(el => {
+      el.style.backgroundImage = `url('${el.dataset.lazyBg}')`;
+      el.removeAttribute('data-lazy-bg');
+    });
+    return;
+  }
+  document.querySelectorAll('[data-lazy-bg]').forEach(el => lazyObserver.observe(el));
 }
 
 function markPlayingTile() {
@@ -1991,6 +2021,43 @@ function renderFeatured() {
   });
 }
 renderFeatured();
+
+// Daily Pick: deterministic by date, 3 songs
+function seededRandom(seed) {
+  let x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+function renderDailyPick() {
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  const pool = [...SONGS];
+  const picks = [];
+  for (let i = 0; i < 3 && pool.length; i++) {
+    const idx = Math.floor(seededRandom(seed + i) * pool.length);
+    picks.push(pool.splice(idx, 1)[0]);
+  }
+  const container = document.getElementById('dailyPick');
+  container.innerHTML = picks.map(s => `
+    <div class="featured-card" data-file="${s.file}">
+      <span class="badge" style="background:var(--cyan);color:#000;">PICK</span>
+      <div class="cover" style="background-image: url('${s.cover}')"></div>
+      <div class="meta">
+        <div class="ft-title">${s.title}</div>
+        <div class="ft-sub">${s.comment}</div>
+      </div>
+    </div>
+  `).join('');
+  container.querySelectorAll('.featured-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const s = SONGS.find(x => x.file === card.dataset.file);
+      if (!s) return;
+      queue = [...SONGS];
+      currentIdx = SONGS.indexOf(s);
+      playCurrent();
+    });
+  });
+}
+renderDailyPick();
 
 // MV inline player
 const mvModal = document.getElementById('mvModal');
