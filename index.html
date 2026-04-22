@@ -331,11 +331,35 @@
   .now-playing.spinning .np-cover .grooves { opacity: 1; }
   @keyframes spinDisc { to { transform: rotate(360deg); } }
   .np-info { min-width: 0; cursor: pointer; }
+  .np-album-tag {
+    display: none;
+    font-size: 0.62rem;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 0.15rem;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .np-album-tag.show { display: inline-flex; }
+  .np-album-tag::before {
+    content: '💿';
+    font-size: 0.7rem;
+  }
   .np-title {
     font-weight: 700; font-size: 0.9rem;
     line-height: 1.3;
     word-break: break-word;
     overflow-wrap: anywhere;
+  }
+  /* Album card playing indicator */
+  .album-card.playing {
+    border-color: var(--amber);
+    box-shadow: 0 8px 30px rgba(255,166,0,0.35);
+  }
+  .album-card.playing .album-play::before {
+    content: '♪ ';
   }
   .np-lyric {
     font-size: 0.75rem; color: var(--amber);
@@ -1578,6 +1602,7 @@
       <span class="spindle"></span>
     </div>
     <div class="np-info" id="npInfoClick">
+      <div class="np-album-tag" id="npAlbumTag"></div>
       <div class="np-title" id="npTitle"></div>
       <div class="np-lyric" id="npLyricInline"></div>
     </div>
@@ -1964,6 +1989,7 @@ function playCurrent() {
   const s = queue[currentIdx];
   npCover.style.backgroundImage = `url('${s.cover}')`;
   npTitle.textContent = s.title;
+  updateAlbumTag();
   // Reset total time display - will update on loadedmetadata/durationchange
   document.getElementById('npTimeTotal').textContent = '--:--';
   audio.src = 'music/' + s.file;
@@ -2331,8 +2357,21 @@ document.querySelectorAll('.album-card').forEach(card => {
 });
 
 // Disable album mode when user changes playback context manually
-btnShuffle.addEventListener('click', () => { albumMode = false; });
-document.getElementById('shuffleAll').addEventListener('click', () => { albumMode = false; });
+btnShuffle.addEventListener('click', () => { albumMode = false; updateAlbumTag(); });
+document.getElementById('shuffleAll').addEventListener('click', () => { albumMode = false; updateAlbumTag(); });
+
+function updateAlbumTag() {
+  const tag = document.getElementById('npAlbumTag');
+  const albumCard = document.querySelector('.album-card[data-album="dance-instinct"]');
+  if (albumMode && currentIdx >= 0) {
+    tag.textContent = `DANCE INSTINCT · Track ${currentIdx + 1}/${queue.length}`;
+    tag.classList.add('show');
+    if (albumCard) albumCard.classList.add('playing');
+  } else {
+    tag.classList.remove('show');
+    if (albumCard) albumCard.classList.remove('playing');
+  }
+}
 
 // ===== Crossfade engine (album mode only) =====
 let audioB = document.getElementById('audioB');
