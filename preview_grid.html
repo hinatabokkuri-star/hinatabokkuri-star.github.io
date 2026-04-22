@@ -260,7 +260,49 @@
     gap: 0.7rem;
     align-items: center;
   }
-  .np-cover { width: 56px; height: 56px; border-radius: 6px; object-fit: cover; }
+  /* Vinyl cover (transitions between square album art and spinning disc) */
+  .np-cover {
+    width: 56px; height: 56px;
+    border-radius: 8px;
+    background: #111 center/cover no-repeat;
+    position: relative;
+    transition: border-radius 0.7s ease, box-shadow 0.4s;
+    flex-shrink: 0;
+  }
+  .np-cover .spindle {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 8px; height: 8px;
+    margin: -4px 0 0 -4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #000 35%, #222 70%, #050505 100%);
+    box-shadow: 0 0 0 1.5px rgba(255,255,255,0.4), 0 0 6px rgba(0,0,0,0.9) inset;
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+  .np-cover .grooves {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      linear-gradient(125deg, transparent 0%, transparent 38%, rgba(255,255,255,0.15) 50%, transparent 62%, transparent 100%),
+      repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0 1px, transparent 1px 3px);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+  .now-playing.spinning .np-cover {
+    border-radius: 50%;
+    animation: spinDisc 6s linear infinite;
+    box-shadow:
+      0 4px 14px rgba(0,0,0,0.6),
+      0 0 0 2px rgba(0,0,0,0.6) inset,
+      0 0 0 3px rgba(255,255,255,0.08) inset;
+  }
+  .now-playing.spinning .np-cover .spindle,
+  .now-playing.spinning .np-cover .grooves { opacity: 1; }
+  @keyframes spinDisc { to { transform: rotate(360deg); } }
   .np-info { min-width: 0; cursor: pointer; }
   .np-title {
     font-weight: 700; font-size: 0.9rem;
@@ -470,7 +512,10 @@
 
 <div id="nowPlaying" class="now-playing">
   <div class="np-row">
-    <img id="npCover" class="np-cover" src="" alt="">
+    <div id="npCover" class="np-cover">
+      <span class="grooves"></span>
+      <span class="spindle"></span>
+    </div>
     <div class="np-info" id="npInfoClick">
       <div class="np-title" id="npTitle"></div>
       <div class="np-lyric" id="npLyricInline"></div>
@@ -634,7 +679,7 @@ function shuffle(arr) {
 function playCurrent() {
   if (currentIdx < 0 || currentIdx >= queue.length) return;
   const s = queue[currentIdx];
-  npCover.src = s.cover;
+  npCover.style.backgroundImage = `url('${s.cover}')`;
   npTitle.textContent = s.title;
   audio.src = 'music/' + s.file;
   parsedLyrics = parseLRC(s.lyrics);
@@ -659,7 +704,7 @@ function updateMediaSession(s) {
   navigator.mediaSession.metadata = new MediaMetadata({
     title: s.title,
     artist: 'hinatabokkuri',
-    album: 'hinatabokkuri',
+    album: 'HINATA AI MUSIC',
     artwork: [
       { src: s.cover, sizes: '512x512', type: 'image/jpeg' },
     ],
@@ -698,8 +743,14 @@ btnPlayPause.addEventListener('click', () => {
   if (audio.paused) audio.play();
   else audio.pause();
 });
-audio.addEventListener('play', () => btnPlayPause.textContent = '⏸');
-audio.addEventListener('pause', () => btnPlayPause.textContent = '▶');
+audio.addEventListener('play', () => {
+  btnPlayPause.textContent = '⏸';
+  np.classList.add('spinning');
+});
+audio.addEventListener('pause', () => {
+  btnPlayPause.textContent = '▶';
+  np.classList.remove('spinning');
+});
 audio.addEventListener('ended', playNext);
 audio.addEventListener('timeupdate', () => {
   const pct = (audio.currentTime / audio.duration) * 100 || 0;
