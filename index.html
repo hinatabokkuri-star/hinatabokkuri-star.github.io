@@ -2352,6 +2352,27 @@ function attachMirrorListeners(el) {
   });
 }
 attachMirrorListeners(audioB);
+
+// Unlock audioB on first user gesture (iOS Safari autoplay restriction workaround)
+let audioBUnlocked = false;
+function unlockAudioB() {
+  if (audioBUnlocked) return;
+  audioBUnlocked = true;
+  try {
+    // Play a short silent buffer to unlock
+    audioB.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
+    audioB.volume = 0;
+    audioB.play().then(() => {
+      audioB.pause();
+      audioB.src = '';
+      audioB.volume = audio.volume;
+    }).catch(() => { audioBUnlocked = false; });
+  } catch (e) { audioBUnlocked = false; }
+}
+// Trigger unlock on any first interaction
+['click', 'touchstart', 'keydown'].forEach(evt => {
+  document.addEventListener(evt, unlockAudioB, { once: true, capture: true });
+});
 const CROSSFADE_SEC = 3;
 let crossfadeInProgress = false;
 let crossfadeTimer = null;
@@ -2383,11 +2404,20 @@ async function startCrossfade() {
   const incoming = (audio === _audioA) ? audioB : _audioA;
   incoming.src = 'music/' + nextSong.file;
   incoming.volume = 0;
+  // Ensure incoming is unlocked (especially audioB on iOS)
+  if (incoming === audioB && !audioBUnlocked) unlockAudioB();
   try {
     await incoming.play();
   } catch (e) {
+    console.log('crossfade incoming.play failed, falling back:', e);
     crossfadeInProgress = false;
     return;
+  }
+  // Verify playing actually started (iOS sometimes silently fails)
+  await new Promise(r => setTimeout(r, 50));
+  if (incoming.paused) {
+    console.log('crossfade incoming paused unexpectedly, retrying');
+    try { await incoming.play(); } catch { crossfadeInProgress = false; return; }
   }
 
   // Swap active reference NOW so mirror listeners recognize `incoming` as active
