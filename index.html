@@ -510,6 +510,32 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* Return-to-current lyric button */
+  .lyric-return-btn {
+    position: absolute;
+    bottom: 1rem; right: 1rem;
+    appearance: none;
+    background: var(--amber);
+    color: #000;
+    border: none;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255,166,0,0.45);
+    z-index: 5;
+    display: none;
+    font-family: inherit;
+    animation: fadeSlideIn 0.25s ease-out;
+  }
+  .lyric-return-btn.show { display: block; }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .now-playing.expanded { position: fixed; }
+
   /* Ruby (振り仮名) */
   ruby rt {
     font-size: 0.55em;
@@ -1642,6 +1668,7 @@
     <button class="np-tab" data-tab="queue">📜 キュー</button>
   </div>
   <div class="np-lyrics-full" id="npLyricsFull"></div>
+  <button class="lyric-return-btn" id="lyricReturnBtn" aria-label="現在行へ戻る">♪ 現在行へ</button>
   <div class="np-queue" id="npQueue"></div>
 </div>
 
@@ -2947,6 +2974,39 @@ function renderFullLyrics() {
   });
 }
 
+let lyricAutoScrollPaused = false;
+let lyricAutoResumeTimer = null;
+let programmaticScroll = false;
+
+function scrollToActiveLyric() {
+  const active = npLyricsFull.querySelector('.lyric-line.active');
+  if (!active) return;
+  programmaticScroll = true;
+  active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => { programmaticScroll = false; }, 600);
+}
+
+// Detect manual scroll to pause auto-follow
+npLyricsFull.addEventListener('scroll', () => {
+  if (programmaticScroll) return;
+  lyricAutoScrollPaused = true;
+  document.getElementById('lyricReturnBtn').classList.add('show');
+  clearTimeout(lyricAutoResumeTimer);
+  lyricAutoResumeTimer = setTimeout(() => {
+    lyricAutoScrollPaused = false;
+    document.getElementById('lyricReturnBtn').classList.remove('show');
+    scrollToActiveLyric();
+  }, 5000);
+}, { passive: true });
+
+// "Return to current" button
+document.getElementById('lyricReturnBtn').addEventListener('click', () => {
+  lyricAutoScrollPaused = false;
+  clearTimeout(lyricAutoResumeTimer);
+  document.getElementById('lyricReturnBtn').classList.remove('show');
+  scrollToActiveLyric();
+});
+
 function updateLyric(t) {
   if (parsedLyrics.length === 0) { npLyricInline.textContent = ''; return; }
   let activeIdx = -1;
@@ -2959,9 +3019,13 @@ function updateLyric(t) {
     el.classList.toggle('active', i === activeIdx);
     el.classList.toggle('past', i < activeIdx);
   });
-  if (activeIdx >= 0 && np.classList.contains('expanded')) {
+  if (activeIdx >= 0 && np.classList.contains('expanded') && !lyricAutoScrollPaused) {
     const active = lines[activeIdx];
-    if (active) active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (active) {
+      programmaticScroll = true;
+      active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => { programmaticScroll = false; }, 600);
+    }
   }
 }
 
