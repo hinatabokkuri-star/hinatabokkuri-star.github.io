@@ -1,4 +1,4 @@
-const CACHE = 'hina-202604230304';
+const CACHE = 'hina-202604230309';
 
 self.addEventListener('install', () => self.skipWaiting());
 
