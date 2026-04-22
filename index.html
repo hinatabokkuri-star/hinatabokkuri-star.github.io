@@ -36,6 +36,7 @@
     --cyan: #4fd1c5;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: calc(16px * var(--font-scale, 1)); }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Yu Gothic", sans-serif;
     background: var(--bg);
@@ -632,6 +633,137 @@
     padding: 0.3rem 0.6rem; cursor: pointer; font-size: 1.1rem;
   }
 
+  /* Settings gear button */
+  .settings-btn {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 40px; height: 40px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: grid;
+    place-items: center;
+    transition: all 0.2s;
+    z-index: 20;
+  }
+  .settings-btn:hover { border-color: var(--amber); color: var(--amber); transform: rotate(30deg); }
+
+  /* Modal shell (shared by settings / shortcuts help) */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 300;
+    display: none;
+    place-items: center;
+    padding: 1rem;
+  }
+  .modal.active { display: grid; }
+  .modal-inner {
+    width: 100%;
+    max-width: 440px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  .modal-inner h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 32px; height: 32px;
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  .modal-close:hover { background: var(--bg3); }
+
+  /* Settings rows */
+  .settings-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.8rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .settings-row:last-child { border-bottom: none; }
+  .settings-row .label { font-size: 0.85rem; }
+  .settings-row .sub { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.2rem; }
+  .seg-control {
+    display: inline-flex;
+    background: var(--bg3);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .seg-control button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .seg-control button.active { background: var(--amber); color: #000; }
+
+  /* Danger button */
+  .danger-btn {
+    appearance: none;
+    border: 1px solid var(--coral, #ff6b7a);
+    background: transparent;
+    color: #ff6b7a;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .danger-btn:hover { background: rgba(255,107,122,0.1); }
+
+  /* Keyboard shortcut list */
+  .shortcut-list {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .shortcut-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.8rem;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  .kbd {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: "SF Mono", "Menlo", monospace;
+    font-size: 0.75rem;
+    color: var(--amber);
+    min-width: 2rem;
+    text-align: center;
+  }
+
   /* Error toast */
   .error-toast {
     position: fixed;
@@ -1161,6 +1293,7 @@
 <body>
 <a href="#songs" class="skip-link">コンテンツへスキップ</a>
 <div class="container">
+  <button id="settingsBtn" class="settings-btn" aria-label="設定" title="設定">⚙</button>
   <header class="site-header">
     <div class="logo-mark"><img src="/icons/icon-192.png" alt="HINATA AI MUSIC"></div>
     <div class="site-title">
@@ -1299,6 +1432,70 @@
     <span>Safariの <span class="ios-icon">⬆</span> 共有ボタン → <strong>「ホーム画面に追加」</strong>でアプリ化</span>
   </div>
   <button class="ios-dismiss" id="iosDismiss" aria-label="閉じる">×</button>
+</div>
+
+<!-- Settings modal -->
+<div id="settingsModal" class="modal" role="dialog" aria-label="設定">
+  <div class="modal-inner">
+    <button class="modal-close" id="settingsClose" aria-label="閉じる">×</button>
+    <h2>⚙ 設定</h2>
+    <div class="settings-row">
+      <div>
+        <div class="label">🆎 文字サイズ</div>
+        <div class="sub">曲名・歌詞・UIの全体サイズ</div>
+      </div>
+      <div class="seg-control" id="fontSizeControl">
+        <button data-scale="0.9">小</button>
+        <button data-scale="1" class="active">標準</button>
+        <button data-scale="1.15">大</button>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div>
+        <div class="label">🎨 色で曲を演出</div>
+        <div class="sub">ジャケ色がプレイヤーに反映</div>
+      </div>
+      <div class="seg-control" id="colorAdaptControl">
+        <button data-val="0">off</button>
+        <button data-val="1" class="active">on</button>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div>
+        <div class="label">⌨ ショートカット</div>
+        <div class="sub">? キーでも開ける</div>
+      </div>
+      <button class="danger-btn" id="openShortcuts" style="color:var(--amber);border-color:var(--amber);">一覧を見る</button>
+    </div>
+    <div class="settings-row">
+      <div>
+        <div class="label">🗑 個人データ削除</div>
+        <div class="sub">お気に入り・履歴・設定をリセット</div>
+      </div>
+      <button class="danger-btn" id="resetAll">リセット</button>
+    </div>
+  </div>
+</div>
+
+<!-- Keyboard shortcuts modal -->
+<div id="shortcutsModal" class="modal" role="dialog" aria-label="キーボードショートカット">
+  <div class="modal-inner">
+    <button class="modal-close" id="shortcutsClose" aria-label="閉じる">×</button>
+    <h2>⌨ キーボードショートカット</h2>
+    <div class="shortcut-list">
+      <div class="shortcut-row"><span class="kbd">Space</span><span>再生 / 一時停止</span></div>
+      <div class="shortcut-row"><span class="kbd">←</span><span>15秒戻る</span></div>
+      <div class="shortcut-row"><span class="kbd">→</span><span>15秒進む</span></div>
+      <div class="shortcut-row"><span class="kbd">Shift+←</span><span>前の曲</span></div>
+      <div class="shortcut-row"><span class="kbd">Shift+→</span><span>次の曲</span></div>
+      <div class="shortcut-row"><span class="kbd">S</span><span>シャッフル切替</span></div>
+      <div class="shortcut-row"><span class="kbd">R</span><span>リピート切替</span></div>
+      <div class="shortcut-row"><span class="kbd">L</span><span>お気に入り切替</span></div>
+      <div class="shortcut-row"><span class="kbd">/</span><span>検索にフォーカス</span></div>
+      <div class="shortcut-row"><span class="kbd">?</span><span>このショートカット一覧</span></div>
+      <div class="shortcut-row"><span class="kbd">Esc</span><span>モーダル・メニューを閉じる</span></div>
+    </div>
+  </div>
 </div>
 
 <!-- MV inline modal -->
@@ -2147,6 +2344,69 @@ function renderDailyPick() {
 }
 renderDailyPick();
 
+// Settings modal + font size + color adapt toggle + reset
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsModal = document.getElementById('settingsModal');
+const shortcutsModal = document.getElementById('shortcutsModal');
+
+settingsBtn.addEventListener('click', () => settingsModal.classList.add('active'));
+document.getElementById('settingsClose').addEventListener('click', () => settingsModal.classList.remove('active'));
+document.getElementById('shortcutsClose').addEventListener('click', () => shortcutsModal.classList.remove('active'));
+document.getElementById('openShortcuts').addEventListener('click', () => {
+  settingsModal.classList.remove('active');
+  shortcutsModal.classList.add('active');
+});
+[settingsModal, shortcutsModal].forEach(m => {
+  m.addEventListener('click', (e) => { if (e.target === m) m.classList.remove('active'); });
+});
+
+// Font size
+const savedFontScale = parseFloat(localStorage.getItem('hb_font_scale') || '1');
+document.documentElement.style.setProperty('--font-scale', String(savedFontScale));
+document.querySelectorAll('#fontSizeControl button').forEach(b => {
+  b.classList.toggle('active', parseFloat(b.dataset.scale) === savedFontScale);
+  b.addEventListener('click', () => {
+    const v = parseFloat(b.dataset.scale);
+    document.documentElement.style.setProperty('--font-scale', String(v));
+    localStorage.setItem('hb_font_scale', String(v));
+    document.querySelectorAll('#fontSizeControl button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+  });
+});
+
+// Color adapt toggle
+let colorAdaptEnabled = localStorage.getItem('hb_color_adapt') !== '0';
+document.querySelectorAll('#colorAdaptControl button').forEach(b => {
+  b.classList.toggle('active', (b.dataset.val === '1') === colorAdaptEnabled);
+  b.addEventListener('click', () => {
+    colorAdaptEnabled = b.dataset.val === '1';
+    localStorage.setItem('hb_color_adapt', colorAdaptEnabled ? '1' : '0');
+    document.querySelectorAll('#colorAdaptControl button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    if (!colorAdaptEnabled) {
+      np.style.removeProperty('--np-accent');
+      np.style.removeProperty('--np-accent-border');
+      np.style.removeProperty('box-shadow');
+    } else if (currentIdx >= 0) {
+      extractAndApplyCoverColor(queue[currentIdx].cover);
+    }
+  });
+});
+
+// Reset all personal data
+document.getElementById('resetAll').addEventListener('click', () => {
+  if (!confirm('お気に入り・履歴・設定すべて削除します。よろしいですか？')) return;
+  ['hb_liked', 'hb_recent', 'hb_last_played', 'hb_volume', 'hb_speed', 'hb_font_scale', 'hb_color_adapt', 'ios_install_dismissed', 'pwa_dismissed'].forEach(k => localStorage.removeItem(k));
+  location.reload();
+});
+
+// Respect color adapt toggle in extractAndApplyCoverColor
+const _origExtract = extractAndApplyCoverColor;
+window.extractAndApplyCoverColor = function(url) {
+  if (!colorAdaptEnabled) return;
+  _origExtract(url);
+};
+
 // Auto-scroll carousels (slow horizontal pan, pause on hover/focus/touch)
 function initAutoScroll() {
   document.querySelectorAll('[data-autoscroll]').forEach(row => {
@@ -2293,25 +2553,52 @@ document.getElementById('btnShare').addEventListener('click', async () => {
 
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
-  // Skip if focused on input
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-  if (currentIdx < 0) return;
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+    if (e.code === 'Escape') e.target.blur();
+    return;
+  }
   switch (e.code) {
     case 'Space':
+      if (currentIdx < 0) return;
       e.preventDefault();
       if (audio.paused) audio.play(); else audio.pause();
       break;
     case 'ArrowRight':
+      if (currentIdx < 0) return;
       if (e.shiftKey) playNext();
       else audio.currentTime = Math.min(audio.duration, audio.currentTime + 15);
       break;
     case 'ArrowLeft':
+      if (currentIdx < 0) return;
       if (e.shiftKey) playPrev();
       else audio.currentTime = Math.max(0, audio.currentTime - 15);
       break;
     case 'KeyS':
       shuffleMode = !shuffleMode;
       btnShuffle.classList.toggle('active', shuffleMode);
+      break;
+    case 'KeyR':
+      btnRepeat.click();
+      break;
+    case 'KeyL':
+      if (currentIdx < 0) return;
+      toggleLike(queue[currentIdx].file);
+      render();
+      updateChipCounts();
+      break;
+    case 'Slash':
+      e.preventDefault();
+      if (e.shiftKey) {
+        // Shift+/ = ? key → open shortcuts
+        document.getElementById('shortcutsModal').classList.add('active');
+      } else {
+        document.getElementById('searchInput')?.focus();
+      }
+      break;
+    case 'Escape':
+      document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active'));
+      sleepMenu?.classList.remove('show');
+      speedMenu?.classList.remove('show');
       break;
   }
 });
