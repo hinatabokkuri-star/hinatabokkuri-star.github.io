@@ -991,6 +991,54 @@
   }
   .chip.active .chip-count { opacity: 0.75; }
 
+  /* Filter action bar (shown when specific genre/liked chip active) */
+  .filter-bar {
+    display: none;
+    margin-bottom: 0.8rem;
+    padding: 0.8rem 1rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .filter-bar.show { display: flex; }
+  .filter-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .filter-label .count {
+    color: var(--text-dim);
+    font-weight: 500;
+    margin-left: 0.3rem;
+  }
+  .filter-actions {
+    display: flex;
+    gap: 0.4rem;
+  }
+  .filter-actions button {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+  }
+  .filter-actions .play-btn {
+    background: var(--amber);
+    color: #000;
+  }
+  .filter-actions .shuffle-btn {
+    background: var(--bg3);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .filter-actions .shuffle-btn:hover { border-color: var(--amber); }
+
   /* Heart/Like button on tiles */
   .tile-like {
     position: absolute;
@@ -1463,6 +1511,17 @@
     </div>
   </div>
 
+  <div id="filterBar" class="filter-bar">
+    <div class="filter-label">
+      <span id="filterName"></span>
+      <span class="count" id="filterCount"></span>
+    </div>
+    <div class="filter-actions">
+      <button class="play-btn" id="filterPlay">▶ 順次再生</button>
+      <button class="shuffle-btn" id="filterShuffle">🔀 シャッフル</button>
+    </div>
+  </div>
+
   <div id="songs" class="grid"></div>
 
   <footer class="site-footer">
@@ -1879,6 +1938,15 @@ function toggleLike(file) {
   if (typeof gtag !== 'undefined') gtag('event', i >= 0 ? 'unlike_track' : 'like_track', { track_file: file });
 }
 
+const GENRE_LABELS = {
+  liked: '❤️ お気に入り',
+  dance: 'ダンス',
+  anime: 'アニソン',
+  ballad: 'バラード',
+  experimental: '実験',
+  'jp-dance': '和ダンス',
+};
+
 function render() {
   grid.innerHTML = '';
   grid.className = currentView;
@@ -1888,6 +1956,16 @@ function render() {
     filtered = SONGS.filter(s => liked.includes(s.file));
   } else {
     filtered = currentFilter === 'all' ? SONGS : SONGS.filter(s => s.genre === currentFilter);
+  }
+  // Show/hide filter action bar
+  const filterBar = document.getElementById('filterBar');
+  if (currentFilter !== 'all' && !searchQuery && filtered.length > 0) {
+    filterBar.classList.add('show');
+    document.getElementById('filterName').textContent = GENRE_LABELS[currentFilter] || currentFilter;
+    document.getElementById('filterCount').textContent = `${filtered.length}曲`;
+    filterBar._currentList = filtered;
+  } else {
+    filterBar.classList.remove('show');
   }
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
@@ -2586,6 +2664,32 @@ async function startCrossfade() {
     }
   }, stepMs);
 }
+
+// Filter bar play/shuffle buttons
+document.getElementById('filterPlay').addEventListener('click', () => {
+  const bar = document.getElementById('filterBar');
+  const list = bar._currentList || [];
+  if (list.length === 0) return;
+  shuffleMode = false;
+  btnShuffle.classList.remove('active');
+  albumMode = false;
+  updateAlbumTag();
+  queue = [...list];
+  currentIdx = 0;
+  playCurrent();
+});
+document.getElementById('filterShuffle').addEventListener('click', () => {
+  const bar = document.getElementById('filterBar');
+  const list = bar._currentList || [];
+  if (list.length === 0) return;
+  shuffleMode = true;
+  btnShuffle.classList.add('active');
+  albumMode = false;
+  updateAlbumTag();
+  queue = shuffle(list);
+  currentIdx = 0;
+  playCurrent();
+});
 
 document.querySelectorAll('.chip[data-genre]').forEach(c => {
   c.addEventListener('click', () => {
