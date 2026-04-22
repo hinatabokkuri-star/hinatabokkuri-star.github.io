@@ -481,15 +481,12 @@
   /* X logo icon button */
   .np-btn .x-icon { width: 18px; height: 18px; fill: currentColor; }
 
-  /* Reduced motion: disable animations for users who prefer it */
+  /* Reduced motion: disable only decorative animations, keep functional ones (disc spin etc.) */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.001s !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.001s !important;
-    }
-    .logo-mark img { animation: none !important; }
+    .logo-mark, .logo-mark img { animation: none !important; }
+    .site-title h1 { animation: none !important; background-position: 0 0 !important; }
     .tile.playing .tile-cover::before { animation: none !important; }
+    .error-toast.show { animation: none !important; opacity: 1; }
   }
 
   /* Accessibility - visible focus ring */
@@ -1611,10 +1608,15 @@ function extractAndApplyCoverColor(coverUrl) {
       }
       if (n === 0) return;
       r = Math.round(r / n); g = Math.round(g / n); b = Math.round(b / n);
-      // Create dim gradient and glow
-      np.style.setProperty('--np-accent', `radial-gradient(at top left, rgba(${r},${g},${b},0.45), transparent 50%)`);
-      np.style.setProperty('--np-accent-border', `rgba(${r},${g},${b},0.6)`);
-      np.style.boxShadow = `0 -8px 40px rgba(${r},${g},${b},0.25)`;
+      // Boost saturation: push away from gray by stretching extremes
+      const boost = (c) => Math.min(255, Math.max(0, Math.round(128 + (c - 128) * 1.6)));
+      const rb = boost(r), gb = boost(g), bb2 = boost(b);
+      // Apply with stronger intensity
+      np.style.setProperty('--np-accent',
+        `radial-gradient(at 30% 0%, rgba(${rb},${gb},${bb2},0.85), transparent 70%), ` +
+        `radial-gradient(at 80% 100%, rgba(${r},${g},${b},0.45), transparent 60%)`);
+      np.style.setProperty('--np-accent-border', `rgba(${rb},${gb},${bb2},0.9)`);
+      np.style.boxShadow = `0 -10px 50px rgba(${rb},${gb},${bb2},0.55), 0 -4px 20px rgba(${r},${g},${b},0.3)`;
     } catch (e) {
       // CORS or other error; fall back to default
       console.log('color extract skipped:', e.message);
