@@ -850,6 +850,82 @@
     text-align: center;
   }
 
+  /* About overlay (full-screen, music keeps playing) */
+  .about-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 400;
+    overflow-y: auto;
+    padding: 1rem 1rem 180px 1rem;
+    display: none;
+  }
+  .about-overlay.show { display: block; animation: fadeSlideUp 0.3s ease-out; }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .about-overlay .about-close {
+    position: sticky;
+    top: 1rem;
+    margin-left: auto;
+    display: grid;
+    place-items: center;
+    width: 40px; height: 40px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .about-overlay .about-close:hover { border-color: var(--amber); color: var(--amber); }
+  .about-overlay .about-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .about-overlay .about-inner h2 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+  .about-overlay .section-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .about-overlay .about-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+  }
+  .about-overlay .about-card p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0.7rem; }
+  .about-overlay .about-card p:last-child { margin-bottom: 0; }
+  .about-overlay .about-card strong { color: var(--text); font-weight: 700; }
+  .about-overlay .links-row {
+    display: flex; flex-wrap: wrap; gap: 0.7rem;
+  }
+  .about-overlay .link-btn {
+    display: inline-flex; align-items: center;
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .about-overlay .link-btn:hover { border-color: var(--amber); color: var(--amber); }
+
   /* Error toast */
   .error-toast {
     position: fixed;
@@ -1577,6 +1653,63 @@
     <span>Safariの <span class="ios-icon">⬆</span> 共有ボタン → <strong>「ホーム画面に追加」</strong>でアプリ化</span>
   </div>
   <button class="ios-dismiss" id="iosDismiss" aria-label="閉じる">×</button>
+</div>
+
+<!-- About overlay (keeps music playing across "navigation") -->
+<div id="aboutOverlay" class="about-overlay">
+  <div class="about-inner">
+    <button class="about-close" id="aboutClose" aria-label="閉じて音楽に戻る">×</button>
+
+    <div class="section-label">About</div>
+    <h2>🌻 hinatabokkuri</h2>
+    <div class="about-card" style="margin-bottom:1rem;">
+      <p>ゲーム・音楽・フリー素材を制作しているインディーゲームクリエイターです。</p>
+      <p><strong>Godot 4</strong> でミステリーサウンドノベル、レトロJRPG、Wizardry風ダンジョンRPGの3作品を同時開発中。素材・BGMは制作後にフリー配布予定。</p>
+      <p>楽曲は <strong>Suno Pro</strong> と ElevenLabs・AivisSpeech の TTS 合成。ジャケット画像は ComfyUI + RealVisXL や Gemini を使い分け。</p>
+    </div>
+
+    <div class="section-label">Links</div>
+    <h2>🔗 ソーシャル</h2>
+    <div class="links-row" style="margin-bottom:1rem;">
+      <a class="link-btn" href="https://www.youtube.com/@hinatabokkuri" target="_blank" rel="noopener">▶ YouTube</a>
+      <a class="link-btn" href="https://x.com/yhhinabon" target="_blank" rel="noopener">𝕏 X / Twitter</a>
+      <a class="link-btn" href="https://github.com/hinatabokkuri-star" target="_blank" rel="noopener">⌥ GitHub</a>
+      <a class="link-btn" href="https://hinatabokkuri.booth.pm/" target="_blank" rel="noopener">🎁 BOOTH</a>
+    </div>
+
+    <div class="section-label">License</div>
+    <h2>📜 利用について</h2>
+    <div class="about-card" style="margin-bottom:0.6rem;">
+      <p style="color:var(--coral,#ff6b7a);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.6rem;">AI-Generated Content</p>
+      <p>画像・音楽・素材はAI生成ツールで制作、各ツールの商用利用規約を確認のうえ公開。</p>
+    </div>
+    <div class="about-card">
+      <p style="color:var(--coral,#ff6b7a);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.6rem;">Terms of Use</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.6rem;">
+        <span style="padding:0.3rem 0.9rem;border-radius:999px;font-size:0.75rem;font-weight:700;background:rgba(72,168,110,0.15);color:#48a86e;">✓ ダウンロード自由</span>
+        <span style="padding:0.3rem 0.9rem;border-radius:999px;font-size:0.75rem;font-weight:700;background:rgba(72,168,110,0.15);color:#48a86e;">✓ 拡散・シェア自由</span>
+        <span style="padding:0.3rem 0.9rem;border-radius:999px;font-size:0.75rem;font-weight:700;background:rgba(255,107,122,0.15);color:#ff6b7a;">✗ 改変禁止</span>
+      </div>
+      <p>常識的な範囲で自由に、商用利用・その他ご相談はXまで。</p>
+    </div>
+
+    <div class="section-label" style="margin-top:1.5rem;">Support</div>
+    <h2>🎁 お布施</h2>
+    <div class="about-card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+      <p style="flex:1;min-width:220px;">気に入った作品があればお気持ち程度で嬉しいです。プレッシャーは一切ありません。</p>
+      <a class="link-btn" href="https://hinatabokkuri.booth.pm/items/8224157" target="_blank" rel="noopener">🛒 BOOTHで支援</a>
+    </div>
+
+    <div class="section-label" style="margin-top:1.5rem;">Contact</div>
+    <h2>💼 お問い合わせ</h2>
+    <div class="about-card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-start;">
+      <div style="flex:1;min-width:220px;">
+        <p style="color:var(--cyan,#4fd1c5);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">DX Support · Kyoto area</p>
+        <p>業務デジタル化や小さなシステム開発のご相談を承ります。京都中心に対面可能な範囲で。</p>
+      </div>
+      <a class="link-btn" href="https://x.com/yhhinabon" target="_blank" rel="noopener">𝕏 X でDM</a>
+    </div>
+  </div>
 </div>
 
 <!-- Settings modal -->
@@ -2978,6 +3111,36 @@ window.extractAndApplyCoverColor = function(url) {
   if (!colorAdaptEnabled) return;
   _origExtract(url);
 };
+
+// About overlay (keeps music playing - no full page navigation)
+const aboutOverlay = document.getElementById('aboutOverlay');
+function openAbout() {
+  aboutOverlay.classList.add('show');
+  window.scrollTo({ top: 0 });
+  history.pushState({ about: true }, '', '/about.html');
+  if (typeof gtag !== 'undefined') gtag('event', 'page_view', { page_path: '/about.html' });
+}
+function closeAbout() {
+  aboutOverlay.classList.remove('show');
+  if (history.state?.about) history.back();
+}
+document.getElementById('aboutClose').addEventListener('click', closeAbout);
+window.addEventListener('popstate', () => {
+  if (!history.state?.about && aboutOverlay.classList.contains('show')) {
+    aboutOverlay.classList.remove('show');
+  }
+});
+// Intercept /about.html links (from footer, nav, etc.)
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a');
+  if (!a) return;
+  const href = a.getAttribute('href');
+  if (href === '/about.html' || href === 'about.html' || href === './about.html') {
+    e.preventDefault();
+    openAbout();
+  }
+});
+// Note: direct visits to /about.html still load the standalone about.html page (for bookmarks/SEO/sharing)
 
 // Auto-scroll carousels (slow horizontal pan, pause on hover/focus/touch)
 function initAutoScroll() {
