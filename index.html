@@ -1512,6 +1512,13 @@
     </div>
     <div class="settings-row">
       <div>
+        <div class="label">💾 オフラインキャッシュ</div>
+        <div class="sub" id="cacheSummary">読込中…</div>
+      </div>
+      <button class="danger-btn" id="clearCache" style="color:var(--cyan);border-color:var(--cyan);">全削除</button>
+    </div>
+    <div class="settings-row">
+      <div>
         <div class="label">🗑 個人データ削除</div>
         <div class="sub">お気に入り・履歴・設定をリセット</div>
       </div>
@@ -2477,6 +2484,48 @@ document.querySelectorAll('#colorAdaptControl button').forEach(b => {
       extractAndApplyCoverColor(queue[currentIdx].cover);
     }
   });
+});
+
+// Offline cache management
+async function updateCacheSummary() {
+  const summary = document.getElementById('cacheSummary');
+  if (!('caches' in window)) { summary.textContent = 'キャッシュAPI非対応'; return; }
+  try {
+    const names = await caches.keys();
+    const hbCaches = names.filter(n => n.startsWith('hina-'));
+    let totalSize = 0;
+    let musicCount = 0;
+    for (const name of hbCaches) {
+      const cache = await caches.open(name);
+      const reqs = await cache.keys();
+      for (const req of reqs) {
+        if (!req.url.includes('/music/') && !req.url.includes('suno.ai')) continue;
+        try {
+          const res = await cache.match(req);
+          if (res) {
+            const blob = await res.clone().blob();
+            totalSize += blob.size;
+            if (req.url.includes('/music/')) musicCount++;
+          }
+        } catch {}
+      }
+    }
+    const mb = (totalSize / 1024 / 1024).toFixed(1);
+    summary.textContent = `${musicCount}曲 / ${mb}MB 保存中`;
+  } catch (e) {
+    summary.textContent = '読込失敗';
+  }
+}
+settingsBtn.addEventListener('click', () => updateCacheSummary());
+updateCacheSummary();
+document.getElementById('clearCache').addEventListener('click', async () => {
+  if (!confirm('オフラインキャッシュを全削除します。次回アクセス時に再ダウンロードされます。')) return;
+  if (!('caches' in window)) return;
+  const names = await caches.keys();
+  await Promise.all(names.filter(n => n.startsWith('hina-')).map(n => caches.delete(n)));
+  showError('キャッシュを削除しました');
+  updateCacheSummary();
+  if (typeof gtag !== 'undefined') gtag('event', 'clear_cache');
 });
 
 // Reset all personal data
