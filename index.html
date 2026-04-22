@@ -2512,6 +2512,7 @@ async function startCrossfade() {
   const s = queue[currentIdx];
   npCover.style.backgroundImage = `url('${s.cover}')`;
   npTitle.textContent = s.title;
+  updateAlbumTag();
   // Update duration immediately (canplay already fired, so duration is available)
   if (isFinite(incoming.duration) && incoming.duration > 0) {
     document.getElementById('npTimeTotal').textContent = fmtTime(incoming.duration);
