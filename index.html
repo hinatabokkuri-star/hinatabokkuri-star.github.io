@@ -1469,12 +1469,31 @@ function showResumeBanner() {
   const banner = document.getElementById('resumeBanner');
   document.getElementById('resumeCover').style.backgroundImage = `url('${s.cover}')`;
   document.getElementById('resumeTitle').textContent = s.title;
-  document.getElementById('resumeTime').textContent = `${m}:${String(sec).padStart(2, '0')} から再開`;
+  const modeTag = saved.shuffleMode ? ' · 🔀シャッフル' : '';
+  const repTag = saved.repeatMode === 'all' ? ' · 🔁全曲' : saved.repeatMode === 'one' ? ' · 🔂1曲' : '';
+  document.getElementById('resumeTime').textContent = `${m}:${String(sec).padStart(2, '0')} から再開${modeTag}${repTag}`;
   banner.classList.add('show');
   document.getElementById('resumePlay').onclick = () => {
     banner.classList.remove('show');
-    queue = [...SONGS];
-    currentIdx = SONGS.indexOf(s);
+    // Restore queue order if saved
+    if (saved.queueFiles && Array.isArray(saved.queueFiles)) {
+      queue = saved.queueFiles.map(f => SONGS.find(x => x.file === f)).filter(Boolean);
+      currentIdx = Math.max(0, Math.min(saved.currentIdx || 0, queue.length - 1));
+      if (queue[currentIdx]?.file !== saved.file) {
+        currentIdx = queue.findIndex(q => q.file === saved.file);
+        if (currentIdx < 0) { queue = [...SONGS]; currentIdx = SONGS.indexOf(s); }
+      }
+    } else {
+      queue = [...SONGS];
+      currentIdx = SONGS.indexOf(s);
+    }
+    // Restore shuffle mode
+    shuffleMode = !!saved.shuffleMode;
+    btnShuffle.classList.toggle('active', shuffleMode);
+    // Restore repeat mode
+    repeatMode = saved.repeatMode || 'off';
+    btnRepeat.classList.toggle('active', repeatMode !== 'off');
+    btnRepeat.textContent = repeatMode === 'one' ? '🔂' : '🔁';
     playCurrent();
     setTimeout(() => { audio.currentTime = saved.currentTime; }, 500);
   };
@@ -1706,7 +1725,7 @@ function playCurrent() {
   }
 }
 
-// Save last played position for Resume
+// Save last played position for Resume (includes queue, shuffle, repeat state)
 let resumeSaveHandle = null;
 audio.addEventListener('timeupdate', () => {
   if (resumeSaveHandle) return;
@@ -1717,6 +1736,10 @@ audio.addEventListener('timeupdate', () => {
         file: queue[currentIdx].file,
         currentTime: audio.currentTime,
         timestamp: Date.now(),
+        shuffleMode,
+        repeatMode,
+        queueFiles: queue.map(q => q.file),
+        currentIdx,
       }));
     }
   }, 3000);
