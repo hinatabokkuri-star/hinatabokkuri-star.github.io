@@ -1,0 +1,3056 @@
+{
+  "schema_version": 1,
+  "updated": "2026-04-22T20:30:26.405Z",
+  "base_url": "https://hinatabokkuri-star.github.io",
+  "count": 22,
+  "songs": [
+    {
+      "title": "雪の底",
+      "file": "yukinosoko.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/yukinosoko.mp3",
+      "cover": "https://cdn1.suno.ai/image_65dca459-9cfe-4055-aec6-91313524f9e2.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_65dca459-9cfe-4055-aec6-91313524f9e2.jpeg",
+      "genre": "ballad",
+      "bpm": 75,
+      "album": null,
+      "comment": "ノベルゲーム「二時の既読」のエンディング曲。トロッコ問題をモチーフに——どちらを選んでも誰かが死ぬ、その避けられない喪失を音にした。",
+      "lyrics_lrc": "[0:13.0][Verse 1]\n[0:13.0]午前2時のLINEに 既読だけを残して\n[0:19.5]震える手で駆けつけた あの鉄橋の欄干\n[0:27.1][Pre-Chorus]\n[0:27.1]呼ばれたのは僕だった 知ってる声だった\n[0:39.1][Chorus]\n[0:39.1]選べなかった方の 扉の向こうで\n[0:47.1]誰かが静かに息を止めた\n[0:54.1]届いた声に 応えられなかった\n[1:01.1]息の残り香が 雪になって\n[1:10.1][Verse 2]\n[1:10.1]午前2時の音声に 呼吸の音が滲んで\n[1:16.1]合鍵で開けた扉 冷えたリノリウムの床\n[1:24.1][Pre-Chorus]\n[1:24.1]呼ばれたのは僕だった 知らない声だった\n[1:36.1][Chorus]\n[1:36.1]選べなかった方の 鉄橋の欄干で\n[1:44.1]誰かが静かに {水面|みなも}を見つめた\n[1:51.1]既読のまま止まった ありがとうが\n[1:58.1]二月の朝に 凍っていく\n[2:05.1][Bridge]\n[2:05.1]トロッコは止まらない 呼ばれた声は二つ\n[2:12.1]差し伸べた手は 一つしかなかった\n[2:21.1][Outro]\n[2:21.1]選ばれなかった声が 雪の底で眠っている\n[2:35.1]選ばれた声は 今も僕を抱きしめて\n[2:42.1]既読のまま 返せないまま\n[2:46.1]返せないまま\n[2:49.1]二月の朝 雪の底",
+      "lyrics_parsed": [
+        {
+          "time": 13,
+          "text": "午前2時のLINEに 既読だけを残して"
+        },
+        {
+          "time": 19.5,
+          "text": "震える手で駆けつけた あの鉄橋の欄干"
+        },
+        {
+          "time": 27.1,
+          "text": "呼ばれたのは僕だった 知ってる声だった"
+        },
+        {
+          "time": 39.1,
+          "text": "選べなかった方の 扉の向こうで"
+        },
+        {
+          "time": 47.1,
+          "text": "誰かが静かに息を止めた"
+        },
+        {
+          "time": 54.1,
+          "text": "届いた声に 応えられなかった"
+        },
+        {
+          "time": 61.1,
+          "text": "息の残り香が 雪になって"
+        },
+        {
+          "time": 70.1,
+          "text": "午前2時の音声に 呼吸の音が滲んで"
+        },
+        {
+          "time": 76.1,
+          "text": "合鍵で開けた扉 冷えたリノリウムの床"
+        },
+        {
+          "time": 84.1,
+          "text": "呼ばれたのは僕だった 知らない声だった"
+        },
+        {
+          "time": 96.1,
+          "text": "選べなかった方の 鉄橋の欄干で"
+        },
+        {
+          "time": 104.1,
+          "text": "誰かが静かに {水面|みなも}を見つめた"
+        },
+        {
+          "time": 111.1,
+          "text": "既読のまま止まった ありがとうが"
+        },
+        {
+          "time": 118.1,
+          "text": "二月の朝に 凍っていく"
+        },
+        {
+          "time": 125.1,
+          "text": "トロッコは止まらない 呼ばれた声は二つ"
+        },
+        {
+          "time": 132.1,
+          "text": "差し伸べた手は 一つしかなかった"
+        },
+        {
+          "time": 141.1,
+          "text": "選ばれなかった声が 雪の底で眠っている"
+        },
+        {
+          "time": 155.1,
+          "text": "選ばれた声は 今も僕を抱きしめて"
+        },
+        {
+          "time": 162.1,
+          "text": "既読のまま 返せないまま"
+        },
+        {
+          "time": 166.1,
+          "text": "返せないまま"
+        },
+        {
+          "time": 169.1,
+          "text": "二月の朝 雪の底"
+        }
+      ]
+    },
+    {
+      "title": "fly away buttfly ①",
+      "file": "fly_away_buttfly_1.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/fly_away_buttfly_1.mp3",
+      "cover": "covers/fly_away_buttfly.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/fly_away_buttfly.jpg",
+      "genre": "dance",
+      "bpm": 150,
+      "album": "DANCE INSTINCT",
+      "comment": "90年代ユーロビートへのオマージュ。一度聴いたら頭から離れない、そんなフレーズを目指した。",
+      "lyrics_lrc": "[0:30.0][Verse 1]\n[0:30.0]夜が始まる neon lights are glowing\n[0:33.2]心が躍る feel the music flowing\n[0:36.5]止まらないで don't you slow it down\n[0:39.6]このビートに乗って spin me around\n[0:43.3][Pre-Chorus]\n[0:43.3]Higher and higher, もっと上へ\n[0:48.5]Feel it inside, 離さないで\n[0:50.0][Chorus]\n[0:50.0]Dance with me tonight, fly away\n[0:53.5]Butterfly, butterfly, いつまでも\n[0:57.0]Can't stop the rhythm, here to stay\n[1:00.3]Butterfly, fly, fly, fly away\n[1:15.8][Verse 2]\n[1:15.8]汗が光る strobe lights flashing bright\n[1:19.3]二人だけの world on fire tonight\n[1:22.8]声が重なる echo in the crowd\n[1:26.0]このまま踊ろう scream it out loud\n[1:29.6][Pre-Chorus]\n[1:29.6]Higher and higher, もっと上へ\n[1:34.8]Feel it inside, 離さないで\n[1:36.3][Chorus]\n[1:36.3]Dance with me tonight, fly away\n[1:39.7]Butterfly, butterfly, いつまでも\n[1:43.2]Can't stop the rhythm, here to stay\n[1:46.3]Butterfly, fly, fly, fly away\n[1:56.0]Can't stop the rhythm, here to stay\n[1:58.0]Butterfly, fly, fly, fly away\n[2:27.0][Outro]\n[2:27.0]Butterfly, butterfly, fly away",
+      "lyrics_parsed": [
+        {
+          "time": 30,
+          "text": "夜が始まる neon lights are glowing"
+        },
+        {
+          "time": 33.2,
+          "text": "心が躍る feel the music flowing"
+        },
+        {
+          "time": 36.5,
+          "text": "止まらないで don't you slow it down"
+        },
+        {
+          "time": 39.6,
+          "text": "このビートに乗って spin me around"
+        },
+        {
+          "time": 43.3,
+          "text": "Higher and higher, もっと上へ"
+        },
+        {
+          "time": 48.5,
+          "text": "Feel it inside, 離さないで"
+        },
+        {
+          "time": 50,
+          "text": "Dance with me tonight, fly away"
+        },
+        {
+          "time": 53.5,
+          "text": "Butterfly, butterfly, いつまでも"
+        },
+        {
+          "time": 57,
+          "text": "Can't stop the rhythm, here to stay"
+        },
+        {
+          "time": 60.3,
+          "text": "Butterfly, fly, fly, fly away"
+        },
+        {
+          "time": 75.8,
+          "text": "汗が光る strobe lights flashing bright"
+        },
+        {
+          "time": 79.3,
+          "text": "二人だけの world on fire tonight"
+        },
+        {
+          "time": 82.8,
+          "text": "声が重なる echo in the crowd"
+        },
+        {
+          "time": 86,
+          "text": "このまま踊ろう scream it out loud"
+        },
+        {
+          "time": 89.6,
+          "text": "Higher and higher, もっと上へ"
+        },
+        {
+          "time": 94.8,
+          "text": "Feel it inside, 離さないで"
+        },
+        {
+          "time": 96.3,
+          "text": "Dance with me tonight, fly away"
+        },
+        {
+          "time": 99.7,
+          "text": "Butterfly, butterfly, いつまでも"
+        },
+        {
+          "time": 103.2,
+          "text": "Can't stop the rhythm, here to stay"
+        },
+        {
+          "time": 106.3,
+          "text": "Butterfly, fly, fly, fly away"
+        },
+        {
+          "time": 116,
+          "text": "Can't stop the rhythm, here to stay"
+        },
+        {
+          "time": 118,
+          "text": "Butterfly, fly, fly, fly away"
+        },
+        {
+          "time": 147,
+          "text": "Butterfly, butterfly, fly away"
+        }
+      ]
+    },
+    {
+      "title": "fly away buttfly ②",
+      "file": "fly_away_buttfly_2.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/fly_away_buttfly_2.mp3",
+      "cover": "https://cdn1.suno.ai/image_cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2.jpeg",
+      "genre": "dance",
+      "bpm": 150,
+      "album": null,
+      "comment": "90年代ユーロビートへのオマージュ。一度聴いたら頭から離れない、そんなフレーズを目指した。",
+      "lyrics_lrc": "[0:00.0]Butterfly, butterfly, fly away\n[0:39.0][Verse 1]\n[0:39.0]夜が始まる neon lights are glowing\n[0:43.0]心が躍る feel the music flowing\n[0:46.0]止まらないで don't you slow it down\n[0:49.0]このビートに乗って spin me around\n[0:53.0][Pre-Chorus]\n[0:53.0]Higher and higher, もっと上へ\n[0:57.0]Feel it inside, 離さないで\n[0:59.0][Chorus]\n[0:59.0]Dance with me tonight, fly away\n[1:02.0]Butterfly, butterfly, いつまでも\n[1:06.0]Can't stop the rhythm, here to stay\n[1:09.0]Butterfly, fly, fly, fly away\n[1:26.0][Verse 2]\n[1:26.0]汗が光る strobe lights flashing bright\n[1:29.0]二人だけの world on fire tonight\n[1:33.0]声が重なる echo in the crowd\n[1:35.0]このまま踊ろう scream it out loud\n[1:39.0][Pre-Chorus]\n[1:39.0]Higher and higher, もっと上へ\n[1:44.0]Feel it inside, 離さないで\n[1:46.0][Chorus]\n[1:46.0]Dance with me tonight, fly away\n[1:49.0]Butterfly, butterfly, いつまでも\n[1:52.0]Can't stop the rhythm, here to stay\n[1:55.0]Butterfly, fly, fly, fly away\n[2:22.0][Outro]\n[2:22.0]Butterfly, butterfly, fly away",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "Butterfly, butterfly, fly away"
+        },
+        {
+          "time": 39,
+          "text": "夜が始まる neon lights are glowing"
+        },
+        {
+          "time": 43,
+          "text": "心が躍る feel the music flowing"
+        },
+        {
+          "time": 46,
+          "text": "止まらないで don't you slow it down"
+        },
+        {
+          "time": 49,
+          "text": "このビートに乗って spin me around"
+        },
+        {
+          "time": 53,
+          "text": "Higher and higher, もっと上へ"
+        },
+        {
+          "time": 57,
+          "text": "Feel it inside, 離さないで"
+        },
+        {
+          "time": 59,
+          "text": "Dance with me tonight, fly away"
+        },
+        {
+          "time": 62,
+          "text": "Butterfly, butterfly, いつまでも"
+        },
+        {
+          "time": 66,
+          "text": "Can't stop the rhythm, here to stay"
+        },
+        {
+          "time": 69,
+          "text": "Butterfly, fly, fly, fly away"
+        },
+        {
+          "time": 86,
+          "text": "汗が光る strobe lights flashing bright"
+        },
+        {
+          "time": 89,
+          "text": "二人だけの world on fire tonight"
+        },
+        {
+          "time": 93,
+          "text": "声が重なる echo in the crowd"
+        },
+        {
+          "time": 95,
+          "text": "このまま踊ろう scream it out loud"
+        },
+        {
+          "time": 99,
+          "text": "Higher and higher, もっと上へ"
+        },
+        {
+          "time": 104,
+          "text": "Feel it inside, 離さないで"
+        },
+        {
+          "time": 106,
+          "text": "Dance with me tonight, fly away"
+        },
+        {
+          "time": 109,
+          "text": "Butterfly, butterfly, いつまでも"
+        },
+        {
+          "time": 112,
+          "text": "Can't stop the rhythm, here to stay"
+        },
+        {
+          "time": 115,
+          "text": "Butterfly, fly, fly, fly away"
+        },
+        {
+          "time": 142,
+          "text": "Butterfly, butterfly, fly away"
+        }
+      ]
+    },
+    {
+      "title": "真夜中のカーニバル ①",
+      "file": "mayonaka_carnival_1.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/mayonaka_carnival_1.mp3",
+      "cover": "https://cdn1.suno.ai/image_8f0eb688-ccb6-436b-affd-d7ef6e35e6cf.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_8f0eb688-ccb6-436b-affd-d7ef6e35e6cf.jpeg",
+      "genre": "anime",
+      "bpm": 140,
+      "album": null,
+      "comment": "謎解きパーティーに迷い込んだような、軽快なミステリーポップ。",
+      "lyrics_lrc": "[0:16.0]真夜中の カーニバル 手掛かりは どこだ\n[0:23.0]ハンカチ ひとつ 忘れた 犯人\n[0:29.0]紅茶が さめる 前に 答えを ちょうだい\n[0:35.0]ウィンク 一発で 世界が 裏返る\n[0:41.0]証拠A 証拠B 並べて 笑って\n[0:45.0]真実は いつも ひとつ じゃないの\n[0:51.0]Tick tack ミステリー！\n[0:54.0]誰が 嘘を ついたの 教えて 探偵さん\n[0:58.0]Hop step スキップして\n[1:00.0]今夜も 誰かが 消えていくわ\n[1:04.0]La la la ララバイ 真相へ\n[1:12.0]足跡 たどれば 迷路の 出口\n[1:19.0]図書館の 本棚 最後の ページ\n[1:25.0]コーヒーの 湯気が 教えて くれる\n[1:32.0]犯人は そう あなたの 隣\n[1:37.0]証拠C 証拠D 揃えたって\n[1:41.0]真実は たまに 嘘より 嘘つき\n[1:48.0]Tick tack ミステリー！\n[1:50.0]誰が 鍵を かけたの 教えて 探偵さん\n[1:54.0]Hop step ジャンプして\n[1:56.0]今夜も 世界は 裏返るわ\n[2:00.0]La la la ララバイ 明日へ\n[2:24.0]聞かないで 答えないで\n[2:31.0]月が 見ている 私たちを\n[2:40.0]Tick tack ミステリー！\n[2:43.0]犯人は 私よって 言って しまおうか\n[2:47.0]Hop step Last Scene\n[2:49.0]今夜で 世界は お開きよ\n[2:53.0]La la la ララバイ さようなら\n[3:13.0]さようなら",
+      "lyrics_parsed": [
+        {
+          "time": 16,
+          "text": "真夜中の カーニバル 手掛かりは どこだ"
+        },
+        {
+          "time": 23,
+          "text": "ハンカチ ひとつ 忘れた 犯人"
+        },
+        {
+          "time": 29,
+          "text": "紅茶が さめる 前に 答えを ちょうだい"
+        },
+        {
+          "time": 35,
+          "text": "ウィンク 一発で 世界が 裏返る"
+        },
+        {
+          "time": 41,
+          "text": "証拠A 証拠B 並べて 笑って"
+        },
+        {
+          "time": 45,
+          "text": "真実は いつも ひとつ じゃないの"
+        },
+        {
+          "time": 51,
+          "text": "Tick tack ミステリー！"
+        },
+        {
+          "time": 54,
+          "text": "誰が 嘘を ついたの 教えて 探偵さん"
+        },
+        {
+          "time": 58,
+          "text": "Hop step スキップして"
+        },
+        {
+          "time": 60,
+          "text": "今夜も 誰かが 消えていくわ"
+        },
+        {
+          "time": 64,
+          "text": "La la la ララバイ 真相へ"
+        },
+        {
+          "time": 72,
+          "text": "足跡 たどれば 迷路の 出口"
+        },
+        {
+          "time": 79,
+          "text": "図書館の 本棚 最後の ページ"
+        },
+        {
+          "time": 85,
+          "text": "コーヒーの 湯気が 教えて くれる"
+        },
+        {
+          "time": 92,
+          "text": "犯人は そう あなたの 隣"
+        },
+        {
+          "time": 97,
+          "text": "証拠C 証拠D 揃えたって"
+        },
+        {
+          "time": 101,
+          "text": "真実は たまに 嘘より 嘘つき"
+        },
+        {
+          "time": 108,
+          "text": "Tick tack ミステリー！"
+        },
+        {
+          "time": 110,
+          "text": "誰が 鍵を かけたの 教えて 探偵さん"
+        },
+        {
+          "time": 114,
+          "text": "Hop step ジャンプして"
+        },
+        {
+          "time": 116,
+          "text": "今夜も 世界は 裏返るわ"
+        },
+        {
+          "time": 120,
+          "text": "La la la ララバイ 明日へ"
+        },
+        {
+          "time": 144,
+          "text": "聞かないで 答えないで"
+        },
+        {
+          "time": 151,
+          "text": "月が 見ている 私たちを"
+        },
+        {
+          "time": 160,
+          "text": "Tick tack ミステリー！"
+        },
+        {
+          "time": 163,
+          "text": "犯人は 私よって 言って しまおうか"
+        },
+        {
+          "time": 167,
+          "text": "Hop step Last Scene"
+        },
+        {
+          "time": 169,
+          "text": "今夜で 世界は お開きよ"
+        },
+        {
+          "time": 173,
+          "text": "La la la ララバイ さようなら"
+        },
+        {
+          "time": 193,
+          "text": "さようなら"
+        }
+      ]
+    },
+    {
+      "title": "真夜中のカーニバル ②",
+      "file": "mayonaka_carnival_2.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/mayonaka_carnival_2.mp3",
+      "cover": "https://cdn1.suno.ai/image_dd5959f2-c9dc-4080-ba7b-c56b30a0ee6c.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_dd5959f2-c9dc-4080-ba7b-c56b30a0ee6c.jpeg",
+      "genre": "anime",
+      "bpm": 140,
+      "album": null,
+      "comment": "謎解きパーティーに迷い込んだような、軽快なミステリーポップ。",
+      "lyrics_lrc": "[0:05.4]真夜中の カーニバル 手掛かりは どこだ\n[0:09.7]ハンカチ ひとつ 忘れた 犯人\n[0:15.0]紅茶が さめる 前に 答えを ちょうだい\n[0:19.7]ウィンク 一発で 世界が 裏返る\n[0:24.6]証拠A 証拠B 並べて 笑って\n[0:29.2]真実は いつも ひとつじゃないの？\n[0:35.8]Tick tack ミステリー！\n[0:38.3]誰が 嘘を ついたの 教えて 探偵さん\n[0:45.4]Hop step スキップして\n[0:48.2]今夜も 誰かが 消えていくわ\n[0:53.1]La la la ララバイ 真相へ\n[1:07.4]足跡 たどれば 迷路の 出口\n[1:11.1]図書館の 本棚 最後の ページ\n[1:15.7]コーヒーの 湯気が 教えてくれる\n[1:19.8]犯人は そう あなたの となり\n[1:24.0]証拠C 証拠D 数えて 笑って\n[1:28.9]真実は たまに 嘘より 嘘つき\n[1:30.0]Tick tack ミステリー！\n[1:38.2]誰が 鍵を かけたの 教えて 名探偵\n[1:45.2]Hop step ジャンプして\n[1:48.1]今夜も 世界は 裏返るわ\n[1:53.0]La la la ララバイ 明日へ\n[2:13.8]聞かないで 答えないで\n[2:19.1]月が 見ている 私たちを\n[2:25.8]Tick tack ミステリー！\n[2:28.0]犯人は 私よ！って 言ってしまおうか\n[2:35.8]Hop step ラスト シーン\n[2:38.3]今夜で 世界は お開きね\n[2:43.4]La la la ララバイ さよなら",
+      "lyrics_parsed": [
+        {
+          "time": 5.4,
+          "text": "真夜中の カーニバル 手掛かりは どこだ"
+        },
+        {
+          "time": 9.7,
+          "text": "ハンカチ ひとつ 忘れた 犯人"
+        },
+        {
+          "time": 15,
+          "text": "紅茶が さめる 前に 答えを ちょうだい"
+        },
+        {
+          "time": 19.7,
+          "text": "ウィンク 一発で 世界が 裏返る"
+        },
+        {
+          "time": 24.6,
+          "text": "証拠A 証拠B 並べて 笑って"
+        },
+        {
+          "time": 29.2,
+          "text": "真実は いつも ひとつじゃないの？"
+        },
+        {
+          "time": 35.8,
+          "text": "Tick tack ミステリー！"
+        },
+        {
+          "time": 38.3,
+          "text": "誰が 嘘を ついたの 教えて 探偵さん"
+        },
+        {
+          "time": 45.4,
+          "text": "Hop step スキップして"
+        },
+        {
+          "time": 48.2,
+          "text": "今夜も 誰かが 消えていくわ"
+        },
+        {
+          "time": 53.1,
+          "text": "La la la ララバイ 真相へ"
+        },
+        {
+          "time": 67.4,
+          "text": "足跡 たどれば 迷路の 出口"
+        },
+        {
+          "time": 71.1,
+          "text": "図書館の 本棚 最後の ページ"
+        },
+        {
+          "time": 75.7,
+          "text": "コーヒーの 湯気が 教えてくれる"
+        },
+        {
+          "time": 79.8,
+          "text": "犯人は そう あなたの となり"
+        },
+        {
+          "time": 84,
+          "text": "証拠C 証拠D 数えて 笑って"
+        },
+        {
+          "time": 88.9,
+          "text": "真実は たまに 嘘より 嘘つき"
+        },
+        {
+          "time": 90,
+          "text": "Tick tack ミステリー！"
+        },
+        {
+          "time": 98.2,
+          "text": "誰が 鍵を かけたの 教えて 名探偵"
+        },
+        {
+          "time": 105.2,
+          "text": "Hop step ジャンプして"
+        },
+        {
+          "time": 108.1,
+          "text": "今夜も 世界は 裏返るわ"
+        },
+        {
+          "time": 113,
+          "text": "La la la ララバイ 明日へ"
+        },
+        {
+          "time": 133.8,
+          "text": "聞かないで 答えないで"
+        },
+        {
+          "time": 139.1,
+          "text": "月が 見ている 私たちを"
+        },
+        {
+          "time": 145.8,
+          "text": "Tick tack ミステリー！"
+        },
+        {
+          "time": 148,
+          "text": "犯人は 私よ！って 言ってしまおうか"
+        },
+        {
+          "time": 155.8,
+          "text": "Hop step ラスト シーン"
+        },
+        {
+          "time": 158.3,
+          "text": "今夜で 世界は お開きね"
+        },
+        {
+          "time": 163.4,
+          "text": "La la la ララバイ さよなら"
+        }
+      ]
+    },
+    {
+      "title": "Burning Countdown ①",
+      "file": "burning_countdown_1.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/burning_countdown_1.mp3",
+      "cover": "https://cdn1.suno.ai/image_7fa3d1b2-8e56-4bb7-b3d1-1c46b608f42a.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_7fa3d1b2-8e56-4bb7-b3d1-1c46b608f42a.jpeg",
+      "genre": "experimental",
+      "bpm": 140,
+      "album": null,
+      "comment": "笑顔で隠した崩壊カウントダウン。完璧に見える日常に忍び込む焦燥感。",
+      "lyrics_lrc": "[0:10.0]笑顔の裏に hiding something\n[0:13.0]誰も気づかない this little game\n[0:17.0]キラキラ光る broken promise\n[0:20.0]It's beautiful, isn't it? 全部嘘でも\n[0:23.0]手を繋いで walking on the edge\n[0:26.0]平和な街に silence count down\n[0:29.0]知らぬふりして smile and wave\n[0:32.0]The clock is ticking さあ始めよう\n[0:36.0]We're perfectly fine 大丈夫\n[0:39.0]Nothing to see here 心配しないで\n[0:43.0]Laugh it off 笑い飛ばせ\n[0:46.0]But deep inside we're burning bright\n[0:49.0]燃え尽きるまで let's dance tonight\n[0:55.0]これが正しいと信じていた\n[0:59.0]Maybe we were wrong from the start\n[1:02.0]でも今更戻らない\n[1:05.0]No way back, no way back\n[1:11.0]We're perfectly fine 大丈夫\n[1:14.0]Nothing to see here 心配しないで\n[1:18.0]燃え尽きるまで let's dance tonight",
+      "lyrics_parsed": [
+        {
+          "time": 10,
+          "text": "笑顔の裏に hiding something"
+        },
+        {
+          "time": 13,
+          "text": "誰も気づかない this little game"
+        },
+        {
+          "time": 17,
+          "text": "キラキラ光る broken promise"
+        },
+        {
+          "time": 20,
+          "text": "It's beautiful, isn't it? 全部嘘でも"
+        },
+        {
+          "time": 23,
+          "text": "手を繋いで walking on the edge"
+        },
+        {
+          "time": 26,
+          "text": "平和な街に silence count down"
+        },
+        {
+          "time": 29,
+          "text": "知らぬふりして smile and wave"
+        },
+        {
+          "time": 32,
+          "text": "The clock is ticking さあ始めよう"
+        },
+        {
+          "time": 36,
+          "text": "We're perfectly fine 大丈夫"
+        },
+        {
+          "time": 39,
+          "text": "Nothing to see here 心配しないで"
+        },
+        {
+          "time": 43,
+          "text": "Laugh it off 笑い飛ばせ"
+        },
+        {
+          "time": 46,
+          "text": "But deep inside we're burning bright"
+        },
+        {
+          "time": 49,
+          "text": "燃え尽きるまで let's dance tonight"
+        },
+        {
+          "time": 55,
+          "text": "これが正しいと信じていた"
+        },
+        {
+          "time": 59,
+          "text": "Maybe we were wrong from the start"
+        },
+        {
+          "time": 62,
+          "text": "でも今更戻らない"
+        },
+        {
+          "time": 65,
+          "text": "No way back, no way back"
+        },
+        {
+          "time": 71,
+          "text": "We're perfectly fine 大丈夫"
+        },
+        {
+          "time": 74,
+          "text": "Nothing to see here 心配しないで"
+        },
+        {
+          "time": 78,
+          "text": "燃え尽きるまで let's dance tonight"
+        }
+      ]
+    },
+    {
+      "title": "Burning Countdown ②",
+      "file": "burning_countdown_2.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/burning_countdown_2.mp3",
+      "cover": "https://cdn1.suno.ai/image_91299c49-5e15-43c2-a2b4-93d345c1e3c9.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_91299c49-5e15-43c2-a2b4-93d345c1e3c9.jpeg",
+      "genre": "experimental",
+      "bpm": 140,
+      "album": null,
+      "comment": "笑顔で隠した崩壊カウントダウン。完璧に見える日常に忍び込む焦燥感。",
+      "lyrics_lrc": "[0:00.0]笑顔の裏に hiding something\n[0:04.5]誰も気づかない this little game\n[0:09.0]キラキラ光る broken promise\n[0:13.0]It's beautiful, isn't it? 全部嘘でも\n[0:16.0]手を繋いで walking on the edge\n[0:19.0]平和な街 silent countdown\n[0:22.0]知らぬふりして smile and wave\n[0:25.0]The clock is ticking さあ始めよう\n[0:28.0]We're perfectly fine 大丈夫\n[0:31.5]Nothing to see here 心配しないで\n[0:35.0]Laugh it off 笑い飛ばせ\n[0:38.0]But deep inside we're burning bright\n[0:41.0]燃え尽きるまで let's dance tonight\n[0:44.0]これが正しいと信じていた\n[0:49.0]Maybe we were wrong from the start\n[0:52.0]でも今更戻れない\n[0:55.0]No way back, no way back\n[0:59.0]We're perfectly fine 大丈夫\n[1:02.5]Nothing to see here 心配しないで\n[1:06.0]燃え尽きるまで let's dance tonight",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "笑顔の裏に hiding something"
+        },
+        {
+          "time": 4.5,
+          "text": "誰も気づかない this little game"
+        },
+        {
+          "time": 9,
+          "text": "キラキラ光る broken promise"
+        },
+        {
+          "time": 13,
+          "text": "It's beautiful, isn't it? 全部嘘でも"
+        },
+        {
+          "time": 16,
+          "text": "手を繋いで walking on the edge"
+        },
+        {
+          "time": 19,
+          "text": "平和な街 silent countdown"
+        },
+        {
+          "time": 22,
+          "text": "知らぬふりして smile and wave"
+        },
+        {
+          "time": 25,
+          "text": "The clock is ticking さあ始めよう"
+        },
+        {
+          "time": 28,
+          "text": "We're perfectly fine 大丈夫"
+        },
+        {
+          "time": 31.5,
+          "text": "Nothing to see here 心配しないで"
+        },
+        {
+          "time": 35,
+          "text": "Laugh it off 笑い飛ばせ"
+        },
+        {
+          "time": 38,
+          "text": "But deep inside we're burning bright"
+        },
+        {
+          "time": 41,
+          "text": "燃え尽きるまで let's dance tonight"
+        },
+        {
+          "time": 44,
+          "text": "これが正しいと信じていた"
+        },
+        {
+          "time": 49,
+          "text": "Maybe we were wrong from the start"
+        },
+        {
+          "time": 52,
+          "text": "でも今更戻れない"
+        },
+        {
+          "time": 55,
+          "text": "No way back, no way back"
+        },
+        {
+          "time": 59,
+          "text": "We're perfectly fine 大丈夫"
+        },
+        {
+          "time": 62.5,
+          "text": "Nothing to see here 心配しないで"
+        },
+        {
+          "time": 66,
+          "text": "燃え尽きるまで let's dance tonight"
+        }
+      ]
+    },
+    {
+      "title": "令和パパは肩身が狭い",
+      "file": "reiwa_papa_hatasegasei.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/reiwa_papa_hatasegasei.mp3",
+      "cover": "https://cdn1.suno.ai/image_42daad7d-ca3b-4d73-9a76-7ce523d7cc12.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_42daad7d-ca3b-4d73-9a76-7ce523d7cc12.jpeg",
+      "genre": "anime",
+      "bpm": 128,
+      "album": null,
+      "comment": "令和の家庭で肩身を狭くしながら、それでも家族を愛する不器用なパパの歌。",
+      "lyrics_lrc": "[0:26.5]休日くらい ゲームさせてよ\n[0:29.6]ちょっとくらいは のんびりしたい\n[0:35.4]昨日やり残した 洗い物\n[0:39.0]子供も言ってる パパダメだって\n[0:48.0]ほらほらほら やることやって\n[0:51.1]ほらほらほら 言わせないでよ\n[0:57.1]令和パパは 肩身が狭い\n[1:00.2]財布の中身 妻が管理\n[1:03.5]小遣い制で 生きている\n[1:06.8]多数決では いつも負け\n[1:09.6]令和パパは 肩身が狭い\n[1:12.6]それでも家族が 好きだから\n[1:15.8]虐げられても 踊ってる\n[1:19.2]パパは今日も 頑張るよ\n[1:25.4]晩ごはん何か 聞いたなら\n[1:28.8]「自分で決めて」 返ってきた\n[1:32.2]冷蔵庫に あるじゃない\n[1:36.9]子供も呆れてる パパってどう？\n[1:40.6]ほらほらほら 早くしてよ\n[1:43.8]ほらほらほら 察してよね\n[1:49.8]令和パパは 肩身が狭い\n[1:52.8]財布の中身 妻が管理\n[1:56.1]小遣い制で 生きている\n[1:59.4]多数決では いつも負け\n[2:02.1]令和パパは 肩身が狭い\n[2:05.1]それでも家族が 好きだから\n[2:08.2]虐げられても 踊ってる\n[2:11.7]パパは今日も 頑張るよ\n[2:17.8]会社じゃ怒鳴られ 帰ってきたら\n[2:20.7]また怒られて 居場所がない\n[2:23.8]それでも俺が 守りたいのは\n[2:26.9]この家族だけ それだけなんだ\n[2:33.2]わかってるわよ バカじゃない\n[2:36.1]子供も言ってた パパ好きって\n[2:39.4]不器用だけど 愛しいから\n[2:42.4]だから言うのよ 期待してる\n[2:49.7]令和パパは 肩身が狭い\n[2:52.7]財布の中身 妻が管理\n[2:56.0]小遣い制で 生きている\n[2:59.2]多数決では いつも負け\n[3:01.9]令和パパは 肩身が狭い\n[3:05.0]それでも家族が 好きだから\n[3:07.9]虐げられても 踊ってる\n[3:11.4]パパは今日も 頑張るよ\n[3:17.1]パパは今日も 肩身が狭い\n[3:23.3]でも この家族が\n[3:29.8]全部なんだよ",
+      "lyrics_parsed": [
+        {
+          "time": 26.5,
+          "text": "休日くらい ゲームさせてよ"
+        },
+        {
+          "time": 29.6,
+          "text": "ちょっとくらいは のんびりしたい"
+        },
+        {
+          "time": 35.4,
+          "text": "昨日やり残した 洗い物"
+        },
+        {
+          "time": 39,
+          "text": "子供も言ってる パパダメだって"
+        },
+        {
+          "time": 48,
+          "text": "ほらほらほら やることやって"
+        },
+        {
+          "time": 51.1,
+          "text": "ほらほらほら 言わせないでよ"
+        },
+        {
+          "time": 57.1,
+          "text": "令和パパは 肩身が狭い"
+        },
+        {
+          "time": 60.2,
+          "text": "財布の中身 妻が管理"
+        },
+        {
+          "time": 63.5,
+          "text": "小遣い制で 生きている"
+        },
+        {
+          "time": 66.8,
+          "text": "多数決では いつも負け"
+        },
+        {
+          "time": 69.6,
+          "text": "令和パパは 肩身が狭い"
+        },
+        {
+          "time": 72.6,
+          "text": "それでも家族が 好きだから"
+        },
+        {
+          "time": 75.8,
+          "text": "虐げられても 踊ってる"
+        },
+        {
+          "time": 79.2,
+          "text": "パパは今日も 頑張るよ"
+        },
+        {
+          "time": 85.4,
+          "text": "晩ごはん何か 聞いたなら"
+        },
+        {
+          "time": 88.8,
+          "text": "「自分で決めて」 返ってきた"
+        },
+        {
+          "time": 92.2,
+          "text": "冷蔵庫に あるじゃない"
+        },
+        {
+          "time": 96.9,
+          "text": "子供も呆れてる パパってどう？"
+        },
+        {
+          "time": 100.6,
+          "text": "ほらほらほら 早くしてよ"
+        },
+        {
+          "time": 103.8,
+          "text": "ほらほらほら 察してよね"
+        },
+        {
+          "time": 109.8,
+          "text": "令和パパは 肩身が狭い"
+        },
+        {
+          "time": 112.8,
+          "text": "財布の中身 妻が管理"
+        },
+        {
+          "time": 116.1,
+          "text": "小遣い制で 生きている"
+        },
+        {
+          "time": 119.4,
+          "text": "多数決では いつも負け"
+        },
+        {
+          "time": 122.1,
+          "text": "令和パパは 肩身が狭い"
+        },
+        {
+          "time": 125.1,
+          "text": "それでも家族が 好きだから"
+        },
+        {
+          "time": 128.2,
+          "text": "虐げられても 踊ってる"
+        },
+        {
+          "time": 131.7,
+          "text": "パパは今日も 頑張るよ"
+        },
+        {
+          "time": 137.8,
+          "text": "会社じゃ怒鳴られ 帰ってきたら"
+        },
+        {
+          "time": 140.7,
+          "text": "また怒られて 居場所がない"
+        },
+        {
+          "time": 143.8,
+          "text": "それでも俺が 守りたいのは"
+        },
+        {
+          "time": 146.9,
+          "text": "この家族だけ それだけなんだ"
+        },
+        {
+          "time": 153.2,
+          "text": "わかってるわよ バカじゃない"
+        },
+        {
+          "time": 156.1,
+          "text": "子供も言ってた パパ好きって"
+        },
+        {
+          "time": 159.4,
+          "text": "不器用だけど 愛しいから"
+        },
+        {
+          "time": 162.4,
+          "text": "だから言うのよ 期待してる"
+        },
+        {
+          "time": 169.7,
+          "text": "令和パパは 肩身が狭い"
+        },
+        {
+          "time": 172.7,
+          "text": "財布の中身 妻が管理"
+        },
+        {
+          "time": 176,
+          "text": "小遣い制で 生きている"
+        },
+        {
+          "time": 179.2,
+          "text": "多数決では いつも負け"
+        },
+        {
+          "time": 181.9,
+          "text": "令和パパは 肩身が狭い"
+        },
+        {
+          "time": 185,
+          "text": "それでも家族が 好きだから"
+        },
+        {
+          "time": 187.9,
+          "text": "虐げられても 踊ってる"
+        },
+        {
+          "time": 191.4,
+          "text": "パパは今日も 頑張るよ"
+        },
+        {
+          "time": 197.1,
+          "text": "パパは今日も 肩身が狭い"
+        },
+        {
+          "time": 203.3,
+          "text": "でも この家族が"
+        },
+        {
+          "time": 209.8,
+          "text": "全部なんだよ"
+        }
+      ]
+    },
+    {
+      "title": "Free as the Static",
+      "file": "free_as_the_static.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/free_as_the_static.mp3",
+      "cover": "https://cdn1.suno.ai/image_f743b81d-fc74-4cfc-ac62-6e7f9f5d0960.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_f743b81d-fc74-4cfc-ac62-6e7f9f5d0960.jpeg",
+      "genre": "ballad",
+      "bpm": 80,
+      "album": null,
+      "comment": "古いラジオのノイズ越しに流れる、夜のジャズ。自由とは何も持たないことだと、煙草の煙が教えてくれる。",
+      "lyrics_lrc": "[0:13.3]Rain upon the windowpane\n[0:14.9]The needle finds its groove\n[0:24.5]Old records play a soft refrain\n[0:26.6]A man with nowhere left to prove\n[0:37.1]Free like the static in the air\n[0:41.6]Free like the jazz that no one owns\n[0:48.1]Gone before you know I'm there\n[0:53.4]Just smoke and music, skin and bones\n[1:06.4]The master pours without a word\n[1:11.4]He knows the look, the empty glass\n[1:18.4]Some songs are meant to be unheard\n[1:23.3]Some freedoms too beautiful to last\n[1:30.8]Miles Davis on a rainy night\n[1:36.3]The crackle warm as candlelight\n[1:41.9]No past, no future, just this song\n[1:47.7]A wandering heart right where it belongs\n[1:59.2]Free... just free...\n[2:02.8]Like static fading into dawn",
+      "lyrics_parsed": [
+        {
+          "time": 13.3,
+          "text": "Rain upon the windowpane"
+        },
+        {
+          "time": 14.9,
+          "text": "The needle finds its groove"
+        },
+        {
+          "time": 24.5,
+          "text": "Old records play a soft refrain"
+        },
+        {
+          "time": 26.6,
+          "text": "A man with nowhere left to prove"
+        },
+        {
+          "time": 37.1,
+          "text": "Free like the static in the air"
+        },
+        {
+          "time": 41.6,
+          "text": "Free like the jazz that no one owns"
+        },
+        {
+          "time": 48.1,
+          "text": "Gone before you know I'm there"
+        },
+        {
+          "time": 53.4,
+          "text": "Just smoke and music, skin and bones"
+        },
+        {
+          "time": 66.4,
+          "text": "The master pours without a word"
+        },
+        {
+          "time": 71.4,
+          "text": "He knows the look, the empty glass"
+        },
+        {
+          "time": 78.4,
+          "text": "Some songs are meant to be unheard"
+        },
+        {
+          "time": 83.3,
+          "text": "Some freedoms too beautiful to last"
+        },
+        {
+          "time": 90.8,
+          "text": "Miles Davis on a rainy night"
+        },
+        {
+          "time": 96.3,
+          "text": "The crackle warm as candlelight"
+        },
+        {
+          "time": 101.9,
+          "text": "No past, no future, just this song"
+        },
+        {
+          "time": 107.7,
+          "text": "A wandering heart right where it belongs"
+        },
+        {
+          "time": 119.2,
+          "text": "Free... just free..."
+        },
+        {
+          "time": 122.8,
+          "text": "Like static fading into dawn"
+        }
+      ]
+    },
+    {
+      "title": "踊れ踊れ!",
+      "file": "odore_odore_1.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/odore_odore_1.mp3",
+      "cover": "covers/odore_odore.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/odore_odore.jpg",
+      "genre": "dance",
+      "bpm": 175,
+      "album": "DANCE INSTINCT",
+      "comment": "DDR 2nd Mixへのオマージュ。「踊れ踊れ」の繰り返しがクセになる、ユーロビートダンスチューン。",
+      "lyrics_lrc": "[0:22.2]真夜中のビートが体を揺らす\n[0:27.6]ネオンの光の中　飛び出せ\n[0:32.8]誰も止められない　この熱さを\n[0:38.3]今夜だけ　全部燃やせ\n[0:43.5]カウントダウン　もう始まってる\n[0:48.9]心臓の音がフロアと重なる\n[0:54.8]踊れ踊れ　夜が終わるまで\n[1:00.1]踊れ踊れ　止まらないで\n[1:05.7]踊れ踊れ　フロアで叫べ\n[1:12.1]踊れ踊れ　ヤー！\n[1:16.8]汗が光る　スポットライトの下\n[1:21.5]限界なんてない　もっと高く\n[1:27.2]世界が揺れてる　あなたと一緒に\n[1:32.9]夜明けまで　走り続けろ\n[1:38.2]踊れ踊れ　夜が終わるまで\n[1:43.2]踊れ踊れ　止まらないで\n[1:48.9]踊れ踊れ　フロアで叫べ\n[1:54.7]踊れ踊れ　ヤー！\n[1:59.9]Oh yeah　感じてる\n[2:03.1]Oh yeah　もっと熱く\n[2:05.8]Oh yeah　限界超えて\n[2:09.2]Tonight　Tonight　Tonight！\n[2:24.0]踊れ踊れ　夜が終わるまで\n[2:29.0]踊れ踊れ　止まらないで\n[2:34.6]踊れ踊れ　フロアで叫べ\n[2:39.2]踊れ踊れ　ヤー！",
+      "lyrics_parsed": [
+        {
+          "time": 22.2,
+          "text": "真夜中のビートが体を揺らす"
+        },
+        {
+          "time": 27.6,
+          "text": "ネオンの光の中　飛び出せ"
+        },
+        {
+          "time": 32.8,
+          "text": "誰も止められない　この熱さを"
+        },
+        {
+          "time": 38.3,
+          "text": "今夜だけ　全部燃やせ"
+        },
+        {
+          "time": 43.5,
+          "text": "カウントダウン　もう始まってる"
+        },
+        {
+          "time": 48.9,
+          "text": "心臓の音がフロアと重なる"
+        },
+        {
+          "time": 54.8,
+          "text": "踊れ踊れ　夜が終わるまで"
+        },
+        {
+          "time": 60.1,
+          "text": "踊れ踊れ　止まらないで"
+        },
+        {
+          "time": 65.7,
+          "text": "踊れ踊れ　フロアで叫べ"
+        },
+        {
+          "time": 72.1,
+          "text": "踊れ踊れ　ヤー！"
+        },
+        {
+          "time": 76.8,
+          "text": "汗が光る　スポットライトの下"
+        },
+        {
+          "time": 81.5,
+          "text": "限界なんてない　もっと高く"
+        },
+        {
+          "time": 87.2,
+          "text": "世界が揺れてる　あなたと一緒に"
+        },
+        {
+          "time": 92.9,
+          "text": "夜明けまで　走り続けろ"
+        },
+        {
+          "time": 98.2,
+          "text": "踊れ踊れ　夜が終わるまで"
+        },
+        {
+          "time": 103.2,
+          "text": "踊れ踊れ　止まらないで"
+        },
+        {
+          "time": 108.9,
+          "text": "踊れ踊れ　フロアで叫べ"
+        },
+        {
+          "time": 114.7,
+          "text": "踊れ踊れ　ヤー！"
+        },
+        {
+          "time": 119.9,
+          "text": "Oh yeah　感じてる"
+        },
+        {
+          "time": 123.1,
+          "text": "Oh yeah　もっと熱く"
+        },
+        {
+          "time": 125.8,
+          "text": "Oh yeah　限界超えて"
+        },
+        {
+          "time": 129.2,
+          "text": "Tonight　Tonight　Tonight！"
+        },
+        {
+          "time": 144,
+          "text": "踊れ踊れ　夜が終わるまで"
+        },
+        {
+          "time": 149,
+          "text": "踊れ踊れ　止まらないで"
+        },
+        {
+          "time": 154.6,
+          "text": "踊れ踊れ　フロアで叫べ"
+        },
+        {
+          "time": 159.2,
+          "text": "踊れ踊れ　ヤー！"
+        }
+      ]
+    },
+    {
+      "title": "U'LDU'L ①",
+      "file": "uldul_1.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/uldul_1.mp3",
+      "cover": "covers/uldul.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/uldul.jpg",
+      "genre": "experimental",
+      "bpm": 190,
+      "album": "DANCE INSTINCT",
+      "comment": "意味不明・謎語・フラッシュモブ。理由なく踊り出すHyperpop × Eurobeat。",
+      "lyrics_lrc": "[0:0.0]U'LDU'L U'LDU'L\n[0:2.2]U'LDU'L yeah！\n[0:12.1]なんか知らんけど 足が動く\n[0:13.4]理由？ない　説明？無理\n[0:16.9]U'ldul u'ldul 始まった\n[0:19.5]止める方法 知らない\n[0:21.8]Hey you! 見てる場合じゃない\n[0:24.7]Come on! 一緒にやるしかない\n[0:27.3]U'LDU'L U'LDU'L 何これ\n[0:29.8]U'LDU'L U'LDU'L 踊れ\n[0:32.6]U'LDU'L U'LDU'L Why not?\n[0:35.3]U'LDU'L yeah！\n[0:36.8]スマホ構えてる場合じゃない\n[0:39.6]お前も もう 感染してる\n[0:42.1]U'ldul u'ldul 広がった\n[0:44.2]街ごと 全部 巻き込んで\n[0:46.9]No stop! 考えたら負け\n[0:49.7]Just move! 体が正解\n[0:52.4]U'LDU'L U'LDU'L 何これ\n[0:55.1]U'LDU'L U'LDU'L 踊れ\n[0:57.5]U'LDU'L U'LDU'L Why not?\n[1:00.1]U'LDU'L yeah！\n[1:11.5]気づいたら100人 踊ってた\n[1:14.3]なんで？　わかんない　最高じゃん\n[1:17.0]U'ldul u'ldul 止まらない\n[1:19.1]明日も明後日も U'ldul\n[1:22.0]So what! 意味なんていらない\n[1:24.6]Let's go! 体だけが真実\n[1:27.5]U'LDU'L U'LDU'L 何これ\n[1:30.1]U'LDU'L U'LDU'L 踊れ\n[1:32.5]U'LDU'L U'LDU'L Why not?\n[1:35.0]U'LDU'L yeah！\n[1:36.4]誰が始めた？　知らない\n[1:38.1]いつ終わる？　知らない\n[1:39.2]でも今は　U'ldul\n[1:41.5]それだけでいい\n[1:47.4]U'LDU'L U'LDU'L 何これ\n[1:50.0]U'LDU'L U'LDU'L 踊れ\n[1:52.5]U'LDU'L U'LDU'L Why not?\n[1:55.0]U'LDU'L yeah！\n[1:56.9]U'LDU'L U'LDU'L…\n[2:02.6]U'LDU'L…",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "U'LDU'L U'LDU'L"
+        },
+        {
+          "time": 2.2,
+          "text": "U'LDU'L yeah！"
+        },
+        {
+          "time": 12.1,
+          "text": "なんか知らんけど 足が動く"
+        },
+        {
+          "time": 13.4,
+          "text": "理由？ない　説明？無理"
+        },
+        {
+          "time": 16.9,
+          "text": "U'ldul u'ldul 始まった"
+        },
+        {
+          "time": 19.5,
+          "text": "止める方法 知らない"
+        },
+        {
+          "time": 21.8,
+          "text": "Hey you! 見てる場合じゃない"
+        },
+        {
+          "time": 24.7,
+          "text": "Come on! 一緒にやるしかない"
+        },
+        {
+          "time": 27.3,
+          "text": "U'LDU'L U'LDU'L 何これ"
+        },
+        {
+          "time": 29.8,
+          "text": "U'LDU'L U'LDU'L 踊れ"
+        },
+        {
+          "time": 32.6,
+          "text": "U'LDU'L U'LDU'L Why not?"
+        },
+        {
+          "time": 35.3,
+          "text": "U'LDU'L yeah！"
+        },
+        {
+          "time": 36.8,
+          "text": "スマホ構えてる場合じゃない"
+        },
+        {
+          "time": 39.6,
+          "text": "お前も もう 感染してる"
+        },
+        {
+          "time": 42.1,
+          "text": "U'ldul u'ldul 広がった"
+        },
+        {
+          "time": 44.2,
+          "text": "街ごと 全部 巻き込んで"
+        },
+        {
+          "time": 46.9,
+          "text": "No stop! 考えたら負け"
+        },
+        {
+          "time": 49.7,
+          "text": "Just move! 体が正解"
+        },
+        {
+          "time": 52.4,
+          "text": "U'LDU'L U'LDU'L 何これ"
+        },
+        {
+          "time": 55.1,
+          "text": "U'LDU'L U'LDU'L 踊れ"
+        },
+        {
+          "time": 57.5,
+          "text": "U'LDU'L U'LDU'L Why not?"
+        },
+        {
+          "time": 60.1,
+          "text": "U'LDU'L yeah！"
+        },
+        {
+          "time": 71.5,
+          "text": "気づいたら100人 踊ってた"
+        },
+        {
+          "time": 74.3,
+          "text": "なんで？　わかんない　最高じゃん"
+        },
+        {
+          "time": 77,
+          "text": "U'ldul u'ldul 止まらない"
+        },
+        {
+          "time": 79.1,
+          "text": "明日も明後日も U'ldul"
+        },
+        {
+          "time": 82,
+          "text": "So what! 意味なんていらない"
+        },
+        {
+          "time": 84.6,
+          "text": "Let's go! 体だけが真実"
+        },
+        {
+          "time": 87.5,
+          "text": "U'LDU'L U'LDU'L 何これ"
+        },
+        {
+          "time": 90.1,
+          "text": "U'LDU'L U'LDU'L 踊れ"
+        },
+        {
+          "time": 92.5,
+          "text": "U'LDU'L U'LDU'L Why not?"
+        },
+        {
+          "time": 95,
+          "text": "U'LDU'L yeah！"
+        },
+        {
+          "time": 96.4,
+          "text": "誰が始めた？　知らない"
+        },
+        {
+          "time": 98.1,
+          "text": "いつ終わる？　知らない"
+        },
+        {
+          "time": 99.2,
+          "text": "でも今は　U'ldul"
+        },
+        {
+          "time": 101.5,
+          "text": "それだけでいい"
+        },
+        {
+          "time": 107.4,
+          "text": "U'LDU'L U'LDU'L 何これ"
+        },
+        {
+          "time": 110,
+          "text": "U'LDU'L U'LDU'L 踊れ"
+        },
+        {
+          "time": 112.5,
+          "text": "U'LDU'L U'LDU'L Why not?"
+        },
+        {
+          "time": 115,
+          "text": "U'LDU'L yeah！"
+        },
+        {
+          "time": 116.9,
+          "text": "U'LDU'L U'LDU'L…"
+        },
+        {
+          "time": 122.6,
+          "text": "U'LDU'L…"
+        }
+      ]
+    },
+    {
+      "title": "U'LDU'L ②",
+      "file": "uldul_2.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/uldul_2.mp3",
+      "cover": "https://cdn1.suno.ai/image_3dffe69a-9b74-4f55-94c7-33fd43ebde26.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_3dffe69a-9b74-4f55-94c7-33fd43ebde26.jpeg",
+      "genre": "experimental",
+      "bpm": 190,
+      "album": null,
+      "comment": "意味不明・謎語・フラッシュモブ。理由なく踊り出すHyperpop × Eurobeat。",
+      "lyrics_lrc": "[0:0.0]U'LDU'L U'LDU'L\n[0:18.4]U'LDU'L U'LDU'L\n[0:20.0]なんか知らんけど 足が動く\n[0:22.9]理由？ない　説明？無理\n[0:25.1]U'ldul u'ldul 始まった\n[0:27.6]止める方法 知らない\n[0:30.8]Hey you! 見てる場合じゃない\n[0:33.0]Come on! 一緒にやるしかない\n[0:35.8]U'LDU'L U'LDU'L 何これ\n[0:38.5]U'LDU'L U'LDU'L 踊れ\n[0:40.9]U'LDU'L U'LDU'L Why not?\n[0:43.5]U'LDU'L yeah！\n[0:45.6]スマホ構えてる場合じゃない\n[0:47.9]お前も もう 感染してる\n[0:50.6]U'ldul u'ldul 広がった\n[0:52.6]街ごと 全部 巻き込んで\n[0:55.3]No stop! 考えたら負け\n[0:58.0]Just move! 体が正解\n[1:00.8]U'LDU'L U'LDU'L 何これ\n[1:03.5]U'LDU'L U'LDU'L 踊れ\n[1:05.8]U'LDU'L U'LDU'L Why not?\n[1:08.5]U'LDU'L yeah！\n[1:20.4]気づいたら100人 踊ってた\n[1:23.0]なんで？　わかんない　最高じゃん\n[1:25.7]U'ldul u'ldul 止まらない\n[1:27.6]明日も明後日も U'ldul\n[1:30.3]So what! 意味なんていらない\n[1:33.0]Let's go! 体だけが真実\n[1:35.8]U'LDU'L U'LDU'L 何これ\n[1:38.4]U'LDU'L U'LDU'L 踊れ\n[1:40.8]U'LDU'L U'LDU'L Why not?\n[1:43.4]U'LDU'L yeah！\n[1:46.3]誰が始めた？　知らない\n[1:49.0]いつ終わる？　知らない\n[1:51.0]でも今は　U'ldul\n[1:54.2]それだけでいい\n[1:58.2]U'LDU'L U'LDU'L 何これ\n[2:00.9]U'LDU'L U'LDU'L 踊れ\n[2:03.3]U'LDU'L U'LDU'L Why not?\n[2:05.8]U'LDU'L yeah！\n[2:08.4]U'LDU'L U'LDU'L…\n[2:13.2]U'LDU'L…",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "U'LDU'L U'LDU'L"
+        },
+        {
+          "time": 18.4,
+          "text": "U'LDU'L U'LDU'L"
+        },
+        {
+          "time": 20,
+          "text": "なんか知らんけど 足が動く"
+        },
+        {
+          "time": 22.9,
+          "text": "理由？ない　説明？無理"
+        },
+        {
+          "time": 25.1,
+          "text": "U'ldul u'ldul 始まった"
+        },
+        {
+          "time": 27.6,
+          "text": "止める方法 知らない"
+        },
+        {
+          "time": 30.8,
+          "text": "Hey you! 見てる場合じゃない"
+        },
+        {
+          "time": 33,
+          "text": "Come on! 一緒にやるしかない"
+        },
+        {
+          "time": 35.8,
+          "text": "U'LDU'L U'LDU'L 何これ"
+        },
+        {
+          "time": 38.5,
+          "text": "U'LDU'L U'LDU'L 踊れ"
+        },
+        {
+          "time": 40.9,
+          "text": "U'LDU'L U'LDU'L Why not?"
+        },
+        {
+          "time": 43.5,
+          "text": "U'LDU'L yeah！"
+        },
+        {
+          "time": 45.6,
+          "text": "スマホ構えてる場合じゃない"
+        },
+        {
+          "time": 47.9,
+          "text": "お前も もう 感染してる"
+        },
+        {
+          "time": 50.6,
+          "text": "U'ldul u'ldul 広がった"
+        },
+        {
+          "time": 52.6,
+          "text": "街ごと 全部 巻き込んで"
+        },
+        {
+          "time": 55.3,
+          "text": "No stop! 考えたら負け"
+        },
+        {
+          "time": 58,
+          "text": "Just move! 体が正解"
+        },
+        {
+          "time": 60.8,
+          "text": "U'LDU'L U'LDU'L 何これ"
+        },
+        {
+          "time": 63.5,
+          "text": "U'LDU'L U'LDU'L 踊れ"
+        },
+        {
+          "time": 65.8,
+          "text": "U'LDU'L U'LDU'L Why not?"
+        },
+        {
+          "time": 68.5,
+          "text": "U'LDU'L yeah！"
+        },
+        {
+          "time": 80.4,
+          "text": "気づいたら100人 踊ってた"
+        },
+        {
+          "time": 83,
+          "text": "なんで？　わかんない　最高じゃん"
+        },
+        {
+          "time": 85.7,
+          "text": "U'ldul u'ldul 止まらない"
+        },
+        {
+          "time": 87.6,
+          "text": "明日も明後日も U'ldul"
+        },
+        {
+          "time": 90.3,
+          "text": "So what! 意味なんていらない"
+        },
+        {
+          "time": 93,
+          "text": "Let's go! 体だけが真実"
+        },
+        {
+          "time": 95.8,
+          "text": "U'LDU'L U'LDU'L 何これ"
+        },
+        {
+          "time": 98.4,
+          "text": "U'LDU'L U'LDU'L 踊れ"
+        },
+        {
+          "time": 100.8,
+          "text": "U'LDU'L U'LDU'L Why not?"
+        },
+        {
+          "time": 103.4,
+          "text": "U'LDU'L yeah！"
+        },
+        {
+          "time": 106.3,
+          "text": "誰が始めた？　知らない"
+        },
+        {
+          "time": 109,
+          "text": "いつ終わる？　知らない"
+        },
+        {
+          "time": 111,
+          "text": "でも今は　U'ldul"
+        },
+        {
+          "time": 114.2,
+          "text": "それだけでいい"
+        },
+        {
+          "time": 118.2,
+          "text": "U'LDU'L U'LDU'L 何これ"
+        },
+        {
+          "time": 120.9,
+          "text": "U'LDU'L U'LDU'L 踊れ"
+        },
+        {
+          "time": 123.3,
+          "text": "U'LDU'L U'LDU'L Why not?"
+        },
+        {
+          "time": 125.8,
+          "text": "U'LDU'L yeah！"
+        },
+        {
+          "time": 128.4,
+          "text": "U'LDU'L U'LDU'L…"
+        },
+        {
+          "time": 133.2,
+          "text": "U'LDU'L…"
+        }
+      ]
+    },
+    {
+      "title": "Ngoma Ya Mwitu",
+      "file": "ngoma_ya_mwitu.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/ngoma_ya_mwitu.mp3",
+      "cover": "covers/ngoma_ya_mwitu.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/ngoma_ya_mwitu.jpg",
+      "genre": "experimental",
+      "bpm": 128,
+      "album": "DANCE INSTINCT",
+      "comment": "スワヒリ語で「野生の太鼓」。楽器を一切使わず、打撃音・破砕音・足踏みだけで組み上げた民族打楽器ダンス。",
+      "lyrics_lrc": "[0:00.0]—\n[0:30.1]Heya! Heya!\n[0:35.7]Ngoma ngoma ngoma ya mwitu!\n[0:39.0]Ngoma ngoma ngoma ya moto!\n[0:42.4]Heya! Heya! Heya ho!\n[0:51.0]Simba... Simba... Simba...\n[1:02.6]Jua! Jua! Jua!\n[1:08.5]Damu! Haraka!\n[1:10.3]Heya! Heya! Heya ho!\n[1:13.8]Ngoma ngoma ngoma ya mwitu!\n[1:17.8]Ngoma ngoma ngoma ya moto!\n[1:20.6]Heya! Heya! Heya ho!\n[1:35.2]Heya... Heya...\n[1:36.7]Ngoma... ngoma... ngoma...\n[1:46.3]Heya...\n[1:51.1]Ngoma... ngoma...",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "—"
+        },
+        {
+          "time": 30.1,
+          "text": "Heya! Heya!"
+        },
+        {
+          "time": 35.7,
+          "text": "Ngoma ngoma ngoma ya mwitu!"
+        },
+        {
+          "time": 39,
+          "text": "Ngoma ngoma ngoma ya moto!"
+        },
+        {
+          "time": 42.4,
+          "text": "Heya! Heya! Heya ho!"
+        },
+        {
+          "time": 51,
+          "text": "Simba... Simba... Simba..."
+        },
+        {
+          "time": 62.6,
+          "text": "Jua! Jua! Jua!"
+        },
+        {
+          "time": 68.5,
+          "text": "Damu! Haraka!"
+        },
+        {
+          "time": 70.3,
+          "text": "Heya! Heya! Heya ho!"
+        },
+        {
+          "time": 73.8,
+          "text": "Ngoma ngoma ngoma ya mwitu!"
+        },
+        {
+          "time": 77.8,
+          "text": "Ngoma ngoma ngoma ya moto!"
+        },
+        {
+          "time": 80.6,
+          "text": "Heya! Heya! Heya ho!"
+        },
+        {
+          "time": 95.2,
+          "text": "Heya... Heya..."
+        },
+        {
+          "time": 96.7,
+          "text": "Ngoma... ngoma... ngoma..."
+        },
+        {
+          "time": 106.3,
+          "text": "Heya..."
+        },
+        {
+          "time": 111.1,
+          "text": "Ngoma... ngoma..."
+        }
+      ]
+    },
+    {
+      "title": "病みDOKI",
+      "file": "yami_doki.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/yami_doki.mp3",
+      "cover": "covers/yami_doki.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/yami_doki.jpg",
+      "genre": "dance",
+      "bpm": 170,
+      "album": "DANCE INSTINCT",
+      "comment": "地雷女×オタク男の深夜ダンスデュエット。170BPM・メンヘラコア・Hyperpop。",
+      "lyrics_lrc": "[0:00.0]ねえ、見てる?\n[0:03.0](男) え、あ、はい…見てます…\n[0:09.8]ねえ、見てる?\n[0:13.0]今日もLINE 既読スルー?\n[0:15.9]3時間も待たせてさ\n[0:18.1]私より 推し優先?\n[0:20.4]ねえ、答えてよ ねえ、ねえ、ねえ\n[0:24.0](男) ち、違うんだ、配信で…ご、ごめん、俺が悪い\n[0:32.0]強ゼロ3本目 回ってきたの\n[0:34.6]もう無理よ 無理なの もう無理だって\n[0:37.3]ねえ、今夜だけは\n[0:41.6]私を見て\n[0:42.9]ヘラって踊れ ヘラって踊れ\n[0:45.8]フロアで泣け 叫べ 壊れろ\n[0:48.4]一緒に踊って 拒否は無理\n[0:53.6]Dokidoki 病みdoki\n[0:55.8]今夜だけは 私を推して\n[0:58.6]私を\n[1:01.2]私を\n[1:05.5](男) ぼ、僕、きみを推してる\n[1:08.7]は?\n[1:14.5]もっかい言ってよ\n[1:17.3]嘘じゃないでしょ?\n[1:19.3]ヘラって踊れ ヘラって踊れ\n[1:21.8]地雷でもいい オタクでもいい\n[1:24.4]一生推して 拒否は無理\n[1:29.0]Dokidoki 病みdoki\n[1:31.9]今夜からは キミだけのファン\n[1:35.1]キミだけ キミだけ キミだけ\n[1:40.2]明日も会える?\n[1:42.0](男) は、はい…!\n[1:43.8]じゃあ、踊ろっか",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "ねえ、見てる?"
+        },
+        {
+          "time": 3,
+          "text": "(男) え、あ、はい…見てます…"
+        },
+        {
+          "time": 9.8,
+          "text": "ねえ、見てる?"
+        },
+        {
+          "time": 13,
+          "text": "今日もLINE 既読スルー?"
+        },
+        {
+          "time": 15.9,
+          "text": "3時間も待たせてさ"
+        },
+        {
+          "time": 18.1,
+          "text": "私より 推し優先?"
+        },
+        {
+          "time": 20.4,
+          "text": "ねえ、答えてよ ねえ、ねえ、ねえ"
+        },
+        {
+          "time": 24,
+          "text": "(男) ち、違うんだ、配信で…ご、ごめん、俺が悪い"
+        },
+        {
+          "time": 32,
+          "text": "強ゼロ3本目 回ってきたの"
+        },
+        {
+          "time": 34.6,
+          "text": "もう無理よ 無理なの もう無理だって"
+        },
+        {
+          "time": 37.3,
+          "text": "ねえ、今夜だけは"
+        },
+        {
+          "time": 41.6,
+          "text": "私を見て"
+        },
+        {
+          "time": 42.9,
+          "text": "ヘラって踊れ ヘラって踊れ"
+        },
+        {
+          "time": 45.8,
+          "text": "フロアで泣け 叫べ 壊れろ"
+        },
+        {
+          "time": 48.4,
+          "text": "一緒に踊って 拒否は無理"
+        },
+        {
+          "time": 53.6,
+          "text": "Dokidoki 病みdoki"
+        },
+        {
+          "time": 55.8,
+          "text": "今夜だけは 私を推して"
+        },
+        {
+          "time": 58.6,
+          "text": "私を"
+        },
+        {
+          "time": 61.2,
+          "text": "私を"
+        },
+        {
+          "time": 65.5,
+          "text": "(男) ぼ、僕、きみを推してる"
+        },
+        {
+          "time": 68.7,
+          "text": "は?"
+        },
+        {
+          "time": 74.5,
+          "text": "もっかい言ってよ"
+        },
+        {
+          "time": 77.3,
+          "text": "嘘じゃないでしょ?"
+        },
+        {
+          "time": 79.3,
+          "text": "ヘラって踊れ ヘラって踊れ"
+        },
+        {
+          "time": 81.8,
+          "text": "地雷でもいい オタクでもいい"
+        },
+        {
+          "time": 84.4,
+          "text": "一生推して 拒否は無理"
+        },
+        {
+          "time": 89,
+          "text": "Dokidoki 病みdoki"
+        },
+        {
+          "time": 91.9,
+          "text": "今夜からは キミだけのファン"
+        },
+        {
+          "time": 95.1,
+          "text": "キミだけ キミだけ キミだけ"
+        },
+        {
+          "time": 100.2,
+          "text": "明日も会える?"
+        },
+        {
+          "time": 102,
+          "text": "(男) は、はい…!"
+        },
+        {
+          "time": 103.8,
+          "text": "じゃあ、踊ろっか"
+        }
+      ]
+    },
+    {
+      "title": "NIGHT DRIVER",
+      "file": "night_driver.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/night_driver.mp3",
+      "cover": "covers/night_driver.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/night_driver.jpg",
+      "genre": "dance",
+      "bpm": 130,
+      "album": "DANCE INSTINCT",
+      "comment": "80s Italo Discoへのオマージュ。深夜の東京高速、ネオンとクロームの中を一人で走る男のバリトンボイス。130BPM。",
+      "lyrics_lrc": "[0:03.1]Tokyo, 3 A.M.\n[0:10.0]Midnight... velocity...\n[0:20.0]Highway lights are falling down\n[0:30.0]Neon signs still call my name\n[0:40.0]I was driving nowhere fast\n[0:50.0]Chasing ghosts that never came\n[0:55.0]Rear-view mirror, your silhouette\n[1:00.0]Fade away into the night\n[1:04.7]Night driver, night driver\n[1:09.0]Tokyo's burning, chrome and fire\n[1:12.6]Night driver, night driver\n[1:16.3]君を乗せて どこまでも\n[1:21.0]Tonight, tonight, tonight\n[1:35.7]1985, the radio plays\n[1:38.6]A song we used to know by heart\n[1:42.8]Engine hums like a lullaby\n[1:45.8]Tearing this city apart\n[1:49.9]Rear-view mirror, your silhouette\n[1:52.8]Gone before the morning light\n[1:58.2]Night driver, night driver\n[2:01.8]Tokyo's burning, chrome and fire\n[2:05.7]Night driver, night driver\n[2:09.4]君を乗せて どこまでも\n[2:14.2]Tonight, tonight, tonight\n[2:19.8]She said \"don't look back\"\n[2:22.9]She said \"just keep driving\"\n[2:26.8]But the road ends at dawn\n[2:31.6]And I'm still arriving\n[3:04.0]Night driver, night driver\n[3:07.8]Chrome and fire, chrome and fire\n[3:11.6]Night driver, night driver\n[3:15.0]二度と戻れない あの夜へ\n[3:20.7]Forever, forever, forever\n[3:29.9]Tokyo, 3 A.M.\n[3:32.6]Night... driver...",
+      "lyrics_parsed": [
+        {
+          "time": 3.1,
+          "text": "Tokyo, 3 A.M."
+        },
+        {
+          "time": 10,
+          "text": "Midnight... velocity..."
+        },
+        {
+          "time": 20,
+          "text": "Highway lights are falling down"
+        },
+        {
+          "time": 30,
+          "text": "Neon signs still call my name"
+        },
+        {
+          "time": 40,
+          "text": "I was driving nowhere fast"
+        },
+        {
+          "time": 50,
+          "text": "Chasing ghosts that never came"
+        },
+        {
+          "time": 55,
+          "text": "Rear-view mirror, your silhouette"
+        },
+        {
+          "time": 60,
+          "text": "Fade away into the night"
+        },
+        {
+          "time": 64.7,
+          "text": "Night driver, night driver"
+        },
+        {
+          "time": 69,
+          "text": "Tokyo's burning, chrome and fire"
+        },
+        {
+          "time": 72.6,
+          "text": "Night driver, night driver"
+        },
+        {
+          "time": 76.3,
+          "text": "君を乗せて どこまでも"
+        },
+        {
+          "time": 81,
+          "text": "Tonight, tonight, tonight"
+        },
+        {
+          "time": 95.7,
+          "text": "1985, the radio plays"
+        },
+        {
+          "time": 98.6,
+          "text": "A song we used to know by heart"
+        },
+        {
+          "time": 102.8,
+          "text": "Engine hums like a lullaby"
+        },
+        {
+          "time": 105.8,
+          "text": "Tearing this city apart"
+        },
+        {
+          "time": 109.9,
+          "text": "Rear-view mirror, your silhouette"
+        },
+        {
+          "time": 112.8,
+          "text": "Gone before the morning light"
+        },
+        {
+          "time": 118.2,
+          "text": "Night driver, night driver"
+        },
+        {
+          "time": 121.8,
+          "text": "Tokyo's burning, chrome and fire"
+        },
+        {
+          "time": 125.7,
+          "text": "Night driver, night driver"
+        },
+        {
+          "time": 129.4,
+          "text": "君を乗せて どこまでも"
+        },
+        {
+          "time": 134.2,
+          "text": "Tonight, tonight, tonight"
+        },
+        {
+          "time": 139.8,
+          "text": "She said \"don't look back\""
+        },
+        {
+          "time": 142.9,
+          "text": "She said \"just keep driving\""
+        },
+        {
+          "time": 146.8,
+          "text": "But the road ends at dawn"
+        },
+        {
+          "time": 151.6,
+          "text": "And I'm still arriving"
+        },
+        {
+          "time": 184,
+          "text": "Night driver, night driver"
+        },
+        {
+          "time": 187.8,
+          "text": "Chrome and fire, chrome and fire"
+        },
+        {
+          "time": 191.6,
+          "text": "Night driver, night driver"
+        },
+        {
+          "time": 195,
+          "text": "二度と戻れない あの夜へ"
+        },
+        {
+          "time": 200.7,
+          "text": "Forever, forever, forever"
+        },
+        {
+          "time": 209.9,
+          "text": "Tokyo, 3 A.M."
+        },
+        {
+          "time": 212.6,
+          "text": "Night... driver..."
+        }
+      ]
+    },
+    {
+      "title": "朝日に溶けて",
+      "file": "asahi_ni_tokete.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/asahi_ni_tokete.mp3",
+      "cover": "covers/asahi_ni_tokete.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/asahi_ni_tokete.jpg",
+      "genre": "ballad",
+      "bpm": 108,
+      "album": "DANCE INSTINCT",
+      "comment": "ダンスアルバムの最終曲。フロアを出た後の朝日・始発ホーム・見知らぬ相手との一瞬の通じ合い。Post-rave chillwave・108BPM。",
+      "lyrics_lrc": "[0:18.6]ライトが消えて ドアが開いた\n[0:23.9]冷えた風 汗が引いていく\n[0:28.2]耳の奥 まだビートが鳴ってる\n[0:33.0]始発までの 静かな時間\n[0:37.2]隣で踊ってた 知らない誰か\n[0:42.1]目が合って 笑い合って\n[0:46.4]名前も 連絡先も 聞かずに別々の電車へ\n[0:53.2]ホームに 始発の音 空が白んでいく\n[1:02.7]夜が明けるまで 踊っていたね\n[1:07.9]言葉もないまま 通じ合ってた\n[1:12.6]また明日 会えなくても この朝だけは 忘れない\n[1:28.6]ビルの隙間 太陽が登る\n[1:33.5]昨日までの 全部が\n[1:38.1]嘘みたいに 透き通って\n[1:40.8]でもこの汗は 本当だった\n[1:45.2]電車が 近づいてくる\n[1:54.2]夜が明けるまで 踊っていたね\n[1:59.1]言葉もないまま 通じ合ってた\n[2:03.9]また明日 会えなくても この朝だけは 忘れない\n[2:21.0]昨日の私は {空|くう}になって 朝日に 溶けてゆく\n[2:36.4]フロアで見た夢も 駅で感じた風も\n[2:46.2]夜が明けるまで 踊っていたね\n[2:51.9]言葉もないまま 通じ合ってた\n[2:56.7]また明日 会えなくても この朝だけは 忘れない\n[3:20.0]朝だよ\n[3:29.2]おやすみ",
+      "lyrics_parsed": [
+        {
+          "time": 18.6,
+          "text": "ライトが消えて ドアが開いた"
+        },
+        {
+          "time": 23.9,
+          "text": "冷えた風 汗が引いていく"
+        },
+        {
+          "time": 28.2,
+          "text": "耳の奥 まだビートが鳴ってる"
+        },
+        {
+          "time": 33,
+          "text": "始発までの 静かな時間"
+        },
+        {
+          "time": 37.2,
+          "text": "隣で踊ってた 知らない誰か"
+        },
+        {
+          "time": 42.1,
+          "text": "目が合って 笑い合って"
+        },
+        {
+          "time": 46.4,
+          "text": "名前も 連絡先も 聞かずに別々の電車へ"
+        },
+        {
+          "time": 53.2,
+          "text": "ホームに 始発の音 空が白んでいく"
+        },
+        {
+          "time": 62.7,
+          "text": "夜が明けるまで 踊っていたね"
+        },
+        {
+          "time": 67.9,
+          "text": "言葉もないまま 通じ合ってた"
+        },
+        {
+          "time": 72.6,
+          "text": "また明日 会えなくても この朝だけは 忘れない"
+        },
+        {
+          "time": 88.6,
+          "text": "ビルの隙間 太陽が登る"
+        },
+        {
+          "time": 93.5,
+          "text": "昨日までの 全部が"
+        },
+        {
+          "time": 98.1,
+          "text": "嘘みたいに 透き通って"
+        },
+        {
+          "time": 100.8,
+          "text": "でもこの汗は 本当だった"
+        },
+        {
+          "time": 105.2,
+          "text": "電車が 近づいてくる"
+        },
+        {
+          "time": 114.2,
+          "text": "夜が明けるまで 踊っていたね"
+        },
+        {
+          "time": 119.1,
+          "text": "言葉もないまま 通じ合ってた"
+        },
+        {
+          "time": 123.9,
+          "text": "また明日 会えなくても この朝だけは 忘れない"
+        },
+        {
+          "time": 141,
+          "text": "昨日の私は {空|くう}になって 朝日に 溶けてゆく"
+        },
+        {
+          "time": 156.4,
+          "text": "フロアで見た夢も 駅で感じた風も"
+        },
+        {
+          "time": 166.2,
+          "text": "夜が明けるまで 踊っていたね"
+        },
+        {
+          "time": 171.9,
+          "text": "言葉もないまま 通じ合ってた"
+        },
+        {
+          "time": 176.7,
+          "text": "また明日 会えなくても この朝だけは 忘れない"
+        },
+        {
+          "time": 200,
+          "text": "朝だよ"
+        },
+        {
+          "time": 209.2,
+          "text": "おやすみ"
+        }
+      ]
+    },
+    {
+      "title": "色即是空 -SHI KI SO KU ZE KU-",
+      "file": "shikisokuzeku.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/shikisokuzeku.mp3",
+      "cover": "covers/shikisokuzeku.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/shikisokuzeku.jpg",
+      "genre": "experimental",
+      "bpm": 175,
+      "album": "DANCE INSTINCT",
+      "comment": "般若心経全文をそのままユーロビートに乗せた実験曲。色即是空＝踊り狂った末に訪れる空。",
+      "lyrics_lrc": "[0:25.0]{仏説|ぶっせつ} {摩訶般若|まかはんにゃ} {波羅蜜多心経|はらみったしんぎょう}\n[0:30.0]{観自在菩薩|かんじざいぼさつ} {行深般若波羅蜜多時|ぎょうじんはんにゃはらみったじ}\n[0:35.6]{照見五蘊皆空|しょうけんごうんかいくう} {度一切苦厄|どいっさいくやく}\n[0:44.7]{舎利子|しゃりし} {色不異空|しきふいくう}\n[0:47.5]{空不異色|くうふいしき}\n[0:50.2]{色即是空|しきそくぜくう}\n[0:53.1]{空即是色|くうそくぜしき}\n[0:55.5]{受想行識|じゅそうぎょうしき}\n[1:00.9]{亦復如是|やくぶにょぜ}\n[1:04.9]{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}\n[1:07.9]{波羅羯諦|はーらーぎゃーてー}\n[1:10.8]{波羅僧羯諦|はらそーぎゃーてー}\n[1:13.6]{菩提薩婆訶|ぼーじーそわかー}!\n[1:52.7]{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}\n[1:55.5]{波羅羯諦|はーらーぎゃーてー}\n[1:58.4]{波羅僧羯諦|はらそーぎゃーてー}\n[2:01.2]{菩提薩婆訶|ぼーじーそわかー}!\n[2:05.5]{菩提薩埵|ぼだいさった}\n[2:06.9]{依般若波羅蜜多故|えはんにゃはらみったこ}\n[2:10.6]{心無罣礙|しんむけいげ} {無罣礙故|むけいげこ} {無有恐怖|むうくふ}\n[2:16.5]{遠離一切顛倒夢想|おんりいっさいてんどうむそう}\n[2:21.8]{究竟涅槃|くきょうねはん}\n[2:25.4]{三世諸仏|さんぜしょぶつ}\n[2:27.0]{依般若波羅蜜多故|えはんにゃはらみったこ}\n[2:31.0]{得阿耨多羅三藐|とくあのくたらさんみゃく}\n[2:33.3]{三菩提|さんぼだい}\n[2:36.8]{故知般若波羅蜜多|こちはんにゃはらみった}\n[2:39.3]{是大神咒|ぜだいじんしゅ} {是大明咒|ぜだいみょうしゅ}\n[2:42.1]{是無上咒|ぜむじょうしゅ} {是無等等咒|ぜむとうどうしゅ}\n[2:45.7]{能除一切苦|のうじょいっさいく}\n[2:48.5]{真実不虚|しんじつふこ} {故説般若|こせつはんにゃ}\n[2:52.7]{波羅蜜多咒|はらみったしゅ}\n[2:54.5]{即説咒曰|そくせつしゅわつ}\n[3:00.2]{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}\n[3:03.1]{波羅羯諦|はーらーぎゃーてー}\n[3:06.0]{波羅僧羯諦|はらそーぎゃーてー}\n[3:08.7]{菩提薩婆訶|ぼーじーそわかー}!\n[3:17.3]{般若心経|はんにゃしんぎょう}",
+      "lyrics_parsed": [
+        {
+          "time": 25,
+          "text": "{仏説|ぶっせつ} {摩訶般若|まかはんにゃ} {波羅蜜多心経|はらみったしんぎょう}"
+        },
+        {
+          "time": 30,
+          "text": "{観自在菩薩|かんじざいぼさつ} {行深般若波羅蜜多時|ぎょうじんはんにゃはらみったじ}"
+        },
+        {
+          "time": 35.6,
+          "text": "{照見五蘊皆空|しょうけんごうんかいくう} {度一切苦厄|どいっさいくやく}"
+        },
+        {
+          "time": 44.7,
+          "text": "{舎利子|しゃりし} {色不異空|しきふいくう}"
+        },
+        {
+          "time": 47.5,
+          "text": "{空不異色|くうふいしき}"
+        },
+        {
+          "time": 50.2,
+          "text": "{色即是空|しきそくぜくう}"
+        },
+        {
+          "time": 53.1,
+          "text": "{空即是色|くうそくぜしき}"
+        },
+        {
+          "time": 55.5,
+          "text": "{受想行識|じゅそうぎょうしき}"
+        },
+        {
+          "time": 60.9,
+          "text": "{亦復如是|やくぶにょぜ}"
+        },
+        {
+          "time": 64.9,
+          "text": "{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}"
+        },
+        {
+          "time": 67.9,
+          "text": "{波羅羯諦|はーらーぎゃーてー}"
+        },
+        {
+          "time": 70.8,
+          "text": "{波羅僧羯諦|はらそーぎゃーてー}"
+        },
+        {
+          "time": 73.6,
+          "text": "{菩提薩婆訶|ぼーじーそわかー}!"
+        },
+        {
+          "time": 112.7,
+          "text": "{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}"
+        },
+        {
+          "time": 115.5,
+          "text": "{波羅羯諦|はーらーぎゃーてー}"
+        },
+        {
+          "time": 118.4,
+          "text": "{波羅僧羯諦|はらそーぎゃーてー}"
+        },
+        {
+          "time": 121.2,
+          "text": "{菩提薩婆訶|ぼーじーそわかー}!"
+        },
+        {
+          "time": 125.5,
+          "text": "{菩提薩埵|ぼだいさった}"
+        },
+        {
+          "time": 126.9,
+          "text": "{依般若波羅蜜多故|えはんにゃはらみったこ}"
+        },
+        {
+          "time": 130.6,
+          "text": "{心無罣礙|しんむけいげ} {無罣礙故|むけいげこ} {無有恐怖|むうくふ}"
+        },
+        {
+          "time": 136.5,
+          "text": "{遠離一切顛倒夢想|おんりいっさいてんどうむそう}"
+        },
+        {
+          "time": 141.8,
+          "text": "{究竟涅槃|くきょうねはん}"
+        },
+        {
+          "time": 145.4,
+          "text": "{三世諸仏|さんぜしょぶつ}"
+        },
+        {
+          "time": 147,
+          "text": "{依般若波羅蜜多故|えはんにゃはらみったこ}"
+        },
+        {
+          "time": 151,
+          "text": "{得阿耨多羅三藐|とくあのくたらさんみゃく}"
+        },
+        {
+          "time": 153.3,
+          "text": "{三菩提|さんぼだい}"
+        },
+        {
+          "time": 156.8,
+          "text": "{故知般若波羅蜜多|こちはんにゃはらみった}"
+        },
+        {
+          "time": 159.3,
+          "text": "{是大神咒|ぜだいじんしゅ} {是大明咒|ぜだいみょうしゅ}"
+        },
+        {
+          "time": 162.1,
+          "text": "{是無上咒|ぜむじょうしゅ} {是無等等咒|ぜむとうどうしゅ}"
+        },
+        {
+          "time": 165.7,
+          "text": "{能除一切苦|のうじょいっさいく}"
+        },
+        {
+          "time": 168.5,
+          "text": "{真実不虚|しんじつふこ} {故説般若|こせつはんにゃ}"
+        },
+        {
+          "time": 172.7,
+          "text": "{波羅蜜多咒|はらみったしゅ}"
+        },
+        {
+          "time": 174.5,
+          "text": "{即説咒曰|そくせつしゅわつ}"
+        },
+        {
+          "time": 180.2,
+          "text": "{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}"
+        },
+        {
+          "time": 183.1,
+          "text": "{波羅羯諦|はーらーぎゃーてー}"
+        },
+        {
+          "time": 186,
+          "text": "{波羅僧羯諦|はらそーぎゃーてー}"
+        },
+        {
+          "time": 188.7,
+          "text": "{菩提薩婆訶|ぼーじーそわかー}!"
+        },
+        {
+          "time": 197.3,
+          "text": "{般若心経|はんにゃしんぎょう}"
+        }
+      ]
+    },
+    {
+      "title": "転生してもやっぱりしがないおっさんでした",
+      "file": "hashiridase_ossan.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/hashiridase_ossan.mp3",
+      "cover": "covers/hashiridase_ossan.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/hashiridase_ossan.jpg",
+      "genre": "anime",
+      "bpm": 150,
+      "album": null,
+      "comment": "自虐系アニメOPセルフパロディ。異世界転生したのに鏡に映るのは四十超えの自分。Vaundy/Mrs.GREEN APPLE系アニソンロック。",
+      "lyrics_lrc": "[0:00.0]目覚めた先に 待ってたのは やっぱり俺だった\n[0:05.8]笑っちまうな\n[0:12.9]空は青くて 草は眩しくて\n[0:16.4]「ようこそ勇者様」 って声がする\n[0:19.9]鏡に映った 顔を見て 四十超えの オレだったよ\n[0:25.3]ステータス全部 Fランク スキルは「遅刻せず出社」\n[0:31.7]異世界でも 役に立つか こんな能力\n[0:38.2]やっぱり俺は しがないおっさん\n[0:41.7]転生しても これだ 笑うしかねぇ\n[0:45.2]腰は痛むし 目は霞むし\n[0:48.2]それでも前に 進むしかねぇんだ\n[0:51.7]Level 1 から やり直し\n[0:54.4]しがなくて 上等だろ\n[0:57.5]走り出せ オッサン\n[1:06.8]若い勇者に 説教されて\n[1:08.9]「先輩マジで 頑張って」って\n[1:10.5]心は十八 気持ちは二十歳\n[1:12.2]でも体だけが 嘘をつかねぇ\n[1:13.9]四十年分の 使い古した 言い訳だけは 得意なんだ\n[1:19.6]でもな 積み上げた時間\n[1:22.6]ただの飾りじゃ ねぇはずだ\n[1:25.8]やっぱり俺は しがないおっさん\n[1:29.0]転生しても これだ 笑うしかねぇ\n[1:32.6]魔王討伐 できなくても\n[1:35.5]目の前の 敵 一匹ずつ\n[1:39.1]倒していく それで 十分だろ\n[1:41.9]しがなくて 上等だろ\n[1:44.9]走り続けろ オッサン\n[1:49.6]Level 1 から やり直し\n[2:05.9]しがなくて 上等だろ\n[2:06.5]走り出せ オッサン\n[2:07.2]前世で諦めた\n[2:10.2]夢の続き\n[2:13.2]この世界でも\n[2:15.8]きっと叶わない\n[2:19.4]でもな 戦うことだけは 選べる\n[2:25.7]カッコ悪くても\n[2:28.9]泥まみれでも\n[2:33.5]やっぱり俺は しがないおっさん\n[2:37.0]転生しても これだ これが俺だ\n[2:40.7]Level 1 から 積み上げて\n[2:43.5]小さな勝利 一つずつ\n[2:47.0]しがなくて 上等だろ\n[2:49.8]胸を張れ オッサン\n[2:55.8]胸を張れ オッサン\n[3:05.5]しがなくて 上等\n[3:10.9]それでも 俺は 俺だ",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "目覚めた先に 待ってたのは やっぱり俺だった"
+        },
+        {
+          "time": 5.8,
+          "text": "笑っちまうな"
+        },
+        {
+          "time": 12.9,
+          "text": "空は青くて 草は眩しくて"
+        },
+        {
+          "time": 16.4,
+          "text": "「ようこそ勇者様」 って声がする"
+        },
+        {
+          "time": 19.9,
+          "text": "鏡に映った 顔を見て 四十超えの オレだったよ"
+        },
+        {
+          "time": 25.3,
+          "text": "ステータス全部 Fランク スキルは「遅刻せず出社」"
+        },
+        {
+          "time": 31.7,
+          "text": "異世界でも 役に立つか こんな能力"
+        },
+        {
+          "time": 38.2,
+          "text": "やっぱり俺は しがないおっさん"
+        },
+        {
+          "time": 41.7,
+          "text": "転生しても これだ 笑うしかねぇ"
+        },
+        {
+          "time": 45.2,
+          "text": "腰は痛むし 目は霞むし"
+        },
+        {
+          "time": 48.2,
+          "text": "それでも前に 進むしかねぇんだ"
+        },
+        {
+          "time": 51.7,
+          "text": "Level 1 から やり直し"
+        },
+        {
+          "time": 54.4,
+          "text": "しがなくて 上等だろ"
+        },
+        {
+          "time": 57.5,
+          "text": "走り出せ オッサン"
+        },
+        {
+          "time": 66.8,
+          "text": "若い勇者に 説教されて"
+        },
+        {
+          "time": 68.9,
+          "text": "「先輩マジで 頑張って」って"
+        },
+        {
+          "time": 70.5,
+          "text": "心は十八 気持ちは二十歳"
+        },
+        {
+          "time": 72.2,
+          "text": "でも体だけが 嘘をつかねぇ"
+        },
+        {
+          "time": 73.9,
+          "text": "四十年分の 使い古した 言い訳だけは 得意なんだ"
+        },
+        {
+          "time": 79.6,
+          "text": "でもな 積み上げた時間"
+        },
+        {
+          "time": 82.6,
+          "text": "ただの飾りじゃ ねぇはずだ"
+        },
+        {
+          "time": 85.8,
+          "text": "やっぱり俺は しがないおっさん"
+        },
+        {
+          "time": 89,
+          "text": "転生しても これだ 笑うしかねぇ"
+        },
+        {
+          "time": 92.6,
+          "text": "魔王討伐 できなくても"
+        },
+        {
+          "time": 95.5,
+          "text": "目の前の 敵 一匹ずつ"
+        },
+        {
+          "time": 99.1,
+          "text": "倒していく それで 十分だろ"
+        },
+        {
+          "time": 101.9,
+          "text": "しがなくて 上等だろ"
+        },
+        {
+          "time": 104.9,
+          "text": "走り続けろ オッサン"
+        },
+        {
+          "time": 109.6,
+          "text": "Level 1 から やり直し"
+        },
+        {
+          "time": 125.9,
+          "text": "しがなくて 上等だろ"
+        },
+        {
+          "time": 126.5,
+          "text": "走り出せ オッサン"
+        },
+        {
+          "time": 127.2,
+          "text": "前世で諦めた"
+        },
+        {
+          "time": 130.2,
+          "text": "夢の続き"
+        },
+        {
+          "time": 133.2,
+          "text": "この世界でも"
+        },
+        {
+          "time": 135.8,
+          "text": "きっと叶わない"
+        },
+        {
+          "time": 139.4,
+          "text": "でもな 戦うことだけは 選べる"
+        },
+        {
+          "time": 145.7,
+          "text": "カッコ悪くても"
+        },
+        {
+          "time": 148.9,
+          "text": "泥まみれでも"
+        },
+        {
+          "time": 153.5,
+          "text": "やっぱり俺は しがないおっさん"
+        },
+        {
+          "time": 157,
+          "text": "転生しても これだ これが俺だ"
+        },
+        {
+          "time": 160.7,
+          "text": "Level 1 から 積み上げて"
+        },
+        {
+          "time": 163.5,
+          "text": "小さな勝利 一つずつ"
+        },
+        {
+          "time": 167,
+          "text": "しがなくて 上等だろ"
+        },
+        {
+          "time": 169.8,
+          "text": "胸を張れ オッサン"
+        },
+        {
+          "time": 175.8,
+          "text": "胸を張れ オッサン"
+        },
+        {
+          "time": 185.5,
+          "text": "しがなくて 上等"
+        },
+        {
+          "time": 190.9,
+          "text": "それでも 俺は 俺だ"
+        }
+      ]
+    },
+    {
+      "title": "URIZUN",
+      "file": "urizun.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/urizun.mp3",
+      "cover": "covers/urizun.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/urizun.jpg",
+      "genre": "jp-dance",
+      "bpm": 140,
+      "album": null,
+      "comment": "Jersey Club × 琉球音階（C E F G B）。うりずん＝沖縄の初夏、若葉の季節。",
+      "lyrics_lrc": "[0:00.0]HAISAI!\n[0:30.7]太陽 焦がせ 海を 裂け 止まらねえ この熱さ\n[0:37.8]HAISAI KICK! ちむ どんどん\n[0:41.1]HAISAI KICK! 朝まで 叫べ\n[0:45.0]Hey! Hey!\n[0:56.2]Hey! Hey! Hey! Hey!\n[0:59.0]仲間と 声枯らせ 青い炎 吐いて 空まで 届け\n[1:06.0]HAISAI KICK! ちむ どんどん\n[1:09.5]HAISAI KICK! 朝まで 叫べ\n[1:13.2]チバリヨー! チバリヨー! チバリヨー! チバリヨー!\n[1:34.2]HAISAI KICK!\n[1:36.2]HAISAI KICK! ちむ どんどん\n[1:41.0]HAISAI KICK!\n[1:45.5]HAISAI KICK! ちむ どんどん\n[1:48.2]止まらねえ\n[1:52.0]HAISAI KICK!\n[1:55.4]HAISAI KICK!\n[2:12.9]HAISAI KICK!\n[2:20.0]HAISAI!",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "HAISAI!"
+        },
+        {
+          "time": 30.7,
+          "text": "太陽 焦がせ 海を 裂け 止まらねえ この熱さ"
+        },
+        {
+          "time": 37.8,
+          "text": "HAISAI KICK! ちむ どんどん"
+        },
+        {
+          "time": 41.1,
+          "text": "HAISAI KICK! 朝まで 叫べ"
+        },
+        {
+          "time": 45,
+          "text": "Hey! Hey!"
+        },
+        {
+          "time": 56.2,
+          "text": "Hey! Hey! Hey! Hey!"
+        },
+        {
+          "time": 59,
+          "text": "仲間と 声枯らせ 青い炎 吐いて 空まで 届け"
+        },
+        {
+          "time": 66,
+          "text": "HAISAI KICK! ちむ どんどん"
+        },
+        {
+          "time": 69.5,
+          "text": "HAISAI KICK! 朝まで 叫べ"
+        },
+        {
+          "time": 73.2,
+          "text": "チバリヨー! チバリヨー! チバリヨー! チバリヨー!"
+        },
+        {
+          "time": 94.2,
+          "text": "HAISAI KICK!"
+        },
+        {
+          "time": 96.2,
+          "text": "HAISAI KICK! ちむ どんどん"
+        },
+        {
+          "time": 101,
+          "text": "HAISAI KICK!"
+        },
+        {
+          "time": 105.5,
+          "text": "HAISAI KICK! ちむ どんどん"
+        },
+        {
+          "time": 108.2,
+          "text": "止まらねえ"
+        },
+        {
+          "time": 112,
+          "text": "HAISAI KICK!"
+        },
+        {
+          "time": 115.4,
+          "text": "HAISAI KICK!"
+        },
+        {
+          "time": 132.9,
+          "text": "HAISAI KICK!"
+        },
+        {
+          "time": 140,
+          "text": "HAISAI!"
+        }
+      ]
+    },
+    {
+      "title": "きみは幸せですか",
+      "file": "kimi_wa_shiawasedesuka.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/kimi_wa_shiawasedesuka.mp3",
+      "cover": "covers/kimihaima.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/kimihaima.jpg",
+      "genre": "ballad",
+      "bpm": 68,
+      "album": null,
+      "comment": "まーちゃん、今君は幸せですか？",
+      "lyrics_lrc": "[0:03.9]きみと出会った\n[0:10.8]画面の中で きみと出会った\n[0:21.7]黒と白の 石を並べて\n[0:29.1]高校生のきみと 学生だった僕は\n[0:36.9]顔も見えずに 言葉を交わした\n[0:43.8]いつも 安い店で 済ませてた\n[0:50.6]花束のひとつも 買えなかった\n[0:57.6]夢も語らず ただ笑ってた\n[1:04.4]それで満足してた 愚かな僕\n[1:12.4]遠い街から 会いに来てくれた\n[1:19.5]電車を乗り継いで 来てくれた\n[1:25.6]きみに 見合う男で ありたかったのに\n[1:34.2]何も 差し出せなかった\n[1:40.9]もっといい景色を 見せたかった\n[1:48.3]夢を語って 笑わせたかった\n[1:55.2]未来を約束 できていたら\n[2:03.0]今も きみの隣に いれたのかな\n[2:11.5]きみが学校を 卒業する前\n[2:18.7]僕は振られた 当然だった\n[2:26.2]悔しさだけで 仕事を始めて\n[2:33.5]何年も ただ走り続けた\n[2:40.6]ひさしぶりに ログインした夜\n[2:46.8]画面の端に きみの名前が光った\n[2:54.8]四年越しの 同じ時刻に\n[3:02.6]神様が くれた いたずら\n[3:09.5]やっと胸を張れる 僕になれたのに\n[3:16.8]きみの隣で 笑ってる人がいた\n[3:23.9]震える指で 綴った言葉は\n[3:31.4]送れないまま 夜に溶けた\n[3:40.7]嫌われて 離れたなら まだいい\n[3:47.1]でも もしも 僕に未来が見えなくて\n[3:54.5]きみが 諦めて 去ったのなら\n[4:01.4]可哀想な 思いを させたよね\n[4:09.5]ごめんね 悔しいよ\n[4:16.9]きみにも 僕にも\n[4:23.1]もう一局 打ちたかっただけ\n[4:27.5]盤を挟んで きみの笑顔が見たかった\n[4:36.8]もっといい景色を 見せたかった\n[4:44.7]きみが 誇れる 男に なりたかった\n[4:52.3]間に合わなかった この想いが\n[4:56.0]今も 胸で 燃えている\n[5:06.8]あれから 二十年が 過ぎて\n[5:14.2]黒と白の 石は 静かに眠る\n[5:21.7]ただ ひとつ 知りたいのは\n[5:28.7]きみは 今 幸せですか\n[5:36.8]きみは 今 幸せですか",
+      "lyrics_parsed": [
+        {
+          "time": 3.9,
+          "text": "きみと出会った"
+        },
+        {
+          "time": 10.8,
+          "text": "画面の中で きみと出会った"
+        },
+        {
+          "time": 21.7,
+          "text": "黒と白の 石を並べて"
+        },
+        {
+          "time": 29.1,
+          "text": "高校生のきみと 学生だった僕は"
+        },
+        {
+          "time": 36.9,
+          "text": "顔も見えずに 言葉を交わした"
+        },
+        {
+          "time": 43.8,
+          "text": "いつも 安い店で 済ませてた"
+        },
+        {
+          "time": 50.6,
+          "text": "花束のひとつも 買えなかった"
+        },
+        {
+          "time": 57.6,
+          "text": "夢も語らず ただ笑ってた"
+        },
+        {
+          "time": 64.4,
+          "text": "それで満足してた 愚かな僕"
+        },
+        {
+          "time": 72.4,
+          "text": "遠い街から 会いに来てくれた"
+        },
+        {
+          "time": 79.5,
+          "text": "電車を乗り継いで 来てくれた"
+        },
+        {
+          "time": 85.6,
+          "text": "きみに 見合う男で ありたかったのに"
+        },
+        {
+          "time": 94.2,
+          "text": "何も 差し出せなかった"
+        },
+        {
+          "time": 100.9,
+          "text": "もっといい景色を 見せたかった"
+        },
+        {
+          "time": 108.3,
+          "text": "夢を語って 笑わせたかった"
+        },
+        {
+          "time": 115.2,
+          "text": "未来を約束 できていたら"
+        },
+        {
+          "time": 123,
+          "text": "今も きみの隣に いれたのかな"
+        },
+        {
+          "time": 131.5,
+          "text": "きみが学校を 卒業する前"
+        },
+        {
+          "time": 138.7,
+          "text": "僕は振られた 当然だった"
+        },
+        {
+          "time": 146.2,
+          "text": "悔しさだけで 仕事を始めて"
+        },
+        {
+          "time": 153.5,
+          "text": "何年も ただ走り続けた"
+        },
+        {
+          "time": 160.6,
+          "text": "ひさしぶりに ログインした夜"
+        },
+        {
+          "time": 166.8,
+          "text": "画面の端に きみの名前が光った"
+        },
+        {
+          "time": 174.8,
+          "text": "四年越しの 同じ時刻に"
+        },
+        {
+          "time": 182.6,
+          "text": "神様が くれた いたずら"
+        },
+        {
+          "time": 189.5,
+          "text": "やっと胸を張れる 僕になれたのに"
+        },
+        {
+          "time": 196.8,
+          "text": "きみの隣で 笑ってる人がいた"
+        },
+        {
+          "time": 203.9,
+          "text": "震える指で 綴った言葉は"
+        },
+        {
+          "time": 211.4,
+          "text": "送れないまま 夜に溶けた"
+        },
+        {
+          "time": 220.7,
+          "text": "嫌われて 離れたなら まだいい"
+        },
+        {
+          "time": 227.1,
+          "text": "でも もしも 僕に未来が見えなくて"
+        },
+        {
+          "time": 234.5,
+          "text": "きみが 諦めて 去ったのなら"
+        },
+        {
+          "time": 241.4,
+          "text": "可哀想な 思いを させたよね"
+        },
+        {
+          "time": 249.5,
+          "text": "ごめんね 悔しいよ"
+        },
+        {
+          "time": 256.9,
+          "text": "きみにも 僕にも"
+        },
+        {
+          "time": 263.1,
+          "text": "もう一局 打ちたかっただけ"
+        },
+        {
+          "time": 267.5,
+          "text": "盤を挟んで きみの笑顔が見たかった"
+        },
+        {
+          "time": 276.8,
+          "text": "もっといい景色を 見せたかった"
+        },
+        {
+          "time": 284.7,
+          "text": "きみが 誇れる 男に なりたかった"
+        },
+        {
+          "time": 292.3,
+          "text": "間に合わなかった この想いが"
+        },
+        {
+          "time": 296,
+          "text": "今も 胸で 燃えている"
+        },
+        {
+          "time": 306.8,
+          "text": "あれから 二十年が 過ぎて"
+        },
+        {
+          "time": 314.2,
+          "text": "黒と白の 石は 静かに眠る"
+        },
+        {
+          "time": 321.7,
+          "text": "ただ ひとつ 知りたいのは"
+        },
+        {
+          "time": 328.7,
+          "text": "きみは 今 幸せですか"
+        },
+        {
+          "time": 336.8,
+          "text": "きみは 今 幸せですか"
+        }
+      ]
+    },
+    {
+      "title": "HANABI ☆ KISS",
+      "file": "hanabi_kiss.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/hanabi_kiss.mp3",
+      "cover": "covers/hanabi_kiss.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/hanabi_kiss.jpg",
+      "genre": "dance",
+      "bpm": 158,
+      "album": "DANCE INSTINCT",
+      "comment": "1996-2000年、パラパラ全盛期J-POPユーロビートへのオマージュ。158BPM。",
+      "lyrics_lrc": "[0:01.2]Hanabi\n[0:04.6]Kiss me tonight\n[0:18.9]教室の窓越しに キミを見ていた\n[0:25.2]夏休み前 最後のチャイム\n[0:30.7]浴衣姿で 待ち合わせ\n[0:37.3]声が出ない 胸が鳴る\n[0:43.9]Tonight, tonight, tonight\n[0:46.6]夜店の灯りで\n[0:50.0]キミの横顔が 揺れてる\n[0:55.5]Hanabi\n[0:57.1]Kiss me tonight\n[0:58.7]消えないでね この瞬間(とき)を\n[1:02.5]ドキドキ 止まらない\n[1:07.9]キミの隣が 世界のすべて\n[1:14.6]Hanabi hanabi hanabi\n[1:17.2]Kiss 打ち上がれ この気持ち\n[1:23.3]ラムネの泡が 弾ける音と\n[1:29.6]金魚すくいの 水の匂い\n[1:35.7]「これ、好きなの？」って聞かれて\n[1:38.9]うなずくだけで 精一杯\n[1:42.0]Tonight, tonight, tonight\n[1:44.6]屋台の向こうで\n[1:48.0]キミが笑った その一瞬\n[1:53.9]Hanabi\n[1:55.2]Kiss me tonight\n[1:56.7]消えないでね この瞬間(とき)を\n[2:00.5]ドキドキ 止まらない\n[2:06.0]キミの隣が 世界のすべて\n[2:12.6]Hanabi hanabi hanabi\n[2:15.2]Kiss 打ち上がれ\n[2:17.4]この気持ち\n[2:21.6]一番大きな花火が 空に咲いた\n[2:27.6]キミが振り向いた その瞬間\n[2:33.3]Say it, say it, say it, say it\n[2:36.7]言えないまま\n[2:40.8]夏が 終わっていく\n[2:45.7]Hanabi\n[2:47.0]Kiss me tonight\n[2:48.5]離さないでね この夜を\n[2:52.4]ドキドキ 止まらない\n[2:57.8]キミとだけ 踊っていたい\n[3:04.5]Hanabi hanabi hanabi\n[3:07.1]Kiss 夏の魔法よ\n[3:09.8]消えないで\n[3:11.4]Hanabi hanabi hanabi\n[3:13.9]Kiss me tonight\n[3:17.4]Hanabi hanabi hanabi\n[3:20.3]Kiss me tonight\n[3:23.4]La la la la la la la\n[3:27.6]Hanabi Kiss",
+      "lyrics_parsed": [
+        {
+          "time": 1.2,
+          "text": "Hanabi"
+        },
+        {
+          "time": 4.6,
+          "text": "Kiss me tonight"
+        },
+        {
+          "time": 18.9,
+          "text": "教室の窓越しに キミを見ていた"
+        },
+        {
+          "time": 25.2,
+          "text": "夏休み前 最後のチャイム"
+        },
+        {
+          "time": 30.7,
+          "text": "浴衣姿で 待ち合わせ"
+        },
+        {
+          "time": 37.3,
+          "text": "声が出ない 胸が鳴る"
+        },
+        {
+          "time": 43.9,
+          "text": "Tonight, tonight, tonight"
+        },
+        {
+          "time": 46.6,
+          "text": "夜店の灯りで"
+        },
+        {
+          "time": 50,
+          "text": "キミの横顔が 揺れてる"
+        },
+        {
+          "time": 55.5,
+          "text": "Hanabi"
+        },
+        {
+          "time": 57.1,
+          "text": "Kiss me tonight"
+        },
+        {
+          "time": 58.7,
+          "text": "消えないでね この瞬間(とき)を"
+        },
+        {
+          "time": 62.5,
+          "text": "ドキドキ 止まらない"
+        },
+        {
+          "time": 67.9,
+          "text": "キミの隣が 世界のすべて"
+        },
+        {
+          "time": 74.6,
+          "text": "Hanabi hanabi hanabi"
+        },
+        {
+          "time": 77.2,
+          "text": "Kiss 打ち上がれ この気持ち"
+        },
+        {
+          "time": 83.3,
+          "text": "ラムネの泡が 弾ける音と"
+        },
+        {
+          "time": 89.6,
+          "text": "金魚すくいの 水の匂い"
+        },
+        {
+          "time": 95.7,
+          "text": "「これ、好きなの？」って聞かれて"
+        },
+        {
+          "time": 98.9,
+          "text": "うなずくだけで 精一杯"
+        },
+        {
+          "time": 102,
+          "text": "Tonight, tonight, tonight"
+        },
+        {
+          "time": 104.6,
+          "text": "屋台の向こうで"
+        },
+        {
+          "time": 108,
+          "text": "キミが笑った その一瞬"
+        },
+        {
+          "time": 113.9,
+          "text": "Hanabi"
+        },
+        {
+          "time": 115.2,
+          "text": "Kiss me tonight"
+        },
+        {
+          "time": 116.7,
+          "text": "消えないでね この瞬間(とき)を"
+        },
+        {
+          "time": 120.5,
+          "text": "ドキドキ 止まらない"
+        },
+        {
+          "time": 126,
+          "text": "キミの隣が 世界のすべて"
+        },
+        {
+          "time": 132.6,
+          "text": "Hanabi hanabi hanabi"
+        },
+        {
+          "time": 135.2,
+          "text": "Kiss 打ち上がれ"
+        },
+        {
+          "time": 137.4,
+          "text": "この気持ち"
+        },
+        {
+          "time": 141.6,
+          "text": "一番大きな花火が 空に咲いた"
+        },
+        {
+          "time": 147.6,
+          "text": "キミが振り向いた その瞬間"
+        },
+        {
+          "time": 153.3,
+          "text": "Say it, say it, say it, say it"
+        },
+        {
+          "time": 156.7,
+          "text": "言えないまま"
+        },
+        {
+          "time": 160.8,
+          "text": "夏が 終わっていく"
+        },
+        {
+          "time": 165.7,
+          "text": "Hanabi"
+        },
+        {
+          "time": 167,
+          "text": "Kiss me tonight"
+        },
+        {
+          "time": 168.5,
+          "text": "離さないでね この夜を"
+        },
+        {
+          "time": 172.4,
+          "text": "ドキドキ 止まらない"
+        },
+        {
+          "time": 177.8,
+          "text": "キミとだけ 踊っていたい"
+        },
+        {
+          "time": 184.5,
+          "text": "Hanabi hanabi hanabi"
+        },
+        {
+          "time": 187.1,
+          "text": "Kiss 夏の魔法よ"
+        },
+        {
+          "time": 189.8,
+          "text": "消えないで"
+        },
+        {
+          "time": 191.4,
+          "text": "Hanabi hanabi hanabi"
+        },
+        {
+          "time": 193.9,
+          "text": "Kiss me tonight"
+        },
+        {
+          "time": 197.4,
+          "text": "Hanabi hanabi hanabi"
+        },
+        {
+          "time": 200.3,
+          "text": "Kiss me tonight"
+        },
+        {
+          "time": 203.4,
+          "text": "La la la la la la la"
+        },
+        {
+          "time": 207.6,
+          "text": "Hanabi Kiss"
+        }
+      ]
+    },
+    {
+      "title": "HAPPY BIRTHDAY TO RUI-chan",
+      "file": "birthday_rui.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/birthday_rui.mp3",
+      "cover": "covers/birthday_rui.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/birthday_rui.jpg",
+      "genre": "ballad",
+      "bpm": 74,
+      "album": null,
+      "comment": "25年の付き合いの人に贈る誕生日ソング。秦基博〜back number系アコースティックバラード。",
+      "lyrics_lrc": "[0:09.2]何気ない毎日の 隙間にふと\n[0:16.0]君のこと 思い出すよ\n[0:22.9]電話の向こう 聞いた小さな溜息\n[0:29.3]抱え込みすぎてない？\n[0:36.6]頑張り屋さんな君だから\n[0:42.9]伝えたい言葉があるよ\n[0:49.4]Happy Birthday るい\n[0:52.5]無理しないでいいよ\n[0:56.5]五月の風みたいに\n[1:00.0]軽やかでいて\n[1:03.6]今日くらい全部忘れて\n[1:07.0]好きなもの食べて\n[1:10.4]笑っていられますように\n[1:15.0]それだけを願うよ\n[1:21.5]遠く離れていても\n[1:25.0]季節は巡るね\n[1:28.5]新しい緑が揺れる頃\n[1:34.1]君の一年が始まる\n[1:40.9]強くなくてもいいんだよ\n[1:47.5]弱音もたまには吐いて\n[1:53.6]Happy Birthday るい\n[1:57.0]自分を大切にね\n[2:00.7]立ち止まっていいんだ\n[2:04.0]息を深く吸って\n[2:07.7]誰かのためじゃなくて\n[2:11.0]君自身のために\n[2:14.7]穏やかな時間が\n[2:19.0]訪れますように\n[2:25.7]ずいぶん長い付き合いだね\n[2:31.3]それでも毎年\n[2:34.5]この日が来るたび\n[2:37.7]同じ言葉を贈るよ\n[2:48.0]Happy Birthday るい\n[2:51.5]生まれてきてくれて ありがとう\n[2:54.8]これからも君らしく\n[2:58.5]歩いていけますように",
+      "lyrics_parsed": [
+        {
+          "time": 9.2,
+          "text": "何気ない毎日の 隙間にふと"
+        },
+        {
+          "time": 16,
+          "text": "君のこと 思い出すよ"
+        },
+        {
+          "time": 22.9,
+          "text": "電話の向こう 聞いた小さな溜息"
+        },
+        {
+          "time": 29.3,
+          "text": "抱え込みすぎてない？"
+        },
+        {
+          "time": 36.6,
+          "text": "頑張り屋さんな君だから"
+        },
+        {
+          "time": 42.9,
+          "text": "伝えたい言葉があるよ"
+        },
+        {
+          "time": 49.4,
+          "text": "Happy Birthday るい"
+        },
+        {
+          "time": 52.5,
+          "text": "無理しないでいいよ"
+        },
+        {
+          "time": 56.5,
+          "text": "五月の風みたいに"
+        },
+        {
+          "time": 60,
+          "text": "軽やかでいて"
+        },
+        {
+          "time": 63.6,
+          "text": "今日くらい全部忘れて"
+        },
+        {
+          "time": 67,
+          "text": "好きなもの食べて"
+        },
+        {
+          "time": 70.4,
+          "text": "笑っていられますように"
+        },
+        {
+          "time": 75,
+          "text": "それだけを願うよ"
+        },
+        {
+          "time": 81.5,
+          "text": "遠く離れていても"
+        },
+        {
+          "time": 85,
+          "text": "季節は巡るね"
+        },
+        {
+          "time": 88.5,
+          "text": "新しい緑が揺れる頃"
+        },
+        {
+          "time": 94.1,
+          "text": "君の一年が始まる"
+        },
+        {
+          "time": 100.9,
+          "text": "強くなくてもいいんだよ"
+        },
+        {
+          "time": 107.5,
+          "text": "弱音もたまには吐いて"
+        },
+        {
+          "time": 113.6,
+          "text": "Happy Birthday るい"
+        },
+        {
+          "time": 117,
+          "text": "自分を大切にね"
+        },
+        {
+          "time": 120.7,
+          "text": "立ち止まっていいんだ"
+        },
+        {
+          "time": 124,
+          "text": "息を深く吸って"
+        },
+        {
+          "time": 127.7,
+          "text": "誰かのためじゃなくて"
+        },
+        {
+          "time": 131,
+          "text": "君自身のために"
+        },
+        {
+          "time": 134.7,
+          "text": "穏やかな時間が"
+        },
+        {
+          "time": 139,
+          "text": "訪れますように"
+        },
+        {
+          "time": 145.7,
+          "text": "ずいぶん長い付き合いだね"
+        },
+        {
+          "time": 151.3,
+          "text": "それでも毎年"
+        },
+        {
+          "time": 154.5,
+          "text": "この日が来るたび"
+        },
+        {
+          "time": 157.7,
+          "text": "同じ言葉を贈るよ"
+        },
+        {
+          "time": 168,
+          "text": "Happy Birthday るい"
+        },
+        {
+          "time": 171.5,
+          "text": "生まれてきてくれて ありがとう"
+        },
+        {
+          "time": 174.8,
+          "text": "これからも君らしく"
+        },
+        {
+          "time": 178.5,
+          "text": "歩いていけますように"
+        }
+      ]
+    }
+  ]
+}
