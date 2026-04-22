@@ -2416,22 +2416,43 @@ async function startCrossfade() {
   const targetVol = audio.volume;
   const outgoing = audio;      // currently playing
   const incoming = (audio === _audioA) ? audioB : _audioA;
-  incoming.src = 'music/' + nextSong.file;
-  incoming.volume = 0;
+
   // Ensure incoming is unlocked (especially audioB on iOS)
   if (incoming === audioB && !audioBUnlocked) unlockAudioB();
+
+  // Properly prepare the incoming audio element
   try {
+    incoming.pause();
+    incoming.volume = 0;
+    incoming.src = 'music/' + nextSong.file;
+    incoming.load();  // force reload
+    // Wait for the element to be ready to play
+    await new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('load timeout')), 3000);
+      if (incoming.readyState >= 3) { clearTimeout(timeout); resolve(); }
+      else {
+        const onReady = () => { clearTimeout(timeout); incoming.removeEventListener('canplay', onReady); resolve(); };
+        incoming.addEventListener('canplay', onReady, { once: true });
+      }
+    });
+    incoming.currentTime = 0;
     await incoming.play();
   } catch (e) {
-    console.log('crossfade incoming.play failed, falling back:', e);
+    console.log('crossfade preparation failed:', e);
     crossfadeInProgress = false;
     return;
   }
+
   // Verify playing actually started (iOS sometimes silently fails)
-  await new Promise(r => setTimeout(r, 50));
+  await new Promise(r => setTimeout(r, 80));
   if (incoming.paused) {
-    console.log('crossfade incoming paused unexpectedly, retrying');
-    try { await incoming.play(); } catch { crossfadeInProgress = false; return; }
+    console.log('incoming paused after play, retrying...');
+    try { await incoming.play(); await new Promise(r => setTimeout(r, 50)); } catch {}
+    if (incoming.paused) {
+      console.log('incoming still paused, aborting crossfade');
+      crossfadeInProgress = false;
+      return;
+    }
   }
 
   // Swap active reference NOW so mirror listeners recognize `incoming` as active
