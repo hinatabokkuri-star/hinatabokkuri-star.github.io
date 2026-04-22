@@ -19,6 +19,57 @@ self.addEventListener('activate', event => {
   );
 });
 
+// Build a 206 Partial Content response from a cached full blob based on a Range header
+async function rangeFromCache(cachedResponse, rangeHeader) {
+  const blob = await cachedResponse.blob();
+  const size = blob.size;
+  const m = /bytes=(\d+)-(\d*)/.exec(rangeHeader);
+  if (!m) return cachedResponse;
+  const start = parseInt(m[1], 10);
+  const end = m[2] ? parseInt(m[2], 10) : size - 1;
+  const slice = blob.slice(start, end + 1);
+  return new Response(slice, {
+    status: 206,
+    statusText: 'Partial Content',
+    headers: {
+      'Content-Type': cachedResponse.headers.get('Content-Type') || 'audio/mpeg',
+      'Content-Range': `bytes ${start}-${end}/${size}`,
+      'Content-Length': String(slice.size),
+      'Accept-Ranges': 'bytes',
+    },
+  });
+}
+
+async function handleMusicRequest(request) {
+  const cache = await caches.open(CACHE_MUSIC);
+  // Match by URL, ignoring Range header on request
+  const cached = await cache.match(request.url);
+  const rangeHeader = request.headers.get('range');
+
+  if (cached) {
+    // Serve from cache (sliced if Range was requested)
+    if (rangeHeader) return rangeFromCache(cached, rangeHeader);
+    return cached;
+  }
+
+  // Not cached yet → fetch full file (no Range header), cache it, respond appropriately
+  try {
+    const fullReq = new Request(request.url, { cache: 'no-store' });
+    const fullRes = await fetch(fullReq);
+    if (fullRes && fullRes.status === 200) {
+      // Store full response in cache
+      await cache.put(request.url, fullRes.clone());
+      // Respond to client
+      if (rangeHeader) return rangeFromCache(fullRes, rangeHeader);
+      return fullRes;
+    }
+    return fullRes;
+  } catch (e) {
+    // Network failure; try to return anything we have
+    return new Response('', { status: 503 });
+  }
+}
+
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
@@ -26,19 +77,12 @@ self.addEventListener('fetch', event => {
   // HTML（ナビゲーション）はSWを素通り（常に最新取得）
   if (request.mode === 'navigate') return;
 
-  // 音楽・ジャケ・Suno CDN → 安定キャッシュ（bumpで消えない）
+  // 音楽・ジャケ・Suno CDN → Range対応の安定キャッシュ
   const isMusic = url.pathname.startsWith('/music/')
     || url.pathname.startsWith('/covers/')
     || url.hostname.includes('suno.ai');
   if (isMusic) {
-    event.respondWith(
-      caches.match(request).then(cached => cached || fetch(request).then(res => {
-        if (res && res.status === 200) {
-          caches.open(CACHE_MUSIC).then(c => c.put(request, res.clone()));
-        }
-        return res;
-      }))
-    );
+    event.respondWith(handleMusicRequest(request));
     return;
   }
 
