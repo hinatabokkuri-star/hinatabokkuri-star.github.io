@@ -537,6 +537,16 @@ function updateLyric(t) {
 }
 
 render();
+
+// ── Service Worker update polling (open tab auto-reload on push) ──
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(reg => {
+    setInterval(() => reg.update().catch(() => {}), 30000);
+  }).catch(() => {});
+  navigator.serviceWorker.addEventListener('message', e => {
+    if (e.data?.type === 'RELOAD') location.reload();
+  });
+}
 </script>
 </body>
 </html>
