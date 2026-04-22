@@ -1964,6 +1964,8 @@ function playCurrent() {
   const s = queue[currentIdx];
   npCover.style.backgroundImage = `url('${s.cover}')`;
   npTitle.textContent = s.title;
+  // Reset total time display - will update on loadedmetadata/durationchange
+  document.getElementById('npTimeTotal').textContent = '--:--';
   audio.src = 'music/' + s.file;
   parsedLyrics = parseLRC(s.lyrics);
   renderFullLyrics();
@@ -2250,16 +2252,28 @@ document.getElementById('iosDismiss').addEventListener('click', () => {
   localStorage.setItem(IOS_DISMISS_KEY, '1');
 });
 // (Duplicate ended handler removed; single active-aware handler is attached above and via attachMirrorListeners)
+function updateTotalTime() {
+  if (isFinite(audio.duration) && audio.duration > 0) {
+    document.getElementById('npTimeTotal').textContent = fmtTime(audio.duration);
+  }
+}
 _audioA.addEventListener('timeupdate', (e) => {
   if (e.target !== audio) return;
   const pct = (audio.currentTime / audio.duration) * 100 || 0;
   npProgressFill.style.width = pct + '%';
   document.getElementById('npTimeCurrent').textContent = fmtTime(audio.currentTime);
+  updateTotalTime();
   updateLyric(audio.currentTime);
 });
-_audioA.addEventListener('loadedmetadata', (e) => {
-  if (e.target !== audio) return;
-  document.getElementById('npTimeTotal').textContent = fmtTime(audio.duration);
+['loadedmetadata', 'durationchange', 'canplay', 'loadeddata'].forEach(evt => {
+  _audioA.addEventListener(evt, (e) => {
+    if (e.target !== audio) return;
+    updateTotalTime();
+  });
+  document.getElementById('audioB').addEventListener(evt, function(e) {
+    if (e.target !== audio) return;
+    updateTotalTime();
+  });
 });
 npProgress.addEventListener('click', (e) => {
   const r = npProgress.getBoundingClientRect();
