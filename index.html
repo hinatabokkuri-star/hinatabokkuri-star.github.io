@@ -890,12 +890,23 @@
     padding: 0.3rem 0.5rem;
   }
 
-  /* Featured section (big tiles for newest tracks) */
+  /* Featured section - horizontal scroll carousel */
   .featured-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    display: flex;
     gap: 1rem;
-    margin-bottom: 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-behavior: smooth;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
+  }
+  .featured-row::-webkit-scrollbar { display: none; }
+  .featured-row .featured-card {
+    flex: 0 0 220px;
+    scroll-snap-align: start;
   }
   .featured-card {
     background: var(--bg2);
@@ -1175,10 +1186,10 @@
   <div id="recentRow" class="recent-row" style="display:none;"></div>
 
   <h2 class="section-title">🎲 今日のオススメ</h2>
-  <div id="dailyPick" class="featured-row"></div>
+  <div id="dailyPick" class="featured-row" data-autoscroll="slow"></div>
 
   <h2 class="section-title">✨ New Drops</h2>
-  <div id="featuredRow" class="featured-row"></div>
+  <div id="featuredRow" class="featured-row" data-autoscroll="slow"></div>
 
   <h2 class="section-title">🎵 Albums</h2>
   <div class="album-row">
@@ -2100,6 +2111,29 @@ function renderDailyPick() {
   });
 }
 renderDailyPick();
+
+// Auto-scroll carousels (slow horizontal pan, pause on hover/focus/touch)
+function initAutoScroll() {
+  document.querySelectorAll('[data-autoscroll]').forEach(row => {
+    let paused = false;
+    let dir = 1;
+    row.addEventListener('mouseenter', () => paused = true);
+    row.addEventListener('mouseleave', () => paused = false);
+    row.addEventListener('touchstart', () => paused = true, { passive: true });
+    row.addEventListener('touchend', () => setTimeout(() => paused = false, 3000), { passive: true });
+    // prefers-reduced-motion respect
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setInterval(() => {
+      if (paused) return;
+      const max = row.scrollWidth - row.clientWidth;
+      if (max <= 4) return;
+      row.scrollLeft += dir * 0.6;
+      if (row.scrollLeft >= max) dir = -1;
+      else if (row.scrollLeft <= 0) dir = 1;
+    }, 40);
+  });
+}
+initAutoScroll();
 
 // MV inline player
 const mvModal = document.getElementById('mvModal');
