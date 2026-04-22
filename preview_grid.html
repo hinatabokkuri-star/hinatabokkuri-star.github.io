@@ -2,12 +2,15 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Grid View Preview - hinatabokkuri</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>hinatabokkuri — Music Preview</title>
 <style>
   :root {
     --bg: #0d0d0d;
     --bg2: #161616;
+    --bg3: #1f1f1f;
     --text: #f0f0f0;
     --text-dim: #999;
     --border: #333;
@@ -20,19 +23,38 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Yu Gothic", sans-serif;
     background: var(--bg);
     color: var(--text);
-    padding: 2rem 1rem;
+    padding: 1rem 1rem 180px 1rem;
     min-height: 100vh;
   }
   .container { max-width: 1400px; margin: 0 auto; }
-  h1 {
-    font-size: 1.6rem;
-    margin-bottom: 0.3rem;
-  }
-  .subtitle {
-    color: var(--text-dim);
+  h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+  .subtitle { color: var(--text-dim); margin-bottom: 1.2rem; font-size: 0.85rem; }
+
+  .hero {
+    background: linear-gradient(135deg, #ffa600, #ff5a8a);
+    border-radius: 16px;
+    padding: 1.5rem;
     margin-bottom: 1.5rem;
-    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 10px 40px rgba(255,90,138,0.25);
   }
+  .hero-icon { font-size: 2.5rem; }
+  .hero-text { flex: 1; color: #000; }
+  .hero-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 0.2rem; }
+  .hero-sub { font-size: 0.8rem; opacity: 0.7; }
+  .hero-btn {
+    appearance: none; border: none;
+    background: #000; color: #fff;
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
   .controls {
     display: flex;
     gap: 0.5rem;
@@ -74,12 +96,10 @@
   }
   .view-toggle button.active { background: var(--amber); color: #000; }
 
-  /* Grid */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1rem;
-    margin-bottom: 2rem;
   }
   .tile {
     background: var(--bg2);
@@ -89,108 +109,124 @@
     transition: transform 0.2s, box-shadow 0.2s;
     position: relative;
   }
-  .tile:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(255,166,0,0.25);
-  }
-  .tile.playing {
-    outline: 2px solid var(--amber);
-  }
+  .tile:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(255,166,0,0.25); }
+  .tile.playing { outline: 2px solid var(--amber); }
   .tile-cover {
     aspect-ratio: 1 / 1;
     background: #000 center/cover no-repeat;
     position: relative;
   }
   .tile-cover::before {
-    content: '▶';
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    font-size: 3rem;
-    color: #fff;
-    background: rgba(0,0,0,0.45);
-    opacity: 0;
-    transition: opacity 0.2s;
+    content: '▶'; position: absolute; inset: 0;
+    display: grid; place-items: center; font-size: 3rem; color: #fff;
+    background: rgba(0,0,0,0.45); opacity: 0; transition: opacity 0.2s;
   }
   .tile:hover .tile-cover::before { opacity: 1; }
   .tile.playing .tile-cover::before {
-    content: '♪';
-    opacity: 1;
-    background: rgba(255,166,0,0.3);
-    color: var(--amber);
+    content: '♪'; opacity: 1; background: rgba(255,166,0,0.3); color: var(--amber);
     animation: pulse 1s ease-in-out infinite;
   }
   @keyframes pulse { 50% { transform: scale(1.1); } }
-  .tile-meta {
-    padding: 0.7rem 0.8rem;
-  }
+  .tile-meta { padding: 0.7rem 0.8rem; }
   .tile-title {
-    font-size: 0.85rem;
-    font-weight: 700;
-    line-height: 1.3;
+    font-size: 0.85rem; font-weight: 700; line-height: 1.3;
     margin-bottom: 0.25rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .tile-comment {
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    line-height: 1.35;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 0.7rem; color: var(--text-dim); line-height: 1.35;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
   .genre-tag {
-    display: inline-block;
-    background: var(--pink);
-    color: #fff;
-    font-size: 0.6rem;
-    padding: 0.1rem 0.4rem;
-    border-radius: 4px;
-    margin-bottom: 0.3rem;
-    font-weight: 700;
+    display: inline-block; background: var(--pink); color: #fff;
+    font-size: 0.6rem; padding: 0.1rem 0.4rem;
+    border-radius: 4px; margin-bottom: 0.3rem; font-weight: 700;
   }
 
-  /* List fallback */
-  .list {
-    display: grid;
-    gap: 0.8rem;
-  }
-  .list .tile {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    align-items: stretch;
-  }
-  .list .tile-cover {
-    width: 120px;
-    aspect-ratio: 1 / 1;
-  }
+  .list { display: grid; gap: 0.8rem; }
+  .list .tile { display: grid; grid-template-columns: 120px 1fr; align-items: stretch; }
+  .list .tile-cover { width: 120px; aspect-ratio: 1/1; }
   .list .tile-title { font-size: 1rem; white-space: normal; }
   .list .tile-comment { font-size: 0.8rem; -webkit-line-clamp: 3; }
 
-  /* Expand preview below grid */
+  /* Now Playing Bar */
   .now-playing {
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(20,20,20,0.85));
-    backdrop-filter: blur(12px);
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(15,15,15,0.95);
+    backdrop-filter: blur(20px);
     border-top: 1px solid var(--border);
-    padding: 1rem;
-    margin: 1rem -1rem -2rem -1rem;
+    padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom)) 1rem;
+    z-index: 100;
     display: none;
   }
-  .now-playing.active { display: grid; grid-template-columns: 80px 1fr; gap: 1rem; align-items: center; }
-  .now-playing img {
-    width: 80px; height: 80px; border-radius: 6px; object-fit: cover;
+  .now-playing.active { display: block; }
+  .np-row {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 0.7rem;
+    align-items: center;
   }
-  .np-info h3 { font-size: 1rem; margin-bottom: 0.3rem; }
-  .np-info audio { width: 100%; max-width: 500px; }
-  .np-info p { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.3rem; }
+  .np-cover { width: 56px; height: 56px; border-radius: 6px; object-fit: cover; }
+  .np-info { min-width: 0; cursor: pointer; }
+  .np-title {
+    font-weight: 700; font-size: 0.9rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .np-lyric {
+    font-size: 0.75rem; color: var(--amber);
+    height: 1.2rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .np-actions { display: flex; gap: 0.3rem; align-items: center; }
+  .np-btn {
+    appearance: none; border: none;
+    background: transparent; color: var(--text);
+    font-size: 1.3rem; cursor: pointer;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    padding: 0;
+  }
+  .np-btn:hover { background: var(--bg2); }
+  .np-btn.primary { background: var(--amber); color: #000; font-size: 1.1rem; }
+  .np-btn.active { color: var(--amber); }
+  .np-progress {
+    margin-top: 0.5rem;
+    height: 4px;
+    background: var(--bg3);
+    border-radius: 2px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .np-progress-fill {
+    height: 100%; background: var(--amber);
+    width: 0%;
+  }
+
+  .np-lyrics-full {
+    margin-top: 1rem;
+    padding: 1rem 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    text-align: center;
+    scroll-behavior: smooth;
+    display: none;
+  }
+  .now-playing.expanded .np-lyrics-full { display: block; }
+  .np-lyrics-full .lyric-line {
+    padding: 0.4rem 0;
+    color: var(--text-dim);
+    font-size: 1rem;
+    transition: all 0.3s;
+  }
+  .np-lyrics-full .lyric-line.active {
+    color: var(--amber);
+    font-size: 1.3rem;
+    font-weight: 700;
+    transform: scale(1.05);
+  }
+  .np-lyrics-full .lyric-line.past { opacity: 0.35; }
 
   @media (max-width: 600px) {
     .grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
@@ -198,13 +234,24 @@
     .tile-comment { font-size: 0.65rem; }
     .list .tile { grid-template-columns: 80px 1fr; }
     .list .tile-cover { width: 80px; }
+    .hero { flex-wrap: wrap; }
+    .hero-text { width: 100%; }
   }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>hinatabokkuri — Grid View Preview</h1>
-  <p class="subtitle">ポートフォリオのグリッドビュー試作。リスト切替、ジャンルチップ、クリックで下部プレイヤー展開</p>
+  <h1>hinatabokkuri — Music Preview</h1>
+  <p class="subtitle">グリッド / シャッフル無限再生 / ロック画面連携 / カラオケ歌詞</p>
+
+  <div class="hero">
+    <div class="hero-icon">🔀</div>
+    <div class="hero-text">
+      <div class="hero-title">Shuffle All</div>
+      <div class="hero-sub">全22曲をランダム永遠再生、iPhoneバックグラウンド対応</div>
+    </div>
+    <button class="hero-btn" id="shuffleAll">Play 🎧</button>
+  </div>
 
   <div class="controls">
     <button class="chip active" data-genre="all">全曲 (22)</button>
@@ -220,55 +267,101 @@
   </div>
 
   <div id="songs" class="grid"></div>
+</div>
 
-  <div id="nowPlaying" class="now-playing">
-    <img id="npCover" src="" alt="">
-    <div class="np-info">
-      <h3 id="npTitle"></h3>
-      <audio id="npAudio" controls preload="none"></audio>
-      <p id="npComment"></p>
+<div id="nowPlaying" class="now-playing">
+  <div class="np-row">
+    <img id="npCover" class="np-cover" src="" alt="">
+    <div class="np-info" id="npInfoClick">
+      <div class="np-title" id="npTitle"></div>
+      <div class="np-lyric" id="npLyricInline"></div>
+    </div>
+    <div class="np-actions">
+      <button class="np-btn" id="btnShuffle" title="シャッフル">🔀</button>
+      <button class="np-btn" id="btnPrev" title="前へ">⏮</button>
+      <button class="np-btn primary" id="btnPlayPause" title="再生/停止">⏸</button>
+      <button class="np-btn" id="btnNext" title="次へ">⏭</button>
+      <button class="np-btn" id="btnExpand" title="歌詞展開">📝</button>
     </div>
   </div>
+  <div class="np-progress" id="npProgress">
+    <div class="np-progress-fill" id="npProgressFill"></div>
+  </div>
+  <div class="np-lyrics-full" id="npLyricsFull"></div>
 </div>
+
+<audio id="audio" preload="none" playsinline></audio>
 
 <script>
 const IMG = id => `https://cdn1.suno.ai/image_${id}.jpeg`;
 const COVER = name => `covers/${name}.jpg`;
 
+const LRC_DB = {
+  'kimi_wa_shiawasedesuka.mp3': `[0:03.9]きみと出会った\n[0:10.8]画面の中で きみと出会った\n[0:21.7]黒と白の 石を並べて\n[0:29.1]高校生のきみと 学生だった僕は\n[0:36.9]顔も見えずに 言葉を交わした\n[0:43.8]いつも 安い店で 済ませてた\n[0:50.6]花束のひとつも 買えなかった\n[0:57.6]夢も語らず ただ笑ってた\n[1:04.4]それで満足してた 愚かな僕\n[1:12.4]遠い街から 会いに来てくれた\n[1:19.5]電車を乗り継いで 来てくれた\n[1:25.6]きみに 見合う男で ありたかったのに\n[1:34.2]何も 差し出せなかった\n[1:40.9]もっといい景色を 見せたかった\n[1:48.3]夢を語って 笑わせたかった\n[1:55.2]未来を約束 できていたら\n[2:03.0]今も きみの隣に いれたのかな\n[2:11.5]きみが学校を 卒業する前\n[2:18.7]僕は振られた 当然だった\n[2:26.2]悔しさだけで 仕事を始めて\n[2:33.5]何年も ただ走り続けた\n[2:40.6]ひさしぶりに ログインした夜\n[2:46.8]画面の端に きみの名前が光った\n[2:54.8]四年越しの 同じ時刻に\n[3:02.6]神様が くれた いたずら\n[3:09.5]やっと胸を張れる 僕になれたのに\n[3:16.8]きみの隣で 笑ってる人がいた\n[3:23.9]震える指で 綴った言葉は\n[3:31.4]送れないまま 夜に溶けた\n[3:40.7]嫌われて 離れたなら まだいい\n[3:47.1]でも もしも 僕に未来が見えなくて\n[3:54.5]きみが 諦めて 去ったのなら\n[4:01.4]可哀想な 思いを させたよね\n[4:09.5]ごめんね 悔しいよ\n[4:16.9]きみにも 僕にも\n[4:23.1]もう一局 打ちたかっただけ\n[4:27.5]盤を挟んで きみの笑顔が見たかった\n[4:36.8]もっといい景色を 見せたかった\n[4:44.7]きみが 誇れる 男に なりたかった\n[4:52.3]間に合わなかった この想いが\n[4:56.0]今も 胸で 燃えている\n[5:06.8]あれから 二十年が 過ぎて\n[5:14.2]黒と白の 石は 静かに眠る\n[5:21.7]ただ ひとつ 知りたいのは\n[5:28.7]きみは 今 幸せですか\n[5:36.8]きみは 今 幸せですか`,
+  'urizun.mp3': `[0:00.0]HAISAI!\n[0:30.7]太陽 焦がせ 海を 裂け 止まらねえ この熱さ\n[0:37.8]HAISAI KICK! ちむ どんどん\n[0:41.1]HAISAI KICK! 朝まで 叫べ\n[0:45.0]Hey! Hey!\n[0:56.2]Hey! Hey! Hey! Hey!\n[0:59.0]仲間と 声枯らせ 青い炎 吐いて 空まで 届け\n[1:06.0]HAISAI KICK! ちむ どんどん\n[1:09.5]HAISAI KICK! 朝まで 叫べ\n[1:13.2]チバリヨー! チバリヨー! チバリヨー! チバリヨー!\n[1:34.2]HAISAI KICK!\n[1:36.2]HAISAI KICK! ちむ どんどん\n[1:41.0]HAISAI KICK!\n[1:45.5]HAISAI KICK! ちむ どんどん\n[1:48.2]止まらねえ\n[1:52.0]HAISAI KICK!\n[1:55.4]HAISAI KICK!\n[2:12.9]HAISAI KICK!\n[2:20.0]HAISAI!`,
+  'hashiridase_ossan.mp3': `[0:00.0]目覚めた先に 待ってたのは やっぱり俺だった\n[0:05.8]笑っちまうな\n[0:12.9]空は青くて 草は眩しくて\n[0:16.4]「ようこそ勇者様」 って声がする\n[0:19.9]鏡に映った 顔を見て 四十超えの オレだったよ\n[0:25.3]ステータス全部 Fランク スキルは「遅刻せず出社」\n[0:31.7]異世界でも 役に立つか こんな能力\n[0:38.2]やっぱり俺は しがないおっさん\n[0:41.7]転生しても これだ 笑うしかねぇ\n[0:45.2]腰は痛むし 目は霞むし\n[0:48.2]それでも前に 進むしかねぇんだ\n[0:51.7]Level 1 から やり直し\n[0:54.4]しがなくて 上等だろ\n[0:57.5]走り出せ オッサン\n[1:06.8]若い勇者に 説教されて\n[1:08.9]「先輩マジで 頑張って」って\n[1:10.5]心は十八 気持ちは二十歳\n[1:12.2]でも体だけが 嘘をつかねぇ\n[1:13.9]四十年分の 使い古した 言い訳だけは 得意なんだ\n[1:19.6]でもな 積み上げた時間\n[1:22.6]ただの飾りじゃ ねぇはずだ\n[1:25.8]やっぱり俺は しがないおっさん\n[1:29.0]転生しても これだ 笑うしかねぇ\n[1:32.6]魔王討伐 できなくても\n[1:35.5]目の前の 敵 一匹ずつ\n[1:39.1]倒していく それで 十分だろ\n[1:41.9]しがなくて 上等だろ\n[1:44.9]走り続けろ オッサン\n[1:49.6]Level 1 から やり直し\n[2:05.9]しがなくて 上等だろ\n[2:06.5]走り出せ オッサン\n[2:07.2]前世で諦めた\n[2:10.2]夢の続き\n[2:13.2]この世界でも\n[2:15.8]きっと叶わない\n[2:19.4]でもな 戦うことだけは 選べる\n[2:25.7]カッコ悪くても\n[2:28.9]泥まみれでも\n[2:33.5]やっぱり俺は しがないおっさん\n[2:37.0]転生しても これだ これが俺だ\n[2:40.7]Level 1 から 積み上げて\n[2:43.5]小さな勝利 一つずつ\n[2:47.0]しがなくて 上等だろ\n[2:49.8]胸を張れ オッサン\n[2:55.8]胸を張れ オッサン\n[3:05.5]しがなくて 上等\n[3:10.9]それでも 俺は 俺だ`,
+};
+
 const SONGS = [
-  { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2'), genre: 'ballad',       comment: 'ピアノと弦の冬のバラード。' },
-  { title: 'fly away buttfly ①',   file: 'fly_away_buttfly_1.mp3',   cover: COVER('fly_away_buttfly'),                    genre: 'dance',        comment: '90年代ユーロビートへのオマージュ。' },
-  { title: 'fly away buttfly ②',   file: 'fly_away_buttfly_2.mp3',   cover: IMG('cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2'), genre: 'dance',        comment: '90年代ユーロビートへのオマージュ。' },
-  { title: '真夜中のカーニバル ①', file: 'mayonaka_carnival_1.mp3',  cover: IMG('8f0eb688-ccb6-436b-affd-d7ef6e35e6cf'), genre: 'anime',        comment: '軽快なミステリーポップ。' },
-  { title: '真夜中のカーニバル ②', file: 'mayonaka_carnival_2.mp3',  cover: IMG('dd5959f2-c9dc-4080-ba7b-c56b30a0ee6c'), genre: 'anime',        comment: '軽快なミステリーポップ。' },
-  { title: 'Burning Countdown ①',  file: 'burning_countdown_1.mp3',  cover: IMG('7fa3d1b2-8e56-4bb7-b3d1-1c46b608f42a'), genre: 'experimental', comment: '笑顔で隠した崩壊カウントダウン。' },
-  { title: 'Burning Countdown ②',  file: 'burning_countdown_2.mp3',  cover: IMG('91299c49-5e15-43c2-a2b4-93d345c1e3c9'), genre: 'experimental', comment: '笑顔で隠した崩壊カウントダウン。' },
-  { title: '令和パパは肩身が狭い', file: 'reiwa_papa_hatasegasei.mp3', cover: IMG('42daad7d-ca3b-4d73-9a76-7ce523d7cc12'), genre: 'anime',       comment: '不器用なパパの歌。' },
-  { title: 'Free as the Static',   file: 'free_as_the_static.mp3',   cover: IMG('f743b81d-fc74-4cfc-ac62-6e7f9f5d0960'), genre: 'ballad',       comment: '夜のジャズ。自由とは何も持たないこと。' },
-  { title: '踊れ踊れ!',             file: 'odore_odore_1.mp3',         cover: COVER('odore_odore'),                         genre: 'dance',        comment: 'DDR 2nd Mixへのオマージュ。' },
-  { title: "U'LDU'L ①",             file: 'uldul_1.mp3',                cover: COVER('uldul'),                               genre: 'experimental', comment: '意味不明・謎語・Hyperpop × Eurobeat。' },
-  { title: "U'LDU'L ②",             file: 'uldul_2.mp3',                cover: IMG('3dffe69a-9b74-4f55-94c7-33fd43ebde26'), genre: 'experimental', comment: '意味不明・謎語・Hyperpop × Eurobeat。' },
-  { title: 'Ngoma Ya Mwitu',        file: 'ngoma_ya_mwitu.mp3',        cover: COVER('ngoma_ya_mwitu'),                      genre: 'experimental', comment: 'スワヒリ語で「野生の太鼓」。' },
-  { title: '病みDOKI',               file: 'yami_doki.mp3',             cover: COVER('yami_doki'),                           genre: 'dance',        comment: '地雷女×オタク男のデュエット。' },
-  { title: 'NIGHT DRIVER',          file: 'night_driver.mp3',          cover: COVER('night_driver'),                        genre: 'dance',        comment: '80s Italo Discoへのオマージュ。' },
-  { title: '朝日に溶けて',           file: 'asahi_ni_tokete.mp3',       cover: COVER('asahi_ni_tokete'),                     genre: 'ballad',       comment: 'ダンスアルバムの最終曲。' },
-  { title: '色即是空',               file: 'shikisokuzeku.mp3',          cover: COVER('shikisokuzeku'),                       genre: 'experimental', comment: '般若心経ユーロビート。' },
-  { title: 'HANABI ☆ KISS',         file: 'hanabi_kiss.mp3',           cover: COVER('hanabi_kiss'),                         genre: 'dance',        comment: 'パラパラ全盛期への回帰。' },
+  { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2'), genre: 'ballad',       comment: 'ピアノと弦の冬のバラード' },
+  { title: 'fly away buttfly ①',   file: 'fly_away_buttfly_1.mp3',   cover: COVER('fly_away_buttfly'),                    genre: 'dance',        comment: '90年代ユーロビートへのオマージュ' },
+  { title: 'fly away buttfly ②',   file: 'fly_away_buttfly_2.mp3',   cover: IMG('cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2'), genre: 'dance',        comment: '90年代ユーロビートへのオマージュ' },
+  { title: '真夜中のカーニバル ①', file: 'mayonaka_carnival_1.mp3',  cover: IMG('8f0eb688-ccb6-436b-affd-d7ef6e35e6cf'), genre: 'anime',        comment: '軽快なミステリーポップ' },
+  { title: '真夜中のカーニバル ②', file: 'mayonaka_carnival_2.mp3',  cover: IMG('dd5959f2-c9dc-4080-ba7b-c56b30a0ee6c'), genre: 'anime',        comment: '軽快なミステリーポップ' },
+  { title: 'Burning Countdown ①',  file: 'burning_countdown_1.mp3',  cover: IMG('7fa3d1b2-8e56-4bb7-b3d1-1c46b608f42a'), genre: 'experimental', comment: '笑顔で隠した崩壊カウントダウン' },
+  { title: 'Burning Countdown ②',  file: 'burning_countdown_2.mp3',  cover: IMG('91299c49-5e15-43c2-a2b4-93d345c1e3c9'), genre: 'experimental', comment: '笑顔で隠した崩壊カウントダウン' },
+  { title: '令和パパは肩身が狭い', file: 'reiwa_papa_hatasegasei.mp3', cover: IMG('42daad7d-ca3b-4d73-9a76-7ce523d7cc12'), genre: 'anime',       comment: '不器用なパパの歌' },
+  { title: 'Free as the Static',   file: 'free_as_the_static.mp3',   cover: IMG('f743b81d-fc74-4cfc-ac62-6e7f9f5d0960'), genre: 'ballad',       comment: '夜のジャズ、自由とは何も持たないこと' },
+  { title: '踊れ踊れ!',             file: 'odore_odore_1.mp3',         cover: COVER('odore_odore'),                         genre: 'dance',        comment: 'DDR 2nd Mixへのオマージュ' },
+  { title: "U'LDU'L ①",             file: 'uldul_1.mp3',                cover: COVER('uldul'),                               genre: 'experimental', comment: 'Hyperpop × Eurobeat・謎語' },
+  { title: "U'LDU'L ②",             file: 'uldul_2.mp3',                cover: IMG('3dffe69a-9b74-4f55-94c7-33fd43ebde26'), genre: 'experimental', comment: 'Hyperpop × Eurobeat・謎語' },
+  { title: 'Ngoma Ya Mwitu',        file: 'ngoma_ya_mwitu.mp3',        cover: COVER('ngoma_ya_mwitu'),                      genre: 'experimental', comment: 'スワヒリ語で「野生の太鼓」' },
+  { title: '病みDOKI',               file: 'yami_doki.mp3',             cover: COVER('yami_doki'),                           genre: 'dance',        comment: '地雷女×オタク男のデュエット' },
+  { title: 'NIGHT DRIVER',          file: 'night_driver.mp3',          cover: COVER('night_driver'),                        genre: 'dance',        comment: '80s Italo Discoへのオマージュ' },
+  { title: '朝日に溶けて',           file: 'asahi_ni_tokete.mp3',       cover: COVER('asahi_ni_tokete'),                     genre: 'ballad',       comment: 'ダンスアルバムの最終曲' },
+  { title: '色即是空',               file: 'shikisokuzeku.mp3',          cover: COVER('shikisokuzeku'),                       genre: 'experimental', comment: '般若心経ユーロビート' },
+  { title: 'HANABI ☆ KISS',         file: 'hanabi_kiss.mp3',           cover: COVER('hanabi_kiss'),                         genre: 'dance',        comment: 'パラパラ全盛期への回帰' },
   { title: 'きみは幸せですか',       file: 'kimi_wa_shiawasedesuka.mp3', cover: COVER('kimihaima'),                          genre: 'ballad',       comment: 'まーちゃん、今君は幸せですか？' },
-  { title: 'URIZUN',                 file: 'urizun.mp3',                 cover: COVER('urizun'),                             genre: 'jp-dance',     comment: 'Jersey Club × 琉球音階。' },
-  { title: '転生してもやっぱりしがないおっさんでした', file: 'hashiridase_ossan.mp3', cover: COVER('hashiridase_ossan'), genre: 'anime', comment: '自虐系アニメOP。' },
-  { title: 'hinatabokkuri MEGAMIX', file: '../music/hinatabokkuri_megamix_v3.mp3', cover: COVER('hinatabokkuri_megamix'), genre: 'experimental', comment: '全9曲を117クリップに刻んだカオスメドレー。' },
+  { title: 'URIZUN',                 file: 'urizun.mp3',                 cover: COVER('urizun'),                             genre: 'jp-dance',     comment: 'Jersey Club × 琉球音階' },
+  { title: '転生してもやっぱりしがないおっさんでした', file: 'hashiridase_ossan.mp3', cover: COVER('hashiridase_ossan'), genre: 'anime', comment: '自虐系アニメOP' },
 ];
+
+SONGS.forEach(s => { s.lyrics = LRC_DB[s.file] || ''; });
+
+function parseLRC(text) {
+  if (!text) return [];
+  return text.split('\n').map(line => {
+    const m = line.match(/^\[(\d+):(\d+(?:\.\d+)?)\](.*)$/);
+    if (!m) return null;
+    const t = parseInt(m[1]) * 60 + parseFloat(m[2]);
+    const txt = m[3].trim();
+    if (!txt || txt.startsWith('[')) return null;
+    return { time: t, text: txt };
+  }).filter(Boolean);
+}
 
 const grid = document.getElementById('songs');
 const np = document.getElementById('nowPlaying');
 const npCover = document.getElementById('npCover');
 const npTitle = document.getElementById('npTitle');
-const npAudio = document.getElementById('npAudio');
-const npComment = document.getElementById('npComment');
+const npLyricInline = document.getElementById('npLyricInline');
+const npLyricsFull = document.getElementById('npLyricsFull');
+const npProgress = document.getElementById('npProgress');
+const npProgressFill = document.getElementById('npProgressFill');
+const audio = document.getElementById('audio');
+const btnShuffle = document.getElementById('btnShuffle');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+const btnPlayPause = document.getElementById('btnPlayPause');
+const btnExpand = document.getElementById('btnExpand');
+const npInfoClick = document.getElementById('npInfoClick');
 
 let currentFilter = 'all';
 let currentView = 'grid';
+let queue = [];
+let currentIdx = -1;
+let shuffleMode = false;
+let parsedLyrics = [];
 
 function render() {
   grid.innerHTML = '';
@@ -286,21 +379,113 @@ function render() {
         <div class="tile-comment">${s.comment}</div>
       </div>
     `;
-    tile.addEventListener('click', () => playSong(s, tile));
+    tile.addEventListener('click', () => {
+      queue = [...filtered];
+      currentIdx = filtered.indexOf(s);
+      playCurrent();
+    });
     grid.appendChild(tile);
+  });
+  markPlayingTile();
+}
+
+function markPlayingTile() {
+  if (currentIdx < 0) return;
+  const current = queue[currentIdx];
+  if (!current) return;
+  document.querySelectorAll('.tile').forEach(t => {
+    t.classList.toggle('playing', t.dataset.file === current.file);
   });
 }
 
-function playSong(s, tile) {
-  document.querySelectorAll('.tile').forEach(t => t.classList.remove('playing'));
-  tile.classList.add('playing');
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function playCurrent() {
+  if (currentIdx < 0 || currentIdx >= queue.length) return;
+  const s = queue[currentIdx];
   npCover.src = s.cover;
   npTitle.textContent = s.title;
-  npAudio.src = 'music/' + s.file;
-  npComment.textContent = s.comment;
+  audio.src = 'music/' + s.file;
+  parsedLyrics = parseLRC(s.lyrics);
+  renderFullLyrics();
   np.classList.add('active');
-  npAudio.play();
+  audio.play().catch(e => console.log('play blocked', e));
+  updateMediaSession(s);
+  markPlayingTile();
 }
+
+function updateMediaSession(s) {
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: s.title,
+    artist: 'hinatabokkuri',
+    album: 'hinatabokkuri',
+    artwork: [
+      { src: s.cover, sizes: '512x512', type: 'image/jpeg' },
+    ],
+  });
+  try {
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+    navigator.mediaSession.setActionHandler('nexttrack', playNext);
+  } catch(e) {}
+}
+
+function playNext() {
+  if (queue.length === 0) return;
+  if (shuffleMode && currentIdx >= queue.length - 1) {
+    queue = shuffle(SONGS);
+    currentIdx = 0;
+  } else {
+    currentIdx = (currentIdx + 1) % queue.length;
+  }
+  playCurrent();
+}
+function playPrev() {
+  if (queue.length === 0) return;
+  currentIdx = (currentIdx - 1 + queue.length) % queue.length;
+  playCurrent();
+}
+
+btnShuffle.addEventListener('click', () => {
+  shuffleMode = !shuffleMode;
+  btnShuffle.classList.toggle('active', shuffleMode);
+});
+btnPrev.addEventListener('click', playPrev);
+btnNext.addEventListener('click', playNext);
+btnPlayPause.addEventListener('click', () => {
+  if (audio.paused) audio.play();
+  else audio.pause();
+});
+audio.addEventListener('play', () => btnPlayPause.textContent = '⏸');
+audio.addEventListener('pause', () => btnPlayPause.textContent = '▶');
+audio.addEventListener('ended', playNext);
+audio.addEventListener('timeupdate', () => {
+  const pct = (audio.currentTime / audio.duration) * 100 || 0;
+  npProgressFill.style.width = pct + '%';
+  updateLyric(audio.currentTime);
+});
+npProgress.addEventListener('click', (e) => {
+  const r = npProgress.getBoundingClientRect();
+  const pct = (e.clientX - r.left) / r.width;
+  audio.currentTime = audio.duration * pct;
+});
+
+document.getElementById('shuffleAll').addEventListener('click', () => {
+  shuffleMode = true;
+  btnShuffle.classList.add('active');
+  queue = shuffle(SONGS);
+  currentIdx = 0;
+  playCurrent();
+});
 
 document.querySelectorAll('.chip[data-genre]').forEach(c => {
   c.addEventListener('click', () => {
@@ -310,7 +495,6 @@ document.querySelectorAll('.chip[data-genre]').forEach(c => {
     render();
   });
 });
-
 document.querySelectorAll('[data-view]').forEach(b => {
   b.addEventListener('click', () => {
     document.querySelectorAll('[data-view]').forEach(x => x.classList.remove('active'));
@@ -319,6 +503,38 @@ document.querySelectorAll('[data-view]').forEach(b => {
     render();
   });
 });
+
+function toggleExpand() { np.classList.toggle('expanded'); }
+btnExpand.addEventListener('click', toggleExpand);
+npInfoClick.addEventListener('click', toggleExpand);
+
+function renderFullLyrics() {
+  if (parsedLyrics.length === 0) {
+    npLyricsFull.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem;">歌詞データ未登録（プレビュー版は最新3曲のみ対応）</p>';
+    return;
+  }
+  npLyricsFull.innerHTML = parsedLyrics.map((l, i) =>
+    `<div class="lyric-line" data-idx="${i}">${l.text}</div>`
+  ).join('');
+}
+
+function updateLyric(t) {
+  if (parsedLyrics.length === 0) { npLyricInline.textContent = ''; return; }
+  let activeIdx = -1;
+  for (let i = parsedLyrics.length - 1; i >= 0; i--) {
+    if (t >= parsedLyrics[i].time) { activeIdx = i; break; }
+  }
+  npLyricInline.textContent = activeIdx >= 0 ? parsedLyrics[activeIdx].text : '';
+  const lines = npLyricsFull.querySelectorAll('.lyric-line');
+  lines.forEach((el, i) => {
+    el.classList.toggle('active', i === activeIdx);
+    el.classList.toggle('past', i < activeIdx);
+  });
+  if (activeIdx >= 0 && np.classList.contains('expanded')) {
+    const active = lines[activeIdx];
+    if (active) active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
 
 render();
 </script>
