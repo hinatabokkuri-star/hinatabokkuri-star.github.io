@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<title>About · HINATA AI MUSIC</title>
+<!-- Google tag (gtag.js) -->
+<script>
+  if (new URLSearchParams(location.search).get('notrack') === '1') {
+    localStorage.setItem('ga_opt_out', '1');
+  }
+  window['ga-disable-G-EN8WSRB7TL'] = localStorage.getItem('ga_opt_out') === '1';
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EN8WSRB7TL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EN8WSRB7TL');
+</script>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #161616;
+    --bg3: #1f1f1f;
+    --text: #f0f0f0;
+    --text-dim: #999;
+    --border: #333;
+    --amber: #ffa600;
+    --pink: #ff5a8a;
+    --cyan: #4fd1c5;
+    --green: #48a86e;
+    --coral: #ff6b7a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Yu Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 1rem 1rem 3rem 1rem;
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+  .container { max-width: 820px; margin: 0 auto; }
+
+  /* Site header (same as music page) */
+  .site-header {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  .logo-mark {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    background: #0a0a0a;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    animation: logoGlow 4s ease-in-out infinite;
+  }
+  .logo-mark img {
+    width: 100%; height: 100%; object-fit: contain;
+    transform-origin: 50% 70%;
+    animation: logoSway 3.5s ease-in-out infinite;
+  }
+  @keyframes logoGlow {
+    0%, 100% { box-shadow: 0 4px 16px rgba(79,209,197,0.4), 0 0 20px rgba(79,209,197,0.2); }
+    50% { box-shadow: 0 4px 24px rgba(255,90,138,0.55), 0 0 30px rgba(255,90,138,0.3); }
+  }
+  @keyframes logoSway {
+    0%, 100% { transform: rotate(-2.5deg); }
+    50%      { transform: rotate(2.5deg); }
+  }
+  .site-title h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    background: linear-gradient(100deg, #ffa600 0%, #ff5a8a 35%, #ffffff 50%, #ff5a8a 65%, #ffa600 100%);
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleShine 4s linear infinite;
+  }
+  @keyframes titleShine {
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+  .site-title .tagline {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* Nav */
+  .top-nav {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .nav-link {
+    appearance: none;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .nav-link:hover { border-color: var(--amber); color: var(--text); }
+  .nav-link.active { background: var(--amber); color: #000; border-color: var(--amber); }
+
+  /* Section */
+  section {
+    margin-bottom: 2.5rem;
+  }
+  section h2 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: 0.01em;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Card */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+  }
+  .card p { font-size: 0.9rem; color: var(--text-dim); }
+  .card p + p { margin-top: 0.8rem; }
+  .card p strong { color: var(--text); font-weight: 700; }
+
+  /* Links row */
+  .links-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .link-btn:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* License tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+  .tag {
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .tag.ok { background: rgba(72,168,110,0.15); color: var(--green); }
+  .tag.ng { background: rgba(255,107,122,0.15); color: var(--coral); }
+
+  .card-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--coral);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .card-label.teal { color: var(--cyan); }
+
+  /* X feed */
+  .x-feed {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,166,0,0.3) transparent;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 600px) {
+    .site-title h1 { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="site-header">
+    <a href="/" style="display:contents;">
+      <div class="logo-mark"><img src="/icons/icon-192.png" alt="HINATA AI MUSIC"></div>
+      <div class="site-title">
+        <h1>hinatabokkuri</h1>
+        <div class="tagline">About · hinatabokkuri の制作者ページ</div>
+      </div>
+    </a>
+  </header>
+
+  <nav class="top-nav">
+    <a class="nav-link" href="/">🎵 Music</a>
+    <a class="nav-link active" href="/about.html">👤 About</a>
+  </nav>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About</div>
+    <h2>🌻 hinatabokkuri</h2>
+    <div class="card">
+      <p>ゲーム・音楽・フリー素材を制作しているインディーゲームクリエイターです。</p>
+      <p><strong>Godot 4</strong> でミステリーサウンドノベル、レトロJRPG、Wizardry風ダンジョンRPGの3作品を同時開発中。素材・BGMは制作後にフリー配布する予定です。</p>
+      <p>楽曲は <strong>Suno Pro</strong> での生成とElevenLabs・AivisSpeechのTTS合成を組み合わせて制作。ジャケット画像は ComfyUI + RealVisXL や Gemini を用途に応じて使い分けています。</p>
+    </div>
+  </section>
+
+  <!-- X FEED -->
+  <section id="x-feed">
+    <div class="section-label">Latest Posts</div>
+    <h2>💬 X / Twitter</h2>
+    <div class="x-feed">
+      <a class="twitter-timeline"
+         data-theme="dark"
+         data-tweet-limit="3"
+         data-chrome="noheader nofooter noborders transparent"
+         href="https://twitter.com/yhhinabon">
+        Tweets by yhhinabon
+      </a>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <section id="links">
+    <div class="section-label">Links</div>
+    <h2>🔗 ソーシャル</h2>
+    <div class="links-row">
+      <a class="link-btn" href="https://www.youtube.com/@hinatabokkuri" target="_blank" rel="noopener">▶ YouTube</a>
+      <a class="link-btn" href="https://x.com/yhhinabon" target="_blank" rel="noopener">𝕏 X / Twitter</a>
+      <a class="link-btn" href="https://github.com/hinatabokkuri-star" target="_blank" rel="noopener">⌥ GitHub</a>
+      <a class="link-btn" href="https://hinatabokkuri.booth.pm/" target="_blank" rel="noopener">🎁 BOOTH</a>
+    </div>
+  </section>
+
+  <!-- LICENSE -->
+  <section id="license">
+    <div class="section-label">License</div>
+    <h2>📜 利用について</h2>
+    <div class="card" style="margin-bottom:1rem;">
+      <div class="card-label">AI-Generated Content</div>
+      <p>当サイトの画像・音楽・素材はAI生成ツールを使用して制作しています。各ツールの商用利用規約を確認のうえ公開しています。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Terms of Use</div>
+      <div class="tags">
+        <span class="tag ok">✓ ダウンロード自由</span>
+        <span class="tag ok">✓ 拡散・シェア自由</span>
+        <span class="tag ng">✗ 改変禁止</span>
+      </div>
+      <p>常識的な範囲でご自由にお使いください。商用利用・その他ご相談はXまでお気軽にどうぞ。</p>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section id="support">
+    <div class="section-label">Support</div>
+    <h2>🎁 お布施</h2>
+    <div class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+      <p style="flex:1;min-width:220px;">気に入った作品があればお気持ちだけいただけたら嬉しいです。プレッシャーは一切ありません。</p>
+      <a class="link-btn" href="https://hinatabokkuri.booth.pm/items/8224157" target="_blank" rel="noopener">🛒 BOOTHで支援する</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <h2>💼 お問い合わせ</h2>
+    <div class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-start;">
+      <div style="flex:1;min-width:220px;">
+        <div class="card-label teal">DX Support · Kyoto area</div>
+        <p>業務のデジタル化や小さなシステム開発のご相談を承っています。京都を中心に、直接お会いしてお話できる範囲でお受けします。気軽にお声がけください。</p>
+      </div>
+      <a class="link-btn" href="https://x.com/yhhinabon" target="_blank" rel="noopener">𝕏 X でDM</a>
+    </div>
+  </section>
+
+  <footer>© 2026 hinatabokkuri · AI Music · Indie Games</footer>
+</div>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script>
+  // Service Worker update polling
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+      setInterval(() => reg.update().catch(() => {}), 30000);
+    }).catch(() => {});
+    navigator.serviceWorker.addEventListener('message', e => {
+      if (e.data?.type === 'RELOAD') location.reload();
+    });
+  }
+</script>
+</body>
+</html>
