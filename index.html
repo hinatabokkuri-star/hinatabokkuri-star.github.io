@@ -902,8 +902,18 @@
   }
   .featured-row::-webkit-scrollbar { display: none; }
   .featured-row .featured-card {
-    flex: 0 0 220px;
+    flex: 0 0 140px;
     scroll-snap-align: start;
+  }
+  .featured-row .featured-card .ft-title { font-size: 0.8rem; }
+  .featured-row .featured-card .ft-sub {
+    font-size: 0.65rem;
+    -webkit-line-clamp: 1;
+  }
+  .featured-row .featured-card .meta { padding: 0.5rem 0.6rem; }
+  .featured-row .featured-card .badge {
+    font-size: 0.55rem;
+    padding: 0.1rem 0.4rem;
   }
   .featured-card {
     background: var(--bg2);
