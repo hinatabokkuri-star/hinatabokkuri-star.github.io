@@ -478,6 +478,165 @@
   /* X logo icon button */
   .np-btn .x-icon { width: 18px; height: 18px; fill: currentColor; }
 
+  /* Accessibility - visible focus ring */
+  :focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  button:focus-visible { outline-offset: 3px; }
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--amber);
+    color: #000;
+    padding: 0.5rem 1rem;
+    z-index: 1000;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .skip-link:focus { left: 1rem; top: 1rem; }
+
+  /* Volume slider (desktop only) */
+  .np-volume {
+    display: none;
+    align-items: center;
+    gap: 0.3rem;
+    margin-left: 0.4rem;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .np-volume { display: flex; }
+  }
+  .np-volume input[type=range] {
+    appearance: none; -webkit-appearance: none;
+    width: 80px; height: 4px;
+    background: var(--bg3);
+    border-radius: 2px;
+    outline: none;
+  }
+  .np-volume input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--amber);
+    cursor: pointer;
+  }
+  .np-volume input[type=range]::-moz-range-thumb {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--amber);
+    cursor: pointer;
+    border: none;
+  }
+  .np-volume .vol-icon { font-size: 0.9rem; color: var(--text-dim); }
+
+  /* Sleep timer indicator */
+  .sleep-indicator {
+    position: fixed;
+    top: 1rem; right: 1rem;
+    background: var(--bg2);
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 150;
+    display: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .sleep-indicator.show { display: block; }
+  .sleep-indicator button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-size: 0.7rem;
+    margin-left: 0.3rem;
+    cursor: pointer;
+  }
+
+  /* Sleep menu */
+  .sleep-menu {
+    position: fixed;
+    bottom: 140px; right: 1rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.4rem;
+    z-index: 150;
+    display: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    min-width: 140px;
+  }
+  .sleep-menu.show { display: block; }
+  .sleep-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.85rem;
+  }
+  .sleep-menu button:hover { background: var(--bg3); }
+  .sleep-menu button.active { color: var(--amber); font-weight: 700; }
+
+  /* iOS install hint */
+  .ios-install {
+    position: fixed;
+    bottom: 140px; left: 1rem; right: 1rem;
+    max-width: 420px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    border: 1px solid #4fd1c5;
+    border-radius: 14px;
+    padding: 1rem;
+    z-index: 150;
+    display: none;
+    gap: 0.8rem;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  .ios-install.show { display: flex; }
+  .ios-install img { width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0; }
+  .ios-install .ios-text { flex: 1; font-size: 0.78rem; line-height: 1.45; }
+  .ios-install .ios-text strong { display: block; font-size: 0.85rem; margin-bottom: 0.2rem; }
+  .ios-install .ios-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px;
+    background: rgba(79,209,197,0.2); color: #4fd1c5;
+    border-radius: 4px; font-size: 0.9rem; vertical-align: middle; margin: 0 0.1rem;
+  }
+  .ios-install .ios-dismiss {
+    appearance: none; border: none;
+    background: transparent; color: var(--text-dim);
+    padding: 0.3rem 0.6rem; cursor: pointer; font-size: 1.1rem;
+  }
+
+  /* Error toast */
+  .error-toast {
+    position: fixed;
+    top: 1rem; left: 50%;
+    transform: translateX(-50%);
+    background: #ff6b7a;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 250;
+    display: none;
+    box-shadow: 0 6px 20px rgba(255,107,122,0.4);
+  }
+  .error-toast.show { display: block; animation: fadeOut 4s ease-out forwards; }
+  @keyframes fadeOut { 0%, 70% { opacity: 1; } 100% { opacity: 0; } }
+
   /* Section heading */
   .section-title {
     font-size: 0.85rem;
@@ -850,6 +1009,7 @@
 </style>
 </head>
 <body>
+<a href="#songs" class="skip-link">コンテンツへスキップ</a>
 <div class="container">
   <header class="site-header">
     <div class="logo-mark"><img src="/icons/icon-192.png" alt="HINATA AI MUSIC"></div>
@@ -936,6 +1096,35 @@
   <button class="dismiss" id="updateLater">あとで</button>
 </div>
 
+<!-- Error toast -->
+<div id="errorToast" class="error-toast" role="alert" aria-live="polite"></div>
+
+<!-- Sleep timer indicator -->
+<div id="sleepIndicator" class="sleep-indicator" aria-live="polite">
+  <span id="sleepCountdown">00:00</span>
+  <button id="sleepCancel" aria-label="スリープタイマー解除">×</button>
+</div>
+
+<!-- Sleep timer menu -->
+<div id="sleepMenu" class="sleep-menu" role="menu">
+  <button data-sleep="0" role="menuitem">タイマーなし</button>
+  <button data-sleep="15" role="menuitem">15分後</button>
+  <button data-sleep="30" role="menuitem">30分後</button>
+  <button data-sleep="60" role="menuitem">60分後</button>
+  <button data-sleep="90" role="menuitem">90分後</button>
+  <button data-sleep="end" role="menuitem">曲終了まで</button>
+</div>
+
+<!-- iOS install hint -->
+<div id="iosInstall" class="ios-install">
+  <img src="/icons/icon-180.png" alt="">
+  <div class="ios-text">
+    <strong>📲 ホーム画面に追加</strong>
+    <span>Safariの <span class="ios-icon">⬆</span> 共有ボタン → <strong>「ホーム画面に追加」</strong>でアプリ化</span>
+  </div>
+  <button class="ios-dismiss" id="iosDismiss" aria-label="閉じる">×</button>
+</div>
+
 <!-- MV inline modal -->
 <div id="mvModal" class="mv-modal">
   <div class="mv-modal-inner">
@@ -966,13 +1155,18 @@
       <div class="np-lyric" id="npLyricInline"></div>
     </div>
     <div class="np-actions">
-      <button class="np-btn" id="btnShuffle" title="シャッフル">🔀</button>
-      <button class="np-btn" id="btnRepeat" title="リピート">🔁</button>
-      <button class="np-btn" id="btnPrev" title="前へ">⏮</button>
-      <button class="np-btn primary" id="btnPlayPause" title="再生/停止">⏸</button>
-      <button class="np-btn" id="btnNext" title="次へ">⏭</button>
-      <button class="np-btn" id="btnShare" title="シェア"><svg class="x-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
-      <button class="np-btn" id="btnExpand" title="歌詞展開">📝</button>
+      <button class="np-btn" id="btnShuffle" title="シャッフル" aria-label="シャッフル切替">🔀</button>
+      <button class="np-btn" id="btnRepeat" title="リピート" aria-label="リピート切替">🔁</button>
+      <button class="np-btn" id="btnPrev" title="前へ" aria-label="前の曲">⏮</button>
+      <button class="np-btn primary" id="btnPlayPause" title="再生/停止" aria-label="再生または停止">⏸</button>
+      <button class="np-btn" id="btnNext" title="次へ" aria-label="次の曲">⏭</button>
+      <button class="np-btn" id="btnShare" title="シェア" aria-label="この曲をシェア"><svg class="x-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
+      <button class="np-btn" id="btnSleep" title="スリープタイマー" aria-label="スリープタイマー">⏰</button>
+      <button class="np-btn" id="btnExpand" title="歌詞展開" aria-label="歌詞を展開">📝</button>
+      <div class="np-volume">
+        <span class="vol-icon" aria-hidden="true">🔊</span>
+        <input id="volumeSlider" type="range" min="0" max="1" step="0.05" value="1" aria-label="音量">
+      </div>
     </div>
   </div>
   <div class="np-progress" id="npProgress">
@@ -1238,11 +1432,148 @@ btnPlayPause.addEventListener('click', () => {
 });
 audio.addEventListener('play', () => {
   btnPlayPause.textContent = '⏸';
+  btnPlayPause.setAttribute('aria-label', '一時停止');
   np.classList.add('spinning');
 });
 audio.addEventListener('pause', () => {
   btnPlayPause.textContent = '▶';
+  btnPlayPause.setAttribute('aria-label', '再生');
   np.classList.remove('spinning');
+});
+
+// Error handling: show toast, skip to next after short delay
+const errorToast = document.getElementById('errorToast');
+function showError(msg) {
+  errorToast.textContent = msg;
+  errorToast.classList.remove('show');
+  void errorToast.offsetWidth;
+  errorToast.classList.add('show');
+  setTimeout(() => errorToast.classList.remove('show'), 4000);
+}
+audio.addEventListener('error', (e) => {
+  if (currentIdx < 0) return;
+  const s = queue[currentIdx];
+  showError(`再生エラー: ${s?.title || '不明'} をスキップ`);
+  if (typeof gtag !== 'undefined') gtag('event', 'play_error', { track_file: s?.file || 'unknown' });
+  setTimeout(playNext, 500);
+});
+audio.addEventListener('stalled', () => {
+  console.log('audio stalled, reload source');
+});
+
+// Volume slider
+const volumeSlider = document.getElementById('volumeSlider');
+const savedVol = localStorage.getItem('hb_volume');
+if (savedVol !== null) audio.volume = parseFloat(savedVol);
+volumeSlider.value = audio.volume;
+volumeSlider.addEventListener('input', () => {
+  audio.volume = parseFloat(volumeSlider.value);
+  localStorage.setItem('hb_volume', volumeSlider.value);
+});
+
+// Sleep timer
+const sleepIndicator = document.getElementById('sleepIndicator');
+const sleepCountdown = document.getElementById('sleepCountdown');
+const sleepMenu = document.getElementById('sleepMenu');
+const btnSleep = document.getElementById('btnSleep');
+let sleepTimerEnd = null;
+let sleepTimerHandle = null;
+let sleepAtSongEnd = false;
+
+btnSleep.addEventListener('click', (e) => {
+  e.stopPropagation();
+  sleepMenu.classList.toggle('show');
+});
+document.addEventListener('click', (e) => {
+  if (!sleepMenu.contains(e.target) && e.target !== btnSleep) sleepMenu.classList.remove('show');
+});
+sleepMenu.querySelectorAll('button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const v = btn.dataset.sleep;
+    sleepMenu.classList.remove('show');
+    clearSleep();
+    if (v === '0') { /* nothing */ }
+    else if (v === 'end') setSleepAtSongEnd();
+    else setSleepTimer(parseInt(v) * 60);
+    sleepMenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+function clearSleep() {
+  if (sleepTimerHandle) clearInterval(sleepTimerHandle);
+  sleepTimerHandle = null;
+  sleepTimerEnd = null;
+  sleepAtSongEnd = false;
+  sleepIndicator.classList.remove('show');
+  btnSleep.classList.remove('active');
+}
+function setSleepTimer(seconds) {
+  sleepTimerEnd = Date.now() + seconds * 1000;
+  sleepIndicator.classList.add('show');
+  btnSleep.classList.add('active');
+  const tick = () => {
+    const left = Math.max(0, Math.floor((sleepTimerEnd - Date.now()) / 1000));
+    const m = Math.floor(left / 60);
+    const s = left % 60;
+    sleepCountdown.textContent = `⏰ ${m}:${String(s).padStart(2, '0')}`;
+    if (left <= 0) {
+      clearSleep();
+      fadeAndPause();
+    }
+  };
+  tick();
+  sleepTimerHandle = setInterval(tick, 1000);
+}
+function setSleepAtSongEnd() {
+  sleepAtSongEnd = true;
+  sleepIndicator.classList.add('show');
+  sleepCountdown.textContent = '⏰ 曲終了まで';
+  btnSleep.classList.add('active');
+}
+function fadeAndPause() {
+  const startVol = audio.volume;
+  const step = startVol / 20;
+  const fade = setInterval(() => {
+    if (audio.volume > step) audio.volume -= step;
+    else {
+      audio.volume = 0;
+      audio.pause();
+      clearInterval(fade);
+      setTimeout(() => { audio.volume = startVol; volumeSlider.value = startVol; }, 500);
+    }
+  }, 200);
+}
+document.getElementById('sleepCancel').addEventListener('click', clearSleep);
+// Intercept playNext when sleepAtSongEnd is active
+const origPlayNext = playNext;
+window.playNext = function() {
+  if (sleepAtSongEnd) {
+    clearSleep();
+    fadeAndPause();
+    return;
+  }
+  origPlayNext();
+};
+// Re-attach ended listener (since we reassigned playNext above, the original closure captured old ref)
+audio.addEventListener('ended', () => window.playNext());
+
+// iOS install hint
+const IOS_DISMISS_KEY = 'ios_install_dismissed';
+function isIOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+function isStandalone() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+if (isIOS() && !isStandalone() && !localStorage.getItem(IOS_DISMISS_KEY)) {
+  // Show iOS hint after 30s
+  setTimeout(() => {
+    document.getElementById('iosInstall').classList.add('show');
+  }, 30000);
+}
+document.getElementById('iosDismiss').addEventListener('click', () => {
+  document.getElementById('iosInstall').classList.remove('show');
+  localStorage.setItem(IOS_DISMISS_KEY, '1');
 });
 audio.addEventListener('ended', playNext);
 audio.addEventListener('timeupdate', () => {
