@@ -2350,7 +2350,6 @@ document.querySelectorAll('.album-card').forEach(card => {
       queue = DANCE_INSTINCT.map(f => SONGS.find(s => s.file === f)).filter(Boolean);
       currentIdx = 0;
       playCurrent();
-      showError('🎵 DANCE INSTINCT: クロスフェード再生中');
       if (typeof gtag !== 'undefined') gtag('event', 'play_album', { album: 'DANCE INSTINCT', crossfade: true });
     }
   });
