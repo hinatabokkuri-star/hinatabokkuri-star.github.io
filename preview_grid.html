@@ -306,7 +306,11 @@
   .np-info { min-width: 0; cursor: pointer; }
   .np-title {
     font-weight: 700; font-size: 0.9rem;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .np-lyric {
     font-size: 0.75rem; color: var(--amber);
