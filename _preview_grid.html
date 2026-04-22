@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grid View Preview - hinatabokkuri</title>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #161616;
+    --text: #f0f0f0;
+    --text-dim: #999;
+    --border: #333;
+    --amber: #ffa600;
+    --pink: #ff5a8a;
+    --cyan: #4fd1c5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Yu Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+  .container { max-width: 1400px; margin: 0 auto; }
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+  .subtitle {
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  .controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .chip {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text-dim);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+  }
+  .chip:hover { border-color: var(--amber); color: var(--text); }
+  .chip.active { background: var(--amber); color: #000; border-color: var(--amber); }
+  .view-toggle {
+    margin-left: auto;
+    display: flex;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .view-toggle button {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+  }
+  .view-toggle button.active { background: var(--amber); color: #000; }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .tile {
+    background: var(--bg2);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(255,166,0,0.25);
+  }
+  .tile.playing {
+    outline: 2px solid var(--amber);
+  }
+  .tile-cover {
+    aspect-ratio: 1 / 1;
+    background: #000 center/cover no-repeat;
+    position: relative;
+  }
+  .tile-cover::before {
+    content: '▶';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 3rem;
+    color: #fff;
+    background: rgba(0,0,0,0.45);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .tile:hover .tile-cover::before { opacity: 1; }
+  .tile.playing .tile-cover::before {
+    content: '♪';
+    opacity: 1;
+    background: rgba(255,166,0,0.3);
+    color: var(--amber);
+    animation: pulse 1s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { transform: scale(1.1); } }
+  .tile-meta {
+    padding: 0.7rem 0.8rem;
+  }
+  .tile-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tile-comment {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .genre-tag {
+    display: inline-block;
+    background: var(--pink);
+    color: #fff;
+    font-size: 0.6rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+
+  /* List fallback */
+  .list {
+    display: grid;
+    gap: 0.8rem;
+  }
+  .list .tile {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: stretch;
+  }
+  .list .tile-cover {
+    width: 120px;
+    aspect-ratio: 1 / 1;
+  }
+  .list .tile-title { font-size: 1rem; white-space: normal; }
+  .list .tile-comment { font-size: 0.8rem; -webkit-line-clamp: 3; }
+
+  /* Expand preview below grid */
+  .now-playing {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(20,20,20,0.85));
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    padding: 1rem;
+    margin: 1rem -1rem -2rem -1rem;
+    display: none;
+  }
+  .now-playing.active { display: grid; grid-template-columns: 80px 1fr; gap: 1rem; align-items: center; }
+  .now-playing img {
+    width: 80px; height: 80px; border-radius: 6px; object-fit: cover;
+  }
+  .np-info h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+  .np-info audio { width: 100%; max-width: 500px; }
+  .np-info p { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.3rem; }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+    .tile-title { font-size: 0.75rem; }
+    .tile-comment { font-size: 0.65rem; }
+    .list .tile { grid-template-columns: 80px 1fr; }
+    .list .tile-cover { width: 80px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>hinatabokkuri — Grid View Preview</h1>
+  <p class="subtitle">ポートフォリオのグリッドビュー試作。リスト切替、ジャンルチップ、クリックで下部プレイヤー展開</p>
+
+  <div class="controls">
+    <button class="chip active" data-genre="all">全曲 (22)</button>
+    <button class="chip" data-genre="dance">ダンス</button>
+    <button class="chip" data-genre="anime">アニソン</button>
+    <button class="chip" data-genre="ballad">バラード</button>
+    <button class="chip" data-genre="experimental">実験</button>
+    <button class="chip" data-genre="jp-dance">和ダンス</button>
+    <div class="view-toggle">
+      <button class="active" data-view="grid">▦ Grid</button>
+      <button data-view="list">☰ List</button>
+    </div>
+  </div>
+
+  <div id="songs" class="grid"></div>
+
+  <div id="nowPlaying" class="now-playing">
+    <img id="npCover" src="" alt="">
+    <div class="np-info">
+      <h3 id="npTitle"></h3>
+      <audio id="npAudio" controls preload="none"></audio>
+      <p id="npComment"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+const IMG = id => `https://cdn1.suno.ai/image_${id}.jpeg`;
+const COVER = name => `covers/${name}.jpg`;
+
+const SONGS = [
+  { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2'), genre: 'ballad',       comment: 'ピアノと弦の冬のバラード。' },
+  { title: 'fly away buttfly ①',   file: 'fly_away_buttfly_1.mp3',   cover: COVER('fly_away_buttfly'),                    genre: 'dance',        comment: '90年代ユーロビートへのオマージュ。' },
+  { title: 'fly away buttfly ②',   file: 'fly_away_buttfly_2.mp3',   cover: IMG('cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2'), genre: 'dance',        comment: '90年代ユーロビートへのオマージュ。' },
+  { title: '真夜中のカーニバル ①', file: 'mayonaka_carnival_1.mp3',  cover: IMG('8f0eb688-ccb6-436b-affd-d7ef6e35e6cf'), genre: 'anime',        comment: '軽快なミステリーポップ。' },
+  { title: '真夜中のカーニバル ②', file: 'mayonaka_carnival_2.mp3',  cover: IMG('dd5959f2-c9dc-4080-ba7b-c56b30a0ee6c'), genre: 'anime',        comment: '軽快なミステリーポップ。' },
+  { title: 'Burning Countdown ①',  file: 'burning_countdown_1.mp3',  cover: IMG('7fa3d1b2-8e56-4bb7-b3d1-1c46b608f42a'), genre: 'experimental', comment: '笑顔で隠した崩壊カウントダウン。' },
+  { title: 'Burning Countdown ②',  file: 'burning_countdown_2.mp3',  cover: IMG('91299c49-5e15-43c2-a2b4-93d345c1e3c9'), genre: 'experimental', comment: '笑顔で隠した崩壊カウントダウン。' },
+  { title: '令和パパは肩身が狭い', file: 'reiwa_papa_hatasegasei.mp3', cover: IMG('42daad7d-ca3b-4d73-9a76-7ce523d7cc12'), genre: 'anime',       comment: '不器用なパパの歌。' },
+  { title: 'Free as the Static',   file: 'free_as_the_static.mp3',   cover: IMG('f743b81d-fc74-4cfc-ac62-6e7f9f5d0960'), genre: 'ballad',       comment: '夜のジャズ。自由とは何も持たないこと。' },
+  { title: '踊れ踊れ!',             file: 'odore_odore_1.mp3',         cover: COVER('odore_odore'),                         genre: 'dance',        comment: 'DDR 2nd Mixへのオマージュ。' },
+  { title: "U'LDU'L ①",             file: 'uldul_1.mp3',                cover: COVER('uldul'),                               genre: 'experimental', comment: '意味不明・謎語・Hyperpop × Eurobeat。' },
+  { title: "U'LDU'L ②",             file: 'uldul_2.mp3',                cover: IMG('3dffe69a-9b74-4f55-94c7-33fd43ebde26'), genre: 'experimental', comment: '意味不明・謎語・Hyperpop × Eurobeat。' },
+  { title: 'Ngoma Ya Mwitu',        file: 'ngoma_ya_mwitu.mp3',        cover: COVER('ngoma_ya_mwitu'),                      genre: 'experimental', comment: 'スワヒリ語で「野生の太鼓」。' },
+  { title: '病みDOKI',               file: 'yami_doki.mp3',             cover: COVER('yami_doki'),                           genre: 'dance',        comment: '地雷女×オタク男のデュエット。' },
+  { title: 'NIGHT DRIVER',          file: 'night_driver.mp3',          cover: COVER('night_driver'),                        genre: 'dance',        comment: '80s Italo Discoへのオマージュ。' },
+  { title: '朝日に溶けて',           file: 'asahi_ni_tokete.mp3',       cover: COVER('asahi_ni_tokete'),                     genre: 'ballad',       comment: 'ダンスアルバムの最終曲。' },
+  { title: '色即是空',               file: 'shikisokuzeku.mp3',          cover: COVER('shikisokuzeku'),                       genre: 'experimental', comment: '般若心経ユーロビート。' },
+  { title: 'HANABI ☆ KISS',         file: 'hanabi_kiss.mp3',           cover: COVER('hanabi_kiss'),                         genre: 'dance',        comment: 'パラパラ全盛期への回帰。' },
+  { title: 'きみは幸せですか',       file: 'kimi_wa_shiawasedesuka.mp3', cover: COVER('kimihaima'),                          genre: 'ballad',       comment: 'まーちゃん、今君は幸せですか？' },
+  { title: 'URIZUN',                 file: 'urizun.mp3',                 cover: COVER('urizun'),                             genre: 'jp-dance',     comment: 'Jersey Club × 琉球音階。' },
+  { title: '転生してもやっぱりしがないおっさんでした', file: 'hashiridase_ossan.mp3', cover: COVER('hashiridase_ossan'), genre: 'anime', comment: '自虐系アニメOP。' },
+  { title: 'hinatabokkuri MEGAMIX', file: '../music/hinatabokkuri_megamix_v3.mp3', cover: COVER('hinatabokkuri_megamix'), genre: 'experimental', comment: '全9曲を117クリップに刻んだカオスメドレー。' },
+];
+
+const grid = document.getElementById('songs');
+const np = document.getElementById('nowPlaying');
+const npCover = document.getElementById('npCover');
+const npTitle = document.getElementById('npTitle');
+const npAudio = document.getElementById('npAudio');
+const npComment = document.getElementById('npComment');
+
+let currentFilter = 'all';
+let currentView = 'grid';
+
+function render() {
+  grid.innerHTML = '';
+  grid.className = currentView;
+  const filtered = currentFilter === 'all' ? SONGS : SONGS.filter(s => s.genre === currentFilter);
+  filtered.forEach(s => {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.dataset.file = s.file;
+    tile.innerHTML = `
+      <div class="tile-cover" style="background-image: url('${s.cover}')"></div>
+      <div class="tile-meta">
+        <span class="genre-tag">${s.genre}</span>
+        <div class="tile-title">${s.title}</div>
+        <div class="tile-comment">${s.comment}</div>
+      </div>
+    `;
+    tile.addEventListener('click', () => playSong(s, tile));
+    grid.appendChild(tile);
+  });
+}
+
+function playSong(s, tile) {
+  document.querySelectorAll('.tile').forEach(t => t.classList.remove('playing'));
+  tile.classList.add('playing');
+  npCover.src = s.cover;
+  npTitle.textContent = s.title;
+  npAudio.src = 'music/' + s.file;
+  npComment.textContent = s.comment;
+  np.classList.add('active');
+  npAudio.play();
+}
+
+document.querySelectorAll('.chip[data-genre]').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('.chip[data-genre]').forEach(b => b.classList.remove('active'));
+    c.classList.add('active');
+    currentFilter = c.dataset.genre;
+    render();
+  });
+});
+
+document.querySelectorAll('[data-view]').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('[data-view]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    currentView = b.dataset.view;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
