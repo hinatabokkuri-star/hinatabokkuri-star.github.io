@@ -34,6 +34,27 @@
     --amber: #ffa600;
     --pink: #ff5a8a;
     --cyan: #4fd1c5;
+    --grad-dark-1: #1a1a1a;
+    --grad-dark-2: #0a0a0a;
+    --overlay-bg: rgba(15,15,15,0.95);
+    --shadow-card: rgba(0,0,0,0.5);
+    --tile-hover-shadow: rgba(255,166,0,0.25);
+  }
+  html[data-theme="light"] {
+    --bg: #faf8f4;
+    --bg2: #ffffff;
+    --bg3: #f0ebe2;
+    --text: #1a1a1a;
+    --text-dim: #6b6b6b;
+    --border: #e0ddd4;
+    --amber: #d97706;
+    --pink: #e11d74;
+    --cyan: #0d9488;
+    --grad-dark-1: #f5f2ec;
+    --grad-dark-2: #ebe8e0;
+    --overlay-bg: rgba(250,248,244,0.92);
+    --shadow-card: rgba(0,0,0,0.1);
+    --tile-hover-shadow: rgba(217,119,6,0.3);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: calc(16px * var(--font-scale, 1)); }
@@ -248,8 +269,8 @@
     position: fixed;
     bottom: 0; left: 0; right: 0;
     background:
-      linear-gradient(to top, rgba(15,15,15,0.95), rgba(15,15,15,0.95)),
-      var(--np-accent, linear-gradient(135deg, #1a1a1a, #0a0a0a));
+      linear-gradient(to top, var(--overlay-bg), var(--overlay-bg)),
+      var(--np-accent, linear-gradient(135deg, var(--grad-dark-1), var(--grad-dark-2)));
     background-blend-mode: normal, normal;
     backdrop-filter: blur(20px);
     border-top: 1px solid var(--np-accent-border, var(--border));
@@ -607,7 +628,7 @@
     bottom: 140px; left: 1rem; right: 1rem;
     max-width: 420px;
     margin: 0 auto;
-    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    background: linear-gradient(135deg, var(--grad-dark-1), var(--grad-dark-2));
     border: 1px solid #4fd1c5;
     border-radius: 14px;
     padding: 1rem;
@@ -800,7 +821,7 @@
     margin-bottom: 0.5rem;
   }
   .album-card {
-    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    background: linear-gradient(135deg, var(--grad-dark-1), var(--grad-dark-2));
     border-radius: 12px;
     padding: 1rem;
     display: grid;
@@ -964,7 +985,7 @@
 
   /* Resume banner */
   .resume-banner {
-    background: linear-gradient(135deg, #1f1f1f, #0a0a0a);
+    background: linear-gradient(135deg, var(--bg3), var(--grad-dark-2));
     border: 1px solid var(--amber);
     border-radius: 12px;
     padding: 1rem;
@@ -1201,7 +1222,7 @@
     bottom: 120px; left: 1rem; right: 1rem;
     max-width: 420px;
     margin: 0 auto;
-    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    background: linear-gradient(135deg, var(--grad-dark-1), var(--grad-dark-2));
     border: 1px solid var(--amber);
     border-radius: 14px;
     padding: 1rem;
@@ -1439,6 +1460,17 @@
   <div class="modal-inner">
     <button class="modal-close" id="settingsClose" aria-label="閉じる">×</button>
     <h2>⚙ 設定</h2>
+    <div class="settings-row">
+      <div>
+        <div class="label">🌓 テーマ</div>
+        <div class="sub">ダーク / ライト / 端末設定に追従</div>
+      </div>
+      <div class="seg-control" id="themeControl">
+        <button data-theme="dark">🌙</button>
+        <button data-theme="light">☀️</button>
+        <button data-theme="auto" class="active">🔄</button>
+      </div>
+    </div>
     <div class="settings-row">
       <div>
         <div class="label">🆎 文字サイズ</div>
@@ -2360,6 +2392,42 @@ document.getElementById('openShortcuts').addEventListener('click', () => {
   m.addEventListener('click', (e) => { if (e.target === m) m.classList.remove('active'); });
 });
 
+// Theme (dark / light / auto)
+function applyTheme(mode) {
+  const html = document.documentElement;
+  if (mode === 'auto') {
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    html.setAttribute('data-theme', prefersLight ? 'light' : 'dark');
+  } else {
+    html.setAttribute('data-theme', mode);
+  }
+  // Update meta theme-color for PWA status bar
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeMeta) {
+    themeMeta.content = html.getAttribute('data-theme') === 'light' ? '#faf8f4' : '#0d0d0d';
+  }
+}
+const savedTheme = localStorage.getItem('hb_theme') || 'auto';
+applyTheme(savedTheme);
+document.querySelectorAll('#themeControl button').forEach(b => {
+  b.classList.toggle('active', b.dataset.theme === savedTheme);
+  b.addEventListener('click', () => {
+    const v = b.dataset.theme;
+    localStorage.setItem('hb_theme', v);
+    applyTheme(v);
+    document.querySelectorAll('#themeControl button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    // Re-apply cover color if playing (colors may need recalc visually)
+    if (currentIdx >= 0 && colorAdaptEnabled) {
+      setTimeout(() => extractAndApplyCoverColor(queue[currentIdx].cover), 100);
+    }
+  });
+});
+// React to system preference changes if in auto mode
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+  if (localStorage.getItem('hb_theme') === 'auto' || !localStorage.getItem('hb_theme')) applyTheme('auto');
+});
+
 // Font size
 const savedFontScale = parseFloat(localStorage.getItem('hb_font_scale') || '1');
 document.documentElement.style.setProperty('--font-scale', String(savedFontScale));
@@ -2396,7 +2464,7 @@ document.querySelectorAll('#colorAdaptControl button').forEach(b => {
 // Reset all personal data
 document.getElementById('resetAll').addEventListener('click', () => {
   if (!confirm('お気に入り・履歴・設定すべて削除します。よろしいですか？')) return;
-  ['hb_liked', 'hb_recent', 'hb_last_played', 'hb_volume', 'hb_speed', 'hb_font_scale', 'hb_color_adapt', 'ios_install_dismissed', 'pwa_dismissed'].forEach(k => localStorage.removeItem(k));
+  ['hb_liked', 'hb_recent', 'hb_last_played', 'hb_volume', 'hb_speed', 'hb_font_scale', 'hb_color_adapt', 'hb_theme', 'ios_install_dismissed', 'pwa_dismissed'].forEach(k => localStorage.removeItem(k));
   location.reload();
 });
 
