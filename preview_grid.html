@@ -73,15 +73,25 @@
     line-height: 1.1;
     font-weight: 900;
     letter-spacing: -0.02em;
-    background: linear-gradient(90deg, #ffa600, #ff5a8a, #ffa600);
-    background-size: 200% 100%;
+    background: linear-gradient(
+      100deg,
+      #ffa600 0%,
+      #ff5a8a 35%,
+      #ffffff 50%,
+      #ff5a8a 65%,
+      #ffa600 100%
+    );
+    background-size: 250% 100%;
+    background-position: 100% 0;
     -webkit-background-clip: text;
             background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: titleShine 6s linear infinite;
+    color: transparent;
+    animation: titleShine 4s linear infinite;
   }
   @keyframes titleShine {
-    to { background-position: 200% 0; }
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
   }
   .site-title .tagline {
     font-size: 0.75rem;
