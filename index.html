@@ -481,6 +481,17 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* Ruby (振り仮名) */
+  ruby rt {
+    font-size: 0.55em;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+  .np-lyrics-full .lyric-line.active ruby rt {
+    color: var(--amber);
+    opacity: 0.85;
+  }
+
   /* Clickable lyric */
   .np-lyrics-full .lyric-line { cursor: pointer; }
   .np-lyrics-full .lyric-line:hover { background: var(--bg2); border-radius: 4px; }
@@ -1733,6 +1744,13 @@ function showResumeBanner() {
 }
 showResumeBanner();
 
+// Convert {原文|ルビ} notation to HTML ruby tags, escape other HTML
+function renderRuby(text) {
+  if (!text) return '';
+  const escape = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return escape(text).replace(/\{([^|{}]+)\|([^{}]+)\}/g, (_, base, rt) => `<ruby>${base}<rt>${rt}</rt></ruby>`);
+}
+
 function parseLRC(text) {
   if (!text) return [];
   return text.split('\n').map(line => {
@@ -2561,7 +2579,7 @@ function renderFullLyrics() {
     return;
   }
   npLyricsFull.innerHTML = parsedLyrics.map((l, i) =>
-    `<div class="lyric-line" data-idx="${i}" data-time="${l.time}">${l.text}</div>`
+    `<div class="lyric-line" data-idx="${i}" data-time="${l.time}">${renderRuby(l.text)}</div>`
   ).join('');
   npLyricsFull.querySelectorAll('.lyric-line').forEach(el => {
     el.addEventListener('click', () => {
@@ -2580,7 +2598,7 @@ function updateLyric(t) {
   for (let i = parsedLyrics.length - 1; i >= 0; i--) {
     if (t >= parsedLyrics[i].time) { activeIdx = i; break; }
   }
-  npLyricInline.textContent = activeIdx >= 0 ? parsedLyrics[activeIdx].text : '';
+  npLyricInline.innerHTML = activeIdx >= 0 ? renderRuby(parsedLyrics[activeIdx].text) : '';
   const lines = npLyricsFull.querySelectorAll('.lyric-line');
   lines.forEach((el, i) => {
     el.classList.toggle('active', i === activeIdx);
