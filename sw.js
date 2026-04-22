@@ -1,5 +1,5 @@
 // Code cache: bumped on each deploy via bump_sw.sh (triggers RELOAD notification)
-const CACHE = 'hina-202604230445';
+const CACHE = 'hina-202604230448';
 // Music cache: stable across deployments (mp3 / covers / Suno CDN images survive bumps)
 const CACHE_MUSIC = 'hina-music-v1';
 
