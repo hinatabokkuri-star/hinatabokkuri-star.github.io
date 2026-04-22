@@ -1610,6 +1610,7 @@
 </div>
 
 <audio id="audio" preload="none" playsinline></audio>
+<audio id="audioB" preload="none" playsinline></audio>
 
 <script src="songs.js?v=1"></script>
 <script>
@@ -2096,7 +2097,10 @@ const savedVol = localStorage.getItem('hb_volume');
 if (savedVol !== null) audio.volume = parseFloat(savedVol);
 volumeSlider.value = audio.volume;
 volumeSlider.addEventListener('input', () => {
-  audio.volume = parseFloat(volumeSlider.value);
+  const v = parseFloat(volumeSlider.value);
+  audio.volume = v;
+  const audioB_ = document.getElementById('audioB');
+  if (audioB_) audioB_.volume = v;
   localStorage.setItem('hb_volume', volumeSlider.value);
 });
 
@@ -2268,7 +2272,8 @@ document.getElementById('shuffleAll').addEventListener('click', () => {
   if (typeof gtag !== 'undefined') gtag('event', 'shuffle_all_start', { total: SONGS.length });
 });
 
-// Album play (sequential, no shuffle)
+// Album play (sequential, no shuffle, crossfade enabled)
+let albumMode = false;
 document.querySelectorAll('.album-card').forEach(card => {
   card.addEventListener('click', (e) => {
     e.preventDefault();
@@ -2276,13 +2281,104 @@ document.querySelectorAll('.album-card').forEach(card => {
     if (album === 'dance-instinct') {
       shuffleMode = false;
       btnShuffle.classList.remove('active');
+      albumMode = true;
       queue = DANCE_INSTINCT.map(f => SONGS.find(s => s.file === f)).filter(Boolean);
       currentIdx = 0;
       playCurrent();
-      if (typeof gtag !== 'undefined') gtag('event', 'play_album', { album: 'DANCE INSTINCT' });
+      showError('🎵 DANCE INSTINCT: クロスフェード再生中');
+      if (typeof gtag !== 'undefined') gtag('event', 'play_album', { album: 'DANCE INSTINCT', crossfade: true });
     }
   });
 });
+
+// Disable album mode when user changes playback context manually
+btnShuffle.addEventListener('click', () => { albumMode = false; });
+document.getElementById('shuffleAll').addEventListener('click', () => { albumMode = false; });
+
+// ===== Crossfade engine (album mode only) =====
+const audioB = document.getElementById('audioB');
+const CROSSFADE_SEC = 3;
+let crossfadeInProgress = false;
+let crossfadeTimer = null;
+
+// Sync volume across both
+function applyVolumeToAll(v) {
+  audio.volume = v;
+  audioB.volume = v;
+}
+
+// Monitor active audio for crossfade trigger
+setInterval(() => {
+  if (!albumMode || crossfadeInProgress) return;
+  if (currentIdx < 0 || currentIdx >= queue.length - 1) return;
+  const active = audio;
+  if (!active.duration || active.paused) return;
+  const remaining = active.duration - active.currentTime;
+  if (remaining > 0 && remaining < CROSSFADE_SEC) startCrossfade();
+}, 300);
+
+async function startCrossfade() {
+  crossfadeInProgress = true;
+  const nextIdx = currentIdx + 1;
+  const nextSong = queue[nextIdx];
+  if (!nextSong) { crossfadeInProgress = false; return; }
+
+  const targetVol = audio.volume;
+  audioB.src = 'music/' + nextSong.file;
+  audioB.volume = 0;
+  try {
+    await audioB.play();
+  } catch (e) {
+    crossfadeInProgress = false;
+    return;
+  }
+
+  const startVol = audio.volume;
+  const steps = 30;
+  const durMs = CROSSFADE_SEC * 1000;
+  const stepMs = durMs / steps;
+  let step = 0;
+  const fade = setInterval(() => {
+    step++;
+    const progress = step / steps;
+    audio.volume = Math.max(0, startVol * (1 - progress));
+    audioB.volume = Math.min(targetVol, targetVol * progress);
+    if (step >= steps) {
+      clearInterval(fade);
+      audio.pause();
+      audio.currentTime = 0;
+      // Swap: audioB becomes the new main audio
+      swapAudioRef();
+      currentIdx = nextIdx;
+      // Update UI for new track
+      const s = queue[currentIdx];
+      npCover.style.backgroundImage = `url('${s.cover}')`;
+      npTitle.textContent = s.title;
+      parsedLyrics = parseLRC(s.lyrics);
+      renderFullLyrics();
+      updateMediaSession(s);
+      markPlayingTile();
+      updateRecentPlayed(s.file);
+      extractAndApplyCoverColor(s.cover);
+      if (np.classList.contains('queue-view')) renderQueue();
+      crossfadeInProgress = false;
+    }
+  }, stepMs);
+}
+
+function swapAudioRef() {
+  // Swap the primary audio element reference
+  // Simplified: copy state and src, then reattach listeners
+  const tmp = audio.src;
+  const tmpTime = audio.currentTime;
+  audio.src = audioB.src;
+  audio.currentTime = audioB.currentTime;
+  audioB.src = '';
+  audioB.pause();
+  // Main `audio` takes over playback
+  if (!audio.paused) return;
+  audio.play().catch(() => {});
+}
 
 document.querySelectorAll('.chip[data-genre]').forEach(c => {
   c.addEventListener('click', () => {
