@@ -246,9 +246,13 @@
   .now-playing {
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    background: rgba(15,15,15,0.95);
+    background:
+      linear-gradient(to top, rgba(15,15,15,0.95), rgba(15,15,15,0.95)),
+      var(--np-accent, linear-gradient(135deg, #1a1a1a, #0a0a0a));
+    background-blend-mode: normal, normal;
     backdrop-filter: blur(20px);
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--np-accent-border, var(--border));
+    transition: border-top-color 1s ease, box-shadow 1s ease;
     padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom)) 1rem;
     z-index: 100;
     display: none;
@@ -1572,6 +1576,43 @@ function render() {
   markPlayingTile();
 }
 
+// Extract dominant color from cover image and apply to Now Playing
+function extractAndApplyCoverColor(coverUrl) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    try {
+      const canvas = document.createElement('canvas');
+      const size = 16;
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, size, size);
+      const data = ctx.getImageData(0, 0, size, size).data;
+      let r = 0, g = 0, b = 0, n = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        const a = data[i+3];
+        if (a < 128) continue;
+        const rr = data[i], gg = data[i+1], bb = data[i+2];
+        // Skip near-white/black for vibrancy
+        const max = Math.max(rr, gg, bb), min = Math.min(rr, gg, bb);
+        if (max < 30 || min > 225) continue;
+        r += rr; g += gg; b += bb; n++;
+      }
+      if (n === 0) return;
+      r = Math.round(r / n); g = Math.round(g / n); b = Math.round(b / n);
+      // Create dim gradient and glow
+      np.style.setProperty('--np-accent', `radial-gradient(at top left, rgba(${r},${g},${b},0.45), transparent 50%)`);
+      np.style.setProperty('--np-accent-border', `rgba(${r},${g},${b},0.6)`);
+      np.style.boxShadow = `0 -8px 40px rgba(${r},${g},${b},0.25)`;
+    } catch (e) {
+      // CORS or other error; fall back to default
+      console.log('color extract skipped:', e.message);
+    }
+  };
+  img.onerror = () => { /* silently fall back */ };
+  img.src = coverUrl;
+}
+
 // Lazy load cover images via IntersectionObserver
 const lazyObserver = ('IntersectionObserver' in window) ? new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -1629,6 +1670,7 @@ function playCurrent() {
   updateMediaSession(s);
   markPlayingTile();
   updateRecentPlayed(s.file);
+  extractAndApplyCoverColor(s.cover);
   if (np.classList.contains('queue-view')) renderQueue();
   if (typeof gtag !== 'undefined') {
     gtag('event', 'play_track', {
