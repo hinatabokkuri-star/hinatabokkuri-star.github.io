@@ -477,6 +477,17 @@
   /* X logo icon button */
   .np-btn .x-icon { width: 18px; height: 18px; fill: currentColor; }
 
+  /* Reduced motion: disable animations for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001s !important;
+    }
+    .logo-mark img { animation: none !important; }
+    .tile.playing .tile-cover::before { animation: none !important; }
+  }
+
   /* Accessibility - visible focus ring */
   :focus-visible {
     outline: 2px solid var(--amber);
@@ -1117,7 +1128,8 @@
     .np-btn .x-icon { width: 14px; height: 14px; }
     /* Hide less-critical buttons on narrow to prevent overflow */
     .np-actions #btnShare,
-    .np-actions #btnRepeat { display: none; }
+    .np-actions #btnRepeat,
+    .np-actions #btnSpeed { display: none; }
   }
   @media (max-width: 380px) {
     .np-btn { width: 30px; height: 30px; }
@@ -1246,6 +1258,14 @@
   <button data-sleep="end" role="menuitem">曲終了まで</button>
 </div>
 
+<!-- Playback speed menu -->
+<div id="speedMenu" class="sleep-menu" role="menu" style="right: 4.5rem;">
+  <button data-speed="0.75" role="menuitem">0.75倍</button>
+  <button data-speed="1" role="menuitem" class="active">1倍（標準）</button>
+  <button data-speed="1.25" role="menuitem">1.25倍</button>
+  <button data-speed="1.5" role="menuitem">1.5倍</button>
+</div>
+
 <!-- iOS install hint -->
 <div id="iosInstall" class="ios-install">
   <img src="/icons/icon-180.png" alt="">
@@ -1292,6 +1312,7 @@
       <button class="np-btn primary" id="btnPlayPause" title="再生/停止" aria-label="再生または停止">⏸</button>
       <button class="np-btn" id="btnNext" title="次へ" aria-label="次の曲">⏭</button>
       <button class="np-btn" id="btnShare" title="シェア" aria-label="この曲をシェア"><svg class="x-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
+      <button class="np-btn" id="btnSpeed" title="再生速度" aria-label="再生速度">⏩</button>
       <button class="np-btn" id="btnSleep" title="スリープタイマー" aria-label="スリープタイマー">⏰</button>
       <button class="np-btn" id="btnExpand" title="歌詞展開" aria-label="歌詞を展開">📝</button>
       <div class="np-volume">
@@ -1780,6 +1801,35 @@ function fadeAndPause() {
   }, 200);
 }
 document.getElementById('sleepCancel').addEventListener('click', clearSleep);
+
+// Playback speed
+const btnSpeed = document.getElementById('btnSpeed');
+const speedMenu = document.getElementById('speedMenu');
+const savedSpeed = parseFloat(localStorage.getItem('hb_speed') || '1');
+audio.playbackRate = savedSpeed;
+if (savedSpeed !== 1) btnSpeed.classList.add('active');
+speedMenu.querySelectorAll('button').forEach(b => {
+  b.classList.toggle('active', parseFloat(b.dataset.speed) === savedSpeed);
+});
+btnSpeed.addEventListener('click', (e) => {
+  e.stopPropagation();
+  speedMenu.classList.toggle('show');
+  sleepMenu.classList.remove('show');
+});
+document.addEventListener('click', (e) => {
+  if (!speedMenu.contains(e.target) && e.target !== btnSpeed) speedMenu.classList.remove('show');
+});
+speedMenu.querySelectorAll('button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const v = parseFloat(btn.dataset.speed);
+    audio.playbackRate = v;
+    localStorage.setItem('hb_speed', String(v));
+    speedMenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    btnSpeed.classList.toggle('active', v !== 1);
+    speedMenu.classList.remove('show');
+  });
+});
 // Intercept playNext when sleepAtSongEnd is active
 const origPlayNext = playNext;
 window.playNext = function() {
