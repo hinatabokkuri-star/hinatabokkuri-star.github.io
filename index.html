@@ -1547,6 +1547,13 @@
     </div>
     <div class="settings-row">
       <div>
+        <div class="label">🔢 バージョン</div>
+        <div class="sub" id="versionInfo">取得中…</div>
+      </div>
+      <button class="danger-btn" id="forceUpdate" style="color:var(--amber);border-color:var(--amber);">更新</button>
+    </div>
+    <div class="settings-row">
+      <div>
         <div class="label">🗑 個人データ削除</div>
         <div class="sub">お気に入り・履歴・設定をリセット</div>
       </div>
@@ -2750,6 +2757,37 @@ document.querySelectorAll('#colorAdaptControl button').forEach(b => {
   });
 });
 
+// Version display (fetch sw.js and extract CACHE const)
+async function updateVersionInfo() {
+  const el = document.getElementById('versionInfo');
+  try {
+    const res = await fetch('/sw.js?t=' + Date.now(), { cache: 'no-store' });
+    const text = await res.text();
+    const m = text.match(/CACHE\s*=\s*'([^']+)'/);
+    if (m) {
+      const ver = m[1];
+      // hina-YYYYMMDDHHmm → readable format
+      const ts = ver.replace('hina-', '');
+      const pretty = ts.length === 12
+        ? `${ts.slice(0,4)}-${ts.slice(4,6)}-${ts.slice(6,8)} ${ts.slice(8,10)}:${ts.slice(10,12)}`
+        : ver;
+      el.textContent = `${pretty}（${ver}）`;
+    } else {
+      el.textContent = '不明';
+    }
+  } catch (e) {
+    el.textContent = 'オフライン';
+  }
+}
+document.getElementById('forceUpdate').addEventListener('click', async () => {
+  if (!('serviceWorker' in navigator)) return location.reload();
+  try {
+    const reg = await navigator.serviceWorker.getRegistration();
+    if (reg) await reg.update();
+  } catch {}
+  setTimeout(() => location.reload(), 500);
+});
+
 // Offline cache management
 async function updateCacheSummary() {
   const summary = document.getElementById('cacheSummary');
@@ -2780,8 +2818,9 @@ async function updateCacheSummary() {
     summary.textContent = '読込失敗';
   }
 }
-settingsBtn.addEventListener('click', () => updateCacheSummary());
+settingsBtn.addEventListener('click', () => { updateCacheSummary(); updateVersionInfo(); });
 updateCacheSummary();
+updateVersionInfo();
 document.getElementById('clearCache').addEventListener('click', async () => {
   if (!confirm('オフラインキャッシュを全削除します。次回アクセス時に再ダウンロードされます。')) return;
   if (!('caches' in window)) return;
