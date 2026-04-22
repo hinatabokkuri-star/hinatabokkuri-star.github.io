@@ -1967,6 +1967,17 @@ function playCurrent() {
   // Reset total time display - will update on loadedmetadata/durationchange
   document.getElementById('npTimeTotal').textContent = '--:--';
   audio.src = 'music/' + s.file;
+  // Poll for duration periodically in case events misfire
+  let durationPolls = 0;
+  const durationPoll = setInterval(() => {
+    durationPolls++;
+    if (isFinite(audio.duration) && audio.duration > 0) {
+      document.getElementById('npTimeTotal').textContent = fmtTime(audio.duration);
+      clearInterval(durationPoll);
+    } else if (durationPolls > 40) {
+      clearInterval(durationPoll);
+    }
+  }, 250);
   parsedLyrics = parseLRC(s.lyrics);
   renderFullLyrics();
   np.classList.add('active');
@@ -2463,6 +2474,12 @@ async function startCrossfade() {
   const s = queue[currentIdx];
   npCover.style.backgroundImage = `url('${s.cover}')`;
   npTitle.textContent = s.title;
+  // Update duration immediately (canplay already fired, so duration is available)
+  if (isFinite(incoming.duration) && incoming.duration > 0) {
+    document.getElementById('npTimeTotal').textContent = fmtTime(incoming.duration);
+  } else {
+    document.getElementById('npTimeTotal').textContent = '--:--';
+  }
   parsedLyrics = parseLRC(s.lyrics);
   renderFullLyrics();
   updateMediaSession(s);
