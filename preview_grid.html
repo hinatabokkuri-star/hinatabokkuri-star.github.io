@@ -8,6 +8,9 @@
 <title>hinatabokkuri — Music Preview</title>
 <!-- Google tag (gtag.js) -->
 <script>
+  if (new URLSearchParams(location.search).get('notrack') === '1') {
+    localStorage.setItem('ga_opt_out', '1');
+  }
   window['ga-disable-G-EN8WSRB7TL'] = localStorage.getItem('ga_opt_out') === '1';
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EN8WSRB7TL"></script>
