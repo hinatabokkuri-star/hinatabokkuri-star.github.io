@@ -1,2332 +1,1570 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script>
-    if (new URLSearchParams(location.search).get('notrack') === '1') {
-      localStorage.setItem('ga_opt_out', '1');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#f59e2b">
+<link rel="manifest" href="/manifest.json">
+<title>HINATA AI MUSIC</title>
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<!-- Google tag (gtag.js) -->
+<script>
+  if (new URLSearchParams(location.search).get('notrack') === '1') {
+    localStorage.setItem('ga_opt_out', '1');
+  }
+  window['ga-disable-G-EN8WSRB7TL'] = localStorage.getItem('ga_opt_out') === '1';
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EN8WSRB7TL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EN8WSRB7TL');
+</script>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #161616;
+    --bg3: #1f1f1f;
+    --text: #f0f0f0;
+    --text-dim: #999;
+    --border: #333;
+    --amber: #ffa600;
+    --pink: #ff5a8a;
+    --cyan: #4fd1c5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Yu Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 1rem 1rem 180px 1rem;
+    min-height: 100vh;
+  }
+  .container { max-width: 1400px; margin: 0 auto; }
+
+  /* Site header with logo */
+  .site-header {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .logo-mark {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: #0a0a0a;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    animation: logoGlow 4s ease-in-out infinite;
+    position: relative;
+  }
+  .logo-mark img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    transform-origin: 50% 70%;
+    animation: logoSway 3.5s ease-in-out infinite;
+    transition: transform 0.3s;
+  }
+  .logo-mark:hover img { transform: scale(1.08); animation-play-state: paused; }
+  @keyframes logoGlow {
+    0%, 100% {
+      box-shadow: 0 4px 16px rgba(79,209,197,0.4), 0 0 20px rgba(79,209,197,0.2);
     }
-    window['ga-disable-G-EN8WSRB7TL'] = localStorage.getItem('ga_opt_out') === '1';
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EN8WSRB7TL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-EN8WSRB7TL');
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>hinatabokkuri</title>
-  <meta name="description" content="hinatabokkuri — sound novel, music, game assets">
-  <meta property="og:title" content="hinatabokkuri">
-  <meta property="og:description" content="sound novel / retro RPG / music / assets">
-  <meta property="og:type" content="website">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#f59e2b">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="hinatabokkuri">
-  <link rel="apple-touch-icon" href="/icons/icon-180.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:       #faf6ef;
-      --bg2:      #ffffff;
-      --bg3:      #fff3e6;
-      --border:   #f0e4d4;
-      --amber:    #f59e2b;
-      --amber-dim:#e07b1f;
-      --coral:    #ff6b7a;
-      --teal:     #2fb8a9;
-      --violet:   #8b6dff;
-      --text:     #2a2320;
-      --text-dim: #8a7a6d;
-      --green:    #48a86e;
-      --shadow:   0 4px 14px rgba(245,158,43,0.10), 0 1px 3px rgba(42,35,32,0.06);
-      --shadow-hover: 0 8px 24px rgba(245,158,43,0.18), 0 2px 6px rgba(42,35,32,0.08);
+    50% {
+      box-shadow: 0 4px 24px rgba(255,90,138,0.55), 0 0 30px rgba(255,90,138,0.3);
     }
+  }
+  @keyframes logoSway {
+    0%, 100% { transform: rotate(-2.5deg); }
+    50%      { transform: rotate(2.5deg); }
+  }
+  .site-title h1 {
+    font-size: 1.8rem;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    background: linear-gradient(
+      100deg,
+      #ffa600 0%,
+      #ff5a8a 35%,
+      #ffffff 50%,
+      #ff5a8a 65%,
+      #ffa600 100%
+    );
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: titleShine 4s linear infinite;
+  }
+  @keyframes titleShine {
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+  .site-title .tagline {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.1rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  @media (max-width: 600px) {
+    .logo-mark { width: 44px; height: 44px; font-size: 1.4rem; border-radius: 12px; }
+    .site-title h1 { font-size: 1.4rem; }
+    .site-title .tagline { font-size: 0.65rem; }
+  }
 
-    html { scroll-behavior: smooth; }
+  .hero {
+    background: linear-gradient(135deg, #ffa600, #ff5a8a);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 10px 40px rgba(255,90,138,0.25);
+  }
+  .hero-icon { font-size: 2.5rem; }
+  .hero-text { flex: 1; color: #000; }
+  .hero-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 0.2rem; }
+  .hero-sub { font-size: 0.8rem; opacity: 0.7; }
+  .hero-btn {
+    appearance: none; border: none;
+    background: #000; color: #fff;
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Noto Sans JP', sans-serif;
-      line-height: 1.75;
-      min-height: 100vh;
-    }
+  .controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .chip {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text-dim);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+  }
+  .chip:hover { border-color: var(--amber); color: var(--text); }
+  .chip.active { background: var(--amber); color: #000; border-color: var(--amber); }
+  .view-toggle {
+    margin-left: auto;
+    display: flex;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .view-toggle button {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+  }
+  .view-toggle button.active { background: var(--amber); color: #000; }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.6rem;
-      height: 60px;
-      background: rgba(255,255,255,0.82);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  .tile {
+    background: var(--bg2);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .tile:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(255,166,0,0.25); }
+  .tile.playing { outline: 2px solid var(--amber); }
+  .tile-cover {
+    aspect-ratio: 1 / 1;
+    background: #000 center/cover no-repeat;
+    position: relative;
+  }
+  .tile-cover::before {
+    content: '▶'; position: absolute; inset: 0;
+    display: grid; place-items: center; font-size: 3rem; color: #fff;
+    background: rgba(0,0,0,0.45); opacity: 0; transition: opacity 0.2s;
+  }
+  .tile:hover .tile-cover::before { opacity: 1; }
+  .tile.playing .tile-cover::before {
+    content: '♪'; opacity: 1; background: rgba(255,166,0,0.3); color: var(--amber);
+    animation: pulse 1s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { transform: scale(1.1); } }
+  .tile-meta { padding: 0.7rem 0.8rem; }
+  .tile-title {
+    font-size: 0.85rem; font-weight: 700; line-height: 1.3;
+    margin-bottom: 0.25rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tile-comment {
+    font-size: 0.7rem; color: var(--text-dim); line-height: 1.35;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .genre-tag {
+    display: inline-block; background: var(--pink); color: #fff;
+    font-size: 0.6rem; padding: 0.1rem 0.4rem;
+    border-radius: 4px; margin-bottom: 0.3rem; font-weight: 700;
+  }
 
-    .nav-logo {
-      font-family: 'Fredoka', 'M PLUS Rounded 1c', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      color: var(--amber);
-      text-decoration: none;
-    }
+  .list { display: grid; gap: 0.8rem; }
+  .list .tile { display: grid; grid-template-columns: 120px 1fr; align-items: stretch; }
+  .list .tile-cover { width: 120px; aspect-ratio: 1/1; }
+  .list .tile-title { font-size: 1rem; white-space: normal; }
+  .list .tile-comment { font-size: 0.8rem; -webkit-line-clamp: 3; }
 
-    .nav-logo::before { content: '✿ '; color: var(--coral); }
+  /* Now Playing Bar */
+  .now-playing {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(15,15,15,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom)) 1rem;
+    z-index: 100;
+    display: none;
+  }
+  .now-playing.active { display: block; }
+  .np-row {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 0.7rem;
+    align-items: center;
+  }
+  /* Vinyl cover (transitions between square album art and spinning disc) */
+  .np-cover {
+    width: 56px; height: 56px;
+    border-radius: 8px;
+    background: #111 center/cover no-repeat;
+    position: relative;
+    transition: border-radius 0.7s ease, box-shadow 0.4s;
+    flex-shrink: 0;
+  }
+  .np-cover .spindle {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 8px; height: 8px;
+    margin: -4px 0 0 -4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #000 35%, #222 70%, #050505 100%);
+    box-shadow: 0 0 0 1.5px rgba(255,255,255,0.4), 0 0 6px rgba(0,0,0,0.9) inset;
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+  .np-cover .grooves {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      linear-gradient(125deg, transparent 0%, transparent 38%, rgba(255,255,255,0.15) 50%, transparent 62%, transparent 100%),
+      repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0 1px, transparent 1px 3px);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+  .now-playing.spinning .np-cover {
+    border-radius: 50%;
+    animation: spinDisc 6s linear infinite;
+    box-shadow:
+      0 4px 14px rgba(0,0,0,0.6),
+      0 0 0 2px rgba(0,0,0,0.6) inset,
+      0 0 0 3px rgba(255,255,255,0.08) inset;
+  }
+  .now-playing.spinning .np-cover .spindle,
+  .now-playing.spinning .np-cover .grooves { opacity: 1; }
+  @keyframes spinDisc { to { transform: rotate(360deg); } }
+  .np-info { min-width: 0; cursor: pointer; }
+  .np-title {
+    font-weight: 700; font-size: 0.9rem;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .np-lyric {
+    font-size: 0.75rem; color: var(--amber);
+    height: 1.2rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .np-actions { display: flex; gap: 0.3rem; align-items: center; }
+  .np-btn {
+    appearance: none; border: none;
+    background: transparent; color: var(--text);
+    font-size: 1.3rem; cursor: pointer;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    padding: 0;
+  }
+  .np-btn:hover { background: var(--bg2); }
+  .np-btn.primary { background: var(--amber); color: #000; font-size: 1.1rem; }
+  .np-btn.active { color: var(--amber); }
+  .np-progress {
+    margin-top: 0.5rem;
+    height: 6px;
+    background: var(--bg3);
+    border-radius: 3px;
+    cursor: pointer;
+    overflow: visible;
+    position: relative;
+  }
+  .np-progress-fill {
+    height: 100%; background: var(--amber);
+    width: 0%;
+    border-radius: 3px;
+  }
+  .np-scrub-tooltip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .np-progress:hover .np-scrub-tooltip { opacity: 1; }
 
-    .nav-links {
-      display: flex;
-      gap: 1.6rem;
-      list-style: none;
-    }
+  .np-lyrics-full {
+    margin: 1rem auto 0 auto;
+    padding: 80px 0;
+    max-height: 260px;
+    overflow-y: auto;
+    text-align: left;
+    scroll-behavior: smooth;
+    display: none;
+    max-width: 720px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 100%);
+  }
+  .now-playing.expanded .np-lyrics-full { display: block; }
+  .np-lyrics-full .lyric-line {
+    padding: 0.4rem 1rem;
+    color: var(--text-dim);
+    font-size: 1rem;
+    transition: color 0.3s, font-size 0.3s, font-weight 0.3s;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+  }
+  .np-lyrics-full .lyric-line.active {
+    color: var(--amber);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .np-lyrics-full .lyric-line.past { opacity: 0.35; }
 
-    .nav-links a {
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
+  /* Update notification */
+  .update-banner {
+    position: fixed;
+    top: 1rem; left: 50%;
+    transform: translateX(-50%);
+    background: var(--amber);
+    color: #000;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    z-index: 200;
+    box-shadow: 0 6px 20px rgba(255,166,0,0.4);
+  }
+  .update-banner.show { display: flex; }
+  .update-banner button {
+    appearance: none; border: none;
+    background: #000; color: #fff;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-weight: 700; font-size: 0.75rem;
+    cursor: pointer; font-family: inherit;
+  }
+  .update-banner .dismiss {
+    background: transparent; color: rgba(0,0,0,0.6);
+    padding: 0.3rem 0.5rem;
+  }
 
-    .nav-links a:hover { color: var(--coral); }
+  /* Search */
+  .search-box {
+    position: relative;
+    flex: 0 1 240px;
+  }
+  .search-box input {
+    width: 100%;
+    appearance: none;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text);
+    padding: 0.4rem 0.8rem 0.4rem 2rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-family: inherit;
+  }
+  .search-box input:focus { outline: 1px solid var(--amber); border-color: var(--amber); }
+  .search-box::before {
+    content: '🔍';
+    position: absolute;
+    left: 0.6rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    pointer-events: none;
+  }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 92vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
+  /* Time display */
+  .np-time {
+    display: flex; justify-content: space-between;
+    font-size: 0.7rem; color: var(--text-dim);
+    margin-top: 0.3rem;
+    font-variant-numeric: tabular-nums;
+  }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle 380px at 18% 22%, rgba(255,107,122,0.22) 0%, transparent 70%),
-        radial-gradient(circle 420px at 82% 30%, rgba(47,184,169,0.18) 0%, transparent 70%),
-        radial-gradient(circle 500px at 50% 88%, rgba(245,158,43,0.18) 0%, transparent 70%),
-        radial-gradient(circle 300px at 88% 78%, rgba(139,109,255,0.14) 0%, transparent 70%);
-      pointer-events: none;
-    }
+  /* Clickable lyric */
+  .np-lyrics-full .lyric-line { cursor: pointer; }
+  .np-lyrics-full .lyric-line:hover { background: var(--bg2); border-radius: 4px; }
 
-    .hero-sub {
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: var(--coral);
-      margin-bottom: 1.4rem;
-      text-transform: uppercase;
-      position: relative;
-    }
+  /* Lyrics scrollbar styling */
+  .np-lyrics-full {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,166,0,0.5) transparent;
+  }
+  .np-lyrics-full::-webkit-scrollbar { width: 6px; }
+  .np-lyrics-full::-webkit-scrollbar-track { background: transparent; }
+  .np-lyrics-full::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--amber), var(--pink));
+    border-radius: 3px;
+  }
+  .np-lyrics-full::-webkit-scrollbar-thumb:hover {
+    background: var(--amber);
+  }
 
-    .hero-sub::before, .hero-sub::after {
-      content: '✦';
-      color: var(--amber);
-      margin: 0 0.6em;
-      opacity: 0.7;
-    }
+  /* X logo icon button */
+  .np-btn .x-icon { width: 18px; height: 18px; fill: currentColor; }
 
-    .hero-name {
-      font-family: 'Fredoka', 'M PLUS Rounded 1c', sans-serif;
-      font-size: clamp(3rem, 9vw, 6rem);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      line-height: 1.05;
-      color: var(--text);
-      margin-bottom: 1.2rem;
-      position: relative;
-    }
+  /* Section heading */
+  .section-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin: 2rem 0 0.8rem 0;
+    text-transform: uppercase;
+  }
 
-    .hero-name span {
-      background: linear-gradient(135deg, var(--coral), var(--amber));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  /* Album card */
+  .album-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .album-card {
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    border-radius: 12px;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .album-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255,166,0,0.2);
+    border-color: var(--amber);
+  }
+  .album-card .cover {
+    width: 100px; height: 100px;
+    border-radius: 8px;
+    background: center/cover no-repeat;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+  }
+  .album-card h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
+  }
+  .album-card .album-meta {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-bottom: 0.6rem;
+  }
+  .album-card .album-play {
+    appearance: none;
+    border: none;
+    background: var(--amber);
+    color: #000;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+  }
 
-    .hero-tagline {
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
-      color: var(--text-dim);
-      font-weight: 500;
-      margin-bottom: 2.8rem;
-      position: relative;
-    }
+  /* MV card */
+  .mv-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .mv-card {
+    background: var(--bg2);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: 1px solid var(--border);
+  }
+  .mv-card:hover { transform: translateY(-3px); border-color: var(--pink); }
+  .mv-thumb {
+    aspect-ratio: 16 / 9;
+    background: #000 center/cover no-repeat;
+    position: relative;
+  }
+  .mv-thumb::before {
+    content: '▶';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    color: #fff;
+    background: rgba(0,0,0,0.6);
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    padding-left: 5px;
+    transition: background 0.2s;
+  }
+  .mv-card:hover .mv-thumb::before { background: var(--pink); }
+  .mv-meta {
+    padding: 0.7rem 0.9rem;
+  }
+  .mv-title {
+    font-weight: 700; font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+  .mv-comment {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
 
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-      justify-content: center;
-      position: relative;
-    }
+  /* Chip count badge */
+  .chip-count {
+    font-weight: 500;
+    opacity: 0.6;
+    margin-left: 0.2rem;
+    font-size: 0.75rem;
+  }
+  .chip.active .chip-count { opacity: 0.75; }
 
-    .tag {
-      padding: 0.4rem 1rem;
-      background: var(--bg2);
-      border: 1.5px solid var(--border);
-      border-radius: 999px;
+  /* Featured section (big tiles for newest tracks) */
+  .featured-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .featured-card {
+    background: var(--bg2);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .featured-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--pink);
+    box-shadow: 0 10px 30px rgba(255,90,138,0.25);
+  }
+  .featured-card .cover {
+    aspect-ratio: 1/1;
+    background: #000 center/cover no-repeat;
+  }
+  .featured-card .badge {
+    position: absolute;
+    top: 8px; left: 8px;
+    background: var(--pink);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .featured-card .meta {
+    padding: 0.7rem 0.9rem;
+  }
+  .featured-card .ft-title {
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .featured-card .ft-sub {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* MV inline modal */
+  .mv-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 500;
+    display: none;
+    place-items: center;
+    padding: 1rem;
+  }
+  .mv-modal.active { display: grid; }
+  .mv-modal-inner {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+  .mv-modal-inner iframe {
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  .mv-modal-close {
+    position: absolute;
+    top: -44px; right: 0;
+    appearance: none;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: inherit;
+  }
+
+  /* Queue panel inside expanded NowPlaying */
+  .np-tabs {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 1rem 0;
+    border-bottom: 1px solid var(--border);
+    max-width: 720px;
+    margin: 0 auto;
+    display: none;
+  }
+  .now-playing.expanded .np-tabs { display: flex; }
+  .np-tab {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .np-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+  .np-queue {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1rem;
+    max-height: 260px;
+    overflow-y: auto;
+    display: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,166,0,0.4) transparent;
+  }
+  .now-playing.expanded.queue-view .np-queue { display: block; }
+  .now-playing.expanded.queue-view .np-lyrics-full { display: none; }
+  .np-queue-item {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 0.7rem;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .np-queue-item:hover { background: var(--bg2); }
+  .np-queue-item.current { background: rgba(255,166,0,0.15); }
+  .np-queue-cover {
+    width: 40px; height: 40px;
+    border-radius: 4px;
+    background: #000 center/cover no-repeat;
+  }
+  .np-queue-title {
+    font-size: 0.85rem; font-weight: 600;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .np-queue-num {
+    font-size: 0.7rem; color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* PWA Install Banner */
+  .pwa-banner {
+    position: fixed;
+    bottom: 120px; left: 1rem; right: 1rem;
+    max-width: 420px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    border: 1px solid var(--amber);
+    border-radius: 14px;
+    padding: 1rem;
+    display: none;
+    align-items: center;
+    gap: 0.8rem;
+    z-index: 150;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  .pwa-banner.show { display: flex; }
+  .pwa-banner img { width: 40px; height: 40px; border-radius: 8px; }
+  .pwa-banner .pwa-text { flex: 1; font-size: 0.8rem; line-height: 1.4; }
+  .pwa-banner button {
+    appearance: none; border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+  }
+  .pwa-banner .pwa-install {
+    background: var(--amber); color: #000;
+  }
+  .pwa-banner .pwa-dismiss {
+    background: transparent; color: var(--text-dim);
+    padding: 0.5rem;
+  }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--amber); }
+  .footer-copy {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+    .tile-title { font-size: 0.75rem; }
+    .tile-comment { font-size: 0.65rem; }
+    .list .tile { grid-template-columns: 80px 1fr; }
+    .list .tile-cover { width: 80px; }
+    .hero { flex-wrap: wrap; }
+    .hero-text { width: 100%; }
+    .search-box { flex: 1 1 100%; order: -1; }
+
+    /* Narrow mobile: lighten NowPlaying to give title room */
+    .np-cover { width: 44px; height: 44px; }
+    .np-btn { width: 30px; height: 30px; font-size: 1rem; }
+    .np-btn.primary { font-size: 0.95rem; }
+    .np-actions { gap: 0.1rem; }
+    .np-row { gap: 0.5rem; grid-template-columns: 44px 1fr auto; }
+    .np-title {
       font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-dim);
-      transition: all 0.2s;
-    }
-
-    .tag:hover { transform: translateY(-2px); }
-
-    .tag.accent {
-      background: linear-gradient(135deg, rgba(255,107,122,0.12), rgba(245,158,43,0.12));
-      border-color: transparent;
-      color: var(--coral);
-      font-weight: 700;
-    }
-
-    /* ── SECTION ── */
-    section {
-      padding: 5rem 1.8rem;
-      max-width: 980px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      padding: 0.3rem 0.9rem;
-      background: linear-gradient(135deg, rgba(255,107,122,0.15), rgba(245,158,43,0.15));
-      color: var(--coral);
-      border-radius: 999px;
-      text-transform: uppercase;
-      margin-bottom: 0.9rem;
-    }
-
-    .section-title {
-      font-family: 'Fredoka', 'M PLUS Rounded 1c', sans-serif;
-      font-size: clamp(1.8rem, 4.5vw, 2.4rem);
-      font-weight: 700;
-      margin-bottom: 2.4rem;
-      color: var(--text);
-    }
-
-    /* ── WORKS GRID ── */
-    .works-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .work-card {
-      background: var(--bg2);
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      padding: 1.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      box-shadow: var(--shadow);
-      transition: all 0.25s;
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .work-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--coral), var(--amber));
-    }
-
-    .work-card:nth-child(2)::before { background: linear-gradient(90deg, var(--teal), var(--amber)); }
-    .work-card:nth-child(3)::before { background: linear-gradient(90deg, var(--violet), var(--coral)); }
-
-    .work-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .work-type {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      color: var(--amber);
-      text-transform: uppercase;
-      margin-top: 0.3rem;
-    }
-
-    .work-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .work-desc {
-      font-size: 0.88rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-    }
-
-    .work-status {
-      margin-top: auto;
-      padding-top: 0.4rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--green);
-    }
-
-    .work-status::before { content: '● '; }
-
-    .work-status.wip { color: var(--text-dim); }
-
-    /* ── MV EMBED ── */
-    .mv-embed {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      margin-bottom: 1.2rem;
-    }
-
-    .mv-embed iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    /* ── X FEED ── */
-    .x-feed {
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      max-height: 560px;
-      background: var(--bg2);
-      box-shadow: var(--shadow);
-    }
-
-    /* ── MUSIC ── */
-    .music-subtitle {
-      font-family: 'Fredoka', 'M PLUS Rounded 1c', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text);
-      margin: 2.8rem 0 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .music-subtitle::before {
-      content: '';
-      width: 6px;
-      height: 22px;
-      border-radius: 4px;
-      background: linear-gradient(180deg, var(--coral), var(--amber));
-    }
-
-    .music-subtitle.teal::before {
-      background: linear-gradient(180deg, var(--teal), var(--violet));
-    }
-
-    .music-subtitle:first-of-type { margin-top: 0; }
-
-    .playlist-tabs {
-      display: flex;
-      gap: 0.4rem;
-      margin-bottom: 0.8rem;
-      flex-wrap: wrap;
-    }
-    .playlist-tabs .tab-btn {
-      appearance: none;
-      border: 1px solid var(--border);
-      background: var(--bg2);
-      color: var(--text-dim);
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
-    .playlist-tabs .tab-btn:hover { border-color: var(--amber); color: var(--text); }
-    .playlist-tabs .tab-btn.active {
-      background: var(--amber);
-      color: #fff;
-      border-color: var(--amber);
-    }
-
-    .suno-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.1rem;
-      margin-bottom: 1.6rem;
-    }
-
-    .suno-card {
-      background: var(--bg2);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 0.9rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      box-shadow: var(--shadow);
-      transition: all 0.25s;
-    }
-
-    .suno-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .suno-embed {
-      width: 100%;
-      height: 160px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: var(--bg3);
-    }
-
-    .suno-embed iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-    }
-
-    .suno-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 0 0.2rem;
-    }
-
-    .suno-title-text {
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .suno-link {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--amber);
-      text-decoration: none;
-      white-space: nowrap;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(245,158,43,0.1);
-      transition: all 0.2s;
-    }
-
-    .suno-link:hover {
-      background: var(--amber);
-      color: #fff;
-    }
-
-    /* ── PLAYLIST PLAYER ── */
-    .player {
-      background: linear-gradient(135deg, rgba(255,107,122,0.08), rgba(47,184,169,0.06), rgba(245,158,43,0.08));
-      border: 1.5px solid var(--border);
-      border-radius: 22px;
-      padding: 1.6rem;
-      box-shadow: var(--shadow);
-      margin-bottom: 1.6rem;
-      position: relative;
-    }
-
-    /* 再生中：RGB ゲーミング光 */
-    .player {
-      transition: box-shadow 0.5s, border-color 0.5s;
-      --glow1: 255,107,122;   /* coral */
-      --glow2: 245,158,43;    /* amber */
-      --glow3: 47,184,169;    /* teal */
-      --glow4: 139,109,255;   /* violet */
-    }
-
-    .player.playing {
-      border-color: transparent;
-      animation: rgbCycle 8s linear infinite, breath 2.4s ease-in-out infinite;
-    }
-
-    @keyframes rgbCycle {
-      0%   { --gA: var(--glow1); --gB: var(--glow2); }
-      25%  { --gA: var(--glow2); --gB: var(--glow3); }
-      50%  { --gA: var(--glow3); --gB: var(--glow4); }
-      75%  { --gA: var(--glow4); --gB: var(--glow1); }
-      100% { --gA: var(--glow1); --gB: var(--glow2); }
-    }
-
-    /* fallback if @property unsupported: simpler interpolation via box-shadow keyframes */
-    @keyframes breath {
-      0%, 100% {
-        box-shadow:
-          0 0 0 2px rgba(255,107,122,0.4),
-          0 0 18px rgba(255,107,122,0.45),
-          0 0 38px rgba(245,158,43,0.3),
-          0 8px 22px rgba(255,107,122,0.25);
-      }
-      20% {
-        box-shadow:
-          0 0 0 2px rgba(245,158,43,0.45),
-          0 0 22px rgba(245,158,43,0.5),
-          0 0 44px rgba(47,184,169,0.32),
-          0 8px 22px rgba(245,158,43,0.28);
-      }
-      40% {
-        box-shadow:
-          0 0 0 2px rgba(47,184,169,0.45),
-          0 0 24px rgba(47,184,169,0.5),
-          0 0 46px rgba(139,109,255,0.32),
-          0 8px 22px rgba(47,184,169,0.28);
-      }
-      60% {
-        box-shadow:
-          0 0 0 2px rgba(139,109,255,0.45),
-          0 0 22px rgba(139,109,255,0.5),
-          0 0 44px rgba(255,107,122,0.32),
-          0 8px 22px rgba(139,109,255,0.28);
-      }
-      80% {
-        box-shadow:
-          0 0 0 2px rgba(255,107,122,0.45),
-          0 0 22px rgba(255,107,122,0.5),
-          0 0 44px rgba(245,158,43,0.32),
-          0 8px 22px rgba(255,107,122,0.28);
-      }
-    }
-
-    /* スキャンライン風シマー（再生中だけ） */
-    .player.playing .player-progress-bar {
-      background: linear-gradient(90deg,
-        var(--coral), var(--amber), var(--teal), var(--violet), var(--coral));
-      background-size: 300% 100%;
-      animation: shimmer 3s linear infinite;
-    }
-
-    @keyframes shimmer {
-      to { background-position: 300% 0; }
-    }
-
-    /* 再生中はタイトルも発光 */
-    .player.playing .player-title {
-      text-shadow:
-        0 0 6px rgba(255,107,122,0.4),
-        0 0 14px rgba(245,158,43,0.3);
-    }
-
-    /* プレイボタンも再生中は強く光る */
-    .player.playing .play-btn {
-      animation: playBtnGlow 2s ease-in-out infinite;
-    }
-
-    @keyframes playBtnGlow {
-      0%, 100% { box-shadow: 0 4px 14px rgba(255,107,122,0.4); }
-      50%      { box-shadow: 0 4px 22px rgba(255,107,122,0.75), 0 0 32px rgba(245,158,43,0.5); }
-    }
-
-    .player-main {
-      display: flex;
-      gap: 1.4rem;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    /* レコード盤ビジュアル — カバーが盤そのもの */
-    .player-cover {
-      width: 128px;
-      height: 128px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-      color: #fff;
-      font-size: 0;
-      background-color: #111;
-      background-image: var(--cover-img, linear-gradient(135deg, var(--coral), var(--amber)));
-      background-size: cover;
-      background-position: center;
-      box-shadow:
-        0 6px 18px rgba(0,0,0,0.4),
-        0 0 0 2px rgba(0,0,0,0.6) inset,
-        0 0 0 3px rgba(255,255,255,0.08) inset;
-      transition: box-shadow 0.4s;
-    }
-
-    /* 溝＆反射オーバーレイ */
-    .player-cover::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background:
-        /* 斜めの反射光 */
-        linear-gradient(125deg,
-          transparent 0%, transparent 38%,
-          rgba(255,255,255,0.18) 46%,
-          rgba(255,255,255,0.28) 50%,
-          rgba(255,255,255,0.08) 56%,
-          transparent 65%),
-        /* 溝（ほのかに） */
-        repeating-radial-gradient(circle at center,
-          transparent 0px, transparent 2px,
-          rgba(0,0,0,0.35) 2px, rgba(0,0,0,0.35) 3px);
-      mix-blend-mode: overlay;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* スピンドル穴 — 専用要素（::after は pulse に使うため分離） */
-    .player-cover .spindle {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 9px; height: 9px;
-      margin: -4.5px 0 0 -4.5px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #000 35%, #222 70%, #050505 100%);
-      box-shadow: 0 0 0 1.5px rgba(255,255,255,0.4), 0 0 6px rgba(0,0,0,0.9) inset;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    /* 回転（再生中のみ） */
-    .player-cover.playing {
-      animation: spinDisc 6s linear infinite;
-    }
-
-    @keyframes spinDisc {
-      to { transform: rotate(360deg); }
-    }
-
-    .player-cover .cover-fallback { display: none; }
-
-    .player-cover .cover-fallback {
-      z-index: 1;
-    }
-
-    .player-cover.has-img .cover-fallback { display: none; }
-
-    .player-cover.playing::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), transparent 55%);
-      animation: pulse 2.4s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.35; }
-      50% { opacity: 0.9; }
-    }
-
-    /* 再生中の回転ディスク風ふちどり */
-    .player-cover::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 20px;
-      background: conic-gradient(from 0deg, var(--coral), var(--amber), var(--teal), var(--violet), var(--coral));
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 0.3s;
-      animation: spinBorder 3s linear infinite;
-    }
-
-    .player-cover.playing::before { opacity: 0.85; }
-
-    .player-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .player-title {
-      font-family: 'Fredoka', 'M PLUS Rounded 1c', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.15rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .player-sub {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      margin-bottom: 0.9rem;
-      font-weight: 500;
-    }
-
-    /* オーディオ反応 EQ バー */
-    .player-eq {
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 3px;
-      height: 0;
-      overflow: hidden;
-      margin-bottom: 0;
-      transition: height 0.4s, margin-bottom 0.4s;
-    }
-
-    .player.playing .player-eq {
-      height: 28px;
-      margin-bottom: 0.6rem;
-    }
-
-    .player-eq .bar {
-      width: 4px;
-      min-height: 3px;
-      height: 3px;
-      border-radius: 2px;
-      background: linear-gradient(180deg, var(--coral), var(--amber));
-      transition: height 0.08s linear;
-      box-shadow: 0 0 6px rgba(255,107,122,0.5);
-    }
-
-    .player-progress {
-      height: 6px;
-      background: var(--border);
-      border-radius: 999px;
-      overflow: hidden;
-      cursor: pointer;
-      margin-bottom: 0.35rem;
-    }
-
-    .player-progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--coral), var(--amber));
-      border-radius: 999px;
-      transition: width 0.1s linear;
-    }
-
-    .player-times {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      font-weight: 500;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .player-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.7rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .player-controls button {
-      background: var(--bg2);
-      border: 1.5px solid var(--border);
-      color: var(--text);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      font-family: inherit;
-      transition: all 0.2s;
-      padding: 0;
-    }
-
-    .player-controls button:hover {
-      border-color: var(--coral);
-      color: var(--coral);
-      transform: translateY(-1px);
-    }
-
-    .player-controls .play-btn {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, var(--coral), var(--amber));
-      border: none;
-      color: #fff;
-      font-size: 1.3rem;
-      box-shadow: 0 4px 14px rgba(255,107,122,0.35);
-    }
-
-    .player-controls .play-btn:hover {
-      color: #fff;
-      transform: scale(1.05);
-    }
-
-    .player-controls button.active {
-      background: rgba(255,107,122,0.15);
-      border-color: var(--coral);
-      color: var(--coral);
-    }
-
-    .share-x-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3em;
-      margin-top: 0.6rem;
-      padding: 0.3rem 0.9rem;
-      border-radius: 999px;
-      border: 1.5px solid var(--border);
-      background: none;
-      color: var(--text-dim);
-      font-size: 0.78rem;
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .share-x-btn:hover { border-color: var(--text); color: var(--text); }
-
-    .mini-controls .mini-share-x {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #fff;
-      background: #111;
-      border-radius: 999px;
-      padding: 0.25rem 0.55rem;
-      line-height: 1;
-    }
-    .mini-controls .mini-share-x:hover { background: #333; }
-
-    .track-comment {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      font-style: italic;
-      line-height: 1.6;
-      min-height: 1.2em;
-      margin: 0.8rem 0 0;
-      padding: 0.6rem 0.8rem;
-      border-left: 2px solid var(--coral);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .track-comment.visible { opacity: 1; }
-
-    .lyrics-panel {
-      margin: 0.8rem 0 0;
-      border-radius: 8px;
-      overflow: hidden;
-      opacity: 0;
-      max-height: 0;
-      transition: opacity 0.4s ease, max-height 0.4s ease;
-    }
-    .lyrics-panel.visible {
-      opacity: 1;
-      max-height: 60px;
-    }
-    .lyrics-ticker {
-      position: relative;
-      min-height: 52px;
-      overflow: hidden;
-      background: rgba(0,0,0,0.28);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-    }
-    .lyrics-ticker::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--coral);
-      border-radius: 0 2px 2px 0;
-    }
-    .lyric-slot {
-      position: absolute;
-      left: 14px; right: 14px;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      white-space: normal;
-      will-change: transform, opacity;
-      padding: 0.55rem 0;
-    }
-    .lyric-slot.enter {
-      animation: lyric-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    .lyric-slot.exit {
-      animation: lyric-exit 0.35s ease-in forwards;
-    }
-    @keyframes lyric-enter {
-      from { transform: translateX(60px); opacity: 0; }
-      to   { transform: translateX(0);   opacity: 1; }
-    }
-    @keyframes lyric-exit {
-      from { transform: translateX(0);    opacity: 1; }
-      to   { transform: translateX(-50px); opacity: 0; }
-    }
-    .lyric-text ruby {
-      ruby-align: center;
-      display: ruby;
-    }
-    .lyric-text rt {
-      display: rt;
-      font-size: 0.5em;
-      color: rgba(255,255,255,0.65);
-      letter-spacing: 0;
-      line-height: 1;
-    }
-    .lyric-text {
-      font-size: 1.05rem;
-      color: #fff;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      line-height: 1.5;
-    }
-
-    .playlist {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 0.9rem;
-      margin-top: 1.4rem;
-    }
-
-    .playlist-item {
-      position: relative;
-      cursor: pointer;
-      border-radius: 14px;
-      background: var(--bg2);
-      border: 1.5px solid var(--border);
-      overflow: hidden;
-      transition: all 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .playlist-item:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--coral);
-    }
-
-    .playlist-item.active {
-      border-color: var(--coral);
-      box-shadow: 0 6px 18px rgba(255,107,122,0.3);
-    }
-
-    .pl-thumb {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      background-size: cover;
-      background-position: center;
-      background-color: var(--border);
-      position: relative;
-    }
-
-    .playlist-item.active .pl-thumb::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,107,122,0.4), rgba(245,158,43,0.25));
-      pointer-events: none;
-    }
-
-    .player.playing .playlist-item.active .pl-thumb::before {
-      content: '♪';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      color: #fff;
-      font-size: 2.4rem;
-      text-shadow: 0 0 10px rgba(0,0,0,0.5), 0 0 20px var(--coral);
-      animation: pulseMark 1.4s ease-in-out infinite;
-    }
-
-    @keyframes pulseMark {
-      0%, 100% { opacity: 0.85; transform: translate(-50%, -50%) scale(1); }
-      50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.18); }
-    }
-
-    .pl-num {
-      position: absolute;
-      top: 0.5rem;
-      left: 0.5rem;
-      z-index: 2;
-      background: rgba(0,0,0,0.55);
-      color: #fff;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      backdrop-filter: blur(4px);
-    }
-
-    .pl-dur {
-      position: absolute;
-      bottom: 0.5rem;
-      right: 0.5rem;
-      z-index: 2;
-      background: rgba(0,0,0,0.55);
-      color: #fff;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      font-variant-numeric: tabular-nums;
-      backdrop-filter: blur(4px);
-    }
-
-    .pl-title {
-      padding: 0.7rem 0.85rem 0.9rem;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.3;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      min-height: 2.6em;
-    }
-
-    .playlist-item.active .pl-title { color: var(--coral); }
-
-    .pl-dl {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      z-index: 3;
-      color: #fff;
-      text-decoration: none;
-      background: rgba(0,0,0,0.55);
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      transition: all 0.15s;
-      backdrop-filter: blur(4px);
-      opacity: 0;
-    }
-
-    .playlist-item:hover .pl-dl { opacity: 1; }
-    .pl-dl:hover { background: var(--amber); }
-
-    @media (max-width: 500px) {
-      .player-main { flex-direction: column; align-items: stretch; text-align: center; }
-      .player-cover { width: 140px; height: 140px; margin: 0 auto; }
-      .playlist { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.7rem; }
-    }
-
-    /* ── SFX LIST ── */
-    .sfx-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .sfx-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.9rem 1.1rem;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      flex-wrap: wrap;
-    }
-
-    .sfx-info {
-      flex: 1;
-      min-width: 160px;
-    }
-
-    .sfx-name {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .sfx-desc {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      margin-top: 0.1rem;
-    }
-
-    .sfx-item audio {
-      height: 32px;
-      flex: 0 0 240px;
-      max-width: 100%;
-    }
-
-    .sfx-item audio::-webkit-media-controls-panel {
-      background: var(--bg);
-    }
-
-    .sfx-dl {
-      padding: 0.4rem 0.9rem;
-      border: 1px solid var(--amber-dim);
-      border-radius: 2px;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--amber);
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .sfx-dl:hover {
-      background: rgba(200,147,58,0.1);
-    }
-
-    .empty-note {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      padding: 1.2rem;
-      text-align: center;
-      background: var(--bg2);
-      border: 1px dashed var(--border);
-      border-radius: 4px;
-    }
-
-    .music-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
-
-    .music-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.2rem;
-      background: var(--bg2);
-      border: 1.5px solid var(--border);
-      border-radius: 14px;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: var(--shadow);
-      transition: all 0.2s;
-    }
-
-    .music-item:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .music-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--coral), var(--amber));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: #fff;
-      font-size: 1.05rem;
-    }
-
-    .music-info { flex: 1; }
-
-    .music-title {
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .music-meta {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      margin-top: 0.1rem;
-    }
-
-    .music-platform {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--amber);
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(245,158,43,0.12);
-    }
-
-    /* ── ABOUT ── */
-    .about-body {
-      font-size: 1rem;
-      color: var(--text);
-      max-width: 640px;
-      background: var(--bg2);
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      padding: 1.8rem 2rem;
-      box-shadow: var(--shadow);
-    }
-
-    .about-body p { color: var(--text-dim); }
-    .about-body p + p { margin-top: 1em; }
-    .about-body strong { color: var(--coral); font-weight: 700; }
-
-    /* ── LINKS ── */
-    .links-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-    }
-
-    .link-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.7rem 1.3rem;
-      background: var(--bg2);
-      border: 1.5px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-      box-shadow: var(--shadow);
-      transition: all 0.2s;
-    }
-
-    .link-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--coral);
-      color: var(--coral);
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      height: 0;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 3rem 2rem 2.5rem;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-dim);
-    }
-
-    footer::before {
-      content: '✿ ❀ ✿';
-      display: block;
-      color: var(--coral);
-      margin-bottom: 0.8rem;
-      letter-spacing: 0.6em;
-      opacity: 0.6;
-    }
-
-    /* ── LANG TOGGLE ── */
-    .lang-toggle {
-      background: var(--bg2);
-      border: 1.5px solid var(--border);
-      color: var(--text-dim);
-      padding: 0.35rem 0.85rem;
-      font-family: inherit;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: 0.08em;
-      border-radius: 999px;
-      transition: all 0.2s;
-    }
-
-    .lang-toggle:hover {
-      border-color: var(--coral);
-      color: var(--coral);
-      transform: translateY(-1px);
-    }
-
-    /* ── MINI PLAYER（スマホ固定） ── */
-    #miniPlayer {
-      display: none;
-      position: fixed;
-      top: 60px; left: 0; right: 0;
-      z-index: 200;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(14px);
-      border-bottom: 1.5px solid var(--border);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      padding: 0.5rem 1rem;
-      align-items: center;
-      gap: 0.75rem;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.25s, visibility 0s 0.25s;
-    }
-
-    #miniPlayer.visible {
-      visibility: visible;
-      opacity: 1;
-      transition: opacity 0.25s, visibility 0s 0s;
-    }
-
-    .mini-cover {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      background-color: #111;
-      background-image: var(--cover-img, linear-gradient(135deg, var(--coral), var(--amber)));
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-
-    .mini-cover.playing { animation: spinDisc 6s linear infinite; }
-
-    .mini-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .mini-title {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .mini-lyric {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      line-height: 1.4;
-      height: 2.8em;
-    }
-
-    .mini-controls {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .mini-controls button {
-      background: none;
-      border: none;
-      font-size: 1.1rem;
-      cursor: pointer;
-      padding: 0.3rem;
-      color: var(--text);
-      line-height: 1;
-    }
-
-    .mini-controls .mini-play-btn {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--coral), var(--amber));
-      color: #fff;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 8px rgba(255,107,122,0.35);
-    }
-
-    .mini-progress {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--border);
-    }
-
-    .mini-progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--coral), var(--amber));
-      transition: width 0.1s linear;
-    }
-
-    /* スマホのみ表示 */
-    @media (max-width: 768px) {
-      #miniPlayer { display: flex; }
-      body.mini-visible .hero { padding-top: 10rem; }
-    }
-
-    /* ── HAMBURGER ── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.4rem;
-      z-index: 1;
-    }
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: transform 0.25s, opacity 0.25s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .nav-drawer {
-      position: fixed;
-      top: 60px; left: 0; right: 0;
-      z-index: 250;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(16px);
-      border-bottom: 1.5px solid var(--border);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      padding: 0.8rem 1.6rem 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      visibility: hidden;
-      opacity: 0;
-      transform: translateY(-6px);
-      transition: opacity 0.22s, transform 0.22s, visibility 0s 0.22s;
-      pointer-events: none;
-    }
-    .nav-drawer.open {
-      visibility: visible;
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.22s, transform 0.22s, visibility 0s 0s;
-      pointer-events: auto;
-    }
-    .nav-drawer a {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid var(--border);
-      display: block;
-      transition: color 0.2s;
-    }
-    .nav-drawer a:last-of-type { border-bottom: none; }
-    .nav-drawer a:hover { color: var(--coral); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 1rem; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-    }
-    @media (max-width: 600px) {
-      section { padding: 3.5rem 1.1rem; }
-      .about-body { padding: 1.4rem 1.3rem; }
-    }
-  </style>
+      -webkit-line-clamp: 3;
+    }
+    .np-lyric { font-size: 0.7rem; }
+    .np-btn .x-icon { width: 14px; height: 14px; }
+  }
+  @media (max-width: 380px) {
+    .np-title { -webkit-line-clamp: 4; }
+    .np-btn { width: 28px; height: 28px; }
+  }
+</style>
 </head>
 <body>
+<div class="container">
+  <header class="site-header">
+    <div class="logo-mark"><img src="/icons/icon-192.png" alt="HINATA AI MUSIC"></div>
+    <div class="site-title">
+      <h1>hinatabokkuri</h1>
+      <div class="tagline">AI Music · 22 Tracks · Shuffle Forever</div>
+    </div>
+  </header>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">hinatabokkuri</a>
-  <ul class="nav-links">
-    <li><a href="#music" data-ja="音楽" data-en="Music">音楽</a></li>
-    <li><a href="#about" data-ja="About" data-en="About">About</a></li>
-    <li><a href="#links" data-ja="リンク" data-en="Links">リンク</a></li>
-  </ul>
-  <div style="display:flex;align-items:center;gap:0.6rem">
-    <button class="lang-toggle" id="langBtn">EN</button>
-    <button class="hamburger" id="hamburger" aria-label="メニュー">
-      <span></span><span></span><span></span>
-    </button>
+  <div class="hero">
+    <div class="hero-icon">🔀</div>
+    <div class="hero-text">
+      <div class="hero-title">Shuffle All</div>
+      <div class="hero-sub">全22曲をランダム永遠再生、iPhoneバックグラウンド対応</div>
+    </div>
+    <button class="hero-btn" id="shuffleAll">Play 🎧</button>
   </div>
-</nav>
-<div class="nav-drawer" id="navDrawer">
-  <a href="#music" data-ja="音楽" data-en="Music">音楽</a>
-  <a href="#about" data-ja="About" data-en="About">About</a>
-  <a href="#links" data-ja="リンク" data-en="Links">リンク</a>
+
+  <h2 class="section-title">✨ New Drops</h2>
+  <div id="featuredRow" class="featured-row"></div>
+
+  <h2 class="section-title">🎵 Albums</h2>
+  <div class="album-row">
+    <div class="album-card" data-album="dance-instinct">
+      <div class="cover" style="background-image: url('covers/dance_instinct.jpg')"></div>
+      <div>
+        <h3>DANCE INSTINCT</h3>
+        <div class="album-meta">9 tracks · 27:14 · 2026</div>
+        <button class="album-play">▶ Play Album</button>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">🎬 Music Videos</h2>
+  <div class="mv-row">
+    <div class="mv-card" data-yt="iLDx1KL6nBQ" data-yt-type="shorts">
+      <div class="mv-thumb" style="background-image: url('covers/yami_doki.jpg')"></div>
+      <div class="mv-meta">
+        <div class="mv-title">病みDOKI</div>
+        <div class="mv-comment">地雷女×オタク男のデュエット、Kling AI MV（1:54フル尺）</div>
+      </div>
+    </div>
+    <div class="mv-card" data-yt="v2vuBKkNf_s">
+      <div class="mv-thumb" style="background-image: url('covers/fly_away_buttfly.jpg')"></div>
+      <div class="mv-meta">
+        <div class="mv-title">fly away buttfly ①</div>
+        <div class="mv-comment">90年代ユーロビートへのオマージュMV</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">🔎 All Tracks</h2>
+  <div class="controls">
+    <div class="search-box"><input id="searchInput" type="text" placeholder="タイトル・歌詞を検索"></div>
+    <button class="chip active" data-genre="all">全曲 <span class="chip-count"></span></button>
+    <button class="chip" data-genre="dance">ダンス <span class="chip-count"></span></button>
+    <button class="chip" data-genre="anime">アニソン <span class="chip-count"></span></button>
+    <button class="chip" data-genre="ballad">バラード <span class="chip-count"></span></button>
+    <button class="chip" data-genre="experimental">実験 <span class="chip-count"></span></button>
+    <button class="chip" data-genre="jp-dance">和ダンス <span class="chip-count"></span></button>
+    <div class="view-toggle">
+      <button class="active" data-view="grid">▦ Grid</button>
+      <button data-view="list">☰ List</button>
+    </div>
+  </div>
+
+  <div id="songs" class="grid"></div>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="/about.html">👤 About</a>
+      <a href="https://x.com/yhhinabon" target="_blank" rel="noopener">𝕏 X (@yhhinabon)</a>
+      <a href="https://youtube.com/@hinatabokkuri" target="_blank" rel="noopener">▶ YouTube</a>
+      <a href="https://github.com/hinatabokkuri-star" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="footer-copy">© 2026 hinatabokkuri · AI Music</p>
+  </footer>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-sub">music creator</div>
-  <h1 class="hero-name">hinata<span>bokkuri</span></h1>
-  <p class="hero-tagline" data-ja="音楽・ゲームをつくっています" data-en="making music & games">
-    音楽・ゲームをつくっています
-  </p>
-  <div class="hero-tags">
-    <span class="tag accent" data-ja="Music" data-en="Music">Music</span>
-    <span class="tag accent" data-ja="AI作曲" data-en="AI Music">AI作曲</span>
-    <span class="tag" data-ja="サウンドノベル" data-en="Sound Novel">サウンドノベル</span>
-    <span class="tag" data-ja="レトロRPG" data-en="Retro RPG">レトロRPG</span>
-    <span class="tag" data-ja="Godot 4" data-en="Godot 4">Godot 4</span>
-  </div>
+<!-- Update notification banner -->
+<div id="updateBanner" class="update-banner">
+  <span>🎵 新バージョンあり</span>
+  <button id="updateNow">今すぐ更新</button>
+  <button class="dismiss" id="updateLater">あとで</button>
 </div>
 
-<div class="divider"></div>
-
-<!-- MUSIC -->
-<section id="music">
-  <div class="section-label" data-ja="音楽" data-en="Music">音楽</div>
-  <h2 class="section-title" data-ja="🎵 音楽" data-en="🎵 Music">🎵 音楽</h2>
-
-  <h3 class="music-subtitle" data-ja="ミュージックビデオ" data-en="Music Videos">ミュージックビデオ</h3>
-  <div class="mv-embed">
-    <iframe src="https://www.youtube.com/embed/v2vuBKkNf_s" title="fly away buttfly — MV" frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen></iframe>
-  </div>
-  <div class="mv-embed" style="aspect-ratio:1/1;max-width:600px;margin:1rem auto;">
-    <iframe src="https://www.youtube.com/embed/iLDx1KL6nBQ" title="病みDOKI — MV" frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen style="width:100%;height:100%;"></iframe>
-  </div>
-  <div class="music-list" style="margin-bottom:1rem;">
-    <a class="music-item" href="https://www.youtube.com/watch?v=v2vuBKkNf_s" target="_blank" rel="noopener">
-      <div class="music-icon">▶</div>
-      <div class="music-info">
-        <div class="music-title">fly away buttfly ①</div>
-        <div class="music-meta" data-ja="MV・2:57" data-en="MV · 2:57">MV・2:57</div>
-      </div>
-      <div class="music-platform">YouTube ↗</div>
-    </a>
-    <a class="music-item" href="https://youtube.com/shorts/iLDx1KL6nBQ" target="_blank" rel="noopener">
-      <div class="music-icon">▶</div>
-      <div class="music-info">
-        <div class="music-title">病みDOKI</div>
-        <div class="music-meta" data-ja="MV・1:54 / Kling AI×Suno×ElevenLabs合成" data-en="MV · 1:54 / Kling AI × Suno × ElevenLabs">MV・1:54 / Kling AI×Suno×ElevenLabs合成</div>
-      </div>
-      <div class="music-platform">YouTube ↗</div>
-    </a>
-  </div>
-
-  <h3 class="music-subtitle" data-ja="楽曲（歌）" data-en="Songs">楽曲（歌）</h3>
-  <div class="playlist-tabs" id="songPlayerTabs">
-    <button type="button" data-tab="all" class="tab-btn active" data-ja="全曲" data-en="All">全曲</button>
-    <button type="button" data-tab="dance" class="tab-btn" data-ja="DANCE INSTINCT" data-en="DANCE INSTINCT">DANCE INSTINCT</button>
-  </div>
-  <div id="songPlayer" class="player">
-    <div class="player-main">
-      <div class="player-cover" data-cover><span class="cover-fallback">♪</span><span class="spindle"></span></div>
-      <div class="player-info">
-        <div class="player-title" data-title>—</div>
-        <div class="player-sub">hinatabokkuri</div>
-        <div class="player-eq" data-eq></div>
-        <div class="player-progress" data-progress><div class="player-progress-bar" data-bar></div></div>
-        <div class="player-times"><span data-cur>0:00</span><span data-tot>0:00</span></div>
-      </div>
-    </div>
-    <div class="player-controls">
-      <button data-shuffle title="Shuffle">🔀</button>
-      <button data-prev title="Previous">⏮</button>
-      <button class="play-btn" data-play title="Play/Pause">▶</button>
-      <button data-next title="Next">⏭</button>
-      <button data-loop title="Loop">🔁</button>
-    </div>
-    <div class="track-comment" data-comment></div>
-    <div class="lyrics-panel" data-lyrics-panel>
-      <div class="lyrics-ticker" data-lyrics-ticker></div>
-    </div>
-    <button class="share-x-btn" data-share-x>𝕏 この曲をシェア</button>
-    <ol class="playlist" data-list></ol>
-    <audio data-audio preload="metadata"></audio>
-  </div>
-
-  <h3 class="music-subtitle teal" data-ja="ゲームサウンド（BGM）" data-en="Game Music (BGM)">ゲームサウンド（BGM）</h3>
-  <p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:1.2rem;" data-ja="ゲーム制作用に作ったループBGM。試聴 & DL 自由に。" data-en="Loop BGM for game use. Free to listen &amp; download.">
-    ゲーム制作用に作ったループBGM。試聴 & DL 自由に。
-  </p>
-  <div id="bgmPlayer" class="player">
-    <div class="player-main">
-      <div class="player-cover" data-cover><span class="cover-fallback">♪</span><span class="spindle"></span></div>
-      <div class="player-info">
-        <div class="player-title" data-title>—</div>
-        <div class="player-sub">hinatabokkuri</div>
-        <div class="player-eq" data-eq></div>
-        <div class="player-progress" data-progress><div class="player-progress-bar" data-bar></div></div>
-        <div class="player-times"><span data-cur>0:00</span><span data-tot>0:00</span></div>
-      </div>
-    </div>
-    <div class="player-controls">
-      <button data-shuffle title="Shuffle">🔀</button>
-      <button data-prev title="Previous">⏮</button>
-      <button class="play-btn" data-play title="Play/Pause">▶</button>
-      <button data-next title="Next">⏭</button>
-      <button data-loop title="Loop">🔁</button>
-    </div>
-    <ol class="playlist" data-list></ol>
-    <audio data-audio preload="metadata"></audio>
-  </div>
-
-  <div class="music-list" style="margin-top:2rem;">
-    <a class="music-item" href="https://www.youtube.com/@hinatabokkuri" target="_blank" rel="noopener">
-      <div class="music-icon">▶</div>
-      <div class="music-info">
-        <div class="music-title" data-ja="YouTube チャンネル" data-en="YouTube Channel">YouTube チャンネル</div>
-        <div class="music-meta" data-ja="MV・楽曲を公開中" data-en="Music videos &amp; tracks">MV・楽曲を公開中</div>
-      </div>
-      <div class="music-platform">YouTube</div>
-    </a>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- X FEED -->
-<section id="x-feed">
-  <div class="section-label" data-ja="最新投稿" data-en="Latest Posts">最新投稿</div>
-  <h2 class="section-title" data-ja="💬 X / Twitter" data-en="💬 X / Twitter">💬 X / Twitter</h2>
-  <div class="x-feed">
-    <a class="twitter-timeline"
-       data-theme="light"
-       data-tweet-limit="3"
-       data-chrome="noheader nofooter noborders"
-       href="https://twitter.com/yhhinabon">
-      Tweets by yhhinabon
-    </a>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">About</div>
-  <h2 class="section-title">🌻 hinatabokkuri</h2>
-  <div class="about-body">
-    <p data-ja="ゲーム・音楽・フリー素材を制作しているインディーゲームクリエイターです。" data-en="Indie game creator making games, music, and free assets.">
-      ゲーム・音楽・フリー素材を制作しているインディーゲームクリエイターです。
-    </p>
-    <p data-ja="<strong>Godot 4</strong> でミステリーサウンドノベル、レトロJRPG、Wizardry風ダンジョンRPGの3作品を同時開発中。素材・BGMは制作後にフリー配布する予定です。" data-en="Currently developing three titles simultaneously in <strong>Godot 4</strong>: a mystery sound novel, a retro JRPG, and a Wizardry-style dungeon RPG. Assets and BGM will be released for free after production.">
-      <strong>Godot 4</strong> でミステリーサウンドノベル、レトロJRPG、Wizardry風ダンジョンRPGの3作品を同時開発中。素材・BGMは制作後にフリー配布する予定です。
-    </p>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- LINKS -->
-<section id="links">
-  <div class="section-label" data-ja="リンク" data-en="Links">リンク</div>
-  <h2 class="section-title" data-ja="🔗 ソーシャル" data-en="🔗 Social">🔗 ソーシャル</h2>
-  <div class="links-row">
-    <a class="link-btn" href="https://www.youtube.com/@hinatabokkuri" target="_blank" rel="noopener">▶ YouTube</a>
-    <a class="link-btn" href="https://x.com/yhhinabon" target="_blank" rel="noopener">𝕏 X / Twitter</a>
-    <a class="link-btn" href="https://github.com/hinatabokkuri-star" target="_blank" rel="noopener">⌥ GitHub</a>
-    <!-- itch.io は必要になったら追加 -->
-  </div>
-</section>
-
-<div id="miniPlayer">
-  <div class="mini-progress"><div class="mini-progress-bar" id="miniBar"></div></div>
-  <div class="mini-cover" id="miniCover"></div>
-  <div class="mini-info">
-    <div class="mini-title" id="miniTitle">—</div>
-    <div class="mini-lyric" id="miniLyric"></div>
-  </div>
-  <div class="mini-controls">
-    <button id="miniPrev" title="Previous">⏮</button>
-    <button class="mini-play-btn" id="miniPlay" title="Play/Pause">▶</button>
-    <button id="miniNext" title="Next">⏭</button>
-    <button class="mini-share-x" id="miniShareX" title="Share on X">𝕏</button>
+<!-- MV inline modal -->
+<div id="mvModal" class="mv-modal">
+  <div class="mv-modal-inner">
+    <button class="mv-modal-close" id="mvModalClose">×</button>
+    <iframe id="mvIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
 
-<section id="license" style="padding:3rem 1.8rem 1rem;max-width:980px;margin:0 auto;">
-  <div class="section-label" data-ja="利用について" data-en="License">利用について</div>
-  <div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.9rem;">
-    <div style="background:var(--bg2);border:1.5px solid var(--border);border-radius:16px;padding:1.4rem 1.6rem;box-shadow:var(--shadow);">
-      <p style="font-size:0.82rem;font-weight:700;color:var(--coral);margin-bottom:0.6rem;letter-spacing:0.08em;text-transform:uppercase;">AI-Generated Content</p>
-      <p style="font-size:0.88rem;color:var(--text-dim);line-height:1.8;"
-         data-ja="当サイトの画像・音楽・素材はAI生成ツールを使用して制作しています。各ツールの商用利用規約を確認のうえ公開しています。"
-         data-en="Images, music, and assets on this site are created using AI generation tools. Published after confirming commercial use terms of each tool.">
-        当サイトの画像・音楽・素材はAI生成ツールを使用して制作しています。各ツールの商用利用規約を確認のうえ公開しています。
-      </p>
+<!-- PWA install banner -->
+<div id="pwaBanner" class="pwa-banner">
+  <img src="/icons/icon-180.png" alt="">
+  <div class="pwa-text">
+    <strong>HINATA AI MUSIC をインストール</strong><br>
+    ホーム画面から素早く再生、オフライン対応
+  </div>
+  <button class="pwa-install" id="pwaInstall">入れる</button>
+  <button class="pwa-dismiss" id="pwaDismiss">×</button>
+</div>
+
+<div id="nowPlaying" class="now-playing">
+  <div class="np-row">
+    <div id="npCover" class="np-cover">
+      <span class="grooves"></span>
+      <span class="spindle"></span>
     </div>
-    <div style="background:var(--bg2);border:1.5px solid var(--border);border-radius:16px;padding:1.4rem 1.6rem;box-shadow:var(--shadow);">
-      <p style="font-size:0.82rem;font-weight:700;color:var(--coral);margin-bottom:0.8rem;letter-spacing:0.08em;text-transform:uppercase;">Terms of Use</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;">
-        <span style="padding:0.3rem 0.9rem;border-radius:999px;font-size:0.78rem;font-weight:700;background:rgba(72,168,110,0.12);color:var(--green);"
-              data-ja="✓ ダウンロード自由" data-en="✓ Download OK">✓ ダウンロード自由</span>
-        <span style="padding:0.3rem 0.9rem;border-radius:999px;font-size:0.78rem;font-weight:700;background:rgba(72,168,110,0.12);color:var(--green);"
-              data-ja="✓ 拡散・シェア自由" data-en="✓ Share OK">✓ 拡散・シェア自由</span>
-        <span style="padding:0.3rem 0.9rem;border-radius:999px;font-size:0.78rem;font-weight:700;background:rgba(255,107,122,0.12);color:var(--coral);"
-              data-ja="✗ 改変禁止" data-en="✗ No Modifications">✗ 改変禁止</span>
-      </div>
-      <p style="font-size:0.83rem;color:var(--text-dim);line-height:1.8;"
-         data-ja="常識的な範囲でご自由にお使いください。商用利用・その他ご相談はXまでお気軽にどうぞ。"
-         data-en="Free to use within reasonable bounds. For commercial use or other inquiries, feel free to reach out on X.">
-        常識的な範囲でご自由にお使いください。商用利用・その他ご相談はXまでお気軽にどうぞ。
-      </p>
+    <div class="np-info" id="npInfoClick">
+      <div class="np-title" id="npTitle"></div>
+      <div class="np-lyric" id="npLyricInline"></div>
+    </div>
+    <div class="np-actions">
+      <button class="np-btn" id="btnShuffle" title="シャッフル">🔀</button>
+      <button class="np-btn" id="btnRepeat" title="リピート">🔁</button>
+      <button class="np-btn" id="btnPrev" title="前へ">⏮</button>
+      <button class="np-btn primary" id="btnPlayPause" title="再生/停止">⏸</button>
+      <button class="np-btn" id="btnNext" title="次へ">⏭</button>
+      <button class="np-btn" id="btnShare" title="シェア"><svg class="x-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
+      <button class="np-btn" id="btnExpand" title="歌詞展開">📝</button>
     </div>
   </div>
-</section>
-
-<section id="support" style="padding:2rem 1.8rem 0.5rem;max-width:980px;margin:0 auto;">
-  <div class="section-label" data-ja="お布施" data-en="Support">お布施</div>
-  <div style="margin-top:1rem;background:var(--bg2);border:1.5px solid var(--border);border-radius:16px;padding:1.6rem 1.8rem;box-shadow:var(--shadow);display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;">
-    <div style="flex:1;min-width:220px;">
-      <p style="font-size:0.88rem;color:var(--text-dim);line-height:1.9;"
-         data-ja="気に入った作品があればお気持ちだけいただけたら嬉しいです。プレッシャーは一切ありません。"
-         data-en="If you enjoy the work, any support is warmly appreciated — no pressure at all.">
-        気に入った作品があればお気持ちだけいただけたら嬉しいです。プレッシャーは一切ありません。
-      </p>
-    </div>
-    <a href="https://hinatabokkuri.booth.pm/items/8224157" target="_blank" rel="noopener"
-       style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.4rem;border-radius:999px;background:var(--bg3);border:1.5px solid var(--border);color:var(--text-dim);font-size:0.83rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:border-color 0.2s,color 0.2s;"
-       onmouseover="this.style.borderColor='var(--amber)';this.style.color='var(--amber)'"
-       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)'">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      <span data-ja="BOOTH で支援する" data-en="Support on BOOTH">BOOTH で支援する</span>
-    </a>
+  <div class="np-progress" id="npProgress">
+    <div class="np-progress-fill" id="npProgressFill"></div>
+    <div class="np-scrub-tooltip" id="npScrubTooltip">0:00</div>
   </div>
-</section>
-
-<section id="contact" style="padding:1.5rem 1.8rem 3rem;max-width:980px;margin:0 auto;">
-  <div class="section-label" data-ja="お問い合わせ" data-en="Contact">お問い合わせ</div>
-  <div style="margin-top:1rem;background:var(--bg2);border:1.5px solid var(--border);border-radius:16px;padding:1.6rem 1.8rem;box-shadow:var(--shadow);display:flex;flex-wrap:wrap;gap:1.4rem;align-items:flex-start;">
-    <div style="flex:1;min-width:220px;">
-      <p style="font-size:0.78rem;font-weight:700;color:var(--teal);margin-bottom:0.6rem;letter-spacing:0.08em;text-transform:uppercase;">DX Support · Kyoto area</p>
-      <p style="font-size:0.87rem;color:var(--text-dim);line-height:1.9;"
-         data-ja="業務のデジタル化や小さなシステム開発のご相談を承っています。京都を中心に、直接お会いしてお話できる範囲でお受けします。気軽にお声がけください。"
-         data-en="Available for small-scale digitalization and system development consultations. Based in Kyoto — face-to-face meetings preferred. Feel free to reach out.">
-        業務のデジタル化や小さなシステム開発のご相談を承っています。京都を中心に、直接お会いしてお話できる範囲でお受けします。気軽にお声がけください。
-      </p>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:0.6rem;align-self:flex-end;">
-      <a href="https://x.com/yhhinabon" target="_blank" rel="noopener"
-         style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.4rem;border-radius:999px;background:var(--bg3);border:1.5px solid var(--border);color:var(--text-dim);font-size:0.83rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:border-color 0.2s,color 0.2s;"
-         onmouseover="this.style.borderColor='var(--amber)';this.style.color='var(--amber)'"
-         onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)'">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117z"/></svg>
-        <span data-ja="X（旧Twitter）でDM" data-en="DM on X">X（旧Twitter）でDM</span>
-      </a>
-    </div>
+  <div class="np-time">
+    <span id="npTimeCurrent">0:00</span>
+    <span id="npTimeTotal">0:00</span>
   </div>
-</section>
+  <div class="np-tabs">
+    <button class="np-tab active" data-tab="lyrics">🎤 歌詞</button>
+    <button class="np-tab" data-tab="queue">📜 キュー</button>
+  </div>
+  <div class="np-lyrics-full" id="npLyricsFull"></div>
+  <div class="np-queue" id="npQueue"></div>
+</div>
 
-<footer>
-  © 2026 hinatabokkuri — all rights reserved
-</footer>
+<audio id="audio" preload="none" playsinline></audio>
 
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script src="songs.js?v=1"></script>
 <script>
-  const langBtn = document.getElementById('langBtn');
-  let lang = 'ja';
+const SONGS = window.HB_SONGS || [];
+// Helpers still referenced by legacy block below (kept for parse safety)
+const IMG = id => `https://cdn1.suno.ai/image_${id}.jpeg`;
+const COVER = name => `covers/${name}.jpg`;
 
-  langBtn.addEventListener('click', () => {
-    lang = lang === 'ja' ? 'en' : 'ja';
-    langBtn.textContent = lang === 'ja' ? 'EN' : 'JP';
-    document.querySelectorAll('[data-ja]').forEach(el => {
-      el.innerHTML = el.dataset[lang];
-    });
+// ===legacy inline data (inert, scheduled for removal) ===
+const _DEAD_LRC_DB_ = {
+  'kimi_wa_shiawasedesuka.mp3': `[0:03.9]きみと出会った\n[0:10.8]画面の中で きみと出会った\n[0:21.7]黒と白の 石を並べて\n[0:29.1]高校生のきみと 学生だった僕は\n[0:36.9]顔も見えずに 言葉を交わした\n[0:43.8]いつも 安い店で 済ませてた\n[0:50.6]花束のひとつも 買えなかった\n[0:57.6]夢も語らず ただ笑ってた\n[1:04.4]それで満足してた 愚かな僕\n[1:12.4]遠い街から 会いに来てくれた\n[1:19.5]電車を乗り継いで 来てくれた\n[1:25.6]きみに 見合う男で ありたかったのに\n[1:34.2]何も 差し出せなかった\n[1:40.9]もっといい景色を 見せたかった\n[1:48.3]夢を語って 笑わせたかった\n[1:55.2]未来を約束 できていたら\n[2:03.0]今も きみの隣に いれたのかな\n[2:11.5]きみが学校を 卒業する前\n[2:18.7]僕は振られた 当然だった\n[2:26.2]悔しさだけで 仕事を始めて\n[2:33.5]何年も ただ走り続けた\n[2:40.6]ひさしぶりに ログインした夜\n[2:46.8]画面の端に きみの名前が光った\n[2:54.8]四年越しの 同じ時刻に\n[3:02.6]神様が くれた いたずら\n[3:09.5]やっと胸を張れる 僕になれたのに\n[3:16.8]きみの隣で 笑ってる人がいた\n[3:23.9]震える指で 綴った言葉は\n[3:31.4]送れないまま 夜に溶けた\n[3:40.7]嫌われて 離れたなら まだいい\n[3:47.1]でも もしも 僕に未来が見えなくて\n[3:54.5]きみが 諦めて 去ったのなら\n[4:01.4]可哀想な 思いを させたよね\n[4:09.5]ごめんね 悔しいよ\n[4:16.9]きみにも 僕にも\n[4:23.1]もう一局 打ちたかっただけ\n[4:27.5]盤を挟んで きみの笑顔が見たかった\n[4:36.8]もっといい景色を 見せたかった\n[4:44.7]きみが 誇れる 男に なりたかった\n[4:52.3]間に合わなかった この想いが\n[4:56.0]今も 胸で 燃えている\n[5:06.8]あれから 二十年が 過ぎて\n[5:14.2]黒と白の 石は 静かに眠る\n[5:21.7]ただ ひとつ 知りたいのは\n[5:28.7]きみは 今 幸せですか\n[5:36.8]きみは 今 幸せですか`,
+  'urizun.mp3': `[0:00.0]HAISAI!\n[0:30.7]太陽 焦がせ 海を 裂け 止まらねえ この熱さ\n[0:37.8]HAISAI KICK! ちむ どんどん\n[0:41.1]HAISAI KICK! 朝まで 叫べ\n[0:45.0]Hey! Hey!\n[0:56.2]Hey! Hey! Hey! Hey!\n[0:59.0]仲間と 声枯らせ 青い炎 吐いて 空まで 届け\n[1:06.0]HAISAI KICK! ちむ どんどん\n[1:09.5]HAISAI KICK! 朝まで 叫べ\n[1:13.2]チバリヨー! チバリヨー! チバリヨー! チバリヨー!\n[1:34.2]HAISAI KICK!\n[1:36.2]HAISAI KICK! ちむ どんどん\n[1:41.0]HAISAI KICK!\n[1:45.5]HAISAI KICK! ちむ どんどん\n[1:48.2]止まらねえ\n[1:52.0]HAISAI KICK!\n[1:55.4]HAISAI KICK!\n[2:12.9]HAISAI KICK!\n[2:20.0]HAISAI!`,
+  'hashiridase_ossan.mp3': `[0:00.0]目覚めた先に 待ってたのは やっぱり俺だった\n[0:05.8]笑っちまうな\n[0:12.9]空は青くて 草は眩しくて\n[0:16.4]「ようこそ勇者様」 って声がする\n[0:19.9]鏡に映った 顔を見て 四十超えの オレだったよ\n[0:25.3]ステータス全部 Fランク スキルは「遅刻せず出社」\n[0:31.7]異世界でも 役に立つか こんな能力\n[0:38.2]やっぱり俺は しがないおっさん\n[0:41.7]転生しても これだ 笑うしかねぇ\n[0:45.2]腰は痛むし 目は霞むし\n[0:48.2]それでも前に 進むしかねぇんだ\n[0:51.7]Level 1 から やり直し\n[0:54.4]しがなくて 上等だろ\n[0:57.5]走り出せ オッサン\n[1:06.8]若い勇者に 説教されて\n[1:08.9]「先輩マジで 頑張って」って\n[1:10.5]心は十八 気持ちは二十歳\n[1:12.2]でも体だけが 嘘をつかねぇ\n[1:13.9]四十年分の 使い古した 言い訳だけは 得意なんだ\n[1:19.6]でもな 積み上げた時間\n[1:22.6]ただの飾りじゃ ねぇはずだ\n[1:25.8]やっぱり俺は しがないおっさん\n[1:29.0]転生しても これだ 笑うしかねぇ\n[1:32.6]魔王討伐 できなくても\n[1:35.5]目の前の 敵 一匹ずつ\n[1:39.1]倒していく それで 十分だろ\n[1:41.9]しがなくて 上等だろ\n[1:44.9]走り続けろ オッサン\n[1:49.6]Level 1 から やり直し\n[2:05.9]しがなくて 上等だろ\n[2:06.5]走り出せ オッサン\n[2:07.2]前世で諦めた\n[2:10.2]夢の続き\n[2:13.2]この世界でも\n[2:15.8]きっと叶わない\n[2:19.4]でもな 戦うことだけは 選べる\n[2:25.7]カッコ悪くても\n[2:28.9]泥まみれでも\n[2:33.5]やっぱり俺は しがないおっさん\n[2:37.0]転生しても これだ これが俺だ\n[2:40.7]Level 1 から 積み上げて\n[2:43.5]小さな勝利 一つずつ\n[2:47.0]しがなくて 上等だろ\n[2:49.8]胸を張れ オッサン\n[2:55.8]胸を張れ オッサン\n[3:05.5]しがなくて 上等\n[3:10.9]それでも 俺は 俺だ`,
+};
+
+const _LEGACY_SONGS_ = [
+  { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2'), genre: 'ballad',       comment: 'ピアノと弦の冬のバラード' },
+  { title: 'fly away buttfly ①',   file: 'fly_away_buttfly_1.mp3',   cover: COVER('fly_away_buttfly'),                    genre: 'dance',        comment: '90年代ユーロビートへのオマージュ' },
+  { title: 'fly away buttfly ②',   file: 'fly_away_buttfly_2.mp3',   cover: IMG('cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2'), genre: 'dance',        comment: '90年代ユーロビートへのオマージュ' },
+  { title: '真夜中のカーニバル ①', file: 'mayonaka_carnival_1.mp3',  cover: IMG('8f0eb688-ccb6-436b-affd-d7ef6e35e6cf'), genre: 'anime',        comment: '軽快なミステリーポップ' },
+  { title: '真夜中のカーニバル ②', file: 'mayonaka_carnival_2.mp3',  cover: IMG('dd5959f2-c9dc-4080-ba7b-c56b30a0ee6c'), genre: 'anime',        comment: '軽快なミステリーポップ' },
+  { title: 'Burning Countdown ①',  file: 'burning_countdown_1.mp3',  cover: IMG('7fa3d1b2-8e56-4bb7-b3d1-1c46b608f42a'), genre: 'experimental', comment: '笑顔で隠した崩壊カウントダウン' },
+  { title: 'Burning Countdown ②',  file: 'burning_countdown_2.mp3',  cover: IMG('91299c49-5e15-43c2-a2b4-93d345c1e3c9'), genre: 'experimental', comment: '笑顔で隠した崩壊カウントダウン' },
+  { title: '令和パパは肩身が狭い', file: 'reiwa_papa_hatasegasei.mp3', cover: IMG('42daad7d-ca3b-4d73-9a76-7ce523d7cc12'), genre: 'anime',       comment: '不器用なパパの歌' },
+  { title: 'Free as the Static',   file: 'free_as_the_static.mp3',   cover: IMG('f743b81d-fc74-4cfc-ac62-6e7f9f5d0960'), genre: 'ballad',       comment: '夜のジャズ、自由とは何も持たないこと' },
+  { title: '踊れ踊れ!',             file: 'odore_odore_1.mp3',         cover: COVER('odore_odore'),                         genre: 'dance',        comment: 'DDR 2nd Mixへのオマージュ' },
+  { title: "U'LDU'L ①",             file: 'uldul_1.mp3',                cover: COVER('uldul'),                               genre: 'experimental', comment: 'Hyperpop × Eurobeat・謎語' },
+  { title: "U'LDU'L ②",             file: 'uldul_2.mp3',                cover: IMG('3dffe69a-9b74-4f55-94c7-33fd43ebde26'), genre: 'experimental', comment: 'Hyperpop × Eurobeat・謎語' },
+  { title: 'Ngoma Ya Mwitu',        file: 'ngoma_ya_mwitu.mp3',        cover: COVER('ngoma_ya_mwitu'),                      genre: 'experimental', comment: 'スワヒリ語で「野生の太鼓」' },
+  { title: '病みDOKI',               file: 'yami_doki.mp3',             cover: COVER('yami_doki'),                           genre: 'dance',        comment: '地雷女×オタク男のデュエット' },
+  { title: 'NIGHT DRIVER',          file: 'night_driver.mp3',          cover: COVER('night_driver'),                        genre: 'dance',        comment: '80s Italo Discoへのオマージュ' },
+  { title: '朝日に溶けて',           file: 'asahi_ni_tokete.mp3',       cover: COVER('asahi_ni_tokete'),                     genre: 'ballad',       comment: 'ダンスアルバムの最終曲' },
+  { title: '色即是空',               file: 'shikisokuzeku.mp3',          cover: COVER('shikisokuzeku'),                       genre: 'experimental', comment: '般若心経ユーロビート' },
+  { title: 'HANABI ☆ KISS',         file: 'hanabi_kiss.mp3',           cover: COVER('hanabi_kiss'),                         genre: 'dance',        comment: 'パラパラ全盛期への回帰' },
+  { title: 'きみは幸せですか',       file: 'kimi_wa_shiawasedesuka.mp3', cover: COVER('kimihaima'),                          genre: 'ballad',       comment: 'まーちゃん、今君は幸せですか？' },
+  { title: 'URIZUN',                 file: 'urizun.mp3',                 cover: COVER('urizun'),                             genre: 'jp-dance',     comment: 'Jersey Club × 琉球音階' },
+  { title: '転生してもやっぱりしがないおっさんでした', file: 'hashiridase_ossan.mp3', cover: COVER('hashiridase_ossan'), genre: 'anime', comment: '自虐系アニメOP' },
+];
+
+// data now in songs.js; legacy LRC_DB/SONGS variables are inert
+
+// Dance Instinct 9-track sequence (order matters)
+const DANCE_INSTINCT = [
+  'fly_away_buttfly_1.mp3', 'hanabi_kiss.mp3', 'odore_odore_1.mp3',
+  'night_driver.mp3', 'ngoma_ya_mwitu.mp3', 'yami_doki.mp3',
+  'uldul_1.mp3', 'shikisokuzeku.mp3', 'asahi_ni_tokete.mp3'
+];
+
+// Populate chip counts
+function updateChipCounts() {
+  const counts = { all: SONGS.length };
+  SONGS.forEach(s => { counts[s.genre] = (counts[s.genre] || 0) + 1; });
+  document.querySelectorAll('.chip[data-genre]').forEach(chip => {
+    const g = chip.dataset.genre;
+    const n = counts[g] || 0;
+    chip.querySelector('.chip-count').textContent = `(${n})`;
   });
+}
+updateChipCounts();
 
-  // カスタムプレイヤー（複数インスタンス対応）
-  const RELEASE = 'music';
-  const IMG = id => `https://cdn1.suno.ai/image_${id}.jpeg`;
-  const COVER = name => `covers/${name}.jpg`;
-  const allPlayers = [];
-  const EQ_BARS = 18;
+function parseLRC(text) {
+  if (!text) return [];
+  return text.split('\n').map(line => {
+    const m = line.match(/^\[(\d+):(\d+(?:\.\d+)?)\](.*)$/);
+    if (!m) return null;
+    const t = parseInt(m[1]) * 60 + parseFloat(m[2]);
+    const txt = m[3].trim();
+    if (!txt || txt.startsWith('[')) return null;
+    return { time: t, text: txt };
+  }).filter(Boolean);
+}
 
-  // iOS では Web Audio を使わない（バックグラウンド再生が止まるため）
-  const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const grid = document.getElementById('songs');
+const np = document.getElementById('nowPlaying');
+const npCover = document.getElementById('npCover');
+const npTitle = document.getElementById('npTitle');
+const npLyricInline = document.getElementById('npLyricInline');
+const npLyricsFull = document.getElementById('npLyricsFull');
+const npProgress = document.getElementById('npProgress');
+const npProgressFill = document.getElementById('npProgressFill');
+const audio = document.getElementById('audio');
+const btnShuffle = document.getElementById('btnShuffle');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+const btnPlayPause = document.getElementById('btnPlayPause');
+const btnExpand = document.getElementById('btnExpand');
+const npInfoClick = document.getElementById('npInfoClick');
 
-  // 共有 AudioContext（最初のクリックで作成）
-  let audioCtx = null;
-  const ensureCtx = () => {
-    if (isIOS) return null;
-    if (!audioCtx) {
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      if (Ctx) audioCtx = new Ctx();
-    }
-    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-  };
+let currentFilter = 'all';
+let currentView = 'grid';
+let searchQuery = '';
+let queue = [];
+let currentIdx = -1;
+let shuffleMode = false;
+let repeatMode = 'off'; // off / one / all
+let parsedLyrics = [];
 
-  const initPlayer = (rootId, initialTracks) => {
-    const root = document.getElementById(rootId);
-    if (!root) return null;
-    let tracks = initialTracks;
-    const q = sel => root.querySelector(sel);
-    const audio = q('[data-audio]');
-    const listEl = q('[data-list]');
-    const titleEl = q('[data-title]');
-    const curEl = q('[data-cur]');
-    const totEl = q('[data-tot]');
-    const barEl = q('[data-bar]');
-    const progressEl = q('[data-progress]');
-    const playBtn = q('[data-play]');
-    const prevBtn = q('[data-prev]');
-    const nextBtn = q('[data-next]');
-    const shuffleBtn = q('[data-shuffle]');
-    const loopBtn = q('[data-loop]');
-    const coverEl = q('[data-cover]');
-    const eqEl = q('[data-eq]');
-    const commentEl     = q('[data-comment]');
-    const lyricsPanelEl = q('[data-lyrics-panel]');
-    const lyricsTickerEl = q('[data-lyrics-ticker]');
+const fmtTime = s => {
+  if (!isFinite(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${String(sec).padStart(2, '0')}`;
+};
 
-    const parseLRC = (lrc) => {
-      const lines = [];
-      for (const raw of lrc.trim().split('\n')) {
-        const m = raw.match(/^\[(\d+):(\d+)(?:\.(\d+))?\](.*)/);
-        if (m) {
-          lines.push({
-            t: parseInt(m[1]) * 60 + parseInt(m[2]) + (m[3] ? parseInt(m[3]) / 100 : 0),
-            text: m[4].trim(),
-            isSection: /^\[[A-Za-z]/.test(m[4].trim()),
-          });
-        }
-      }
-      return lines;
-    };
-
-    let lyricsData = null;
-    let lastLyricIdx = -1;
-    let currentSection = '';
-
-    const buildLyricsDOM = (lrc) => {
-      lyricsData = null;
-      lastLyricIdx = -1;
-      currentSection = '';
-      if (lyricsTickerEl) lyricsTickerEl.innerHTML = '';
-      if (!lrc) return;
-      lyricsData = parseLRC(lrc);
-    };
-
-    const renderRuby = (text) => {
-      // {漢字|ふりがな} → <ruby>漢字<rt>ふりがな</rt></ruby>
-      return text.replace(/\{([^|]+)\|([^}]+)\}/g, '<ruby>$1<rt>$2</rt></ruby>');
-    };
-
-    const showLyricLine = (line) => {
-      if (!lyricsTickerEl) return;
-      lyricsTickerEl.querySelectorAll('.lyric-slot').forEach(old => {
-        if (old.classList.contains('exit')) return;
-        old.classList.remove('enter');
-        old.classList.add('exit');
-        const removeOld = () => { if (old.parentNode) old.remove(); };
-        old.addEventListener('animationend', removeOld, { once: true });
-        setTimeout(removeOld, 600);
-      });
-      const slot = document.createElement('div');
-      slot.className = 'lyric-slot enter';
-      const txt = document.createElement('span');
-      txt.className = 'lyric-text';
-      txt.innerHTML = renderRuby(line.text);
-      slot.appendChild(txt);
-      lyricsTickerEl.appendChild(slot);
-    };
-
-    const updateLyricHighlight = (currentTime) => {
-      if (!lyricsData || !lyricsData.length) return;
-      let idx = 0;
-      for (let i = 0; i < lyricsData.length; i++) {
-        if (lyricsData[i].t <= currentTime) idx = i;
-      }
-      if (idx === lastLyricIdx) return;
-      lastLyricIdx = idx;
-      const line = lyricsData[idx];
-      if (line.isSection) {
-        currentSection = line.text.replace(/[\[\]]/g, '');
-        // セクションだけの行はスキップして次の歌詞行を表示
-        if (idx + 1 < lyricsData.length && !lyricsData[idx + 1].isSection) {
-          return;
-        }
-      } else {
-        showLyricLine(line);
-      }
-    };
-
-    let index = 0, shuffle = false, loop = false;
-    let analyser = null, sourceNode = null, eqBars = [], rafId = null;
-
-    // EQ バー作成
-    for (let i = 0; i < EQ_BARS; i++) {
-      const b = document.createElement('div');
-      b.className = 'bar';
-      eqEl.appendChild(b);
-      eqBars.push(b);
-    }
-
-    // Web Audio 接続（初回 play 時に1回だけ）
-    const connectAnalyser = () => {
-      const ctx = ensureCtx();
-      if (!ctx || sourceNode) return;
-      try {
-        sourceNode = ctx.createMediaElementSource(audio);
-        analyser = ctx.createAnalyser();
-        analyser.fftSize = 128;
-        analyser.smoothingTimeConstant = 0.75;
-        sourceNode.connect(analyser);
-        analyser.connect(ctx.destination);
-      } catch (e) { /* already connected or cross-origin */ }
-    };
-
-    const drawEQ = () => {
-      if (!analyser) { rafId = null; return; }
-      if (audio.paused) { rafId = null; return; }
-      const buf = new Uint8Array(analyser.frequencyBinCount);
-      analyser.getByteFrequencyData(buf);
-      // 低〜中域を EQ_BARS 本にマップ
-      const binCount = Math.floor(buf.length * 0.75);
-      const step = binCount / EQ_BARS;
-      for (let i = 0; i < EQ_BARS; i++) {
-        const start = Math.floor(i * step);
-        const end = Math.floor((i + 1) * step);
-        let sum = 0, n = 0;
-        for (let j = start; j < end; j++) { sum += buf[j]; n++; }
-        const avg = n ? sum / n : 0;
-        const h = Math.max(3, (avg / 255) * 26);
-        eqBars[i].style.height = h + 'px';
-      }
-      rafId = requestAnimationFrame(drawEQ);
-    };
-
-    const startEQ = () => { if (!rafId) rafId = requestAnimationFrame(drawEQ); };
-
-    const fmt = s => {
-      if (!isFinite(s)) return '0:00';
-      const m = Math.floor(s / 60);
-      const sec = Math.floor(s % 60);
-      return `${m}:${sec.toString().padStart(2, '0')}`;
-    };
-
-    const renderList = () => {
-      listEl.innerHTML = '';
-      tracks.forEach((t, i) => {
-        const li = document.createElement('li');
-        li.className = 'playlist-item';
-        li.innerHTML = `
-          <span class="pl-thumb" style="background-image:url('${t.cover}')"></span>
-          <span class="pl-num">${i + 1}</span>
-          <span class="pl-title">${t.title}</span>
-          <span class="pl-dur" data-dur>–:–</span>
-          <a class="pl-dl" href="${RELEASE}/${t.file}" download title="Download">DL</a>
-        `;
-        li.addEventListener('click', (e) => {
-          if (e.target.classList.contains('pl-dl')) return;
-          playIndex(i);
-        });
-        listEl.appendChild(li);
-        const a = new Audio();
-        a.preload = 'metadata';
-        a.src = `${RELEASE}/${t.file}`;
-        a.addEventListener('loadedmetadata', () => {
-          li.querySelector('[data-dur]').textContent = fmt(a.duration);
-        });
-      });
-    };
-    renderList();
-
-    const setCover = (url) => {
-      if (url) {
-        coverEl.style.setProperty('--cover-img', `url('${url}')`);
-        coverEl.classList.add('has-img');
-      } else {
-        coverEl.style.removeProperty('--cover-img');
-        coverEl.classList.remove('has-img');
-      }
-    };
-
-    const updateActive = () => {
-      [...listEl.children].forEach((li, i) => li.classList.toggle('active', i === index));
-      titleEl.textContent = tracks[index].title;
-      setCover(tracks[index].cover);
-      if (commentEl) {
-        const c = tracks[index].comment || '';
-        commentEl.textContent = c;
-        commentEl.classList.toggle('visible', !!c);
-      }
-      if (lyricsPanelEl) {
-        const lyr = tracks[index].lyrics || '';
-        buildLyricsDOM(lyr);
-        lyricsPanelEl.classList.toggle('visible', !!lyr);
-      }
-      const playing = !audio.paused && audio.src;
-      coverEl.classList.toggle('playing', playing);
-      root.classList.toggle('playing', playing);
-      playBtn.textContent = audio.paused ? '▶' : '❚❚';
-    };
-
-    const updateMediaSession = (i) => {
-      if (!('mediaSession' in navigator)) return;
-      const t = tracks[i];
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: t.title,
-        artist: 'hinatabokkuri',
-        artwork: t.cover ? [{ src: t.cover, sizes: '512x512', type: 'image/jpeg' }] : []
-      });
-      navigator.mediaSession.setActionHandler('play',     () => { audio.play(); });
-      navigator.mediaSession.setActionHandler('pause',    () => { audio.pause(); });
-      navigator.mediaSession.setActionHandler('previoustrack', () => playIndex(prevIdx()));
-      navigator.mediaSession.setActionHandler('nexttrack',     () => { const n = nextIdx(); if (n >= 0) playIndex(n); });
-    };
-
-    let pendingPlay = false;
-
-    const playIndex = (i) => {
-      index = i;
-      audio.src = `${RELEASE}/${tracks[i].file}`;
-      audio.play().catch(() => { pendingPlay = true; });
-      updateActive();
-      updateMediaSession(i);
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'play_track', { track_title: tracks[i].title, player_id: rootId });
-      }
-    };
-
-    const pause = () => audio.pause();
-
-    const nextIdx = () => {
-      if (shuffle) {
-        let r;
-        do { r = Math.floor(Math.random() * tracks.length); } while (tracks.length > 1 && r === index);
-        return r;
-      }
-      if (index + 1 >= tracks.length) return loop ? 0 : -1;
-      return index + 1;
-    };
-
-    const prevIdx = () => (index - 1 < 0) ? (loop ? tracks.length - 1 : 0) : index - 1;
-
-    playBtn.addEventListener('click', () => {
-      if (!audio.src) { playIndex(0); return; }
-      if (audio.paused) audio.play(); else audio.pause();
+function render() {
+  grid.innerHTML = '';
+  grid.className = currentView;
+  let filtered = currentFilter === 'all' ? SONGS : SONGS.filter(s => s.genre === currentFilter);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    filtered = filtered.filter(s =>
+      s.title.toLowerCase().includes(q) ||
+      s.comment.toLowerCase().includes(q) ||
+      (s.lyrics || '').toLowerCase().includes(q)
+    );
+  }
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="grid-column:1/-1;color:var(--text-dim);text-align:center;padding:2rem;">該当なし</p>';
+    return;
+  }
+  filtered.forEach(s => {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.dataset.file = s.file;
+    tile.innerHTML = `
+      <div class="tile-cover" style="background-image: url('${s.cover}')"></div>
+      <div class="tile-meta">
+        <span class="genre-tag">${s.genre}</span>
+        <div class="tile-title">${s.title}</div>
+        <div class="tile-comment">${s.comment}</div>
+      </div>
+    `;
+    tile.addEventListener('click', () => {
+      queue = [...filtered];
+      currentIdx = filtered.indexOf(s);
+      playCurrent();
     });
-    nextBtn.addEventListener('click', () => { const n = nextIdx(); if (n >= 0) playIndex(n); });
-    prevBtn.addEventListener('click', () => playIndex(prevIdx()));
-    shuffleBtn.addEventListener('click', () => { shuffle = !shuffle; shuffleBtn.classList.toggle('active', shuffle); });
-    loopBtn.addEventListener('click', () => { loop = !loop; loopBtn.classList.toggle('active', loop); });
-
-    const shareXBtn = q('[data-share-x]');
-    if (shareXBtn) {
-      shareXBtn.addEventListener('click', () => {
-        const title = tracks[index]?.title || '—';
-        const text = `🎵 「${title}」/ hinatabokkuri`;
-        const url = 'https://hinatabokkuri-star.github.io';
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener');
-      });
-    }
-
-    audio.addEventListener('play', () => {
-      // 他のインスタンスを止める
-      allPlayers.forEach(p => { if (p.audio !== audio) p.pause(); });
-      connectAnalyser();
-      startEQ();
-      updateActive();
-    });
-    audio.addEventListener('pause', updateActive);
-    audio.addEventListener('timeupdate', () => {
-      curEl.textContent = fmt(audio.currentTime);
-      if (audio.duration) barEl.style.width = (audio.currentTime / audio.duration * 100) + '%';
-      updateLyricHighlight(audio.currentTime);
-    });
-    audio.addEventListener('loadedmetadata', () => { totEl.textContent = fmt(audio.duration); });
-    audio.addEventListener('ended', () => {
-      const n = nextIdx();
-      if (n >= 0) {
-        playIndex(n);
-        // iOSバックグラウンドでは新srcのplay()が成功扱いでも音が出ないケースがある
-        // → バックグラウンド時は必ずpendingPlayをセットして復帰時にリトライ保証
-        if (document.hidden) pendingPlay = true;
-      } else updateActive();
-    });
-    // 復帰時: 歌詞位置の再同期 & バックグラウンドで失敗した再生のリトライ
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        if (pendingPlay && audio.paused && audio.src) {
-          pendingPlay = false;
-          audio.play().catch(() => {});
-        }
-        updateLyricHighlight(audio.currentTime);
-      }
-    });
-
-    let seeking = false;
-    const seekTo = (clientX) => {
-      if (!audio.duration) return;
-      const rect = progressEl.getBoundingClientRect();
-      const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-      audio.currentTime = ratio * audio.duration;
-      barEl.style.width = (ratio * 100) + '%';
-    };
-    progressEl.addEventListener('pointerdown', (e) => {
-      seeking = true;
-      progressEl.setPointerCapture(e.pointerId);
-      seekTo(e.clientX);
-    });
-    progressEl.addEventListener('pointermove', (e) => {
-      if (seeking) seekTo(e.clientX);
-    });
-    progressEl.addEventListener('pointerup',   () => { seeking = false; });
-    progressEl.addEventListener('pointercancel', () => { seeking = false; });
-
-    titleEl.textContent = tracks[0].title;
-    setCover(tracks[0].cover);
-    listEl.firstChild.classList.add('active');
-
-    const setTracks = (newTracks) => {
-      const currentFile = tracks[index]?.file;
-      tracks = newTracks;
-      renderList();
-      const matchIdx = tracks.findIndex(t => t.file === currentFile);
-      if (matchIdx >= 0) {
-        // 再生中曲が新リストに存在→その位置をアクティブ表示
-        index = matchIdx;
-        updateActive();
-      } else {
-        // 再生中曲が新リストに無い→プレイヤー表示は触らず、次曲で新リスト先頭に飛ぶ
-        index = -1;
-        [...listEl.children].forEach(li => li.classList.remove('active'));
-      }
-    };
-
-    const api = { audio, pause, setTracks, getCurrentLyricText: () => {
-      if (!lyricsData || lastLyricIdx < 0) return '';
-      const line = lyricsData[lastLyricIdx];
-      return line ? line.text.replace(/\{([^|]+)\|[^}]+\}/g, '$1') : '';
-    } };
-    allPlayers.push(api);
-    return api;
-  };
-
-  const allSongs = [
-    { title: '雪の底',               file: 'yukinosoko.mp3',           cover: IMG('65dca459-9cfe-4055-aec6-91313524f9e2'), comment: 'ノベルゲーム「二時の既読」のエンディング曲。トロッコ問題をモチーフに——どちらを選んでも誰かが死ぬ、その避けられない喪失を音にした。', lyrics: `[0:13.0][Verse 1]\n[0:13.0]午前2時のLINEに 既読だけを残して\n[0:19.5]震える手で駆けつけた あの鉄橋の欄干\n[0:27.1][Pre-Chorus]\n[0:27.1]呼ばれたのは僕だった 知ってる声だった\n[0:39.1][Chorus]\n[0:39.1]選べなかった方の 扉の向こうで\n[0:47.1]誰かが静かに息を止めた\n[0:54.1]届いた声に 応えられなかった\n[1:01.1]息の残り香が 雪になって\n[1:10.1][Verse 2]\n[1:10.1]午前2時の音声に 呼吸の音が滲んで\n[1:16.1]合鍵で開けた扉 冷えたリノリウムの床\n[1:24.1][Pre-Chorus]\n[1:24.1]呼ばれたのは僕だった 知らない声だった\n[1:36.1][Chorus]\n[1:36.1]選べなかった方の 鉄橋の欄干で\n[1:44.1]誰かが静かに {水面|みなも}を見つめた\n[1:51.1]既読のまま止まった ありがとうが\n[1:58.1]二月の朝に 凍っていく\n[2:05.1][Bridge]\n[2:05.1]トロッコは止まらない 呼ばれた声は二つ\n[2:12.1]差し伸べた手は 一つしかなかった\n[2:21.1][Outro]\n[2:21.1]選ばれなかった声が 雪の底で眠っている\n[2:35.1]選ばれた声は 今も僕を抱きしめて\n[2:42.1]既読のまま 返せないまま\n[2:46.1]返せないまま\n[2:49.1]二月の朝 雪の底` },
-    { title: 'fly away buttfly ①',   file: 'fly_away_buttfly_1.mp3',   cover: COVER('fly_away_buttfly'), comment: '90年代ユーロビートへのオマージュ。一度聴いたら頭から離れない、そんなフレーズを目指した。', lyrics: `[0:30.0][Verse 1]\n[0:30.0]夜が始まる neon lights are glowing\n[0:33.2]心が躍る feel the music flowing\n[0:36.5]止まらないで don't you slow it down\n[0:39.6]このビートに乗って spin me around\n[0:43.3][Pre-Chorus]\n[0:43.3]Higher and higher, もっと上へ\n[0:48.5]Feel it inside, 離さないで\n[0:50.0][Chorus]\n[0:50.0]Dance with me tonight, fly away\n[0:53.5]Butterfly, butterfly, いつまでも\n[0:57.0]Can't stop the rhythm, here to stay\n[1:00.3]Butterfly, fly, fly, fly away\n[1:15.8][Verse 2]\n[1:15.8]汗が光る strobe lights flashing bright\n[1:19.3]二人だけの world on fire tonight\n[1:22.8]声が重なる echo in the crowd\n[1:26.0]このまま踊ろう scream it out loud\n[1:29.6][Pre-Chorus]\n[1:29.6]Higher and higher, もっと上へ\n[1:34.8]Feel it inside, 離さないで\n[1:36.3][Chorus]\n[1:36.3]Dance with me tonight, fly away\n[1:39.7]Butterfly, butterfly, いつまでも\n[1:43.2]Can't stop the rhythm, here to stay\n[1:46.3]Butterfly, fly, fly, fly away\n[1:56.0]Can't stop the rhythm, here to stay\n[1:58.0]Butterfly, fly, fly, fly away\n[2:27.0][Outro]\n[2:27.0]Butterfly, butterfly, fly away` },
-    { title: 'fly away buttfly ②',   file: 'fly_away_buttfly_2.mp3',   cover: IMG('cfb304ee-b58b-49c4-8fc0-67e7b5ee06e2'), comment: '90年代ユーロビートへのオマージュ。一度聴いたら頭から離れない、そんなフレーズを目指した。', lyrics: `[0:00.0]Butterfly, butterfly, fly away\n[0:39.0][Verse 1]\n[0:39.0]夜が始まる neon lights are glowing\n[0:43.0]心が躍る feel the music flowing\n[0:46.0]止まらないで don't you slow it down\n[0:49.0]このビートに乗って spin me around\n[0:53.0][Pre-Chorus]\n[0:53.0]Higher and higher, もっと上へ\n[0:57.0]Feel it inside, 離さないで\n[0:59.0][Chorus]\n[0:59.0]Dance with me tonight, fly away\n[1:02.0]Butterfly, butterfly, いつまでも\n[1:06.0]Can't stop the rhythm, here to stay\n[1:09.0]Butterfly, fly, fly, fly away\n[1:26.0][Verse 2]\n[1:26.0]汗が光る strobe lights flashing bright\n[1:29.0]二人だけの world on fire tonight\n[1:33.0]声が重なる echo in the crowd\n[1:35.0]このまま踊ろう scream it out loud\n[1:39.0][Pre-Chorus]\n[1:39.0]Higher and higher, もっと上へ\n[1:44.0]Feel it inside, 離さないで\n[1:46.0][Chorus]\n[1:46.0]Dance with me tonight, fly away\n[1:49.0]Butterfly, butterfly, いつまでも\n[1:52.0]Can't stop the rhythm, here to stay\n[1:55.0]Butterfly, fly, fly, fly away\n[2:22.0][Outro]\n[2:22.0]Butterfly, butterfly, fly away` },
-    { title: '真夜中のカーニバル ①', file: 'mayonaka_carnival_1.mp3',  cover: IMG('8f0eb688-ccb6-436b-affd-d7ef6e35e6cf'), comment: '謎解きパーティーに迷い込んだような、軽快なミステリーポップ。', lyrics: `[0:16.0]真夜中の カーニバル 手掛かりは どこだ\n[0:23.0]ハンカチ ひとつ 忘れた 犯人\n[0:29.0]紅茶が さめる 前に 答えを ちょうだい\n[0:35.0]ウィンク 一発で 世界が 裏返る\n[0:41.0]証拠A 証拠B 並べて 笑って\n[0:45.0]真実は いつも ひとつ じゃないの\n[0:51.0]Tick tack ミステリー！\n[0:54.0]誰が 嘘を ついたの 教えて 探偵さん\n[0:58.0]Hop step スキップして\n[1:00.0]今夜も 誰かが 消えていくわ\n[1:04.0]La la la ララバイ 真相へ\n[1:12.0]足跡 たどれば 迷路の 出口\n[1:19.0]図書館の 本棚 最後の ページ\n[1:25.0]コーヒーの 湯気が 教えて くれる\n[1:32.0]犯人は そう あなたの 隣\n[1:37.0]証拠C 証拠D 揃えたって\n[1:41.0]真実は たまに 嘘より 嘘つき\n[1:48.0]Tick tack ミステリー！\n[1:50.0]誰が 鍵を かけたの 教えて 探偵さん\n[1:54.0]Hop step ジャンプして\n[1:56.0]今夜も 世界は 裏返るわ\n[2:00.0]La la la ララバイ 明日へ\n[2:24.0]聞かないで 答えないで\n[2:31.0]月が 見ている 私たちを\n[2:40.0]Tick tack ミステリー！\n[2:43.0]犯人は 私よって 言って しまおうか\n[2:47.0]Hop step Last Scene\n[2:49.0]今夜で 世界は お開きよ\n[2:53.0]La la la ララバイ さようなら\n[3:13.0]さようなら` },
-    { title: '真夜中のカーニバル ②', file: 'mayonaka_carnival_2.mp3',  cover: IMG('dd5959f2-c9dc-4080-ba7b-c56b30a0ee6c'), comment: '謎解きパーティーに迷い込んだような、軽快なミステリーポップ。', lyrics: `[0:05.4]真夜中の カーニバル 手掛かりは どこだ\n[0:09.7]ハンカチ ひとつ 忘れた 犯人\n[0:15.0]紅茶が さめる 前に 答えを ちょうだい\n[0:19.7]ウィンク 一発で 世界が 裏返る\n[0:24.6]証拠A 証拠B 並べて 笑って\n[0:29.2]真実は いつも ひとつじゃないの？\n[0:35.8]Tick tack ミステリー！\n[0:38.3]誰が 嘘を ついたの 教えて 探偵さん\n[0:45.4]Hop step スキップして\n[0:48.2]今夜も 誰かが 消えていくわ\n[0:53.1]La la la ララバイ 真相へ\n[1:07.4]足跡 たどれば 迷路の 出口\n[1:11.1]図書館の 本棚 最後の ページ\n[1:15.7]コーヒーの 湯気が 教えてくれる\n[1:19.8]犯人は そう あなたの となり\n[1:24.0]証拠C 証拠D 数えて 笑って\n[1:28.9]真実は たまに 嘘より 嘘つき\n[1:30.0]Tick tack ミステリー！\n[1:38.2]誰が 鍵を かけたの 教えて 名探偵\n[1:45.2]Hop step ジャンプして\n[1:48.1]今夜も 世界は 裏返るわ\n[1:53.0]La la la ララバイ 明日へ\n[2:13.8]聞かないで 答えないで\n[2:19.1]月が 見ている 私たちを\n[2:25.8]Tick tack ミステリー！\n[2:28.0]犯人は 私よ！って 言ってしまおうか\n[2:35.8]Hop step ラスト シーン\n[2:38.3]今夜で 世界は お開きね\n[2:43.4]La la la ララバイ さよなら` },
-    { title: 'Burning Countdown ①',  file: 'burning_countdown_1.mp3',  cover: IMG('7fa3d1b2-8e56-4bb7-b3d1-1c46b608f42a'), comment: '笑顔で隠した崩壊カウントダウン。完璧に見える日常に忍び込む焦燥感。', lyrics: `[0:10.0]笑顔の裏に hiding something\n[0:13.0]誰も気づかない this little game\n[0:17.0]キラキラ光る broken promise\n[0:20.0]It's beautiful, isn't it? 全部嘘でも\n[0:23.0]手を繋いで walking on the edge\n[0:26.0]平和な街に silence count down\n[0:29.0]知らぬふりして smile and wave\n[0:32.0]The clock is ticking さあ始めよう\n[0:36.0]We're perfectly fine 大丈夫\n[0:39.0]Nothing to see here 心配しないで\n[0:43.0]Laugh it off 笑い飛ばせ\n[0:46.0]But deep inside we're burning bright\n[0:49.0]燃え尽きるまで let's dance tonight\n[0:55.0]これが正しいと信じていた\n[0:59.0]Maybe we were wrong from the start\n[1:02.0]でも今更戻らない\n[1:05.0]No way back, no way back\n[1:11.0]We're perfectly fine 大丈夫\n[1:14.0]Nothing to see here 心配しないで\n[1:18.0]燃え尽きるまで let's dance tonight` },
-    { title: 'Burning Countdown ②',  file: 'burning_countdown_2.mp3',  cover: IMG('91299c49-5e15-43c2-a2b4-93d345c1e3c9'), comment: '笑顔で隠した崩壊カウントダウン。完璧に見える日常に忍び込む焦燥感。', lyrics: `[0:00.0]笑顔の裏に hiding something\n[0:04.5]誰も気づかない this little game\n[0:09.0]キラキラ光る broken promise\n[0:13.0]It's beautiful, isn't it? 全部嘘でも\n[0:16.0]手を繋いで walking on the edge\n[0:19.0]平和な街 silent countdown\n[0:22.0]知らぬふりして smile and wave\n[0:25.0]The clock is ticking さあ始めよう\n[0:28.0]We're perfectly fine 大丈夫\n[0:31.5]Nothing to see here 心配しないで\n[0:35.0]Laugh it off 笑い飛ばせ\n[0:38.0]But deep inside we're burning bright\n[0:41.0]燃え尽きるまで let's dance tonight\n[0:44.0]これが正しいと信じていた\n[0:49.0]Maybe we were wrong from the start\n[0:52.0]でも今更戻れない\n[0:55.0]No way back, no way back\n[0:59.0]We're perfectly fine 大丈夫\n[1:02.5]Nothing to see here 心配しないで\n[1:06.0]燃え尽きるまで let's dance tonight` },
-    { title: '令和パパは肩身が狭い',  file: 'reiwa_papa_hatasegasei.mp3', cover: IMG('42daad7d-ca3b-4d73-9a76-7ce523d7cc12'), comment: '令和の家庭で肩身を狭くしながら、それでも家族を愛する不器用なパパの歌。', lyrics: `[0:26.5]休日くらい ゲームさせてよ\n[0:29.6]ちょっとくらいは のんびりしたい\n[0:35.4]昨日やり残した 洗い物\n[0:39.0]子供も言ってる パパダメだって\n[0:48.0]ほらほらほら やることやって\n[0:51.1]ほらほらほら 言わせないでよ\n[0:57.1]令和パパは 肩身が狭い\n[1:00.2]財布の中身 妻が管理\n[1:03.5]小遣い制で 生きている\n[1:06.8]多数決では いつも負け\n[1:09.6]令和パパは 肩身が狭い\n[1:12.6]それでも家族が 好きだから\n[1:15.8]虐げられても 踊ってる\n[1:19.2]パパは今日も 頑張るよ\n[1:25.4]晩ごはん何か 聞いたなら\n[1:28.8]「自分で決めて」 返ってきた\n[1:32.2]冷蔵庫に あるじゃない\n[1:36.9]子供も呆れてる パパってどう？\n[1:40.6]ほらほらほら 早くしてよ\n[1:43.8]ほらほらほら 察してよね\n[1:49.8]令和パパは 肩身が狭い\n[1:52.8]財布の中身 妻が管理\n[1:56.1]小遣い制で 生きている\n[1:59.4]多数決では いつも負け\n[2:02.1]令和パパは 肩身が狭い\n[2:05.1]それでも家族が 好きだから\n[2:08.2]虐げられても 踊ってる\n[2:11.7]パパは今日も 頑張るよ\n[2:17.8]会社じゃ怒鳴られ 帰ってきたら\n[2:20.7]また怒られて 居場所がない\n[2:23.8]それでも俺が 守りたいのは\n[2:26.9]この家族だけ それだけなんだ\n[2:33.2]わかってるわよ バカじゃない\n[2:36.1]子供も言ってた パパ好きって\n[2:39.4]不器用だけど 愛しいから\n[2:42.4]だから言うのよ 期待してる\n[2:49.7]令和パパは 肩身が狭い\n[2:52.7]財布の中身 妻が管理\n[2:56.0]小遣い制で 生きている\n[2:59.2]多数決では いつも負け\n[3:01.9]令和パパは 肩身が狭い\n[3:05.0]それでも家族が 好きだから\n[3:07.9]虐げられても 踊ってる\n[3:11.4]パパは今日も 頑張るよ\n[3:17.1]パパは今日も 肩身が狭い\n[3:23.3]でも この家族が\n[3:29.8]全部なんだよ` },
-    { title: 'Free as the Static',   file: 'free_as_the_static.mp3',    cover: IMG('f743b81d-fc74-4cfc-ac62-6e7f9f5d0960'), comment: '古いラジオのノイズ越しに流れる、夜のジャズ。自由とは何も持たないことだと、煙草の煙が教えてくれる。', lyrics: `[0:13.3]Rain upon the windowpane\n[0:14.9]The needle finds its groove\n[0:24.5]Old records play a soft refrain\n[0:26.6]A man with nowhere left to prove\n[0:37.1]Free like the static in the air\n[0:41.6]Free like the jazz that no one owns\n[0:48.1]Gone before you know I'm there\n[0:53.4]Just smoke and music, skin and bones\n[1:06.4]The master pours without a word\n[1:11.4]He knows the look, the empty glass\n[1:18.4]Some songs are meant to be unheard\n[1:23.3]Some freedoms too beautiful to last\n[1:30.8]Miles Davis on a rainy night\n[1:36.3]The crackle warm as candlelight\n[1:41.9]No past, no future, just this song\n[1:47.7]A wandering heart right where it belongs\n[1:59.2]Free... just free...\n[2:02.8]Like static fading into dawn` },
-    { title: '踊れ踊れ!',             file: 'odore_odore_1.mp3',          cover: COVER('odore_odore'), comment: 'DDR 2nd Mixへのオマージュ。「踊れ踊れ」の繰り返しがクセになる、ユーロビートダンスチューン。', lyrics: `[0:22.2]真夜中のビートが体を揺らす\n[0:27.6]ネオンの光の中　飛び出せ\n[0:32.8]誰も止められない　この熱さを\n[0:38.3]今夜だけ　全部燃やせ\n[0:43.5]カウントダウン　もう始まってる\n[0:48.9]心臓の音がフロアと重なる\n[0:54.8]踊れ踊れ　夜が終わるまで\n[1:00.1]踊れ踊れ　止まらないで\n[1:05.7]踊れ踊れ　フロアで叫べ\n[1:12.1]踊れ踊れ　ヤー！\n[1:16.8]汗が光る　スポットライトの下\n[1:21.5]限界なんてない　もっと高く\n[1:27.2]世界が揺れてる　あなたと一緒に\n[1:32.9]夜明けまで　走り続けろ\n[1:38.2]踊れ踊れ　夜が終わるまで\n[1:43.2]踊れ踊れ　止まらないで\n[1:48.9]踊れ踊れ　フロアで叫べ\n[1:54.7]踊れ踊れ　ヤー！\n[1:59.9]Oh yeah　感じてる\n[2:03.1]Oh yeah　もっと熱く\n[2:05.8]Oh yeah　限界超えて\n[2:09.2]Tonight　Tonight　Tonight！\n[2:24.0]踊れ踊れ　夜が終わるまで\n[2:29.0]踊れ踊れ　止まらないで\n[2:34.6]踊れ踊れ　フロアで叫べ\n[2:39.2]踊れ踊れ　ヤー！` },
-    { title: "U'LDU'L ①",             file: 'uldul_1.mp3',                cover: COVER('uldul'), comment: '意味不明・謎語・フラッシュモブ。理由なく踊り出すHyperpop × Eurobeat。', lyrics: `[0:0.0]U'LDU'L U'LDU'L\n[0:2.2]U'LDU'L yeah！\n[0:12.1]なんか知らんけど 足が動く\n[0:13.4]理由？ない　説明？無理\n[0:16.9]U'ldul u'ldul 始まった\n[0:19.5]止める方法 知らない\n[0:21.8]Hey you! 見てる場合じゃない\n[0:24.7]Come on! 一緒にやるしかない\n[0:27.3]U'LDU'L U'LDU'L 何これ\n[0:29.8]U'LDU'L U'LDU'L 踊れ\n[0:32.6]U'LDU'L U'LDU'L Why not?\n[0:35.3]U'LDU'L yeah！\n[0:36.8]スマホ構えてる場合じゃない\n[0:39.6]お前も もう 感染してる\n[0:42.1]U'ldul u'ldul 広がった\n[0:44.2]街ごと 全部 巻き込んで\n[0:46.9]No stop! 考えたら負け\n[0:49.7]Just move! 体が正解\n[0:52.4]U'LDU'L U'LDU'L 何これ\n[0:55.1]U'LDU'L U'LDU'L 踊れ\n[0:57.5]U'LDU'L U'LDU'L Why not?\n[1:00.1]U'LDU'L yeah！\n[1:11.5]気づいたら100人 踊ってた\n[1:14.3]なんで？　わかんない　最高じゃん\n[1:17.0]U'ldul u'ldul 止まらない\n[1:19.1]明日も明後日も U'ldul\n[1:22.0]So what! 意味なんていらない\n[1:24.6]Let's go! 体だけが真実\n[1:27.5]U'LDU'L U'LDU'L 何これ\n[1:30.1]U'LDU'L U'LDU'L 踊れ\n[1:32.5]U'LDU'L U'LDU'L Why not?\n[1:35.0]U'LDU'L yeah！\n[1:36.4]誰が始めた？　知らない\n[1:38.1]いつ終わる？　知らない\n[1:39.2]でも今は　U'ldul\n[1:41.5]それだけでいい\n[1:47.4]U'LDU'L U'LDU'L 何これ\n[1:50.0]U'LDU'L U'LDU'L 踊れ\n[1:52.5]U'LDU'L U'LDU'L Why not?\n[1:55.0]U'LDU'L yeah！\n[1:56.9]U'LDU'L U'LDU'L…\n[2:02.6]U'LDU'L…` },
-    { title: "U'LDU'L ②",             file: 'uldul_2.mp3',                cover: IMG('3dffe69a-9b74-4f55-94c7-33fd43ebde26'), comment: '意味不明・謎語・フラッシュモブ。理由なく踊り出すHyperpop × Eurobeat。', lyrics: `[0:0.0]U'LDU'L U'LDU'L\n[0:18.4]U'LDU'L U'LDU'L\n[0:20.0]なんか知らんけど 足が動く\n[0:22.9]理由？ない　説明？無理\n[0:25.1]U'ldul u'ldul 始まった\n[0:27.6]止める方法 知らない\n[0:30.8]Hey you! 見てる場合じゃない\n[0:33.0]Come on! 一緒にやるしかない\n[0:35.8]U'LDU'L U'LDU'L 何これ\n[0:38.5]U'LDU'L U'LDU'L 踊れ\n[0:40.9]U'LDU'L U'LDU'L Why not?\n[0:43.5]U'LDU'L yeah！\n[0:45.6]スマホ構えてる場合じゃない\n[0:47.9]お前も もう 感染してる\n[0:50.6]U'ldul u'ldul 広がった\n[0:52.6]街ごと 全部 巻き込んで\n[0:55.3]No stop! 考えたら負け\n[0:58.0]Just move! 体が正解\n[1:00.8]U'LDU'L U'LDU'L 何これ\n[1:03.5]U'LDU'L U'LDU'L 踊れ\n[1:05.8]U'LDU'L U'LDU'L Why not?\n[1:08.5]U'LDU'L yeah！\n[1:20.4]気づいたら100人 踊ってた\n[1:23.0]なんで？　わかんない　最高じゃん\n[1:25.7]U'ldul u'ldul 止まらない\n[1:27.6]明日も明後日も U'ldul\n[1:30.3]So what! 意味なんていらない\n[1:33.0]Let's go! 体だけが真実\n[1:35.8]U'LDU'L U'LDU'L 何これ\n[1:38.4]U'LDU'L U'LDU'L 踊れ\n[1:40.8]U'LDU'L U'LDU'L Why not?\n[1:43.4]U'LDU'L yeah！\n[1:46.3]誰が始めた？　知らない\n[1:49.0]いつ終わる？　知らない\n[1:51.0]でも今は　U'ldul\n[1:54.2]それだけでいい\n[1:58.2]U'LDU'L U'LDU'L 何これ\n[2:00.9]U'LDU'L U'LDU'L 踊れ\n[2:03.3]U'LDU'L U'LDU'L Why not?\n[2:05.8]U'LDU'L yeah！\n[2:08.4]U'LDU'L U'LDU'L…\n[2:13.2]U'LDU'L…` },
-    { title: 'Ngoma Ya Mwitu',        file: 'ngoma_ya_mwitu.mp3',        cover: COVER('ngoma_ya_mwitu'), comment: 'スワヒリ語で「野生の太鼓」。楽器を一切使わず、打撃音・破砕音・足踏みだけで組み上げた民族打楽器ダンス。Ngoma=太鼓/踊り、Moto=火、Simba=獅子、Jua=太陽、Damu=血、Haraka=速く、Mwitu=野生。', lyrics: `[0:00.0]—\n[0:30.1]Heya! Heya!\n[0:35.7]Ngoma ngoma ngoma ya mwitu!\n[0:39.0]Ngoma ngoma ngoma ya moto!\n[0:42.4]Heya! Heya! Heya ho!\n[0:51.0]Simba... Simba... Simba...\n[1:02.6]Jua! Jua! Jua!\n[1:08.5]Damu! Haraka!\n[1:10.3]Heya! Heya! Heya ho!\n[1:13.8]Ngoma ngoma ngoma ya mwitu!\n[1:17.8]Ngoma ngoma ngoma ya moto!\n[1:20.6]Heya! Heya! Heya ho!\n[1:35.2]Heya... Heya...\n[1:36.7]Ngoma... ngoma... ngoma...\n[1:46.3]Heya...\n[1:51.1]Ngoma... ngoma...` },
-    { title: '病みDOKI',                file: 'yami_doki.mp3',           cover: COVER('yami_doki'), comment: '地雷女×オタク男の深夜ダンスデュエット。女声はSunoで歌唱生成、オタク男の「ボイスメモ」部分はElevenLabs v3 TTS（LIAM）で別生成してffmpegオーバーレイ合成。歌えないキャラの非対称性そのものがテーマ。170BPM・メンヘラコア・Hyperpop。', lyrics: `[0:00.0]ねえ、見てる?\n[0:03.0](男) え、あ、はい…見てます…\n[0:09.8]ねえ、見てる?\n[0:13.0]今日もLINE 既読スルー?\n[0:15.9]3時間も待たせてさ\n[0:18.1]私より 推し優先?\n[0:20.4]ねえ、答えてよ ねえ、ねえ、ねえ\n[0:24.0](男) ち、違うんだ、配信で…ご、ごめん、俺が悪い\n[0:32.0]強ゼロ3本目 回ってきたの\n[0:34.6]もう無理よ 無理なの もう無理だって\n[0:37.3]ねえ、今夜だけは\n[0:41.6]私を見て\n[0:42.9]ヘラって踊れ ヘラって踊れ\n[0:45.8]フロアで泣け 叫べ 壊れろ\n[0:48.4]一緒に踊って 拒否は無理\n[0:53.6]Dokidoki 病みdoki\n[0:55.8]今夜だけは 私を推して\n[0:58.6]私を\n[1:01.2]私を\n[1:05.5](男) ぼ、僕、きみを推してる\n[1:08.7]は?\n[1:14.5]もっかい言ってよ\n[1:17.3]嘘じゃないでしょ?\n[1:19.3]ヘラって踊れ ヘラって踊れ\n[1:21.8]地雷でもいい オタクでもいい\n[1:24.4]一生推して 拒否は無理\n[1:29.0]Dokidoki 病みdoki\n[1:31.9]今夜からは キミだけのファン\n[1:35.1]キミだけ キミだけ キミだけ\n[1:40.2]明日も会える?\n[1:42.0](男) は、はい…!\n[1:43.8]じゃあ、踊ろっか` },
-    { title: 'NIGHT DRIVER',           file: 'night_driver.mp3',          cover: COVER('night_driver'), comment: '80s Italo Discoへのオマージュ。Giorgio Moroder・Kavinsky系のレトロフューチャー。深夜の東京高速、ネオンとクロームの中を一人で走る男のバリトンボイス。130BPM。', lyrics: `[0:03.1]Tokyo, 3 A.M.\n[0:10.0]Midnight... velocity...\n[0:20.0]Highway lights are falling down\n[0:30.0]Neon signs still call my name\n[0:40.0]I was driving nowhere fast\n[0:50.0]Chasing ghosts that never came\n[0:55.0]Rear-view mirror, your silhouette\n[1:00.0]Fade away into the night\n[1:04.7]Night driver, night driver\n[1:09.0]Tokyo's burning, chrome and fire\n[1:12.6]Night driver, night driver\n[1:16.3]君を乗せて どこまでも\n[1:21.0]Tonight, tonight, tonight\n[1:35.7]1985, the radio plays\n[1:38.6]A song we used to know by heart\n[1:42.8]Engine hums like a lullaby\n[1:45.8]Tearing this city apart\n[1:49.9]Rear-view mirror, your silhouette\n[1:52.8]Gone before the morning light\n[1:58.2]Night driver, night driver\n[2:01.8]Tokyo's burning, chrome and fire\n[2:05.7]Night driver, night driver\n[2:09.4]君を乗せて どこまでも\n[2:14.2]Tonight, tonight, tonight\n[2:19.8]She said "don't look back"\n[2:22.9]She said "just keep driving"\n[2:26.8]But the road ends at dawn\n[2:31.6]And I'm still arriving\n[3:04.0]Night driver, night driver\n[3:07.8]Chrome and fire, chrome and fire\n[3:11.6]Night driver, night driver\n[3:15.0]二度と戻れない あの夜へ\n[3:20.7]Forever, forever, forever\n[3:29.9]Tokyo, 3 A.M.\n[3:32.6]Night... driver...` },
-    { title: '朝日に溶けて',            file: 'asahi_ni_tokete.mp3',       cover: COVER('asahi_ni_tokete'), comment: 'ダンスアルバムの最終曲。フロアを出た後の朝日・始発ホーム・見知らぬ相手との一瞬の通じ合い。Track 8「色即是空」の《空(くう)》が朝日に溶けて、全アルバムが閉じる。Post-rave chillwave・108BPM。', lyrics: `[0:18.6]ライトが消えて ドアが開いた\n[0:23.9]冷えた風 汗が引いていく\n[0:28.2]耳の奥 まだビートが鳴ってる\n[0:33.0]始発までの 静かな時間\n[0:37.2]隣で踊ってた 知らない誰か\n[0:42.1]目が合って 笑い合って\n[0:46.4]名前も 連絡先も 聞かずに別々の電車へ\n[0:53.2]ホームに 始発の音 空が白んでいく\n[1:02.7]夜が明けるまで 踊っていたね\n[1:07.9]言葉もないまま 通じ合ってた\n[1:12.6]また明日 会えなくても この朝だけは 忘れない\n[1:28.6]ビルの隙間 太陽が登る\n[1:33.5]昨日までの 全部が\n[1:38.1]嘘みたいに 透き通って\n[1:40.8]でもこの汗は 本当だった\n[1:45.2]電車が 近づいてくる\n[1:54.2]夜が明けるまで 踊っていたね\n[1:59.1]言葉もないまま 通じ合ってた\n[2:03.9]また明日 会えなくても この朝だけは 忘れない\n[2:21.0]昨日の私は {空|くう}になって 朝日に 溶けてゆく\n[2:36.4]フロアで見た夢も 駅で感じた風も\n[2:46.2]夜が明けるまで 踊っていたね\n[2:51.9]言葉もないまま 通じ合ってた\n[2:56.7]また明日 会えなくても この朝だけは 忘れない\n[3:20.0]朝だよ\n[3:29.2]おやすみ` },
-    { title: '色即是空 -SHI KI SO KU ZE KU-', file: 'shikisokuzeku.mp3', cover: COVER('shikisokuzeku'), comment: '般若心経全文をそのままユーロビートに乗せた実験曲。色即是空＝踊り狂った末に訪れる空。マントラ「羯諦羯諦」の反復構造がダンスミュージックと完璧に噛み合う発見。', lyrics: `[0:00.0]—\n[0:25.0]{仏説|ぶっせつ} {摩訶般若|まかはんにゃ} {波羅蜜多心経|はらみったしんぎょう}\n[0:30.0]{観自在菩薩|かんじざいぼさつ} {行深般若波羅蜜多時|ぎょうじんはんにゃはらみったじ}\n[0:35.6]{照見五蘊皆空|しょうけんごうんかいくう} {度一切苦厄|どいっさいくやく}\n[0:44.7]{舎利子|しゃりし} {色不異空|しきふいくう}\n[0:47.5]{空不異色|くうふいしき}\n[0:50.2]{色即是空|しきそくぜくう}\n[0:53.1]{空即是色|くうそくぜしき}\n[0:55.5]{受想行識|じゅそうぎょうしき}\n[1:00.9]{亦復如是|やくぶにょぜ}\n[1:04.9]{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}\n[1:07.9]{波羅羯諦|はーらーぎゃーてー}\n[1:10.8]{波羅僧羯諦|はらそーぎゃーてー}\n[1:13.6]{菩提薩婆訶|ぼーじーそわかー}!\n[1:17.1]{舎利子|しゃりし} {是諸法空相|ぜしょほうくうそう}\n[1:20.1]{不生不滅|ふしょうふめつ}\n[1:21.3]{不垢不浄|ふくふじょう} {不増不減|ふぞうふげん}\n[1:28.8]{是故空中無色|ぜこくうちゅうむしき} {無受想行識|むじゅそうぎょうしき}\n[1:32.3]{無眼耳鼻舌身意|むげんにびぜっしんに}\n[1:34.9]{無色声香味触法|むしきしょうこうみそくほう}\n[1:37.4]{無眼界|むげんかい} {乃至無意識界|ないしむいしきかい}\n[1:40.9]{無無明|むむみょう} {亦無無明尽|やくむむみょうじん}\n[1:43.5]{乃至無老死|ないしむろうし} {亦無老死尽|やくむろうしじん}\n[1:46.5]{無苦集滅道|むくしゅうめつどう} {無智亦無得|むちやくむとく}\n[1:49.5]{以無所得故|いむしょとくこ}\n[1:52.7]{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}\n[1:55.5]{波羅羯諦|はーらーぎゃーてー}\n[1:58.4]{波羅僧羯諦|はらそーぎゃーてー}\n[2:01.2]{菩提薩婆訶|ぼーじーそわかー}!\n[2:05.5]{菩提薩埵|ぼだいさった}\n[2:06.9]{依般若波羅蜜多故|えはんにゃはらみったこ}\n[2:10.6]{心無罣礙|しんむけいげ} {無罣礙故|むけいげこ} {無有恐怖|むうくふ}\n[2:16.5]{遠離一切顛倒夢想|おんりいっさいてんどうむそう}\n[2:21.8]{究竟涅槃|くきょうねはん}\n[2:25.4]{三世諸仏|さんぜしょぶつ}\n[2:27.0]{依般若波羅蜜多故|えはんにゃはらみったこ}\n[2:31.0]{得阿耨多羅三藐|とくあのくたらさんみゃく}\n[2:33.3]{三菩提|さんぼだい}\n[2:36.8]{故知般若波羅蜜多|こちはんにゃはらみった}\n[2:39.3]{是大神咒|ぜだいじんしゅ} {是大明咒|ぜだいみょうしゅ}\n[2:42.1]{是無上咒|ぜむじょうしゅ} {是無等等咒|ぜむとうどうしゅ}\n[2:45.7]{能除一切苦|のうじょいっさいく}\n[2:48.5]{真実不虚|しんじつふこ} {故説般若|こせつはんにゃ}\n[2:52.7]{波羅蜜多咒|はらみったしゅ}\n[2:54.5]{即説咒曰|そくせつしゅわつ}\n[3:00.2]{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}\n[3:03.1]{波羅羯諦|はーらーぎゃーてー}\n[3:06.0]{波羅僧羯諦|はらそーぎゃーてー}\n[3:08.7]{菩提薩婆訶|ぼーじーそわかー}!\n[3:11.3]{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}\n[3:13.7]{羯諦|ぎゃーてー} {羯諦|ぎゃーてー}!\n[3:17.3]{般若心経|はんにゃしんぎょう}\n[3:19.3]{般若心経|はんにゃしんぎょう}...` },
-    { title: '転生してもやっぱりしがないおっさんでした', file: 'hashiridase_ossan.mp3', cover: COVER('hashiridase_ossan'), comment: '自虐系アニメOPセルフパロディ。異世界転生したのに鏡に映るのは四十超えの自分、ステータスは全部Fランク、スキルは「遅刻せず出社」。それでも前に進むしかねぇんだ。Vaundy/Mrs.GREEN APPLE系アニソンロック。', lyrics: `[0:00.0]目覚めた先に 待ってたのは やっぱり俺だった\n[0:05.8]笑っちまうな\n[0:12.9]空は青くて 草は眩しくて\n[0:16.4]「ようこそ勇者様」 って声がする\n[0:19.9]鏡に映った 顔を見て 四十超えの オレだったよ\n[0:25.3]ステータス全部 Fランク スキルは「遅刻せず出社」\n[0:31.7]異世界でも 役に立つか こんな能力\n[0:38.2]やっぱり俺は しがないおっさん\n[0:41.7]転生しても これだ 笑うしかねぇ\n[0:45.2]腰は痛むし 目は霞むし\n[0:48.2]それでも前に 進むしかねぇんだ\n[0:51.7]Level 1 から やり直し\n[0:54.4]しがなくて 上等だろ\n[0:57.5]走り出せ オッサン\n[1:06.8]若い勇者に 説教されて\n[1:08.9]「先輩マジで 頑張って」って\n[1:10.5]心は十八 気持ちは二十歳\n[1:12.2]でも体だけが 嘘をつかねぇ\n[1:13.9]四十年分の 使い古した 言い訳だけは 得意なんだ\n[1:19.6]でもな 積み上げた時間\n[1:22.6]ただの飾りじゃ ねぇはずだ\n[1:25.8]やっぱり俺は しがないおっさん\n[1:29.0]転生しても これだ 笑うしかねぇ\n[1:32.6]魔王討伐 できなくても\n[1:35.5]目の前の 敵 一匹ずつ\n[1:39.1]倒していく それで 十分だろ\n[1:41.9]しがなくて 上等だろ\n[1:44.9]走り続けろ オッサン\n[1:49.6]Level 1 から やり直し\n[2:05.9]しがなくて 上等だろ\n[2:06.5]走り出せ オッサン\n[2:07.2]前世で諦めた\n[2:10.2]夢の続き\n[2:13.2]この世界でも\n[2:15.8]きっと叶わない\n[2:19.4]でもな 戦うことだけは 選べる\n[2:25.7]カッコ悪くても\n[2:28.9]泥まみれでも\n[2:33.5]やっぱり俺は しがないおっさん\n[2:37.0]転生しても これだ これが俺だ\n[2:40.7]Level 1 から 積み上げて\n[2:43.5]小さな勝利 一つずつ\n[2:47.0]しがなくて 上等だろ\n[2:49.8]胸を張れ オッサン\n[2:55.8]胸を張れ オッサン\n[3:05.5]しがなくて 上等\n[3:10.9]それでも 俺は 俺だ` },
-    { title: 'URIZUN',                 file: 'urizun.mp3',                 cover: COVER('urizun'), comment: 'Jersey Club × 琉球音階（C E F G B）。うりずん＝沖縄の初夏、若葉の季節。トリプルキック連打と三線風リフで若者の迸る青春を鳴らす実験トラック。', lyrics: `[0:00.0]HAISAI!\n[0:30.7]太陽 焦がせ 海を 裂け 止まらねえ この熱さ\n[0:37.8]HAISAI KICK! ちむ どんどん\n[0:41.1]HAISAI KICK! 朝まで 叫べ\n[0:45.0]Hey! Hey!\n[0:56.2]Hey! Hey! Hey! Hey!\n[0:59.0]仲間と 声枯らせ 青い炎 吐いて 空まで 届け\n[1:06.0]HAISAI KICK! ちむ どんどん\n[1:09.5]HAISAI KICK! 朝まで 叫べ\n[1:13.2]チバリヨー! チバリヨー! チバリヨー! チバリヨー!\n[1:34.2]HAISAI KICK!\n[1:36.2]HAISAI KICK! ちむ どんどん\n[1:41.0]HAISAI KICK!\n[1:45.5]HAISAI KICK! ちむ どんどん\n[1:48.2]止まらねえ\n[1:52.0]HAISAI KICK!\n[1:55.4]HAISAI KICK!\n[2:12.9]HAISAI KICK!\n[2:20.0]HAISAI!` },
-    { title: 'きみは幸せですか',        file: 'kimi_wa_shiawasedesuka.mp3', cover: COVER('kimihaima'), comment: 'まーちゃん、今君は幸せですか？', lyrics: `[0:03.9]きみと出会った\n[0:10.8]画面の中で きみと出会った\n[0:21.7]黒と白の 石を並べて\n[0:29.1]高校生のきみと 学生だった僕は\n[0:36.9]顔も見えずに 言葉を交わした\n[0:43.8]いつも 安い店で 済ませてた\n[0:50.6]花束のひとつも 買えなかった\n[0:57.6]夢も語らず ただ笑ってた\n[1:04.4]それで満足してた 愚かな僕\n[1:12.4]遠い街から 会いに来てくれた\n[1:19.5]電車を乗り継いで 来てくれた\n[1:25.6]きみに 見合う男で ありたかったのに\n[1:34.2]何も 差し出せなかった\n[1:40.9]もっといい景色を 見せたかった\n[1:48.3]夢を語って 笑わせたかった\n[1:55.2]未来を約束 できていたら\n[2:03.0]今も きみの隣に いれたのかな\n[2:11.5]きみが学校を 卒業する前\n[2:18.7]僕は振られた 当然だった\n[2:26.2]悔しさだけで 仕事を始めて\n[2:33.5]何年も ただ走り続けた\n[2:40.6]ひさしぶりに ログインした夜\n[2:46.8]画面の端に きみの名前が光った\n[2:54.8]四年越しの 同じ時刻に\n[3:02.6]神様が くれた いたずら\n[3:09.5]やっと胸を張れる 僕になれたのに\n[3:16.8]きみの隣で 笑ってる人がいた\n[3:23.9]震える指で 綴った言葉は\n[3:31.4]送れないまま 夜に溶けた\n[3:40.7]嫌われて 離れたなら まだいい\n[3:47.1]でも もしも 僕に未来が見えなくて\n[3:54.5]きみが 諦めて 去ったのなら\n[4:01.4]可哀想な 思いを させたよね\n[4:09.5]ごめんね 悔しいよ\n[4:16.9]きみにも 僕にも\n[4:23.1]もう一局 打ちたかっただけ\n[4:27.5]盤を挟んで きみの笑顔が見たかった\n[4:36.8]もっといい景色を 見せたかった\n[4:44.7]きみが 誇れる 男に なりたかった\n[4:52.3]間に合わなかった この想いが\n[4:56.0]今も 胸で 燃えている\n[5:06.8]あれから 二十年が 過ぎて\n[5:14.2]黒と白の 石は 静かに眠る\n[5:21.7]ただ ひとつ 知りたいのは\n[5:28.7]きみは 今 幸せですか\n[5:36.8]きみは 今 幸せですか` },
-    { title: 'HANABI ☆ KISS',          file: 'hanabi_kiss.mp3',           cover: COVER('hanabi_kiss'), comment: '1996-2000年、パラパラ全盛期J-POPユーロビートへのオマージュ。夏祭りの夜、好きなクラスメイトに声もかけられない、あの甘くて苦い青春を158BPMに閉じ込めた。', lyrics: `[0:01.2]Hanabi\n[0:04.6]Kiss me tonight\n[0:18.9]教室の窓越しに キミを見ていた\n[0:25.2]夏休み前 最後のチャイム\n[0:30.7]浴衣姿で 待ち合わせ\n[0:37.3]声が出ない 胸が鳴る\n[0:43.9]Tonight, tonight, tonight\n[0:46.6]夜店の灯りで\n[0:50.0]キミの横顔が 揺れてる\n[0:55.5]Hanabi\n[0:57.1]Kiss me tonight\n[0:58.7]消えないでね この瞬間(とき)を\n[1:02.5]ドキドキ 止まらない\n[1:07.9]キミの隣が 世界のすべて\n[1:14.6]Hanabi hanabi hanabi\n[1:17.2]Kiss 打ち上がれ この気持ち\n[1:23.3]ラムネの泡が 弾ける音と\n[1:29.6]金魚すくいの 水の匂い\n[1:35.7]「これ、好きなの？」って聞かれて\n[1:38.9]うなずくだけで 精一杯\n[1:42.0]Tonight, tonight, tonight\n[1:44.6]屋台の向こうで\n[1:48.0]キミが笑った その一瞬\n[1:53.9]Hanabi\n[1:55.2]Kiss me tonight\n[1:56.7]消えないでね この瞬間(とき)を\n[2:00.5]ドキドキ 止まらない\n[2:06.0]キミの隣が 世界のすべて\n[2:12.6]Hanabi hanabi hanabi\n[2:15.2]Kiss 打ち上がれ\n[2:17.4]この気持ち\n[2:21.6]一番大きな花火が 空に咲いた\n[2:27.6]キミが振り向いた その瞬間\n[2:33.3]Say it, say it, say it, say it\n[2:36.7]言えないまま\n[2:40.8]夏が 終わっていく\n[2:45.7]Hanabi\n[2:47.0]Kiss me tonight\n[2:48.5]離さないでね この夜を\n[2:52.4]ドキドキ 止まらない\n[2:57.8]キミとだけ 踊っていたい\n[3:04.5]Hanabi hanabi hanabi\n[3:07.1]Kiss 夏の魔法よ\n[3:09.8]消えないで\n[3:11.4]Hanabi hanabi hanabi\n[3:13.9]Kiss me tonight\n[3:17.4]Hanabi hanabi hanabi\n[3:20.3]Kiss me tonight\n[3:23.4]La la la la la la la\n[3:27.6]Hanabi Kiss` },
-    { title: 'HAPPY BIRTHDAY TO RUI-chan', file: 'birthday_rui.mp3', cover: COVER('birthday_rui'), comment: '25年の付き合いの人に贈る誕生日ソング。秦基博〜back number系アコースティックバラード。恋愛ではなく、頑張りすぎないでねという純粋な祝福。', lyrics: `[0:09.2]何気ない毎日の 隙間にふと\n[0:16.0]君のこと 思い出すよ\n[0:22.9]電話の向こう 聞いた小さな溜息\n[0:29.3]抱え込みすぎてない？\n[0:36.6]頑張り屋さんな君だから\n[0:42.9]伝えたい言葉があるよ\n[0:49.4]Happy Birthday るい\n[0:52.5]無理しないでいいよ\n[0:56.5]五月の風みたいに\n[1:00.0]軽やかでいて\n[1:03.6]今日くらい全部忘れて\n[1:07.0]好きなもの食べて\n[1:10.4]笑っていられますように\n[1:15.0]それだけを願うよ\n[1:21.5]遠く離れていても\n[1:25.0]季節は巡るね\n[1:28.5]新しい緑が揺れる頃\n[1:34.1]君の一年が始まる\n[1:40.9]強くなくてもいいんだよ\n[1:47.5]弱音もたまには吐いて\n[1:53.6]Happy Birthday るい\n[1:57.0]自分を大切にね\n[2:00.7]立ち止まっていいんだ\n[2:04.0]息を深く吸って\n[2:07.7]誰かのためじゃなくて\n[2:11.0]君自身のために\n[2:14.7]穏やかな時間が\n[2:19.0]訪れますように\n[2:25.7]ずいぶん長い付き合いだね\n[2:31.3]それでも毎年\n[2:34.5]この日が来るたび\n[2:37.7]同じ言葉を贈るよ\n[2:48.0]Happy Birthday るい\n[2:51.5]生まれてきてくれて ありがとう\n[2:54.8]これからも君らしく\n[2:58.5]歩いていけますように` },
-  ];
-
-  const pickTracks = (titles) => titles.map(t => allSongs.find(s => s.title === t)).filter(Boolean);
-  const danceAlbum = pickTracks([
-    'fly away buttfly ①',
-    'HANABI ☆ KISS',
-    '踊れ踊れ!',
-    'NIGHT DRIVER',
-    'Ngoma Ya Mwitu',
-    '病みDOKI',
-    "U'LDU'L ①",
-    '色即是空 -SHI KI SO KU ZE KU-',
-    '朝日に溶けて',
-  ]);
-
-  const songPlayerApi = initPlayer('songPlayer', allSongs);
-
-  document.querySelectorAll('#songPlayerTabs .tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#songPlayerTabs .tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      songPlayerApi.setTracks(btn.dataset.tab === 'dance' ? danceAlbum : allSongs);
-    });
+    grid.appendChild(tile);
   });
+  markPlayingTile();
+}
 
-  initPlayer('bgmPlayer', [
-    { title: 'aftermath ①',         file: 'aftermath_1.mp3',        cover: IMG('b9f2f1cf-1f17-440d-9d9c-451d399d8d68') },
-    { title: 'aftermath ②',         file: 'aftermath_2.mp3',        cover: IMG('3ba59ada-3222-47c2-93df-f5eb8080eb53') },
-    { title: 'encounter ①',         file: 'encounter_1.mp3',        cover: IMG('01d4bed3-c1b1-49f9-bcff-74b0f4a8b29f') },
-    { title: 'encounter ②',         file: 'encounter_2.mp3',        cover: IMG('4eb3da64-b071-4ebe-bfde-d9052e0d454c') },
-    { title: 'tension-drive ①',     file: 'tension_drive_1.mp3',    cover: IMG('f2156413-e449-4386-af47-c3dd4afe1bc8') },
-    { title: 'tension-drive ②',     file: 'tension_drive_2.mp3',    cover: IMG('96bf650d-0ae9-48c9-9f99-cc3af9e06c69') },
-    { title: 'opening-ambient ①',   file: 'opening_ambient_1.mp3',  cover: IMG('9148e29f-5b92-4130-8934-75a11a877214') },
-    { title: 'opening-ambient ②',   file: 'opening_ambient_2.mp3',  cover: IMG('ed26e02e-3d21-456d-93a9-9c8ea02b2301') },
-    { title: 'Puzzle Room Loop ①',  file: 'puzzle_room_loop_1.mp3', cover: IMG('d5c71d9f-eb64-429d-934a-d1905f51227f') },
-    { title: 'Puzzle Room Loop ②',  file: 'puzzle_room_loop_2.mp3', cover: IMG('25f7009e-d1d2-418b-ab91-14847f7913d4') },
-  ]);
+function markPlayingTile() {
+  if (currentIdx < 0) return;
+  const current = queue[currentIdx];
+  if (!current) return;
+  document.querySelectorAll('.tile').forEach(t => {
+    t.classList.toggle('playing', t.dataset.file === current.file);
+  });
+}
 
-  // 排他再生：自作プレイヤー間は allPlayers で制御済み。YouTube MV だけ追加対応
-  (() => {
-    const ytIframes = () => document.querySelectorAll('iframe[src*="youtube.com/embed"]');
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
-    // YouTube の enablejsapi=1 を自動付与
-    ytIframes().forEach(f => {
-      if (!f.src.includes('enablejsapi')) {
-        const sep = f.src.includes('?') ? '&' : '?';
-        f.src = f.src + sep + 'enablejsapi=1';
-      }
-    });
-
-    const pauseYT = (except) => {
-      ytIframes().forEach(f => {
-        if (f === except) return;
-        try { f.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); } catch(e) {}
-      });
-    };
-
-    // 自作プレイヤー play 時に YouTube を止める
-    allPlayers.forEach(p => {
-      p.audio.addEventListener('play', () => pauseYT(null));
-    });
-
-    // YouTube フォーカス時に自作プレイヤー全停止
-    window.addEventListener('blur', () => {
-      setTimeout(() => {
-        const focused = document.activeElement;
-        if (focused && focused.tagName === 'IFRAME' && (focused.src || '').includes('youtube.com/embed')) {
-          allPlayers.forEach(p => p.pause());
-          pauseYT(focused);
-        }
-      }, 0);
-    });
-  })();
-
-  // ── ハンバーガーメニュー ────────────────────────────────
-  (() => {
-    const btn    = document.getElementById('hamburger');
-    const drawer = document.getElementById('navDrawer');
-    if (!btn) return;
-    btn.addEventListener('click', () => {
-      btn.classList.toggle('open');
-      drawer.classList.toggle('open');
-    });
-    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      btn.classList.remove('open');
-      drawer.classList.remove('open');
-    }));
-    document.addEventListener('click', e => {
-      if (!drawer.contains(e.target) && !btn.contains(e.target)) {
-        btn.classList.remove('open');
-        drawer.classList.remove('open');
-      }
-    });
-  })();
-
-  // ── ミニプレイヤー（allPlayers 定義後に実行） ───────────
-  (() => {
-    const mini      = document.getElementById('miniPlayer');
-    const miniCover = document.getElementById('miniCover');
-    const miniTitle = document.getElementById('miniTitle');
-    const miniPlay  = document.getElementById('miniPlay');
-    const miniPrev  = document.getElementById('miniPrev');
-    const miniNext  = document.getElementById('miniNext');
-    const miniBar   = document.getElementById('miniBar');
-    const miniLyric = document.getElementById('miniLyric');
-    let activeApi        = null;
-    let trackChanging    = false;
-
-    const isMobile = () => window.matchMedia('(max-width:768px)').matches;
-
-    const sync = () => {
-      if (!activeApi) return;
-      const audio = activeApi.audio;
-      miniPlay.textContent = audio.paused ? '▶' : '❚❚';
-      miniCover.classList.toggle('playing', !audio.paused);
-      if (audio.duration) miniBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
-      if (miniLyric) miniLyric.textContent = activeApi.getCurrentLyricText?.() || '';
-    };
-
-    const show = (api) => {
-      activeApi = api;
-      mini.classList.add('visible');
-      document.body.classList.add('mini-visible');
-    };
-
-    const hide = () => {
-      mini.classList.remove('visible');
-      document.body.classList.remove('mini-visible');
-    };
-
-    allPlayers.forEach(api => {
-      api.audio.addEventListener('ended', () => {
-        trackChanging = true; // トラック切り替え中はpauseでhideしない
-      });
-      api.audio.addEventListener('play', () => {
-        if (!isMobile()) return;
-        trackChanging = false;
-        const playerRoot = api.audio.closest('.player');
-        if (playerRoot) {
-          const cover = playerRoot.querySelector('[data-cover]');
-          const title = playerRoot.querySelector('[data-title]');
-          const img = cover?.style.getPropertyValue('--cover-img') || '';
-          if (img) miniCover.style.backgroundImage = img;
-          miniTitle.textContent = title?.textContent || '—';
-        }
-        show(api);
-        sync();
-      });
-      api.audio.addEventListener('pause', () => {
-        sync();
-        if (!trackChanging && allPlayers.every(p => p.audio.paused)) hide();
-      });
-      api.audio.addEventListener('timeupdate', sync);
-    });
-
-    miniPlay.addEventListener('click', () => {
-      if (!activeApi) return;
-      activeApi.audio.paused ? activeApi.audio.play() : activeApi.audio.pause();
-    });
-    miniPrev.addEventListener('click', () => {
-      activeApi?.audio.closest('.player')?.querySelector('[data-prev]')?.click();
-    });
-    miniNext.addEventListener('click', () => {
-      activeApi?.audio.closest('.player')?.querySelector('[data-next]')?.click();
-    });
-    document.getElementById('miniShareX').addEventListener('click', () => {
-      const title = miniTitle.textContent || '—';
-      const text = `🎵 「${title}」/ hinatabokkuri`;
-      const url = 'https://hinatabokkuri-star.github.io';
-      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener');
-    });
-    mini.addEventListener('click', e => {
-      if (e.target.tagName === 'BUTTON') return;
-      activeApi?.audio.closest('.player')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-  })();
-
-  // ── Service Worker ──────────────────────────────────────
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').then(reg => {
-      // 表示中タブに向けた更新ポーリング（30秒ごとにSW更新チェック）
-      // sw.js の CACHE バージョンが変わっていれば新SWがactivate→RELOADメッセージ→自動リロード
-      setInterval(() => reg.update().catch(() => {}), 30000);
-    }).catch(() => {});
-    navigator.serviceWorker.addEventListener('message', e => {
-      if (e.data?.type === 'RELOAD') location.reload();
+function playCurrent() {
+  if (currentIdx < 0 || currentIdx >= queue.length) return;
+  const s = queue[currentIdx];
+  npCover.style.backgroundImage = `url('${s.cover}')`;
+  npTitle.textContent = s.title;
+  audio.src = 'music/' + s.file;
+  parsedLyrics = parseLRC(s.lyrics);
+  renderFullLyrics();
+  np.classList.add('active');
+  audio.play().catch(e => console.log('play blocked', e));
+  updateMediaSession(s);
+  markPlayingTile();
+  if (np.classList.contains('queue-view')) renderQueue();
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'play_track', {
+      track_title: s.title,
+      track_file: s.file,
+      genre: s.genre,
+      player_id: 'main',
+      shuffle_mode: shuffleMode,
     });
   }
-</script>
+}
 
+function updateMediaSession(s) {
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: s.title,
+    artist: 'hinatabokkuri',
+    album: 'HINATA AI MUSIC',
+    artwork: [
+      { src: s.cover, sizes: '512x512', type: 'image/jpeg' },
+    ],
+  });
+  try {
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+    navigator.mediaSession.setActionHandler('nexttrack', playNext);
+  } catch(e) {}
+}
+
+function playNext() {
+  if (queue.length === 0) return;
+  if (repeatMode === 'one') {
+    audio.currentTime = 0;
+    audio.play();
+    return;
+  }
+  if (shuffleMode && currentIdx >= queue.length - 1) {
+    queue = shuffle(SONGS);
+    currentIdx = 0;
+  } else if (currentIdx >= queue.length - 1) {
+    if (repeatMode === 'all') currentIdx = 0;
+    else { audio.pause(); return; }
+  } else {
+    currentIdx = currentIdx + 1;
+  }
+  playCurrent();
+}
+function playPrev() {
+  if (queue.length === 0) return;
+  currentIdx = (currentIdx - 1 + queue.length) % queue.length;
+  playCurrent();
+}
+
+btnShuffle.addEventListener('click', () => {
+  shuffleMode = !shuffleMode;
+  btnShuffle.classList.toggle('active', shuffleMode);
+});
+
+const btnRepeat = document.getElementById('btnRepeat');
+btnRepeat.addEventListener('click', () => {
+  repeatMode = repeatMode === 'off' ? 'all' : repeatMode === 'all' ? 'one' : 'off';
+  btnRepeat.classList.toggle('active', repeatMode !== 'off');
+  btnRepeat.textContent = repeatMode === 'one' ? '🔂' : '🔁';
+  btnRepeat.title = `リピート: ${repeatMode === 'off' ? 'off' : repeatMode === 'one' ? '1曲' : '全曲'}`;
+});
+btnPrev.addEventListener('click', playPrev);
+btnNext.addEventListener('click', playNext);
+btnPlayPause.addEventListener('click', () => {
+  if (audio.paused) audio.play();
+  else audio.pause();
+});
+audio.addEventListener('play', () => {
+  btnPlayPause.textContent = '⏸';
+  np.classList.add('spinning');
+});
+audio.addEventListener('pause', () => {
+  btnPlayPause.textContent = '▶';
+  np.classList.remove('spinning');
+});
+audio.addEventListener('ended', playNext);
+audio.addEventListener('timeupdate', () => {
+  const pct = (audio.currentTime / audio.duration) * 100 || 0;
+  npProgressFill.style.width = pct + '%';
+  document.getElementById('npTimeCurrent').textContent = fmtTime(audio.currentTime);
+  updateLyric(audio.currentTime);
+});
+audio.addEventListener('loadedmetadata', () => {
+  document.getElementById('npTimeTotal').textContent = fmtTime(audio.duration);
+});
+npProgress.addEventListener('click', (e) => {
+  const r = npProgress.getBoundingClientRect();
+  const pct = (e.clientX - r.left) / r.width;
+  audio.currentTime = audio.duration * pct;
+});
+
+const npScrubTooltip = document.getElementById('npScrubTooltip');
+npProgress.addEventListener('mousemove', (e) => {
+  if (!isFinite(audio.duration)) return;
+  const r = npProgress.getBoundingClientRect();
+  const pct = (e.clientX - r.left) / r.width;
+  const t = audio.duration * pct;
+  npScrubTooltip.textContent = fmtTime(t);
+  npScrubTooltip.style.left = `${pct * 100}%`;
+});
+
+document.getElementById('shuffleAll').addEventListener('click', () => {
+  shuffleMode = true;
+  btnShuffle.classList.add('active');
+  queue = shuffle(SONGS);
+  currentIdx = 0;
+  playCurrent();
+  if (typeof gtag !== 'undefined') gtag('event', 'shuffle_all_start', { total: SONGS.length });
+});
+
+// Album play (sequential, no shuffle)
+document.querySelectorAll('.album-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    e.preventDefault();
+    const album = card.dataset.album;
+    if (album === 'dance-instinct') {
+      shuffleMode = false;
+      btnShuffle.classList.remove('active');
+      queue = DANCE_INSTINCT.map(f => SONGS.find(s => s.file === f)).filter(Boolean);
+      currentIdx = 0;
+      playCurrent();
+      if (typeof gtag !== 'undefined') gtag('event', 'play_album', { album: 'DANCE INSTINCT' });
+    }
+  });
+});
+
+document.querySelectorAll('.chip[data-genre]').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('.chip[data-genre]').forEach(b => b.classList.remove('active'));
+    c.classList.add('active');
+    currentFilter = c.dataset.genre;
+    render();
+  });
+});
+document.querySelectorAll('[data-view]').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('[data-view]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    currentView = b.dataset.view;
+    render();
+  });
+});
+
+function toggleExpand() { np.classList.toggle('expanded'); }
+btnExpand.addEventListener('click', toggleExpand);
+npInfoClick.addEventListener('click', toggleExpand);
+
+// Tabs inside expanded NowPlaying
+document.querySelectorAll('.np-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.np-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    np.classList.toggle('queue-view', tab.dataset.tab === 'queue');
+    if (tab.dataset.tab === 'queue') renderQueue();
+  });
+});
+
+function renderQueue() {
+  const npQueue = document.getElementById('npQueue');
+  if (queue.length === 0) {
+    npQueue.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem;">キューが空</p>';
+    return;
+  }
+  npQueue.innerHTML = queue.map((s, i) => `
+    <div class="np-queue-item ${i === currentIdx ? 'current' : ''}" data-idx="${i}">
+      <div class="np-queue-cover" style="background-image: url('${s.cover}')"></div>
+      <div class="np-queue-title">${i === currentIdx ? '♪ ' : ''}${s.title}</div>
+      <div class="np-queue-num">${String(i + 1).padStart(2, '0')}</div>
+    </div>
+  `).join('');
+  npQueue.querySelectorAll('.np-queue-item').forEach(el => {
+    el.addEventListener('click', () => {
+      currentIdx = parseInt(el.dataset.idx);
+      playCurrent();
+      renderQueue();
+    });
+  });
+}
+
+// Featured section (newest 4 tracks)
+function renderFeatured() {
+  const featuredRow = document.getElementById('featuredRow');
+  // Latest 4 songs = last 4 in SONGS array (newest is appended)
+  const latest = SONGS.slice(-4).reverse();
+  featuredRow.innerHTML = latest.map(s => `
+    <div class="featured-card" data-file="${s.file}">
+      <span class="badge">NEW</span>
+      <div class="cover" style="background-image: url('${s.cover}')"></div>
+      <div class="meta">
+        <div class="ft-title">${s.title}</div>
+        <div class="ft-sub">${s.comment}</div>
+      </div>
+    </div>
+  `).join('');
+  featuredRow.querySelectorAll('.featured-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const s = SONGS.find(x => x.file === card.dataset.file);
+      if (!s) return;
+      queue = [...SONGS];
+      currentIdx = SONGS.indexOf(s);
+      playCurrent();
+    });
+  });
+}
+renderFeatured();
+
+// MV inline player
+const mvModal = document.getElementById('mvModal');
+const mvIframe = document.getElementById('mvIframe');
+document.querySelectorAll('.mv-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const id = card.dataset.yt;
+    const type = card.dataset.ytType;
+    const url = type === 'shorts'
+      ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`
+      : `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+    mvIframe.src = url;
+    mvModal.classList.add('active');
+    audio.pause();
+    if (typeof gtag !== 'undefined') gtag('event', 'play_mv', { mv_id: id });
+  });
+});
+document.getElementById('mvModalClose').addEventListener('click', closeMvModal);
+mvModal.addEventListener('click', (e) => {
+  if (e.target === mvModal) closeMvModal();
+});
+function closeMvModal() {
+  mvModal.classList.remove('active');
+  mvIframe.src = '';
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mvModal.classList.contains('active')) closeMvModal();
+});
+
+// PWA Install Banner
+const pwaBanner = document.getElementById('pwaBanner');
+let deferredInstallPrompt = null;
+const PWA_DISMISS_KEY = 'pwa_dismissed';
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  if (localStorage.getItem(PWA_DISMISS_KEY)) return;
+  // Show banner after 20s of engagement
+  setTimeout(() => pwaBanner.classList.add('show'), 20000);
+});
+document.getElementById('pwaInstall').addEventListener('click', async () => {
+  pwaBanner.classList.remove('show');
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    const { outcome } = await deferredInstallPrompt.userChoice;
+    if (typeof gtag !== 'undefined') gtag('event', 'pwa_install_prompt', { outcome });
+    deferredInstallPrompt = null;
+  }
+});
+document.getElementById('pwaDismiss').addEventListener('click', () => {
+  pwaBanner.classList.remove('show');
+  localStorage.setItem(PWA_DISMISS_KEY, '1');
+});
+// Hide banner if already installed (display-mode standalone)
+if (window.matchMedia('(display-mode: standalone)').matches) {
+  pwaBanner.style.display = 'none';
+}
+
+function renderFullLyrics() {
+  if (parsedLyrics.length === 0) {
+    npLyricsFull.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem;">歌詞データ未登録（プレビュー版は最新3曲のみ対応）</p>';
+    return;
+  }
+  npLyricsFull.innerHTML = parsedLyrics.map((l, i) =>
+    `<div class="lyric-line" data-idx="${i}" data-time="${l.time}">${l.text}</div>`
+  ).join('');
+  npLyricsFull.querySelectorAll('.lyric-line').forEach(el => {
+    el.addEventListener('click', () => {
+      const t = parseFloat(el.dataset.time);
+      if (!isNaN(t)) {
+        audio.currentTime = t;
+        if (audio.paused) audio.play();
+      }
+    });
+  });
+}
+
+function updateLyric(t) {
+  if (parsedLyrics.length === 0) { npLyricInline.textContent = ''; return; }
+  let activeIdx = -1;
+  for (let i = parsedLyrics.length - 1; i >= 0; i--) {
+    if (t >= parsedLyrics[i].time) { activeIdx = i; break; }
+  }
+  npLyricInline.textContent = activeIdx >= 0 ? parsedLyrics[activeIdx].text : '';
+  const lines = npLyricsFull.querySelectorAll('.lyric-line');
+  lines.forEach((el, i) => {
+    el.classList.toggle('active', i === activeIdx);
+    el.classList.toggle('past', i < activeIdx);
+  });
+  if (activeIdx >= 0 && np.classList.contains('expanded')) {
+    const active = lines[activeIdx];
+    if (active) active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// Search input
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchQuery = e.target.value;
+  render();
+});
+
+// Share (Web Share API → Twitter fallback)
+document.getElementById('btnShare').addEventListener('click', async () => {
+  if (currentIdx < 0) return;
+  const s = queue[currentIdx];
+  const text = `いま聴いてる: ${s.title} by hinatabokkuri`;
+  const url = 'https://hinatabokkuri-star.github.io/';
+  // Use native share sheet on mobile (iOS/Android)
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: s.title, text, url });
+      if (typeof gtag !== 'undefined') gtag('event', 'share_track', { track_title: s.title, network: 'native' });
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') return; // user cancelled
+    }
+  }
+  // Fallback to Twitter/X web intent
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener');
+  if (typeof gtag !== 'undefined') gtag('event', 'share_track', { track_title: s.title, network: 'x' });
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // Skip if focused on input
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (currentIdx < 0) return;
+  switch (e.code) {
+    case 'Space':
+      e.preventDefault();
+      if (audio.paused) audio.play(); else audio.pause();
+      break;
+    case 'ArrowRight':
+      if (e.shiftKey) playNext();
+      else audio.currentTime = Math.min(audio.duration, audio.currentTime + 15);
+      break;
+    case 'ArrowLeft':
+      if (e.shiftKey) playPrev();
+      else audio.currentTime = Math.max(0, audio.currentTime - 15);
+      break;
+    case 'KeyS':
+      shuffleMode = !shuffleMode;
+      btnShuffle.classList.toggle('active', shuffleMode);
+      break;
+  }
+});
+
+render();
+
+// Debug: URL ?testUpdate で通知バナーを手動テスト
+if (new URLSearchParams(location.search).has('testUpdate')) {
+  setTimeout(() => {
+    document.getElementById('updateBanner').classList.add('show');
+    document.getElementById('updateNow').onclick = () => alert('本番では location.reload() する');
+    document.getElementById('updateLater').onclick = () => document.getElementById('updateBanner').classList.remove('show');
+  }, 500);
+}
+
+// ── Service Worker update: notification-based (not forced reload) ──
+const updateBanner = document.getElementById('updateBanner');
+const updateNow = document.getElementById('updateNow');
+const updateLater = document.getElementById('updateLater');
+const DISMISS_KEY = 'hb_dismissed_version';
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(reg => {
+    setInterval(() => reg.update().catch(() => {}), 30000);
+  }).catch(() => {});
+  navigator.serviceWorker.addEventListener('message', e => {
+    if (e.data?.type === 'RELOAD') {
+      const version = e.data?.version || Date.now();
+      const dismissed = localStorage.getItem(DISMISS_KEY);
+      if (dismissed === String(version)) return;
+      // If audio not actively playing, reload silently
+      if (!audio || audio.paused) {
+        location.reload();
+        return;
+      }
+      // Otherwise show notification banner
+      updateBanner.classList.add('show');
+      updateNow.onclick = () => {
+        localStorage.removeItem(DISMISS_KEY);
+        location.reload();
+      };
+      updateLater.onclick = () => {
+        localStorage.setItem(DISMISS_KEY, String(version));
+        updateBanner.classList.remove('show');
+      };
+    }
+  });
+}
+</script>
 </body>
 </html>

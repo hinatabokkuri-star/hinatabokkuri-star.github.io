@@ -1,5 +1,5 @@
 // Shared songs data for hinatabokkuri portfolio
-// Used by both index.html (legacy) and preview_grid.html (new)
+// Used by index.html (music main) and about.html
 (function(global){
   const IMG = id => `https://cdn1.suno.ai/image_${id}.jpeg`;
   const COVER = name => `covers/${name}.jpg`;
