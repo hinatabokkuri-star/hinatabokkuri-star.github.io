@@ -468,6 +468,23 @@
     .hero { flex-wrap: wrap; }
     .hero-text { width: 100%; }
     .search-box { flex: 1 1 100%; order: -1; }
+
+    /* Narrow mobile: lighten NowPlaying to give title room */
+    .np-cover { width: 48px; height: 48px; }
+    .np-btn { width: 34px; height: 34px; font-size: 1.1rem; }
+    .np-btn.primary { font-size: 1rem; }
+    .np-actions { gap: 0.15rem; }
+    .np-row { gap: 0.5rem; grid-template-columns: 48px 1fr auto; }
+    /* Hide share on narrow (still in expanded secondary row). Shuffle stays for UX. */
+    .np-actions #btnShare { display: none; }
+    .np-title {
+      font-size: 0.8rem;
+      -webkit-line-clamp: 3;
+    }
+    .np-lyric { font-size: 0.7rem; }
+  }
+  @media (max-width: 380px) {
+    .np-title { -webkit-line-clamp: 4; }
   }
 </style>
 </head>
