@@ -470,21 +470,21 @@
     .search-box { flex: 1 1 100%; order: -1; }
 
     /* Narrow mobile: lighten NowPlaying to give title room */
-    .np-cover { width: 48px; height: 48px; }
-    .np-btn { width: 34px; height: 34px; font-size: 1.1rem; }
-    .np-btn.primary { font-size: 1rem; }
-    .np-actions { gap: 0.15rem; }
-    .np-row { gap: 0.5rem; grid-template-columns: 48px 1fr auto; }
-    /* Hide share on narrow (still in expanded secondary row). Shuffle stays for UX. */
-    .np-actions #btnShare { display: none; }
+    .np-cover { width: 44px; height: 44px; }
+    .np-btn { width: 30px; height: 30px; font-size: 1rem; }
+    .np-btn.primary { font-size: 0.95rem; }
+    .np-actions { gap: 0.1rem; }
+    .np-row { gap: 0.5rem; grid-template-columns: 44px 1fr auto; }
     .np-title {
       font-size: 0.8rem;
       -webkit-line-clamp: 3;
     }
     .np-lyric { font-size: 0.7rem; }
+    .np-btn .x-icon { width: 14px; height: 14px; }
   }
   @media (max-width: 380px) {
     .np-title { -webkit-line-clamp: 4; }
+    .np-btn { width: 28px; height: 28px; }
   }
 </style>
 </head>
@@ -861,12 +861,23 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
   render();
 });
 
-// Share to X
-document.getElementById('btnShare').addEventListener('click', () => {
+// Share (Web Share API → Twitter fallback)
+document.getElementById('btnShare').addEventListener('click', async () => {
   if (currentIdx < 0) return;
   const s = queue[currentIdx];
   const text = `いま聴いてる: ${s.title} by hinatabokkuri`;
   const url = 'https://hinatabokkuri-star.github.io/';
+  // Use native share sheet on mobile (iOS/Android)
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: s.title, text, url });
+      if (typeof gtag !== 'undefined') gtag('event', 'share_track', { track_title: s.title, network: 'native' });
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') return; // user cancelled
+    }
+  }
+  // Fallback to Twitter/X web intent
   window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener');
   if (typeof gtag !== 'undefined') gtag('event', 'share_track', { track_title: s.title, network: 'x' });
 });
