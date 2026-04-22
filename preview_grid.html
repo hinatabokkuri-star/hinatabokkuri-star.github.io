@@ -205,16 +205,16 @@
   }
 
   .np-lyrics-full {
-    margin-top: 1rem;
-    padding: 1rem 0;
-    max-height: 50vh;
+    margin: 1rem auto 0 auto;
+    padding: 80px 0;
+    max-height: 260px;
     overflow-y: auto;
     text-align: left;
     scroll-behavior: smooth;
     display: none;
     max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 100%);
   }
   .now-playing.expanded .np-lyrics-full { display: block; }
   .np-lyrics-full .lyric-line {
@@ -302,6 +302,24 @@
   .np-lyrics-full .lyric-line { cursor: pointer; }
   .np-lyrics-full .lyric-line:hover { background: var(--bg2); border-radius: 4px; }
 
+  /* Lyrics scrollbar styling */
+  .np-lyrics-full {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,166,0,0.5) transparent;
+  }
+  .np-lyrics-full::-webkit-scrollbar { width: 6px; }
+  .np-lyrics-full::-webkit-scrollbar-track { background: transparent; }
+  .np-lyrics-full::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--amber), var(--pink));
+    border-radius: 3px;
+  }
+  .np-lyrics-full::-webkit-scrollbar-thumb:hover {
+    background: var(--amber);
+  }
+
+  /* X logo icon button */
+  .np-btn .x-icon { width: 18px; height: 18px; fill: currentColor; }
+
   @media (max-width: 600px) {
     .grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
     .tile-title { font-size: 0.75rem; }
@@ -364,7 +382,7 @@
       <button class="np-btn" id="btnPrev" title="前へ">⏮</button>
       <button class="np-btn primary" id="btnPlayPause" title="再生/停止">⏸</button>
       <button class="np-btn" id="btnNext" title="次へ">⏭</button>
-      <button class="np-btn" id="btnShare" title="Xでシェア">📤</button>
+      <button class="np-btn" id="btnShare" title="Xでシェア"><svg class="x-icon" viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg"><path d="M714 519L1161 0h-106L667 451 372 0H0l468 708L0 1227h106l409-475 326 475h372L714 519zM573 691l-47-68L144 80h162l305 437 47 68 395 565H891L573 691z"/></svg></button>
       <button class="np-btn" id="btnExpand" title="歌詞展開">📝</button>
     </div>
   </div>
@@ -698,6 +716,15 @@ document.addEventListener('keydown', (e) => {
 });
 
 render();
+
+// Debug: URL ?testUpdate で通知バナーを手動テスト
+if (new URLSearchParams(location.search).has('testUpdate')) {
+  setTimeout(() => {
+    document.getElementById('updateBanner').classList.add('show');
+    document.getElementById('updateNow').onclick = () => alert('本番では location.reload() する');
+    document.getElementById('updateLater').onclick = () => document.getElementById('updateBanner').classList.remove('show');
+  }, 500);
+}
 
 // ── Service Worker update: notification-based (not forced reload) ──
 const updateBanner = document.getElementById('updateBanner');
