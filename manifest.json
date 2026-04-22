@@ -1,11 +1,11 @@
 {
-  "name": "hinatabokkuri",
-  "short_name": "hinatabokkuri",
-  "description": "sound novel / music / game assets",
+  "name": "HINATA AI MUSIC",
+  "short_name": "HINATA AI MUSIC",
+  "description": "hinatabokkuri の AI 音楽アーティストページ",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#faf6ef",
-  "theme_color": "#f59e2b",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
   "lang": "ja",
   "icons": [
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
