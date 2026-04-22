@@ -215,16 +215,18 @@
   }
   .now-playing.expanded .np-lyrics-full { display: block; }
   .np-lyrics-full .lyric-line {
-    padding: 0.4rem 0;
+    padding: 0.4rem 1rem;
     color: var(--text-dim);
     font-size: 1rem;
-    transition: all 0.3s;
+    transition: color 0.3s, font-size 0.3s, font-weight 0.3s;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
   }
   .np-lyrics-full .lyric-line.active {
     color: var(--amber);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    transform: scale(1.05);
   }
   .np-lyrics-full .lyric-line.past { opacity: 0.35; }
 
