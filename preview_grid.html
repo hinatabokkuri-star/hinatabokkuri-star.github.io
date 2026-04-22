@@ -459,6 +459,157 @@
   /* X logo icon button */
   .np-btn .x-icon { width: 18px; height: 18px; fill: currentColor; }
 
+  /* Section heading */
+  .section-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin: 2rem 0 0.8rem 0;
+    text-transform: uppercase;
+  }
+
+  /* Album card */
+  .album-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .album-card {
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    border-radius: 12px;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .album-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255,166,0,0.2);
+    border-color: var(--amber);
+  }
+  .album-card .cover {
+    width: 100px; height: 100px;
+    border-radius: 8px;
+    background: center/cover no-repeat;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+  }
+  .album-card h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
+  }
+  .album-card .album-meta {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-bottom: 0.6rem;
+  }
+  .album-card .album-play {
+    appearance: none;
+    border: none;
+    background: var(--amber);
+    color: #000;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* MV card */
+  .mv-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .mv-card {
+    background: var(--bg2);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: 1px solid var(--border);
+  }
+  .mv-card:hover { transform: translateY(-3px); border-color: var(--pink); }
+  .mv-thumb {
+    aspect-ratio: 16 / 9;
+    background: #000 center/cover no-repeat;
+    position: relative;
+  }
+  .mv-thumb::before {
+    content: '▶';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    color: #fff;
+    background: rgba(0,0,0,0.6);
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    padding-left: 5px;
+    transition: background 0.2s;
+  }
+  .mv-card:hover .mv-thumb::before { background: var(--pink); }
+  .mv-meta {
+    padding: 0.7rem 0.9rem;
+  }
+  .mv-title {
+    font-weight: 700; font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+  .mv-comment {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* Chip count badge */
+  .chip-count {
+    font-weight: 500;
+    opacity: 0.6;
+    margin-left: 0.2rem;
+    font-size: 0.75rem;
+  }
+  .chip.active .chip-count { opacity: 0.75; }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--amber); }
+  .footer-copy {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    opacity: 0.6;
+  }
+
   @media (max-width: 600px) {
     .grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
     .tile-title { font-size: 0.75rem; }
@@ -507,14 +658,45 @@
     <button class="hero-btn" id="shuffleAll">Play 🎧</button>
   </div>
 
+  <h2 class="section-title">🎵 Albums</h2>
+  <div class="album-row">
+    <div class="album-card" data-album="dance-instinct">
+      <div class="cover" style="background-image: url('covers/fly_away_buttfly.jpg')"></div>
+      <div>
+        <h3>DANCE INSTINCT</h3>
+        <div class="album-meta">9 tracks · 27:14 · 2026</div>
+        <button class="album-play">▶ Play Album</button>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">🎬 Music Videos</h2>
+  <div class="mv-row">
+    <a class="mv-card" href="https://www.youtube.com/shorts/iLDx1KL6nBQ" target="_blank" rel="noopener">
+      <div class="mv-thumb" style="background-image: url('covers/yami_doki.jpg')"></div>
+      <div class="mv-meta">
+        <div class="mv-title">病みDOKI</div>
+        <div class="mv-comment">地雷女×オタク男のデュエット、Kling AI MV（1:54フル尺）</div>
+      </div>
+    </a>
+    <a class="mv-card" href="https://www.youtube.com/watch?v=v2vuBKkNf_s" target="_blank" rel="noopener">
+      <div class="mv-thumb" style="background-image: url('covers/fly_away_buttfly.jpg')"></div>
+      <div class="mv-meta">
+        <div class="mv-title">fly away buttfly ①</div>
+        <div class="mv-comment">90年代ユーロビートへのオマージュMV</div>
+      </div>
+    </a>
+  </div>
+
+  <h2 class="section-title">🔎 All Tracks</h2>
   <div class="controls">
     <div class="search-box"><input id="searchInput" type="text" placeholder="タイトル・歌詞を検索"></div>
-    <button class="chip active" data-genre="all">全曲 (22)</button>
-    <button class="chip" data-genre="dance">ダンス</button>
-    <button class="chip" data-genre="anime">アニソン</button>
-    <button class="chip" data-genre="ballad">バラード</button>
-    <button class="chip" data-genre="experimental">実験</button>
-    <button class="chip" data-genre="jp-dance">和ダンス</button>
+    <button class="chip active" data-genre="all">全曲 <span class="chip-count"></span></button>
+    <button class="chip" data-genre="dance">ダンス <span class="chip-count"></span></button>
+    <button class="chip" data-genre="anime">アニソン <span class="chip-count"></span></button>
+    <button class="chip" data-genre="ballad">バラード <span class="chip-count"></span></button>
+    <button class="chip" data-genre="experimental">実験 <span class="chip-count"></span></button>
+    <button class="chip" data-genre="jp-dance">和ダンス <span class="chip-count"></span></button>
     <div class="view-toggle">
       <button class="active" data-view="grid">▦ Grid</button>
       <button data-view="list">☰ List</button>
@@ -522,6 +704,15 @@
   </div>
 
   <div id="songs" class="grid"></div>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="https://x.com/yhhinabon" target="_blank" rel="noopener">X (@yhhinabon)</a>
+      <a href="https://youtube.com/@hinatabokkuri" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://github.com/hinatabokkuri-star" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="footer-copy">© 2026 hinatabokkuri · AI Music</p>
+  </footer>
 </div>
 
 <!-- Update notification banner -->
@@ -597,6 +788,25 @@ const SONGS = [
 ];
 
 SONGS.forEach(s => { s.lyrics = LRC_DB[s.file] || ''; });
+
+// Dance Instinct 9-track sequence (order matters)
+const DANCE_INSTINCT = [
+  'fly_away_buttfly_1.mp3', 'hanabi_kiss.mp3', 'odore_odore_1.mp3',
+  'night_driver.mp3', 'ngoma_ya_mwitu.mp3', 'yami_doki.mp3',
+  'uldul_1.mp3', 'shikisokuzeku.mp3', 'asahi_ni_tokete.mp3'
+];
+
+// Populate chip counts
+function updateChipCounts() {
+  const counts = { all: SONGS.length };
+  SONGS.forEach(s => { counts[s.genre] = (counts[s.genre] || 0) + 1; });
+  document.querySelectorAll('.chip[data-genre]').forEach(chip => {
+    const g = chip.dataset.genre;
+    const n = counts[g] || 0;
+    chip.querySelector('.chip-count').textContent = `(${n})`;
+  });
+}
+updateChipCounts();
 
 function parseLRC(text) {
   if (!text) return [];
@@ -795,6 +1005,22 @@ document.getElementById('shuffleAll').addEventListener('click', () => {
   currentIdx = 0;
   playCurrent();
   if (typeof gtag !== 'undefined') gtag('event', 'shuffle_all_start', { total: SONGS.length });
+});
+
+// Album play (sequential, no shuffle)
+document.querySelectorAll('.album-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    e.preventDefault();
+    const album = card.dataset.album;
+    if (album === 'dance-instinct') {
+      shuffleMode = false;
+      btnShuffle.classList.remove('active');
+      queue = DANCE_INSTINCT.map(f => SONGS.find(s => s.file === f)).filter(Boolean);
+      currentIdx = 0;
+      playCurrent();
+      if (typeof gtag !== 'undefined') gtag('event', 'play_album', { album: 'DANCE INSTINCT' });
+    }
+  });
 });
 
 document.querySelectorAll('.chip[data-genre]').forEach(c => {
