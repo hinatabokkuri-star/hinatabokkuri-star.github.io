@@ -332,16 +332,35 @@
   .np-btn.active { color: var(--amber); }
   .np-progress {
     margin-top: 0.5rem;
-    height: 4px;
+    height: 6px;
     background: var(--bg3);
-    border-radius: 2px;
+    border-radius: 3px;
     cursor: pointer;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
   }
   .np-progress-fill {
     height: 100%; background: var(--amber);
     width: 0%;
+    border-radius: 3px;
   }
+  .np-scrub-tooltip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .np-progress:hover .np-scrub-tooltip { opacity: 1; }
 
   .np-lyrics-full {
     margin: 1rem auto 0 auto;
@@ -582,6 +601,197 @@
   }
   .chip.active .chip-count { opacity: 0.75; }
 
+  /* Featured section (big tiles for newest tracks) */
+  .featured-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .featured-card {
+    background: var(--bg2);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .featured-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--pink);
+    box-shadow: 0 10px 30px rgba(255,90,138,0.25);
+  }
+  .featured-card .cover {
+    aspect-ratio: 1/1;
+    background: #000 center/cover no-repeat;
+  }
+  .featured-card .badge {
+    position: absolute;
+    top: 8px; left: 8px;
+    background: var(--pink);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .featured-card .meta {
+    padding: 0.7rem 0.9rem;
+  }
+  .featured-card .ft-title {
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .featured-card .ft-sub {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* MV inline modal */
+  .mv-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 500;
+    display: none;
+    place-items: center;
+    padding: 1rem;
+  }
+  .mv-modal.active { display: grid; }
+  .mv-modal-inner {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+  .mv-modal-inner iframe {
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  .mv-modal-close {
+    position: absolute;
+    top: -44px; right: 0;
+    appearance: none;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: inherit;
+  }
+
+  /* Queue panel inside expanded NowPlaying */
+  .np-tabs {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 1rem 0;
+    border-bottom: 1px solid var(--border);
+    max-width: 720px;
+    margin: 0 auto;
+    display: none;
+  }
+  .now-playing.expanded .np-tabs { display: flex; }
+  .np-tab {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .np-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+  .np-queue {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1rem;
+    max-height: 260px;
+    overflow-y: auto;
+    display: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,166,0,0.4) transparent;
+  }
+  .now-playing.expanded.queue-view .np-queue { display: block; }
+  .now-playing.expanded.queue-view .np-lyrics-full { display: none; }
+  .np-queue-item {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 0.7rem;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .np-queue-item:hover { background: var(--bg2); }
+  .np-queue-item.current { background: rgba(255,166,0,0.15); }
+  .np-queue-cover {
+    width: 40px; height: 40px;
+    border-radius: 4px;
+    background: #000 center/cover no-repeat;
+  }
+  .np-queue-title {
+    font-size: 0.85rem; font-weight: 600;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .np-queue-num {
+    font-size: 0.7rem; color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* PWA Install Banner */
+  .pwa-banner {
+    position: fixed;
+    bottom: 120px; left: 1rem; right: 1rem;
+    max-width: 420px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    border: 1px solid var(--amber);
+    border-radius: 14px;
+    padding: 1rem;
+    display: none;
+    align-items: center;
+    gap: 0.8rem;
+    z-index: 150;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  .pwa-banner.show { display: flex; }
+  .pwa-banner img { width: 40px; height: 40px; border-radius: 8px; }
+  .pwa-banner .pwa-text { flex: 1; font-size: 0.8rem; line-height: 1.4; }
+  .pwa-banner button {
+    appearance: none; border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+  }
+  .pwa-banner .pwa-install {
+    background: var(--amber); color: #000;
+  }
+  .pwa-banner .pwa-dismiss {
+    background: transparent; color: var(--text-dim);
+    padding: 0.5rem;
+  }
+
   /* Footer */
   .site-footer {
     margin-top: 3rem;
@@ -658,6 +868,9 @@
     <button class="hero-btn" id="shuffleAll">Play 🎧</button>
   </div>
 
+  <h2 class="section-title">✨ New Drops</h2>
+  <div id="featuredRow" class="featured-row"></div>
+
   <h2 class="section-title">🎵 Albums</h2>
   <div class="album-row">
     <div class="album-card" data-album="dance-instinct">
@@ -672,20 +885,20 @@
 
   <h2 class="section-title">🎬 Music Videos</h2>
   <div class="mv-row">
-    <a class="mv-card" href="https://www.youtube.com/shorts/iLDx1KL6nBQ" target="_blank" rel="noopener">
+    <div class="mv-card" data-yt="iLDx1KL6nBQ" data-yt-type="shorts">
       <div class="mv-thumb" style="background-image: url('covers/yami_doki.jpg')"></div>
       <div class="mv-meta">
         <div class="mv-title">病みDOKI</div>
         <div class="mv-comment">地雷女×オタク男のデュエット、Kling AI MV（1:54フル尺）</div>
       </div>
-    </a>
-    <a class="mv-card" href="https://www.youtube.com/watch?v=v2vuBKkNf_s" target="_blank" rel="noopener">
+    </div>
+    <div class="mv-card" data-yt="v2vuBKkNf_s">
       <div class="mv-thumb" style="background-image: url('covers/fly_away_buttfly.jpg')"></div>
       <div class="mv-meta">
         <div class="mv-title">fly away buttfly ①</div>
         <div class="mv-comment">90年代ユーロビートへのオマージュMV</div>
       </div>
-    </a>
+    </div>
   </div>
 
   <h2 class="section-title">🔎 All Tracks</h2>
@@ -722,6 +935,25 @@
   <button class="dismiss" id="updateLater">あとで</button>
 </div>
 
+<!-- MV inline modal -->
+<div id="mvModal" class="mv-modal">
+  <div class="mv-modal-inner">
+    <button class="mv-modal-close" id="mvModalClose">×</button>
+    <iframe id="mvIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- PWA install banner -->
+<div id="pwaBanner" class="pwa-banner">
+  <img src="/icons/icon-180.png" alt="">
+  <div class="pwa-text">
+    <strong>HINATA AI MUSIC をインストール</strong><br>
+    ホーム画面から素早く再生、オフライン対応
+  </div>
+  <button class="pwa-install" id="pwaInstall">入れる</button>
+  <button class="pwa-dismiss" id="pwaDismiss">×</button>
+</div>
+
 <div id="nowPlaying" class="now-playing">
   <div class="np-row">
     <div id="npCover" class="np-cover">
@@ -734,6 +966,7 @@
     </div>
     <div class="np-actions">
       <button class="np-btn" id="btnShuffle" title="シャッフル">🔀</button>
+      <button class="np-btn" id="btnRepeat" title="リピート">🔁</button>
       <button class="np-btn" id="btnPrev" title="前へ">⏮</button>
       <button class="np-btn primary" id="btnPlayPause" title="再生/停止">⏸</button>
       <button class="np-btn" id="btnNext" title="次へ">⏭</button>
@@ -743,12 +976,18 @@
   </div>
   <div class="np-progress" id="npProgress">
     <div class="np-progress-fill" id="npProgressFill"></div>
+    <div class="np-scrub-tooltip" id="npScrubTooltip">0:00</div>
   </div>
   <div class="np-time">
     <span id="npTimeCurrent">0:00</span>
     <span id="npTimeTotal">0:00</span>
   </div>
+  <div class="np-tabs">
+    <button class="np-tab active" data-tab="lyrics">🎤 歌詞</button>
+    <button class="np-tab" data-tab="queue">📜 キュー</button>
+  </div>
   <div class="np-lyrics-full" id="npLyricsFull"></div>
+  <div class="np-queue" id="npQueue"></div>
 </div>
 
 <audio id="audio" preload="none" playsinline></audio>
@@ -842,6 +1081,7 @@ let searchQuery = '';
 let queue = [];
 let currentIdx = -1;
 let shuffleMode = false;
+let repeatMode = 'off'; // off / one / all
 let parsedLyrics = [];
 
 const fmtTime = s => {
@@ -950,11 +1190,19 @@ function updateMediaSession(s) {
 
 function playNext() {
   if (queue.length === 0) return;
+  if (repeatMode === 'one') {
+    audio.currentTime = 0;
+    audio.play();
+    return;
+  }
   if (shuffleMode && currentIdx >= queue.length - 1) {
     queue = shuffle(SONGS);
     currentIdx = 0;
+  } else if (currentIdx >= queue.length - 1) {
+    if (repeatMode === 'all') currentIdx = 0;
+    else { audio.pause(); return; }
   } else {
-    currentIdx = (currentIdx + 1) % queue.length;
+    currentIdx = currentIdx + 1;
   }
   playCurrent();
 }
@@ -967,6 +1215,14 @@ function playPrev() {
 btnShuffle.addEventListener('click', () => {
   shuffleMode = !shuffleMode;
   btnShuffle.classList.toggle('active', shuffleMode);
+});
+
+const btnRepeat = document.getElementById('btnRepeat');
+btnRepeat.addEventListener('click', () => {
+  repeatMode = repeatMode === 'off' ? 'all' : repeatMode === 'all' ? 'one' : 'off';
+  btnRepeat.classList.toggle('active', repeatMode !== 'off');
+  btnRepeat.textContent = repeatMode === 'one' ? '🔂' : '🔁';
+  btnRepeat.title = `リピート: ${repeatMode === 'off' ? 'off' : repeatMode === 'one' ? '1曲' : '全曲'}`;
 });
 btnPrev.addEventListener('click', playPrev);
 btnNext.addEventListener('click', playNext);
@@ -996,6 +1252,16 @@ npProgress.addEventListener('click', (e) => {
   const r = npProgress.getBoundingClientRect();
   const pct = (e.clientX - r.left) / r.width;
   audio.currentTime = audio.duration * pct;
+});
+
+const npScrubTooltip = document.getElementById('npScrubTooltip');
+npProgress.addEventListener('mousemove', (e) => {
+  if (!isFinite(audio.duration)) return;
+  const r = npProgress.getBoundingClientRect();
+  const pct = (e.clientX - r.left) / r.width;
+  const t = audio.duration * pct;
+  npScrubTooltip.textContent = fmtTime(t);
+  npScrubTooltip.style.left = `${pct * 100}%`;
 });
 
 document.getElementById('shuffleAll').addEventListener('click', () => {
@@ -1043,6 +1309,122 @@ document.querySelectorAll('[data-view]').forEach(b => {
 function toggleExpand() { np.classList.toggle('expanded'); }
 btnExpand.addEventListener('click', toggleExpand);
 npInfoClick.addEventListener('click', toggleExpand);
+
+// Tabs inside expanded NowPlaying
+document.querySelectorAll('.np-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.np-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    np.classList.toggle('queue-view', tab.dataset.tab === 'queue');
+    if (tab.dataset.tab === 'queue') renderQueue();
+  });
+});
+
+function renderQueue() {
+  const npQueue = document.getElementById('npQueue');
+  if (queue.length === 0) {
+    npQueue.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem;">キューが空</p>';
+    return;
+  }
+  npQueue.innerHTML = queue.map((s, i) => `
+    <div class="np-queue-item ${i === currentIdx ? 'current' : ''}" data-idx="${i}">
+      <div class="np-queue-cover" style="background-image: url('${s.cover}')"></div>
+      <div class="np-queue-title">${i === currentIdx ? '♪ ' : ''}${s.title}</div>
+      <div class="np-queue-num">${String(i + 1).padStart(2, '0')}</div>
+    </div>
+  `).join('');
+  npQueue.querySelectorAll('.np-queue-item').forEach(el => {
+    el.addEventListener('click', () => {
+      currentIdx = parseInt(el.dataset.idx);
+      playCurrent();
+      renderQueue();
+    });
+  });
+}
+
+// Featured section (newest 4 tracks)
+function renderFeatured() {
+  const featuredRow = document.getElementById('featuredRow');
+  // Latest 4 songs = last 4 in SONGS array (newest is appended)
+  const latest = SONGS.slice(-4).reverse();
+  featuredRow.innerHTML = latest.map(s => `
+    <div class="featured-card" data-file="${s.file}">
+      <span class="badge">NEW</span>
+      <div class="cover" style="background-image: url('${s.cover}')"></div>
+      <div class="meta">
+        <div class="ft-title">${s.title}</div>
+        <div class="ft-sub">${s.comment}</div>
+      </div>
+    </div>
+  `).join('');
+  featuredRow.querySelectorAll('.featured-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const s = SONGS.find(x => x.file === card.dataset.file);
+      if (!s) return;
+      queue = [...SONGS];
+      currentIdx = SONGS.indexOf(s);
+      playCurrent();
+    });
+  });
+}
+renderFeatured();
+
+// MV inline player
+const mvModal = document.getElementById('mvModal');
+const mvIframe = document.getElementById('mvIframe');
+document.querySelectorAll('.mv-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const id = card.dataset.yt;
+    const type = card.dataset.ytType;
+    const url = type === 'shorts'
+      ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`
+      : `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+    mvIframe.src = url;
+    mvModal.classList.add('active');
+    audio.pause();
+    if (typeof gtag !== 'undefined') gtag('event', 'play_mv', { mv_id: id });
+  });
+});
+document.getElementById('mvModalClose').addEventListener('click', closeMvModal);
+mvModal.addEventListener('click', (e) => {
+  if (e.target === mvModal) closeMvModal();
+});
+function closeMvModal() {
+  mvModal.classList.remove('active');
+  mvIframe.src = '';
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mvModal.classList.contains('active')) closeMvModal();
+});
+
+// PWA Install Banner
+const pwaBanner = document.getElementById('pwaBanner');
+let deferredInstallPrompt = null;
+const PWA_DISMISS_KEY = 'pwa_dismissed';
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  if (localStorage.getItem(PWA_DISMISS_KEY)) return;
+  // Show banner after 20s of engagement
+  setTimeout(() => pwaBanner.classList.add('show'), 20000);
+});
+document.getElementById('pwaInstall').addEventListener('click', async () => {
+  pwaBanner.classList.remove('show');
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    const { outcome } = await deferredInstallPrompt.userChoice;
+    if (typeof gtag !== 'undefined') gtag('event', 'pwa_install_prompt', { outcome });
+    deferredInstallPrompt = null;
+  }
+});
+document.getElementById('pwaDismiss').addEventListener('click', () => {
+  pwaBanner.classList.remove('show');
+  localStorage.setItem(PWA_DISMISS_KEY, '1');
+});
+// Hide banner if already installed (display-mode standalone)
+if (window.matchMedia('(display-mode: standalone)').matches) {
+  pwaBanner.style.display = 'none';
+}
 
 function renderFullLyrics() {
   if (parsedLyrics.length === 0) {
