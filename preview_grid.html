@@ -6,6 +6,17 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>hinatabokkuri — Music Preview</title>
+<!-- Google tag (gtag.js) -->
+<script>
+  window['ga-disable-G-EN8WSRB7TL'] = localStorage.getItem('ga_opt_out') === '1';
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EN8WSRB7TL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EN8WSRB7TL');
+</script>
 <style>
   :root {
     --bg: #0d0d0d;
@@ -545,6 +556,15 @@ function playCurrent() {
   audio.play().catch(e => console.log('play blocked', e));
   updateMediaSession(s);
   markPlayingTile();
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'play_track', {
+      track_title: s.title,
+      track_file: s.file,
+      genre: s.genre,
+      player_id: 'preview_grid',
+      shuffle_mode: shuffleMode,
+    });
+  }
 }
 
 function updateMediaSession(s) {
@@ -615,6 +635,7 @@ document.getElementById('shuffleAll').addEventListener('click', () => {
   queue = shuffle(SONGS);
   currentIdx = 0;
   playCurrent();
+  if (typeof gtag !== 'undefined') gtag('event', 'shuffle_all_start', { total: SONGS.length });
 });
 
 document.querySelectorAll('.chip[data-genre]').forEach(c => {
@@ -688,6 +709,7 @@ document.getElementById('btnShare').addEventListener('click', () => {
   const text = `いま聴いてる: ${s.title} by hinatabokkuri`;
   const url = 'https://hinatabokkuri-star.github.io/';
   window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener');
+  if (typeof gtag !== 'undefined') gtag('event', 'share_track', { track_title: s.title, network: 'x' });
 });
 
 // Keyboard shortcuts
