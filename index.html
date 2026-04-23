@@ -1960,6 +1960,18 @@ function renderRecentRow() {
 }
 renderRecentRow();
 
+// Deep link: ?play=<basename> auto-plays that song on load
+(() => {
+  const basename = new URLSearchParams(location.search).get('play');
+  if (!basename) return;
+  const target = SONGS.find(x => x.file.replace(/\.mp3$/, '') === basename);
+  if (!target) return;
+  queue = [...SONGS];
+  currentIdx = SONGS.indexOf(target);
+  // Defer a tick so player UI is ready
+  setTimeout(() => playCurrent(), 200);
+})();
+
 // Resume banner
 function showResumeBanner() {
   const saved = JSON.parse(localStorage.getItem('hb_last_played') || 'null');
@@ -3301,23 +3313,43 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
   render();
 });
 
-// Share (Web Share API → Twitter fallback)
+// Share: Web Share API with jacket file (mobile) → text-only share → Twitter intent
 document.getElementById('btnShare').addEventListener('click', async () => {
   if (currentIdx < 0) return;
   const s = queue[currentIdx];
-  const text = `いま聴いてる: ${s.title} by hinatabokkuri`;
-  const url = 'https://hinatabokkuri-star.github.io/';
-  // Use native share sheet on mobile (iOS/Android)
+  const basename = s.file.replace(/\.mp3$/, '');
+  const text = `「${s.title}」とってもいい曲だから聞いてみて`;
+  const url = `https://hinatabokkuri-star.github.io/?play=${encodeURIComponent(basename)}`;
+  // 1) Web Share API with jacket file (best case: mobile native share sheet with image attached)
+  if (navigator.share && navigator.canShare) {
+    try {
+      const resp = await fetch(s.cover);
+      if (resp.ok) {
+        const blob = await resp.blob();
+        const ext = blob.type.includes('png') ? 'png' : 'jpg';
+        const file = new File([blob], `${basename}.${ext}`, { type: blob.type || 'image/jpeg' });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({ title: s.title, text, url, files: [file] });
+          if (typeof gtag !== 'undefined') gtag('event', 'share_track', { track_title: s.title, network: 'native_file' });
+          return;
+        }
+      }
+    } catch (e) {
+      if (e && e.name === 'AbortError') return; // user cancelled
+      // else fall through
+    }
+  }
+  // 2) Web Share API without file
   if (navigator.share) {
     try {
       await navigator.share({ title: s.title, text, url });
       if (typeof gtag !== 'undefined') gtag('event', 'share_track', { track_title: s.title, network: 'native' });
       return;
     } catch (e) {
-      if (e.name === 'AbortError') return; // user cancelled
+      if (e && e.name === 'AbortError') return;
     }
   }
-  // Fallback to Twitter/X web intent
+  // 3) Desktop fallback: Twitter/X web intent (no image attachment possible)
   window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener');
   if (typeof gtag !== 'undefined') gtag('event', 'share_track', { track_title: s.title, network: 'x' });
 });
