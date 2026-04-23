@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-23T14:01:50.663Z",
+  "updated": "2026-04-23T14:11:09.923Z",
   "base_url": "https://hinatabokkuri-star.github.io",
   "count": 25,
   "songs": [
@@ -3107,8 +3107,8 @@
       "title": "BLUE DOMINION (女声版)",
       "file": "blue_dominion_female.mp3",
       "file_url": "https://hinatabokkuri-star.github.io/music/blue_dominion_female.mp3",
-      "cover": "https://cdn1.suno.ai/image_0ec7351b-2e71-4899-8680-e034c1518f63.jpeg",
-      "cover_url": "https://cdn1.suno.ai/image_0ec7351b-2e71-4899-8680-e034c1518f63.jpeg",
+      "cover": "covers/blue_dominion_female.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/blue_dominion_female.jpg",
       "genre": "rock",
       "bpm": 144,
       "album": null,
