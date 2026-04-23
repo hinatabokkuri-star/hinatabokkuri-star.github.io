@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-23T13:46:43.376Z",
+  "updated": "2026-04-23T14:01:50.663Z",
   "base_url": "https://hinatabokkuri-star.github.io",
   "count": 25,
   "songs": [
@@ -3094,8 +3094,8 @@
       "title": "BLUE DOMINION (男声版)",
       "file": "blue_dominion_male.mp3",
       "file_url": "https://hinatabokkuri-star.github.io/music/blue_dominion_male.mp3",
-      "cover": "https://cdn1.suno.ai/image_cc7874ef-7488-4cb2-8ce3-7a24d40e9640.jpeg",
-      "cover_url": "https://cdn1.suno.ai/image_cc7874ef-7488-4cb2-8ce3-7a24d40e9640.jpeg",
+      "cover": "covers/blue_dominion_male.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/blue_dominion_male.jpg",
       "genre": "rock",
       "bpm": 144,
       "album": null,
