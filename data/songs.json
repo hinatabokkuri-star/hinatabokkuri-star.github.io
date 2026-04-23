@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-23T15:07:41.429Z",
+  "updated": "2026-04-23T16:07:14.635Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 25,
+  "count": 26,
   "songs": [
     {
       "title": "雪の底",
@@ -3291,6 +3291,19 @@
           "text": "Veni, vidi, vici, 侍"
         }
       ]
+    },
+    {
+      "title": "取扱説明書",
+      "file": "toriatsukai.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/toriatsukai.mp3",
+      "cover": "covers/toriatsukai.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/toriatsukai.jpg",
+      "genre": "pop",
+      "bpm": 80,
+      "album": null,
+      "comment": "セオリー破壊実験シリーズ第1弾。真面目な感動バラードの皮を被せて、歌詞だけ全部メタ化した曲。「これから歌を歌います」「ここで泣くタイミングです」と自己実況する三分間。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
     },
     {
       "title": "BLUE DOMINION (女声版)",
