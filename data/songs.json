@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-23T05:19:56.463Z",
+  "updated": "2026-04-23T05:56:15.880Z",
   "base_url": "https://hinatabokkuri-star.github.io",
   "count": 23,
   "songs": [
@@ -3056,8 +3056,8 @@
       "title": "卑弥呼",
       "file": "himiko.mp3",
       "file_url": "https://hinatabokkuri-star.github.io/music/himiko.mp3",
-      "cover": "https://cdn1.suno.ai/image_0da72167-fb7b-48f7-bfdc-722c87561021.jpeg",
-      "cover_url": "https://cdn1.suno.ai/image_0da72167-fb7b-48f7-bfdc-722c87561021.jpeg",
+      "cover": "covers/himiko.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/himiko.jpg",
       "genre": "experimental",
       "bpm": 78,
       "album": null,
