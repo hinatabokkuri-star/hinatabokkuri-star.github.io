@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-22T20:30:26.405Z",
+  "updated": "2026-04-23T03:33:57.988Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 22,
+  "count": 23,
   "songs": [
     {
       "title": "雪の底",
@@ -2891,6 +2891,44 @@
         {
           "time": 207.6,
           "text": "Hanabi Kiss"
+        }
+      ]
+    },
+    {
+      "title": "卑弥呼",
+      "file": "himiko.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/himiko.mp3",
+      "cover": "https://cdn1.suno.ai/image_0da72167-fb7b-48f7-bfdc-722c87561021.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_0da72167-fb7b-48f7-bfdc-722c87561021.jpeg",
+      "genre": "experimental",
+      "bpm": 78,
+      "album": null,
+      "comment": "リアル系政治×神託ヒューマンドラマ・大河ドラマOPを想定した和オーケストラ。篳篥・龍笛・琵琶・太鼓と女声ヴォカリーズで邪馬台国の霧を描く。",
+      "lyrics_lrc": "[1:00.4]日の御子よ\n[1:06.0]天つ神の声\n[1:11.7]倭（やまと）に満ちて\n[1:18.0]占（うら）は告ぐ\n[1:44.6]倭（やまと）に満ちて\n[2:03.5]ああ— 日の御子よ",
+      "lyrics_parsed": [
+        {
+          "time": 60.4,
+          "text": "日の御子よ"
+        },
+        {
+          "time": 66,
+          "text": "天つ神の声"
+        },
+        {
+          "time": 71.7,
+          "text": "倭（やまと）に満ちて"
+        },
+        {
+          "time": 78,
+          "text": "占（うら）は告ぐ"
+        },
+        {
+          "time": 104.6,
+          "text": "倭（やまと）に満ちて"
+        },
+        {
+          "time": 123.5,
+          "text": "ああ— 日の御子よ"
         }
       ]
     },
