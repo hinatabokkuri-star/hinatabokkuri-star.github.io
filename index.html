@@ -2252,19 +2252,35 @@ function shuffle(arr) {
 
 function playCurrent() {
   if (currentIdx < 0 || currentIdx >= queue.length) return;
-  // Auto-dismiss resume banner 10 seconds after any playback starts
+  const s = queue[currentIdx];
+  // --- CRITICAL PATH: iOS requires src + play() to stay within the
+  //     media-event continuation window (fires from `ended`). Any sync
+  //     work before play() can break continuity and cause background
+  //     play() promise rejection. Keep this block minimal & synchronous.
+  audio.src = 'music/' + s.file;
+  parsedLyrics = parseLRC(s.lyrics); // needed for timeupdate lyric sync
+  const playPromise = audio.play();
+  if (playPromise && typeof playPromise.catch === 'function') {
+    playPromise.catch(err => {
+      console.log('play blocked, retry once', err);
+      // iOS sometimes rejects the first play() after backgrounded src change.
+      // Single retry on next tick usually succeeds because load has progressed.
+      setTimeout(() => {
+        audio.play().catch(e2 => console.log('play retry failed', e2));
+      }, 200);
+    });
+  }
+  // --- END CRITICAL PATH ---
+
+  // Deferred UI/state updates (safe to run after play started)
   const resumeBanner = document.getElementById('resumeBanner');
   if (resumeBanner?.classList.contains('show')) {
     setTimeout(() => resumeBanner.classList.remove('show'), 10000);
   }
-  const s = queue[currentIdx];
   npCover.style.backgroundImage = `url('${s.cover}')`;
   npTitle.textContent = s.title;
   updateAlbumTag();
-  // Reset total time display - will update on loadedmetadata/durationchange
   document.getElementById('npTimeTotal').textContent = '--:--';
-  audio.src = 'music/' + s.file;
-  // Poll for duration periodically in case events misfire
   let durationPolls = 0;
   const durationPoll = setInterval(() => {
     durationPolls++;
@@ -2275,10 +2291,8 @@ function playCurrent() {
       clearInterval(durationPoll);
     }
   }, 250);
-  parsedLyrics = parseLRC(s.lyrics);
   renderFullLyrics();
   np.classList.add('active');
-  audio.play().catch(e => console.log('play blocked', e));
   updateMediaSession(s);
   markPlayingTile();
   updateRecentPlayed(s.file);
