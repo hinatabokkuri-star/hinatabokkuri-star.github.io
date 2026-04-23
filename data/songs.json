@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-23T14:11:09.923Z",
+  "updated": "2026-04-23T14:33:19.434Z",
   "base_url": "https://hinatabokkuri-star.github.io",
   "count": 25,
   "songs": [
@@ -3100,8 +3100,197 @@
       "bpm": 144,
       "album": null,
       "comment": "2026 W杯日本代表応援歌。対戦相手5カ国（蘭・瑞・チュニジア・ブラジル・モロッコ）を母国語で煽り倒すB'z風アリーナロック。Oranjeを燃やしVikingarを沈め、全ての王座を蒼く塗る宣言。",
-      "lyrics_lrc": "",
-      "lyrics_parsed": []
+      "lyrics_lrc": "[0:28.6][Intro]\n[0:32.0][Verse 1]\n[0:32.0]2022 同じ檻の中で散った\n[0:38.0]Jij stond naast ons, niet erboven\n[0:42.0]今度は俺たちが 置き去りにする\n[0:46.8]Het oranje dooft in blauwe storm\n[0:52.6][Pre-Chorus]\n[0:52.6]芝生が燃える 鼓動が軋む\n[1:01.0]Here we stand, at the edge of fate\n[1:08.2][Chorus]\n[1:08.2]Blue wings, hellbent and wild\n[1:11.3]蒼く燃え尽きるまで\n[1:14.7]Devour the world, samurai\n[1:17.7]この魂に境界はない\n[1:21.1]Oranje burns, Vikingar falls\n[1:24.5]Les aigles tombent, yalla 侍\n[1:33.3][Verse 2]\n[1:33.3]何年ぶりだ この光\n[1:37.1]Välkommen tillbaka, gamla Vikingar\n[1:40.5]歓迎代わりに 牙を剥く\n[1:43.9]Valhall väntar, gå hem igen\n[1:47.0][Verse 3]\n[1:47.0]Petits aigles de Carthage\n[1:49.1]大人の試合に よく来たな\n[1:53.1]Yalla, rentrez chez vous\n[1:55.5]砂漠に還れ 鷲の雛よ\n[2:00.3][Chorus]\n[2:00.3]Blue wings, hellbent and wild\n[2:03.3]蒼く燃え尽きるまで\n[2:06.7]Devour the world, samurai\n[2:09.6]この魂に境界はない\n[2:13.1]Oranje burns, Vikingar falls\n[2:16.5]Les aigles tombent, yalla 侍\n[2:29.2][Bridge]\n[2:29.2]Oranje, Vikingar, les aigles, all fell\n[2:35.5]Beyond Group F, beyond every throne\n[2:39.2]地球の裏まで 蒼く染めろ\n[2:52.0][Verse 4]\n[2:52.0]Onde esta a Seleção de ouro\n[2:58.0]黄金時代は 過去形のまま\n[3:03.0]Canarinho canta sem voz\n[3:08.0]籠の中で カナリアは鳴けない\n[3:12.4][Verse 5]\n[3:12.4]2022の奇跡 once upon a time\n[3:15.9]Miracle fané, lions d'Atlas\n[3:22.0]蒼い嵐が 神話を書き換える\n[3:29.1]Atlas s'effondre sous nos pieds\n[3:35.0][Guitar Solo]\n[4:02.5][Last Chorus]\n[4:02.5]Blue wings, hellbent and wild\n[4:05.8]蒼く燃え尽きるまで\n[4:09.2]Devour the world, samurai\n[4:12.1]この魂に境界はない\n[4:15.5]Canarinho cai, Atlas cède\n[4:19.0]全ての王座 蒼く塗れ\n[4:22.7]Götterdämmerung, samurai rise\n[4:29.1][Outro]\n[4:29.1]Sin piedad, ingen nåd, sans merci\n[4:35.8]誰にも容赦はしない\n[4:43.3]Veni, vidi, vici, 侍",
+      "lyrics_parsed": [
+        {
+          "time": 32,
+          "text": "2022 同じ檻の中で散った"
+        },
+        {
+          "time": 38,
+          "text": "Jij stond naast ons, niet erboven"
+        },
+        {
+          "time": 42,
+          "text": "今度は俺たちが 置き去りにする"
+        },
+        {
+          "time": 46.8,
+          "text": "Het oranje dooft in blauwe storm"
+        },
+        {
+          "time": 52.6,
+          "text": "芝生が燃える 鼓動が軋む"
+        },
+        {
+          "time": 61,
+          "text": "Here we stand, at the edge of fate"
+        },
+        {
+          "time": 68.2,
+          "text": "Blue wings, hellbent and wild"
+        },
+        {
+          "time": 71.3,
+          "text": "蒼く燃え尽きるまで"
+        },
+        {
+          "time": 74.7,
+          "text": "Devour the world, samurai"
+        },
+        {
+          "time": 77.7,
+          "text": "この魂に境界はない"
+        },
+        {
+          "time": 81.1,
+          "text": "Oranje burns, Vikingar falls"
+        },
+        {
+          "time": 84.5,
+          "text": "Les aigles tombent, yalla 侍"
+        },
+        {
+          "time": 93.3,
+          "text": "何年ぶりだ この光"
+        },
+        {
+          "time": 97.1,
+          "text": "Välkommen tillbaka, gamla Vikingar"
+        },
+        {
+          "time": 100.5,
+          "text": "歓迎代わりに 牙を剥く"
+        },
+        {
+          "time": 103.9,
+          "text": "Valhall väntar, gå hem igen"
+        },
+        {
+          "time": 107,
+          "text": "Petits aigles de Carthage"
+        },
+        {
+          "time": 109.1,
+          "text": "大人の試合に よく来たな"
+        },
+        {
+          "time": 113.1,
+          "text": "Yalla, rentrez chez vous"
+        },
+        {
+          "time": 115.5,
+          "text": "砂漠に還れ 鷲の雛よ"
+        },
+        {
+          "time": 120.3,
+          "text": "Blue wings, hellbent and wild"
+        },
+        {
+          "time": 123.3,
+          "text": "蒼く燃え尽きるまで"
+        },
+        {
+          "time": 126.7,
+          "text": "Devour the world, samurai"
+        },
+        {
+          "time": 129.6,
+          "text": "この魂に境界はない"
+        },
+        {
+          "time": 133.1,
+          "text": "Oranje burns, Vikingar falls"
+        },
+        {
+          "time": 136.5,
+          "text": "Les aigles tombent, yalla 侍"
+        },
+        {
+          "time": 149.2,
+          "text": "Oranje, Vikingar, les aigles, all fell"
+        },
+        {
+          "time": 155.5,
+          "text": "Beyond Group F, beyond every throne"
+        },
+        {
+          "time": 159.2,
+          "text": "地球の裏まで 蒼く染めろ"
+        },
+        {
+          "time": 172,
+          "text": "Onde esta a Seleção de ouro"
+        },
+        {
+          "time": 178,
+          "text": "黄金時代は 過去形のまま"
+        },
+        {
+          "time": 183,
+          "text": "Canarinho canta sem voz"
+        },
+        {
+          "time": 188,
+          "text": "籠の中で カナリアは鳴けない"
+        },
+        {
+          "time": 192.4,
+          "text": "2022の奇跡 once upon a time"
+        },
+        {
+          "time": 195.9,
+          "text": "Miracle fané, lions d'Atlas"
+        },
+        {
+          "time": 202,
+          "text": "蒼い嵐が 神話を書き換える"
+        },
+        {
+          "time": 209.1,
+          "text": "Atlas s'effondre sous nos pieds"
+        },
+        {
+          "time": 242.5,
+          "text": "Blue wings, hellbent and wild"
+        },
+        {
+          "time": 245.8,
+          "text": "蒼く燃え尽きるまで"
+        },
+        {
+          "time": 249.2,
+          "text": "Devour the world, samurai"
+        },
+        {
+          "time": 252.1,
+          "text": "この魂に境界はない"
+        },
+        {
+          "time": 255.5,
+          "text": "Canarinho cai, Atlas cède"
+        },
+        {
+          "time": 259,
+          "text": "全ての王座 蒼く塗れ"
+        },
+        {
+          "time": 262.7,
+          "text": "Götterdämmerung, samurai rise"
+        },
+        {
+          "time": 269.1,
+          "text": "Sin piedad, ingen nåd, sans merci"
+        },
+        {
+          "time": 275.8,
+          "text": "誰にも容赦はしない"
+        },
+        {
+          "time": 283.3,
+          "text": "Veni, vidi, vici, 侍"
+        }
+      ]
     },
     {
       "title": "BLUE DOMINION (女声版)",
@@ -3113,8 +3302,197 @@
       "bpm": 144,
       "album": null,
       "comment": "同歌詞を女声ハードロックで。LiSA/Aimer系パワフルボーカル、戦場の女神視点で冷徹に宣告する解釈版。",
-      "lyrics_lrc": "",
-      "lyrics_parsed": []
+      "lyrics_lrc": "[0:25.2][Intro]\n[0:28.2][Verse 1]\n[0:28.2]2022 同じ檻の中で散った\n[0:33.5]Jij stond naast ons, niet erboven\n[0:37.0]今度は俺たちが 置き去りにする\n[0:41.2]Het oranje dooft in blauwe storm\n[0:46.4][Pre-Chorus]\n[0:46.4]芝生が燃える 鼓動が軋む\n[0:53.8]Here we stand, at the edge of fate\n[1:00.1][Chorus]\n[1:00.1]Blue wings, hellbent and wild\n[1:02.8]蒼く燃え尽きるまで\n[1:05.8]Devour the world, samurai\n[1:08.5]この魂に境界はない\n[1:11.5]Oranje burns, Vikingar falls\n[1:14.5]Les aigles tombent, yalla 侍\n[1:22.2][Verse 2]\n[1:22.2]何年ぶりだ この光\n[1:25.6]Välkommen tillbaka, gamla Vikingar\n[1:28.6]歓迎代わりに 牙を剥く\n[1:31.6]Valhall väntar, gå hem igen\n[1:34.3][Verse 3]\n[1:34.3]Petits aigles de Carthage\n[1:36.1]大人の試合に よく来たな\n[1:39.7]Yalla, rentrez chez vous\n[1:41.8]砂漠に還れ 鷲の雛よ\n[1:46.0][Chorus]\n[1:46.0]Blue wings, hellbent and wild\n[1:48.7]蒼く燃え尽きるまで\n[1:51.6]Devour the world, samurai\n[1:54.2]この魂に境界はない\n[1:57.3]Oranje burns, Vikingar falls\n[2:00.3]Les aigles tombent, yalla 侍\n[2:11.5][Bridge]\n[2:11.5]Oranje, Vikingar, les aigles, all fell\n[2:17.0]Beyond Group F, beyond every throne\n[2:20.3]地球の裏まで 蒼く染めろ\n[2:31.6][Verse 4]\n[2:31.6]Onde esta a Seleção de ouro\n[2:36.9]黄金時代は 過去形のまま\n[2:41.3]Canarinho canta sem voz\n[2:45.7]籠の中で カナリアは鳴けない\n[2:49.5][Verse 5]\n[2:49.5]2022の奇跡 once upon a time\n[2:52.6]Miracle fané, lions d'Atlas\n[2:58.0]蒼い嵐が 神話を書き換える\n[3:04.3]Atlas s'effondre sous nos pieds\n[3:09.5][Guitar Solo]\n[3:33.7][Last Chorus]\n[3:33.7]Blue wings, hellbent and wild\n[3:36.6]蒼く燃え尽きるまで\n[3:39.6]Devour the world, samurai\n[3:42.1]この魂に境界はない\n[3:45.1]Canarinho cai, Atlas cède\n[3:48.2]全ての王座 蒼く塗れ\n[3:51.5]Götterdämmerung, samurai rise\n[3:57.1][Outro]\n[3:57.1]Sin piedad, ingen nåd, sans merci\n[4:03.0]誰にも容赦はしない\n[4:09.6]Veni, vidi, vici, 侍",
+      "lyrics_parsed": [
+        {
+          "time": 28.2,
+          "text": "2022 同じ檻の中で散った"
+        },
+        {
+          "time": 33.5,
+          "text": "Jij stond naast ons, niet erboven"
+        },
+        {
+          "time": 37,
+          "text": "今度は俺たちが 置き去りにする"
+        },
+        {
+          "time": 41.2,
+          "text": "Het oranje dooft in blauwe storm"
+        },
+        {
+          "time": 46.4,
+          "text": "芝生が燃える 鼓動が軋む"
+        },
+        {
+          "time": 53.8,
+          "text": "Here we stand, at the edge of fate"
+        },
+        {
+          "time": 60.1,
+          "text": "Blue wings, hellbent and wild"
+        },
+        {
+          "time": 62.8,
+          "text": "蒼く燃え尽きるまで"
+        },
+        {
+          "time": 65.8,
+          "text": "Devour the world, samurai"
+        },
+        {
+          "time": 68.5,
+          "text": "この魂に境界はない"
+        },
+        {
+          "time": 71.5,
+          "text": "Oranje burns, Vikingar falls"
+        },
+        {
+          "time": 74.5,
+          "text": "Les aigles tombent, yalla 侍"
+        },
+        {
+          "time": 82.2,
+          "text": "何年ぶりだ この光"
+        },
+        {
+          "time": 85.6,
+          "text": "Välkommen tillbaka, gamla Vikingar"
+        },
+        {
+          "time": 88.6,
+          "text": "歓迎代わりに 牙を剥く"
+        },
+        {
+          "time": 91.6,
+          "text": "Valhall väntar, gå hem igen"
+        },
+        {
+          "time": 94.3,
+          "text": "Petits aigles de Carthage"
+        },
+        {
+          "time": 96.1,
+          "text": "大人の試合に よく来たな"
+        },
+        {
+          "time": 99.7,
+          "text": "Yalla, rentrez chez vous"
+        },
+        {
+          "time": 101.8,
+          "text": "砂漠に還れ 鷲の雛よ"
+        },
+        {
+          "time": 106,
+          "text": "Blue wings, hellbent and wild"
+        },
+        {
+          "time": 108.7,
+          "text": "蒼く燃え尽きるまで"
+        },
+        {
+          "time": 111.6,
+          "text": "Devour the world, samurai"
+        },
+        {
+          "time": 114.2,
+          "text": "この魂に境界はない"
+        },
+        {
+          "time": 117.3,
+          "text": "Oranje burns, Vikingar falls"
+        },
+        {
+          "time": 120.3,
+          "text": "Les aigles tombent, yalla 侍"
+        },
+        {
+          "time": 131.5,
+          "text": "Oranje, Vikingar, les aigles, all fell"
+        },
+        {
+          "time": 137,
+          "text": "Beyond Group F, beyond every throne"
+        },
+        {
+          "time": 140.3,
+          "text": "地球の裏まで 蒼く染めろ"
+        },
+        {
+          "time": 151.6,
+          "text": "Onde esta a Seleção de ouro"
+        },
+        {
+          "time": 156.9,
+          "text": "黄金時代は 過去形のまま"
+        },
+        {
+          "time": 161.3,
+          "text": "Canarinho canta sem voz"
+        },
+        {
+          "time": 165.7,
+          "text": "籠の中で カナリアは鳴けない"
+        },
+        {
+          "time": 169.5,
+          "text": "2022の奇跡 once upon a time"
+        },
+        {
+          "time": 172.6,
+          "text": "Miracle fané, lions d'Atlas"
+        },
+        {
+          "time": 178,
+          "text": "蒼い嵐が 神話を書き換える"
+        },
+        {
+          "time": 184.3,
+          "text": "Atlas s'effondre sous nos pieds"
+        },
+        {
+          "time": 213.7,
+          "text": "Blue wings, hellbent and wild"
+        },
+        {
+          "time": 216.6,
+          "text": "蒼く燃え尽きるまで"
+        },
+        {
+          "time": 219.6,
+          "text": "Devour the world, samurai"
+        },
+        {
+          "time": 222.1,
+          "text": "この魂に境界はない"
+        },
+        {
+          "time": 225.1,
+          "text": "Canarinho cai, Atlas cède"
+        },
+        {
+          "time": 228.2,
+          "text": "全ての王座 蒼く塗れ"
+        },
+        {
+          "time": 231.5,
+          "text": "Götterdämmerung, samurai rise"
+        },
+        {
+          "time": 237.1,
+          "text": "Sin piedad, ingen nåd, sans merci"
+        },
+        {
+          "time": 243,
+          "text": "誰にも容赦はしない"
+        },
+        {
+          "time": 249.6,
+          "text": "Veni, vidi, vici, 侍"
+        }
+      ]
     }
   ]
 }
