@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-23T05:56:15.880Z",
+  "updated": "2026-04-23T13:46:43.376Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 23,
+  "count": 25,
   "songs": [
     {
       "title": "雪の底",
@@ -3089,6 +3089,32 @@
           "text": "ああ— 日の御子よ"
         }
       ]
+    },
+    {
+      "title": "BLUE DOMINION (男声版)",
+      "file": "blue_dominion_male.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/blue_dominion_male.mp3",
+      "cover": "https://cdn1.suno.ai/image_cc7874ef-7488-4cb2-8ce3-7a24d40e9640.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_cc7874ef-7488-4cb2-8ce3-7a24d40e9640.jpeg",
+      "genre": "rock",
+      "bpm": 144,
+      "album": null,
+      "comment": "2026 W杯日本代表応援歌。対戦相手5カ国（蘭・瑞・チュニジア・ブラジル・モロッコ）を母国語で煽り倒すB'z風アリーナロック。Oranjeを燃やしVikingarを沈め、全ての王座を蒼く塗る宣言。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
+    },
+    {
+      "title": "BLUE DOMINION (女声版)",
+      "file": "blue_dominion_female.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/blue_dominion_female.mp3",
+      "cover": "https://cdn1.suno.ai/image_0ec7351b-2e71-4899-8680-e034c1518f63.jpeg",
+      "cover_url": "https://cdn1.suno.ai/image_0ec7351b-2e71-4899-8680-e034c1518f63.jpeg",
+      "genre": "rock",
+      "bpm": 144,
+      "album": null,
+      "comment": "同歌詞を女声ハードロックで。LiSA/Aimer系パワフルボーカル、戦場の女神視点で冷徹に宣告する解釈版。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
     }
   ]
 }
