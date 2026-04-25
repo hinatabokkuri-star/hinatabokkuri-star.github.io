@@ -1402,6 +1402,19 @@
     gap: 1rem;
     flex-wrap: wrap;
   }
+  .np-dl-btn {
+    display: inline-block;
+    margin-top: 1.2rem;
+    padding: 0.45rem 1.1rem;
+    border: 1px solid var(--amber);
+    border-radius: 6px;
+    color: var(--amber);
+    font-size: 0.82rem;
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.15s;
+  }
+  .np-dl-btn:hover { opacity: 1; }
   .now-playing.expanded.about-view .np-about { display: block; }
   .now-playing.expanded.about-view .np-lyrics-full { display: none; }
   .np-queue-item {
@@ -2943,7 +2956,7 @@ function renderAbout() {
     s.bpm   ? `BPM: ${s.bpm}` : '',
     s.album ? `アルバム: ${s.album}${s.track_no ? ` #${s.track_no}` : ''}` : '',
   ].filter(Boolean).join('　/　');
-  el.innerHTML = `<div>${s.comment || '（説明なし）'}</div>${meta ? `<div class="np-about-meta">${meta}</div>` : ''}`;
+  el.innerHTML = `<div>${s.comment || '（説明なし）'}</div>${meta ? `<div class="np-about-meta">${meta}</div>` : ''}<a class="np-dl-btn" href="music/${s.file}" download="${s.title}.mp3">⬇ MP3 ダウンロード</a>`;
 }
 
 function renderQueue() {
