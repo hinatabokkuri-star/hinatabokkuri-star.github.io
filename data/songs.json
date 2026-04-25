@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-25T09:42:21.298Z",
+  "updated": "2026-04-25T14:24:52.604Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 34,
+  "count": 35,
   "songs": [
     {
       "title": "雪の底",
@@ -4223,6 +4223,19 @@
       "bpm": 144,
       "album": "星霜の旅人",
       "comment": "架空のJRPG『星霜の旅人』サウンドトラック2曲目。「起きなさい息子、城へ行け」——目覚めた勇者が朝の道を駆け出す疾走感。Aマイナー144BPM。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
+    },
+    {
+      "title": "遠き地平",
+      "file": "seisou_03_tooki_chihei.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/seisou_03_tooki_chihei.mp3",
+      "cover": "covers/seisou_03_tooki_chihei.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/seisou_03_tooki_chihei.jpg",
+      "genre": "orchestral",
+      "bpm": 99,
+      "album": "星霜の旅人",
+      "comment": "架空のJRPG『星霜の旅人』サウンドトラック3曲目。DQ2の一人旅のような心細い荒野。仲間も目的地もまだ遠い、それでも歩み続ける静かな決意。Eマイナー99BPM、孤独と希望の狭間で揺れる構造。",
       "lyrics_lrc": "",
       "lyrics_parsed": []
     }
