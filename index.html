@@ -2252,20 +2252,20 @@ function render() {
   prev.className = 'pager-btn';
   prev.textContent = '‹';
   prev.disabled = currentPage === 0;
-  prev.onclick = () => { currentPage--; render(); window.scrollTo({top: 0, behavior: 'smooth'}); };
+  prev.onclick = () => { currentPage--; render(); grid.scrollIntoView({behavior: 'smooth', block: 'start'}); };
   pager.appendChild(prev);
   for (let i = 0; i < totalPages; i++) {
     const btn = document.createElement('button');
     btn.className = 'pager-btn' + (i === currentPage ? ' active' : '');
     btn.textContent = i + 1;
-    btn.onclick = ((p) => () => { currentPage = p; render(); window.scrollTo({top: 0, behavior: 'smooth'}); })(i);
+    btn.onclick = ((p) => () => { currentPage = p; render(); grid.scrollIntoView({behavior: 'smooth', block: 'start'}); })(i);
     pager.appendChild(btn);
   }
   const next = document.createElement('button');
   next.className = 'pager-btn';
   next.textContent = '›';
   next.disabled = currentPage === totalPages - 1;
-  next.onclick = () => { currentPage++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); };
+  next.onclick = () => { currentPage++; render(); grid.scrollIntoView({behavior: 'smooth', block: 'start'}); };
   pager.appendChild(next);
   const info = document.createElement('span');
   info.className = 'pager-info';
