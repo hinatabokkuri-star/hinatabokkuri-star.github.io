@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-25T14:24:52.604Z",
+  "updated": "2026-04-25T15:25:57.654Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 35,
+  "count": 36,
   "songs": [
     {
       "title": "雪の底",
@@ -4236,6 +4236,19 @@
       "bpm": 99,
       "album": "星霜の旅人",
       "comment": "架空のJRPG『星霜の旅人』サウンドトラック3曲目。DQ2の一人旅のような心細い荒野。仲間も目的地もまだ遠い、それでも歩み続ける静かな決意。Eマイナー99BPM、孤独と希望の狭間で揺れる構造。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
+    },
+    {
+      "title": "見えざる脅威",
+      "file": "seisou_04_miezaru_kyoui.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/seisou_04_miezaru_kyoui.mp3",
+      "cover": "covers/seisou_04_miezaru_kyoui.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/seisou_04_miezaru_kyoui.jpg",
+      "genre": "orchestral",
+      "bpm": 64,
+      "album": "星霜の旅人",
+      "comment": "架空のJRPG『星霜の旅人』サウンドトラック4曲目。深く狭い洞窟の闇の中、何かに見られている。低弦のドローンと打楽器の衝撃で迫る恐怖。Dマイナー64BPM、メロディなしの relentless approach 型。",
       "lyrics_lrc": "",
       "lyrics_parsed": []
     }
