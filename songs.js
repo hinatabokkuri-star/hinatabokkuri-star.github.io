@@ -41,5 +41,6 @@
     { title: '勇者の目覚め', file: 'seisou_02_yusha_no_mezame.mp3', cover: COVER('seisou_02_yusha_no_mezame'), genre: 'orchestral', bpm: 144, album: '星霜の旅人', track_no: 2, comment: '架空のJRPG『星霜の旅人』サウンドトラック2曲目。「起きなさい息子、城へ行け」——目覚めた勇者が朝の道を駆け出す疾走感。Aマイナー144BPM。' },
     { title: '遠き地平', file: 'seisou_03_tooki_chihei.mp3', cover: COVER('seisou_03_tooki_chihei'), genre: 'orchestral', bpm: 99, album: '星霜の旅人', track_no: 3, comment: '架空のJRPG『星霜の旅人』サウンドトラック3曲目。DQ2の一人旅のような心細い荒野。仲間も目的地もまだ遠い、それでも歩み続ける静かな決意。Eマイナー99BPM、孤独と希望の狭間で揺れる構造。' },
     { title: '見えざる脅威', file: 'seisou_04_miezaru_kyoui.mp3', cover: COVER('seisou_04_miezaru_kyoui'), genre: 'orchestral', bpm: 64, album: '星霜の旅人', track_no: 4, comment: '架空のJRPG『星霜の旅人』サウンドトラック4曲目。深く狭い洞窟の闇の中、何かに見られている。低弦のドローンと打楽器の衝撃で迫る恐怖。Dマイナー64BPM、メロディなしの relentless approach 型。' },
+    { title: '輝ける明日へ', file: 'kagayakeru_ashita_e.mp3', cover: COVER('kagayakeru_ashita_e'), genre: 'anime', bpm: 135, comment: '90年代アニメOPへのオマージュ。魔法騎士レイアース的な王道ファンタジー世界観——ゆずれない思いを持った少女が、炎の剣を掲げて前へ走り出す。' },
   ];
 })(window);

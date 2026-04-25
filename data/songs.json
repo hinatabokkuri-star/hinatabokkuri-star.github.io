@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-25T15:25:57.654Z",
+  "updated": "2026-04-25T16:10:57.724Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 36,
+  "count": 37,
   "songs": [
     {
       "title": "雪の底",
@@ -4249,6 +4249,19 @@
       "bpm": 64,
       "album": "星霜の旅人",
       "comment": "架空のJRPG『星霜の旅人』サウンドトラック4曲目。深く狭い洞窟の闇の中、何かに見られている。低弦のドローンと打楽器の衝撃で迫る恐怖。Dマイナー64BPM、メロディなしの relentless approach 型。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
+    },
+    {
+      "title": "輝ける明日へ",
+      "file": "kagayakeru_ashita_e.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/kagayakeru_ashita_e.mp3",
+      "cover": "covers/kagayakeru_ashita_e.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/kagayakeru_ashita_e.jpg",
+      "genre": "anime",
+      "bpm": 135,
+      "album": null,
+      "comment": "90年代アニメOPへのオマージュ。魔法騎士レイアース的な王道ファンタジー世界観——ゆずれない思いを持った少女が、炎の剣を掲げて前へ走り出す。",
       "lyrics_lrc": "",
       "lyrics_parsed": []
     }
