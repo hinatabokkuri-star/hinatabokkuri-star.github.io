@@ -1384,6 +1384,26 @@
   }
   .now-playing.expanded.queue-view .np-queue { display: block; }
   .now-playing.expanded.queue-view .np-lyrics-full { display: none; }
+  .np-about {
+    display: none;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.2rem 1.5rem 2rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+    color: var(--text);
+    white-space: pre-wrap;
+  }
+  .np-about-meta {
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .now-playing.expanded.about-view .np-about { display: block; }
+  .now-playing.expanded.about-view .np-lyrics-full { display: none; }
   .np-queue-item {
     display: grid;
     grid-template-columns: 40px 1fr auto;
@@ -1871,10 +1891,12 @@
   </div>
   <div class="np-tabs">
     <button class="np-tab active" data-tab="lyrics">🎤 歌詞</button>
+    <button class="np-tab" data-tab="about">📝 概要</button>
     <button class="np-tab" data-tab="queue">📜 キュー</button>
   </div>
   <div class="np-lyrics-full" id="npLyricsFull"></div>
   <button class="lyric-return-btn" id="lyricReturnBtn" aria-label="現在行へ戻る">♪ 現在行へ</button>
+  <div class="np-about" id="npAbout"></div>
   <div class="np-queue" id="npQueue"></div>
 </div>
 
@@ -2904,9 +2926,23 @@ document.querySelectorAll('.np-tab').forEach(tab => {
     document.querySelectorAll('.np-tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     np.classList.toggle('queue-view', tab.dataset.tab === 'queue');
+    np.classList.toggle('about-view', tab.dataset.tab === 'about');
     if (tab.dataset.tab === 'queue') renderQueue();
+    if (tab.dataset.tab === 'about') renderAbout();
   });
 });
+
+function renderAbout() {
+  const el = document.getElementById('npAbout');
+  const s = queue[currentIdx];
+  if (!s) { el.innerHTML = ''; return; }
+  const meta = [
+    s.genre ? `ジャンル: ${s.genre}` : '',
+    s.bpm   ? `BPM: ${s.bpm}` : '',
+    s.album ? `アルバム: ${s.album}${s.track_no ? ` #${s.track_no}` : ''}` : '',
+  ].filter(Boolean).join('　/　');
+  el.innerHTML = `<div>${s.comment || '（説明なし）'}</div>${meta ? `<div class="np-about-meta">${meta}</div>` : ''}`;
+}
 
 function renderQueue() {
   const npQueue = document.getElementById('npQueue');
