@@ -1479,6 +1479,27 @@
   }
 
   /* Footer */
+  .pager {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 0 0.5rem;
+  }
+  .pager-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .pager-btn:hover { border-color: var(--amber); color: var(--amber); }
+  .pager-btn.active { border-color: var(--amber); color: var(--amber); font-weight: 700; }
+  .pager-btn:disabled { opacity: 0.3; cursor: default; }
+  .pager-info { font-size: 0.78rem; color: var(--text-dim); padding: 0 0.5rem; }
   .site-footer {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -1639,6 +1660,7 @@
   </div>
 
   <div id="songs" class="grid"></div>
+  <div id="pager" class="pager"></div>
 
   <footer class="site-footer">
     <div class="footer-links">
@@ -2115,6 +2137,8 @@ const npInfoClick = document.getElementById('npInfoClick');
 
 let currentFilter = 'all';
 let currentView = 'grid';
+let currentPage = 0;
+const PAGE_SIZE = 12;
 let searchQuery = '';
 let queue = [];
 let currentIdx = -1;
@@ -2180,9 +2204,14 @@ function render() {
   }
   if (filtered.length === 0) {
     grid.innerHTML = '<p style="grid-column:1/-1;color:var(--text-dim);text-align:center;padding:2rem;">該当なし</p>';
+    document.getElementById('pager').innerHTML = '';
     return;
   }
-  filtered.forEach(s => {
+  filtered = [...filtered].reverse();
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  if (currentPage >= totalPages) currentPage = totalPages - 1;
+  const pageSlice = filtered.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
+  pageSlice.forEach(s => {
     const tile = document.createElement('div');
     tile.className = 'tile';
     tile.dataset.file = s.file;
@@ -2215,6 +2244,33 @@ function render() {
   });
   lazyLoadCovers();
   markPlayingTile();
+  // Pager
+  const pager = document.getElementById('pager');
+  if (totalPages <= 1) { pager.innerHTML = ''; return; }
+  pager.innerHTML = '';
+  const prev = document.createElement('button');
+  prev.className = 'pager-btn';
+  prev.textContent = '‹';
+  prev.disabled = currentPage === 0;
+  prev.onclick = () => { currentPage--; render(); window.scrollTo({top: 0, behavior: 'smooth'}); };
+  pager.appendChild(prev);
+  for (let i = 0; i < totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'pager-btn' + (i === currentPage ? ' active' : '');
+    btn.textContent = i + 1;
+    btn.onclick = ((p) => () => { currentPage = p; render(); window.scrollTo({top: 0, behavior: 'smooth'}); })(i);
+    pager.appendChild(btn);
+  }
+  const next = document.createElement('button');
+  next.className = 'pager-btn';
+  next.textContent = '›';
+  next.disabled = currentPage === totalPages - 1;
+  next.onclick = () => { currentPage++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); };
+  pager.appendChild(next);
+  const info = document.createElement('span');
+  info.className = 'pager-info';
+  info.textContent = `${filtered.length}曲`;
+  pager.appendChild(info);
 }
 
 // Extract dominant color from cover image and apply to Now Playing
@@ -2919,6 +2975,7 @@ document.querySelectorAll('.chip[data-genre]').forEach(c => {
     document.querySelectorAll('.chip[data-genre]').forEach(b => b.classList.remove('active'));
     c.classList.add('active');
     currentFilter = c.dataset.genre;
+    currentPage = 0;
     render();
   });
 });
@@ -3403,6 +3460,7 @@ function updateLyric(t) {
 // Search input
 document.getElementById('searchInput').addEventListener('input', (e) => {
   searchQuery = e.target.value;
+  currentPage = 0;
   render();
 });
 
