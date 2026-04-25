@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-25T05:43:11.182Z",
+  "updated": "2026-04-25T09:42:21.298Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 32,
+  "count": 34,
   "songs": [
     {
       "title": "雪の底",
@@ -4199,6 +4199,32 @@
           "text": "(ツー ツー ツー)"
         }
       ]
+    },
+    {
+      "title": "始まりの鐘",
+      "file": "seisou_01_hajimari_no_kane.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/seisou_01_hajimari_no_kane.mp3",
+      "cover": "covers/seisou_01_hajimari_no_kane.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/seisou_01_hajimari_no_kane.jpg",
+      "genre": "orchestral",
+      "bpm": 117,
+      "album": "星霜の旅人",
+      "comment": "架空のJRPG『星霜の旅人』サウンドトラック1曲目。ファンファーレと序曲を繋いだ開幕の儀式。鐘塔から響く金管の響きで物語が始まる。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
+    },
+    {
+      "title": "勇者の目覚め",
+      "file": "seisou_02_yusha_no_mezame.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/seisou_02_yusha_no_mezame.mp3",
+      "cover": "covers/seisou_02_yusha_no_mezame.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/seisou_02_yusha_no_mezame.jpg",
+      "genre": "orchestral",
+      "bpm": 144,
+      "album": "星霜の旅人",
+      "comment": "架空のJRPG『星霜の旅人』サウンドトラック2曲目。「起きなさい息子、城へ行け」——目覚めた勇者が朝の道を駆け出す疾走感。Aマイナー144BPM。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
     }
   ]
 }
