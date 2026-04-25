@@ -2338,6 +2338,7 @@ function playCurrent() {
   updateRecentPlayed(s.file);
   extractAndApplyCoverColor(s.cover);
   if (np.classList.contains('queue-view')) renderQueue();
+  if (np.classList.contains('about-view')) renderAbout();
   if (typeof gtag !== 'undefined') {
     gtag('event', 'play_track', {
       track_title: s.title,
@@ -2851,6 +2852,7 @@ async function startCrossfade() {
   updateRecentPlayed(s.file);
   extractAndApplyCoverColor(s.cover);
   if (np.classList.contains('queue-view')) renderQueue();
+  if (np.classList.contains('about-view')) renderAbout();
 
   // Perform the volume crossfade in parallel
   const startVol = outgoing.volume;
