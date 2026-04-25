@@ -56,7 +56,7 @@
     --shadow-card: rgba(0,0,0,0.1);
     --tile-hover-shadow: rgba(217,119,6,0.3);
   }
-  html[data-skin="samurai"] {
+  html[data-theme="samurai"] {
     --bg: #050d1c;
     --bg2: #091527;
     --bg3: #0e2040;
@@ -72,20 +72,6 @@
     --shadow-card: rgba(0,0,0,0.6);
     --tile-hover-shadow: rgba(232,25,44,0.35);
   }
-  .skin-toggle {
-    margin-left: auto;
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.3rem 0.55rem;
-    font-size: 1.1rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: border-color 0.15s;
-    flex-shrink: 0;
-  }
-  .skin-toggle:hover { border-color: var(--amber); }
-  html[data-skin="samurai"] .skin-toggle { border-color: var(--amber); }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: calc(16px * var(--font-scale, 1)); }
   body {
@@ -1597,7 +1583,6 @@
       <h1>hinatabokkuri</h1>
       <div class="tagline" id="tagline">AI Music · Shuffle Forever</div>
     </div>
-    <button id="skinToggle" class="skin-toggle" title="スキン切替" aria-label="スキン切替">🎨</button>
   </header>
 
   <div class="hero">
@@ -1826,16 +1811,7 @@
         <button data-theme="dark">🌙</button>
         <button data-theme="light">☀️</button>
         <button data-theme="auto" class="active">🔄</button>
-      </div>
-    </div>
-    <div class="settings-row">
-      <div>
-        <div class="label">🎨 スキン</div>
-        <div class="sub">カラースキンを変更</div>
-      </div>
-      <div class="seg-control" id="skinControl">
-        <button data-skin="default" class="active">デフォルト</button>
-        <button data-skin="samurai">🇯🇵 SAMURAI</button>
+        <button data-theme="samurai">🇯🇵</button>
       </div>
     </div>
     <div class="settings-row">
@@ -3159,37 +3135,7 @@ document.getElementById('openShortcuts').addEventListener('click', () => {
   m.addEventListener('click', (e) => { if (e.target === m) m.classList.remove('active'); });
 });
 
-// Skin
-function applySkin(skin) {
-  document.documentElement.setAttribute('data-skin', skin === 'default' ? '' : skin);
-  const toggle = document.getElementById('skinToggle');
-  toggle.textContent = skin === 'samurai' ? '🇯🇵' : '🎨';
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-  if (themeMeta && skin === 'samurai') themeMeta.content = '#050d1c';
-}
-const savedSkin = localStorage.getItem('hb_skin') || 'default';
-applySkin(savedSkin);
-document.querySelectorAll('#skinControl button').forEach(b => {
-  b.classList.toggle('active', b.dataset.skin === savedSkin);
-  b.addEventListener('click', () => {
-    const v = b.dataset.skin;
-    localStorage.setItem('hb_skin', v);
-    applySkin(v);
-    document.querySelectorAll('#skinControl button').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-  });
-});
-document.getElementById('skinToggle').addEventListener('click', () => {
-  const current = localStorage.getItem('hb_skin') || 'default';
-  const next = current === 'samurai' ? 'default' : 'samurai';
-  localStorage.setItem('hb_skin', next);
-  applySkin(next);
-  document.querySelectorAll('#skinControl button').forEach(b => {
-    b.classList.toggle('active', b.dataset.skin === next);
-  });
-});
-
-// Theme (dark / light / auto)
+// Theme (dark / light / auto / samurai)
 function applyTheme(mode) {
   const html = document.documentElement;
   if (mode === 'auto') {
@@ -3198,10 +3144,10 @@ function applyTheme(mode) {
   } else {
     html.setAttribute('data-theme', mode);
   }
-  // Update meta theme-color for PWA status bar
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   if (themeMeta) {
-    themeMeta.content = html.getAttribute('data-theme') === 'light' ? '#faf8f4' : '#0d0d0d';
+    const t = html.getAttribute('data-theme');
+    themeMeta.content = t === 'light' ? '#faf8f4' : t === 'samurai' ? '#050d1c' : '#0d0d0d';
   }
 }
 const savedTheme = localStorage.getItem('hb_theme') || 'auto';
