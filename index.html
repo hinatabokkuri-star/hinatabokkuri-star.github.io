@@ -1624,6 +1624,14 @@
         <button class="album-play">▶ Play Album</button>
       </div>
     </div>
+    <div class="album-card" data-album="seisou-no-tabibito">
+      <div class="cover" style="background-image: url('covers/seisou_01_hajimari_no_kane.jpg')"></div>
+      <div>
+        <h3>星霜の旅人</h3>
+        <div class="album-meta">進行中 · 5 tracks · 架空JRPGサントラ</div>
+        <button class="album-play">▶ Play Album</button>
+      </div>
+    </div>
   </div>
 
   <h2 class="section-title">🎬 Music Videos</h2>
@@ -1974,6 +1982,21 @@ const DANCE_INSTINCT = [
   'night_driver.mp3', 'ngoma_ya_mwitu.mp3', 'yami_doki.mp3',
   'uldul_1.mp3', 'shikisokuzeku.mp3', 'asahi_ni_tokete.mp3'
 ];
+
+// 星霜の旅人 — 架空JRPGサントラ（進行中、track_no順、クロスフェードなしの自然な無音間）
+const SEISOU_NO_TABIBITO = [
+  'seisou_01_hajimari_no_kane.mp3',
+  'seisou_02_yusha_no_mezame.mp3',
+  'seisou_03_tooki_chihei.mp3',
+  'seisou_04_miezaru_kyoui.mp3',
+  'seisou_05_hagane_no_senkou.mp3'
+];
+
+// Per-album config: which albums use crossfade
+const ALBUM_CONFIG = {
+  'dance-instinct':     { name: 'DANCE INSTINCT', tracks: DANCE_INSTINCT, crossfade: true },
+  'seisou-no-tabibito': { name: '星霜の旅人', tracks: SEISOU_NO_TABIBITO, crossfade: false },
+};
 
 // Populate chip counts
 function updateChipCounts() {
@@ -2713,38 +2736,42 @@ document.getElementById('shuffleAll').addEventListener('click', () => {
   if (typeof gtag !== 'undefined') gtag('event', 'shuffle_all_start', { total: SONGS.length });
 });
 
-// Album play (sequential, no shuffle, crossfade enabled)
+// Album play (sequential, no shuffle, crossfade per-album)
 let albumMode = false;
+let currentAlbumId = null;
 document.querySelectorAll('.album-card').forEach(card => {
   card.addEventListener('click', (e) => {
     e.preventDefault();
     const album = card.dataset.album;
-    if (album === 'dance-instinct') {
-      shuffleMode = false;
-      btnShuffle.classList.remove('active');
-      albumMode = true;
-      queue = DANCE_INSTINCT.map(f => SONGS.find(s => s.file === f)).filter(Boolean);
-      currentIdx = 0;
-      playCurrent();
-      if (typeof gtag !== 'undefined') gtag('event', 'play_album', { album: 'DANCE INSTINCT', crossfade: true });
-    }
+    const conf = ALBUM_CONFIG[album];
+    if (!conf) return;
+    shuffleMode = false;
+    btnShuffle.classList.remove('active');
+    albumMode = true;
+    currentAlbumId = album;
+    queue = conf.tracks.map(f => SONGS.find(s => s.file === f)).filter(Boolean);
+    currentIdx = 0;
+    playCurrent();
+    if (typeof gtag !== 'undefined') gtag('event', 'play_album', { album: conf.name, crossfade: conf.crossfade });
   });
 });
 
 // Disable album mode when user changes playback context manually
-btnShuffle.addEventListener('click', () => { albumMode = false; updateAlbumTag(); });
-document.getElementById('shuffleAll').addEventListener('click', () => { albumMode = false; updateAlbumTag(); });
+btnShuffle.addEventListener('click', () => { albumMode = false; currentAlbumId = null; updateAlbumTag(); });
+document.getElementById('shuffleAll').addEventListener('click', () => { albumMode = false; currentAlbumId = null; updateAlbumTag(); });
 
 function updateAlbumTag() {
   const tag = document.getElementById('npAlbumTag');
-  const albumCard = document.querySelector('.album-card[data-album="dance-instinct"]');
-  if (albumMode && currentIdx >= 0) {
-    tag.textContent = `DANCE INSTINCT · Track ${currentIdx + 1}/${queue.length}`;
+  // Reset all album-card "playing" states
+  document.querySelectorAll('.album-card').forEach(c => c.classList.remove('playing'));
+  if (albumMode && currentIdx >= 0 && currentAlbumId) {
+    const conf = ALBUM_CONFIG[currentAlbumId];
+    tag.textContent = `${conf.name} · Track ${currentIdx + 1}/${queue.length}`;
     tag.classList.add('show');
-    if (albumCard) albumCard.classList.add('playing');
+    const card = document.querySelector(`.album-card[data-album="${currentAlbumId}"]`);
+    if (card) card.classList.add('playing');
   } else {
     tag.classList.remove('show');
-    if (albumCard) albumCard.classList.remove('playing');
   }
 }
 
@@ -2825,6 +2852,8 @@ function applyVolumeToAll(v) {
 // Monitor active audio for crossfade trigger
 setInterval(() => {
   if (!albumMode || crossfadeInProgress) return;
+  // Skip crossfade for albums configured with crossfade: false (e.g. soundtracks)
+  if (currentAlbumId && ALBUM_CONFIG[currentAlbumId] && ALBUM_CONFIG[currentAlbumId].crossfade === false) return;
   if (currentIdx < 0 || currentIdx >= queue.length - 1) return;
   const active = audio;
   if (!active.duration || active.paused) return;
@@ -2932,7 +2961,7 @@ document.getElementById('filterPlay').addEventListener('click', () => {
   if (list.length === 0) return;
   shuffleMode = false;
   btnShuffle.classList.remove('active');
-  albumMode = false;
+  albumMode = false; currentAlbumId = null;
   updateAlbumTag();
   queue = [...list];
   currentIdx = 0;
@@ -2944,7 +2973,7 @@ document.getElementById('filterShuffle').addEventListener('click', () => {
   if (list.length === 0) return;
   shuffleMode = true;
   btnShuffle.classList.add('active');
-  albumMode = false;
+  albumMode = false; currentAlbumId = null;
   updateAlbumTag();
   queue = shuffle(list);
   currentIdx = 0;
