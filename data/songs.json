@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-26T15:53:19.236Z",
+  "updated": "2026-04-26T16:53:02.478Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 42,
+  "count": 43,
   "songs": [
     {
       "title": "雪の底",
@@ -5072,6 +5072,19 @@
       "bpm": 106,
       "album": "星霜の旅人",
       "comment": "架空JRPGサウンドトラック『星霜の旅人』5曲目。初の本格戦闘——剣の閃光と魔物の咆哮が交錯する瞬間。Bマイナー106BPM、雑魚戦テーマだがズシリと重厚に。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
+    },
+    {
+      "title": "暮色の街路",
+      "file": "seisou_06_boshoku_no_gairo.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/seisou_06_boshoku_no_gairo.mp3",
+      "cover": "covers/seisou_06_boshoku_no_gairo.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/seisou_06_boshoku_no_gairo.jpg",
+      "genre": "orchestral",
+      "bpm": 95,
+      "album": "星霜の旅人",
+      "comment": "架空JRPGサウンドトラック『星霜の旅人』6曲目。戦いを終えて街に辿り着いた旅人——昼の市場の喧騒、酒場の灯、深夜の静寂と、街の一日を3部構成で描く。Suno 3テイクをffmpeg合成、F major→D minor→C majorと和声変化。",
       "lyrics_lrc": "",
       "lyrics_parsed": []
     }
