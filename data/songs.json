@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-27T05:30:17.836Z",
+  "updated": "2026-04-27T07:45:21.423Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 44,
+  "count": 45,
   "songs": [
     {
       "title": "雪の底",
@@ -5098,6 +5098,19 @@
       "bpm": 97,
       "album": "星霜の旅人",
       "comment": "架空JRPGサウンドトラック『星霜の旅人』7曲目。孤独な旋律が仲間と出会う瞬間。ラヴェルのボレロ方式で同一メロディを保ちながら1声→2声→3声→4声と楽器が積み重なっていく構造。Gメジャー97BPM、1人旅から4人パーティへの転換を音の厚みで表現。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
+    },
+    {
+      "title": "闇の眷属",
+      "file": "seisou_08_yami_no_kenzoku.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/seisou_08_yami_no_kenzoku.mp3",
+      "cover": "covers/seisou_08_yami_no_kenzoku.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/seisou_08_yami_no_kenzoku.jpg",
+      "genre": "orchestral",
+      "bpm": 113,
+      "album": "星霜の旅人",
+      "comment": "架空JRPGサウンドトラック『星霜の旅人』8曲目。パーティとして初の試練——古代神殿の祭壇に立ちはだかる中ボスとの対峙。F#メジャー112BPM、教会オルガンと無音節クワイア、ペダルポイント低音で荘厳な威圧感を構築。最終決戦のために強度70%に温存。",
       "lyrics_lrc": "",
       "lyrics_parsed": []
     }

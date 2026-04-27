@@ -49,5 +49,6 @@
     { title: '鋼の閃光', file: 'seisou_05_hagane_no_senkou.mp3', cover: COVER('seisou_05_hagane_no_senkou'), genre: 'orchestral', bpm: 106, album: '星霜の旅人', track_no: 5, comment: '架空JRPGサウンドトラック『星霜の旅人』5曲目。初の本格戦闘——剣の閃光と魔物の咆哮が交錯する瞬間。Bマイナー106BPM、雑魚戦テーマだがズシリと重厚に。' },
     { title: '暮色の街路', file: 'seisou_06_boshoku_no_gairo.mp3', cover: COVER('seisou_06_boshoku_no_gairo'), genre: 'orchestral', bpm: 95, album: '星霜の旅人', track_no: 6, comment: '架空JRPGサウンドトラック『星霜の旅人』6曲目。戦いを終えて街に辿り着いた旅人——昼の市場の喧騒、酒場の灯、深夜の静寂と、街の一日を3部構成で描く。Suno 3テイクをffmpeg合成、F major→D minor→C majorと和声変化。' },
     { title: '集う旋律', file: 'seisou_07_tsudou_senritsu.mp3', cover: COVER('seisou_07_tsudou_senritsu'), genre: 'orchestral', bpm: 97, album: '星霜の旅人', track_no: 7, comment: '架空JRPGサウンドトラック『星霜の旅人』7曲目。孤独な旋律が仲間と出会う瞬間。ラヴェルのボレロ方式で同一メロディを保ちながら1声→2声→3声→4声と楽器が積み重なっていく構造。Gメジャー97BPM、1人旅から4人パーティへの転換を音の厚みで表現。' },
+    { title: '闇の眷属', file: 'seisou_08_yami_no_kenzoku.mp3', cover: COVER('seisou_08_yami_no_kenzoku'), genre: 'orchestral', bpm: 113, album: '星霜の旅人', track_no: 8, comment: '架空JRPGサウンドトラック『星霜の旅人』8曲目。パーティとして初の試練——古代神殿の祭壇に立ちはだかる中ボスとの対峙。F#メジャー112BPM、教会オルガンと無音節クワイア、ペダルポイント低音で荘厳な威圧感を構築。最終決戦のために強度70%に温存。' },
   ];
 })(window);
