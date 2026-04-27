@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-26T16:53:02.478Z",
+  "updated": "2026-04-27T05:30:17.836Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 43,
+  "count": 44,
   "songs": [
     {
       "title": "雪の底",
@@ -5085,6 +5085,19 @@
       "bpm": 95,
       "album": "星霜の旅人",
       "comment": "架空JRPGサウンドトラック『星霜の旅人』6曲目。戦いを終えて街に辿り着いた旅人——昼の市場の喧騒、酒場の灯、深夜の静寂と、街の一日を3部構成で描く。Suno 3テイクをffmpeg合成、F major→D minor→C majorと和声変化。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
+    },
+    {
+      "title": "集う旋律",
+      "file": "seisou_07_tsudou_senritsu.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/seisou_07_tsudou_senritsu.mp3",
+      "cover": "covers/seisou_07_tsudou_senritsu.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/seisou_07_tsudou_senritsu.jpg",
+      "genre": "orchestral",
+      "bpm": 97,
+      "album": "星霜の旅人",
+      "comment": "架空JRPGサウンドトラック『星霜の旅人』7曲目。孤独な旋律が仲間と出会う瞬間。ラヴェルのボレロ方式で同一メロディを保ちながら1声→2声→3声→4声と楽器が積み重なっていく構造。Gメジャー97BPM、1人旅から4人パーティへの転換を音の厚みで表現。",
       "lyrics_lrc": "",
       "lyrics_parsed": []
     }
