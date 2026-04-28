@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-27T15:41:03.293Z",
+  "updated": "2026-04-28T14:21:20.324Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 47,
+  "count": 49,
   "songs": [
     {
       "title": "雪の底",
@@ -5317,6 +5317,133 @@
           "text": "{急々如律令|きゅうきゅうにょりつりょう}"
         }
       ]
+    },
+    {
+      "title": "I'll be here",
+      "file": "ill_be_here.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/ill_be_here.mp3",
+      "cover": "covers/ill_be_here.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/ill_be_here.jpg",
+      "genre": "ballad",
+      "bpm": 75,
+      "album": null,
+      "comment": "ファンタジー幻想世界のシネマティックピアノバラード。星空の廃墟に佇む少女が、遠いあなたへ静かに語りかける——Like a star that won't burn out, I'll be here。",
+      "lyrics_lrc": "[0:17.1]Every night I close my eyes\n[0:22.2]I hear your voice across the dark\n[0:29.5]A gentle light that never fades\n[0:34.7]Still burning in my heart\n[0:37.9]The words I never said\n[0:42.2]Still echo in my chest\n[0:45.9]I'm watching over you\n[0:52.0]I always do\n[0:55.0]Until this feeling reaches you\n[1:01.4]Like a star that won't burn out\n[1:07.7]I'll be here\n[1:23.1]Even as the seasons turn\n[1:28.6]Some things don't change at all\n[1:35.1]Your smile is all I needed\n[1:40.5]To keep me standing tall\n[1:48.1]No matter where you are\n[1:52.3]I'm never far\n[1:57.0]I'm watching over you\n[2:02.2]I always do\n[2:04.5]Until this feeling reaches you\n[2:11.2]Like a star that won't burn out\n[2:17.9]I'll be here\n[2:42.7]Maybe someday you'll see\n[2:47.1]What you've always meant to me\n[2:57.7]I'll be here…",
+      "lyrics_parsed": [
+        {
+          "time": 17.1,
+          "text": "Every night I close my eyes"
+        },
+        {
+          "time": 22.2,
+          "text": "I hear your voice across the dark"
+        },
+        {
+          "time": 29.5,
+          "text": "A gentle light that never fades"
+        },
+        {
+          "time": 34.7,
+          "text": "Still burning in my heart"
+        },
+        {
+          "time": 37.9,
+          "text": "The words I never said"
+        },
+        {
+          "time": 42.2,
+          "text": "Still echo in my chest"
+        },
+        {
+          "time": 45.9,
+          "text": "I'm watching over you"
+        },
+        {
+          "time": 52,
+          "text": "I always do"
+        },
+        {
+          "time": 55,
+          "text": "Until this feeling reaches you"
+        },
+        {
+          "time": 61.4,
+          "text": "Like a star that won't burn out"
+        },
+        {
+          "time": 67.7,
+          "text": "I'll be here"
+        },
+        {
+          "time": 83.1,
+          "text": "Even as the seasons turn"
+        },
+        {
+          "time": 88.6,
+          "text": "Some things don't change at all"
+        },
+        {
+          "time": 95.1,
+          "text": "Your smile is all I needed"
+        },
+        {
+          "time": 100.5,
+          "text": "To keep me standing tall"
+        },
+        {
+          "time": 108.1,
+          "text": "No matter where you are"
+        },
+        {
+          "time": 112.3,
+          "text": "I'm never far"
+        },
+        {
+          "time": 117,
+          "text": "I'm watching over you"
+        },
+        {
+          "time": 122.2,
+          "text": "I always do"
+        },
+        {
+          "time": 124.5,
+          "text": "Until this feeling reaches you"
+        },
+        {
+          "time": 131.2,
+          "text": "Like a star that won't burn out"
+        },
+        {
+          "time": 137.9,
+          "text": "I'll be here"
+        },
+        {
+          "time": 162.7,
+          "text": "Maybe someday you'll see"
+        },
+        {
+          "time": 167.1,
+          "text": "What you've always meant to me"
+        },
+        {
+          "time": 177.7,
+          "text": "I'll be here…"
+        }
+      ]
+    },
+    {
+      "title": "愛と呼びしもの",
+      "file": "ai_to_yobishi_mono.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/ai_to_yobishi_mono.mp3",
+      "cover": "covers/ai_to_yobishi_mono.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/ai_to_yobishi_mono.jpg",
+      "genre": "soundtrack",
+      "bpm": 130,
+      "album": null,
+      "comment": "中世西洋騎士の悲恋を描く11分3幕構成のオペラ長編。姫を奪わんとする悪役視点で、戦闘から致命傷、死の床で遠く祝祭の歓声を聞く最期まで。最後まで愛を識らずに「ただ姫の我に向かう笑顔を」と虚しく息絶える独白劇。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
     }
   ]
 }
