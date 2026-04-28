@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-28T14:57:09.873Z",
+  "updated": "2026-04-28T17:02:14.448Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 49,
+  "count": 51,
   "songs": [
     {
       "title": "雪の底",
@@ -5719,6 +5719,342 @@
         {
           "time": 660,
           "text": "あゝ"
+        }
+      ]
+    },
+    {
+      "title": "Across the Stars",
+      "file": "across_the_stars.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/across_the_stars.mp3",
+      "cover": "covers/across_the_stars.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/across_the_stars.jpg",
+      "genre": "anime",
+      "bpm": 120,
+      "album": null,
+      "comment": "前作「I'll be here」のアンサーソング。星空の廃墟で待っていた少女がついに自ら歩き出す——アイリッシュフルートとオーケストラ、鼓動的パーカッションが旅の決意を支えるケルト・エピック・アンセム。",
+      "lyrics_lrc": "[0:25.7]The bridge of starlight calls my name\n[0:30.0]I will not stay where shadows weigh\n[0:34.5]I let the silence fall behind\n[0:38.4]I claim the dawn before the day\n[0:42.7]No more whispers in the dark\n[0:46.6]I sing my own song now\n[0:52.2]Across the stars I'm running free\n[0:56.0]Through every storm that calls to me\n[0:59.9]I will not bow, I will not break\n[1:03.7]I'll find your heart for both our sakes\n[1:07.8]Across the stars\n[1:11.3]I'm coming home\n[1:14.9]Across the stars\n[1:18.9]I'm not alone\n[1:37.8]The wind remembers ancient songs\n[1:42.5]Of every soul that dared to roam\n[1:46.2]I follow rivers made of light\n[1:50.0]Each step a prayer that leads me home\n[1:54.0]No more dreaming from afar\n[1:58.8]The fire burns within\n[2:03.7]Across the stars I'm running free\n[2:07.6]Through every storm that calls to me\n[2:11.5]I will not bow, I will not break\n[2:15.3]I'll find your heart for both our sakes\n[2:19.4]Across the stars\n[2:22.7]I'm coming home\n[2:26.8]Across the stars\n[2:30.3]I'm not alone\n[3:03.0]Mountains rise, I climb them all\n[3:07.0]Oceans roar, I will not fall\n[3:10.4]The night may try to hold me down\n[3:14.3]But every star will guide me on\n[3:21.3]Across the stars I'm running free\n[3:25.0]The fire burns inside of me\n[3:28.9]I will not bow, I will not break\n[3:32.7]This is the path I choose to take\n[3:36.7]Across the stars\n[3:40.5]I'm coming home\n[3:43.9]Across the stars\n[3:49.2]We meet again",
+      "lyrics_parsed": [
+        {
+          "time": 25.7,
+          "text": "The bridge of starlight calls my name"
+        },
+        {
+          "time": 30,
+          "text": "I will not stay where shadows weigh"
+        },
+        {
+          "time": 34.5,
+          "text": "I let the silence fall behind"
+        },
+        {
+          "time": 38.4,
+          "text": "I claim the dawn before the day"
+        },
+        {
+          "time": 42.7,
+          "text": "No more whispers in the dark"
+        },
+        {
+          "time": 46.6,
+          "text": "I sing my own song now"
+        },
+        {
+          "time": 52.2,
+          "text": "Across the stars I'm running free"
+        },
+        {
+          "time": 56,
+          "text": "Through every storm that calls to me"
+        },
+        {
+          "time": 59.9,
+          "text": "I will not bow, I will not break"
+        },
+        {
+          "time": 63.7,
+          "text": "I'll find your heart for both our sakes"
+        },
+        {
+          "time": 67.8,
+          "text": "Across the stars"
+        },
+        {
+          "time": 71.3,
+          "text": "I'm coming home"
+        },
+        {
+          "time": 74.9,
+          "text": "Across the stars"
+        },
+        {
+          "time": 78.9,
+          "text": "I'm not alone"
+        },
+        {
+          "time": 97.8,
+          "text": "The wind remembers ancient songs"
+        },
+        {
+          "time": 102.5,
+          "text": "Of every soul that dared to roam"
+        },
+        {
+          "time": 106.2,
+          "text": "I follow rivers made of light"
+        },
+        {
+          "time": 110,
+          "text": "Each step a prayer that leads me home"
+        },
+        {
+          "time": 114,
+          "text": "No more dreaming from afar"
+        },
+        {
+          "time": 118.8,
+          "text": "The fire burns within"
+        },
+        {
+          "time": 123.7,
+          "text": "Across the stars I'm running free"
+        },
+        {
+          "time": 127.6,
+          "text": "Through every storm that calls to me"
+        },
+        {
+          "time": 131.5,
+          "text": "I will not bow, I will not break"
+        },
+        {
+          "time": 135.3,
+          "text": "I'll find your heart for both our sakes"
+        },
+        {
+          "time": 139.4,
+          "text": "Across the stars"
+        },
+        {
+          "time": 142.7,
+          "text": "I'm coming home"
+        },
+        {
+          "time": 146.8,
+          "text": "Across the stars"
+        },
+        {
+          "time": 150.3,
+          "text": "I'm not alone"
+        },
+        {
+          "time": 183,
+          "text": "Mountains rise, I climb them all"
+        },
+        {
+          "time": 187,
+          "text": "Oceans roar, I will not fall"
+        },
+        {
+          "time": 190.4,
+          "text": "The night may try to hold me down"
+        },
+        {
+          "time": 194.3,
+          "text": "But every star will guide me on"
+        },
+        {
+          "time": 201.3,
+          "text": "Across the stars I'm running free"
+        },
+        {
+          "time": 205,
+          "text": "The fire burns inside of me"
+        },
+        {
+          "time": 208.9,
+          "text": "I will not bow, I will not break"
+        },
+        {
+          "time": 212.7,
+          "text": "This is the path I choose to take"
+        },
+        {
+          "time": 216.7,
+          "text": "Across the stars"
+        },
+        {
+          "time": 220.5,
+          "text": "I'm coming home"
+        },
+        {
+          "time": 223.9,
+          "text": "Across the stars"
+        },
+        {
+          "time": 229.2,
+          "text": "We meet again"
+        }
+      ]
+    },
+    {
+      "title": "ベンティ アドショット ヘーゼルナッツ バニラ アーモンド キャラメル エクストラホイップ キャラメルソース モカソース ランバチップ チョコレートクリーム",
+      "file": "venti_addshot.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/venti_addshot.mp3",
+      "cover": "covers/venti_addshot.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/venti_addshot.jpg",
+      "genre": "experimental",
+      "bpm": 108,
+      "album": null,
+      "comment": "カフェ行列で前の客たちが長文カスタムオーダーを次々と詠唱する、ある日の風景を童謡化した早口言葉ノベルティ。オカリナ・カスタネット・ハンドベルだけで構成、ドラムもベースもなし。最長級のメニュー名を一気に詠唱できるか、それとも噛むか。オチが本作のすべて。",
+      "lyrics_lrc": "[0:00.0]いらっしゃいませ ご注文は?\n[0:06.5]平日午後の スタバの列\n[0:09.1]私の前に 三人ならぶ\n[0:12.2]ふつうの客で ありますように\n[0:15.2]そんな願いは とどかない\n[0:18.0]ショート ソイ オールミルク アド リストレットショット\n[0:21.4]ノンシロップ チョコレートソース アドホイップ\n[0:25.5]フルリーフ チャイ ラテ で\n[0:29.4]え? 今? なんて言った\n[0:31.9]聞きとれた けど 書きとれない\n[0:35.2]私の番 まだ来ない\n[0:37.9]次の人 もう口ひらいてる\n[0:41.7]トール バニラ ノンファット アド リストレットショット\n[0:44.8]チョコレートソース エクストラホイップ\n[0:47.7]コーヒージェリー アンド クリーミー\n[0:50.7]バニラ フラペチーノ で\n[0:53.5]もう 一人 いるんですけど\n[0:56.2]このひと カウンターの常連\n[0:59.4]店員さん 顔色 変わらない\n[1:02.3]プロって すごい こわい\n[1:05.4]トール ダーク モカ チップ クリーム\n[1:07.7]フラペチーノ\n[1:10.9]ソイ ウィズ チョコレートソース\n[1:13.6]ノンホイップ\n[1:17.0]ありがとうございます\n[1:18.8]私の番 きた\n[1:21.5]ふつうのコーヒーで 逃げる?\n[1:25.2]いや 今日は やる\n[1:31.9]ベンティ アドショット ヘーゼル\n[1:34.4]ナッツ バニラ アーモンド\n[1:36.2]キャラメル エクストラホイップ\n[1:38.2]キャラメルソース モカソース\n[1:40.3]ランバチップ チョコレートクリーム\n[1:43.3]フラペチーノ!\n[1:48.3]言えた! 言えた!\n[1:50.2]あ あの すみません\n[1:51.8]やっぱり ホット コーヒー トールで",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "いらっしゃいませ ご注文は?"
+        },
+        {
+          "time": 6.5,
+          "text": "平日午後の スタバの列"
+        },
+        {
+          "time": 9.1,
+          "text": "私の前に 三人ならぶ"
+        },
+        {
+          "time": 12.2,
+          "text": "ふつうの客で ありますように"
+        },
+        {
+          "time": 15.2,
+          "text": "そんな願いは とどかない"
+        },
+        {
+          "time": 18,
+          "text": "ショート ソイ オールミルク アド リストレットショット"
+        },
+        {
+          "time": 21.4,
+          "text": "ノンシロップ チョコレートソース アドホイップ"
+        },
+        {
+          "time": 25.5,
+          "text": "フルリーフ チャイ ラテ で"
+        },
+        {
+          "time": 29.4,
+          "text": "え? 今? なんて言った"
+        },
+        {
+          "time": 31.9,
+          "text": "聞きとれた けど 書きとれない"
+        },
+        {
+          "time": 35.2,
+          "text": "私の番 まだ来ない"
+        },
+        {
+          "time": 37.9,
+          "text": "次の人 もう口ひらいてる"
+        },
+        {
+          "time": 41.7,
+          "text": "トール バニラ ノンファット アド リストレットショット"
+        },
+        {
+          "time": 44.8,
+          "text": "チョコレートソース エクストラホイップ"
+        },
+        {
+          "time": 47.7,
+          "text": "コーヒージェリー アンド クリーミー"
+        },
+        {
+          "time": 50.7,
+          "text": "バニラ フラペチーノ で"
+        },
+        {
+          "time": 53.5,
+          "text": "もう 一人 いるんですけど"
+        },
+        {
+          "time": 56.2,
+          "text": "このひと カウンターの常連"
+        },
+        {
+          "time": 59.4,
+          "text": "店員さん 顔色 変わらない"
+        },
+        {
+          "time": 62.3,
+          "text": "プロって すごい こわい"
+        },
+        {
+          "time": 65.4,
+          "text": "トール ダーク モカ チップ クリーム"
+        },
+        {
+          "time": 67.7,
+          "text": "フラペチーノ"
+        },
+        {
+          "time": 70.9,
+          "text": "ソイ ウィズ チョコレートソース"
+        },
+        {
+          "time": 73.6,
+          "text": "ノンホイップ"
+        },
+        {
+          "time": 77,
+          "text": "ありがとうございます"
+        },
+        {
+          "time": 78.8,
+          "text": "私の番 きた"
+        },
+        {
+          "time": 81.5,
+          "text": "ふつうのコーヒーで 逃げる?"
+        },
+        {
+          "time": 85.2,
+          "text": "いや 今日は やる"
+        },
+        {
+          "time": 91.9,
+          "text": "ベンティ アドショット ヘーゼル"
+        },
+        {
+          "time": 94.4,
+          "text": "ナッツ バニラ アーモンド"
+        },
+        {
+          "time": 96.2,
+          "text": "キャラメル エクストラホイップ"
+        },
+        {
+          "time": 98.2,
+          "text": "キャラメルソース モカソース"
+        },
+        {
+          "time": 100.3,
+          "text": "ランバチップ チョコレートクリーム"
+        },
+        {
+          "time": 103.3,
+          "text": "フラペチーノ!"
+        },
+        {
+          "time": 108.3,
+          "text": "言えた! 言えた!"
+        },
+        {
+          "time": 110.2,
+          "text": "あ あの すみません"
+        },
+        {
+          "time": 111.8,
+          "text": "やっぱり ホット コーヒー トールで"
         }
       ]
     }
