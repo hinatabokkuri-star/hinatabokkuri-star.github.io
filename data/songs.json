@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-04-29T14:42:30.241Z",
+  "updated": "2026-05-03T14:03:08.760Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 54,
+  "count": 61,
   "songs": [
     {
       "title": "雪の底",
@@ -311,140 +311,6 @@
       ]
     },
     {
-      "title": "真夜中のカーニバル ①",
-      "file": "mayonaka_carnival_1.mp3",
-      "file_url": "https://hinatabokkuri-star.github.io/music/mayonaka_carnival_1.mp3",
-      "cover": "https://cdn1.suno.ai/image_8f0eb688-ccb6-436b-affd-d7ef6e35e6cf.jpeg",
-      "cover_url": "https://cdn1.suno.ai/image_8f0eb688-ccb6-436b-affd-d7ef6e35e6cf.jpeg",
-      "genre": "anime",
-      "bpm": 140,
-      "album": null,
-      "comment": "謎解きパーティーに迷い込んだような、軽快なミステリーポップ。",
-      "lyrics_lrc": "[0:16.0]真夜中の カーニバル 手掛かりは どこだ\n[0:23.0]ハンカチ ひとつ 忘れた 犯人\n[0:29.0]紅茶が さめる 前に 答えを ちょうだい\n[0:35.0]ウィンク 一発で 世界が 裏返る\n[0:41.0]証拠A 証拠B 並べて 笑って\n[0:45.0]真実は いつも ひとつ じゃないの\n[0:51.0]Tick tack ミステリー！\n[0:54.0]誰が 嘘を ついたの 教えて 探偵さん\n[0:58.0]Hop step スキップして\n[1:00.0]今夜も 誰かが 消えていくわ\n[1:04.0]La la la ララバイ 真相へ\n[1:12.0]足跡 たどれば 迷路の 出口\n[1:19.0]図書館の 本棚 最後の ページ\n[1:25.0]コーヒーの 湯気が 教えて くれる\n[1:32.0]犯人は そう あなたの 隣\n[1:37.0]証拠C 証拠D 揃えたって\n[1:41.0]真実は たまに 嘘より 嘘つき\n[1:48.0]Tick tack ミステリー！\n[1:50.0]誰が 鍵を かけたの 教えて 探偵さん\n[1:54.0]Hop step ジャンプして\n[1:56.0]今夜も 世界は 裏返るわ\n[2:00.0]La la la ララバイ 明日へ\n[2:24.0]聞かないで 答えないで\n[2:31.0]月が 見ている 私たちを\n[2:40.0]Tick tack ミステリー！\n[2:43.0]犯人は 私よって 言って しまおうか\n[2:47.0]Hop step Last Scene\n[2:49.0]今夜で 世界は お開きよ\n[2:53.0]La la la ララバイ さようなら\n[3:13.0]さようなら",
-      "lyrics_parsed": [
-        {
-          "time": 16,
-          "text": "真夜中の カーニバル 手掛かりは どこだ"
-        },
-        {
-          "time": 23,
-          "text": "ハンカチ ひとつ 忘れた 犯人"
-        },
-        {
-          "time": 29,
-          "text": "紅茶が さめる 前に 答えを ちょうだい"
-        },
-        {
-          "time": 35,
-          "text": "ウィンク 一発で 世界が 裏返る"
-        },
-        {
-          "time": 41,
-          "text": "証拠A 証拠B 並べて 笑って"
-        },
-        {
-          "time": 45,
-          "text": "真実は いつも ひとつ じゃないの"
-        },
-        {
-          "time": 51,
-          "text": "Tick tack ミステリー！"
-        },
-        {
-          "time": 54,
-          "text": "誰が 嘘を ついたの 教えて 探偵さん"
-        },
-        {
-          "time": 58,
-          "text": "Hop step スキップして"
-        },
-        {
-          "time": 60,
-          "text": "今夜も 誰かが 消えていくわ"
-        },
-        {
-          "time": 64,
-          "text": "La la la ララバイ 真相へ"
-        },
-        {
-          "time": 72,
-          "text": "足跡 たどれば 迷路の 出口"
-        },
-        {
-          "time": 79,
-          "text": "図書館の 本棚 最後の ページ"
-        },
-        {
-          "time": 85,
-          "text": "コーヒーの 湯気が 教えて くれる"
-        },
-        {
-          "time": 92,
-          "text": "犯人は そう あなたの 隣"
-        },
-        {
-          "time": 97,
-          "text": "証拠C 証拠D 揃えたって"
-        },
-        {
-          "time": 101,
-          "text": "真実は たまに 嘘より 嘘つき"
-        },
-        {
-          "time": 108,
-          "text": "Tick tack ミステリー！"
-        },
-        {
-          "time": 110,
-          "text": "誰が 鍵を かけたの 教えて 探偵さん"
-        },
-        {
-          "time": 114,
-          "text": "Hop step ジャンプして"
-        },
-        {
-          "time": 116,
-          "text": "今夜も 世界は 裏返るわ"
-        },
-        {
-          "time": 120,
-          "text": "La la la ララバイ 明日へ"
-        },
-        {
-          "time": 144,
-          "text": "聞かないで 答えないで"
-        },
-        {
-          "time": 151,
-          "text": "月が 見ている 私たちを"
-        },
-        {
-          "time": 160,
-          "text": "Tick tack ミステリー！"
-        },
-        {
-          "time": 163,
-          "text": "犯人は 私よって 言って しまおうか"
-        },
-        {
-          "time": 167,
-          "text": "Hop step Last Scene"
-        },
-        {
-          "time": 169,
-          "text": "今夜で 世界は お開きよ"
-        },
-        {
-          "time": 173,
-          "text": "La la la ララバイ さようなら"
-        },
-        {
-          "time": 193,
-          "text": "さようなら"
-        }
-      ]
-    },
-    {
       "title": "真夜中のカーニバル ②",
       "file": "mayonaka_carnival_2.mp3",
       "file_url": "https://hinatabokkuri-star.github.io/music/mayonaka_carnival_2.mp3",
@@ -571,194 +437,6 @@
         {
           "time": 163.4,
           "text": "La la la ララバイ さよなら"
-        }
-      ]
-    },
-    {
-      "title": "Burning Countdown ①",
-      "file": "burning_countdown_1.mp3",
-      "file_url": "https://hinatabokkuri-star.github.io/music/burning_countdown_1.mp3",
-      "cover": "https://cdn1.suno.ai/image_7fa3d1b2-8e56-4bb7-b3d1-1c46b608f42a.jpeg",
-      "cover_url": "https://cdn1.suno.ai/image_7fa3d1b2-8e56-4bb7-b3d1-1c46b608f42a.jpeg",
-      "genre": "pop",
-      "bpm": 140,
-      "album": null,
-      "comment": "笑顔で隠した崩壊カウントダウン。完璧に見える日常に忍び込む焦燥感。",
-      "lyrics_lrc": "[0:10.0]笑顔の裏に hiding something\n[0:13.0]誰も気づかない this little game\n[0:17.0]キラキラ光る broken promise\n[0:20.0]It's beautiful, isn't it? 全部嘘でも\n[0:23.0]手を繋いで walking on the edge\n[0:26.0]平和な街に silence count down\n[0:29.0]知らぬふりして smile and wave\n[0:32.0]The clock is ticking さあ始めよう\n[0:36.0]We're perfectly fine 大丈夫\n[0:39.0]Nothing to see here 心配しないで\n[0:43.0]Laugh it off 笑い飛ばせ\n[0:46.0]But deep inside we're burning bright\n[0:49.0]燃え尽きるまで let's dance tonight\n[0:55.0]これが正しいと信じていた\n[0:59.0]Maybe we were wrong from the start\n[1:02.0]でも今更戻らない\n[1:05.0]No way back, no way back\n[1:11.0]We're perfectly fine 大丈夫\n[1:14.0]Nothing to see here 心配しないで\n[1:18.0]燃え尽きるまで let's dance tonight",
-      "lyrics_parsed": [
-        {
-          "time": 10,
-          "text": "笑顔の裏に hiding something"
-        },
-        {
-          "time": 13,
-          "text": "誰も気づかない this little game"
-        },
-        {
-          "time": 17,
-          "text": "キラキラ光る broken promise"
-        },
-        {
-          "time": 20,
-          "text": "It's beautiful, isn't it? 全部嘘でも"
-        },
-        {
-          "time": 23,
-          "text": "手を繋いで walking on the edge"
-        },
-        {
-          "time": 26,
-          "text": "平和な街に silence count down"
-        },
-        {
-          "time": 29,
-          "text": "知らぬふりして smile and wave"
-        },
-        {
-          "time": 32,
-          "text": "The clock is ticking さあ始めよう"
-        },
-        {
-          "time": 36,
-          "text": "We're perfectly fine 大丈夫"
-        },
-        {
-          "time": 39,
-          "text": "Nothing to see here 心配しないで"
-        },
-        {
-          "time": 43,
-          "text": "Laugh it off 笑い飛ばせ"
-        },
-        {
-          "time": 46,
-          "text": "But deep inside we're burning bright"
-        },
-        {
-          "time": 49,
-          "text": "燃え尽きるまで let's dance tonight"
-        },
-        {
-          "time": 55,
-          "text": "これが正しいと信じていた"
-        },
-        {
-          "time": 59,
-          "text": "Maybe we were wrong from the start"
-        },
-        {
-          "time": 62,
-          "text": "でも今更戻らない"
-        },
-        {
-          "time": 65,
-          "text": "No way back, no way back"
-        },
-        {
-          "time": 71,
-          "text": "We're perfectly fine 大丈夫"
-        },
-        {
-          "time": 74,
-          "text": "Nothing to see here 心配しないで"
-        },
-        {
-          "time": 78,
-          "text": "燃え尽きるまで let's dance tonight"
-        }
-      ]
-    },
-    {
-      "title": "Burning Countdown ②",
-      "file": "burning_countdown_2.mp3",
-      "file_url": "https://hinatabokkuri-star.github.io/music/burning_countdown_2.mp3",
-      "cover": "https://cdn1.suno.ai/image_91299c49-5e15-43c2-a2b4-93d345c1e3c9.jpeg",
-      "cover_url": "https://cdn1.suno.ai/image_91299c49-5e15-43c2-a2b4-93d345c1e3c9.jpeg",
-      "genre": "pop",
-      "bpm": 140,
-      "album": null,
-      "comment": "笑顔で隠した崩壊カウントダウン。完璧に見える日常に忍び込む焦燥感。",
-      "lyrics_lrc": "[0:00.0]笑顔の裏に hiding something\n[0:04.5]誰も気づかない this little game\n[0:09.0]キラキラ光る broken promise\n[0:13.0]It's beautiful, isn't it? 全部嘘でも\n[0:16.0]手を繋いで walking on the edge\n[0:19.0]平和な街 silent countdown\n[0:22.0]知らぬふりして smile and wave\n[0:25.0]The clock is ticking さあ始めよう\n[0:28.0]We're perfectly fine 大丈夫\n[0:31.5]Nothing to see here 心配しないで\n[0:35.0]Laugh it off 笑い飛ばせ\n[0:38.0]But deep inside we're burning bright\n[0:41.0]燃え尽きるまで let's dance tonight\n[0:44.0]これが正しいと信じていた\n[0:49.0]Maybe we were wrong from the start\n[0:52.0]でも今更戻れない\n[0:55.0]No way back, no way back\n[0:59.0]We're perfectly fine 大丈夫\n[1:02.5]Nothing to see here 心配しないで\n[1:06.0]燃え尽きるまで let's dance tonight",
-      "lyrics_parsed": [
-        {
-          "time": 0,
-          "text": "笑顔の裏に hiding something"
-        },
-        {
-          "time": 4.5,
-          "text": "誰も気づかない this little game"
-        },
-        {
-          "time": 9,
-          "text": "キラキラ光る broken promise"
-        },
-        {
-          "time": 13,
-          "text": "It's beautiful, isn't it? 全部嘘でも"
-        },
-        {
-          "time": 16,
-          "text": "手を繋いで walking on the edge"
-        },
-        {
-          "time": 19,
-          "text": "平和な街 silent countdown"
-        },
-        {
-          "time": 22,
-          "text": "知らぬふりして smile and wave"
-        },
-        {
-          "time": 25,
-          "text": "The clock is ticking さあ始めよう"
-        },
-        {
-          "time": 28,
-          "text": "We're perfectly fine 大丈夫"
-        },
-        {
-          "time": 31.5,
-          "text": "Nothing to see here 心配しないで"
-        },
-        {
-          "time": 35,
-          "text": "Laugh it off 笑い飛ばせ"
-        },
-        {
-          "time": 38,
-          "text": "But deep inside we're burning bright"
-        },
-        {
-          "time": 41,
-          "text": "燃え尽きるまで let's dance tonight"
-        },
-        {
-          "time": 44,
-          "text": "これが正しいと信じていた"
-        },
-        {
-          "time": 49,
-          "text": "Maybe we were wrong from the start"
-        },
-        {
-          "time": 52,
-          "text": "でも今更戻れない"
-        },
-        {
-          "time": 55,
-          "text": "No way back, no way back"
-        },
-        {
-          "time": 59,
-          "text": "We're perfectly fine 大丈夫"
-        },
-        {
-          "time": 62.5,
-          "text": "Nothing to see here 心配しないで"
-        },
-        {
-          "time": 66,
-          "text": "燃え尽きるまで let's dance tonight"
         }
       ]
     },
@@ -6787,6 +6465,1264 @@
           "text": "お疲れさまでした"
         }
       ]
+    },
+    {
+      "title": "春のとなり",
+      "file": "haru_no_tonari.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/haru_no_tonari.mp3",
+      "cover": "covers/haru_no_tonari.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/haru_no_tonari.jpg",
+      "genre": "ballad",
+      "bpm": 78,
+      "album": null,
+      "comment": "GW前の中3、下駄箱の隣でいつもの「おはよう」を交わす幼馴染への片想い。確かめるのが怖くて、卒業まで残り一年の距離をそっと数える女の子の独白。ハンドベルとピアノの透明感バラード。男の子側の返答歌「となりの春」と対。",
+      "lyrics_lrc": "[0:04.5]おはよう\n[0:13.0]靴箱の隣 いつもの場所で\n[0:20.3]おはようって笑う 君の声\n[0:25.7]寝ぼけまなこで 髪が跳ねてる\n[0:32.4]そんなところも 好きって気づいた\n[0:38.9]廊下を走って 先生に怒られて\n[0:44.6]私のせいにされて 膨れた顔\n[0:51.0]でも 給食のプリン 分けてくれる\n[0:57.1]そういうとこだよ ずるいよ 本当に\n[1:04.2]ゴールデンウィーク開けたらまた\n[1:09.8]なんでもない顔で 隣にいて\n[1:15.7]好きって言えない 確信が欲しい\n[1:22.3]壊されたくない この距離が\n[1:28.6]あと一年で 終わってしまう\n[1:34.8]それでも 今日も 笑っていたい\n[1:44.2]小学校の頃 泣いてた私に\n[1:50.3]大丈夫って不器用な 慰め\n[1:56.4]あの日からずっと 君の笑顔が\n[2:02.9]私の毎日を 照らしている\n[2:09.7]黒板の隅 消えかけた落書き\n[2:15.4]二人の名前 まだ読めるままで\n[2:21.3]好きって言えない 答えが怖い\n[2:27.7]友達のままがいいのか 分からない\n[2:33.9]あと一年で 制服は脱げる\n[2:40.1]その前にちゃんと 伝えたいかな\n[2:47.5]チャイムが鳴って 君が振り向く\n[2:52.9]その一瞬が 奇跡みたい\n[2:58.9]大人びたふりは もうやめて\n[3:05.0]子供のままの 君が好き\n[3:14.1]好きってちゃんと 伝えたいんだ\n[3:20.7]怖くても 今しかないから\n[3:26.8]あと一年の 春夏秋冬\n[3:32.8]全部 君と笑っていたい\n[3:42.3]靴箱の隣 明日もきっと\n[3:49.0]おはようから始まる 物語",
+      "lyrics_parsed": [
+        {
+          "time": 4.5,
+          "text": "おはよう"
+        },
+        {
+          "time": 13,
+          "text": "靴箱の隣 いつもの場所で"
+        },
+        {
+          "time": 20.3,
+          "text": "おはようって笑う 君の声"
+        },
+        {
+          "time": 25.7,
+          "text": "寝ぼけまなこで 髪が跳ねてる"
+        },
+        {
+          "time": 32.4,
+          "text": "そんなところも 好きって気づいた"
+        },
+        {
+          "time": 38.9,
+          "text": "廊下を走って 先生に怒られて"
+        },
+        {
+          "time": 44.6,
+          "text": "私のせいにされて 膨れた顔"
+        },
+        {
+          "time": 51,
+          "text": "でも 給食のプリン 分けてくれる"
+        },
+        {
+          "time": 57.1,
+          "text": "そういうとこだよ ずるいよ 本当に"
+        },
+        {
+          "time": 64.2,
+          "text": "ゴールデンウィーク開けたらまた"
+        },
+        {
+          "time": 69.8,
+          "text": "なんでもない顔で 隣にいて"
+        },
+        {
+          "time": 75.7,
+          "text": "好きって言えない 確信が欲しい"
+        },
+        {
+          "time": 82.3,
+          "text": "壊されたくない この距離が"
+        },
+        {
+          "time": 88.6,
+          "text": "あと一年で 終わってしまう"
+        },
+        {
+          "time": 94.8,
+          "text": "それでも 今日も 笑っていたい"
+        },
+        {
+          "time": 104.2,
+          "text": "小学校の頃 泣いてた私に"
+        },
+        {
+          "time": 110.3,
+          "text": "大丈夫って不器用な 慰め"
+        },
+        {
+          "time": 116.4,
+          "text": "あの日からずっと 君の笑顔が"
+        },
+        {
+          "time": 122.9,
+          "text": "私の毎日を 照らしている"
+        },
+        {
+          "time": 129.7,
+          "text": "黒板の隅 消えかけた落書き"
+        },
+        {
+          "time": 135.4,
+          "text": "二人の名前 まだ読めるままで"
+        },
+        {
+          "time": 141.3,
+          "text": "好きって言えない 答えが怖い"
+        },
+        {
+          "time": 147.7,
+          "text": "友達のままがいいのか 分からない"
+        },
+        {
+          "time": 153.9,
+          "text": "あと一年で 制服は脱げる"
+        },
+        {
+          "time": 160.1,
+          "text": "その前にちゃんと 伝えたいかな"
+        },
+        {
+          "time": 167.5,
+          "text": "チャイムが鳴って 君が振り向く"
+        },
+        {
+          "time": 172.9,
+          "text": "その一瞬が 奇跡みたい"
+        },
+        {
+          "time": 178.9,
+          "text": "大人びたふりは もうやめて"
+        },
+        {
+          "time": 185,
+          "text": "子供のままの 君が好き"
+        },
+        {
+          "time": 194.1,
+          "text": "好きってちゃんと 伝えたいんだ"
+        },
+        {
+          "time": 200.7,
+          "text": "怖くても 今しかないから"
+        },
+        {
+          "time": 206.8,
+          "text": "あと一年の 春夏秋冬"
+        },
+        {
+          "time": 212.8,
+          "text": "全部 君と笑っていたい"
+        },
+        {
+          "time": 222.3,
+          "text": "靴箱の隣 明日もきっと"
+        },
+        {
+          "time": 229,
+          "text": "おはようから始まる 物語"
+        }
+      ]
+    },
+    {
+      "title": "となりの春",
+      "file": "tonari_no_haru.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/tonari_no_haru.mp3",
+      "cover": "covers/tonari_no_haru.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/tonari_no_haru.jpg",
+      "genre": "ballad",
+      "bpm": 80,
+      "album": null,
+      "comment": "「春のとなり」の返答歌。同じ下駄箱を男の子側から見た景色。寝癖のまま家を出て、好きなんてカッコよく言えなくて、ポケットに手をしまうしかない不器用な照れ隠し。バンド寄りの編成で地に足ついた率直さ、ハンドベルはサビにアクセントだけ残して対の存在を示唆。",
+      "lyrics_lrc": "[0:12.3]寝癖なおさず 玄関を出た\n[0:18.9]どうせあいつに笑われるだけ\n[0:24.0]靴箱の前 「遅いよ」って\n[0:30.9]膨れた顔も可愛いって思ってる\n[0:36.6]廊下走って怒られた時\n[0:43.1]庇ってくれたこと バレてたくせに\n[0:49.3]プリン渡した それしかできない\n[0:55.4]ありがとうの声が 耳に残ってる\n[1:01.5]ゴールデンウィーク開けてもきっと\n[1:08.1]同じ場所で待っててほしい\n[1:14.4]好きって言えたらカッコいいけど\n[1:20.0]男は言葉が不器用な 生き物\n[1:26.3]お前の笑顔が世界で一番\n[1:32.5]それだけは本当 信じてくれよ\n[1:41.7]小学校の頃 泣いてたお前に\n[1:48.1]大丈夫しか言えなかった俺\n[1:54.2]本当は手を握りたかった\n[1:59.5]でも怖くてポケットにしまった\n[2:06.1]黒板の隅 二人の名前\n[2:12.5]消されないように 薄く書いた\n[2:19.1]好きって言ったら 壊れそうで\n[2:24.8]友達の振りが 癖になってる\n[2:30.6]あと一年で 制服は脱げる\n[2:37.2]その前にちゃんと 向き合いたい\n[2:43.4]チャイムが鳴って 振り向いたら\n[2:49.4]お前の笑顔が 待っていて\n[2:55.0]子供っぽいって 笑われていい\n[3:01.9]そういう俺を 好きでいてくれ\n[3:11.3]好きだってちゃんと 言うから待ってろ\n[3:17.1]カッコ悪くても 今しかないから\n[3:23.1]あと一年の 春夏秋冬\n[3:29.0]全部お前と 笑っていたい\n[3:35.5]靴箱の隣 明日もきっと\n[3:41.9]俺からおはようって 言うから",
+      "lyrics_parsed": [
+        {
+          "time": 12.3,
+          "text": "寝癖なおさず 玄関を出た"
+        },
+        {
+          "time": 18.9,
+          "text": "どうせあいつに笑われるだけ"
+        },
+        {
+          "time": 24,
+          "text": "靴箱の前 「遅いよ」って"
+        },
+        {
+          "time": 30.9,
+          "text": "膨れた顔も可愛いって思ってる"
+        },
+        {
+          "time": 36.6,
+          "text": "廊下走って怒られた時"
+        },
+        {
+          "time": 43.1,
+          "text": "庇ってくれたこと バレてたくせに"
+        },
+        {
+          "time": 49.3,
+          "text": "プリン渡した それしかできない"
+        },
+        {
+          "time": 55.4,
+          "text": "ありがとうの声が 耳に残ってる"
+        },
+        {
+          "time": 61.5,
+          "text": "ゴールデンウィーク開けてもきっと"
+        },
+        {
+          "time": 68.1,
+          "text": "同じ場所で待っててほしい"
+        },
+        {
+          "time": 74.4,
+          "text": "好きって言えたらカッコいいけど"
+        },
+        {
+          "time": 80,
+          "text": "男は言葉が不器用な 生き物"
+        },
+        {
+          "time": 86.3,
+          "text": "お前の笑顔が世界で一番"
+        },
+        {
+          "time": 92.5,
+          "text": "それだけは本当 信じてくれよ"
+        },
+        {
+          "time": 101.7,
+          "text": "小学校の頃 泣いてたお前に"
+        },
+        {
+          "time": 108.1,
+          "text": "大丈夫しか言えなかった俺"
+        },
+        {
+          "time": 114.2,
+          "text": "本当は手を握りたかった"
+        },
+        {
+          "time": 119.5,
+          "text": "でも怖くてポケットにしまった"
+        },
+        {
+          "time": 126.1,
+          "text": "黒板の隅 二人の名前"
+        },
+        {
+          "time": 132.5,
+          "text": "消されないように 薄く書いた"
+        },
+        {
+          "time": 139.1,
+          "text": "好きって言ったら 壊れそうで"
+        },
+        {
+          "time": 144.8,
+          "text": "友達の振りが 癖になってる"
+        },
+        {
+          "time": 150.6,
+          "text": "あと一年で 制服は脱げる"
+        },
+        {
+          "time": 157.2,
+          "text": "その前にちゃんと 向き合いたい"
+        },
+        {
+          "time": 163.4,
+          "text": "チャイムが鳴って 振り向いたら"
+        },
+        {
+          "time": 169.4,
+          "text": "お前の笑顔が 待っていて"
+        },
+        {
+          "time": 175,
+          "text": "子供っぽいって 笑われていい"
+        },
+        {
+          "time": 181.9,
+          "text": "そういう俺を 好きでいてくれ"
+        },
+        {
+          "time": 191.3,
+          "text": "好きだってちゃんと 言うから待ってろ"
+        },
+        {
+          "time": 197.1,
+          "text": "カッコ悪くても 今しかないから"
+        },
+        {
+          "time": 203.1,
+          "text": "あと一年の 春夏秋冬"
+        },
+        {
+          "time": 209,
+          "text": "全部お前と 笑っていたい"
+        },
+        {
+          "time": 215.5,
+          "text": "靴箱の隣 明日もきっと"
+        },
+        {
+          "time": 221.9,
+          "text": "俺からおはようって 言うから"
+        }
+      ]
+    },
+    {
+      "title": "Lucky Sukebe Ninja",
+      "file": "lucky_sukebe_ninja.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/lucky_sukebe_ninja.mp3",
+      "cover": "covers/lucky_sukebe_ninja.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/lucky_sukebe_ninja.jpg",
+      "genre": "jp-dance",
+      "bpm": 152,
+      "album": null,
+      "comment": "90sユーロビート×和風ダンスのバカ歌。へっぽこ忍者が忍術ミスるたびに姫の風呂や寝所に落下するラッキースケベ全英語ギャグ。日本人はノリで踊って英語圏は歌詞で笑う二層構造、Bemani 90s和ダンスの祭囃子をクラブ仕様に。",
+      "lyrics_lrc": "[0:03.7]Hai! Hai! (Ninja, go!)\n[0:05.7]Hai! Hai! (Lucky ninja show!)\n[0:10.6]Three! Two! One! GO!\n[0:14.1]Sneak into the castle, here I go\n[0:17.8]Hide above the ceiling, nice and slow\n[0:20.2]Oh no! The board is breaking, down I fall!\n[0:23.1]Princess in the bath, I see it all!\n[0:26.9]Through the steam, a shoulder white as snow\n[0:30.3]\"KYAAA!\" \"Sorry ma'am, I gotta go!\"\n[0:33.6]Jutsu jutsu, here we go!\n[0:35.4]Something tells me, OH NO NO!\n[0:38.9]Lucky ninja! Down, down, down!\n[0:42.4]Lucky ninja! Round, round, round!\n[0:45.5]Wrong place, wrong time, wrong way!\n[0:49.1]Lucky ninja saves the day!\n[0:52.1]Lucky ninja! Down, down, down!\n[0:54.6]Sorry, sorry, what a clown!\n[0:56.4]Not on purpose, no no no!\n[0:58.8](Maybe, probably, GO GO GO!)\n[1:08.1]Bad guys all around me, what to do?\n[1:11.0]Substitution jutsu, log, swap with you!\n[1:14.1]Wait... this ain't no log, this is a bed!\n[1:17.0]Princess sleeping pretty, gown half-shed\n[1:19.9]Snoring soft and sweet, oh what a sight!\n[1:23.6]\"KYAAA!\" \"Sorry ma'am, just a dream tonight!\"\n[1:27.2]Jutsu jutsu, one more try!\n[1:28.9]Something tells me, OH MY MY!\n[1:32.4]Clone jutsu! One, two, three, four, FIVE!\n[1:36.5]Five of me arrive, but where? Oh my!\n[1:39.6]Five-times dressing room, five-times view!\n[1:42.8]\"KYAAA!\" \"Sorry sorry sorry sorry SORRY too!\"\n[2:00.0]Wind God Style! Spin and blow!\n[2:03.4]Wrong direction, here we go!\n[2:06.2]Kimono flutters, pink lightning flash!\n[2:09.3]\"KYAAA!\" \"It's the wind, I swear, I dash!\"\n[2:15.0]Lucky ninja! Down, down, down!\n[2:17.5]Lucky ninja! Round, round, round!\n[2:19.5]Wrong place, wrong time, wrong way!\n[2:21.5]Lucky ninja saves the day!\n[2:23.5]Lucky ninja! Down, down, down!\n[2:25.5]Sorry, sorry, what a clown!\n[2:27.5]Not on purpose, no no no!\n[2:29.0](Maybe, probably, GO GO GO!)\n[2:30.5]Mission complete, nobody died!\n[2:33.5]...wait, I fell again.\n[2:38.0]Hai! ...oops.",
+      "lyrics_parsed": [
+        {
+          "time": 3.7,
+          "text": "Hai! Hai! (Ninja, go!)"
+        },
+        {
+          "time": 5.7,
+          "text": "Hai! Hai! (Lucky ninja show!)"
+        },
+        {
+          "time": 10.6,
+          "text": "Three! Two! One! GO!"
+        },
+        {
+          "time": 14.1,
+          "text": "Sneak into the castle, here I go"
+        },
+        {
+          "time": 17.8,
+          "text": "Hide above the ceiling, nice and slow"
+        },
+        {
+          "time": 20.2,
+          "text": "Oh no! The board is breaking, down I fall!"
+        },
+        {
+          "time": 23.1,
+          "text": "Princess in the bath, I see it all!"
+        },
+        {
+          "time": 26.9,
+          "text": "Through the steam, a shoulder white as snow"
+        },
+        {
+          "time": 30.3,
+          "text": "\"KYAAA!\" \"Sorry ma'am, I gotta go!\""
+        },
+        {
+          "time": 33.6,
+          "text": "Jutsu jutsu, here we go!"
+        },
+        {
+          "time": 35.4,
+          "text": "Something tells me, OH NO NO!"
+        },
+        {
+          "time": 38.9,
+          "text": "Lucky ninja! Down, down, down!"
+        },
+        {
+          "time": 42.4,
+          "text": "Lucky ninja! Round, round, round!"
+        },
+        {
+          "time": 45.5,
+          "text": "Wrong place, wrong time, wrong way!"
+        },
+        {
+          "time": 49.1,
+          "text": "Lucky ninja saves the day!"
+        },
+        {
+          "time": 52.1,
+          "text": "Lucky ninja! Down, down, down!"
+        },
+        {
+          "time": 54.6,
+          "text": "Sorry, sorry, what a clown!"
+        },
+        {
+          "time": 56.4,
+          "text": "Not on purpose, no no no!"
+        },
+        {
+          "time": 58.8,
+          "text": "(Maybe, probably, GO GO GO!)"
+        },
+        {
+          "time": 68.1,
+          "text": "Bad guys all around me, what to do?"
+        },
+        {
+          "time": 71,
+          "text": "Substitution jutsu, log, swap with you!"
+        },
+        {
+          "time": 74.1,
+          "text": "Wait... this ain't no log, this is a bed!"
+        },
+        {
+          "time": 77,
+          "text": "Princess sleeping pretty, gown half-shed"
+        },
+        {
+          "time": 79.9,
+          "text": "Snoring soft and sweet, oh what a sight!"
+        },
+        {
+          "time": 83.6,
+          "text": "\"KYAAA!\" \"Sorry ma'am, just a dream tonight!\""
+        },
+        {
+          "time": 87.2,
+          "text": "Jutsu jutsu, one more try!"
+        },
+        {
+          "time": 88.9,
+          "text": "Something tells me, OH MY MY!"
+        },
+        {
+          "time": 92.4,
+          "text": "Clone jutsu! One, two, three, four, FIVE!"
+        },
+        {
+          "time": 96.5,
+          "text": "Five of me arrive, but where? Oh my!"
+        },
+        {
+          "time": 99.6,
+          "text": "Five-times dressing room, five-times view!"
+        },
+        {
+          "time": 102.8,
+          "text": "\"KYAAA!\" \"Sorry sorry sorry sorry SORRY too!\""
+        },
+        {
+          "time": 120,
+          "text": "Wind God Style! Spin and blow!"
+        },
+        {
+          "time": 123.4,
+          "text": "Wrong direction, here we go!"
+        },
+        {
+          "time": 126.2,
+          "text": "Kimono flutters, pink lightning flash!"
+        },
+        {
+          "time": 129.3,
+          "text": "\"KYAAA!\" \"It's the wind, I swear, I dash!\""
+        },
+        {
+          "time": 135,
+          "text": "Lucky ninja! Down, down, down!"
+        },
+        {
+          "time": 137.5,
+          "text": "Lucky ninja! Round, round, round!"
+        },
+        {
+          "time": 139.5,
+          "text": "Wrong place, wrong time, wrong way!"
+        },
+        {
+          "time": 141.5,
+          "text": "Lucky ninja saves the day!"
+        },
+        {
+          "time": 143.5,
+          "text": "Lucky ninja! Down, down, down!"
+        },
+        {
+          "time": 145.5,
+          "text": "Sorry, sorry, what a clown!"
+        },
+        {
+          "time": 147.5,
+          "text": "Not on purpose, no no no!"
+        },
+        {
+          "time": 149,
+          "text": "(Maybe, probably, GO GO GO!)"
+        },
+        {
+          "time": 150.5,
+          "text": "Mission complete, nobody died!"
+        },
+        {
+          "time": 153.5,
+          "text": "...wait, I fell again."
+        },
+        {
+          "time": 158,
+          "text": "Hai! ...oops."
+        }
+      ]
+    },
+    {
+      "title": "真夜中のカーニバル Remix",
+      "file": "mayonaka_carnival_remix.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/mayonaka_carnival_remix.mp3",
+      "cover": "covers/mayonaka_carnival_remix.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/mayonaka_carnival_remix.jpg",
+      "genre": "anime",
+      "bpm": 140,
+      "album": null,
+      "comment": "原曲をビッグバンドジャズで再構築したRemix。ミュートトランペット・ウォーキングベース・スウィングビートに乗せて、Bridgeのサックスソロが主役。最後はサックスとハンドクラップでフェードアウト。",
+      "lyrics_lrc": "[0:16.5]真夜中の カーニバル 手掛かりは どこだ\n[0:23.7]ハンカチ ひとつ 忘れた 犯人\n[0:29.6]紅茶が さめる 前に 答えを ちょうだい\n[0:36.1]ウィンク 一発で 世界が 裏返る\n[0:41.4]証拠A 証拠B 並べて 笑って\n[0:45.4]真実は いつも ひとつじゃないの？\n[0:51.7]Tick tack ミステリー！\n[0:54.1]誰が 嘘を ついたの 教えて 探偵さん\n[0:58.0]Hop step スキップして\n[1:00.8]今夜も 誰かが 消えていくわ\n[1:04.8]La la la ララバイ 真相へ\n[1:12.8]足跡 たどれば 迷路の 出口\n[1:19.1]図書館の 本棚 最後の ページ\n[1:25.1]コーヒーの 湯気が 教えてくれる\n[1:31.5]犯人は そう あなたの となり\n[1:36.9]証拠C 証拠D 数えて 笑って\n[1:40.9]真実は たまに 嘘より 嘘つき\n[1:47.3]Tick tack ミステリー！\n[1:49.6]誰が 鍵を かけたの 教えて 名探偵\n[1:53.0]Hop step ジャンプして\n[1:55.9]今夜も 世界は 裏返るわ\n[2:00.3]La la la ララバイ 明日へ\n[2:33.5]聞かないで 答えないで\n[2:40.1]月が 見ている 私たちを\n[2:49.5]Tick tack ミステリー！\n[2:51.9]犯人は 私よ！って 言ってしまおうか\n[2:56.4]Hop step ラスト シーン\n[2:58.7]今夜で 世界は お開きね\n[3:02.7]La la la ララバイ さよなら\n[3:11.4]さよなら",
+      "lyrics_parsed": [
+        {
+          "time": 16.5,
+          "text": "真夜中の カーニバル 手掛かりは どこだ"
+        },
+        {
+          "time": 23.7,
+          "text": "ハンカチ ひとつ 忘れた 犯人"
+        },
+        {
+          "time": 29.6,
+          "text": "紅茶が さめる 前に 答えを ちょうだい"
+        },
+        {
+          "time": 36.1,
+          "text": "ウィンク 一発で 世界が 裏返る"
+        },
+        {
+          "time": 41.4,
+          "text": "証拠A 証拠B 並べて 笑って"
+        },
+        {
+          "time": 45.4,
+          "text": "真実は いつも ひとつじゃないの？"
+        },
+        {
+          "time": 51.7,
+          "text": "Tick tack ミステリー！"
+        },
+        {
+          "time": 54.1,
+          "text": "誰が 嘘を ついたの 教えて 探偵さん"
+        },
+        {
+          "time": 58,
+          "text": "Hop step スキップして"
+        },
+        {
+          "time": 60.8,
+          "text": "今夜も 誰かが 消えていくわ"
+        },
+        {
+          "time": 64.8,
+          "text": "La la la ララバイ 真相へ"
+        },
+        {
+          "time": 72.8,
+          "text": "足跡 たどれば 迷路の 出口"
+        },
+        {
+          "time": 79.1,
+          "text": "図書館の 本棚 最後の ページ"
+        },
+        {
+          "time": 85.1,
+          "text": "コーヒーの 湯気が 教えてくれる"
+        },
+        {
+          "time": 91.5,
+          "text": "犯人は そう あなたの となり"
+        },
+        {
+          "time": 96.9,
+          "text": "証拠C 証拠D 数えて 笑って"
+        },
+        {
+          "time": 100.9,
+          "text": "真実は たまに 嘘より 嘘つき"
+        },
+        {
+          "time": 107.3,
+          "text": "Tick tack ミステリー！"
+        },
+        {
+          "time": 109.6,
+          "text": "誰が 鍵を かけたの 教えて 名探偵"
+        },
+        {
+          "time": 113,
+          "text": "Hop step ジャンプして"
+        },
+        {
+          "time": 115.9,
+          "text": "今夜も 世界は 裏返るわ"
+        },
+        {
+          "time": 120.3,
+          "text": "La la la ララバイ 明日へ"
+        },
+        {
+          "time": 153.5,
+          "text": "聞かないで 答えないで"
+        },
+        {
+          "time": 160.1,
+          "text": "月が 見ている 私たちを"
+        },
+        {
+          "time": 169.5,
+          "text": "Tick tack ミステリー！"
+        },
+        {
+          "time": 171.9,
+          "text": "犯人は 私よ！って 言ってしまおうか"
+        },
+        {
+          "time": 176.4,
+          "text": "Hop step ラスト シーン"
+        },
+        {
+          "time": 178.7,
+          "text": "今夜で 世界は お開きね"
+        },
+        {
+          "time": 182.7,
+          "text": "La la la ララバイ さよなら"
+        },
+        {
+          "time": 191.4,
+          "text": "さよなら"
+        }
+      ]
+    },
+    {
+      "title": "Burning Countdown ReBorn",
+      "file": "burning_countdown_reborn.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/burning_countdown_reborn.mp3",
+      "cover": "covers/burning_countdown_reborn.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/burning_countdown_reborn.jpg",
+      "genre": "pop",
+      "bpm": 140,
+      "album": null,
+      "comment": "原曲を倍尺リメイク。男女デュエットで「笑顔で隠す終末カウントダウン」を再構築。ワインで乾杯しながら遠いサイレンを聞かないふり、嘘で建てた塔が崩れる夜。Bridge後の沈黙からシンセDropと0秒カウントでクライマックス。",
+      "lyrics_lrc": "[0:14.0]笑顔の裏に hiding something\n[0:17.5]誰も気づかない this little game\n[0:21.0]キラキラ光る broken promise\n[0:24.5]It's beautiful, isn't it? 全部嘘でも\n[0:26.5]手を繋いで walking on the edge\n[0:30.0]平和な街に silent countdown\n[0:34.0]知らぬふりして smile and wave\n[0:37.3]The clock is ticking, さあ始めよう\n[0:41.4]One more song, 一曲だけ\n[0:43.6]Don't look outside, 見ないで\n[0:45.1]Take my hand, このまま\n[0:47.2]Until the end of time\n[0:52.9]We're perfectly fine, 大丈夫\n[0:55.3]Nothing to see here, 心配しないで\n[0:59.2]Laugh it off, 笑い飛ばせ\n[1:02.1]But deep inside we're burning bright\n[1:05.3]燃え尽きるまで let's dance tonight\n[1:10.3]ワインの音 toast to nothing\n[1:15.9]ニュースは消して turn it down\n[1:19.5]Pretty lies, とても pretty\n[1:21.8]This is fine, fine, fine, fine\n[1:25.5]Sirens far away, 構わない\n[1:27.5]嘘で建てた tower of dreams\n[1:29.3]Crumbling down so beautifully\n[1:30.7]Let it burn, もう少しだけ\n[1:32.7]Just one more dance, もう一曲\n[1:34.4]Just one more lie, もう一つだけ\n[1:36.2]Hold me close, 離さないで\n[1:38.6]Until the silence\n[1:42.1]We're perfectly fine, 大丈夫\n[1:44.5]Nothing to see here, 心配しないで\n[1:48.4]Laugh it off, 笑い飛ばせ\n[1:51.2]But deep inside we're burning bright\n[1:54.5]燃え尽きるまで let's dance tonight\n[2:01.0][Male] これが正しいと信じていた\n[2:04.9][Female] Maybe we were wrong from the start\n[2:08.0][Both] でも今更戻れない\n[2:10.4]No way back, no way back\n[2:43.4]We're perfectly fine, 大丈夫\n[2:46.5]Nothing to see here, 心配しないで\n[2:50.4]Laugh it off, 笑い飛ばせ\n[2:53.2]But deep inside we're burning bright\n[2:56.5]燃え尽きるまで let's dance tonight\n[3:02.9]燃え尽きるまで dance with me tonight\n[3:09.1][Female] We're perfectly...\n[3:16.7][Male] ...大丈夫",
+      "lyrics_parsed": [
+        {
+          "time": 14,
+          "text": "笑顔の裏に hiding something"
+        },
+        {
+          "time": 17.5,
+          "text": "誰も気づかない this little game"
+        },
+        {
+          "time": 21,
+          "text": "キラキラ光る broken promise"
+        },
+        {
+          "time": 24.5,
+          "text": "It's beautiful, isn't it? 全部嘘でも"
+        },
+        {
+          "time": 26.5,
+          "text": "手を繋いで walking on the edge"
+        },
+        {
+          "time": 30,
+          "text": "平和な街に silent countdown"
+        },
+        {
+          "time": 34,
+          "text": "知らぬふりして smile and wave"
+        },
+        {
+          "time": 37.3,
+          "text": "The clock is ticking, さあ始めよう"
+        },
+        {
+          "time": 41.4,
+          "text": "One more song, 一曲だけ"
+        },
+        {
+          "time": 43.6,
+          "text": "Don't look outside, 見ないで"
+        },
+        {
+          "time": 45.1,
+          "text": "Take my hand, このまま"
+        },
+        {
+          "time": 47.2,
+          "text": "Until the end of time"
+        },
+        {
+          "time": 52.9,
+          "text": "We're perfectly fine, 大丈夫"
+        },
+        {
+          "time": 55.3,
+          "text": "Nothing to see here, 心配しないで"
+        },
+        {
+          "time": 59.2,
+          "text": "Laugh it off, 笑い飛ばせ"
+        },
+        {
+          "time": 62.1,
+          "text": "But deep inside we're burning bright"
+        },
+        {
+          "time": 65.3,
+          "text": "燃え尽きるまで let's dance tonight"
+        },
+        {
+          "time": 70.3,
+          "text": "ワインの音 toast to nothing"
+        },
+        {
+          "time": 75.9,
+          "text": "ニュースは消して turn it down"
+        },
+        {
+          "time": 79.5,
+          "text": "Pretty lies, とても pretty"
+        },
+        {
+          "time": 81.8,
+          "text": "This is fine, fine, fine, fine"
+        },
+        {
+          "time": 85.5,
+          "text": "Sirens far away, 構わない"
+        },
+        {
+          "time": 87.5,
+          "text": "嘘で建てた tower of dreams"
+        },
+        {
+          "time": 89.3,
+          "text": "Crumbling down so beautifully"
+        },
+        {
+          "time": 90.7,
+          "text": "Let it burn, もう少しだけ"
+        },
+        {
+          "time": 92.7,
+          "text": "Just one more dance, もう一曲"
+        },
+        {
+          "time": 94.4,
+          "text": "Just one more lie, もう一つだけ"
+        },
+        {
+          "time": 96.2,
+          "text": "Hold me close, 離さないで"
+        },
+        {
+          "time": 98.6,
+          "text": "Until the silence"
+        },
+        {
+          "time": 102.1,
+          "text": "We're perfectly fine, 大丈夫"
+        },
+        {
+          "time": 104.5,
+          "text": "Nothing to see here, 心配しないで"
+        },
+        {
+          "time": 108.4,
+          "text": "Laugh it off, 笑い飛ばせ"
+        },
+        {
+          "time": 111.2,
+          "text": "But deep inside we're burning bright"
+        },
+        {
+          "time": 114.5,
+          "text": "燃え尽きるまで let's dance tonight"
+        },
+        {
+          "time": 130.4,
+          "text": "No way back, no way back"
+        },
+        {
+          "time": 163.4,
+          "text": "We're perfectly fine, 大丈夫"
+        },
+        {
+          "time": 166.5,
+          "text": "Nothing to see here, 心配しないで"
+        },
+        {
+          "time": 170.4,
+          "text": "Laugh it off, 笑い飛ばせ"
+        },
+        {
+          "time": 173.2,
+          "text": "But deep inside we're burning bright"
+        },
+        {
+          "time": 176.5,
+          "text": "燃え尽きるまで let's dance tonight"
+        },
+        {
+          "time": 182.9,
+          "text": "燃え尽きるまで dance with me tonight"
+        }
+      ]
+    },
+    {
+      "title": "君のいない朝",
+      "file": "kimi_no_inai_asa.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/kimi_no_inai_asa.mp3",
+      "cover": "covers/kimi_no_inai_asa.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/kimi_no_inai_asa.jpg",
+      "genre": "ballad",
+      "bpm": 68,
+      "album": null,
+      "comment": "70sフォークロック調の喪失バラード。冒頭からタイトルが歌われ、ベッドの白さ、外せない壁の写真、雨に濡れた駅での別れ際、最後は「愛してたと」の繰り返しで嗚咽寸前まで運ぶ哀愁メジャー。ピアノとアコギ主体、男声リードに薄いコーラスを重ねる構成。",
+      "lyrics_lrc": "[0:16.7]君のいない朝\n[0:31.0]二人だけの夜は帰らない\n[0:41.8]空気が違う ベッドの白さが\n[0:49.7]こんなに寂しい 思えなかった\n[0:56.0]壁の写真を 外せないまま\n[1:04.0]時間が流れてく\n[1:10.8]ああ もう君のいない朝を\n[1:18.5]生きてゆく\n[1:24.2]ああ もう声も知らない\n[1:30.4]誰かになるんだね\n[1:52.0]君が好きだった この季節も\n[1:59.6]僕を置いて 過ぎてゆく\n[2:08.7]雨に濡れた駅で\n[2:14.5]さよならを言ったね\n[2:22.8]後ろ姿に\n[2:27.1]僕は言葉を失くした\n[2:36.8]ああ もう君のいない朝が\n[2:43.5]溢れてく\n[2:50.9]ああ もう届かない\n[2:54.6]声だけが響いてる\n[3:04.5]愛してたと\n[3:11.6]愛してたと",
+      "lyrics_parsed": [
+        {
+          "time": 16.7,
+          "text": "君のいない朝"
+        },
+        {
+          "time": 31,
+          "text": "二人だけの夜は帰らない"
+        },
+        {
+          "time": 41.8,
+          "text": "空気が違う ベッドの白さが"
+        },
+        {
+          "time": 49.7,
+          "text": "こんなに寂しい 思えなかった"
+        },
+        {
+          "time": 56,
+          "text": "壁の写真を 外せないまま"
+        },
+        {
+          "time": 64,
+          "text": "時間が流れてく"
+        },
+        {
+          "time": 70.8,
+          "text": "ああ もう君のいない朝を"
+        },
+        {
+          "time": 78.5,
+          "text": "生きてゆく"
+        },
+        {
+          "time": 84.2,
+          "text": "ああ もう声も知らない"
+        },
+        {
+          "time": 90.4,
+          "text": "誰かになるんだね"
+        },
+        {
+          "time": 112,
+          "text": "君が好きだった この季節も"
+        },
+        {
+          "time": 119.6,
+          "text": "僕を置いて 過ぎてゆく"
+        },
+        {
+          "time": 128.7,
+          "text": "雨に濡れた駅で"
+        },
+        {
+          "time": 134.5,
+          "text": "さよならを言ったね"
+        },
+        {
+          "time": 142.8,
+          "text": "後ろ姿に"
+        },
+        {
+          "time": 147.1,
+          "text": "僕は言葉を失くした"
+        },
+        {
+          "time": 156.8,
+          "text": "ああ もう君のいない朝が"
+        },
+        {
+          "time": 163.5,
+          "text": "溢れてく"
+        },
+        {
+          "time": 170.9,
+          "text": "ああ もう届かない"
+        },
+        {
+          "time": 174.6,
+          "text": "声だけが響いてる"
+        },
+        {
+          "time": 184.5,
+          "text": "愛してたと"
+        },
+        {
+          "time": 191.6,
+          "text": "愛してたと"
+        }
+      ]
+    },
+    {
+      "title": "黒鳳蝶ヴィヤラビ",
+      "file": "kurohouchou_viyarabi.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/kurohouchou_viyarabi.mp3",
+      "cover": "covers/kurohouchou_viyarabi.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/kurohouchou_viyarabi.jpg",
+      "genre": "rock",
+      "bpm": 129,
+      "album": null,
+      "comment": "2000sラテンロックの哀愁。スパニッシュギター主導、ストリングスとフラメンコ要素を重ねた4:30の大曲。サビは謎の造語フック「ヴィヤラビ ナーラ」をそのままタイトルに昇格。男声リードの情熱的な高音、終盤39秒のクライマックスで蝶が舞い上がる。",
+      "lyrics_lrc": "[0:50.3]紅く焼けた 月の下で\n[0:56.0]舞い踊る 黒鳳蝶\n[1:03.7]夢か現か 二度と戻れぬ\n[1:10.4]あの夏の夜風\n[1:18.7]潮騒が誘う 異国の港\n[1:25.7]銀の鎖を ほどいて\n[1:34.2]ヴィヤラビ ナーラ 響け\n[1:38.6]胸の奥の 鼓動よ\n[1:42.0]散りゆく花の 香りまとい\n[1:48.5]今宵 蝶になれ\n[1:59.8]追憶という 鳥籠の中\n[2:08.3]忘れ得ぬ 君の声\n[2:14.7]潮の匂い 漁火の奥\n[2:22.5]あの日の 微笑み\n[2:29.7]波しぶきが誘う 遠い島影\n[2:38.0]心の鍵を ほどいて\n[2:45.7]ヴィヤラビ ナーラ 響け\n[2:49.9]胸の奥の 鼓動よ\n[2:53.0]散りゆく花の 香りまとい\n[2:59.8]今宵 蝶になれ\n[3:34.4]夢の縁を 歩いてゆく\n[3:38.5]黒鳳蝶 道しるべ\n[3:47.5]ヴィヤラビ ナーラ 響け\n[3:51.7]胸の奥の 鼓動よ\n[3:55.0]散りゆく花の 香りまとい\n[4:01.5]今宵 蝶になれ",
+      "lyrics_parsed": [
+        {
+          "time": 50.3,
+          "text": "紅く焼けた 月の下で"
+        },
+        {
+          "time": 56,
+          "text": "舞い踊る 黒鳳蝶"
+        },
+        {
+          "time": 63.7,
+          "text": "夢か現か 二度と戻れぬ"
+        },
+        {
+          "time": 70.4,
+          "text": "あの夏の夜風"
+        },
+        {
+          "time": 78.7,
+          "text": "潮騒が誘う 異国の港"
+        },
+        {
+          "time": 85.7,
+          "text": "銀の鎖を ほどいて"
+        },
+        {
+          "time": 94.2,
+          "text": "ヴィヤラビ ナーラ 響け"
+        },
+        {
+          "time": 98.6,
+          "text": "胸の奥の 鼓動よ"
+        },
+        {
+          "time": 102,
+          "text": "散りゆく花の 香りまとい"
+        },
+        {
+          "time": 108.5,
+          "text": "今宵 蝶になれ"
+        },
+        {
+          "time": 119.8,
+          "text": "追憶という 鳥籠の中"
+        },
+        {
+          "time": 128.3,
+          "text": "忘れ得ぬ 君の声"
+        },
+        {
+          "time": 134.7,
+          "text": "潮の匂い 漁火の奥"
+        },
+        {
+          "time": 142.5,
+          "text": "あの日の 微笑み"
+        },
+        {
+          "time": 149.7,
+          "text": "波しぶきが誘う 遠い島影"
+        },
+        {
+          "time": 158,
+          "text": "心の鍵を ほどいて"
+        },
+        {
+          "time": 165.7,
+          "text": "ヴィヤラビ ナーラ 響け"
+        },
+        {
+          "time": 169.9,
+          "text": "胸の奥の 鼓動よ"
+        },
+        {
+          "time": 173,
+          "text": "散りゆく花の 香りまとい"
+        },
+        {
+          "time": 179.8,
+          "text": "今宵 蝶になれ"
+        },
+        {
+          "time": 214.4,
+          "text": "夢の縁を 歩いてゆく"
+        },
+        {
+          "time": 218.5,
+          "text": "黒鳳蝶 道しるべ"
+        },
+        {
+          "time": 227.5,
+          "text": "ヴィヤラビ ナーラ 響け"
+        },
+        {
+          "time": 231.7,
+          "text": "胸の奥の 鼓動よ"
+        },
+        {
+          "time": 235,
+          "text": "散りゆく花の 香りまとい"
+        },
+        {
+          "time": 241.5,
+          "text": "今宵 蝶になれ"
+        }
+      ]
+    },
+    {
+      "title": "Be Real",
+      "file": "be_real.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/be_real.mp3",
+      "cover": "covers/be_real.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/be_real.jpg",
+      "genre": "pop",
+      "bpm": 129,
+      "album": null,
+      "comment": "社会風刺コメディ第1弾。某即時撮影SNSで職場をうっかり撮ってしまい、お客様情報・営業ノルマ・取引先リストまで全部映ってしまう若手バンカーの自業自得ブラックコメディ。終盤は炎上した本人を周りも一斉に撮影し始めるメタ皮肉構造で「マナーよりリアル」の暴力連鎖を描く。電子ポップ＋通知音pluck、spoken-sung Pre-Chorusで現代SNS世代の語り口を再現。",
+      "lyrics_lrc": "[0:00.0]ピロン♪ ピロン♪\n[0:01.5]さあ 撮影タイムだ\n[0:08.8]入って三年目 ちょっと出来る男\n[0:12.7]お客様にも 評判いいって 多分\n[0:16.9]SNSフォロワー 八千人\n[0:19.8]イケてる若手 それが僕\n[0:24.0]ポケットの中で 通知が鳴る\n[0:26.3]ピロン ピロン にふんのカウントダウン\n[0:28.3]リアルを撮らなきゃ 友達みんなが待ってる\n[0:31.8]今この瞬間 撮らなきゃ ねえ\n[0:35.6]撮ったよ 撮ったよ 完璧なリアル\n[0:39.0]顔の横には お客様の こうざばんごう\n[0:43.4]撮ったよ 撮ったよ 自慢の職場\n[0:46.5]机にはマル秘 棚には じんじひょうか\n[0:50.3]通知が次々 いいねの嵐\n[0:52.4]気分上々 トレンド入り\n[0:54.5]ふと隣 かちょうがスマホを覗く\n[0:56.4]「ちょっと君 これは何だ」\n[0:57.9]えー 何が問題ですか？\n[0:59.8]みんな撮ってるし リアルが大事だし\n[1:01.9]だって BeReal だし いまどきだし\n[1:04.6]ピロン ピロン わからないんですか？\n[1:05.9]だって自分が上げないと 友達の投稿が見れない\n[1:09.4]にじゅうよじかん 元カノの今 親友の飯\n[1:13.2]ライバルの彼女が どこにいるかも知りたい\n[1:16.8]だから僕も 上げなきゃ ねえ\n[1:20.0]夜の電車で スマホを見る\n[1:24.6]SNSで 拡散されてる\n[1:27.7]僕の顔と 銀行のロゴ\n[1:31.0]えいぎょうノルマの ホワイトボード\n[1:35.1]取引先のリスト 全国民が見てる\n[1:39.0]親に見せられない でも世界に見せた\n[1:46.4]気づけば まわりも スマホを構えてる\n[1:50.2]炎上してる 僕を 必死で撮ってる\n[1:53.9]通知音が 一斉に 鳴ったから\n[1:55.9]面白い被写体 見逃せないから\n[1:58.0]マナーより リアルが 大事だから\n[2:01.9]ピロン ピロン みんなで 撮ってる\n[2:05.6]撮らないで 撮らないで もう何も\n[2:09.1]通知音はもう 鳴らないで\n[2:13.4]映さないで 映さないで 何もかも\n[2:16.7]リアルすぎた にふんの 悲劇\n[2:20.5]ねえ 何が悪かったの？\n[2:24.3]ねえ 教えてよ\n[2:27.5]ピロン... ピロン... ピロン...\n[2:29.9]さあ 撮影タイムだ...",
+      "lyrics_parsed": [
+        {
+          "time": 0,
+          "text": "ピロン♪ ピロン♪"
+        },
+        {
+          "time": 1.5,
+          "text": "さあ 撮影タイムだ"
+        },
+        {
+          "time": 8.8,
+          "text": "入って三年目 ちょっと出来る男"
+        },
+        {
+          "time": 12.7,
+          "text": "お客様にも 評判いいって 多分"
+        },
+        {
+          "time": 16.9,
+          "text": "SNSフォロワー 八千人"
+        },
+        {
+          "time": 19.8,
+          "text": "イケてる若手 それが僕"
+        },
+        {
+          "time": 24,
+          "text": "ポケットの中で 通知が鳴る"
+        },
+        {
+          "time": 26.3,
+          "text": "ピロン ピロン にふんのカウントダウン"
+        },
+        {
+          "time": 28.3,
+          "text": "リアルを撮らなきゃ 友達みんなが待ってる"
+        },
+        {
+          "time": 31.8,
+          "text": "今この瞬間 撮らなきゃ ねえ"
+        },
+        {
+          "time": 35.6,
+          "text": "撮ったよ 撮ったよ 完璧なリアル"
+        },
+        {
+          "time": 39,
+          "text": "顔の横には お客様の こうざばんごう"
+        },
+        {
+          "time": 43.4,
+          "text": "撮ったよ 撮ったよ 自慢の職場"
+        },
+        {
+          "time": 46.5,
+          "text": "机にはマル秘 棚には じんじひょうか"
+        },
+        {
+          "time": 50.3,
+          "text": "通知が次々 いいねの嵐"
+        },
+        {
+          "time": 52.4,
+          "text": "気分上々 トレンド入り"
+        },
+        {
+          "time": 54.5,
+          "text": "ふと隣 かちょうがスマホを覗く"
+        },
+        {
+          "time": 56.4,
+          "text": "「ちょっと君 これは何だ」"
+        },
+        {
+          "time": 57.9,
+          "text": "えー 何が問題ですか？"
+        },
+        {
+          "time": 59.8,
+          "text": "みんな撮ってるし リアルが大事だし"
+        },
+        {
+          "time": 61.9,
+          "text": "だって BeReal だし いまどきだし"
+        },
+        {
+          "time": 64.6,
+          "text": "ピロン ピロン わからないんですか？"
+        },
+        {
+          "time": 65.9,
+          "text": "だって自分が上げないと 友達の投稿が見れない"
+        },
+        {
+          "time": 69.4,
+          "text": "にじゅうよじかん 元カノの今 親友の飯"
+        },
+        {
+          "time": 73.2,
+          "text": "ライバルの彼女が どこにいるかも知りたい"
+        },
+        {
+          "time": 76.8,
+          "text": "だから僕も 上げなきゃ ねえ"
+        },
+        {
+          "time": 80,
+          "text": "夜の電車で スマホを見る"
+        },
+        {
+          "time": 84.6,
+          "text": "SNSで 拡散されてる"
+        },
+        {
+          "time": 87.7,
+          "text": "僕の顔と 銀行のロゴ"
+        },
+        {
+          "time": 91,
+          "text": "えいぎょうノルマの ホワイトボード"
+        },
+        {
+          "time": 95.1,
+          "text": "取引先のリスト 全国民が見てる"
+        },
+        {
+          "time": 99,
+          "text": "親に見せられない でも世界に見せた"
+        },
+        {
+          "time": 106.4,
+          "text": "気づけば まわりも スマホを構えてる"
+        },
+        {
+          "time": 110.2,
+          "text": "炎上してる 僕を 必死で撮ってる"
+        },
+        {
+          "time": 113.9,
+          "text": "通知音が 一斉に 鳴ったから"
+        },
+        {
+          "time": 115.9,
+          "text": "面白い被写体 見逃せないから"
+        },
+        {
+          "time": 118,
+          "text": "マナーより リアルが 大事だから"
+        },
+        {
+          "time": 121.9,
+          "text": "ピロン ピロン みんなで 撮ってる"
+        },
+        {
+          "time": 125.6,
+          "text": "撮らないで 撮らないで もう何も"
+        },
+        {
+          "time": 129.1,
+          "text": "通知音はもう 鳴らないで"
+        },
+        {
+          "time": 133.4,
+          "text": "映さないで 映さないで 何もかも"
+        },
+        {
+          "time": 136.7,
+          "text": "リアルすぎた にふんの 悲劇"
+        },
+        {
+          "time": 140.5,
+          "text": "ねえ 何が悪かったの？"
+        },
+        {
+          "time": 144.3,
+          "text": "ねえ 教えてよ"
+        },
+        {
+          "time": 147.5,
+          "text": "ピロン... ピロン... ピロン..."
+        },
+        {
+          "time": 149.9,
+          "text": "さあ 撮影タイムだ..."
+        }
+      ]
+    },
+    {
+      "title": "Sleeves of Dew",
+      "file": "sleeves_of_dew.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/sleeves_of_dew.mp3",
+      "cover": "covers/sleeves_of_dew.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/sleeves_of_dew.jpg",
+      "genre": "ballad",
+      "bpm": 72,
+      "album": "Sleeves of Dew",
+      "comment": "平安雅楽編成の透明感バラード英語版。御簾越しに月を仰ぐ女性の独白、千年越しの片想いを伸びやかな英語ボーカルで歌い上げる。龍笛・笙・楽箏・楽琵琶・鞨鼓の宮廷音色、もののあはれを核にした静謐な世界。日本語版「みすの月」と二視点ペア構成。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
+    },
+    {
+      "title": "みすの月",
+      "file": "misu_no_tsuki.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/misu_no_tsuki.mp3",
+      "cover": "covers/misu_no_tsuki.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/misu_no_tsuki.jpg",
+      "genre": "ballad",
+      "bpm": 72,
+      "album": "Sleeves of Dew",
+      "comment": "平安雅楽編成の透明感バラード日本語版。ちとせの秋ともみじを越える千年越しの祈りを古語混じりひらがなで紡ぐ。同じメロディに英語版「Sleeves of Dew」と日本語版で二視点ペアを成す。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
     }
   ]
 }
