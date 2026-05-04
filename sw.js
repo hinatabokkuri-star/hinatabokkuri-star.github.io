@@ -77,11 +77,15 @@ self.addEventListener('fetch', event => {
   // HTML（ナビゲーション）はSWを素通り（常に最新取得）
   if (request.mode === 'navigate') return;
 
-  // 音楽・ジャケ・Suno CDN → Range対応の安定キャッシュ
-  const isMusic = url.pathname.startsWith('/music/')
-    || url.pathname.startsWith('/covers/')
+  // 音楽 mp3 はSW介入しない（ネイティブのRangeで安定再生）
+  // 旧実装はRange時に全体DL→sliceしていたため、Androidで大きいファイルが
+  // audio要素のタイムアウトを超えてerror→自動スキップを誘発していた
+  if (url.pathname.startsWith('/music/')) return;
+
+  // ジャケ画像・Suno CDN → 安定キャッシュ（Range無関係）
+  const isCoverLike = url.pathname.startsWith('/covers/')
     || url.hostname.includes('suno.ai');
-  if (isMusic) {
+  if (isCoverLike) {
     event.respondWith(handleMusicRequest(request));
     return;
   }
