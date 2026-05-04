@@ -2544,14 +2544,32 @@ function showError(msg) {
   errorToast.classList.add('show');
   setTimeout(() => errorToast.classList.remove('show'), 4000);
 }
-_audioA.addEventListener('error', (e) => {
-  if (e.target !== audio) return;
+// Cascade guard: if N consecutive tracks error in a row, stop auto-skipping.
+// Resets to 0 once a track plays past 1s (see timeupdate handlers).
+let consecutiveErrorCount = 0;
+const MAX_AUTO_SKIP = 3;
+function handlePlayError(targetEl) {
+  if (targetEl !== audio) return;
   if (currentIdx < 0) return;
   const s = queue[currentIdx];
+  consecutiveErrorCount++;
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'play_error', {
+      track_file: s?.file || 'unknown',
+      error_code: targetEl.error?.code,
+      consecutive: consecutiveErrorCount,
+    });
+  }
+  if (consecutiveErrorCount >= MAX_AUTO_SKIP) {
+    showError(`連続再生エラー (${consecutiveErrorCount}回)。停止しました`);
+    audio.pause();
+    consecutiveErrorCount = 0;
+    return;
+  }
   showError(`再生エラー: ${s?.title || '不明'} をスキップ`);
-  if (typeof gtag !== 'undefined') gtag('event', 'play_error', { track_file: s?.file || 'unknown' });
   setTimeout(() => window.playNext ? window.playNext() : playNext(), 500);
-});
+}
+_audioA.addEventListener('error', (e) => handlePlayError(e.target));
 
 // Volume slider
 const volumeSlider = document.getElementById('volumeSlider');
@@ -2715,6 +2733,7 @@ _audioA.addEventListener('timeupdate', (e) => {
   document.getElementById('npTimeCurrent').textContent = fmtTime(audio.currentTime);
   updateTotalTime();
   updateLyric(audio.currentTime);
+  if (consecutiveErrorCount > 0 && audio.currentTime > 1) consecutiveErrorCount = 0;
 });
 ['loadedmetadata', 'durationchange', 'canplay', 'loadeddata'].forEach(evt => {
   _audioA.addEventListener(evt, (e) => {
@@ -2818,19 +2837,13 @@ function attachMirrorListeners(el) {
     npProgressFill.style.width = pct + '%';
     document.getElementById('npTimeCurrent').textContent = fmtTime(this.currentTime);
     updateLyric(this.currentTime);
+    if (consecutiveErrorCount > 0 && this.currentTime > 1) consecutiveErrorCount = 0;
   });
   el.addEventListener('loadedmetadata', function() {
     if (this !== audio) return;
     document.getElementById('npTimeTotal').textContent = fmtTime(this.duration);
   });
-  el.addEventListener('error', function() {
-    if (this !== audio) return;
-    if (currentIdx < 0) return;
-    const s = queue[currentIdx];
-    showError(`再生エラー: ${s?.title || '不明'} をスキップ`);
-    if (typeof gtag !== 'undefined') gtag('event', 'play_error', { track_file: s?.file || 'unknown' });
-    setTimeout(() => window.playNext ? window.playNext() : playNext(), 500);
-  });
+  el.addEventListener('error', function() { handlePlayError(this); });
 }
 attachMirrorListeners(audioB);
 
