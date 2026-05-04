@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated": "2026-05-03T14:03:08.760Z",
+  "updated": "2026-05-04T13:28:09.277Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 61,
+  "count": 62,
   "songs": [
     {
       "title": "雪の底",
@@ -7708,8 +7708,125 @@
       "bpm": 72,
       "album": "Sleeves of Dew",
       "comment": "平安雅楽編成の透明感バラード英語版。御簾越しに月を仰ぐ女性の独白、千年越しの片想いを伸びやかな英語ボーカルで歌い上げる。龍笛・笙・楽箏・楽琵琶・鞨鼓の宮廷音色、もののあはれを核にした静謐な世界。日本語版「みすの月」と二視点ペア構成。",
-      "lyrics_lrc": "",
-      "lyrics_parsed": []
+      "lyrics_lrc": "[0:25.0][Verse 1]\n[0:25.0]Pale moon above the silken screen\n[0:32.1]A whisper from the inner court\n[0:39.9]The koto trembles, soft and low\n[0:45.0]Sleeves of silk, heavy with dew\n[0:52.7][Pre-Chorus]\n[0:52.7]A letter sealed in plum perfume\n[0:59.7]Will it reach you, will it find your hand\n[1:07.3][Chorus]\n[1:07.3]Through a thousand autumn leaves\n[1:13.7]Through a thousand winter moons\n[1:20.1]I am singing, only for you\n[1:28.0]In the empire of the falling rain\n[1:50.9][Verse 2]\n[1:50.9]Brushstrokes fading on the page\n[1:57.4]Cherry petals on the corridor\n[2:05.1]The bell at dusk, a single note\n[2:11.1]And the screen between us, still\n[2:17.8][Pre-Chorus]\n[2:17.8]A poem folded in your sleeve\n[2:24.1]Will you read me, will you understand\n[2:32.6][Chorus]\n[2:32.6]Through a thousand autumn leaves\n[2:38.3]Through a thousand winter moons\n[2:45.2]I am singing, only for you\n[2:53.4]In the empire of the falling rain\n[3:15.5][Bridge]\n[3:15.5]Everything that fades is beautiful\n[3:19.3]Everything that breaks is dear\n[3:22.4]Time is a river running silent\n[3:26.5]And love is the moon upon its face\n[3:32.9][Chorus]\n[3:32.9]Through a thousand autumn leaves\n[3:39.2]Through a thousand winter moons\n[3:46.2]I am singing, only for you\n[3:54.1]In the empire of the falling rain\n[4:00.4]I will always sing for you",
+      "lyrics_parsed": [
+        {
+          "time": 25,
+          "text": "Pale moon above the silken screen"
+        },
+        {
+          "time": 32.1,
+          "text": "A whisper from the inner court"
+        },
+        {
+          "time": 39.9,
+          "text": "The koto trembles, soft and low"
+        },
+        {
+          "time": 45,
+          "text": "Sleeves of silk, heavy with dew"
+        },
+        {
+          "time": 52.7,
+          "text": "A letter sealed in plum perfume"
+        },
+        {
+          "time": 59.7,
+          "text": "Will it reach you, will it find your hand"
+        },
+        {
+          "time": 67.3,
+          "text": "Through a thousand autumn leaves"
+        },
+        {
+          "time": 73.7,
+          "text": "Through a thousand winter moons"
+        },
+        {
+          "time": 80.1,
+          "text": "I am singing, only for you"
+        },
+        {
+          "time": 88,
+          "text": "In the empire of the falling rain"
+        },
+        {
+          "time": 110.9,
+          "text": "Brushstrokes fading on the page"
+        },
+        {
+          "time": 117.4,
+          "text": "Cherry petals on the corridor"
+        },
+        {
+          "time": 125.1,
+          "text": "The bell at dusk, a single note"
+        },
+        {
+          "time": 131.1,
+          "text": "And the screen between us, still"
+        },
+        {
+          "time": 137.8,
+          "text": "A poem folded in your sleeve"
+        },
+        {
+          "time": 144.1,
+          "text": "Will you read me, will you understand"
+        },
+        {
+          "time": 152.6,
+          "text": "Through a thousand autumn leaves"
+        },
+        {
+          "time": 158.3,
+          "text": "Through a thousand winter moons"
+        },
+        {
+          "time": 165.2,
+          "text": "I am singing, only for you"
+        },
+        {
+          "time": 173.4,
+          "text": "In the empire of the falling rain"
+        },
+        {
+          "time": 195.5,
+          "text": "Everything that fades is beautiful"
+        },
+        {
+          "time": 199.3,
+          "text": "Everything that breaks is dear"
+        },
+        {
+          "time": 202.4,
+          "text": "Time is a river running silent"
+        },
+        {
+          "time": 206.5,
+          "text": "And love is the moon upon its face"
+        },
+        {
+          "time": 212.9,
+          "text": "Through a thousand autumn leaves"
+        },
+        {
+          "time": 219.2,
+          "text": "Through a thousand winter moons"
+        },
+        {
+          "time": 226.2,
+          "text": "I am singing, only for you"
+        },
+        {
+          "time": 234.1,
+          "text": "In the empire of the falling rain"
+        },
+        {
+          "time": 240.4,
+          "text": "I will always sing for you"
+        }
+      ]
     },
     {
       "title": "みすの月",
@@ -7721,8 +7838,299 @@
       "bpm": 72,
       "album": "Sleeves of Dew",
       "comment": "平安雅楽編成の透明感バラード日本語版。ちとせの秋ともみじを越える千年越しの祈りを古語混じりひらがなで紡ぐ。同じメロディに英語版「Sleeves of Dew」と日本語版で二視点ペアを成す。",
-      "lyrics_lrc": "",
-      "lyrics_parsed": []
+      "lyrics_lrc": "[0:24.7][Verse 1]\n[0:24.7]みすのうえ あおき月よ\n[0:31.4]おくのみやに ささやくこえ\n[0:38.3]ことのねは ふるえながら\n[0:45.9]ぬれておもき きぬのそで\n[0:52.9][Pre-Chorus]\n[0:52.9]うめのかおり とじたふみ\n[0:59.7]とどくだろうか あなたへと\n[1:06.9][Chorus]\n[1:06.9]ちとせのあき もみじ越え\n[1:15.0]ちとせのふゆ つきを越え\n[1:21.4]ただあなたへ うたをおくる\n[1:29.1]あめふるみやこ のなかで\n[1:51.4][Verse 2]\n[1:51.4]紙のうえに 筆あとうすれ\n[1:58.3]ろうにちりゆく さくらびら\n[2:05.5]ゆうべのかねの ひとつのね\n[2:11.6]ふたりへだてる みすはまだ\n[2:18.3][Pre-Chorus]\n[2:18.3]あなたのそでに おりしうた\n[2:25.5]よんでくれるか わかるだろうか\n[2:33.0][Chorus]\n[2:33.0]ちとせのあき もみじ越え\n[2:40.3]ちとせのふゆ つきを越え\n[2:47.3]ただあなたへ うたをおくる\n[2:55.2]あめふるみやこ のなかで\n[3:19.4][Bridge]\n[3:19.4]ちりゆくものは うるわしく\n[3:26.5]こわれるものは いとしくて\n[3:33.8]ときはしずかな ながれのかわ\n[3:40.3]こいはそのうえに やどる月\n[3:51.9][Chorus]\n[3:51.9]ちとせのあき もみじ越え\n[4:00.0]ちとせのふゆ つきを越え\n[4:06.3]ただあなたへ うたをおくる\n[4:13.9]あめふるみやこ のなかで\n[4:24.7]いつまでも うたいつづける",
+      "lyrics_parsed": [
+        {
+          "time": 24.7,
+          "text": "みすのうえ あおき月よ"
+        },
+        {
+          "time": 31.4,
+          "text": "おくのみやに ささやくこえ"
+        },
+        {
+          "time": 38.3,
+          "text": "ことのねは ふるえながら"
+        },
+        {
+          "time": 45.9,
+          "text": "ぬれておもき きぬのそで"
+        },
+        {
+          "time": 52.9,
+          "text": "うめのかおり とじたふみ"
+        },
+        {
+          "time": 59.7,
+          "text": "とどくだろうか あなたへと"
+        },
+        {
+          "time": 66.9,
+          "text": "ちとせのあき もみじ越え"
+        },
+        {
+          "time": 75,
+          "text": "ちとせのふゆ つきを越え"
+        },
+        {
+          "time": 81.4,
+          "text": "ただあなたへ うたをおくる"
+        },
+        {
+          "time": 89.1,
+          "text": "あめふるみやこ のなかで"
+        },
+        {
+          "time": 111.4,
+          "text": "紙のうえに 筆あとうすれ"
+        },
+        {
+          "time": 118.3,
+          "text": "ろうにちりゆく さくらびら"
+        },
+        {
+          "time": 125.5,
+          "text": "ゆうべのかねの ひとつのね"
+        },
+        {
+          "time": 131.6,
+          "text": "ふたりへだてる みすはまだ"
+        },
+        {
+          "time": 138.3,
+          "text": "あなたのそでに おりしうた"
+        },
+        {
+          "time": 145.5,
+          "text": "よんでくれるか わかるだろうか"
+        },
+        {
+          "time": 153,
+          "text": "ちとせのあき もみじ越え"
+        },
+        {
+          "time": 160.3,
+          "text": "ちとせのふゆ つきを越え"
+        },
+        {
+          "time": 167.3,
+          "text": "ただあなたへ うたをおくる"
+        },
+        {
+          "time": 175.2,
+          "text": "あめふるみやこ のなかで"
+        },
+        {
+          "time": 199.4,
+          "text": "ちりゆくものは うるわしく"
+        },
+        {
+          "time": 206.5,
+          "text": "こわれるものは いとしくて"
+        },
+        {
+          "time": 213.8,
+          "text": "ときはしずかな ながれのかわ"
+        },
+        {
+          "time": 220.3,
+          "text": "こいはそのうえに やどる月"
+        },
+        {
+          "time": 231.9,
+          "text": "ちとせのあき もみじ越え"
+        },
+        {
+          "time": 240,
+          "text": "ちとせのふゆ つきを越え"
+        },
+        {
+          "time": 246.3,
+          "text": "ただあなたへ うたをおくる"
+        },
+        {
+          "time": 253.9,
+          "text": "あめふるみやこ のなかで"
+        },
+        {
+          "time": 264.7,
+          "text": "いつまでも うたいつづける"
+        }
+      ]
+    },
+    {
+      "title": "白い約束",
+      "file": "shiroi_yakusoku.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/shiroi_yakusoku.mp3",
+      "cover": "covers/shiroi_yakusoku.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/shiroi_yakusoku.jpg",
+      "genre": "ballad",
+      "bpm": 82,
+      "album": null,
+      "comment": "2000年代J-popテイストの冬の卒業バラード。性別をぼかした「キミ」と「ふたり」が冬の校舎で交わした約束、十年後の二月に再会できるなら——というノスタルジーの王道。ピアノ主導でしっとり、最後は雪の中の祈りで閉じる。",
+      "lyrics_lrc": "[0:13.7][Verse 1]\n[0:13.7]凍えた朝の校舎で\n[0:20.5]白い息がただよう\n[0:26.5]窓ガラス曇らせて\n[0:31.2]名前書いてふざけた\n[0:39.0]ストーブの前に座って\n[0:43.9]何時間でも話せたね\n[0:50.1]たわいない毎日が ずっと続くと思ってた\n[1:02.6][Pre-Chorus]\n[1:02.6]突然の知らせに ことばをなくした\n[1:08.5]最後の冬になるなんて 信じられなかった\n[1:16.9][Chorus]\n[1:16.9]キミと冬の終わり\n[1:22.6]交わした約束 忘れない\n[1:29.3]凍えた指先 つなぎ合わせた帰り道\n[1:41.1]十年後の二月に もう一度会えるなら\n[1:47.6]変わらない笑顔で きっと\n[1:51.9]最高の思い出を\n[2:00.8][Verse 2]\n[2:00.8]マフラーに埋めた顔 涙を隠してたんだろ\n[2:06.8]泣き虫だったキミも ひとりで歩けるよ\n[2:12.5]卒業式のあの日 校庭に降り積もる雪\n[2:18.0]踏みしめた足跡が ふたつ並んでた\n[2:24.3][Pre-Chorus]\n[2:24.3]言いたかったことばは 雪に溶けていった\n[2:29.5]それでも伝わってると 信じてたんだ\n[2:38.3][Chorus]\n[2:38.3]キミと冬の終わり\n[2:43.6]交わした約束 忘れない\n[2:49.9]吐く息白く 響いた笑い声\n[2:58.8]十年後の二月に もう一度会えるなら\n[3:05.4]お互いの夢の話 きっと\n[3:10.4]聞かせ合おう\n[3:15.3][Bridge]\n[3:15.3]時が流れて 季節がめぐって\n[3:23.4]あの日のことばだけが まだ胸に残ってる\n[3:30.0]強くなれただろうか キミに見せられるかな\n[3:36.0]凍えた窓の向こう 思い出が手を振る\n[3:44.1][Final Chorus]\n[3:44.1]キミと冬の終わり\n[3:49.6]交わした約束 忘れない\n[3:56.2]あれがふたりの 一番きらめいた日々\n[4:05.0]十年後の二月に もう一度会えるなら\n[4:11.3]変わらない場所で きっと\n[4:14.4]最高の思い出を また\n[4:22.0][Outro]\n[4:22.0]雪が降ってる いまも変わらず\n[4:31.0]あの冬の キミの笑顔のように\n[4:37.0]最高の思い出を ありがとう",
+      "lyrics_parsed": [
+        {
+          "time": 13.7,
+          "text": "凍えた朝の校舎で"
+        },
+        {
+          "time": 20.5,
+          "text": "白い息がただよう"
+        },
+        {
+          "time": 26.5,
+          "text": "窓ガラス曇らせて"
+        },
+        {
+          "time": 31.2,
+          "text": "名前書いてふざけた"
+        },
+        {
+          "time": 39,
+          "text": "ストーブの前に座って"
+        },
+        {
+          "time": 43.9,
+          "text": "何時間でも話せたね"
+        },
+        {
+          "time": 50.1,
+          "text": "たわいない毎日が ずっと続くと思ってた"
+        },
+        {
+          "time": 62.6,
+          "text": "突然の知らせに ことばをなくした"
+        },
+        {
+          "time": 68.5,
+          "text": "最後の冬になるなんて 信じられなかった"
+        },
+        {
+          "time": 76.9,
+          "text": "キミと冬の終わり"
+        },
+        {
+          "time": 82.6,
+          "text": "交わした約束 忘れない"
+        },
+        {
+          "time": 89.3,
+          "text": "凍えた指先 つなぎ合わせた帰り道"
+        },
+        {
+          "time": 101.1,
+          "text": "十年後の二月に もう一度会えるなら"
+        },
+        {
+          "time": 107.6,
+          "text": "変わらない笑顔で きっと"
+        },
+        {
+          "time": 111.9,
+          "text": "最高の思い出を"
+        },
+        {
+          "time": 120.8,
+          "text": "マフラーに埋めた顔 涙を隠してたんだろ"
+        },
+        {
+          "time": 126.8,
+          "text": "泣き虫だったキミも ひとりで歩けるよ"
+        },
+        {
+          "time": 132.5,
+          "text": "卒業式のあの日 校庭に降り積もる雪"
+        },
+        {
+          "time": 138,
+          "text": "踏みしめた足跡が ふたつ並んでた"
+        },
+        {
+          "time": 144.3,
+          "text": "言いたかったことばは 雪に溶けていった"
+        },
+        {
+          "time": 149.5,
+          "text": "それでも伝わってると 信じてたんだ"
+        },
+        {
+          "time": 158.3,
+          "text": "キミと冬の終わり"
+        },
+        {
+          "time": 163.6,
+          "text": "交わした約束 忘れない"
+        },
+        {
+          "time": 169.9,
+          "text": "吐く息白く 響いた笑い声"
+        },
+        {
+          "time": 178.8,
+          "text": "十年後の二月に もう一度会えるなら"
+        },
+        {
+          "time": 185.4,
+          "text": "お互いの夢の話 きっと"
+        },
+        {
+          "time": 190.4,
+          "text": "聞かせ合おう"
+        },
+        {
+          "time": 195.3,
+          "text": "時が流れて 季節がめぐって"
+        },
+        {
+          "time": 203.4,
+          "text": "あの日のことばだけが まだ胸に残ってる"
+        },
+        {
+          "time": 210,
+          "text": "強くなれただろうか キミに見せられるかな"
+        },
+        {
+          "time": 216,
+          "text": "凍えた窓の向こう 思い出が手を振る"
+        },
+        {
+          "time": 224.1,
+          "text": "キミと冬の終わり"
+        },
+        {
+          "time": 229.6,
+          "text": "交わした約束 忘れない"
+        },
+        {
+          "time": 236.2,
+          "text": "あれがふたりの 一番きらめいた日々"
+        },
+        {
+          "time": 245,
+          "text": "十年後の二月に もう一度会えるなら"
+        },
+        {
+          "time": 251.3,
+          "text": "変わらない場所で きっと"
+        },
+        {
+          "time": 254.4,
+          "text": "最高の思い出を また"
+        },
+        {
+          "time": 262,
+          "text": "雪が降ってる いまも変わらず"
+        },
+        {
+          "time": 271,
+          "text": "あの冬の キミの笑顔のように"
+        },
+        {
+          "time": 277,
+          "text": "最高の思い出を ありがとう"
+        }
+      ]
     }
   ]
 }
