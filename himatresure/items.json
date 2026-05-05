@@ -3142,6 +3142,81 @@
     ]
   },
   {
+    "no": 59,
+    "category": "武器",
+    "name": "アクアランス",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
+      },
+      {
+        "type": "P",
+        "name": "XPアップ",
+        "desc": "かくとくXP+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 60,
     "category": "武器",
     "name": "アクアブレイド",
