@@ -1113,7 +1113,12 @@
     "no": 21,
     "category": "武器",
     "name": "キリン",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 406,
+        "name": "ジラフィ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -1188,7 +1193,12 @@
     "no": 22,
     "category": "武器",
     "name": "にょいぼう",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 406,
+        "name": "ジラフィ"
+      }
+    ],
     "skills": [
       {
         "type": "M",
@@ -1972,7 +1982,12 @@
     "no": 34,
     "category": "武器",
     "name": "エレキランス",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 406,
+        "name": "ジラフィ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -11615,6 +11630,103 @@
         "pt": 500,
         "name": "VITバフ",
         "effect": "VITステータス+5%"
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 406,
+    "category": "ペット",
+    "name": "ジラフィ",
+    "monster_type": "アニマル",
+    "drop_items": [
+      {
+        "no": 22,
+        "name": "にょいぼう"
+      },
+      {
+        "no": 21,
+        "name": "キリン"
+      },
+      {
+        "no": 34,
+        "name": "エレキランス"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": null,
+        "name": "???"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ダッシュアタック",
+        "desc": "スピードまかせのこうげき (ATK+SPD)"
+      },
+      {
+        "type": "M",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "P",
+        "name": "エンカウンター",
+        "desc": "モンスターしゅつげんりつアップ"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
       },
       {
         "pt": 1000,
