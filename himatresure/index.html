@@ -289,11 +289,11 @@
 
   <!-- スキル指定モード -->
   <div class="checker-mode active" id="mode-skill">
-    <p class="ck-label">発動させたいスキルを選択</p>
-    <select class="ck-select" id="skill-select">
-      <option value="">-- スキルを選んでください --</option>
-    </select>
-    <div id="skill-result"></div>
+    <p class="ck-label">発動させたいスキルを選択（1〜3つ・AND検索）</p>
+    <div class="skill-checks" id="skill-checks-skill"></div>
+    <div id="skill-and-summary"></div>
+    <button class="search-btn" style="margin-top:12px" onclick="searchBySkill()">⚡ 発動する組み合わせを探す</button>
+    <div id="skill-combo-result" style="margin-top:8px"></div>
   </div>
 
   <!-- 装備から検索モード -->
@@ -356,7 +356,7 @@ async function init() {
     return;
   }
   renderList();
-  buildSkillSelect();
+  buildSkillChecksForSkillMode();
   buildSlots();
   buildSkillChecks();
 }
@@ -460,56 +460,65 @@ function allSkillNames() {
   return [...set].sort((a,b) => a.localeCompare(b,'ja'));
 }
 
-function buildSkillSelect() {
-  const sel = document.getElementById('skill-select');
-  allSkillNames().forEach(name => {
-    const opt = document.createElement('option');
-    opt.value = name; opt.textContent = name;
-    sel.appendChild(opt);
-  });
-  sel.addEventListener('change', renderSkillResult);
+function buildSkillChecksForSkillMode() {
+  const wrap = document.getElementById('skill-checks-skill');
+  const skillMap = new Map();
+  allItems.forEach(item => item.skills.forEach(s => {
+    if (!skillMap.has(s.name)) skillMap.set(s.name, s.type);
+  }));
+  const sorted = [...skillMap.entries()].sort((a,b) => a[0].localeCompare(b[0],'ja'));
+  wrap.innerHTML = sorted.map(([name, type]) =>
+    `<label class="skill-check-label">
+      <input type="checkbox" value="${name}" onchange="onSkillModeCheck()">
+      <span class="stype st-${type}">${type}</span>${name}
+    </label>`
+  ).join('');
 }
 
-function renderSkillResult() {
-  const skillName = document.getElementById('skill-select').value;
-  const el = document.getElementById('skill-result');
-  if (!skillName) { el.innerHTML = ''; return; }
+function getSkillModeTargets() {
+  return [...document.querySelectorAll('#skill-checks-skill input:checked')].map(c => c.value);
+}
 
-  const bycat = {};
-  CATS.forEach(cat => {
-    bycat[cat] = allItems.filter(i => i.category === cat && i.skills.some(s => s.name === skillName));
+function onSkillModeCheck() {
+  const targets = getSkillModeTargets();
+  document.querySelectorAll('#skill-checks-skill .skill-check-label').forEach(lbl => {
+    lbl.classList.toggle('checked', lbl.querySelector('input').checked);
   });
-  const catsWithSkill = CATS.filter(c => bycat[c].length > 0);
 
-  let html = `<div class="skill-summary">
-    <div>「<strong>${skillName}</strong>」を持つスロット：`;
-  CATS.forEach(cat => {
-    const has = bycat[cat].length > 0;
-    html += `<span class="${has?'ok':'ng'}">${has?'✓':'✗'}${cat} </span>`;
-  });
-  html += '</div>';
-  html += catsWithSkill.length >= 3
-    ? `<div class="ok">→ ${catsWithSkill.length}スロットで所持可。発動できます！</div>`
-    : `<div class="ng">→ ${catsWithSkill.length}スロットのみ。現在のデータでは発動不可。</div>`;
-  html += '</div>';
+  const summaryEl = document.getElementById('skill-and-summary');
+  if (targets.length === 0) { summaryEl.innerHTML = ''; return; }
 
-  html += '<div class="skill-result-grid">';
-  CATS.forEach(cat => {
-    const items = bycat[cat];
-    html += `<div class="skill-cat-block">
-      <div class="skill-cat-title">
-        <span class="cat-tag cat-tag-${cat}">${cat}</span>
-        <span class="skill-cat-count ${items.length===0?'none':''}">${items.length}件</span>
-      </div>
-      ${items.length === 0
-        ? `<div style="font-size:12px;color:var(--muted)">なし</div>`
-        : items.map(i=>`<div class="skill-item-row" onclick="openModal(${i.no})">
-            <span class="skill-item-no">No${i.no}</span><span>${i.name}</span></div>`).join('')
-      }
+  // 各スキルの発動可否をリアルタイム表示
+  let html = '<div class="skill-summary" style="margin-top:10px">';
+  targets.forEach(skillName => {
+    const catsWithSkill = CATS.filter(cat =>
+      allItems.some(i => i.category === cat && i.skills.some(s => s.name === skillName))
+    );
+    const ok = catsWithSkill.length >= 3;
+    html += `<div><span class="${ok?'ok':'ng'}">${ok?'✓':'✗'}</span>
+      「<strong>${skillName}</strong>」：${catsWithSkill.length}スロットで所持可
+      ${ok ? '' : '<span style="color:var(--skill-A)"> ← 現データでは発動不可</span>'}
     </div>`;
   });
+  if (targets.length >= 2) {
+    html += `<div style="margin-top:6px;color:var(--muted);font-size:11px">
+      → ${targets.length}スキルを同時発動する組み合わせを探します
+    </div>`;
+  }
   html += '</div>';
-  el.innerHTML = html;
+  summaryEl.innerHTML = html;
+  document.getElementById('skill-combo-result').innerHTML = '';
+}
+
+function searchBySkill() {
+  const targets = getSkillModeTargets();
+  if (targets.length === 0) {
+    document.getElementById('skill-combo-result').innerHTML =
+      '<div class="ck-empty">スキルを1つ以上選択してください</div>';
+    return;
+  }
+  // 全スロット空き、ターゲットスキル指定で組み合わせ探索
+  runComboSearch({}, targets, 'skill-combo-result');
 }
 
 // ━━━ 装備から検索：スロット ━━━
@@ -578,11 +587,13 @@ function getFixedSlots() {
   return slots;
 }
 
-// ━━━ 組み合わせ探索 ━━━
+// ━━━ 組み合わせ探索（共通） ━━━
 function searchCombinations() {
-  const fixedSlots = getFixedSlots();
-  const targetSkills = getTargetSkills();
-  const resultEl = document.getElementById('combo-result');
+  runComboSearch(getFixedSlots(), getTargetSkills(), 'combo-result');
+}
+
+function runComboSearch(fixedSlots, targetSkills, resultElId) {
+  const resultEl = document.getElementById(resultElId);
 
   // 固定スロットのベーススキルカウント
   const baseCount = {};
