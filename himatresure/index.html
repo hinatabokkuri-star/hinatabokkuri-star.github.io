@@ -299,13 +299,17 @@
     </select>
   </div>
   <div class="filter-bar">
-    <button class="owned-filter-btn" id="owned-filter-btn" onclick="toggleOwnedFilter()">★ 所持のみ</button>
     <button class="filter-btn active" data-cat="all">すべて</button>
     <button class="filter-btn" data-cat="武器">武器</button>
     <button class="filter-btn" data-cat="盾">盾</button>
     <button class="filter-btn" data-cat="鎧">鎧</button>
     <button class="filter-btn" data-cat="アクセサリー">アクセ</button>
     <button class="filter-btn" data-cat="ペット">ペット</button>
+  </div>
+  <div class="filter-bar" style="margin-top:6px">
+    <button class="owned-filter-btn active" id="owned-btn-all"   onclick="setOwnedFilter('all')">すべて</button>
+    <button class="owned-filter-btn"        id="owned-btn-owned" onclick="setOwnedFilter('owned')">★ 所持のみ</button>
+    <button class="owned-filter-btn"        id="owned-btn-unowned" onclick="setOwnedFilter('unowned')">☆ 未所持のみ</button>
   </div>
 </div>
 <div id="count-bar" style="display:flex;align-items:center;gap:10px;padding:4px 12px 2px">
@@ -399,7 +403,7 @@ function catLabel(cat) { return CAT_LABEL[cat] || cat; }
 
 let allItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
-let ownedFilter = false;
+let ownedFilter = 'all'; // 'all' | 'owned' | 'unowned'
 let ownedSet = new Set(JSON.parse(localStorage.getItem('himatubu_owned') || '[]'));
 
 function saveOwned() {
@@ -421,14 +425,20 @@ function unmarkVisibleOwned() {
   saveOwned();
   renderList();
 }
-function toggleOwnedFilter() {
-  ownedFilter = !ownedFilter;
-  document.getElementById('owned-filter-btn').classList.toggle('active', ownedFilter);
-  document.getElementById('owned-filter-btn-checker').classList.toggle('active', ownedFilter);
-  buildSlots();
-  buildSkillChecks();
-  buildSkillChecksForSkillMode();
+function setOwnedFilter(mode) {
+  ownedFilter = mode;
+  ['all','owned','unowned'].forEach(m =>
+    document.getElementById(`owned-btn-${m}`)?.classList.toggle('active', m === mode));
+  const cb = document.getElementById('owned-filter-btn-checker');
+  if (cb) {
+    cb.classList.toggle('active', mode !== 'all');
+    cb.textContent = mode === 'unowned' ? '☆ 未所持のみ' : '★ 所持のみ';
+  }
+  buildSlots(); buildSkillChecks(); buildSkillChecksForSkillMode();
   renderList();
+}
+function toggleOwnedFilter() { // チェッカータブから呼ばれる
+  setOwnedFilter(ownedFilter === 'owned' ? 'all' : 'owned');
 }
 
 // ━━━ 初期化 ━━━
@@ -450,7 +460,8 @@ async function init() {
 // ━━━ 一覧 ━━━
 function getFiltered() {
   let items = allItems.filter(item => {
-    if (ownedFilter && !ownedSet.has(item.no)) return false;
+    if (ownedFilter === 'owned'   && !ownedSet.has(item.no)) return false;
+    if (ownedFilter === 'unowned' &&  ownedSet.has(item.no)) return false;
     if (currentCat !== 'all' && item.category !== currentCat) return false;
     if (!currentSearch) return true;
     const q = currentSearch;
@@ -649,7 +660,9 @@ const GROUP_LABEL = { A: 'A　物理', 'M攻撃': 'M　魔法攻撃', 'M回復':
 
 function renderSkillChecks(wrap, onchange) {
   const skillMap = new Map();
-  const pool = ownedFilter ? allItems.filter(i => ownedSet.has(i.no)) : allItems;
+  const pool = ownedFilter === 'owned'   ? allItems.filter(i =>  ownedSet.has(i.no))
+             : ownedFilter === 'unowned' ? allItems.filter(i => !ownedSet.has(i.no))
+             : allItems;
   pool.forEach(item => item.skills.forEach(s => {
     if (!skillMap.has(s.name)) skillMap.set(s.name, s.type);
   }));
@@ -739,7 +752,9 @@ function searchCombinations() {
 
 function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const resultEl = document.getElementById(resultElId);
-  const basePool = ownedFilter ? allItems.filter(i => ownedSet.has(i.no)) : allItems;
+  const basePool = ownedFilter === 'owned'   ? allItems.filter(i =>  ownedSet.has(i.no))
+                 : ownedFilter === 'unowned' ? allItems.filter(i => !ownedSet.has(i.no))
+                 : allItems;
 
   // 固定スロットのベーススキルカウント
   const baseCount = {};
