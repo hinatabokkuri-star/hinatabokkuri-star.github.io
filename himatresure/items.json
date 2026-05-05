@@ -944,7 +944,7 @@
   {
     "no": 21,
     "category": "武器",
-    "name": "キリフ",
+    "name": "キリン",
     "drop_from": [],
     "skills": [
       {
@@ -3592,7 +3592,7 @@
   {
     "no": 125,
     "category": "武器",
-    "name": "フリざお",
+    "name": "つりざお",
     "drop_from": [],
     "skills": [
       {
