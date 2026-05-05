@@ -780,7 +780,11 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     }
     backtrack(0, {}, {...baseCount});
     results.sort((a,b) => b.activeCount - a.activeCount);
-    renderComboResults(resultEl, results.slice(0,MAX_RESULTS), results.length, targetSkills, fixedSlots);
+    const multi = results.filter(r => r.activeCount >= 2);
+    const single = results.filter(r => r.activeCount === 1);
+    const base = (multi.length > 0 ? multi : single).slice(0, MAX_RESULTS);
+    const extra = multi.length > 0 ? single.slice(0, MAX_RESULTS) : [];
+    renderComboResults(resultEl, base, results.length, targetSkills, fixedSlots, extra);
     return;
   }
 
@@ -858,21 +862,15 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   }
 
   results.sort((a,b) => b.activeCount - a.activeCount);
-  renderComboResults(resultEl, results.slice(0,MAX_RESULTS), results.length, [], fixedSlots);
+  const multi = results.filter(r => r.activeCount >= 2);
+  const single = results.filter(r => r.activeCount === 1);
+  const base = (multi.length > 0 ? multi : single).slice(0, MAX_RESULTS);
+  const extra = multi.length > 0 ? single.slice(0, MAX_RESULTS) : [];
+  renderComboResults(resultEl, base, results.length, [], fixedSlots, extra);
 }
 
-function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots) {
-  if (shown.length === 0) {
-    resultEl.innerHTML = '<div class="ck-empty">条件を満たす組み合わせが見つかりませんでした</div>';
-    return;
-  }
-  const headerText = targetSkills.length > 0
-    ? `「${targetSkills.join('・')}」を発動できる組み合わせ`
-    : `発動スキルがある組み合わせ`;
-  let html = `<div class="result-header">
-    <strong>${headerText}</strong>：${shown.length}件${total > MAX_RESULTS ? `（${total}件中上位${MAX_RESULTS}件）` : ''}
-  </div>`;
-  html += shown.map(({slots, count}) => {
+function comboCardsHtml(items, fixedSlots, targetSkills) {
+  return items.map(({slots, count}) => {
     const slotRows = CATS.map(cat => {
       const item = fixedSlots[cat] || slots[cat];
       if (!item) return `<div class="combo-slot-row"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span><span class="combo-slot-empty">─</span></div>`;
@@ -891,6 +889,30 @@ function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots) {
     }).join('');
     return `<div class="combo-card"><div class="combo-slots">${slotRows}</div><div class="combo-active-skills">${badges}</div></div>`;
   }).join('');
+}
+
+function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, extra = []) {
+  if (shown.length === 0) {
+    resultEl.innerHTML = '<div class="ck-empty">条件を満たす組み合わせが見つかりませんでした</div>';
+    return;
+  }
+  const headerText = targetSkills.length > 0
+    ? `「${targetSkills.join('・')}」を発動できる組み合わせ`
+    : `発動スキルがある組み合わせ`;
+  let html = `<div class="result-header">
+    <strong>${headerText}</strong>：${shown.length}件${total > MAX_RESULTS ? `（${total}件中上位${MAX_RESULTS}件）` : ''}
+  </div>`;
+  html += comboCardsHtml(shown, fixedSlots, targetSkills);
+  if (extra.length > 0) {
+    const extraHtml = comboCardsHtml(extra, fixedSlots, targetSkills);
+    html += `<div id="single-toggle-wrap" style="text-align:center;padding:12px 0">
+      <button class="owned-filter-btn" onclick="
+        document.getElementById('single-results').style.display='block';
+        this.parentElement.style.display='none';
+      ">1スキルのみの組み合わせも表示（${extra.length}件）</button>
+    </div>
+    <div id="single-results" style="display:none">${extraHtml}</div>`;
+  }
   resultEl.innerHTML = html;
 }
 
