@@ -635,7 +635,7 @@
   {
     "no": 16,
     "category": "武器",
-    "name": "がたな",
+    "name": "かたな",
     "drop_from": [],
     "skills": [
       {
@@ -5142,7 +5142,7 @@
   {
     "no": 194,
     "category": "盾",
-    "name": "ラムバーシールド",
+    "name": "ランバーシールド",
     "drop_from": [],
     "skills": [
       {
