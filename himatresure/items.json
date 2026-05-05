@@ -8272,7 +8272,12 @@
     "no": 272,
     "category": "鎧",
     "name": "タンクアーマー",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 460,
+        "name": "ストーンクラブ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -11305,6 +11310,10 @@
       {
         "no": 463,
         "name": "スコーピオン"
+      },
+      {
+        "no": 460,
+        "name": "ストーンクラブ"
       }
     ],
     "skills": [
@@ -14135,6 +14144,103 @@
         "type": "M",
         "name": "スロージャワー",
         "desc": "スローじょうたいにするまほうこうげき (INT)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 460,
+    "category": "ペット",
+    "name": "ストーンクラブ",
+    "monster_type": "アームド",
+    "drop_items": [
+      {
+        "no": 272,
+        "name": "タンクアーマー"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": 384,
+        "name": "クラブリング"
+      },
+      {
+        "no": null,
+        "name": "???"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ガード",
+        "desc": "つぎにうけるダメージをはいばん (VIT)"
+      },
+      {
+        "type": "P",
+        "name": "ふいうち",
+        "desc": "せんせいこうげきをしかける"
+      },
+      {
+        "type": "P",
+        "name": "カウンター",
+        "desc": "こうげきをうけるとターンがはやまる (VIT)"
       }
     ],
     "mastery_bonus": [
