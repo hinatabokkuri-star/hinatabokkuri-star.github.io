@@ -83,7 +83,7 @@
   .card-head { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
   .card-no { color: var(--muted); font-size: 11px; flex-shrink: 0; }
   .card-name { font-size: 15px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .cat-tag { font-size: 10px; padding: 2px 0; border: 1px solid; white-space: nowrap; width: 3em; min-width: 3em; max-width: 3em; text-align: center; display: inline-block; overflow: hidden; }
+  .cat-tag { font-size: 10px; padding: 2px 4px; border: 1px solid; white-space: nowrap; min-width: 3.5em; text-align: center; display: inline-block; flex-shrink: 0; }
   .cat-tag-武器         { color: var(--tag-武器);         border-color: var(--tag-武器); }
   .cat-tag-盾           { color: var(--tag-盾);           border-color: var(--tag-盾); }
   .cat-tag-鎧           { color: var(--tag-鎧);           border-color: var(--tag-鎧); }
@@ -319,21 +319,20 @@
   </div>
 
   <div class="mode-tabs">
-    <button class="mode-btn active" data-mode="skill">🔍 スキルから検索</button>
-    <button class="mode-btn" data-mode="equip">🎒 装備から検索</button>
+    <button class="mode-btn active" data-mode="equip">🎒 組み合わせ検索</button>
+    <button class="mode-btn" data-mode="skill">🔍 スキルから検索</button>
   </div>
 
-  <!-- スキル指定モード -->
-  <div class="checker-mode active" id="mode-skill">
-    <p class="ck-label">発動させたいスキルを選択（1〜3つ・AND検索）</p>
+  <!-- スキルから検索モード -->
+  <div class="checker-mode" id="mode-skill">
+    <p class="ck-label" style="margin-bottom:10px">スキルを選択（AND検索）</p>
     <div class="skill-checks" id="skill-checks-skill"></div>
-    <div id="skill-and-summary"></div>
-    <button class="search-btn" style="margin-top:12px" onclick="searchBySkill()">⚡ 発動する組み合わせを探す</button>
+    <button class="search-btn" style="margin-top:12px" onclick="searchBySkill()">🔍 この装備を検索</button>
     <div id="skill-combo-result" style="margin-top:8px"></div>
   </div>
 
-  <!-- 装備から検索モード -->
-  <div class="checker-mode" id="mode-equip">
+  <!-- 組み合わせ検索モード -->
+  <div class="checker-mode active" id="mode-equip">
     <div class="equip-search-wrap">
 
       <!-- ① 固定装備スロット -->
@@ -532,45 +531,44 @@ function getSkillModeTargets() {
 }
 
 function onSkillModeCheck() {
-  const targets = getSkillModeTargets();
   document.querySelectorAll('#skill-checks-skill .skill-check-label').forEach(lbl => {
     lbl.classList.toggle('checked', lbl.querySelector('input').checked);
   });
-
-  const summaryEl = document.getElementById('skill-and-summary');
-  if (targets.length === 0) { summaryEl.innerHTML = ''; return; }
-
-  // 各スキルの発動可否をリアルタイム表示
-  let html = '<div class="skill-summary" style="margin-top:10px">';
-  targets.forEach(skillName => {
-    const catsWithSkill = CATS.filter(cat =>
-      allItems.some(i => i.category === cat && i.skills.some(s => s.name === skillName))
-    );
-    const ok = catsWithSkill.length >= 3;
-    html += `<div><span class="${ok?'ok':'ng'}">${ok?'✓':'✗'}</span>
-      「<strong>${skillName}</strong>」：${catsWithSkill.length}スロットで所持可
-      ${ok ? '' : '<span style="color:var(--skill-A)"> ← 現データでは発動不可</span>'}
-    </div>`;
-  });
-  if (targets.length >= 2) {
-    html += `<div style="margin-top:6px;color:var(--muted);font-size:11px">
-      → ${targets.length}スキルを同時発動する組み合わせを探します
-    </div>`;
-  }
-  html += '</div>';
-  summaryEl.innerHTML = html;
   document.getElementById('skill-combo-result').innerHTML = '';
 }
 
 function searchBySkill() {
   const targets = getSkillModeTargets();
+  const resultEl = document.getElementById('skill-combo-result');
   if (targets.length === 0) {
-    document.getElementById('skill-combo-result').innerHTML =
-      '<div class="ck-empty">スキルを1つ以上選択してください</div>';
+    resultEl.innerHTML = '<div class="ck-empty">スキルを1つ以上選択してください</div>';
     return;
   }
-  // 全スロット空き、ターゲットスキル指定で組み合わせ探索
-  runComboSearch({}, targets, 'skill-combo-result');
+  // AND検索: 選択したスキルをすべて持つアイテムを抽出
+  const matched = allItems.filter(item =>
+    targets.every(sk => item.skills.some(s => s.name === sk))
+  );
+  if (matched.length === 0) {
+    resultEl.innerHTML = '<div class="ck-empty">該当する装備がありません</div>';
+    return;
+  }
+  let html = `<div class="result-header">「<strong>${targets.join('」「')}</strong>」を持つ装備：<strong>${matched.length}件</strong></div>`;
+  CATS.forEach(cat => {
+    const items = matched.filter(i => i.category === cat).sort((a,b) => a.no - b.no);
+    if (!items.length) return;
+    html += `<div class="skill-cat-block" style="margin-bottom:8px">
+      <div class="skill-cat-title">
+        <span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span>
+        <span class="skill-cat-count">${items.length}件</span>
+      </div>
+      ${items.map(item => `
+        <div class="skill-item-row" onclick="openModal(${item.no})">
+          <span class="skill-item-no">No${item.no}</span>
+          <span>${item.name}</span>
+        </div>`).join('')}
+    </div>`;
+  });
+  resultEl.innerHTML = html;
 }
 
 // ━━━ 装備から検索：スロット ━━━
