@@ -349,7 +349,7 @@ let currentCat = 'all', currentSearch = '', currentSort = 'no';
 // ━━━ 初期化 ━━━
 async function init() {
   try {
-    const res = await fetch('items.json');
+    const res = await fetch('items.json?v=' + Date.now());
     allItems = await res.json();
   } catch(e) {
     document.getElementById('grid').innerHTML = '<div class="empty">データ読み込み失敗</div>';
