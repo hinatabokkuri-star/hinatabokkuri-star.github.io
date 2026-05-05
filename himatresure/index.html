@@ -686,7 +686,15 @@ function getFixedSlots() {
 
 // ━━━ 組み合わせ探索（共通） ━━━
 function searchCombinations() {
-  runComboSearch(getFixedSlots(), getTargetSkills(), 'combo-result');
+  const fixed = getFixedSlots();
+  const skills = getTargetSkills();
+  const hasFixed = CATS.some(c => fixed[c]);
+  if (!hasFixed && skills.length === 0) {
+    document.getElementById('combo-result').innerHTML =
+      '<div class="ck-impossible">装備かスキルを少なくとも1つ指定してください。<br>絞り込みなしだと組み合わせが膨大になります。</div>';
+    return;
+  }
+  runComboSearch(fixed, skills, 'combo-result');
 }
 
 function runComboSearch(fixedSlots, targetSkills, resultElId) {
