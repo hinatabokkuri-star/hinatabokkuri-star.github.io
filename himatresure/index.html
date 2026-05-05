@@ -673,7 +673,8 @@ function clearCheckerSelections() {
     cb.checked = false;
     cb.closest('label').classList.remove('checked');
   });
-  searchCombinations();
+  document.getElementById('combo-result').innerHTML =
+    '<div class="ck-empty" style="color:var(--dim)">装備またはスキルを選択すると自動で検索します</div>';
 }
 
 function onCheckChange(checkbox) {
