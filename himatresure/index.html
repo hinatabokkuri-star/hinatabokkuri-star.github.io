@@ -301,6 +301,7 @@
   </div>
   <div class="filter-bar">
     <button class="owned-filter-btn" id="owned-filter-btn" onclick="toggleOwnedFilter()">★ 所持のみ</button>
+    <button class="owned-filter-btn" id="owned-all-btn" onclick="markAllOwned()">★ 全件チェック</button>
     <button class="filter-btn active" data-cat="all">すべて</button>
     <button class="filter-btn" data-cat="武器">武器</button>
     <button class="filter-btn" data-cat="盾">盾</button>
@@ -410,6 +411,11 @@ function saveOwned() {
 function toggleOwned(no, e) {
   e.stopPropagation();
   if (ownedSet.has(no)) ownedSet.delete(no); else ownedSet.add(no);
+  saveOwned();
+  renderList();
+}
+function markAllOwned() {
+  allItems.forEach(i => ownedSet.add(i.no));
   saveOwned();
   renderList();
 }
