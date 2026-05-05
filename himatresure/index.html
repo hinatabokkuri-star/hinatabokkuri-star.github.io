@@ -305,7 +305,7 @@
     <button class="nav-tab active" data-tab="list">📋 装備一覧</button>
     <button class="nav-tab" data-tab="checker">⚡ スキル発動チェッカー</button>
     <button class="nav-tab" data-tab="mastery">⭐ マスタリーボーナス</button>
-    <button class="nav-tab" data-tab="live">🔴 LIVE</button>
+    <button class="nav-tab" data-tab="live" id="nav-tab-live" style="display:none">🔴 LIVE</button>
   </nav>
 </section>
 
@@ -1049,7 +1049,6 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
     document.getElementById('count-bar').style.display = isList ? '' : 'none';
     if (tab.dataset.tab === 'mastery') renderMastery();
     if (tab.dataset.tab === 'live') checkLive();
-    else clearInterval(liveCheckTimer);
   });
 });
 
@@ -1078,6 +1077,7 @@ async function checkLive() {
 }
 
 function renderLiveOn(videoId, title) {
+  document.getElementById('nav-tab-live').style.display = '';
   const wrap = document.getElementById('live-wrap');
   wrap.className = '';
   wrap.innerHTML = `
@@ -1099,6 +1099,13 @@ function renderLiveOn(videoId, title) {
 }
 
 function renderLiveOff() {
+  const tab = document.getElementById('nav-tab-live');
+  tab.style.display = 'none';
+  // LIVEタブ表示中なら装備一覧に戻す
+  if (tab.classList.contains('active')) {
+    document.querySelector('[data-tab="list"]').click();
+    return;
+  }
   const wrap = document.getElementById('live-wrap');
   wrap.className = '';
   wrap.innerHTML = `
@@ -1125,6 +1132,9 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
 });
 
 init();
+// ページ読み込み時にライブ確認（タブは配信中のみ表示）
+checkLive();
+setInterval(checkLive, 120000);
 </script>
 </body>
 </html>
