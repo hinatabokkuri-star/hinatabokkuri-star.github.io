@@ -311,6 +311,7 @@
 <div style="display:flex;align-items:center;gap:10px;padding:4px 12px 2px">
   <div id="count" style="padding:0"></div>
   <button id="mark-visible-btn" onclick="markVisibleOwned()" style="display:none;background:none;border:1px solid #665500;color:#aa8800;font-family:inherit;font-size:11px;padding:3px 10px;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent"></button>
+  <button id="unmark-visible-btn" onclick="unmarkVisibleOwned()" style="display:none;background:none;border:1px solid var(--border);color:var(--muted);font-family:inherit;font-size:11px;padding:3px 10px;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent"></button>
 </div>
 
 <!-- TAB: 一覧 -->
@@ -420,6 +421,11 @@ function markVisibleOwned() {
   saveOwned();
   renderList();
 }
+function unmarkVisibleOwned() {
+  getFiltered().forEach(i => ownedSet.delete(i.no));
+  saveOwned();
+  renderList();
+}
 function toggleOwnedFilter() {
   ownedFilter = !ownedFilter;
   document.getElementById('owned-filter-btn').classList.toggle('active', ownedFilter);
@@ -466,6 +472,10 @@ function renderList() {
   const btn = document.getElementById('mark-visible-btn');
   btn.style.display = unowned.length ? '' : 'none';
   btn.textContent = `★ ${catLabel2}を全件所有済みに（${unowned.length}件）`;
+  const owned = filtered.filter(i => ownedSet.has(i.no));
+  const unBtn = document.getElementById('unmark-visible-btn');
+  unBtn.style.display = owned.length ? '' : 'none';
+  unBtn.textContent = `☆ ${catLabel2}の★を全解除（${owned.length}件）`;
   document.getElementById('count').textContent = `${filtered.length} 件`;
   if (!filtered.length) {
     document.getElementById('grid').innerHTML = '<div class="empty">該当する装備がありません</div>';
