@@ -1,0 +1,127 @@
+[
+  {
+    "no": 2,
+    "category": "武器",
+    "name": "こんぼう",
+    "drop_from": [{"no": 395, "name": "スライム"}],
+    "skills": [
+      {"type": "A", "name": "タックル",      "desc": "かるいたいあたりこうげき (VIT)"},
+      {"type": "A", "name": "スタンアタック", "desc": "スタンさせるこうげき (ATK)"},
+      {"type": "P", "name": "とどめ",         "desc": "ラストヒットのダメージ+50%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "スライムギア",     "effect": "スライムタイプへのダメージ+10%"},
+      {"pt": 250,  "name": "ATKバフ",          "effect": "ATKステータス+5%"},
+      {"pt": 500,  "name": "クリティカルギア", "effect": "クリティカル+5%"},
+      {"pt": 1000, "name": "XPギア",           "effect": "かくとくXP+5%"},
+      {"pt": 1500, "name": "アニマルギア",      "effect": "アニマルタイプへのダメージ+10%"},
+      {"pt": 2500, "name": "スタンギア",        "effect": "スタンはっせい+5%"},
+      {"pt": 3500, "name": "XPバフ",           "effect": "ドロップXP+0〜1"},
+      {"pt": 5000, "name": "XPバフ",           "effect": "ドロップXP+0〜1"},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 176,
+    "category": "盾",
+    "name": "ナベのフタ",
+    "drop_from": [{"no": 423, "name": "グレグレ"}],
+    "skills": [
+      {"type": "A", "name": "タックル",     "desc": "かるいたいあたりこうげき (VIT)"},
+      {"type": "M", "name": "アクア",       "desc": "みずぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "ラピッドムーブ", "desc": "いどうスピード+5"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "コインギア",    "effect": "ドロップコイン+0〜1"},
+      {"pt": 250,  "name": "OPTバフ",       "effect": "そうびオプションはっせいりつ+5%"},
+      {"pt": 500,  "name": "アクションギア", "effect": "アクションスキル+5%"},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 269,
+    "category": "鎧",
+    "name": "ナイトアーマー",
+    "drop_from": [
+      {"no": 395, "name": "スライム"},
+      {"no": 397, "name": "キラーサーペント"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ガード",  "desc": "つぎにうけるダメージをはいばん (VIT)"},
+      {"type": "A", "name": "タックル", "desc": "かるいたいあたりこうげき (VIT)"},
+      {"type": "P", "name": "XPアップ", "desc": "かくとくXP+50%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "XPバフ",  "effect": "ドロップXP+0〜1"},
+      {"pt": 250,  "name": "OPTバフ", "effect": "そうびオプションはっせいりつ+5%"},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 346,
+    "category": "アクセサリー",
+    "name": "フレアリング",
+    "drop_from": [],
+    "skills": [
+      {"type": "A", "name": "ラッシュ", "desc": "とっしんこうげき (VIT+SPD)"},
+      {"type": "M", "name": "フレア",   "desc": "ほのおぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "とどめ",   "desc": "ラストヒットのダメージ+50%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "フレアギア",  "effect": "ほのおダメージ+10%"},
+      {"pt": 250,  "name": "アーマーギア", "effect": "アーマータイプへのダメージ+10%"},
+      {"pt": 500,  "name": "フレアギア",  "effect": "ほのおダメージ+10%"},
+      {"pt": 1000, "name": "ATKバフ",    "effect": "ATKステータス+5%"},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 395,
+    "category": "ペット",
+    "name": "スライム",
+    "monster_type": "スライム",
+    "drop_items": [
+      {"no": null, "name": "グミボール"},
+      {"no": 269,  "name": "ナイトアーマー"},
+      {"no": 2,    "name": "こんぼう"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "スライムリング"}
+    ],
+    "skills": [
+      {"type": "A", "name": "タックル",    "desc": "かるいたいあたりこうげき (VIT)"},
+      {"type": "A", "name": "スローアタック", "desc": "スローじょうたいにするこうげき (ATK)"},
+      {"type": "M", "name": "アクア",      "desc": "みずぞくせいのまほうこうげき (INTx2)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  }
+]
