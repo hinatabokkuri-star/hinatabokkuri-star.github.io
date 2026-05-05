@@ -83,7 +83,7 @@
   .card-head { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
   .card-no { color: var(--muted); font-size: 11px; flex-shrink: 0; }
   .card-name { font-size: 15px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .cat-tag { font-size: 10px; padding: 2px 0; border: 1px solid; flex-shrink: 0; white-space: nowrap; width: 3em; text-align: center; display: inline-block; }
+  .cat-tag { font-size: 10px; padding: 2px 0; border: 1px solid; white-space: nowrap; width: 3em; min-width: 3em; max-width: 3em; text-align: center; display: inline-block; overflow: hidden; }
   .cat-tag-武器         { color: var(--tag-武器);         border-color: var(--tag-武器); }
   .cat-tag-盾           { color: var(--tag-盾);           border-color: var(--tag-盾); }
   .cat-tag-鎧           { color: var(--tag-鎧);           border-color: var(--tag-鎧); }
@@ -807,7 +807,7 @@ function renderMastery() {
       <div class="mastery-bonus-row" onclick="openModal(${r.item.no})">
         <span class="mastery-pt">${r.pt}pt</span>
         <span class="mastery-item-name">
-          <span class="cat-tag cat-tag-${r.item.category}" style="margin-right:5px">${r.item.category}</span>No${r.item.no} ${r.item.name}
+          <span class="cat-tag cat-tag-${r.item.category}" style="margin-right:5px">${catLabel(r.item.category)}</span>No${r.item.no} ${r.item.name}
         </span>
         <span class="mastery-effect">${r.effect}</span>
       </div>`).join('');
