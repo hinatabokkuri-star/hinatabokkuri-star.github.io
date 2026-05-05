@@ -1585,7 +1585,7 @@
     "drop_from": [
       {
         "no": 415,
-        "name": "バタフライ"
+        "name": "バタフィ"
       }
     ],
     "skills": [
@@ -3150,7 +3150,12 @@
     "no": 57,
     "category": "武器",
     "name": "れいとうサンマ",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 453,
+        "name": "マーキャット"
+      }
+    ],
     "skills": [
       {
         "type": "M",
@@ -12039,7 +12044,7 @@
   {
     "no": 415,
     "category": "ペット",
-    "name": "バタフライ",
+    "name": "バタフィ",
     "monster_type": "インセクト",
     "drop_items": [
       {
@@ -13886,8 +13891,8 @@
     "monster_type": "アニマル",
     "drop_items": [
       {
-        "no": null,
-        "name": "???"
+        "no": 57,
+        "name": "れいとうサンマ"
       },
       {
         "no": null,
