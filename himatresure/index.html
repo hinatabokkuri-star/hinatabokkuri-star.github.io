@@ -276,9 +276,41 @@
   .live-offline .live-icon { font-size: 40px; margin-bottom: 12px; }
   .live-channel-link { display: inline-block; margin-top: 14px; padding: 8px 20px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-size: 13px; }
   .live-loading { text-align: center; padding: 60px; color: var(--muted); }
+
+  /* ━━━ LIVE NOTIFY BANNER ━━━ */
+  .live-notify-banner {
+    position: fixed;
+    top: calc(12px + env(safe-area-inset-top));
+    left: 50%; transform: translateX(-50%);
+    background: #cc0000; color: #fff;
+    padding: 8px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: bold;
+    display: none; align-items: center; gap: 8px;
+    z-index: 200; white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(200,0,0,0.5);
+  }
+  .live-notify-banner.show { display: flex; }
+  .live-notify-banner .lnb-watch {
+    background: #fff; color: #cc0000;
+    border: none; border-radius: 999px;
+    font-family: inherit; font-size: 11px; font-weight: bold;
+    padding: 3px 10px; cursor: pointer;
+  }
+  .live-notify-banner .lnb-dismiss {
+    background: transparent; color: rgba(255,255,255,0.7);
+    border: none; font-family: inherit; font-size: 14px;
+    padding: 0 2px; cursor: pointer; line-height: 1;
+  }
 </style>
 </head>
 <body>
+
+<!-- LIVE NOTIFY BANNER -->
+<div id="live-notify-banner" class="live-notify-banner">
+  <span>🔴 LIVE配信中！</span>
+  <button class="lnb-watch" onclick="lnbWatch()">今すぐ見る</button>
+  <button class="lnb-dismiss" onclick="lnbDismiss()">×</button>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1076,8 +1108,26 @@ async function checkLive() {
   }
 }
 
+function showLiveNotifyBanner() {
+  if (!sessionStorage.getItem('lnb_dismissed')) {
+    document.getElementById('live-notify-banner').classList.add('show');
+  }
+}
+function lnbWatch() {
+  lnbDismiss();
+  document.getElementById('nav-tab-live').click();
+}
+function lnbDismiss() {
+  sessionStorage.setItem('lnb_dismissed', '1');
+  document.getElementById('live-notify-banner').classList.remove('show');
+}
+
 function renderLiveOn(videoId, title) {
   document.getElementById('nav-tab-live').style.display = '';
+  // LIVEタブを見ていない場合のみバナー表示
+  if (!document.getElementById('nav-tab-live').classList.contains('active')) {
+    showLiveNotifyBanner();
+  }
   const wrap = document.getElementById('live-wrap');
   wrap.className = '';
   wrap.innerHTML = `
@@ -1099,6 +1149,8 @@ function renderLiveOn(videoId, title) {
 }
 
 function renderLiveOff() {
+  document.getElementById('live-notify-banner').classList.remove('show');
+  sessionStorage.removeItem('lnb_dismissed');
   const tab = document.getElementById('nav-tab-live');
   tab.style.display = 'none';
   // LIVEタブ表示中なら装備一覧に戻す
