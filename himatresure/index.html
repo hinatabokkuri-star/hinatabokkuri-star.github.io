@@ -354,13 +354,8 @@
         <div class="skill-checks" id="skill-checks"></div>
       </div>
 
-      <!-- ③ 探す -->
-      <button class="search-btn" id="search-combos-btn" onclick="searchCombinations()">
-        ⚡ 組み合わせを探す
-      </button>
-
       <!-- 結果 -->
-      <div class="combo-result" id="combo-result"></div>
+      <div class="combo-result" id="combo-result"><div class="ck-empty" style="color:var(--dim)">装備またはスキルを選択すると自動で検索します</div></div>
     </div>
   </div>
 </div>
@@ -648,6 +643,7 @@ function onSlotChange(cat) {
   el.innerHTML = item
     ? item.skills.map(s=>`<div class="slot-skill-chip"><span class="skill-type st-${s.type}">${s.type}</span><span style="font-size:11px">${s.name}</span></div>`).join('')
     : '';
+  searchCombinations();
 }
 
 // ━━━ 装備から検索：スキルチェックボックス ━━━
@@ -670,6 +666,7 @@ function buildSkillChecks() {
 function onCheckChange(checkbox) {
   const lbl = checkbox.closest('label');
   lbl.classList.toggle('checked', checkbox.checked);
+  searchCombinations();
 }
 
 function getTargetSkills() {
@@ -711,7 +708,7 @@ function searchCombinations() {
   const hasFixed = CATS.some(c => fixed[c]);
   if (!hasFixed && skills.length === 0) {
     document.getElementById('combo-result').innerHTML =
-      '<div class="ck-impossible">装備かスキルを少なくとも1つ指定してください。<br>絞り込みなしだと組み合わせが膨大になります。</div>';
+      '<div class="ck-empty" style="color:var(--dim)">装備またはスキルを選択すると自動で検索します</div>';
     return;
   }
   runComboSearch(fixed, skills, 'combo-result');
