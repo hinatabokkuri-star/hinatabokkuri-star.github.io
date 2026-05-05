@@ -82,8 +82,8 @@
   .card:active { border-color: var(--accent); }
   .card.owned { border-color: #aa8800; }
   .card-head { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
-  .star-btn { background: none; border: none; font-size: 16px; cursor: pointer; padding: 0 2px; line-height: 1; flex-shrink: 0; opacity: 0.35; transition: opacity .1s; -webkit-tap-highlight-color: transparent; }
-  .star-btn.owned { opacity: 1; }
+  .star-btn { background: none; border: none; font-size: 16px; cursor: pointer; padding: 0 2px; line-height: 1; flex-shrink: 0; color: var(--dim); transition: color .1s; -webkit-tap-highlight-color: transparent; }
+  .star-btn.owned { color: #ffcc00; text-shadow: 0 0 6px #ffcc0088; }
   .owned-filter-btn { background: var(--bg); border: 1px solid var(--border); color: var(--muted); font-family: inherit; font-size: 12px; padding: 5px 12px; cursor: pointer; white-space: nowrap; flex-shrink: 0; -webkit-tap-highlight-color: transparent; transition: border-color .1s, color .1s; }
   .owned-filter-btn.active { color: #ffcc00; border-color: #aa8800; background: #1e1a00; }
   .card-no { color: var(--muted); font-size: 11px; flex-shrink: 0; }
@@ -301,7 +301,6 @@
   </div>
   <div class="filter-bar">
     <button class="owned-filter-btn" id="owned-filter-btn" onclick="toggleOwnedFilter()">★ 所持のみ</button>
-    <button class="owned-filter-btn" id="owned-all-btn" onclick="markAllOwned()">★ 全件チェック</button>
     <button class="filter-btn active" data-cat="all">すべて</button>
     <button class="filter-btn" data-cat="武器">武器</button>
     <button class="filter-btn" data-cat="盾">盾</button>
@@ -310,7 +309,10 @@
     <button class="filter-btn" data-cat="ペット">ペット</button>
   </div>
 </div>
-<div id="count"></div>
+<div style="display:flex;align-items:center;gap:10px;padding:4px 12px 2px">
+  <div id="count" style="padding:0"></div>
+  <button id="mark-visible-btn" onclick="markVisibleOwned()" style="display:none;background:none;border:1px solid #665500;color:#aa8800;font-family:inherit;font-size:11px;padding:3px 10px;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent"></button>
+</div>
 
 <!-- TAB: 一覧 -->
 <div class="tab-content active" id="tab-list">
@@ -414,8 +416,8 @@ function toggleOwned(no, e) {
   saveOwned();
   renderList();
 }
-function markAllOwned() {
-  allItems.forEach(i => ownedSet.add(i.no));
+function markVisibleOwned() {
+  getFiltered().forEach(i => ownedSet.add(i.no));
   saveOwned();
   renderList();
 }
@@ -460,6 +462,11 @@ function getFiltered() {
 
 function renderList() {
   const filtered = getFiltered();
+  const unowned = filtered.filter(i => !ownedSet.has(i.no));
+  const catLabel2 = currentCat === 'all' ? '表示中' : catLabel(currentCat);
+  const btn = document.getElementById('mark-visible-btn');
+  btn.style.display = unowned.length ? '' : 'none';
+  btn.textContent = `★ ${catLabel2}を全件所有済みに（${unowned.length}件）`;
   document.getElementById('count').textContent = `${filtered.length} 件`;
   if (!filtered.length) {
     document.getElementById('grid').innerHTML = '<div class="empty">該当する装備がありません</div>';
