@@ -1299,6 +1299,121 @@
     ]
   },
   {
+    "no": 177,
+    "category": "盾",
+    "name": "きのいた",
+    "drop_from": [{"no": 427, "name": "イビルプレート"}],
+    "skills": [
+      {"type": "A", "name": "ガード",     "desc": "つぎにうけるダメージをはいばん (VIT)"},
+      {"type": "A", "name": "タックル",   "desc": "かるいたいあたりこうげき (VIT)"},
+      {"type": "P", "name": "デスマーチ", "desc": "しぬまであるきつづける"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "OPTバフ",    "effect": "そうびオプションはっせいりつ+5%"},
+      {"pt": 250,  "name": "ゴブリンギア", "effect": "ゴブリンタイプへのダメージ+10%"},
+      {"pt": 500,  "name": "VITバフ",    "effect": "VITステータス+5%"},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 179,
+    "category": "盾",
+    "name": "サカナ",
+    "drop_from": [],
+    "skills": [
+      {"type": "A", "name": "ラッキーパンチ", "desc": "かるいランダムこうげき (LUK?)"},
+      {"type": "M", "name": "アクア",        "desc": "みずぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "デスマーチ",    "desc": "しぬまであるきつづける"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 200,
+    "category": "盾",
+    "name": "グミボール",
+    "drop_from": [{"no": 395, "name": "スライム"}],
+    "skills": [
+      {"type": "A", "name": "ラッキーパンチ", "desc": "かるいランダムこうげき (LUK?)"},
+      {"type": "A", "name": "スローアタック", "desc": "スローじょうたいにするこうげき (ATK)"},
+      {"type": "P", "name": "XPアップ",      "desc": "かくとくXP+50%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "VITバフ", "effect": "VITステータス+5%"},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 201,
+    "category": "盾",
+    "name": "ミラーシールド",
+    "drop_from": [],
+    "skills": [
+      {"type": "A", "name": "マジックアタック", "desc": "まりょくをまとったこうげき (ATK+INT)"},
+      {"type": "M", "name": "おいのり",         "desc": "HPをかいふくする (LUK?)"},
+      {"type": "P", "name": "カウンター",       "desc": "こうげきをうけるとターンがはやまる (VIT)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "マジックギア", "effect": "マジックスキル+5%"},
+      {"pt": 250,  "name": "OPTバフ",    "effect": "そうびオプションはっせいりつ+5%"},
+      {"pt": 500,  "name": "スタンギア", "effect": "スタンはっせい+5%"},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 203,
+    "category": "盾",
+    "name": "かめのこうら",
+    "drop_from": [],
+    "skills": [
+      {"type": "M", "name": "アクア",     "desc": "みずぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "めいそう",   "desc": "HPをかいふくする (Lv)"},
+      {"type": "P", "name": "カウンター", "desc": "こうげきをうけるとターンがはやまる (VIT)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
     "no": 269,
     "category": "鎧",
     "name": "ナイトアーマー",

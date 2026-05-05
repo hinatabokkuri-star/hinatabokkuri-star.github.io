@@ -214,6 +214,34 @@
   .drop-link { color: var(--accent); text-decoration: none; cursor: pointer; }
   .empty { grid-column: 1/-1; text-align: center; color: var(--muted); padding: 60px 20px; font-size: 13px; }
 
+  /* ━━━ MASTERY TAB ━━━ */
+  #mastery-search:focus { border-color: var(--accent); }
+  #mastery-search::placeholder { color: var(--muted); }
+
+  .mastery-bonus-card {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 12px; margin-bottom: 8px;
+  }
+  .mastery-bonus-name {
+    font-size: 14px; color: var(--accent); margin-bottom: 8px;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .mastery-bonus-minpt {
+    font-size: 10px; color: var(--ok); border: 1px solid var(--ok); padding: 1px 6px;
+  }
+  .mastery-bonus-rows { display: flex; flex-direction: column; gap: 4px; }
+  .mastery-bonus-row {
+    display: flex; align-items: center; gap: 8px; font-size: 12px;
+    padding: 3px 0; border-bottom: 1px solid var(--panel2);
+    cursor: pointer;
+  }
+  .mastery-bonus-row:last-child { border-bottom: none; }
+  .mastery-bonus-row:hover .mastery-item-name { color: var(--accent); }
+  .mastery-pt { color: var(--muted); width: 52px; flex-shrink: 0; font-size: 11px; }
+  .mastery-item-name { flex: 1; }
+  .mastery-effect { color: var(--muted); font-size: 11px; }
+  .mastery-count { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+
   /* ━━━ FOOTER ━━━ */
   footer { background: var(--panel); border-top: 1px solid var(--border); padding: 16px; text-align: center; font-size: 11px; color: var(--muted); line-height: 2.2; }
   footer a { color: var(--muted); text-decoration: underline; }
@@ -245,6 +273,7 @@
   <nav class="nav-tabs">
     <button class="nav-tab active" data-tab="list">📋 装備一覧</button>
     <button class="nav-tab" data-tab="checker">⚡ スキル発動チェッカー</button>
+    <button class="nav-tab" data-tab="mastery">⭐ マスタリーボーナス</button>
   </nav>
 </section>
 
@@ -323,6 +352,15 @@
   </div>
 </div>
 
+<!-- TAB: マスタリーボーナス -->
+<div class="tab-content" id="tab-mastery">
+  <div style="padding:12px 12px 4px">
+    <input id="mastery-search" type="search" placeholder="ボーナス名・効果で絞り込み…" autocomplete="off"
+      style="width:100%;background:var(--panel);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:14px;padding:8px 12px;outline:none;">
+  </div>
+  <div id="mastery-list" style="padding:8px 12px 80px"></div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div>ひまつぶトレジャー &copy; <a href="https://apps.apple.com/jp/app/%E3%81%B2%E3%81%BE%E3%81%A4%E3%81%B6%E3%83%88%E3%83%AC%E3%82%B8%E3%83%A3%E3%83%BC/id6759699741" target="_blank" rel="noopener">Mitsuhiro Okada</a></div>
@@ -359,6 +397,7 @@ async function init() {
   buildSkillChecksForSkillMode();
   buildSlots();
   buildSkillChecks();
+  masteryMap = buildMasteryMap();
 }
 
 // ━━━ 一覧 ━━━
@@ -726,6 +765,63 @@ document.getElementById('sort').addEventListener('change', e => {
   currentSort = e.target.value; renderList();
 });
 
+// ━━━ マスタリーボーナス一覧 ━━━
+function buildMasteryMap() {
+  // バフ名 → [{pt, item}] のマップを作成
+  const map = new Map();
+  allItems.forEach(item => {
+    item.mastery_bonus.forEach(b => {
+      if (!b.name) return;
+      if (!map.has(b.name)) map.set(b.name, []);
+      map.get(b.name).push({ pt: b.pt, effect: b.effect, item });
+    });
+  });
+  // 各グループ内をpt昇順
+  map.forEach(arr => arr.sort((a,b) => a.pt - b.pt));
+  // グループ自体を最低ptで昇順ソート
+  return [...map.entries()].sort((a, b) => a[1][0].pt - b[1][0].pt || a[0].localeCompare(b[0],'ja'));
+}
+
+let masteryMap = [];
+
+function renderMastery() {
+  const q = document.getElementById('mastery-search').value.trim();
+  const el = document.getElementById('mastery-list');
+
+  const filtered = masteryMap.filter(([name, rows]) => {
+    if (!q) return true;
+    if (name.includes(q)) return true;
+    return rows.some(r => r.effect.includes(q) || r.item.name.includes(q));
+  });
+
+  if (!filtered.length) {
+    el.innerHTML = '<div class="empty">該当なし</div>';
+    return;
+  }
+
+  el.innerHTML = filtered.map(([name, rows]) => {
+    const minPt = rows[0].pt;
+    const rowsHtml = rows.map(r => `
+      <div class="mastery-bonus-row" onclick="openModal(${r.item.no})">
+        <span class="mastery-pt">${r.pt}pt</span>
+        <span class="mastery-item-name">
+          <span class="cat-tag cat-tag-${r.item.category}" style="margin-right:5px">${r.item.category}</span>No${r.item.no} ${r.item.name}
+        </span>
+        <span class="mastery-effect">${r.effect}</span>
+      </div>`).join('');
+    return `<div class="mastery-bonus-card">
+      <div class="mastery-bonus-name">
+        ${name}
+        <span class="mastery-bonus-minpt">最低 ${minPt}pt</span>
+      </div>
+      <div class="mastery-count">${rows.length}件</div>
+      <div class="mastery-bonus-rows">${rowsHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('mastery-search').addEventListener('input', renderMastery);
+
 document.querySelectorAll('.nav-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -735,6 +831,7 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
     const isList = tab.dataset.tab === 'list';
     document.getElementById('toolbar').style.display = isList ? '' : 'none';
     document.getElementById('count').style.display = isList ? '' : 'none';
+    if (tab.dataset.tab === 'mastery') renderMastery();
   });
 });
 
