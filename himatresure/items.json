@@ -1376,5 +1376,695 @@
       {"pt": 7500, "name": null, "effect": null},
       {"pt": 9999, "name": null, "effect": null}
     ]
+  },
+  {
+    "no": 397,
+    "category": "ペット",
+    "name": "キラーサーペント",
+    "monster_type": "リザード",
+    "drop_items": [
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": 4,    "name": "ロングソード"},
+      {"no": null, "name": "???"},
+      {"no": 269,  "name": "ナイトアーマー"}
+    ],
+    "skills": [
+      {"type": "A", "name": "タックル",      "desc": "かるいたいあたりこうげき (VIT)"},
+      {"type": "A", "name": "ダッシュアタック", "desc": "スピードまかせのこうげき (ATK+SPD)"},
+      {"type": "M", "name": "ポイズンミスト", "desc": "どくじょうたいにするまほうこうげき (INT)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "ゴブリンギア",  "effect": "ゴブリンタイプへのダメージ+10%"},
+      {"pt": 250,  "name": "ATKバフ",      "effect": "ATKステータス+5%"},
+      {"pt": 500,  "name": "アクションギア", "effect": "アクションスキル+5%"},
+      {"pt": 1000, "name": "XPバフ",       "effect": "ドロップXP+0〜1"},
+      {"pt": 1500, "name": "ムーブギア",   "effect": "いどうスピード+1"},
+      {"pt": 2500, "name": "アニマルギア",  "effect": "アニマルタイプへのダメージ+10%"},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 401,
+    "category": "ペット",
+    "name": "バグスカルゴ",
+    "monster_type": "インセクト",
+    "drop_items": [
+      {"no": 17,   "name": "ストーンボウ"},
+      {"no": null, "name": "ダンボール"},
+      {"no": null, "name": "スネイルガード"},
+      {"no": null, "name": "ビッグシールド"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "M", "name": "チャージ",    "desc": "つぎにあたえるダメージをアップ (INT)"},
+      {"type": "A", "name": "スローアタック", "desc": "スローじょうたいにするこうげき (ATK)"},
+      {"type": "P", "name": "XPアップ",   "desc": "かくとくXP+50%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "XPギア",  "effect": "かくとくXP+5%"},
+      {"pt": 250,  "name": "スローギア", "effect": "スローはっせい+5%"},
+      {"pt": 500,  "name": "VITバフ", "effect": "VITステータス+5%"},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 409,
+    "category": "ペット",
+    "name": "イガグリドッグ",
+    "monster_type": "アニマル",
+    "drop_items": [
+      {"no": null, "name": "???"},
+      {"no": null, "name": "ニードルガード"},
+      {"no": 109,  "name": "クナイ"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "スパイクシールド"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ボディアタック",  "desc": "たいじゅうをのせたこうげき (ATK+VIT)"},
+      {"type": "A", "name": "ダッシュアタック", "desc": "スピードまかせのこうげき (ATK+SPD)"},
+      {"type": "P", "name": "カウンター",      "desc": "こうげきをうけるとターンがはやまる (VIT)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 412,
+    "category": "ペット",
+    "name": "タニップ",
+    "monster_type": null,
+    "drop_items": [
+      {"no": 27,   "name": "リーフカッター"},
+      {"no": null, "name": "???"},
+      {"no": 100,  "name": "スコップ"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "M", "name": "リーフ",   "desc": "くさぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "キュア",   "desc": "がいふくまほう (INT)"},
+      {"type": "P", "name": "XPアップ", "desc": "かくとくXP+50%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 414,
+    "category": "ペット",
+    "name": "パクパクフラワー",
+    "monster_type": null,
+    "drop_items": [
+      {"no": 28,   "name": "フラワーハンマー"},
+      {"no": null, "name": "フラワーガード"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "M", "name": "リーフ",   "desc": "くさぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "ライト",   "desc": "ひかりぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "めいそう", "desc": "HPをかいふくする (Lv)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 417,
+    "category": "ペット",
+    "name": "クロッピ",
+    "monster_type": null,
+    "drop_items": [
+      {"no": 30,   "name": "まきもの"},
+      {"no": null, "name": "???"},
+      {"no": 11,   "name": "アクアロッド"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "M", "name": "アクア",       "desc": "みずぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "ポイズンミスト", "desc": "どくじょうたいにするまほうこうげき (INT)"},
+      {"type": "P", "name": "ステップムーブ", "desc": "ステップいどうになる"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "インセクトギア", "effect": "インセクトタイプへのダメージ+10%"},
+      {"pt": 250,  "name": "SPDバフ",      "effect": "SPDステータス+5%"},
+      {"pt": 500,  "name": "スライムギア",  "effect": "スライムタイプへのダメージ+10%"},
+      {"pt": 1000, "name": "ムーブギア",   "effect": "いどうスピード+1"},
+      {"pt": 1500, "name": "コインギア",   "effect": "ドロップコイン+0〜1"},
+      {"pt": 2500, "name": "アクアギア",   "effect": "みずダメージ+10%"},
+      {"pt": 3500, "name": "INTバフ",     "effect": "INTステータス+5%"},
+      {"pt": 5000, "name": "LUKバフ",     "effect": "LUKステータス+5%"},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 419,
+    "category": "ペット",
+    "name": "エンジェルスライム",
+    "monster_type": "スライム",
+    "drop_items": [
+      {"no": 32,   "name": "ホーリーボウ"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "M", "name": "ライト",   "desc": "ひかりぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "キュア",   "desc": "がいふくまほう (INT)"},
+      {"type": "M", "name": "おいのり", "desc": "HPをかいふくする (LUK?)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "XPバフ",     "effect": "ドロップXP+0〜1"},
+      {"pt": 250,  "name": "デビルギア",  "effect": "デビルタイプへのダメージ+10%"},
+      {"pt": 500,  "name": "アンデッドギア", "effect": "アンデッドタイプへのダメージ+10%"},
+      {"pt": 1000, "name": "ライトギア",  "effect": "ひかりダメージ+10%"},
+      {"pt": 1500, "name": "LUKバフ",    "effect": "LUKステータス+5%"},
+      {"pt": 2500, "name": "フレアギア",  "effect": "ほのおダメージ+10%"},
+      {"pt": 3500, "name": "LUKバフ",    "effect": "LUKステータス+5%"},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 423,
+    "category": "ペット",
+    "name": "ゲレゲレ",
+    "monster_type": "インセクト",
+    "drop_items": [
+      {"no": 35,   "name": "スタブナイフ"},
+      {"no": 176,  "name": "ナベのフタ"},
+      {"no": null, "name": "ブロンズシールド"},
+      {"no": null, "name": "しゅうじんふく"},
+      {"no": null, "name": "カオスリング"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ポイズンアタック", "desc": "どくじょうたいにするこうげき (ATK)"},
+      {"type": "M", "name": "ダーク",          "desc": "やみぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "エンカウンター",  "desc": "モンスターしゅつげんりつアップ"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 426,
+    "category": "ペット",
+    "name": "グリーンマッシュ",
+    "monster_type": null,
+    "drop_items": [
+      {"no": null, "name": "???"},
+      {"no": null, "name": "きのこ"},
+      {"no": 26,   "name": "まるた"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ボディアタック", "desc": "たいじゅうをのせたこうげき (ATK+VIT)"},
+      {"type": "M", "name": "リーフ",        "desc": "くさぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "キュア",        "desc": "がいふくまほう (INT)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 427,
+    "category": "ペット",
+    "name": "イビルプレート",
+    "monster_type": "メダマ",
+    "drop_items": [
+      {"no": null, "name": "???"},
+      {"no": null, "name": "スキンヘッド"},
+      {"no": 44,   "name": "グリーンボウ"},
+      {"no": null, "name": "きのいた"},
+      {"no": null, "name": "インテリング"}
+    ],
+    "skills": [
+      {"type": "M", "name": "リーフ",     "desc": "くさぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "ダーク",     "desc": "やみぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "デスマーチ", "desc": "しぬまであるきつづける"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "ダークギア",  "effect": "やみダメージ+10%"},
+      {"pt": 250,  "name": "INTバフ",    "effect": "INTステータス+5%"},
+      {"pt": 500,  "name": "リーフギア",  "effect": "くさダメージ+10%"},
+      {"pt": 1000, "name": "XPバフ",     "effect": "ドロップXP+0〜1"},
+      {"pt": 1500, "name": "INTバフ",    "effect": "INTステータス+5%"},
+      {"pt": 2500, "name": "マジックギア", "effect": "マジックスキル+5%"},
+      {"pt": 3500, "name": "SPDバフ",    "effect": "SPDステータス+5%"},
+      {"pt": 5000, "name": "マジックギア", "effect": "マジックスキル+5%"},
+      {"pt": 7500, "name": "リーフギア",  "effect": "くさダメージ+10%"},
+      {"pt": 9999, "name": "INTバフ",    "effect": "INTステータス+5%"}
+    ]
+  },
+  {
+    "no": 430,
+    "category": "ペット",
+    "name": "マッドマン",
+    "monster_type": "アンデッド",
+    "drop_items": [
+      {"no": 41,   "name": "アースブレイド"},
+      {"no": null, "name": "わらにんぎょう"},
+      {"no": 100,  "name": "スコップ"},
+      {"no": null, "name": "モグメット"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "M", "name": "リーフ",       "desc": "くさぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "スロージャワー", "desc": "スローじょうたいにするまほうこうげき (INT)"},
+      {"type": "M", "name": "めいそう",     "desc": "HPをかいふくする (Lv)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "インセクトギア", "effect": "インセクトタイプへのダメージ+10%"},
+      {"pt": 250,  "name": "LUKバフ",      "effect": "LUKステータス+5%"},
+      {"pt": 500,  "name": "VITバフ",      "effect": "VITステータス+5%"},
+      {"pt": 1000, "name": "リーフギア",   "effect": "くさダメージ+10%"},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 431,
+    "category": "ペット",
+    "name": "スケルトン",
+    "monster_type": "アンデッド",
+    "drop_items": [
+      {"no": 42,   "name": "スカルロッド"},
+      {"no": null, "name": "ボーンシールド"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "A", "name": "マジックアタック", "desc": "まりょくをまとったこうげき (ATK+INT)"},
+      {"type": "M", "name": "ダーク",           "desc": "やみぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "ふいうち",         "desc": "せんせいこうげきをしかける"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 435,
+    "category": "ペット",
+    "name": "ゴブリンナイト",
+    "monster_type": "ゴブリン",
+    "drop_items": [
+      {"no": 4,    "name": "ロングソード"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "ゴブリング"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ガード",           "desc": "つぎにうけるダメージをはいばん (VIT)"},
+      {"type": "A", "name": "マジックアタック",  "desc": "まりょくをまとったこうげき (ATK+INT)"},
+      {"type": "P", "name": "クリティカル+20%", "desc": "クリティカル+20%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 436,
+    "category": "ペット",
+    "name": "ゴブリンメイジ",
+    "monster_type": "ゴブリン",
+    "drop_items": [
+      {"no": 7,    "name": "スタッフ"},
+      {"no": null, "name": "???"},
+      {"no": 59,   "name": "ヒーリングワンド"},
+      {"no": 113,  "name": "ムーンロッド"},
+      {"no": null, "name": "インテリング"}
+    ],
+    "skills": [
+      {"type": "M", "name": "マジックボール", "desc": "かるいまほうこうげき (INT)"},
+      {"type": "M", "name": "ランダムマジック", "desc": "ランダムなまほうこうげき (INT+LUK?)"},
+      {"type": "M", "name": "キュア",         "desc": "がいふくまほう (INT)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 437,
+    "category": "ペット",
+    "name": "ゴブリンハンター",
+    "monster_type": "ゴブリン",
+    "drop_items": [
+      {"no": 44,   "name": "グリーンボウ"},
+      {"no": null, "name": "ハンターローブ"},
+      {"no": 8,    "name": "ウッドボウ"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "M", "name": "チャージ",      "desc": "つぎにあたえるダメージをアップ (INT)"},
+      {"type": "A", "name": "ダッシュアタック", "desc": "スピードまかせのこうげき (ATK+SPD)"},
+      {"type": "P", "name": "とどめ",        "desc": "ラストヒットのダメージ+50%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 439,
+    "category": "ペット",
+    "name": "ゴブリンギャング",
+    "monster_type": "ゴブリン",
+    "drop_items": [
+      {"no": null, "name": "???"},
+      {"no": null, "name": "ゴブリング"},
+      {"no": 144,  "name": "クロウ"},
+      {"no": 152,  "name": "ギガントアックス"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "A", "name": "タックル",   "desc": "かるいたいあたりこうげき (VIT)"},
+      {"type": "P", "name": "カウンター", "desc": "こうげきをうけるとターンがはやまる (VIT)"},
+      {"type": "P", "name": "コインプラス", "desc": "ドロップコイン+0〜3"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": "ゴブリンギア", "effect": "ゴブリンタイプへのダメージ+10%"},
+      {"pt": 250,  "name": "コインギア",  "effect": "ドロップコイン+0〜1"},
+      {"pt": 500,  "name": "ATKバフ",    "effect": "ATKステータス+5%"},
+      {"pt": 1000, "name": "ゴブリンギア", "effect": "ゴブリンタイプへのダメージ+10%"},
+      {"pt": 1500, "name": "SPDバフ",    "effect": "SPDステータス+5%"},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 440,
+    "category": "ペット",
+    "name": "アイアンテール",
+    "monster_type": "インセクト",
+    "drop_items": [
+      {"no": 46,   "name": "ストーンロッド"},
+      {"no": null, "name": "ヘビーアーマー"},
+      {"no": null, "name": "???"},
+      {"no": 17,   "name": "ストーンボウ"},
+      {"no": null, "name": "アイアンシールド"}
+    ],
+    "skills": [
+      {"type": "A", "name": "スタンアタック",  "desc": "スタンさせるこうげき (ATK)"},
+      {"type": "M", "name": "ダーク",          "desc": "やみぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "クリティカル+20%", "desc": "クリティカル+20%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 441,
+    "category": "ペット",
+    "name": "ワークスライム",
+    "monster_type": "アームド",
+    "drop_items": [
+      {"no": 47,   "name": "ピッケル"},
+      {"no": null, "name": "モグメット"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ガード",     "desc": "つぎにうけるダメージをはいばん (VIT)"},
+      {"type": "A", "name": "タックル",   "desc": "かるいたいあたりこうげき (VIT)"},
+      {"type": "P", "name": "デスマーチ", "desc": "しぬまであるきつづける"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 443,
+    "category": "ペット",
+    "name": "トールボット",
+    "monster_type": null,
+    "drop_items": [
+      {"no": 49,   "name": "スタンドマイク"},
+      {"no": null, "name": "???"},
+      {"no": 67,   "name": "しゅりけん"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "デビルソング"}
+    ],
+    "skills": [
+      {"type": "M", "name": "ソニックウェーブ", "desc": "かぜのまほうこうげき (INT+SPD)"},
+      {"type": "M", "name": "ダーク",          "desc": "やみぞくせいのまほうこうげき (INTx2)"},
+      {"type": "M", "name": "ライフドレイン",  "desc": "HPをうばいとるまほうこうげき (INT)"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 447,
+    "category": "ペット",
+    "name": "レッドアイ",
+    "monster_type": "メダマ",
+    "drop_items": [
+      {"no": 52,   "name": "ヒートナイフ"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ジャブ",     "desc": "かるいスピードこうげき (SPD)"},
+      {"type": "M", "name": "フレア",     "desc": "ほのおぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "デスマーチ", "desc": "しぬまであるきつづける"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 450,
+    "category": "ペット",
+    "name": "デビルアイ",
+    "monster_type": "メダマ",
+    "drop_items": [
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": 7,    "name": "スタッフ"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "M", "name": "ソニックウェーブ", "desc": "かぜのまほうこうげき (INT+SPD)"},
+      {"type": "M", "name": "フレア",           "desc": "ほのおぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "ふいうち",         "desc": "せんせいこうげきをしかける"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 463,
+    "category": "ペット",
+    "name": "スコーピオン",
+    "monster_type": "インセクト",
+    "drop_items": [
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "クラブリング"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ポイズンアタック", "desc": "どくじょうたいにするこうげき (ATK)"},
+      {"type": "P", "name": "クリティカル+20%", "desc": "クリティカル+20%"},
+      {"type": "P", "name": "とどめ",           "desc": "ラストヒットのダメージ+50%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
+  },
+  {
+    "no": 467,
+    "category": "ペット",
+    "name": "サボキング",
+    "monster_type": null,
+    "drop_items": [
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": 162,  "name": "デストロイヤー"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ポイズンアタック", "desc": "どくじょうたいにするこうげき (ATK)"},
+      {"type": "M", "name": "リーフ",           "desc": "くさぞくせいのまほうこうげき (INTx2)"},
+      {"type": "P", "name": "クリティカル+20%", "desc": "クリティカル+20%"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
   }
 ]
