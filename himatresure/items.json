@@ -556,7 +556,7 @@
     "category": "武器",
     "name": "スタブナイフ",
     "drop_from": [
-      {"no": 423, "name": "グレグレ"}
+      {"no": 423, "name": "ゲレゲレ"}
     ],
     "skills": [
       {"type": "A", "name": "スタンアタック", "desc": "スタンさせるこうげき (ATK)"},
@@ -1279,7 +1279,7 @@
     "no": 176,
     "category": "盾",
     "name": "ナベのフタ",
-    "drop_from": [{"no": 423, "name": "グレグレ"}],
+    "drop_from": [{"no": 423, "name": "ゲレゲレ"}],
     "skills": [
       {"type": "A", "name": "タックル",     "desc": "かるいたいあたりこうげき (VIT)"},
       {"type": "M", "name": "アクア",       "desc": "みずぞくせいのまほうこうげき (INTx2)"},
