@@ -258,24 +258,6 @@
   footer { background: var(--panel); border-top: 1px solid var(--border); padding: 16px; text-align: center; font-size: 11px; color: var(--muted); line-height: 2.2; }
   footer a { color: var(--muted); text-decoration: underline; }
 
-  /* ━━━ LIVE ━━━ */
-  #tab-live { padding: 0 0 80px; }
-  .live-status-bar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--panel); border-bottom: 1px solid var(--border); font-size: 12px; }
-  .live-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; font-size: 11px; font-weight: bold; flex-shrink: 0; }
-  .live-badge.on  { background: #cc0000; color: #fff; }
-  .live-badge.off { background: var(--bg); border: 1px solid var(--border); color: var(--muted); }
-  .live-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .live-layout { display: flex; flex-direction: column; }
-  @media (min-width: 700px) { .live-layout { flex-direction: row; } }
-  .live-player-wrap { position: relative; width: 100%; padding-top: 56.25%; background: #000; flex-shrink: 0; }
-  @media (min-width: 700px) { .live-player-wrap { width: 60%; padding-top: calc(60% * 0.5625); } }
-  .live-player-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-  .live-chat-wrap { flex: 1; min-height: 300px; }
-  .live-chat-wrap iframe { width: 100%; height: 100%; min-height: 300px; border: none; }
-  .live-offline { text-align: center; padding: 60px 20px; color: var(--muted); line-height: 2.4; }
-  .live-offline .live-icon { font-size: 40px; margin-bottom: 12px; }
-  .live-channel-link { display: inline-block; margin-top: 14px; padding: 8px 20px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-size: 13px; }
-  .live-loading { text-align: center; padding: 60px; color: var(--muted); }
 
   /* ━━━ UPDATE NOTIFY BANNER ━━━ */
   .update-notify-banner {
@@ -337,7 +319,6 @@
     <button class="nav-tab active" data-tab="list">📋 装備一覧</button>
     <button class="nav-tab" data-tab="checker">⚡ スキル発動チェッカー</button>
     <button class="nav-tab" data-tab="mastery">⭐ マスタリーボーナス</button>
-    <button class="nav-tab" data-tab="live" id="nav-tab-live" style="display:none">🔴 LIVE</button>
   </nav>
 </section>
 
@@ -373,11 +354,6 @@
 <!-- TAB: 一覧 -->
 <div class="tab-content active" id="tab-list">
   <div id="grid"></div>
-</div>
-
-<!-- TAB: LIVE -->
-<div class="tab-content" id="tab-live">
-  <div id="live-wrap" class="live-loading">確認中…</div>
 </div>
 
 <!-- TAB: チェッカー -->
@@ -1082,33 +1058,9 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
     document.getElementById('toolbar').style.display = isList ? '' : 'none';
     document.getElementById('count-bar').style.display = isList ? '' : 'none';
     if (tab.dataset.tab === 'mastery') renderMastery();
-    if (tab.dataset.tab === 'live') checkLive();
   });
 });
 
-// ━━━ YouTube LIVE ━━━
-const YT_API_KEY = 'AIzaSyDj0hym8KQYix3b7lnFfu8sNAbae4f5Fa4';
-const YT_CHANNEL_ID = 'UCuMu13-XfLh1D8wRDwZA38w';
-let liveCheckTimer = null;
-
-async function checkLive() {
-  const wrap = document.getElementById('live-wrap');
-  wrap.className = 'live-loading';
-  wrap.innerHTML = '確認中…';
-  try {
-    const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YT_CHANNEL_ID}&type=video&eventType=live&key=${YT_API_KEY}`);
-    const data = await res.json();
-    if (data.items && data.items.length > 0) {
-      const item = data.items[0];
-      renderLiveOn(item.id.videoId, item.snippet.title);
-    } else {
-      renderLiveOff();
-    }
-  } catch(e) {
-    wrap.className = '';
-    wrap.innerHTML = '<div class="live-offline"><div>接続エラー</div></div>';
-  }
-}
 
 // ━━━ データ更新通知 ━━━
 const UNB_KEY = 'himatubu_item_count';
@@ -1129,51 +1081,6 @@ function unbDismiss() {
   document.getElementById('update-notify-banner').classList.remove('show');
 }
 
-function renderLiveOn(videoId, title) {
-  document.getElementById('nav-tab-live').style.display = '';
-  const wrap = document.getElementById('live-wrap');
-  wrap.className = '';
-  wrap.innerHTML = `
-    <div class="live-status-bar">
-      <span class="live-badge on">● LIVE</span>
-      <span class="live-title">${title}</span>
-      <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" style="color:var(--muted);font-size:11px;flex-shrink:0">別タブで開く</a>
-    </div>
-    <div class="live-layout">
-      <div class="live-player-wrap">
-        <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-      <div class="live-chat-wrap">
-        <iframe src="https://www.youtube.com/live_chat?is_popout=1&v=${videoId}" allow="autoplay"></iframe>
-      </div>
-    </div>`;
-  clearInterval(liveCheckTimer);
-  liveCheckTimer = setInterval(checkLive, 120000);
-}
-
-function renderLiveOff() {
-  const tab = document.getElementById('nav-tab-live');
-  tab.style.display = 'none';
-  // LIVEタブ表示中なら装備一覧に戻す
-  if (tab.classList.contains('active')) {
-    document.querySelector('[data-tab="list"]').click();
-    return;
-  }
-  const wrap = document.getElementById('live-wrap');
-  wrap.className = '';
-  wrap.innerHTML = `
-    <div class="live-status-bar">
-      <span class="live-badge off">○ オフライン</span>
-      <span class="live-title" style="color:var(--muted)">現在配信していません</span>
-    </div>
-    <div class="live-offline">
-      <div class="live-icon">📺</div>
-      <div>現在ライブ配信は行っていません</div>
-      <div style="font-size:11px;margin-top:6px">配信開始時に通知を受け取るにはチャンネル登録＋🔔</div>
-      <a class="live-channel-link" href="https://www.youtube.com/channel/${YT_CHANNEL_ID}" target="_blank" rel="noopener">YouTube チャンネルを見る</a>
-    </div>`;
-  clearInterval(liveCheckTimer);
-}
 
 document.querySelectorAll('.mode-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1185,9 +1092,6 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
 });
 
 init();
-// ページ読み込み時にライブ確認（タブは配信中のみ表示）
-checkLive();
-setInterval(checkLive, 120000);
 </script>
 </body>
 </html>
