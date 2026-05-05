@@ -485,6 +485,10 @@
       {
         "no": 417,
         "name": "クロッピ"
+      },
+      {
+        "no": 457,
+        "name": "ウンディーネ"
       }
     ],
     "skills": [
@@ -8746,7 +8750,12 @@
     "no": 347,
     "category": "アクセサリー",
     "name": "アクアリング",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 457,
+        "name": "ウンディーネ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -9754,7 +9763,12 @@
     "no": 373,
     "category": "アクセサリー",
     "name": "クリスタルリング",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 457,
+        "name": "ウンディーネ"
+      }
+    ],
     "skills": [
       {
         "type": "M",
@@ -11984,6 +11998,103 @@
         "type": "P",
         "name": "ふいうち",
         "desc": "せんせいこうげきをしかける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 457,
+    "category": "ペット",
+    "name": "ウンディーネ",
+    "monster_type": null,
+    "drop_items": [
+      {
+        "no": 347,
+        "name": "アクアリング"
+      },
+      {
+        "no": 373,
+        "name": "クリスタルリング"
+      },
+      {
+        "no": 11,
+        "name": "アクアロッド"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": null,
+        "name": "???"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "ライフドレイン",
+        "desc": "HPをうばいとるまほうこうげき (INT)"
+      },
+      {
+        "type": "M",
+        "name": "スロージャワー",
+        "desc": "スローじょうたいにするまほうこうげき (INT)"
       }
     ],
     "mastery_bonus": [
