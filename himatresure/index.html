@@ -557,18 +557,7 @@ function allSkillNames() {
 }
 
 function buildSkillChecksForSkillMode() {
-  const wrap = document.getElementById('skill-checks-skill');
-  const skillMap = new Map();
-  allItems.forEach(item => item.skills.forEach(s => {
-    if (!skillMap.has(s.name)) skillMap.set(s.name, s.type);
-  }));
-  const sorted = [...skillMap.entries()].sort((a,b) => a[0].localeCompare(b[0],'ja'));
-  wrap.innerHTML = sorted.map(([name, type]) =>
-    `<label class="skill-check-label">
-      <input type="checkbox" value="${name}" onchange="onSkillModeCheck()">
-      <span class="stype st-${type}">${type}</span>${name}
-    </label>`
-  ).join('');
+  renderSkillChecks(document.getElementById('skill-checks-skill'), 'onSkillModeCheck()');
 }
 
 function getSkillModeTargets() {
@@ -647,21 +636,40 @@ function onSlotChange(cat) {
   searchCombinations();
 }
 
-// ━━━ 装備から検索：スキルチェックボックス ━━━
-function buildSkillChecks() {
-  const wrap = document.getElementById('skill-checks');
-  // スキル名とtypeの対応を収集
+// M回復スキル判定
+const M_HEAL = new Set(['キュア', 'おいのり', 'めいそう']);
+function skillGroup(name, type) {
+  if (type === 'A') return 'A';
+  if (type === 'M') return M_HEAL.has(name) ? 'M回復' : 'M攻撃';
+  return 'P';
+}
+const GROUP_ORDER = ['A', 'M攻撃', 'M回復', 'P'];
+const GROUP_LABEL = { A: 'A　物理', 'M攻撃': 'M　魔法攻撃', 'M回復': 'M　魔法回復', P: 'P　パッシブ' };
+
+function renderSkillChecks(wrap, onchange) {
   const skillMap = new Map();
-  allItems.forEach(item => item.skills.forEach(s => {
+  const pool = ownedFilter ? allItems.filter(i => ownedSet.has(i.no)) : allItems;
+  pool.forEach(item => item.skills.forEach(s => {
     if (!skillMap.has(s.name)) skillMap.set(s.name, s.type);
   }));
-  const sorted = [...skillMap.entries()].sort((a,b) => a[0].localeCompare(b[0],'ja'));
-  wrap.innerHTML = sorted.map(([name, type]) =>
-    `<label class="skill-check-label" id="chklbl-${CSS.escape(name)}">
-      <input type="checkbox" value="${name}" onchange="onCheckChange(this)">
-      <span class="stype st-${type}">${type}</span>${name}
-    </label>`
-  ).join('');
+  const groups = {};
+  GROUP_ORDER.forEach(g => groups[g] = []);
+  skillMap.forEach((type, name) => groups[skillGroup(name, type)].push([name, type]));
+  GROUP_ORDER.forEach(g => groups[g].sort((a,b) => a[0].localeCompare(b[0],'ja')));
+
+  wrap.innerHTML = GROUP_ORDER.filter(g => groups[g].length > 0).map(g => `
+    <div style="width:100%;font-size:10px;color:var(--muted);margin:8px 0 4px;border-bottom:1px solid var(--border);padding-bottom:2px">${GROUP_LABEL[g]}</div>
+    ${groups[g].map(([name, type]) => `
+      <label class="skill-check-label">
+        <input type="checkbox" value="${name}" onchange="${onchange}">
+        <span class="stype st-${type}">${type}</span>${name}
+      </label>`).join('')}
+  `).join('');
+}
+
+// ━━━ 装備から検索：スキルチェックボックス ━━━
+function buildSkillChecks() {
+  renderSkillChecks(document.getElementById('skill-checks'), 'onCheckChange(this)');
 }
 
 function clearCheckerSelections() {
