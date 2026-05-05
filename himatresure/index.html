@@ -691,8 +691,8 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     if (idx === emptyCats.length) {
       const active = Object.entries(count).filter(([,c]) => c >= 3);
       if (targetSkills.length === 0) {
-        // ターゲット未指定：2スキル以上同時発動のものだけ収集
-        if (active.length >= 2) results.push({ slots: {...slots}, count: {...count}, activeCount: active.length });
+        // ターゲット未指定：1スキル以上発動するものを収集
+        if (active.length >= 1) results.push({ slots: {...slots}, count: {...count}, activeCount: active.length });
       } else {
         if (targetSkills.every(sk => (count[sk] || 0) >= 3)) {
           results.push({ slots: {...slots}, count: {...count}, activeCount: active.length });
@@ -723,7 +723,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
 
   const headerText = targetSkills.length > 0
     ? `「${targetSkills.join('・')}」を発動できる組み合わせ`
-    : `2スキル以上同時発動できる組み合わせ`;
+    : `発動スキルがある組み合わせ`;
 
   let html = `<div class="result-header">
     <strong>${headerText}</strong>：${shown.length}件${results.length > MAX_RESULTS ? `（${results.length}件中上位${MAX_RESULTS}件）` : ''}
