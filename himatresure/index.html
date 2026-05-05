@@ -684,19 +684,18 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     catCandidates[cat] = [null, ...relevant]; // null = このスロットは使わない（空き）
   });
 
-  // バックトラッキングで全組み合わせ探索
+  // バックトラッキングで全組み合わせ探索（上限なしで全収集してからソート）
   const results = [];
 
   function backtrack(idx, slots, count) {
-    if (results.length >= MAX_RESULTS) return;
     if (idx === emptyCats.length) {
+      const active = Object.entries(count).filter(([,c]) => c >= 3);
       if (targetSkills.length === 0) {
-        // ターゲット未指定：何かスキルが発動するものを収集
-        const active = Object.entries(count).filter(([,c]) => c >= 3).map(([n]) => n);
-        if (active.length > 0) results.push({ slots: {...slots}, count: {...count} });
+        // ターゲット未指定：2スキル以上同時発動のものだけ収集
+        if (active.length >= 2) results.push({ slots: {...slots}, count: {...count}, activeCount: active.length });
       } else {
         if (targetSkills.every(sk => (count[sk] || 0) >= 3)) {
-          results.push({ slots: {...slots}, count: {...count} });
+          results.push({ slots: {...slots}, count: {...count}, activeCount: active.length });
         }
       }
       return;
@@ -707,28 +706,30 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
       if (item) item.skills.forEach(s => { newCount[s.name] = (newCount[s.name] || 0) + 1; });
       slots[cat] = item;
       backtrack(idx + 1, slots, newCount);
-      if (results.length >= MAX_RESULTS) return;
     }
     delete slots[cat];
   }
 
   backtrack(0, {}, {...baseCount});
 
-  if (results.length === 0) {
+  // 発動スキル数降順でソート、上位MAX_RESULTSに絞る
+  results.sort((a, b) => b.activeCount - a.activeCount);
+  const shown = results.slice(0, MAX_RESULTS);
+
+  if (shown.length === 0) {
     resultEl.innerHTML = `<div class="ck-empty">条件を満たす組み合わせが見つかりませんでした</div>`;
     return;
   }
 
-  const fixedCount = CATS.filter(c => fixedSlots[c]).length;
   const headerText = targetSkills.length > 0
     ? `「${targetSkills.join('・')}」を発動できる組み合わせ`
-    : `発動スキルがある組み合わせ`;
+    : `2スキル以上同時発動できる組み合わせ`;
 
   let html = `<div class="result-header">
-    <strong>${headerText}</strong>：${results.length}件${results.length >= MAX_RESULTS ? `（上限${MAX_RESULTS}件）` : ''}
+    <strong>${headerText}</strong>：${shown.length}件${results.length > MAX_RESULTS ? `（${results.length}件中上位${MAX_RESULTS}件）` : ''}
   </div>`;
 
-  html += results.map(({slots, count}) => {
+  html += shown.map(({slots, count}) => {
     // スロット表示
     const slotRows = CATS.map(cat => {
       const item = fixedSlots[cat] || slots[cat];
