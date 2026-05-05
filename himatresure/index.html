@@ -320,10 +320,9 @@
 
 <!-- TAB: チェッカー -->
 <div class="tab-content" id="tab-checker">
-  <div class="checker-rule-bar">
-    <strong>発動ルール：</strong>
-    武器 / 盾 / 鎧 / アクセサリー / ペット の5スロットのうち
-    <strong>同名スキルが3つ以上</strong> 揃うと発動
+  <div class="checker-rule-bar" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <span><strong>発動ルール：</strong>武器 / 盾 / 鎧 / アクセサリー / ペット の5スロットのうち<strong>同名スキルが3つ以上</strong>揃うと発動</span>
+    <button class="owned-filter-btn" id="owned-filter-btn-checker" onclick="toggleOwnedFilter()" style="margin-left:auto;flex-shrink:0">★ 所持のみ</button>
   </div>
 
   <div class="mode-tabs">
@@ -428,6 +427,10 @@ function unmarkVisibleOwned() {
 function toggleOwnedFilter() {
   ownedFilter = !ownedFilter;
   document.getElementById('owned-filter-btn').classList.toggle('active', ownedFilter);
+  document.getElementById('owned-filter-btn-checker').classList.toggle('active', ownedFilter);
+  buildSlots();
+  buildSkillChecks();
+  buildSkillChecksForSkillMode();
   renderList();
 }
 
