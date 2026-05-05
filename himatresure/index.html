@@ -323,6 +323,7 @@
   <div class="checker-rule-bar" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
     <span><strong>発動ルール：</strong>武器 / 盾 / 鎧 / アクセサリー / ペット の5スロットのうち<strong>同名スキルが3つ以上</strong>揃うと発動</span>
     <button class="owned-filter-btn" id="owned-filter-btn-checker" onclick="toggleOwnedFilter()" style="margin-left:auto;flex-shrink:0">★ 所持のみ</button>
+    <button class="owned-filter-btn" onclick="clearCheckerSelections()" style="flex-shrink:0">✕ 選択解除</button>
   </div>
 
   <div class="mode-tabs">
@@ -661,6 +662,18 @@ function buildSkillChecks() {
       <span class="stype st-${type}">${type}</span>${name}
     </label>`
   ).join('');
+}
+
+function clearCheckerSelections() {
+  document.querySelectorAll('.slot-select').forEach(sel => {
+    sel.value = '';
+    document.getElementById(`slot-skills-${sel.dataset.cat}`).innerHTML = '';
+  });
+  document.querySelectorAll('#skill-checks input').forEach(cb => {
+    cb.checked = false;
+    cb.closest('label').classList.remove('checked');
+  });
+  searchCombinations();
 }
 
 function onCheckChange(checkbox) {
