@@ -5684,7 +5684,23 @@
     "category": "盾",
     "name": "トゲトゲシールド",
     "drop_from": [],
-    "skills": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ラッシュ",
+        "desc": "とっしんこうげき (VIT+SPD)"
+      },
+      {
+        "type": "A",
+        "name": "ポイズンアタック",
+        "desc": "どくじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "P",
+        "name": "カウンター",
+        "desc": "こうげきをうけるとターンがはやまる (VIT)"
+      }
+    ],
     "mastery_bonus": [
       {
         "pt": 100,
