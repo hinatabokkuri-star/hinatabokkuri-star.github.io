@@ -83,7 +83,7 @@
   .card-head { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
   .card-no { color: var(--muted); font-size: 11px; flex-shrink: 0; }
   .card-name { font-size: 15px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .cat-tag { font-size: 10px; padding: 2px 5px; border: 1px solid; flex-shrink: 0; white-space: nowrap; }
+  .cat-tag { font-size: 10px; padding: 2px 0; border: 1px solid; flex-shrink: 0; white-space: nowrap; width: 3em; text-align: center; display: inline-block; }
   .cat-tag-武器         { color: var(--tag-武器);         border-color: var(--tag-武器); }
   .cat-tag-盾           { color: var(--tag-盾);           border-color: var(--tag-盾); }
   .cat-tag-鎧           { color: var(--tag-鎧);           border-color: var(--tag-鎧); }
@@ -292,7 +292,7 @@
     <button class="filter-btn" data-cat="武器">武器</button>
     <button class="filter-btn" data-cat="盾">盾</button>
     <button class="filter-btn" data-cat="鎧">鎧</button>
-    <button class="filter-btn" data-cat="アクセサリー">アクセサリー</button>
+    <button class="filter-btn" data-cat="アクセサリー">アクセ</button>
     <button class="filter-btn" data-cat="ペット">ペット</button>
   </div>
 </div>
@@ -379,7 +379,9 @@
 <script>
 const CATS = ['武器','盾','鎧','アクセサリー','ペット'];
 const CAT_ORDER = {'武器':0,'盾':1,'鎧':2,'アクセサリー':3,'ペット':4};
+const CAT_LABEL = {'武器':'武器','盾':'盾','鎧':'鎧','アクセサリー':'アクセ','ペット':'ペット'};
 const MAX_RESULTS = 30;
+function catLabel(cat) { return CAT_LABEL[cat] || cat; }
 
 let allItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
@@ -433,7 +435,7 @@ function renderList() {
       <div class="card-head">
         <span class="card-no">No${item.no}</span>
         <span class="card-name">${item.name}</span>
-        <span class="cat-tag cat-tag-${item.category}">${item.category}</span>
+        <span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span>
       </div>
       <div class="card-skills">
         ${item.skills.map(s=>`<div class="skill-row"><span class="skill-type st-${s.type}">${s.type}</span><span>${s.name}</span></div>`).join('')}
@@ -467,7 +469,7 @@ function openModal(no) {
     ? `<span style="font-size:11px;color:var(--tag-ペット);margin-right:4px">[${item.monster_type}]</span>` : '';
   document.getElementById('modal-body').innerHTML = `
     <h2>${typeTag}${item.name}</h2>
-    <div class="modal-sub"><span>No${item.no}</span><span class="cat-tag cat-tag-${item.category}">${item.category}</span></div>
+    <div class="modal-sub"><span>No${item.no}</span><span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span></div>
     <section><h3>スキル ── 同名3種装備で発動</h3>
     <div class="modal-skills">${item.skills.map(s=>`
       <div class="modal-skill-row">
@@ -570,7 +572,7 @@ function buildSlots() {
       .map(i => `<option value="${i.no}">No${i.no} ${i.name}</option>`)
       .join('');
     return `<div class="slot-block">
-      <div class="slot-label"><span class="cat-tag cat-tag-${cat}">${cat}</span></div>
+      <div class="slot-label"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span></div>
       <select class="slot-select" data-cat="${cat}" onchange="onSlotChange('${cat}')">
         <option value="">── 空き（探索対象） ──</option>
         ${options}
@@ -721,10 +723,10 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     // スロット表示
     const slotRows = CATS.map(cat => {
       const item = fixedSlots[cat] || slots[cat];
-      if (!item) return `<div class="combo-slot-row"><span class="cat-tag cat-tag-${cat}">${cat}</span><span class="combo-slot-empty">─</span></div>`;
+      if (!item) return `<div class="combo-slot-row"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span><span class="combo-slot-empty">─</span></div>`;
       const isFixed = !!fixedSlots[cat];
       return `<div class="combo-slot-row">
-        <span class="cat-tag cat-tag-${cat}">${cat}</span>
+        <span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span>
         <span class="combo-slot-item${isFixed?' ':' '}" onclick="openModal(${item.no})" style="${isFixed?'color:var(--muted)':''}">
           ${isFixed?'🔒 ':''}No${item.no} ${item.name}
         </span>
