@@ -80,7 +80,12 @@
   /* ━━━ CARD ━━━ */
   .card { background: var(--panel); border: 1px solid var(--border); padding: 11px 12px; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: border-color .1s; }
   .card:active { border-color: var(--accent); }
+  .card.owned { border-color: #aa8800; }
   .card-head { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+  .star-btn { background: none; border: none; font-size: 16px; cursor: pointer; padding: 0 2px; line-height: 1; flex-shrink: 0; opacity: 0.35; transition: opacity .1s; -webkit-tap-highlight-color: transparent; }
+  .star-btn.owned { opacity: 1; }
+  .owned-filter-btn { background: var(--bg); border: 1px solid var(--border); color: var(--muted); font-family: inherit; font-size: 12px; padding: 5px 12px; cursor: pointer; white-space: nowrap; flex-shrink: 0; -webkit-tap-highlight-color: transparent; transition: border-color .1s, color .1s; }
+  .owned-filter-btn.active { color: #ffcc00; border-color: #aa8800; background: #1e1a00; }
   .card-no { color: var(--muted); font-size: 11px; flex-shrink: 0; }
   .card-name { font-size: 15px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .cat-tag { font-size: 10px; padding: 2px 4px; border: 1px solid; white-space: nowrap; min-width: 3.5em; text-align: center; display: inline-block; flex-shrink: 0; }
@@ -295,6 +300,7 @@
     </select>
   </div>
   <div class="filter-bar">
+    <button class="owned-filter-btn" id="owned-filter-btn" onclick="toggleOwnedFilter()">★ 所持のみ</button>
     <button class="filter-btn active" data-cat="all">すべて</button>
     <button class="filter-btn" data-cat="武器">武器</button>
     <button class="filter-btn" data-cat="盾">盾</button>
@@ -395,6 +401,23 @@ function catLabel(cat) { return CAT_LABEL[cat] || cat; }
 
 let allItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
+let ownedFilter = false;
+let ownedSet = new Set(JSON.parse(localStorage.getItem('himatubu_owned') || '[]'));
+
+function saveOwned() {
+  localStorage.setItem('himatubu_owned', JSON.stringify([...ownedSet]));
+}
+function toggleOwned(no, e) {
+  e.stopPropagation();
+  if (ownedSet.has(no)) ownedSet.delete(no); else ownedSet.add(no);
+  saveOwned();
+  renderList();
+}
+function toggleOwnedFilter() {
+  ownedFilter = !ownedFilter;
+  document.getElementById('owned-filter-btn').classList.toggle('active', ownedFilter);
+  renderList();
+}
 
 // ━━━ 初期化 ━━━
 async function init() {
@@ -415,6 +438,7 @@ async function init() {
 // ━━━ 一覧 ━━━
 function getFiltered() {
   let items = allItems.filter(item => {
+    if (ownedFilter && !ownedSet.has(item.no)) return false;
     if (currentCat !== 'all' && item.category !== currentCat) return false;
     if (!currentSearch) return true;
     const q = currentSearch;
@@ -441,11 +465,12 @@ function renderList() {
     const dropNames = drops.filter(d => d.name && d.name !== '???').map(d => d.name);
     const dropHtml = dropNames.length
       ? `<div class="card-drop">${isPet?'ドロップ':'入手元'}：<span>${dropNames.join('、')}</span></div>` : '';
-    return `<div class="card" onclick="openModal(${item.no})">
+    return `<div class="card${ownedSet.has(item.no)?' owned':''}" onclick="openModal(${item.no})">
       <div class="card-head">
         <span class="card-no">No${item.no}</span>
         <span class="card-name">${item.name}</span>
         <span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span>
+        <button class="star-btn${ownedSet.has(item.no)?' owned':''}" onclick="toggleOwned(${item.no},event)" title="所持マーク">★</button>
       </div>
       <div class="card-skills">
         ${item.skills.map(s=>`<div class="skill-row"><span class="skill-type st-${s.type}">${s.type}</span><span>${s.name}</span></div>`).join('')}
@@ -676,11 +701,12 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const emptyCats = CATS.filter(c => !fixedSlots[c]);
 
   // 空きスロットの候補装備（目標スキルのいずれかを持つ、またはターゲット未指定は全件）
+  const basePool = ownedFilter ? allItems.filter(i => ownedSet.has(i.no)) : allItems;
   const catCandidates = {};
   emptyCats.forEach(cat => {
     const relevant = targetSkills.length > 0
-      ? allItems.filter(i => i.category === cat && i.skills.some(s => targetSkills.includes(s.name)))
-      : allItems.filter(i => i.category === cat);
+      ? basePool.filter(i => i.category === cat && i.skills.some(s => targetSkills.includes(s.name)))
+      : basePool.filter(i => i.category === cat);
     catCandidates[cat] = [null, ...relevant]; // null = このスロットは使わない（空き）
   });
 
