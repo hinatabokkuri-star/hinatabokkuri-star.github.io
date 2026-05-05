@@ -307,7 +307,7 @@
     <button class="filter-btn" data-cat="ペット">ペット</button>
   </div>
 </div>
-<div style="display:flex;align-items:center;gap:10px;padding:4px 12px 2px">
+<div id="count-bar" style="display:flex;align-items:center;gap:10px;padding:4px 12px 2px">
   <div id="count" style="padding:0"></div>
   <button id="mark-visible-btn" onclick="markVisibleOwned()" style="display:none;background:none;border:1px solid #665500;color:#aa8800;font-family:inherit;font-size:11px;padding:3px 10px;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent"></button>
   <button id="unmark-visible-btn" onclick="unmarkVisibleOwned()" style="display:none;background:none;border:1px solid var(--border);color:var(--muted);font-family:inherit;font-size:11px;padding:3px 10px;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent"></button>
@@ -964,7 +964,7 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
     const isList = tab.dataset.tab === 'list';
     document.getElementById('toolbar').style.display = isList ? '' : 'none';
-    document.getElementById('count').style.display = isList ? '' : 'none';
+    document.getElementById('count-bar').style.display = isList ? '' : 'none';
     if (tab.dataset.tab === 'mastery') renderMastery();
   });
 });
