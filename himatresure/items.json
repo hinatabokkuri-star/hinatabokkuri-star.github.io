@@ -9057,6 +9057,475 @@
     ]
   },
   {
+    "no": 365,
+    "category": "アクセサリー",
+    "name": "アンデッドリング",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ポイズンアタック",
+        "desc": "どくじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "M",
+        "name": "スロージャワー",
+        "desc": "スローじょうたいにするまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "デスマーチ",
+        "desc": "しぬまであるきつづける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 366,
+    "category": "アクセサリー",
+    "name": "デビルリング",
+    "drop_from": [
+      {
+        "no": 443,
+        "name": "トールボット"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
+      },
+      {
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "P",
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 369,
+    "category": "アクセサリー",
+    "name": "インテリング",
+    "drop_from": [
+      {
+        "no": 427,
+        "name": "イビルプレート"
+      },
+      {
+        "no": 436,
+        "name": "ゴブリンメイジ"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "チャージ",
+        "desc": "つぎにあたえるダメージをアップ (INT)"
+      },
+      {
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "エンカウンター",
+        "desc": "モンスターしゅつげんりつアップ"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 372,
+    "category": "アクセサリー",
+    "name": "ラッキーリング",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ラッキーパンチ",
+        "desc": "かるいランダムこうげき (LUK?)"
+      },
+      {
+        "type": "M",
+        "name": "ランダムマジック",
+        "desc": "ランダムなまほうこうげき (INT+LUK?)"
+      },
+      {
+        "type": "P",
+        "name": "コインプラス",
+        "desc": "ドロップコイン+0〜3"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 373,
+    "category": "アクセサリー",
+    "name": "クリスタルリング",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
+      },
+      {
+        "type": "M",
+        "name": "ランダムマジック",
+        "desc": "ランダムなまほうこうげき (INT+LUK?)"
+      },
+      {
+        "type": "P",
+        "name": "コインプラス",
+        "desc": "ドロップコイン+0〜3"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 384,
+    "category": "アクセサリー",
+    "name": "クラブリング",
+    "drop_from": [
+      {
+        "no": 463,
+        "name": "スコーピオン"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ガード",
+        "desc": "つぎにうけるダメージをはいばん (VIT)"
+      },
+      {
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "カウンター",
+        "desc": "こうげきをうけるとターンがはやまる (VIT)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 250,
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
+      },
+      {
+        "pt": 500,
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
+      },
+      {
+        "pt": 1000,
+        "name": "シールドギア",
+        "effect": "うけるダメージ-5%"
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 395,
     "category": "ペット",
     "name": "スライム",
@@ -10049,7 +10518,7 @@
         "name": "きのいた"
       },
       {
-        "no": null,
+        "no": 369,
         "name": "インテリング"
       }
     ],
@@ -10437,7 +10906,7 @@
         "name": "ムーンロッド"
       },
       {
-        "no": null,
+        "no": 369,
         "name": "インテリング"
       }
     ],
@@ -11213,7 +11682,7 @@
         "name": "???"
       },
       {
-        "no": null,
+        "no": 384,
         "name": "クラブリング"
       }
     ],
