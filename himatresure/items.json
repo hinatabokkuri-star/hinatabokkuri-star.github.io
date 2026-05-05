@@ -2066,5 +2066,35 @@
       {"pt": 7500, "name": null, "effect": null},
       {"pt": 9999, "name": null, "effect": null}
     ]
+  },
+  {
+    "no": 481,
+    "category": "ペット",
+    "name": "ゴブリンロード",
+    "monster_type": "ゴブリン",
+    "drop_items": [
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"},
+      {"no": null, "name": "???"}
+    ],
+    "skills": [
+      {"type": "A", "name": "ランダムアタック", "desc": "うんまかせのこうげき (ATK+LUK?)"},
+      {"type": "A", "name": "スタンアタック",  "desc": "スタンさせるこうげき (ATK)"},
+      {"type": "P", "name": "ステップムーブ", "desc": "ステップいどうになる"}
+    ],
+    "mastery_bonus": [
+      {"pt": 100,  "name": null, "effect": null},
+      {"pt": 250,  "name": null, "effect": null},
+      {"pt": 500,  "name": null, "effect": null},
+      {"pt": 1000, "name": null, "effect": null},
+      {"pt": 1500, "name": null, "effect": null},
+      {"pt": 2500, "name": null, "effect": null},
+      {"pt": 3500, "name": null, "effect": null},
+      {"pt": 5000, "name": null, "effect": null},
+      {"pt": 7500, "name": null, "effect": null},
+      {"pt": 9999, "name": null, "effect": null}
+    ]
   }
 ]
