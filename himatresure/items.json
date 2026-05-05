@@ -7,6 +7,10 @@
       {
         "no": 395,
         "name": "スライム"
+      },
+      {
+        "no": 438,
+        "name": "ゴブリンモンク"
       }
     ],
     "skills": [
@@ -1258,6 +1262,10 @@
       {
         "no": 426,
         "name": "グリーンマッシュ"
+      },
+      {
+        "no": 449,
+        "name": "ドリルアイ"
       }
     ],
     "skills": [
@@ -2428,7 +2436,12 @@
     "no": 45,
     "category": "武器",
     "name": "グローブ",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 438,
+        "name": "ゴブリンモンク"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -3224,6 +3237,81 @@
         "type": "P",
         "name": "ラピッドムーブ",
         "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 70,
+    "category": "武器",
+    "name": "えんぴつ",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
+      },
+      {
+        "type": "M",
+        "name": "おいのり",
+        "desc": "HPをかいふくする (LUK?)"
+      },
+      {
+        "type": "P",
+        "name": "XPアップ",
+        "desc": "かくとくXP+50%"
       }
     ],
     "mastery_bonus": [
@@ -6532,7 +6620,12 @@
     "no": 218,
     "category": "盾",
     "name": "ばくだん",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 449,
+        "name": "ドリルアイ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -8605,7 +8698,12 @@
     "no": 308,
     "category": "鎧",
     "name": "ロボットアーマー",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 449,
+        "name": "ドリルアイ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -11702,6 +11800,103 @@
     ]
   },
   {
+    "no": 438,
+    "category": "ペット",
+    "name": "ゴブリンモンク",
+    "monster_type": "ゴブリン",
+    "drop_items": [
+      {
+        "no": 45,
+        "name": "グローブ"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": 2,
+        "name": "こんぼう"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": null,
+        "name": "???"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ボディアタック",
+        "desc": "たいじゅうをのせたこうげき (ATK+VIT)"
+      },
+      {
+        "type": "A",
+        "name": "ラッシュ",
+        "desc": "とっしんこうげき (VIT+SPD)"
+      },
+      {
+        "type": "P",
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 439,
     "category": "ペット",
     "name": "ゴブリンギャング",
@@ -12131,6 +12326,103 @@
         "type": "P",
         "name": "デスマーチ",
         "desc": "しぬまであるきつづける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 449,
+    "category": "ペット",
+    "name": "ドリルアイ",
+    "monster_type": "メダマ",
+    "drop_items": [
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": 218,
+        "name": "ばくだん"
+      },
+      {
+        "no": 26,
+        "name": "まるた"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": 308,
+        "name": "ロボットアーマー"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
+      },
+      {
+        "type": "A",
+        "name": "ラッシュ",
+        "desc": "とっしんこうげき (VIT+SPD)"
+      },
+      {
+        "type": "P",
+        "name": "コインプラス",
+        "desc": "ドロップコイン+0〜3"
       }
     ],
     "mastery_bonus": [
