@@ -637,6 +637,86 @@
     ]
   },
   {
+    "no": 14,
+    "category": "武器",
+    "name": "フレイル",
+    "drop_from": [
+      {
+        "no": 467,
+        "name": "サボキング"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "キュア",
+        "desc": "がいふくまほう (INT)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 16,
     "category": "武器",
     "name": "かたな",
@@ -12329,8 +12409,8 @@
     "monster_type": null,
     "drop_items": [
       {
-        "no": null,
-        "name": "???"
+        "no": 14,
+        "name": "フレイル"
       },
       {
         "no": null,
