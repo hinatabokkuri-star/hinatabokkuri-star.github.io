@@ -166,7 +166,7 @@
   {
     "no": 3,
     "category": "武器",
-    "name": "ガガー",
+    "name": "ダガー",
     "drop_from": [
       {
         "no": 463,
@@ -334,7 +334,7 @@
   {
     "no": 6,
     "category": "武器",
-    "name": "クッドバンマー",
+    "name": "ウッドハンマー",
     "drop_from": [
       {
         "no": 401,
@@ -1666,7 +1666,7 @@
   {
     "no": 24,
     "category": "武器",
-    "name": "バブソン",
+    "name": "ハブラシ",
     "drop_from": [
       {
         "no": 408,
@@ -4037,7 +4037,7 @@
   {
     "no": 63,
     "category": "武器",
-    "name": "ぼうちょう",
+    "name": "ほうちょう",
     "drop_from": [
       {
         "no": 468,
@@ -4116,8 +4116,8 @@
   },
   {
     "no": 64,
-    "category": "盾",
-    "name": "ディフェンサー",
+    "category": "武器",
+    "name": "ディフェンダー",
     "drop_from": [],
     "skills": [
       {
@@ -4740,7 +4740,7 @@
   {
     "no": 74,
     "category": "武器",
-    "name": "ファイヤーホク",
+    "name": "ファイヤーボウ",
     "drop_from": [],
     "skills": [
       {
@@ -4975,7 +4975,7 @@
   {
     "no": 79,
     "category": "武器",
-    "name": "ゴブリンスピア",
+    "name": "ゴブリンキラー",
     "drop_from": [],
     "skills": [
       {
@@ -5050,7 +5050,7 @@
   {
     "no": 81,
     "category": "武器",
-    "name": "がしお",
+    "name": "かしわ",
     "drop_from": [
       {
         "no": null,
@@ -5130,7 +5130,7 @@
   {
     "no": 82,
     "category": "武器",
-    "name": "ニコジン",
+    "name": "ニンジン",
     "drop_from": [
       {
         "no": null,
@@ -6608,7 +6608,7 @@
   {
     "no": 149,
     "category": "武器",
-    "name": "デスマイズ",
+    "name": "デスサイズ",
     "drop_from": [
       {
         "no": 400,
@@ -8022,7 +8022,7 @@
   {
     "no": 188,
     "category": "盾",
-    "name": "ビッグドンナリ",
+    "name": "ビッグドングリ",
     "drop_from": [
       {
         "no": 484,
@@ -8886,7 +8886,7 @@
   {
     "no": 202,
     "category": "盾",
-    "name": "スプリングソルド",
+    "name": "スプリングシールド",
     "drop_from": [
       {
         "no": 407,
@@ -9656,7 +9656,7 @@
   {
     "no": 212,
     "category": "盾",
-    "name": "ニーカ",
+    "name": "ニク",
     "drop_from": [
       {
         "no": 410,
@@ -9811,7 +9811,7 @@
   {
     "no": 214,
     "category": "盾",
-    "name": "ビラージュールド",
+    "name": "ビラーシールド",
     "drop_from": [],
     "skills": [
       {
@@ -10126,7 +10126,7 @@
   {
     "no": 219,
     "category": "盾",
-    "name": "フック",
+    "name": "ブック",
     "drop_from": [
       {
         "no": 412,
@@ -10281,7 +10281,7 @@
   {
     "no": 222,
     "category": "盾",
-    "name": "キュキュガード",
+    "name": "キュウキュウガード",
     "drop_from": [],
     "skills": [
       {
@@ -10979,7 +10979,7 @@
   {
     "no": 232,
     "category": "盾",
-    "name": "アトミックソルド",
+    "name": "アトミックシールド",
     "drop_from": [],
     "skills": [
       {
@@ -11429,7 +11429,7 @@
   {
     "no": 245,
     "category": "盾",
-    "name": "ジャーニーソード",
+    "name": "シャイニングシールド",
     "drop_from": [
       {
         "no": null,
@@ -11744,7 +11744,7 @@
   {
     "no": 253,
     "category": "盾",
-    "name": "ストーンソード",
+    "name": "ストーンシールド",
     "drop_from": [
       {
         "no": null,
@@ -11984,7 +11984,7 @@
   {
     "no": 265,
     "category": "盾",
-    "name": "アップシールド",
+    "name": "アンプシールド",
     "drop_from": [
       {
         "no": null,
@@ -12463,7 +12463,7 @@
   {
     "no": 274,
     "category": "鎧",
-    "name": "バードフィウェア",
+    "name": "パーティウェア",
     "drop_from": [
       {
         "no": null,
@@ -13308,7 +13308,7 @@
   {
     "no": 288,
     "category": "鎧",
-    "name": "クィーブドレス",
+    "name": "クイーンドレス",
     "drop_from": [
       {
         "no": null,
@@ -14706,7 +14706,7 @@
   {
     "no": 326,
     "category": "鎧",
-    "name": "あごく",
+    "name": "みこふく",
     "drop_from": [
       {
         "no": null,
@@ -15100,7 +15100,7 @@
   {
     "no": 349,
     "category": "アクセサリー",
-    "name": "ライトソング",
+    "name": "ライトリング",
     "drop_from": [
       {
         "no": null,
@@ -15579,7 +15579,7 @@
   {
     "no": 358,
     "category": "アクセサリー",
-    "name": "コインソング",
+    "name": "コインリング",
     "drop_from": [
       {
         "no": null,
@@ -15981,7 +15981,7 @@
   {
     "no": 363,
     "category": "アクセサリー",
-    "name": "メダマソング",
+    "name": "メダマリング",
     "drop_from": [
       {
         "no": null,
@@ -17252,7 +17252,7 @@
   {
     "no": 392,
     "category": "ペット",
-    "name": "ツィー",
+    "name": "ツィギー",
     "monster_type": null,
     "drop_items": [
       {
@@ -17636,7 +17636,7 @@
   {
     "no": 396,
     "category": "ペット",
-    "name": "ウィングヴァイ",
+    "name": "ウィングアイ",
     "monster_type": "メダマ",
     "drop_items": [
       {
@@ -17824,6 +17824,95 @@
     ]
   },
   {
+    "no": 400,
+    "category": "ペット",
+    "name": "マンティス",
+    "monster_type": "インセクト",
+    "drop_items": [
+      {
+        "no": 16,
+        "name": "かたな"
+      },
+      {
+        "no": null,
+        "name": "アクアソープ"
+      },
+      {
+        "no": 71,
+        "name": "カットラス"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ジャブ",
+        "desc": "かるいスピードこうげき (SPD)"
+      },
+      {
+        "type": "M",
+        "name": "ソニックウェーブ",
+        "desc": "かぜのまほうこうげき (INT+SPD)"
+      },
+      {
+        "type": "P",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
+      },
+      {
+        "pt": 250,
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
+      },
+      {
+        "pt": 500,
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
+      },
+      {
+        "pt": 1000,
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
+      },
+      {
+        "pt": 1500,
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
+      },
+      {
+        "pt": 5000,
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
+      },
+      {
+        "pt": 7500,
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
+      },
+      {
+        "pt": 9999,
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
+      }
+    ]
+  },
+  {
     "no": 401,
     "category": "ペット",
     "name": "バグスカルゴ",
@@ -17924,7 +18013,7 @@
     "no": 403,
     "category": "ペット",
     "name": "キャタピラー",
-    "monster_type": "インフェクト",
+    "monster_type": "インセクト",
     "drop_items": [
       {
         "no": null,
@@ -18408,7 +18497,7 @@
   {
     "no": 410,
     "category": "ペット",
-    "name": "バシツノードッグ",
+    "name": "ハングリードッグ",
     "monster_type": "アニマル",
     "drop_items": [
       {
@@ -18590,7 +18679,7 @@
   {
     "no": 413,
     "category": "ペット",
-    "name": "ソードアイ",
+    "name": "シードアイ",
     "monster_type": "メダマ",
     "drop_items": [
       {
@@ -18873,7 +18962,7 @@
   {
     "no": 416,
     "category": "ペット",
-    "name": "マフィター",
+    "name": "マンイーター",
     "monster_type": "メダマ",
     "drop_items": [
       {
@@ -19059,7 +19148,7 @@
   {
     "no": 418,
     "category": "ペット",
-    "name": "マーダイフ",
+    "name": "マーダイン",
     "monster_type": "デビル",
     "drop_items": [
       {
@@ -19548,7 +19637,7 @@
   {
     "no": 428,
     "category": "ペット",
-    "name": "タイプント",
+    "name": "タイラント",
     "monster_type": "リザード",
     "drop_items": [
       {
@@ -20704,7 +20793,7 @@
   {
     "no": 445,
     "category": "ペット",
-    "name": "キレーアント",
+    "name": "キラーアント",
     "monster_type": "インセクト",
     "drop_items": [
       {
@@ -21856,7 +21945,7 @@
   {
     "no": 468,
     "category": "ペット",
-    "name": "ミミベア",
+    "name": "マミィベア",
     "monster_type": "アニマル",
     "drop_items": [
       {
@@ -21946,7 +22035,7 @@
   {
     "no": 472,
     "category": "ペット",
-    "name": "メルにっと",
+    "name": "メガピッピ",
     "monster_type": "アニマル",
     "drop_items": [
       {
@@ -22798,98 +22887,9 @@
     ]
   },
   {
-    "no": 488,
-    "category": "ペット",
-    "name": "マフィス",
-    "monster_type": "インセクト",
-    "drop_items": [
-      {
-        "no": 16,
-        "name": "かたな"
-      },
-      {
-        "no": null,
-        "name": "アクアソープ"
-      },
-      {
-        "no": 71,
-        "name": "カットラス"
-      }
-    ],
-    "skills": [
-      {
-        "type": "A",
-        "name": "ジャブ",
-        "desc": "かるいスピードこうげき (SPD)"
-      },
-      {
-        "type": "M",
-        "name": "ソニックウェーブ",
-        "desc": "かぜのまほうこうげき (INT+SPD)"
-      },
-      {
-        "type": "P",
-        "name": "マジックアタック",
-        "desc": "まりょくをまとったこうげき (ATK+INT)"
-      }
-    ],
-    "mastery_bonus": [
-      {
-        "pt": 100,
-        "name": "インセクトギア",
-        "effect": "インセクトタイプへのダメージ+10%"
-      },
-      {
-        "pt": 250,
-        "name": "ATKバフ",
-        "effect": "ATKステータス+5%"
-      },
-      {
-        "pt": 500,
-        "name": "SPDバフ",
-        "effect": "SPDステータス+5%"
-      },
-      {
-        "pt": 1000,
-        "name": "クリティカルギア",
-        "effect": "クリティカル+5%"
-      },
-      {
-        "pt": 1500,
-        "name": "インセクトギア",
-        "effect": "インセクトタイプへのダメージ+10%"
-      },
-      {
-        "pt": 2500,
-        "name": null,
-        "effect": null
-      },
-      {
-        "pt": 3500,
-        "name": "ATKバフ",
-        "effect": "ATKステータス+5%"
-      },
-      {
-        "pt": 5000,
-        "name": "SPDバフ",
-        "effect": "SPDステータス+5%"
-      },
-      {
-        "pt": 7500,
-        "name": "ATKバフ",
-        "effect": "ATKステータス+5%"
-      },
-      {
-        "pt": 9999,
-        "name": "SPDバフ",
-        "effect": "SPDステータス+5%"
-      }
-    ]
-  },
-  {
     "no": 494,
     "category": "ペット",
-    "name": "ブレイドキーズ",
+    "name": "ブレイドホース",
     "monster_type": "アームド",
     "drop_items": [
       {
