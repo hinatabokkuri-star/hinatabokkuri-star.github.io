@@ -805,7 +805,9 @@ function searchCombinations() {
 }
 
 // 反復回数の上限（無限ループ防止のセーフティ）
-const ITER_CAP = 8_000_000;
+const ITER_CAP = 5_000_000;
+// 時間予算（ミリ秒）：超えたら部分結果で打ち切り
+const TIME_BUDGET_MS = 4000;
 
 function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const resultEl = document.getElementById(resultElId);
@@ -882,11 +884,37 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     const arr = groups.get(key);
     if (arr.length < GROUP_LIMIT) arr.push(result);
   }
-  // グループから多様性優先で MAX_RESULTS 件取り出す
+  // グループから多様性優先で取り出す
+  // - activeCount >= 3 のグループは全部表示（1グループ1件、30件超えOK）
+  // - activeCount === 2 は残り枠を多様性優先で埋める
   function finalize(groups) {
-    // グループを activeCount 降順でソート（先頭要素の activeCount で代表）
     const lists = [...groups.values()].map(arr => arr.slice());
     lists.sort((a, b) => b[0].activeCount - a[0].activeCount);
+    const tier1 = []; // activeCount >= 3：全種類
+    const tier2Lists = []; // activeCount === 2 のグループ
+    for (const list of lists) {
+      if (!list.length) continue;
+      if (list[0].activeCount >= 3) tier1.push(list[0]);
+      else tier2Lists.push(list);
+    }
+    // tier2 は MAX_RESULTS - tier1.length 件まで（最低0）
+    const tier2Quota = Math.max(0, MAX_RESULTS - tier1.length);
+    const tier2 = [];
+    let round = 0;
+    while (tier2.length < tier2Quota) {
+      let added = false;
+      for (const list of tier2Lists) {
+        if (tier2.length >= tier2Quota) break;
+        if (list[round]) { tier2.push(list[round]); added = true; }
+      }
+      if (!added) break;
+      round++;
+    }
+    return [...tier1, ...tier2];
+  }
+  // single（activeCount===1）は常に MAX_RESULTS 件まで（extra扱い）
+  function finalizeSingle(groups) {
+    const lists = [...groups.values()].map(arr => arr.slice());
     const result = [];
     let round = 0;
     while (result.length < MAX_RESULTS) {
@@ -905,6 +933,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   let totalCount = 0;
   let iters = 0;
   let stopped = false;
+  const startTime = performance.now();
 
   outer: for (const skillName of pivotSkills) {
     const catMap = SKILL_CAT_MAP.get(skillName) || {};
@@ -927,6 +956,10 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
 
       for (const combo of cartesianGen(arrays)) {
         if (++iters >= ITER_CAP) { stopped = true; break outer; }
+        // 8192回ごとに時間チェック（performance.now() のコストを抑制）
+        if ((iters & 0x1FFF) === 0 && performance.now() - startTime > TIME_BUDGET_MS) {
+          stopped = true; break outer;
+        }
 
         const slots = {};
         allCatsOrder.forEach((c, i) => slots[c] = combo[i]);
@@ -950,7 +983,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
 
   // multi が空なら single を表示し、extra は無し。multi があれば single は extra。
   const finalMulti = finalize(multiGroups);
-  const finalSingle = finalize(singleGroups);
+  const finalSingle = finalizeSingle(singleGroups);
   const base = finalMulti.length > 0 ? finalMulti : finalSingle;
   const extra = finalMulti.length > 0 ? finalSingle : [];
   renderComboResults(resultEl, base, totalCount, targetSkills, fixedSlots, extra, stopped);
