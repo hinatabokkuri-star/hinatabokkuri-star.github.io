@@ -8,15 +8,15 @@
   @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
   :root {
-    --bg:      #0f0f1e;
-    --panel:   #1a1a30;
-    --panel2:  #13132a;
-    --border:  #3a3a6a;
-    --accent:  #8888ff;
-    --text:    #e0e0ff;
-    --muted:   #5555aa;
-    --dim:     #3a3a6a;
-    --ok:      #2ecc71;
+    --bg:      #08080f;
+    --panel:   #111120;
+    --panel2:  #0c0c18;
+    --border:  #2a2a4a;
+    --accent:  #e8b84b;
+    --text:    #d8d8e8;
+    --muted:   #44446a;
+    --dim:     #2a2a4a;
+    --ok:      #4ecb71;
     --warn:    #f39c12;
     --tag-武器:         #e05050;
     --tag-盾:           #4488dd;
@@ -25,7 +25,7 @@
     --tag-ペット:       #ff9944;
     --skill-A: #e74c3c;
     --skill-M: #4a9eff;
-    --skill-P: #2ecc71;
+    --skill-P: #4ecb71;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,16 +33,14 @@
   body { background: var(--bg); color: var(--text); font-family: 'DotGothic16', monospace; min-height: 100vh; font-size: 14px; -webkit-text-size-adjust: 100%; }
 
   /* ━━━ HERO ━━━ */
-  .hero { background: linear-gradient(160deg, #1e1e3e 0%, #0f0f1e 60%); border-bottom: 2px solid var(--border); padding: 20px 16px 0; }
-  .hero-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+  .hero { background: var(--panel); border-bottom: 2px solid var(--border); padding: 14px 16px 0; }
+  .hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
   .hero-titles { flex: 1; }
-  .hero-genre { font-size: 10px; color: var(--muted); letter-spacing: 0.15em; margin-bottom: 4px; }
-  .hero-name { font-size: 22px; color: var(--accent); letter-spacing: 0.05em; line-height: 1.2; margin-bottom: 6px; }
-  .hero-sub { font-size: 11px; color: var(--muted); }
+  .hero-by { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 3px; }
+  .hero-name { font-size: 20px; color: var(--accent); letter-spacing: 0.04em; line-height: 1.2; text-shadow: 0 0 12px rgba(232,184,75,0.4); }
   .store-badges { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
   .store-badges a { display: block; line-height: 0; }
-  .store-badges img { height: 36px; width: auto; display: block; }
-  .hero-desc { font-size: 11px; color: #8888bb; line-height: 1.8; border-left: 2px solid var(--dim); padding: 6px 10px; margin-bottom: 14px; }
+  .store-badges img { height: 32px; width: auto; display: block; }
 
   /* ━━━ NAV TABS ━━━ */
   .nav-tabs { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
@@ -264,16 +262,16 @@
     position: fixed;
     top: calc(12px + env(safe-area-inset-top));
     left: 50%; transform: translateX(-50%);
-    background: var(--accent); color: #fff;
+    background: #1a1608; color: var(--accent); border: 1px solid var(--accent);
     padding: 8px 12px; border-radius: 999px;
     font-size: 12px; font-weight: bold;
     display: none; align-items: center; gap: 8px;
     z-index: 200; white-space: nowrap;
-    box-shadow: 0 4px 16px rgba(136,136,255,0.45);
+    box-shadow: 0 4px 16px rgba(232,184,75,0.35);
   }
   .update-notify-banner.show { display: flex; }
   .update-notify-banner .unb-ok {
-    background: #fff; color: var(--accent);
+    background: var(--accent); color: #0a0a00;
     border: none; border-radius: 999px;
     font-family: inherit; font-size: 11px; font-weight: bold;
     padding: 3px 10px; cursor: pointer;
@@ -298,9 +296,8 @@
 <section class="hero">
   <div class="hero-top">
     <div class="hero-titles">
-      <div class="hero-genre">ロールプレイング / ハクスラ</div>
-      <h1 class="hero-name">ひまつぶトレジャー</h1>
-      <div class="hero-sub">装備 &amp; ペット 図鑑（有志データベース）</div>
+      <div class="hero-by">ひなたぼっくり式</div>
+      <h1 class="hero-name">ひまつぶトレジャー サポートツール</h1>
     </div>
     <div class="store-badges">
       <a href="https://apps.apple.com/jp/app/%E3%81%B2%E3%81%BE%E3%81%A4%E3%81%B6%E3%83%88%E3%83%AC%E3%82%B8%E3%83%A3%E3%83%BC/id6759699741" target="_blank" rel="noopener" aria-label="Download on the App Store">
@@ -311,10 +308,6 @@
       </a>
     </div>
   </div>
-  <p class="hero-desc">
-    1分でも1時間でも、暇な時間でレベル上げ＆トレハンを楽しめる超簡単お手軽ハクスラゲーム。<br>
-    フィールドは一本道。装備マスタリーやスキル習得で自分だけのビルドを作ろう。
-  </p>
   <nav class="nav-tabs">
     <button class="nav-tab active" data-tab="list">📋 装備一覧</button>
     <button class="nav-tab" data-tab="checker">⚡ スキル発動チェッカー</button>
