@@ -4410,6 +4410,86 @@
     ]
   },
   {
+    "no": 86,
+    "category": "武器",
+    "name": "プリマ",
+    "drop_from": [
+      {
+        "no": 473,
+        "name": "ダチョーン"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "エンカウンター",
+        "desc": "モンスターしゅつげんりつアップ"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 88,
     "category": "武器",
     "name": "クマちゃんハンマー",
@@ -5170,6 +5250,90 @@
         "pt": 7500,
         "name": "ATKバフ",
         "effect": "ATKステータス+5%"
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 143,
+    "category": "武器",
+    "name": "マジカルロッド",
+    "drop_from": [
+      {
+        "no": 419,
+        "name": "エンジェルスライム"
+      },
+      {
+        "no": 457,
+        "name": "ウンディーネ"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
+      },
+      {
+        "type": "M",
+        "name": "ランダムマジック",
+        "desc": "ランダムなまほうこうげき (INT+LUK?)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
       },
       {
         "pt": 9999,
@@ -14284,6 +14448,10 @@
       {
         "no": 356,
         "name": "ホーリーリング"
+      },
+      {
+        "no": 143,
+        "name": "マジカルロッド"
       }
     ],
     "skills": [
@@ -16135,6 +16303,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 143,
+        "name": "マジカルロッド"
       }
     ],
     "skills": [
@@ -16810,6 +16982,10 @@
       {
         "no": 371,
         "name": "スピードリング"
+      },
+      {
+        "no": 86,
+        "name": "プリマ"
       }
     ],
     "skills": [
