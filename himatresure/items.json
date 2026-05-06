@@ -2772,6 +2772,86 @@
     ]
   },
   {
+    "no": 38,
+    "category": "武器",
+    "name": "ペロペロキャンディ",
+    "drop_from": [
+      {
+        "no": 426,
+        "name": "グリーンマッシュ"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "キュア",
+        "desc": "がいふくまほう (INT)"
+      },
+      {
+        "type": "P",
+        "name": "デスマーチ",
+        "desc": "しぬまであるきつづける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 40,
     "category": "武器",
     "name": "むしどりあみ",
@@ -6688,7 +6768,7 @@
   {
     "no": 150,
     "category": "武器",
-    "name": "ハルバード",
+    "name": "シルバーアックス",
     "drop_from": [
       {
         "no": 397,
@@ -6715,53 +6795,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "ダメージギア",
+        "effect": "あたえるダメージ+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ]
   },
@@ -6922,6 +7002,81 @@
         "pt": 9999,
         "name": "SPDバフ",
         "effect": "SPDステータス+5%"
+      }
+    ]
+  },
+  {
+    "no": 158,
+    "category": "武器",
+    "name": "ハルバード",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "タックル",
+        "desc": "かるいたいあたりこうげき (VIT)"
+      },
+      {
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "エンカウンター",
+        "desc": "モンスターしゅつげんりつアップ"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
       }
     ]
   },
@@ -8833,6 +8988,81 @@
         "type": "P",
         "name": "カウンター",
         "desc": "こうげきをうけるとターンがはやまる (VIT)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 201,
+    "category": "盾",
+    "name": "サンダーガード",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
+      },
+      {
+        "type": "M",
+        "name": "スタンショック",
+        "desc": "スタンさせるまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
       }
     ],
     "mastery_bonus": [
@@ -14566,6 +14796,10 @@
       {
         "no": 481,
         "name": "ゴブリンロード"
+      },
+      {
+        "no": 480,
+        "name": "ゴブリンアタック [ゴブリン]"
       }
     ],
     "skills": [
@@ -16299,6 +16533,170 @@
     ]
   },
   {
+    "no": 367,
+    "category": "アクセサリー",
+    "name": "アームドリング",
+    "drop_from": [
+      {
+        "no": 481,
+        "name": "ゴブリンロード"
+      },
+      {
+        "no": 461,
+        "name": "アンモン [アームド]"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ガード",
+        "desc": "つぎにうけるダメージをはいばん (VIT)"
+      },
+      {
+        "type": "A",
+        "name": "ボディアタック",
+        "desc": "たいじゅうをのせたこうげき (ATK+VIT)"
+      },
+      {
+        "type": "P",
+        "name": "カウンター",
+        "desc": "こうげきをうけるとターンがはやまる (VIT)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 368,
+    "category": "アクセサリー",
+    "name": "アタックリング",
+    "drop_from": [
+      {
+        "no": 463,
+        "name": "スコーピオン"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ラッシュ",
+        "desc": "とっしんこうげき (VIT+SPD)"
+      },
+      {
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 369,
     "category": "アクセサリー",
     "name": "インテリング",
@@ -17747,8 +18145,8 @@
         "name": "ガントレット"
       },
       {
-        "no": null,
-        "name": "???"
+        "no": 150,
+        "name": "シルバーアックス"
       },
       {
         "no": 4,
@@ -19538,8 +19936,8 @@
     "monster_type": null,
     "drop_items": [
       {
-        "no": null,
-        "name": "???"
+        "no": 38,
+        "name": "ペロペロキャンディ"
       },
       {
         "no": 204,
@@ -21660,7 +22058,7 @@
         "name": "ベビーアーマー"
       },
       {
-        "no": null,
+        "no": 367,
         "name": "アームドリング"
       }
     ],
@@ -21745,8 +22143,8 @@
         "name": "ヒートランス"
       },
       {
-        "no": null,
-        "name": "???"
+        "no": 368,
+        "name": "アタックリング"
       },
       {
         "no": null,
@@ -22604,14 +23002,111 @@
     ]
   },
   {
+    "no": 480,
+    "category": "ペット",
+    "name": "ゴブリンアタック [ゴブリン]",
+    "monster_type": "ゴブリン",
+    "drop_items": [
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": 324,
+        "name": "ゴブリンアーマー"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": 25,
+        "name": "かなぼう"
+      },
+      {
+        "no": 391,
+        "name": "シールドリング"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "チャージ",
+        "desc": "つぎにあたえるダメージをアップ (INT)"
+      },
+      {
+        "type": "A",
+        "name": "ガード",
+        "desc": "つぎにうけるダメージをはいばん (VIT)"
+      },
+      {
+        "type": "P",
+        "name": "カウンター",
+        "desc": "こうげきをうけるとターンがはやまる (VIT)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 481,
     "category": "ペット",
     "name": "ゴブリンロード",
     "monster_type": "ゴブリン",
     "drop_items": [
       {
-        "no": null,
-        "name": "???"
+        "no": 367,
+        "name": "アームドリング"
       },
       {
         "no": null,
