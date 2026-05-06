@@ -804,8 +804,8 @@ function searchCombinations() {
   runComboSearch(fixed, skills, 'combo-result');
 }
 
-// 結果総数の上限（爆発抑制）：上位ソート＆表示には十分な数で打ち切る
-const COMBO_RESULT_CAP = MAX_RESULTS * 200;
+// 反復回数の上限（無限ループ防止のセーフティ）
+const ITER_CAP = 8_000_000;
 
 function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const resultEl = document.getElementById(resultElId);
@@ -862,11 +862,34 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   // 起点スキル：ターゲット指定時はそれを使い、無指定時は activatable 全部
   const pivotSkills = targetSkills.length > 0 ? targetSkills : activatable;
 
+  // top-K 保持：multi（activeCount>=2）と single（activeCount===1）を別リストで管理
+  // 各リストは降順ソート維持、サイズ MAX_RESULTS。閾値より低い候補は即破棄。
+  const topMulti = [];
+  const topSingle = [];
+  let multiThreshold = 0;  // multi に入る最低 activeCount（リスト満杯後のみ有効）
+  function tryAdd(result) {
+    if (result.activeCount >= 2) {
+      if (topMulti.length < MAX_RESULTS) {
+        topMulti.push(result);
+        if (topMulti.length === MAX_RESULTS) {
+          topMulti.sort((a,b) => b.activeCount - a.activeCount);
+          multiThreshold = topMulti[MAX_RESULTS-1].activeCount;
+        }
+      } else if (result.activeCount > multiThreshold) {
+        topMulti[MAX_RESULTS-1] = result;
+        topMulti.sort((a,b) => b.activeCount - a.activeCount);
+        multiThreshold = topMulti[MAX_RESULTS-1].activeCount;
+      }
+    } else if (result.activeCount === 1) {
+      if (topSingle.length < MAX_RESULTS) topSingle.push(result);
+    }
+  }
+
   const seen = new Set();
-  const results = [];
+  let totalCount = 0;
+  let iters = 0;
   let stopped = false;
 
-  // 1ピボットスキルにつき：必要数を持つカテゴリ subset × 自由スロット直積
   outer: for (const skillName of pivotSkills) {
     const catMap = SKILL_CAT_MAP.get(skillName) || {};
     const fixedCnt = baseCount[skillName] || 0;
@@ -887,6 +910,8 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
       const allCatsOrder = [...subset, ...otherCats];
 
       for (const combo of cartesianGen(arrays)) {
+        if (++iters >= ITER_CAP) { stopped = true; break outer; }
+
         const slots = {};
         allCatsOrder.forEach((c, i) => slots[c] = combo[i]);
 
@@ -901,18 +926,17 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
         // ターゲット指定時：全 target skill が3揃ってる必要
         if (targetSkills.length > 0 && !targetSkills.every(sk => (count[sk]||0)>=3)) continue;
         const activeCount = Object.values(count).filter(c => c>=3).length;
-        results.push({ slots, count, activeCount });
-        if (results.length >= COMBO_RESULT_CAP) { stopped = true; break outer; }
+        totalCount++;
+        tryAdd({ slots, count, activeCount });
       }
     }
   }
 
-  results.sort((a,b) => b.activeCount - a.activeCount);
-  const multi = results.filter(r => r.activeCount >= 2);
-  const single = results.filter(r => r.activeCount === 1);
-  const base = (multi.length > 0 ? multi : single).slice(0, MAX_RESULTS);
-  const extra = multi.length > 0 ? single.slice(0, MAX_RESULTS) : [];
-  renderComboResults(resultEl, base, results.length, targetSkills, fixedSlots, extra, stopped);
+  // multi が空なら single を表示し、extra は無し。multi があれば single は extra。
+  topMulti.sort((a,b) => b.activeCount - a.activeCount);
+  const base = topMulti.length > 0 ? topMulti : topSingle;
+  const extra = topMulti.length > 0 ? topSingle : [];
+  renderComboResults(resultEl, base, totalCount, targetSkills, fixedSlots, extra, stopped);
 }
 
 function comboCardsHtml(items, fixedSlots, targetSkills) {
