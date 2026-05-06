@@ -436,6 +436,11 @@ const CAT_ORDER = {'武器':0,'盾':1,'鎧':2,'アクセサリー':3,'ペット'
 const CAT_LABEL = {'武器':'武器','盾':'盾','鎧':'鎧','アクセサリー':'アクセ','ペット':'ペット'};
 const MAX_RESULTS = 30;
 function catLabel(cat) { return CAT_LABEL[cat] || cat; }
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[ch]));
+}
 
 let allItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
@@ -461,7 +466,37 @@ function unmarkVisibleOwned() {
   saveOwned();
   renderList();
 }
+function snapshotCheckerState() {
+  return {
+    slots: Object.fromEntries([...document.querySelectorAll('.slot-select')]
+      .map(sel => [sel.dataset.cat, sel.value])),
+    equipSkills: [...document.querySelectorAll('#skill-checks input:checked')].map(cb => cb.value),
+    skillModeSkills: [...document.querySelectorAll('#skill-checks-skill input:checked')].map(cb => cb.value)
+  };
+}
+function restoreCheckedSkills(selector, values) {
+  const set = new Set(values || []);
+  document.querySelectorAll(`${selector} input`).forEach(cb => {
+    cb.checked = set.has(cb.value);
+    cb.closest('label')?.classList.toggle('checked', cb.checked);
+  });
+}
+function restoreCheckerState(state) {
+  if (!state) return;
+  CATS.forEach(cat => {
+    const sel = document.querySelector(`.slot-select[data-cat="${cat}"]`);
+    if (!sel) return;
+    sel.value = [...sel.options].some(opt => opt.value === state.slots?.[cat]) ? state.slots[cat] : '';
+    const no = parseInt(sel.value);
+    renderSlotSkills(cat, no ? allItems.find(i => i.no === no) : null);
+  });
+  restoreCheckedSkills('#skill-checks', state.equipSkills);
+  restoreCheckedSkills('#skill-checks-skill', state.skillModeSkills);
+  searchCombinations();
+  document.getElementById('skill-combo-result').innerHTML = '';
+}
 function setOwnedFilter(mode) {
+  const checkerState = snapshotCheckerState();
   ownedFilter = mode;
   ['all','owned','unowned'].forEach(m =>
     document.getElementById(`owned-btn-${m}`)?.classList.toggle('active', m === mode));
@@ -471,6 +506,7 @@ function setOwnedFilter(mode) {
     cb.textContent = mode === 'unowned' ? '☆ 未所持のみ' : '★ 所持のみ';
   }
   buildSlots(); buildSkillChecks(); buildSkillChecksForSkillMode();
+  restoreCheckerState(checkerState);
   renderList();
 }
 function toggleOwnedFilter() { // チェッカータブから呼ばれる
@@ -508,10 +544,15 @@ async function init() {
   rebuildIndices();
   // ページロード時：前回より増えていたら通知
   const prev = parseInt(localStorage.getItem(UNB_KEY) || '0', 10);
-  if (prev > 0 && allItems.length > prev) {
+  currentDataSignature = dataSignature(allItems);
+  const prevSignature = localStorage.getItem(UNB_SIG_KEY) || '';
+  if (prevSignature && prevSignature !== currentDataSignature) {
+    showUpdateBanner(allItems.length - prev);
+  } else if (prev > 0 && allItems.length > prev) {
     showUpdateBanner(allItems.length - prev);
   }
   localStorage.setItem(UNB_KEY, String(allItems.length));
+  localStorage.setItem(UNB_SIG_KEY, currentDataSignature);
   renderList();
   buildSkillChecksForSkillMode();
   buildSlots();
@@ -557,18 +598,18 @@ function renderList() {
   document.getElementById('grid').innerHTML = filtered.map(item => {
     const isPet = item.category === 'ペット';
     const drops = (isPet ? item.drop_items : item.drop_from) || [];
-    const dropNames = drops.filter(d => d.name && d.name !== '???').map(d => d.name);
+    const dropNames = drops.filter(d => d.name && d.name !== '???').map(d => escapeHtml(d.name));
     const dropHtml = dropNames.length
       ? `<div class="card-drop">${isPet?'ドロップ':'入手元'}：<span>${dropNames.join('、')}</span></div>` : '';
     return `<div class="card${ownedSet.has(item.no)?' owned':''}" onclick="openModal(${item.no})">
       <div class="card-head">
         <span class="card-no">No${item.no}</span>
-        <span class="card-name">${item.name}</span>
+        <span class="card-name">${escapeHtml(item.name)}</span>
         <span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span>
         <button class="star-btn${ownedSet.has(item.no)?' owned':''}" onclick="toggleOwned(${item.no},event)" title="所持マーク">★</button>
       </div>
       <div class="card-skills">
-        ${item.skills.map(s=>`<div class="skill-row"><span class="skill-type st-${s.type}">${s.type}</span><span>${s.name}</span></div>`).join('')}
+        ${item.skills.map(s=>`<div class="skill-row"><span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span><span>${escapeHtml(s.name)}</span></div>`).join('')}
       </div>
       ${dropHtml}
     </div>`;
@@ -586,26 +627,26 @@ function openModal(no) {
     <div class="drop-list">${drops.map(d => {
       if (!d.name || d.name === '???') return '<span style="color:var(--dim)">???</span>';
       const linked = d.no != null && allItems.find(i => i.no === d.no);
-      const label = (d.no ? `No${d.no} ` : '') + d.name;
+      const label = escapeHtml((d.no ? `No${d.no} ` : '') + d.name);
       return linked ? `<a class="drop-link" onclick="openModal(${d.no})">${label}</a>` : label;
     }).join('<br>')}</div></section>` : '';
   const knownBonus = item.mastery_bonus.filter(b => b.name).length;
   const masteryRows = item.mastery_bonus.map(b =>
     `<tr class="${b.name?'':'locked'}"><td>${b.pt}pt</td>${b.name
-      ?`<td>${b.name}</td><td>${b.effect}</td>`
+      ?`<td>${escapeHtml(b.name)}</td><td>${escapeHtml(b.effect)}</td>`
       :`<td colspan="2" style="color:var(--dim)">???</td>`}</tr>`
   ).join('');
   const typeTag = item.monster_type
-    ? `<span style="font-size:11px;color:var(--tag-ペット);margin-right:4px">[${item.monster_type}]</span>` : '';
+    ? `<span style="font-size:11px;color:var(--tag-ペット);margin-right:4px">[${escapeHtml(item.monster_type)}]</span>` : '';
   document.getElementById('modal-body').innerHTML = `
-    <h2>${typeTag}${item.name}</h2>
+    <h2>${typeTag}${escapeHtml(item.name)}</h2>
     <div class="modal-sub"><span>No${item.no}</span><span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span></div>
     <section><h3>スキル ── 同名3種装備で発動</h3>
     <div class="modal-skills">${item.skills.map(s=>`
       <div class="modal-skill-row">
-        <span class="skill-type st-${s.type}">${s.type}</span>
-        <span class="skill-name-col">${s.name}</span>
-        <span class="skill-desc-col">${s.desc||''}</span>
+        <span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span>
+        <span class="skill-name-col">${escapeHtml(s.name)}</span>
+        <span class="skill-desc-col">${escapeHtml(s.desc||'')}</span>
       </div>`).join('')}</div></section>
     ${dropHtml}
     <section><h3>マスタリーボーナス（解放済 ${knownBonus}/${item.mastery_bonus.length}）</h3>
@@ -661,7 +702,7 @@ function searchBySkill() {
     resultEl.innerHTML = '<div class="ck-empty">該当する装備がありません</div>';
     return;
   }
-  let html = `<div class="result-header">「<strong>${targets.join('」「')}</strong>」を持つ装備：<strong>${matched.length}件</strong></div>`;
+  let html = `<div class="result-header">「<strong>${targets.map(escapeHtml).join('」「')}</strong>」を持つ装備：<strong>${matched.length}件</strong></div>`;
   CATS.forEach(cat => {
     const items = matched.filter(i => i.category === cat).sort((a,b) => a.no - b.no);
     if (!items.length) return;
@@ -673,7 +714,7 @@ function searchBySkill() {
       ${items.map(item => `
         <div class="skill-item-row" onclick="openModal(${item.no})">
           <span class="skill-item-no">No${item.no}</span>
-          <span>${item.name}</span>
+          <span>${escapeHtml(item.name)}</span>
         </div>`).join('')}
     </div>`;
   });
@@ -687,7 +728,7 @@ function buildSlots() {
     const options = allItems
       .filter(i => i.category === cat)
       .sort((a,b) => a.no - b.no)
-      .map(i => `<option value="${i.no}">No${i.no} ${i.name}</option>`)
+      .map(i => `<option value="${i.no}">No${i.no} ${escapeHtml(i.name)}</option>`)
       .join('');
     return `<div class="slot-block">
       <div class="slot-label"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span></div>
@@ -704,11 +745,14 @@ function onSlotChange(cat) {
   const sel = document.querySelector(`.slot-select[data-cat="${cat}"]`);
   const no = parseInt(sel.value);
   const item = no ? allItems.find(i => i.no === no) : null;
+  renderSlotSkills(cat, item);
+  searchCombinations();
+}
+function renderSlotSkills(cat, item) {
   const el = document.getElementById(`slot-skills-${cat}`);
   el.innerHTML = item
-    ? item.skills.map(s=>`<div class="slot-skill-chip"><span class="skill-type st-${s.type}">${s.type}</span><span style="font-size:11px">${s.name}</span></div>`).join('')
+    ? item.skills.map(s=>`<div class="slot-skill-chip"><span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span><span style="font-size:11px">${escapeHtml(s.name)}</span></div>`).join('')
     : '';
-  searchCombinations();
 }
 
 // M回復スキル判定
@@ -718,8 +762,12 @@ function skillGroup(name, type) {
   if (type === 'M') return M_HEAL.has(name) ? 'M回復' : 'M攻撃';
   return 'P';
 }
-const GROUP_ORDER = ['A', 'M攻撃', 'M回復', 'P'];
-const GROUP_LABEL = { A: 'A　物理', 'M攻撃': 'M　魔法攻撃', 'M回復': 'M　魔法回復', P: 'P　パッシブ' };
+const GROUP_ORDER = ['A', 'M攻撃', 'M回復', 'P', '複合'];
+const GROUP_LABEL = { A: 'A　物理', 'M攻撃': 'M　魔法攻撃', 'M回復': 'M　魔法回復', P: 'P　パッシブ', '複合': '複合　type混在' };
+function skillCheckGroup(name, types) {
+  if (types.size > 1) return '複合';
+  return skillGroup(name, [...types][0]);
+}
 
 function renderSkillChecks(wrap, onchange) {
   const skillMap = new Map();
@@ -727,19 +775,23 @@ function renderSkillChecks(wrap, onchange) {
              : ownedFilter === 'unowned' ? allItems.filter(i => !ownedSet.has(i.no))
              : allItems;
   pool.forEach(item => item.skills.forEach(s => {
-    if (!skillMap.has(s.name)) skillMap.set(s.name, s.type);
+    if (!skillMap.has(s.name)) skillMap.set(s.name, new Set());
+    skillMap.get(s.name).add(s.type);
   }));
   const groups = {};
   GROUP_ORDER.forEach(g => groups[g] = []);
-  skillMap.forEach((type, name) => groups[skillGroup(name, type)].push([name, type]));
+  skillMap.forEach((types, name) => {
+    const typeList = [...types];
+    groups[skillCheckGroup(name, types)].push([name, typeList.join('/'), typeList[0]]);
+  });
   GROUP_ORDER.forEach(g => groups[g].sort((a,b) => a[0].localeCompare(b[0],'ja')));
 
   wrap.innerHTML = GROUP_ORDER.filter(g => groups[g].length > 0).map(g => `
     <div style="width:100%;font-size:10px;color:var(--muted);margin:8px 0 4px;border-bottom:1px solid var(--border);padding-bottom:2px">${GROUP_LABEL[g]}</div>
-    ${groups[g].map(([name, type]) => `
+    ${groups[g].map(([name, typeLabel, typeClass]) => `
       <label class="skill-check-label">
-        <input type="checkbox" value="${name}" onchange="${onchange}">
-        <span class="stype st-${type}">${type}</span>${name}
+        <input type="checkbox" value="${escapeHtml(name)}" onchange="${onchange}">
+        <span class="stype st-${typeClass}">${escapeHtml(typeLabel)}</span>${escapeHtml(name)}
       </label>`).join('')}
   `).join('');
 }
@@ -844,7 +896,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
       return fixedCnt + possibleCats < 3;
     });
     if (impossibleSkills.length > 0) {
-      resultEl.innerHTML = `<div class="ck-impossible">「${impossibleSkills.join('・')}」は空き枠が足りないため発動不可能です。<br>固定装備を減らすか、別のスキルを選んでください。</div>`;
+        resultEl.innerHTML = `<div class="ck-impossible">「${impossibleSkills.map(escapeHtml).join('・')}」は空き枠が足りないため発動不可能です。<br>固定装備を減らすか、別のスキルを選んでください。</div>`;
       return;
     }
   }
@@ -985,14 +1037,14 @@ function comboCardHtml({slots, count, alternatives = []}, fixedSlots, targetSkil
     return `<div class="combo-slot-row">
       <span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span>
       <span class="combo-slot-item" onclick="openModal(${item.no})" style="${isFixed?'color:var(--muted)':''}">
-        ${isFixed?'🔒 ':''}No${item.no} ${item.name}
+        ${isFixed?'🔒 ':''}No${item.no} ${escapeHtml(item.name)}
       </span>
     </div>`;
   }).join('');
   const activeSkills = Object.entries(count).filter(([,c]) => c>=3).sort((a,b) => b[1]-a[1]);
   const badges = activeSkills.map(([name,cnt]) => {
     const isTarget = targetSkills.includes(name);
-    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${name}<span class="combo-skill-count"> ${cnt}/5</span></span>`;
+    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(name)}<span class="combo-skill-count"> ${cnt}/5</span></span>`;
   }).join('');
   // 代替装備パターンの折りたたみ
   let altsHtml = '';
@@ -1021,7 +1073,7 @@ function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, ex
     return;
   }
   const headerText = targetSkills.length > 0
-    ? `「${targetSkills.join('・')}」を発動できる組み合わせ`
+    ? `「${targetSkills.map(escapeHtml).join('・')}」を発動できる組み合わせ`
     : `発動スキルがある組み合わせ`;
   const totalLabel = stopped
     ? `（${total.toLocaleString()}件超 中上位${MAX_RESULTS}件・打ち切り）`
@@ -1113,11 +1165,11 @@ function renderMastery() {
       <div class="mastery-bonus-row" onclick="openModal(${r.item.no})">
         <span class="mastery-pt">${r.pt}pt</span>
         <span class="mastery-item-name">
-          <span class="cat-tag cat-tag-${r.item.category}" style="margin-right:5px">${catLabel(r.item.category)}</span>No${r.item.no} ${r.item.name}
+          <span class="cat-tag cat-tag-${r.item.category}" style="margin-right:5px">${catLabel(r.item.category)}</span>No${r.item.no} ${escapeHtml(r.item.name)}
         </span>
       </div>`).join('');
     return `<div class="mastery-bonus-card">
-      <div class="mastery-bonus-name">${name}<span class="mastery-effect" style="margin-left:8px">${rows[0].effect}</span></div>
+      <div class="mastery-bonus-name">${escapeHtml(name)}<span class="mastery-effect" style="margin-left:8px">${escapeHtml(rows[0].effect)}</span></div>
       <div class="mastery-count">${rows.length}件</div>
       <div class="mastery-bonus-rows">${rowsHtml}</div>
     </div>`;
@@ -1140,23 +1192,37 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 
 // ━━━ データ更新通知（ポーリング） ━━━
 const UNB_KEY = 'himatubu_item_count';
+const UNB_SIG_KEY = 'himatubu_data_signature';
 const POLL_INTERVAL = 3 * 60 * 1000; // 3分
 let pendingItems = null; // 取得済み新データを一時保持
+let currentDataSignature = '';
 
 function showUpdateBanner(diff) {
-  document.getElementById('unb-text').textContent = `✨ 新しい装備が${diff}件追加されました`;
+  document.getElementById('unb-text').textContent = diff > 0
+    ? `✨ 新しい装備が${diff}件追加されました`
+    : '✨ 装備データが更新されました';
   document.getElementById('update-notify-banner').classList.add('show');
+}
+
+function dataSignature(data) {
+  const text = JSON.stringify(data);
+  let hash = 2166136261;
+  for (let i = 0; i < text.length; i++) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `${data.length}:${(hash >>> 0).toString(16)}`;
 }
 
 async function pollDataUpdate() {
   try {
     const res = await fetch('items.json?v=' + Date.now());
     const data = await res.json();
+    const signature = dataSignature(data);
+    if (signature === currentDataSignature) return;
     const diff = data.length - allItems.length;
-    if (diff > 0) {
-      pendingItems = data;
-      showUpdateBanner(diff);
-    }
+    pendingItems = data;
+    showUpdateBanner(diff);
   } catch(e) { /* サイレントに無視 */ }
 }
 
@@ -1165,6 +1231,7 @@ function unbOk() {
   if (pendingItems) {
     allItems = pendingItems;
     pendingItems = null;
+    currentDataSignature = dataSignature(allItems);
     rebuildIndices();
     renderList();
     buildSkillChecksForSkillMode();
@@ -1173,6 +1240,7 @@ function unbOk() {
     masteryMap = buildMasteryMap();
   }
   localStorage.setItem(UNB_KEY, String(allItems.length));
+  localStorage.setItem(UNB_SIG_KEY, currentDataSignature);
   document.getElementById('update-notify-banner').classList.remove('show');
 }
 function unbDismiss() {
