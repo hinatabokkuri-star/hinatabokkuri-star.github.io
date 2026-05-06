@@ -8,18 +8,18 @@
   @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
   :root {
-    --bg:      #08080f;
-    --panel:   #111120;
-    --panel2:  #0c0c18;
-    --border:  #2a2a4a;
+    --bg:      #080e16;
+    --panel:   #0f1e2c;
+    --panel2:  #091620;
+    --border:  #1c3650;
     --accent:  #e8b84b;
-    --text:    #d8d8e8;
-    --muted:   #44446a;
-    --dim:     #2a2a4a;
+    --text:    #c8dce8;
+    --muted:   #3a5870;
+    --dim:     #1c3650;
     --ok:      #4ecb71;
     --warn:    #f39c12;
     --tag-武器:         #e05050;
-    --tag-盾:           #4488dd;
+    --tag-盾:           #4a9eff;
     --tag-鎧:           #44cc88;
     --tag-アクセサリー: #cc66ff;
     --tag-ペット:       #ff9944;
@@ -33,11 +33,12 @@
   body { background: var(--bg); color: var(--text); font-family: 'DotGothic16', monospace; min-height: 100vh; font-size: 14px; -webkit-text-size-adjust: 100%; }
 
   /* ━━━ HERO ━━━ */
-  .hero { background: var(--panel); border-bottom: 2px solid var(--border); padding: 14px 16px 0; }
+  .hero { background: var(--panel); border-bottom: 2px solid #1c3650; padding: 14px 16px 0; }
   .hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
   .hero-titles { flex: 1; }
   .hero-by { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 3px; }
-  .hero-name { font-size: 20px; color: var(--accent); letter-spacing: 0.04em; line-height: 1.2; text-shadow: 0 0 12px rgba(232,184,75,0.4); }
+  .hero-name { font-size: 18px; color: var(--accent); letter-spacing: 0.04em; line-height: 1.4; text-shadow: 0 0 10px rgba(232,184,75,0.35); }
+  .hero-name-sub { font-size: 13px; color: #8aaccc; display: block; margin-top: 1px; }
   .store-badges { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
   .store-badges a { display: block; line-height: 0; }
   .store-badges img { height: 32px; width: auto; display: block; }
@@ -297,7 +298,7 @@
   <div class="hero-top">
     <div class="hero-titles">
       <div class="hero-by">ひなたぼっくり式</div>
-      <h1 class="hero-name">ひまつぶトレジャー サポートツール</h1>
+      <h1 class="hero-name">ひまつぶトレジャー<span class="hero-name-sub">サポートツール</span></h1>
     </div>
     <div class="store-badges">
       <a href="https://apps.apple.com/jp/app/%E3%81%B2%E3%81%BE%E3%81%A4%E3%81%B6%E3%83%88%E3%83%AC%E3%82%B8%E3%83%A3%E3%83%BC/id6759699741" target="_blank" rel="noopener" aria-label="Download on the App Store">
