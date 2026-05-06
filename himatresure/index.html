@@ -179,6 +179,15 @@
   .result-header strong { color: var(--text); }
 
   .combo-card { background: var(--panel); border: 1px solid var(--border); padding: 12px; margin-bottom: 8px; }
+  .combo-card-alt { background: var(--panel2); border-color: var(--dim); margin-top: 6px; margin-bottom: 0; }
+  .alts-toggle {
+    margin-top: 10px; background: var(--bg); border: 1px solid var(--border);
+    color: var(--muted); font-family: inherit; font-size: 11px;
+    padding: 5px 10px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+    transition: color .1s, border-color .1s;
+  }
+  .alts-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .combo-alts { margin-top: 8px; padding-left: 14px; border-left: 2px solid var(--dim); }
   .combo-slots { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
   .combo-slot-row { display: flex; gap: 8px; align-items: center; font-size: 12px; }
   .combo-slot-empty { color: var(--muted); font-size: 11px; }
@@ -865,8 +874,8 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const pivotSkills = targetSkills.length > 0 ? targetSkills : activatable;
 
   // 発動スキルセットでグルーピングして多様性を確保
-  // 各グループに保持する最大件数（多様性が足りない時の埋め草用）
-  const GROUP_LIMIT = 5;
+  // 各グループに保持する最大件数（同パターンの装備違い用）
+  const GROUP_LIMIT = 10;
   const multiGroups = new Map();   // skillSetKey → results[]（activeCount>=2）
   const singleGroups = new Map();  // skillSetKey → results[]（activeCount===1）
 
@@ -885,48 +894,27 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     if (arr.length < GROUP_LIMIT) arr.push(result);
   }
   // グループから多様性優先で取り出す
-  // - activeCount >= 3 のグループは全部表示（1グループ1件、30件超えOK）
-  // - activeCount === 2 は残り枠を多様性優先で埋める
+  // - 各グループから1件ずつ「代表」として取り、残りは alternatives に格納
+  // - activeCount >= 3 のグループは全部表示（30件超えOK）
+  // - activeCount === 2 は残り枠を埋める
   function finalize(groups) {
-    const lists = [...groups.values()].map(arr => arr.slice());
-    lists.sort((a, b) => b[0].activeCount - a[0].activeCount);
-    const tier1 = []; // activeCount >= 3：全種類
-    const tier2Lists = []; // activeCount === 2 のグループ
-    for (const list of lists) {
-      if (!list.length) continue;
-      if (list[0].activeCount >= 3) tier1.push(list[0]);
-      else tier2Lists.push(list);
-    }
-    // tier2 は MAX_RESULTS - tier1.length 件まで（最低0）
-    const tier2Quota = Math.max(0, MAX_RESULTS - tier1.length);
+    const arrays = [...groups.values()].sort((a, b) => b[0].activeCount - a[0].activeCount);
+    const tier1 = [];
     const tier2 = [];
-    let round = 0;
-    while (tier2.length < tier2Quota) {
-      let added = false;
-      for (const list of tier2Lists) {
-        if (tier2.length >= tier2Quota) break;
-        if (list[round]) { tier2.push(list[round]); added = true; }
-      }
-      if (!added) break;
-      round++;
+    for (const arr of arrays) {
+      if (!arr.length) continue;
+      const rep = { ...arr[0], alternatives: arr.slice(1) };
+      if (arr[0].activeCount >= 3) tier1.push(rep);
+      else tier2.push(rep);
     }
-    return [...tier1, ...tier2];
+    const tier2Quota = Math.max(0, MAX_RESULTS - tier1.length);
+    return [...tier1, ...tier2.slice(0, tier2Quota)];
   }
   // single（activeCount===1）は常に MAX_RESULTS 件まで（extra扱い）
   function finalizeSingle(groups) {
-    const lists = [...groups.values()].map(arr => arr.slice());
-    const result = [];
-    let round = 0;
-    while (result.length < MAX_RESULTS) {
-      let added = false;
-      for (const list of lists) {
-        if (result.length >= MAX_RESULTS) break;
-        if (list[round]) { result.push(list[round]); added = true; }
-      }
-      if (!added) break;
-      round++;
-    }
-    return result;
+    const arrays = [...groups.values()];
+    const reps = arrays.map(arr => ({ ...arr[0], alternatives: arr.slice(1) }));
+    return reps.slice(0, MAX_RESULTS);
   }
 
   const seen = new Set();
@@ -989,26 +977,42 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   renderComboResults(resultEl, base, totalCount, targetSkills, fixedSlots, extra, stopped);
 }
 
-function comboCardsHtml(items, fixedSlots, targetSkills) {
-  return items.map(({slots, count}) => {
-    const slotRows = CATS.map(cat => {
-      const item = fixedSlots[cat] || slots[cat];
-      if (!item) return `<div class="combo-slot-row"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span><span class="combo-slot-empty">─</span></div>`;
-      const isFixed = !!fixedSlots[cat];
-      return `<div class="combo-slot-row">
-        <span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span>
-        <span class="combo-slot-item" onclick="openModal(${item.no})" style="${isFixed?'color:var(--muted)':''}">
-          ${isFixed?'🔒 ':''}No${item.no} ${item.name}
-        </span>
-      </div>`;
-    }).join('');
-    const activeSkills = Object.entries(count).filter(([,c]) => c>=3).sort((a,b) => b[1]-a[1]);
-    const badges = activeSkills.map(([name,cnt]) => {
-      const isTarget = targetSkills.includes(name);
-      return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${name}<span class="combo-skill-count"> ${cnt}/5</span></span>`;
-    }).join('');
-    return `<div class="combo-card"><div class="combo-slots">${slotRows}</div><div class="combo-active-skills">${badges}</div></div>`;
+function comboCardHtml({slots, count, alternatives = []}, fixedSlots, targetSkills, isAlt = false) {
+  const slotRows = CATS.map(cat => {
+    const item = fixedSlots[cat] || slots[cat];
+    if (!item) return `<div class="combo-slot-row"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span><span class="combo-slot-empty">─</span></div>`;
+    const isFixed = !!fixedSlots[cat];
+    return `<div class="combo-slot-row">
+      <span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span>
+      <span class="combo-slot-item" onclick="openModal(${item.no})" style="${isFixed?'color:var(--muted)':''}">
+        ${isFixed?'🔒 ':''}No${item.no} ${item.name}
+      </span>
+    </div>`;
   }).join('');
+  const activeSkills = Object.entries(count).filter(([,c]) => c>=3).sort((a,b) => b[1]-a[1]);
+  const badges = activeSkills.map(([name,cnt]) => {
+    const isTarget = targetSkills.includes(name);
+    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${name}<span class="combo-skill-count"> ${cnt}/5</span></span>`;
+  }).join('');
+  // 代替装備パターンの折りたたみ
+  let altsHtml = '';
+  if (alternatives.length > 0) {
+    const altCards = alternatives.map(a => comboCardHtml(a, fixedSlots, targetSkills, true)).join('');
+    altsHtml = `
+      <button class="alts-toggle" onclick="
+        const wrap = this.nextElementSibling;
+        const open = wrap.style.display !== 'none';
+        wrap.style.display = open ? 'none' : '';
+        this.textContent = (open ? '▸ ' : '▾ ') + '同じスキル発動の別装備（${alternatives.length}件）';
+      ">▸ 同じスキル発動の別装備（${alternatives.length}件）</button>
+      <div class="combo-alts" style="display:none">${altCards}</div>`;
+  }
+  const cls = isAlt ? 'combo-card combo-card-alt' : 'combo-card';
+  return `<div class="${cls}"><div class="combo-slots">${slotRows}</div><div class="combo-active-skills">${badges}</div>${altsHtml}</div>`;
+}
+
+function comboCardsHtml(items, fixedSlots, targetSkills) {
+  return items.map(it => comboCardHtml(it, fixedSlots, targetSkills, false)).join('');
 }
 
 function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, extra = [], stopped = false) {
