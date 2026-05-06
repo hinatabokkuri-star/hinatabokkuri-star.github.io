@@ -862,27 +862,43 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   // 起点スキル：ターゲット指定時はそれを使い、無指定時は activatable 全部
   const pivotSkills = targetSkills.length > 0 ? targetSkills : activatable;
 
-  // top-K 保持：multi（activeCount>=2）と single（activeCount===1）を別リストで管理
-  // 各リストは降順ソート維持、サイズ MAX_RESULTS。閾値より低い候補は即破棄。
-  const topMulti = [];
-  const topSingle = [];
-  let multiThreshold = 0;  // multi に入る最低 activeCount（リスト満杯後のみ有効）
+  // 発動スキルセットでグルーピングして多様性を確保
+  // 各グループに保持する最大件数（多様性が足りない時の埋め草用）
+  const GROUP_LIMIT = 5;
+  const multiGroups = new Map();   // skillSetKey → results[]（activeCount>=2）
+  const singleGroups = new Map();  // skillSetKey → results[]（activeCount===1）
+
+  function activeKey(count) {
+    const active = [];
+    for (const k in count) if (count[k] >= 3) active.push(k);
+    active.sort();
+    return active.join('|');
+  }
   function tryAdd(result) {
-    if (result.activeCount >= 2) {
-      if (topMulti.length < MAX_RESULTS) {
-        topMulti.push(result);
-        if (topMulti.length === MAX_RESULTS) {
-          topMulti.sort((a,b) => b.activeCount - a.activeCount);
-          multiThreshold = topMulti[MAX_RESULTS-1].activeCount;
-        }
-      } else if (result.activeCount > multiThreshold) {
-        topMulti[MAX_RESULTS-1] = result;
-        topMulti.sort((a,b) => b.activeCount - a.activeCount);
-        multiThreshold = topMulti[MAX_RESULTS-1].activeCount;
+    if (result.activeCount === 0) return;
+    const groups = result.activeCount >= 2 ? multiGroups : singleGroups;
+    const key = activeKey(result.count);
+    if (!groups.has(key)) groups.set(key, []);
+    const arr = groups.get(key);
+    if (arr.length < GROUP_LIMIT) arr.push(result);
+  }
+  // グループから多様性優先で MAX_RESULTS 件取り出す
+  function finalize(groups) {
+    // グループを activeCount 降順でソート（先頭要素の activeCount で代表）
+    const lists = [...groups.values()].map(arr => arr.slice());
+    lists.sort((a, b) => b[0].activeCount - a[0].activeCount);
+    const result = [];
+    let round = 0;
+    while (result.length < MAX_RESULTS) {
+      let added = false;
+      for (const list of lists) {
+        if (result.length >= MAX_RESULTS) break;
+        if (list[round]) { result.push(list[round]); added = true; }
       }
-    } else if (result.activeCount === 1) {
-      if (topSingle.length < MAX_RESULTS) topSingle.push(result);
+      if (!added) break;
+      round++;
     }
+    return result;
   }
 
   const seen = new Set();
@@ -933,9 +949,10 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   }
 
   // multi が空なら single を表示し、extra は無し。multi があれば single は extra。
-  topMulti.sort((a,b) => b.activeCount - a.activeCount);
-  const base = topMulti.length > 0 ? topMulti : topSingle;
-  const extra = topMulti.length > 0 ? topSingle : [];
+  const finalMulti = finalize(multiGroups);
+  const finalSingle = finalize(singleGroups);
+  const base = finalMulti.length > 0 ? finalMulti : finalSingle;
+  const extra = finalMulti.length > 0 ? finalSingle : [];
   renderComboResults(resultEl, base, totalCount, targetSkills, fixedSlots, extra, stopped);
 }
 
