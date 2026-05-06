@@ -338,7 +338,7 @@
     "drop_from": [
       {
         "no": 401,
-        "name": "バリスカルゴ"
+        "name": "バグスカルゴ"
       }
     ],
     "skills": [
@@ -737,6 +737,10 @@
       {
         "no": 457,
         "name": "ウンディーネ"
+      },
+      {
+        "no": 393,
+        "name": "キャッピー"
       }
     ],
     "skills": [
@@ -813,7 +817,12 @@
     "no": 12,
     "category": "武器",
     "name": "リーフロッド",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 394,
+        "name": "リーフィ"
+      }
+    ],
     "skills": [
       {
         "type": "M",
@@ -1670,7 +1679,7 @@
     "drop_from": [
       {
         "no": 408,
-        "name": "クラチャバ"
+        "name": "クラゲック"
       }
     ],
     "skills": [
@@ -2700,7 +2709,12 @@
     "no": 37,
     "category": "武器",
     "name": "ちゅうしゃき",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 402,
+        "name": "キラービー"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -4131,7 +4145,7 @@
         "desc": "たいじゅうをのせたこうげき (ATK+VIT)"
       },
       {
-        "type": "A",
+        "type": "P",
         "name": "カウンター",
         "desc": "こうげきをうけるとターンがはやまる (VIT)"
       }
@@ -4824,7 +4838,7 @@
     "drop_from": [],
     "skills": [
       {
-        "type": "M",
+        "type": "A",
         "name": "マジックアタック",
         "desc": "まりょくをまとったこうげき (ATK+INT)"
       },
@@ -5149,9 +5163,9 @@
         "desc": "くさぞくせいのまほうこうげき (INTx2)"
       },
       {
-        "type": "M",
-        "name": "フレア",
-        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+        "type": "P",
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
       }
     ],
     "mastery_bonus": [
@@ -5219,7 +5233,7 @@
     ],
     "skills": [
       {
-        "type": "M",
+        "type": "A",
         "name": "ランダムアタック",
         "desc": "うんまかせのこうげき (ATK+LUK?)"
       },
@@ -5229,9 +5243,9 @@
         "desc": "くさぞくせいのまほうこうげき (INTx2)"
       },
       {
-        "type": "M",
-        "name": "ガード",
-        "desc": "つぎにうけるダメージをはいばん (VIT)"
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
       }
     ],
     "mastery_bonus": [
@@ -5374,7 +5388,7 @@
     "drop_from": [],
     "skills": [
       {
-        "type": "M",
+        "type": "A",
         "name": "ボディアタック",
         "desc": "たいじゅうをのせたこうげき (ATK+VIT)"
       },
@@ -6707,9 +6721,9 @@
         "desc": "HPをうばいとるまほうこうげき (INT)"
       },
       {
-        "type": "M",
-        "name": "ダークマーナ",
-        "desc": "やみぞくせいのまほうこうげき (INTx2)"
+        "type": "P",
+        "name": "デスマーチ",
+        "desc": "しぬまであるきつづける"
       }
     ],
     "mastery_bonus": [
@@ -6932,12 +6946,12 @@
     "drop_from": [
       {
         "no": 403,
-        "name": "キャサピラー"
+        "name": "キャタピラー"
       }
     ],
     "skills": [
       {
-        "type": "M",
+        "type": "A",
         "name": "ジャブ",
         "desc": "かるいスピードこうげき (SPD)"
       },
@@ -7491,7 +7505,7 @@
     ],
     "skills": [
       {
-        "type": "M",
+        "type": "A",
         "name": "マジックアタック",
         "desc": "まりょくをまとったこうげき (ATK+INT)"
       },
@@ -8191,6 +8205,10 @@
       {
         "no": 488,
         "name": "クリッパリ"
+      },
+      {
+        "no": 408,
+        "name": "クラゲック"
       }
     ],
     "skills": [
@@ -8506,6 +8524,10 @@
       {
         "no": 423,
         "name": "ゲレゲレ"
+      },
+      {
+        "no": 410,
+        "name": "ハングリードッグ"
       }
     ],
     "skills": [
@@ -9125,7 +9147,7 @@
     "drop_from": [
       {
         "no": 407,
-        "name": "うさびー"
+        "name": "ラバーバニー"
       }
     ],
     "skills": [
@@ -9895,7 +9917,7 @@
     "drop_from": [
       {
         "no": 410,
-        "name": "バツワードッグ"
+        "name": "ハングリードッグ"
       }
     ],
     "skills": [
@@ -9910,7 +9932,7 @@
         "desc": "HPをかいふくする (LUK?)"
       },
       {
-        "type": "A",
+        "type": "P",
         "name": "エンカウンター",
         "desc": "モンスターしゅつげんりつアップ"
       }
@@ -11518,9 +11540,9 @@
     "drop_from": [],
     "skills": [
       {
-        "type": "M",
-        "name": "ランダムマジック",
-        "desc": "ランダムなまほうこうげき (INT+LUK?)"
+        "type": "A",
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
       },
       {
         "type": "M",
@@ -12467,7 +12489,7 @@
     "drop_from": [
       {
         "no": 396,
-        "name": "ウィングテイ"
+        "name": "ウィングアイ"
       }
     ],
     "skills": [
@@ -12859,7 +12881,12 @@
     "no": 276,
     "category": "鎧",
     "name": "ふうすいローブ",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 393,
+        "name": "キャッピー"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -12934,7 +12961,12 @@
     "no": 277,
     "category": "鎧",
     "name": "はっぱ",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 394,
+        "name": "リーフィ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -14565,7 +14597,7 @@
     "drop_from": [
       {
         "no": 468,
-        "name": "マミィヘア"
+        "name": "マミィベア"
       }
     ],
     "skills": [
@@ -15034,11 +15066,11 @@
     "drop_from": [
       {
         "no": 397,
-        "name": "ラーターベント"
+        "name": "キラーサーペント"
       },
       {
         "no": 392,
-        "name": "ダキー"
+        "name": "ツィギー"
       }
     ],
     "skills": [
@@ -15194,6 +15226,10 @@
       {
         "no": 457,
         "name": "ウンディーネ"
+      },
+      {
+        "no": 393,
+        "name": "キャッピー"
       }
     ],
     "skills": [
@@ -15270,7 +15306,12 @@
     "no": 348,
     "category": "アクセサリー",
     "name": "リーフリング",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 394,
+        "name": "リーフィ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -15984,7 +16025,12 @@
     "no": 360,
     "category": "アクセサリー",
     "name": "インセクトリング",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 402,
+        "name": "キラービー"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -16151,7 +16197,16 @@
     "no": 362,
     "category": "アクセサリー",
     "name": "アニマルリング",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 408,
+        "name": "クラゲック"
+      },
+      {
+        "no": 410,
+        "name": "ハングリードッグ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -17341,7 +17396,7 @@
     "drop_from": [
       {
         "no": 416,
-        "name": "マフイーター"
+        "name": "マンイーター"
       },
       {
         "no": 414,
@@ -17761,8 +17816,8 @@
     "monster_type": "スライム",
     "drop_items": [
       {
-        "no": null,
-        "name": "アクロロード"
+        "no": 11,
+        "name": "アクアロッド"
       },
       {
         "no": 178,
@@ -17770,11 +17825,15 @@
       },
       {
         "no": null,
-        "name": "アクアルアーマー"
+        "name": "アクアアーマー"
       },
       {
-        "no": null,
-        "name": "ぷぁきゅろーぷ"
+        "no": 276,
+        "name": "ふうすいローブ"
+      },
+      {
+        "no": 347,
+        "name": "アクアリング"
       }
     ],
     "skills": [
@@ -17784,14 +17843,14 @@
         "desc": "かるいまほうこうげき (INT)"
       },
       {
-        "type": "M",
-        "name": "ランダムマジック",
-        "desc": "ランダムなまほうこうげき (INT+LUK?)"
+        "type": "A",
+        "name": "ラッキーパンチ",
+        "desc": "かるいランダムこうげき (LUK?)"
       },
       {
-        "type": "P",
-        "name": "XPアップ",
-        "desc": "かくとくXP+50%"
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
       }
     ],
     "mastery_bonus": [
@@ -17858,16 +17917,16 @@
         "name": "リーフロッド"
       },
       {
-        "no": 178,
-        "name": "サカナ"
+        "no": 179,
+        "name": "リーフシールド"
       },
       {
         "no": null,
-        "name": "クラウドサイン"
+        "name": "ウッドサイズ"
       },
       {
-        "no": null,
-        "name": "ははじ"
+        "no": 277,
+        "name": "はっぱ"
       },
       {
         "no": 348,
@@ -17882,13 +17941,13 @@
       },
       {
         "type": "M",
-        "name": "ランダムマジック",
-        "desc": "ランダムなまほうこうげき (INT+LUK?)"
+        "name": "リーフ",
+        "desc": "くさぞくせいのまほうこうげき (INTx2)"
       },
       {
         "type": "P",
-        "name": "とどめ",
-        "desc": "ラストヒットのダメージ+50%"
+        "name": "XPアップ",
+        "desc": "かくとくXP+50%"
       }
     ],
     "mastery_bonus": [
@@ -18262,7 +18321,7 @@
         "desc": "かぜのまほうこうげき (INT+SPD)"
       },
       {
-        "type": "P",
+        "type": "A",
         "name": "マジックアタック",
         "desc": "まりょくをまとったこうげき (ATK+INT)"
       }
@@ -18379,6 +18438,103 @@
         "pt": 500,
         "name": "VITバフ",
         "effect": "VITステータス+5%"
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 402,
+    "category": "ペット",
+    "name": "キラービー",
+    "monster_type": "インセクト",
+    "drop_items": [
+      {
+        "no": 18,
+        "name": "スティンガー"
+      },
+      {
+        "no": null,
+        "name": "????"
+      },
+      {
+        "no": null,
+        "name": "クサイ"
+      },
+      {
+        "no": 37,
+        "name": "ちゅうしゃき"
+      },
+      {
+        "no": 360,
+        "name": "インセクトリング"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
+      },
+      {
+        "type": "M",
+        "name": "ポイズンミスト",
+        "desc": "どくじょうたいにするまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
       },
       {
         "pt": 1000,
@@ -18887,6 +19043,103 @@
     ]
   },
   {
+    "no": 408,
+    "category": "ペット",
+    "name": "クラゲック",
+    "monster_type": "アニマル",
+    "drop_items": [
+      {
+        "no": 24,
+        "name": "ハブラシ"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": null,
+        "name": "きりえだ"
+      },
+      {
+        "no": 188,
+        "name": "ビッグドングリ"
+      },
+      {
+        "no": 362,
+        "name": "アニマルリング"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
+      },
+      {
+        "type": "P",
+        "name": "とどめ",
+        "desc": "ラストヒットのダメージ+50%"
+      },
+      {
+        "type": "P",
+        "name": "コインプラス",
+        "desc": "ドロップコイン+0〜3"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 409,
     "category": "ペット",
     "name": "イガグリドッグ",
@@ -18990,12 +19243,24 @@
     "monster_type": "アニマル",
     "drop_items": [
       {
-        "no": null,
-        "name": "フロンシールド"
+        "no": 193,
+        "name": "ブロンズシールド"
       },
       {
         "no": 362,
         "name": "アニマルリング"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": 212,
+        "name": "ニク"
+      },
+      {
+        "no": null,
+        "name": "???"
       }
     ],
     "skills": [
@@ -19006,13 +19271,13 @@
       },
       {
         "type": "A",
-        "name": "ジャブ",
-        "desc": "かるいスピードこうげき (SPD)"
+        "name": "ラッシュ",
+        "desc": "とっしんこうげき (VIT+SPD)"
       },
       {
         "type": "P",
-        "name": "ラッシュ",
-        "desc": "とっしんこうげき (VIT+SPD)"
+        "name": "デスマーチ",
+        "desc": "しぬまであるきつづける"
       }
     ],
     "mastery_bonus": [
@@ -19188,13 +19453,13 @@
       },
       {
         "type": "M",
-        "name": "アクア",
-        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+        "name": "ダーク",
+        "desc": "やみぞくせいのまほうこうげき (INTx2)"
       },
       {
         "type": "M",
-        "name": "ゾンビーロード",
-        "desc": "???"
+        "name": "めいそう",
+        "desc": "HPをかいふくする (Lv)"
       }
     ],
     "mastery_bonus": [
@@ -23412,9 +23677,9 @@
         "desc": "スピードまかせのこうげき (ATK+SPD)"
       },
       {
-        "type": "M",
-        "name": "マジックボール",
-        "desc": "かるいまほうこうげき (INT)"
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
       }
     ],
     "mastery_bonus": [
@@ -23501,8 +23766,8 @@
       },
       {
         "type": "A",
-        "name": "ランダムアタック",
-        "desc": "うんまかせのこうげき (ATK+LUK?)"
+        "name": "スタンアタック",
+        "desc": "スタンさせるこうげき (ATK)"
       },
       {
         "type": "P",
@@ -23669,7 +23934,7 @@
     ],
     "skills": [
       {
-        "type": "M",
+        "type": "A",
         "name": "アクセル",
         "desc": "つぎにあたえるダメージをアップ (SPD)"
       },
