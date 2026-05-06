@@ -5344,7 +5344,7 @@
     ]
   },
   {
-    "no": 179,
+    "no": 178,
     "category": "盾",
     "name": "サカナ",
     "drop_from": [],
@@ -7739,6 +7739,156 @@
     ]
   },
   {
+    "no": 223,
+    "category": "盾",
+    "name": "クロックガード",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "スローアタック",
+        "desc": "スローじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "M",
+        "name": "スロージャワー",
+        "desc": "スローじょうたいにするまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 224,
+    "category": "盾",
+    "name": "ダイヤシールド",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "M",
+        "name": "チャージ",
+        "desc": "つぎにあたえるダメージをアップ (INT)"
+      },
+      {
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 227,
     "category": "盾",
     "name": "トルネードシールド",
@@ -7758,6 +7908,165 @@
         "type": "P",
         "name": "ステップムーブ",
         "desc": "ステップいどうになる"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 228,
+    "category": "盾",
+    "name": "チェーン",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "スタンアタック",
+        "desc": "スタンさせるこうげき (ATK)"
+      },
+      {
+        "type": "M",
+        "name": "ダーク",
+        "desc": "やみぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "とどめ",
+        "desc": "ラストヒットのダメージ+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 229,
+    "category": "盾",
+    "name": "サブガード",
+    "drop_from": [
+      {
+        "no": 447,
+        "name": "レッドアイ"
+      },
+      {
+        "no": 467,
+        "name": "サボキング"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "エンカウンター",
+        "desc": "モンスターしゅつげんりつアップ"
       }
     ],
     "mastery_bonus": [
@@ -10602,7 +10911,7 @@
     "drop_from": [
       {
         "no": 473,
-        "name": "ダチョーブ"
+        "name": "ダチョーン"
       }
     ],
     "skills": [
@@ -13903,6 +14212,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 229,
+        "name": "サブガード"
       }
     ],
     "skills": [
@@ -14364,6 +14677,87 @@
     ]
   },
   {
+    "no": 459,
+    "category": "ペット",
+    "name": "マーメイド [アームド]",
+    "monster_type": null,
+    "drop_items": [
+      {
+        "no": null,
+        "name": "???"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
+      },
+      {
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "おいのり",
+        "desc": "HPをかいふくする (LUK?)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 460,
     "category": "ペット",
     "name": "ストーンクラブ",
@@ -14582,6 +14976,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 229,
+        "name": "サブガード"
       }
     ],
     "skills": [
@@ -14657,7 +15055,7 @@
   {
     "no": 473,
     "category": "ペット",
-    "name": "ダチョーブ",
+    "name": "ダチョーン",
     "monster_type": "アニマル",
     "drop_items": [
       {
