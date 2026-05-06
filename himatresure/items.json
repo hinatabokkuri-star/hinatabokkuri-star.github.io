@@ -2933,7 +2933,7 @@
     "drop_from": [
       {
         "no": 443,
-        "name": "トールボット"
+        "name": "トールバット"
       }
     ],
     "skills": [
@@ -3792,7 +3792,7 @@
     "drop_from": [
       {
         "no": 443,
-        "name": "トールボット"
+        "name": "トールバット"
       }
     ],
     "skills": [
@@ -12637,7 +12637,7 @@
     "drop_from": [
       {
         "no": 443,
-        "name": "トールボット"
+        "name": "トールバット"
       }
     ],
     "skills": [
@@ -15620,7 +15620,7 @@
   {
     "no": 443,
     "category": "ペット",
-    "name": "トールボット",
+    "name": "トールバット",
     "monster_type": null,
     "drop_items": [
       {
