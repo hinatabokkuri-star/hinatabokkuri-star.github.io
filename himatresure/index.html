@@ -842,9 +842,46 @@ let allItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
 let ownedFilter = 'all'; // 'all' | 'owned' | 'unowned'
 let ownedSet = new Set(JSON.parse(localStorage.getItem('himatubu_owned') || '[]'));
+const OWNER_HASH_PREFIX = '#owned=';
 
 function saveOwned() {
   localStorage.setItem('himatubu_owned', JSON.stringify([...ownedSet]));
+}
+function refreshOwnedViews() {
+  const checkerState = snapshotCheckerState();
+  buildSlots(); buildSkillChecks(); buildSkillChecksForSkillMode();
+  restoreCheckerState(checkerState);
+  renderList();
+}
+async function loadOwnerOwnedItems() {
+  const raw = prompt('所有Noを貼り付けてください');
+  if (raw) loadOwnerOwnedItemsFromText(raw);
+}
+function parseOwnerOwnedText(text) {
+  return [...new Set(String(text).split(/[^0-9]+/)
+    .filter(Boolean)
+    .map(Number)
+    .filter(Number.isFinite))];
+}
+function loadOwnerOwnedItemsFromText(text) {
+  const list = parseOwnerOwnedText(text);
+  if (!list.length) {
+    alert('所有Noが見つかりませんでした');
+    return;
+  }
+  const before = ownedSet.size;
+  list.forEach(no => ownedSet.add(no));
+  saveOwned();
+  refreshOwnedViews();
+  alert(`所有アイテムを読み込みました（${ownedSet.size - before}件追加 / ${ownedSet.size}件）`);
+}
+function shouldAutoLoadOwnerOwnedItems() {
+  return location.hash.startsWith(OWNER_HASH_PREFIX);
+}
+function loadOwnerOwnedItemsFromHash() {
+  if (!shouldAutoLoadOwnerOwnedItems()) return;
+  loadOwnerOwnedItemsFromText(decodeURIComponent(location.hash.slice(OWNER_HASH_PREFIX.length)));
+  history.replaceState(null, '', location.pathname + location.search);
 }
 function toggleOwned(no, e) {
   e.stopPropagation();
@@ -955,6 +992,7 @@ async function init() {
   buildSkillChecks();
   masteryMap = buildMasteryMap();
   startDataPoll();
+  loadOwnerOwnedItemsFromHash();
 }
 
 // ━━━ 一覧 ━━━
@@ -1505,6 +1543,22 @@ document.getElementById('search').addEventListener('input', e => {
 });
 document.getElementById('sort').addEventListener('change', e => {
   currentSort = e.target.value; renderList();
+});
+
+// Owner-only convenience: use #owned=1,2,3 on the URL, or type "myitems" outside inputs.
+window.addEventListener('hashchange', () => {
+  loadOwnerOwnedItemsFromHash();
+});
+let ownerCommandBuffer = '';
+window.addEventListener('keydown', e => {
+  const tag = e.target?.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key.length !== 1) return;
+  ownerCommandBuffer = (ownerCommandBuffer + e.key.toLowerCase()).slice(-7);
+  if (ownerCommandBuffer === 'myitems') {
+    ownerCommandBuffer = '';
+    loadOwnerOwnedItems();
+  }
 });
 
 // ━━━ マスタリーボーナス一覧 ━━━
