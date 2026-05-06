@@ -477,13 +477,18 @@ async function init() {
     document.getElementById('grid').innerHTML = '<div class="empty">データ読み込み失敗</div>';
     return;
   }
-  checkDataUpdate(allItems.length);
+  // ページロード時：前回より増えていたら通知
+  const prev = parseInt(localStorage.getItem(UNB_KEY) || '0', 10);
+  if (prev > 0 && allItems.length > prev) {
+    showUpdateBanner(allItems.length - prev);
+  }
   localStorage.setItem(UNB_KEY, String(allItems.length));
   renderList();
   buildSkillChecksForSkillMode();
   buildSlots();
   buildSkillChecks();
   masteryMap = buildMasteryMap();
+  startDataPoll();
 }
 
 // ━━━ 一覧 ━━━
@@ -1056,23 +1061,49 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 });
 
 
-// ━━━ データ更新通知 ━━━
+// ━━━ データ更新通知（ポーリング） ━━━
 const UNB_KEY = 'himatubu_item_count';
+const POLL_INTERVAL = 3 * 60 * 1000; // 3分
+let pendingItems = null; // 取得済み新データを一時保持
 
-function checkDataUpdate(count) {
-  const prev = parseInt(localStorage.getItem(UNB_KEY) || '0', 10);
-  if (prev > 0 && count > prev) {
-    const diff = count - prev;
-    document.getElementById('unb-text').textContent = `✨ 新しい装備が${diff}件追加されました`;
-    document.getElementById('update-notify-banner').classList.add('show');
-  }
+function showUpdateBanner(diff) {
+  document.getElementById('unb-text').textContent = `✨ 新しい装備が${diff}件追加されました`;
+  document.getElementById('update-notify-banner').classList.add('show');
 }
+
+async function pollDataUpdate() {
+  try {
+    const res = await fetch('items.json?v=' + Date.now());
+    const data = await res.json();
+    const diff = data.length - allItems.length;
+    if (diff > 0) {
+      pendingItems = data;
+      showUpdateBanner(diff);
+    }
+  } catch(e) { /* サイレントに無視 */ }
+}
+
 function unbOk() {
+  // 新データを即反映
+  if (pendingItems) {
+    allItems = pendingItems;
+    pendingItems = null;
+    renderList();
+    buildSkillChecksForSkillMode();
+    buildSlots();
+    buildSkillChecks();
+    masteryMap = buildMasteryMap();
+  }
   localStorage.setItem(UNB_KEY, String(allItems.length));
   document.getElementById('update-notify-banner').classList.remove('show');
 }
 function unbDismiss() {
   document.getElementById('update-notify-banner').classList.remove('show');
+}
+
+// ポーリング開始（init後に呼ぶ）
+function startDataPoll() {
+  setInterval(pollDataUpdate, POLL_INTERVAL);
 }
 
 
