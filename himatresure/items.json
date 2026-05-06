@@ -4342,7 +4342,12 @@
     "no": 77,
     "category": "武器",
     "name": "おおぬさ",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 477,
+        "name": "フェニックス [アンデッド]"
+      }
+    ],
     "skills": [
       {
         "type": "M",
@@ -12179,6 +12184,10 @@
       {
         "no": 437,
         "name": "ゴブリンハンター"
+      },
+      {
+        "no": 477,
+        "name": "フェニックス [アンデッド]"
       }
     ],
     "skills": [
@@ -17445,6 +17454,99 @@
         "type": "P",
         "name": "XPアップ",
         "desc": "かくとくXP+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 477,
+    "category": "ペット",
+    "name": "フェニックス [アンデッド]",
+    "monster_type": "アンデッド",
+    "drop_items": [
+      {
+        "no": 77,
+        "name": "おおぬさ"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": 352,
+        "name": "フェザーリング"
+      },
+      {
+        "no": null,
+        "name": "???"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "ソニックウェーブ",
+        "desc": "かぜのまほうこうげき (INT+SPD)"
+      },
+      {
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "デスマーチ",
+        "desc": "しぬまであるきつづける"
       }
     ],
     "mastery_bonus": [
