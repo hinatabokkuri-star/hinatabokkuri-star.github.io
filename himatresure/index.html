@@ -84,6 +84,12 @@
   .star-btn.owned { color: #ffcc00; text-shadow: 0 0 6px #ffcc0088; }
   .owned-filter-btn { background: var(--bg); border: 1px solid var(--border); color: var(--muted); font-family: inherit; font-size: 12px; padding: 5px 12px; cursor: pointer; white-space: nowrap; flex-shrink: 0; -webkit-tap-highlight-color: transparent; transition: border-color .1s, color .1s; }
   .owned-filter-btn.active { color: #ffcc00; border-color: #aa8800; background: #1e1a00; }
+  .owned-import { margin-top: 7px; }
+  .owned-import-panel { margin-top: 7px; padding: 9px; border: 1px solid var(--border); background: var(--panel); }
+  .owned-import-help { margin: 0 0 7px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+  #owned-import-text { width: 100%; min-height: 72px; box-sizing: border-box; resize: vertical; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: inherit; font-size: 12px; line-height: 1.5; padding: 8px; }
+  .owned-import-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 7px; }
+  .owned-import-status { color: var(--muted); font-size: 11px; }
   .card-no { color: var(--muted); font-size: 11px; flex-shrink: 0; }
   .card-name { font-size: 15px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .cat-tag { font-size: 10px; padding: 2px 4px; border: 1px solid; white-space: nowrap; min-width: 3.5em; text-align: center; display: inline-block; flex-shrink: 0; }
@@ -372,6 +378,16 @@
     color: #415b69;
     border-radius: 999px;
   }
+  .owned-import-panel {
+    background: #ffffff;
+    border-color: #a8b9c4;
+    border-radius: 10px;
+  }
+  #owned-import-text {
+    background: #ffffff;
+    border-color: #9eb1bd;
+    border-radius: 8px;
+  }
   .filter-btn.active,
   .mode-btn.active,
   .skill-check-label.checked,
@@ -602,6 +618,15 @@
     color: #b7c8d5;
     border-radius: 6px;
   }
+  body.theme-dark .owned-import-panel {
+    background: #111b24;
+    border-color: #3d5264;
+    border-radius: 8px;
+  }
+  body.theme-dark #owned-import-text {
+    background: #101821;
+    border-color: #44596b;
+  }
   body.theme-dark .filter-btn.active,
   body.theme-dark .mode-btn.active,
   body.theme-dark .skill-check-label.checked,
@@ -735,6 +760,18 @@
     <button class="owned-filter-btn active" id="owned-btn-all"   onclick="setOwnedFilter('all')">すべて</button>
     <button class="owned-filter-btn"        id="owned-btn-owned" onclick="setOwnedFilter('owned')">★ 所持のみ</button>
     <button class="owned-filter-btn"        id="owned-btn-unowned" onclick="setOwnedFilter('unowned')">☆ 未所持のみ</button>
+  </div>
+  <div class="owned-import">
+    <button class="owned-filter-btn" id="owned-import-toggle" onclick="toggleOwnedImportPanel()">所有Noインポート</button>
+    <div class="owned-import-panel" id="owned-import-panel" style="display:none">
+      <p class="owned-import-help">持っている装備Noを貼り付けると★に追加します。カンマ、空白、改行、No付き表記のどれでもOKです。</p>
+      <textarea id="owned-import-text" placeholder="例: 1, 2, 4, 10&#10;No176 No177 No180"></textarea>
+      <div class="owned-import-actions">
+        <button class="owned-filter-btn" onclick="importOwnedFromTextarea()">読み込む</button>
+        <button class="owned-filter-btn" onclick="clearOwnedImportText()">入力を消す</button>
+        <span class="owned-import-status" id="owned-import-status"></span>
+      </div>
+    </div>
   </div>
 </div>
 <div id="count-bar" style="display:flex;align-items:center;gap:10px;padding:4px 12px 2px">
@@ -874,6 +911,34 @@ function loadOwnerOwnedItemsFromText(text) {
   saveOwned();
   refreshOwnedViews();
   alert(`所有アイテムを読み込みました（${ownedSet.size - before}件追加 / ${ownedSet.size}件）`);
+}
+function toggleOwnedImportPanel() {
+  const panel = document.getElementById('owned-import-panel');
+  const toggle = document.getElementById('owned-import-toggle');
+  const open = panel.style.display === 'none';
+  panel.style.display = open ? '' : 'none';
+  toggle.classList.toggle('active', open);
+  if (open) document.getElementById('owned-import-text').focus();
+}
+function importOwnedFromTextarea() {
+  const textarea = document.getElementById('owned-import-text');
+  const status = document.getElementById('owned-import-status');
+  const list = parseOwnerOwnedText(textarea.value);
+  if (!list.length) {
+    status.textContent = '所有Noが見つかりませんでした';
+    textarea.focus();
+    return;
+  }
+  const before = ownedSet.size;
+  list.forEach(no => ownedSet.add(no));
+  saveOwned();
+  refreshOwnedViews();
+  status.textContent = `${list.length}件を読み取り、${ownedSet.size - before}件追加しました`;
+}
+function clearOwnedImportText() {
+  document.getElementById('owned-import-text').value = '';
+  document.getElementById('owned-import-status').textContent = '';
+  document.getElementById('owned-import-text').focus();
 }
 function shouldAutoLoadOwnerOwnedItems() {
   return location.hash.startsWith(OWNER_HASH_PREFIX);
