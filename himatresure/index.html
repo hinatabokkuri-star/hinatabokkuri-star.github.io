@@ -291,9 +291,398 @@
     border: none; font-family: inherit; font-size: 14px;
     padding: 0 2px; cursor: pointer; line-height: 1;
   }
+
+  /* ━━━ READABLE THEME ━━━
+     明るめを標準にし、暗めにも切り替え可能。 */
+  :root {
+    --bg:      #d9e4ea;
+    --panel:   #f6fbfe;
+    --panel2:  #eaf2f6;
+    --border:  #9db0bd;
+    --accent:  #b97a16;
+    --text:    #182832;
+    --muted:   #58707f;
+    --dim:     #9aabb5;
+    --ok:      #237a47;
+    --warn:    #b96b16;
+    --tag-武器:         #c94643;
+    --tag-盾:           #2f74b9;
+    --tag-鎧:           #238658;
+    --tag-アクセサリー: #8c50b5;
+    --tag-ペット:       #b26724;
+    --skill-A: #c94643;
+    --skill-M: #2f74b9;
+    --skill-P: #238658;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(255,255,255,0.7), transparent 360px),
+      linear-gradient(180deg, #eaf3f7 0, #d5e1e8 260px, #cedbe3 100%),
+      var(--bg);
+    color: var(--text);
+    line-height: 1.58;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #ffffff 0%, #edf6fa 48%, #d7e7ee 100%);
+    border-bottom-color: #a9bac5;
+    box-shadow: 0 8px 24px rgba(69,92,109,0.18);
+  }
+  .hero-by { color: #627b89; }
+  .hero-name {
+    color: #925c10;
+    text-shadow: none;
+  }
+  .hero-name-sub { color: #425967; }
+  .nav-tab { color: #536d7d; }
+  .nav-tab.active { color: #925c10; border-bottom-color: #c98c24; }
+
+  .toolbar {
+    background: rgba(246,251,254,0.94);
+    backdrop-filter: blur(8px);
+    border-bottom-color: #a8b9c4;
+    box-shadow: 0 6px 20px rgba(71,93,110,0.12);
+  }
+  #search,
+  .sort-select,
+  .ck-select,
+  .slot-select {
+    background: #ffffff;
+    border-color: #9eb1bd;
+    color: var(--text);
+    border-radius: 8px;
+  }
+  #search:focus,
+  .sort-select:focus,
+  .ck-select:focus,
+  .slot-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(185,122,22,0.16);
+  }
+
+  .filter-btn,
+  .owned-filter-btn,
+  .mode-btn,
+  .skill-check-label,
+  .mastery-radio-label,
+  .alts-toggle {
+    background: #ffffff;
+    border-color: #9fb2bd;
+    color: #415b69;
+    border-radius: 999px;
+  }
+  .filter-btn.active,
+  .mode-btn.active,
+  .skill-check-label.checked,
+  .mastery-radio-label.checked {
+    background: #fff0c9;
+    color: #7a4a0c;
+    border-color: #c98c24;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+  }
+  .filter-btn[data-cat="武器"].active { background: #ffe7e6; }
+  .filter-btn[data-cat="盾"].active { background: #e4f0ff; }
+  .filter-btn[data-cat="鎧"].active { background: #e5f6ec; }
+  .filter-btn[data-cat="アクセサリー"].active { background: #f4e8fb; }
+  .filter-btn[data-cat="ペット"].active { background: #fff0df; }
+  .owned-filter-btn.active {
+    background: #fff0c9;
+    color: #7a4a0c;
+    border-color: #c98c24;
+  }
+
+  .card,
+  .slot-block,
+  .target-section,
+  .skill-cat-block,
+  .combo-card,
+  .mastery-bonus-card,
+  .checker-rule-bar {
+    background: var(--panel);
+    border-color: #a9bac5;
+    border-radius: 10px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 8px 18px rgba(70,93,110,0.13);
+  }
+  .card {
+    position: relative;
+    padding: 12px 13px 12px 17px;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: var(--border);
+    border-radius: 10px 0 0 10px;
+  }
+  .card:has(.cat-tag-武器)::before { background: var(--tag-武器); }
+  .card:has(.cat-tag-盾)::before { background: var(--tag-盾); }
+  .card:has(.cat-tag-鎧)::before { background: var(--tag-鎧); }
+  .card:has(.cat-tag-アクセサリー)::before { background: var(--tag-アクセサリー); }
+  .card:has(.cat-tag-ペット)::before { background: var(--tag-ペット); }
+  .card:hover {
+    border-color: #7891a0;
+    transform: translateY(-2px);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 12px 24px rgba(70,93,110,0.18);
+  }
+  .card.owned {
+    background: #fff8df;
+    border-color: #d2a13a;
+    box-shadow: 0 0 0 1px rgba(185,122,22,0.12), 0 10px 22px rgba(116,83,24,0.16);
+  }
+  .star-btn { color: #9aaab4; }
+  .star-btn.owned { color: #bd870f; text-shadow: none; }
+
+  .cat-tag,
+  .skill-type,
+  .skill-check-label .stype {
+    border-radius: 5px;
+    background: rgba(255,255,255,0.72);
+    font-weight: bold;
+  }
+  .skill-type,
+  .skill-check-label .stype {
+    min-width: 24px;
+    text-align: center;
+  }
+  .card-no,
+  .skill-item-no,
+  .mastery-pt,
+  #count {
+    color: #607887;
+  }
+  .card-name,
+  .skill-name-col,
+  .mastery-item-name {
+    color: #172a35;
+  }
+  .card-drop span,
+  .skill-desc-col,
+  .mastery-effect {
+    color: #526a78;
+  }
+  .card-drop { color: #6b8190; }
+  .skill-row span:last-child { font-weight: 600; }
+  .skill-row { color: #203440; }
+  .slot-block,
+  .target-section,
+  .skill-cat-block,
+  .combo-card,
+  .mastery-bonus-card {
+    background: rgba(255,255,255,0.88);
+  }
+  .checker-rule-bar {
+    background: #eef6f9;
+  }
+  .ck-empty,
+  .empty {
+    color: #6d8391;
+  }
+
+  #modal {
+    background: #f8fcfe;
+    border-color: #c98c24;
+    border-radius: 12px;
+    box-shadow: 0 24px 60px rgba(35,55,70,0.36);
+  }
+  #modal-close {
+    background: #ffffff;
+    border-color: #a9bac5;
+    color: #415b69;
+    border-radius: 999px;
+  }
+  #modal h3 { color: #6b8190; border-bottom-color: #c9d6de; }
+  .mastery-table td {
+    border-bottom-color: #d8e3e9;
+  }
+  .mastery-table td:nth-child(2) { color: #925c10; }
+  .drop-link { color: #955f12; font-weight: bold; }
+  footer {
+    background: #e6f0f5;
+    border-top-color: #adbec8;
+    color: #617986;
+  }
+
+
+  .theme-toggle {
+    position: fixed;
+    right: 12px;
+    bottom: 52px;
+    z-index: 260;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: rgba(255,255,255,0.78);
+    border: 1px solid #a9bac5;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+  .theme-toggle button {
+    border: 1px solid transparent;
+    background: transparent;
+    color: #415b69;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  body.theme-light #theme-light,
+  body.theme-dark #theme-dark {
+    background: #1c3341;
+    color: #fff5d5;
+    border-color: #304c5c;
+  }
+
+  body.theme-dark {
+    --bg:      #121922;
+    --panel:   #1b2732;
+    --panel2:  #151f29;
+    --border:  #314253;
+    --accent:  #f0c85a;
+    --text:    #e4eef4;
+    --muted:   #9ab0c2;
+    --dim:     #5c7181;
+    --ok:      #70d98b;
+    --warn:    #f1a94f;
+    --tag-武器:         #e26a66;
+    --tag-盾:           #6daef5;
+    --tag-鎧:           #67c997;
+    --tag-アクセサリー: #c78bed;
+    --tag-ペット:       #eba565;
+    --skill-A: #e57470;
+    --skill-M: #74b4f6;
+    --skill-P: #76d796;
+    background:
+      linear-gradient(180deg, rgba(240,200,90,0.045), transparent 180px),
+      var(--bg);
+    color: var(--text);
+  }
+  body.theme-dark .hero {
+    background: linear-gradient(180deg, #23313d 0%, #1b2732 100%);
+    border-bottom-color: #3f5566;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+  }
+  body.theme-dark .hero-by { color: #b8c9d6; }
+  body.theme-dark .hero-name { color: #f6d76f; }
+  body.theme-dark .hero-name-sub { color: #c7d5df; }
+  body.theme-dark .nav-tab { color: var(--muted); }
+  body.theme-dark .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  body.theme-dark .toolbar {
+    background: rgba(27,39,50,0.96);
+    border-bottom-color: #405568;
+    box-shadow: none;
+  }
+  body.theme-dark #search,
+  body.theme-dark .sort-select,
+  body.theme-dark .ck-select,
+  body.theme-dark .slot-select {
+    background: #101821;
+    border-color: #44596b;
+    color: var(--text);
+  }
+  body.theme-dark #search:focus,
+  body.theme-dark .sort-select:focus,
+  body.theme-dark .ck-select:focus,
+  body.theme-dark .slot-select:focus {
+    box-shadow: 0 0 0 2px rgba(240,200,90,0.18);
+  }
+  body.theme-dark .filter-btn,
+  body.theme-dark .owned-filter-btn,
+  body.theme-dark .mode-btn,
+  body.theme-dark .skill-check-label,
+  body.theme-dark .mastery-radio-label,
+  body.theme-dark .alts-toggle {
+    background: #111b24;
+    border-color: #3d5264;
+    color: #b7c8d5;
+    border-radius: 6px;
+  }
+  body.theme-dark .filter-btn.active,
+  body.theme-dark .mode-btn.active,
+  body.theme-dark .skill-check-label.checked,
+  body.theme-dark .mastery-radio-label.checked,
+  body.theme-dark .owned-filter-btn.active {
+    background: #2b2a20;
+    color: #f4d369;
+    border-color: #f0c85a;
+    box-shadow: none;
+  }
+  body.theme-dark .card,
+  body.theme-dark .slot-block,
+  body.theme-dark .target-section,
+  body.theme-dark .skill-cat-block,
+  body.theme-dark .combo-card,
+  body.theme-dark .mastery-bonus-card,
+  body.theme-dark .checker-rule-bar {
+    background: var(--panel);
+    border-color: #3a5062;
+    border-radius: 8px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04), 0 8px 20px rgba(0,0,0,0.16);
+  }
+  body.theme-dark .card { padding: 12px 13px 12px 17px; }
+  body.theme-dark .card:hover {
+    border-color: #60778a;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04), 0 8px 20px rgba(0,0,0,0.16);
+  }
+  body.theme-dark .card.owned {
+    background: #222a2e;
+    border-color: rgba(240,200,90,0.55);
+    box-shadow: 0 0 0 1px rgba(240,200,90,0.12), 0 8px 22px rgba(0,0,0,0.18);
+  }
+  body.theme-dark .cat-tag,
+  body.theme-dark .skill-type,
+  body.theme-dark .skill-check-label .stype {
+    background: rgba(255,255,255,0.035);
+  }
+  body.theme-dark .card-no,
+  body.theme-dark .skill-item-no,
+  body.theme-dark .mastery-pt,
+  body.theme-dark #count { color: #a8bbc9; }
+  body.theme-dark .card-name,
+  body.theme-dark .skill-name-col,
+  body.theme-dark .mastery-item-name { color: #f0f6f8; }
+  body.theme-dark .card-drop span,
+  body.theme-dark .skill-desc-col,
+  body.theme-dark .mastery-effect { color: #b6c6d0; }
+  body.theme-dark .card-drop { color: var(--muted); }
+  body.theme-dark .skill-row { color: #e4eef4; }
+  body.theme-dark .skill-row span:last-child { color: #dceaf2; }
+  body.theme-dark #modal {
+    background: #1f2b35;
+    border-color: #f0c85a;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+  body.theme-dark #modal-close {
+    background: none;
+    border-color: var(--border);
+    color: var(--text);
+  }
+  body.theme-dark #modal h3 { color: var(--muted); border-bottom-color: var(--border); }
+  body.theme-dark .mastery-table td { border-bottom-color: #314253; }
+  body.theme-dark .mastery-table td:nth-child(2) { color: var(--accent); }
+  body.theme-dark .drop-link { color: var(--accent); }
+  body.theme-dark footer {
+    background: var(--panel);
+    border-top-color: var(--border);
+    color: var(--muted);
+  }
+  body.theme-dark .theme-toggle {
+    background: rgba(18,25,34,0.78);
+    border-color: #3d5264;
+  }
+  body.theme-dark .theme-toggle button { color: #b7c8d5; }
 </style>
 </head>
-<body>
+<body class="theme-light">
+<div class="theme-toggle" aria-label="テーマ切替">
+  <button id="theme-light" type="button" onclick="setSiteTheme('light')">明るめ</button>
+  <button id="theme-dark" type="button" onclick="setSiteTheme('dark')">暗め</button>
+</div>
 
 <!-- UPDATE NOTIFY BANNER -->
 <div id="update-notify-banner" class="update-notify-banner">
@@ -431,6 +820,13 @@
 </div>
 
 <script>
+function setSiteTheme(theme) {
+  document.body.classList.toggle('theme-dark', theme === 'dark');
+  document.body.classList.toggle('theme-light', theme !== 'dark');
+  try { localStorage.setItem('himatresure_theme', theme); } catch(e) {}
+}
+setSiteTheme(localStorage.getItem('himatresure_theme') || 'light');
+
 const CATS = ['武器','盾','鎧','アクセサリー','ペット'];
 const CAT_ORDER = {'武器':0,'盾':1,'鎧':2,'アクセサリー':3,'ペット':4};
 const CAT_LABEL = {'武器':'武器','盾':'盾','鎧':'鎧','アクセサリー':'アクセ','ペット':'ペット'};
