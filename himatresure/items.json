@@ -9615,6 +9615,86 @@
     ]
   },
   {
+    "no": 268,
+    "category": "盾",
+    "name": "マタドールマント",
+    "drop_from": [
+      {
+        "no": 475,
+        "name": "ミノタウロス"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ジャブ",
+        "desc": "かるいスピードこうげき (SPD)"
+      },
+      {
+        "type": "A",
+        "name": "ラッシュ",
+        "desc": "とっしんこうげき (VIT+SPD)"
+      },
+      {
+        "type": "P",
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 269,
     "category": "鎧",
     "name": "ナイトアーマー",
@@ -17251,6 +17331,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 268,
+        "name": "マタドールマント"
       }
     ],
     "skills": [
