@@ -4332,7 +4332,7 @@
   {
     "no": 92,
     "category": "武器",
-    "name": "ソプコロ",
+    "name": "リンコロ",
     "drop_from": [],
     "skills": [
       {
@@ -12795,6 +12795,86 @@
     ]
   },
   {
+    "no": 375,
+    "category": "アクセサリー",
+    "name": "スパイクリング",
+    "drop_from": [
+      {
+        "no": 467,
+        "name": "サボキング"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ジャブ",
+        "desc": "かるいスピードこうげき (SPD)"
+      },
+      {
+        "type": "A",
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
+      },
+      {
+        "type": "P",
+        "name": "カウンター",
+        "desc": "こうげきをうけるとターンがはやまる (VIT)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 384,
     "category": "アクセサリー",
     "name": "クラブリング",
@@ -14272,7 +14352,7 @@
       },
       {
         "no": null,
-        "name": "ジャーマンプローブ"
+        "name": "ジャーマングローブ"
       }
     ],
     "skills": [
@@ -16191,12 +16271,12 @@
     "monster_type": "デビル",
     "drop_items": [
       {
-        "no": null,
-        "name": "トルネードソールド"
+        "no": 67,
+        "name": "しゅりけん"
       },
       {
-        "no": 71,
-        "name": "カットラス"
+        "no": 227,
+        "name": "トルネードシールド"
       },
       {
         "no": null,
@@ -16306,6 +16386,10 @@
       {
         "no": 226,
         "name": "サボテンシールド"
+      },
+      {
+        "no": 375,
+        "name": "スパイクリング"
       }
     ],
     "skills": [
