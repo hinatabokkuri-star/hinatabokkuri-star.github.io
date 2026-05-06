@@ -721,6 +721,81 @@
     ]
   },
   {
+    "no": 13,
+    "category": "武器",
+    "name": "ウイングブレイド",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
+      },
+      {
+        "type": "M",
+        "name": "ソニックウェーブ",
+        "desc": "かぜのまほうこうげき (INT+SPD)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 14,
     "category": "武器",
     "name": "フレイル",
@@ -4100,6 +4175,86 @@
     ]
   },
   {
+    "no": 84,
+    "category": "武器",
+    "name": "ブーケ",
+    "drop_from": [
+      {
+        "no": 459,
+        "name": "マーメイド [アームド]"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "リーフ",
+        "desc": "くさぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "ポイズンミスト",
+        "desc": "どくじょうたいにするまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "コインプラス",
+        "desc": "ドロップコイン+0〜3"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 88,
     "category": "武器",
     "name": "クマちゃんハンマー",
@@ -4119,6 +4274,81 @@
         "type": "P",
         "name": "デスマーチ",
         "desc": "しぬまであるきつづける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 92,
+    "category": "武器",
+    "name": "ソプコロ",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ラッキーパンチ",
+        "desc": "かるいランダムこうげき (LUK?)"
+      },
+      {
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "XPアップ",
+        "desc": "かくとくXP+50%"
       }
     ],
     "mastery_bonus": [
@@ -6584,6 +6814,86 @@
     ]
   },
   {
+    "no": 197,
+    "category": "盾",
+    "name": "イクラガード",
+    "drop_from": [
+      {
+        "no": 417,
+        "name": "クロッピ"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
+      },
+      {
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "ふいうち",
+        "desc": "せんせいこうげきをしかける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 198,
     "category": "盾",
     "name": "アクアガード",
@@ -7584,6 +7894,86 @@
     ]
   },
   {
+    "no": 216,
+    "category": "盾",
+    "name": "ボールガード",
+    "drop_from": [
+      {
+        "no": 407,
+        "name": "ラバーバニー"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
+      },
+      {
+        "type": "A",
+        "name": "ラッキーパンチ",
+        "desc": "かるいランダムこうげき (LUK?)"
+      },
+      {
+        "type": "P",
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 218,
     "category": "盾",
     "name": "ばくだん",
@@ -7833,6 +8223,170 @@
         "type": "P",
         "name": "ラピッドムーブ",
         "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 225,
+    "category": "盾",
+    "name": "レッドシールド",
+    "drop_from": [
+      {
+        "no": 463,
+        "name": "スコーピオン"
+      },
+      {
+        "no": 447,
+        "name": "レッドアイ"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 226,
+    "category": "盾",
+    "name": "サボテンシールド",
+    "drop_from": [
+      {
+        "no": 467,
+        "name": "サボキング"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ポイズンアタック",
+        "desc": "どくじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "M",
+        "name": "リーフ",
+        "desc": "くさぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "カウンター",
+        "desc": "こうげきをうけるとターンがはやまる (VIT)"
       }
     ],
     "mastery_bonus": [
@@ -9582,6 +10136,86 @@
     ]
   },
   {
+    "no": 287,
+    "category": "鎧",
+    "name": "チャイナドレス",
+    "drop_from": [
+      {
+        "no": 414,
+        "name": "パクパクフラワー"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "スロージャワー",
+        "desc": "スローじょうたいにするまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 290,
     "category": "鎧",
     "name": "うらないローブ",
@@ -10135,6 +10769,81 @@
     ]
   },
   {
+    "no": 307,
+    "category": "鎧",
+    "name": "サイボーグスーツ",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
+      },
+      {
+        "type": "A",
+        "name": "スタンアタック",
+        "desc": "スタンさせるこうげき (ATK)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 308,
     "category": "鎧",
     "name": "ロボットアーマー",
@@ -10515,6 +11224,81 @@
     ]
   },
   {
+    "no": 325,
+    "category": "鎧",
+    "name": "バードウィング",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "M",
+        "name": "ソニックウェーブ",
+        "desc": "かぜのまほうこうげき (INT+SPD)"
+      },
+      {
+        "type": "A",
+        "name": "スローアタック",
+        "desc": "スローじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "P",
+        "name": "ふいうち",
+        "desc": "せんせいこうげきをしかける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 346,
     "category": "アクセサリー",
     "name": "フレアリング",
@@ -10791,6 +11575,161 @@
         "pt": 1000,
         "name": "XPギア",
         "effect": "かくとくXP+5%"
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 353,
+    "category": "アクセサリー",
+    "name": "エレキリング",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "M",
+        "name": "チャージ",
+        "desc": "つぎにあたえるダメージをアップ (INT)"
+      },
+      {
+        "type": "M",
+        "name": "スタンショック",
+        "desc": "スタンさせるまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 356,
+    "category": "アクセサリー",
+    "name": "ホーリーリング",
+    "drop_from": [
+      {
+        "no": 419,
+        "name": "エンジェルスライム"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "スタンショック",
+        "desc": "スタンさせるまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "ふいうち",
+        "desc": "せんせいこうげきをしかける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
       },
       {
         "pt": 1500,
@@ -11621,6 +12560,86 @@
     ]
   },
   {
+    "no": 371,
+    "category": "アクセサリー",
+    "name": "スピードリング",
+    "drop_from": [
+      {
+        "no": 473,
+        "name": "ダチョーン"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
+      },
+      {
+        "type": "A",
+        "name": "ダッシュアタック",
+        "desc": "スピードまかせのこうげき (ATK+SPD)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 372,
     "category": "アクセサリー",
     "name": "ラッキーリング",
@@ -12272,6 +13291,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 216,
+        "name": "ボールガード"
       }
     ],
     "skills": [
@@ -12563,6 +13586,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 287,
+        "name": "チャイナドレス"
       }
     ],
     "skills": [
@@ -12757,6 +13784,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 197,
+        "name": "イクラガード"
       }
     ],
     "skills": [
@@ -12854,6 +13885,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 356,
+        "name": "ホーリーリング"
       }
     ],
     "skills": [
@@ -13214,6 +14249,99 @@
         "pt": 9999,
         "name": "INTバフ",
         "effect": "INTステータス+5%"
+      }
+    ]
+  },
+  {
+    "no": 429,
+    "category": "ペット",
+    "name": "スカルリグ [インセクト]",
+    "monster_type": "インセクト",
+    "drop_items": [
+      {
+        "no": null,
+        "name": "ねじりあみ"
+      },
+      {
+        "no": 206,
+        "name": "スカルガード"
+      },
+      {
+        "no": 42,
+        "name": "スカルロッド"
+      },
+      {
+        "no": null,
+        "name": "ジャーマンプローブ"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "タックル",
+        "desc": "かるいたいあたりこうげき (VIT)"
+      },
+      {
+        "type": "M",
+        "name": "ダーク",
+        "desc": "やみぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "エンカウンター",
+        "desc": "モンスターしゅつげんりつアップ"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
       }
     ]
   },
@@ -14216,6 +15344,10 @@
       {
         "no": 229,
         "name": "サブガード"
+      },
+      {
+        "no": 225,
+        "name": "レッドシールド"
       }
     ],
     "skills": [
@@ -14685,6 +15817,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 84,
+        "name": "ブーケ"
       }
     ],
     "skills": [
@@ -14855,6 +15991,99 @@
     ]
   },
   {
+    "no": 461,
+    "category": "ペット",
+    "name": "アンモン [アームド]",
+    "monster_type": "アームド",
+    "drop_items": [
+      {
+        "no": 223,
+        "name": "クロックガード"
+      },
+      {
+        "no": 224,
+        "name": "ダイヤシールド"
+      },
+      {
+        "no": null,
+        "name": "ベビーアーマー"
+      },
+      {
+        "no": null,
+        "name": "アームドリング"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "チャージ",
+        "desc": "つぎにあたえるダメージをアップ (INT)"
+      },
+      {
+        "type": "A",
+        "name": "ガード",
+        "desc": "つぎにうけるダメージをはいばん (VIT)"
+      },
+      {
+        "type": "P",
+        "name": "XPアップ",
+        "desc": "かくとくXP+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 463,
     "category": "ペット",
     "name": "スコーピオン",
@@ -14879,6 +16108,10 @@
       {
         "no": 384,
         "name": "クラブリング"
+      },
+      {
+        "no": 225,
+        "name": "レッドシールド"
       }
     ],
     "skills": [
@@ -14896,6 +16129,95 @@
         "type": "P",
         "name": "とどめ",
         "desc": "ラストヒットのダメージ+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 465,
+    "category": "ペット",
+    "name": "トルネ [デビル]",
+    "monster_type": "デビル",
+    "drop_items": [
+      {
+        "no": null,
+        "name": "トルネードソールド"
+      },
+      {
+        "no": 71,
+        "name": "カットラス"
+      },
+      {
+        "no": null,
+        "name": "がくるま"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
+      },
+      {
+        "type": "M",
+        "name": "ソニックウェーブ",
+        "desc": "かぜのまほうこうげき (INT+SPD)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
       }
     ],
     "mastery_bonus": [
@@ -14980,6 +16302,10 @@
       {
         "no": 229,
         "name": "サブガード"
+      },
+      {
+        "no": 226,
+        "name": "サボテンシールド"
       }
     ],
     "skills": [
@@ -15077,6 +16403,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 371,
+        "name": "スピードリング"
       }
     ],
     "skills": [
@@ -15247,6 +16577,99 @@
     ]
   },
   {
+    "no": 476,
+    "category": "ペット",
+    "name": "ドラゴン [リザード]",
+    "monster_type": "リザード",
+    "drop_items": [
+      {
+        "no": null,
+        "name": "ブーメラン"
+      },
+      {
+        "no": 320,
+        "name": "ドラゴンスーツ"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": null,
+        "name": "???"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "XPアップ",
+        "desc": "かくとくXP+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 481,
     "category": "ペット",
     "name": "ゴブリンロード",
@@ -15288,6 +16711,95 @@
         "type": "P",
         "name": "ステップムーブ",
         "desc": "ステップいどうになる"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 484,
+    "category": "ペット",
+    "name": "キャロットウォーリア [アームド]",
+    "monster_type": "アームド",
+    "drop_items": [
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": null,
+        "name": "???"
+      },
+      {
+        "no": null,
+        "name": "???"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
+      },
+      {
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "M",
+        "name": "リーフ",
+        "desc": "くさぞくせいのまほうこうげき (INTx2)"
       }
     ],
     "mastery_bonus": [
