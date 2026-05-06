@@ -1420,6 +1420,90 @@
     ]
   },
   {
+    "no": 25,
+    "category": "武器",
+    "name": "がなぱら",
+    "drop_from": [
+      {
+        "no": 488,
+        "name": "イガリンドッグ"
+      },
+      {
+        "no": 480,
+        "name": "ゴブリンタンク"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "ダーク",
+        "desc": "やみぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "デスマーチ",
+        "desc": "しぬまであるきつづける"
+      },
+      {
+        "type": "P",
+        "name": "とどめ",
+        "desc": "ラストヒットのダメージ+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 26,
     "category": "武器",
     "name": "まるた",
@@ -13438,6 +13522,90 @@
     ]
   },
   {
+    "no": 391,
+    "category": "アクセサリー",
+    "name": "シールドリング",
+    "drop_from": [
+      {
+        "no": 481,
+        "name": "ゴブリンロード"
+      },
+      {
+        "no": 480,
+        "name": "ゴブリンタンク"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ガード",
+        "desc": "つぎにうけるダメージをはいばん (VIT)"
+      },
+      {
+        "type": "A",
+        "name": "タックル",
+        "desc": "かるいたいあたりこうげき (VIT)"
+      },
+      {
+        "type": "P",
+        "name": "XPアップ",
+        "desc": "かくとくXP+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 395,
     "category": "ペット",
     "name": "スライム",
@@ -17277,6 +17445,10 @@
       {
         "no": 324,
         "name": "ゴブリンアーマー"
+      },
+      {
+        "no": 391,
+        "name": "シールドリング"
       }
     ],
     "skills": [
