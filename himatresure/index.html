@@ -808,11 +808,16 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     }
     const catCandidates = {};
     emptyCats.forEach(cat => {
-      catCandidates[cat] = [null, ...basePool.filter(i =>
-        i.category === cat && i.skills.some(s => targetSkills.includes(s.name)))];
+      // 全アイテムを候補にする（ターゲット外スロットで他スキルも発動できるよう）
+      catCandidates[cat] = [null, ...basePool.filter(i => i.category === cat)];
     });
     const results = [];
     function backtrack(idx, slots, count) {
+      // 枝刈り：残りスロット数でターゲットスキルが達成不可なら打ち切り
+      const remaining = emptyCats.length - idx;
+      for (const sk of targetSkills) {
+        if ((count[sk]||0) + remaining < 3) return;
+      }
       if (idx === emptyCats.length) {
         if (targetSkills.every(sk => (count[sk]||0) >= 3))
           results.push({ slots:{...slots}, count:{...count},
