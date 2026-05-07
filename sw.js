@@ -1,5 +1,5 @@
 // Code cache: bumped on each deploy via bump_sw.sh (triggers RELOAD notification)
-const CACHE = 'hina-202605061359';
+const CACHE = 'hina-202605071150';
 // Music cache: stable across deployments (mp3 / covers / Suno CDN images survive bumps)
 const CACHE_MUSIC = 'hina-music-v1';
 
@@ -73,6 +73,12 @@ async function handleMusicRequest(request) {
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
+
+  // Tetris page: bypass browser/CDN cache as much as possible.
+  if (request.mode === 'navigate' && url.pathname.startsWith('/tetris/')) {
+    event.respondWith(fetch(new Request(request, { cache: 'reload' })));
+    return;
+  }
 
   // HTML（ナビゲーション）はSWを素通り（常に最新取得）
   if (request.mode === 'navigate') return;

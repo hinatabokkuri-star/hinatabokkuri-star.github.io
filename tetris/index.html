@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Blockfall</title>
   <style>
     :root {
@@ -117,6 +120,10 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 8px;
       box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
+    }
+
+    .mobile-hud {
+      display: none;
     }
 
     canvas {
@@ -328,7 +335,7 @@
 
     @media (max-width: 760px) {
       :root {
-        --cell: min(7.4vw, 29px, calc((100vh - 220px) / 20));
+        --cell: min(7.4vw, 29px, calc((100vh - 292px) / 20));
       }
 
       body {
@@ -369,6 +376,49 @@
       .board-wrap {
         justify-self: center;
         order: -1;
+      }
+
+      .mobile-hud {
+        width: min(380px, calc(100vw - 24px));
+        display: grid;
+        grid-template-columns: 82px minmax(72px, 1fr) 82px;
+        align-items: center;
+        gap: 8px;
+        justify-self: center;
+        order: -2;
+        padding: 8px;
+        background: rgba(23, 31, 40, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+      }
+
+      .hud-mini {
+        min-width: 0;
+      }
+
+      .hud-mini .label,
+      .hud-score .label {
+        margin-bottom: 4px;
+        font-size: 10px;
+        text-align: center;
+      }
+
+      .hud-mini canvas {
+        width: 74px;
+        height: 44px;
+        margin: 0 auto;
+      }
+
+      .hud-score {
+        display: grid;
+        place-items: center;
+        min-width: 0;
+      }
+
+      .hud-score strong {
+        font-size: 20px;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
       }
 
       .touch {
@@ -417,6 +467,21 @@
           <div class="key"><strong>C</strong><span>ホールド</span></div>
           <div class="key"><strong>P</strong><span>ポーズ</span></div>
         </div>
+      </div>
+    </section>
+
+    <section class="mobile-hud" aria-label="Mobile game status">
+      <div class="hud-mini">
+        <p class="label">Hold</p>
+        <canvas id="mobileHold" width="112" height="88" aria-label="Mobile hold piece"></canvas>
+      </div>
+      <div class="hud-score">
+        <p class="label">Score</p>
+        <strong id="mobileScore">0</strong>
+      </div>
+      <div class="hud-mini">
+        <p class="label">Next</p>
+        <canvas id="mobileNext" width="112" height="88" aria-label="Mobile next piece"></canvas>
       </div>
     </section>
 
@@ -491,7 +556,10 @@
     const boardCtx = boardCanvas.getContext("2d");
     const nextCtx = document.querySelector("#next").getContext("2d");
     const holdCtx = document.querySelector("#hold").getContext("2d");
+    const mobileNextCtx = document.querySelector("#mobileNext").getContext("2d");
+    const mobileHoldCtx = document.querySelector("#mobileHold").getContext("2d");
     const scoreEl = document.querySelector("#score");
+    const mobileScoreEl = document.querySelector("#mobileScore");
     const linesEl = document.querySelector("#lines");
     const levelEl = document.querySelector("#level");
     const overlay = document.querySelector("#overlay");
@@ -661,6 +729,7 @@
 
     function updateStats() {
       scoreEl.textContent = score;
+      mobileScoreEl.textContent = score;
       linesEl.textContent = lines;
       levelEl.textContent = level;
     }
@@ -746,6 +815,8 @@
       }
       drawMini(nextCtx, nextPiece?.type);
       drawMini(holdCtx, holdPiece);
+      drawMini(mobileNextCtx, nextPiece?.type);
+      drawMini(mobileHoldCtx, holdPiece);
     }
 
     function showOverlay(title, text, buttonText = "Start") {
@@ -851,6 +922,12 @@
     updateStats();
     draw();
     requestAnimationFrame(loop);
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js")
+        .then(registration => registration.update())
+        .catch(() => {});
+    }
   </script>
 </body>
 </html>
