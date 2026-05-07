@@ -241,7 +241,7 @@
 
     @media (max-width: 760px) {
       :root {
-        --cell: min(7.4vw, 29px);
+        --cell: min(7.4vw, 29px, calc((100vh - 190px) / 20));
       }
 
       body {
@@ -277,6 +277,7 @@
 
       .touch {
         display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         position: fixed;
         left: max(10px, env(safe-area-inset-left));
         right: max(10px, env(safe-area-inset-right));
