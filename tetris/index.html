@@ -210,16 +210,33 @@
 
     .touch {
       display: none;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(7, minmax(0, 1fr));
       gap: 8px;
     }
 
     .touch button {
       min-width: 0;
+      min-height: 48px;
       padding: 10px 6px;
       background: var(--panel-2);
       color: var(--text);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 18px;
+      touch-action: manipulation;
+      user-select: none;
+    }
+
+    .touch .wide {
+      grid-column: span 2;
+    }
+
+    .touch .primary {
+      background: var(--accent);
+      color: #17130a;
+    }
+
+    .touch .danger {
+      color: var(--danger);
     }
 
     @media (max-width: 760px) {
@@ -235,7 +252,7 @@
         min-height: auto;
         grid-template-columns: 1fr;
         gap: 12px;
-        padding: 12px;
+        padding: 12px 12px 92px;
       }
 
       .side {
@@ -260,7 +277,20 @@
 
       .touch {
         display: grid;
-        grid-column: 1 / -1;
+        position: fixed;
+        left: max(10px, env(safe-area-inset-left));
+        right: max(10px, env(safe-area-inset-right));
+        bottom: max(10px, env(safe-area-inset-bottom));
+        z-index: 20;
+        grid-column: auto;
+        width: min(520px, calc(100vw - 20px));
+        margin: 0 auto;
+        padding: 8px;
+        background: rgba(12, 17, 23, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.36);
       }
     }
   </style>
@@ -311,11 +341,13 @@
         <div class="stat"><span>Level</span><strong id="level">1</strong></div>
       </div>
       <div class="touch" aria-label="Touch controls">
-        <button data-action="left">←</button>
-        <button data-action="right">→</button>
-        <button data-action="rotate">↻</button>
-        <button data-action="drop">↓</button>
-        <button data-action="hard">⤓</button>
+        <button data-action="hold" aria-label="Hold">H</button>
+        <button data-action="left" aria-label="Move left">←</button>
+        <button data-action="right" aria-label="Move right">→</button>
+        <button data-action="rotate" aria-label="Rotate">↻</button>
+        <button data-action="drop" aria-label="Soft drop">↓</button>
+        <button data-action="pause" class="danger" aria-label="Pause">Ⅱ</button>
+        <button data-action="hard" class="wide primary" aria-label="Hard drop">⤓</button>
       </div>
     </section>
   </main>
@@ -699,6 +731,8 @@
         if (action === "rotate") rotatePiece();
         if (action === "drop") softDrop();
         if (action === "hard") hardDrop();
+        if (action === "hold") holdCurrentPiece();
+        if (action === "pause") togglePause();
       });
     });
 
