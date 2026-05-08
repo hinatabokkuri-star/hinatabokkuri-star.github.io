@@ -1459,6 +1459,25 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     if (fixedCnt + emptyCntWithSkill >= ACTIVATION_NEED - EXTRA_SKILL_POINT) activatable.push(name);
   }
   const activatableSet = new Set(activatable);
+  const targetSet = new Set(targetSkills);
+  const skillReach = new Map();
+  activatable.forEach(name => {
+    const catMap = SKILL_CAT_MAP.get(name) || {};
+    const fixedCnt = baseCount[name] || 0;
+    const emptyCntWithSkill = emptyCats.filter(c => filt(catMap[c]||[]).length > 0).length;
+    skillReach.set(name, fixedCnt + emptyCntWithSkill);
+  });
+  function candidateScore(item) {
+    return item.skills.reduce((score, s) => {
+      if (targetSet.has(s.name)) score += 1000;
+      if (activatableSet.has(s.name)) score += (skillReach.get(s.name) || 0) * 10;
+      score += (baseCount[s.name] || 0) * 25;
+      return score;
+    }, 0);
+  }
+  function sortCandidates(arr) {
+    return [...arr].sort((a, b) => candidateScore(b) - candidateScore(a) || a.no - b.no);
+  }
 
   if (activatable.length === 0) {
     resultEl.innerHTML = '<div class="ck-empty">条件を満たす組み合わせが見つかりませんでした</div>';
@@ -1468,8 +1487,10 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   // 「自由スロット用」候補：ターゲット指定時も他スキルの同時発動を拾えるよう、発動候補スキル持ちを使う
   const otherSlotCandidates = {};
   emptyCats.forEach(cat => {
-    otherSlotCandidates[cat] = filt(ITEMS_BY_CAT[cat])
-      .filter(i => i.skills.some(s => activatableSet.has(s.name)));
+    otherSlotCandidates[cat] = sortCandidates(
+      filt(ITEMS_BY_CAT[cat])
+        .filter(i => i.skills.some(s => activatableSet.has(s.name)))
+    );
   });
 
   // 起点スキル：ターゲット指定時はそれを使い、無指定時は activatable 全部
@@ -1512,10 +1533,104 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   }
 
   const seen = new Set();
+  const highSeen = new Set();
   let totalCount = 0;
   let iters = 0;
   let stopped = false;
   const startTime = performance.now();
+
+  function addExactHighResult(slots, count) {
+    if (targetSkills.length > 0 && !canActivateTargets(count, targetSkills)) return;
+    const bonusChoices = resultBonusSkills(count, targetSkills);
+    const normalActiveCount = normalActiveSkills(count).length;
+    const choices = bonusChoices.length > 0 ? bonusChoices : [null];
+    const slotKey = CATS.map(c => (fixedSlots[c] || slots[c])?.no ?? 0).join(',');
+    for (const bonusSkill of choices) {
+      const activeCount = normalActiveCount + (bonusSkill ? 1 : 0);
+      if (activeCount < 4) continue;
+      const key = `${slotKey}|${bonusSkill || ''}`;
+      if (highSeen.has(key)) continue;
+      highSeen.add(key);
+      tryAdd({ slots: { ...slots }, count: { ...count }, bonusSkill, activeCount });
+    }
+  }
+
+  function exactHighSearch() {
+    const skillNames = [...SKILL_CAT_MAP.keys()];
+    const skillIndex = new Map(skillNames.map((name, idx) => [name, idx]));
+    const targetIdx = targetSkills.map(name => skillIndex.get(name)).filter(idx => idx !== undefined);
+    const arrays = CATS.map(cat => fixedSlots[cat] ? [null] : sortCandidates(filt(ITEMS_BY_CAT[cat])));
+    arrays.forEach(arr => arr.forEach(item => {
+      if (item && !item._comboSkillIdx) item._comboSkillIdx = item.skills.map(s => skillIndex.get(s.name));
+    }));
+
+    const countArr = new Int8Array(skillNames.length);
+    Object.entries(baseCount).forEach(([name, cnt]) => {
+      const idx = skillIndex.get(name);
+      if (idx !== undefined) countArr[idx] = cnt;
+    });
+
+    const remaining = Array(CATS.length + 1).fill(null).map(() => new Int8Array(skillNames.length));
+    for (let depth = CATS.length - 1; depth >= 0; depth--) {
+      remaining[depth].set(remaining[depth + 1]);
+      const present = new Set();
+      arrays[depth].forEach(item => item?._comboSkillIdx?.forEach(idx => present.add(idx)));
+      present.forEach(idx => remaining[depth][idx]++);
+    }
+
+    function mayStillReachTargets(depth) {
+      for (const idx of targetIdx) {
+        if (countArr[idx] + remaining[depth][idx] < ACTIVATION_NEED - EXTRA_SKILL_POINT) return false;
+      }
+      return true;
+    }
+
+    function mayReachHigh(depth) {
+      let possibleActive = 0;
+      let hasBonus = false;
+      for (let idx = 0; idx < skillNames.length; idx++) {
+        const maxPossible = countArr[idx] + remaining[depth][idx];
+        if (maxPossible >= ACTIVATION_NEED) possibleActive++;
+        else if (maxPossible >= ACTIVATION_NEED - EXTRA_SKILL_POINT) hasBonus = true;
+      }
+      return possibleActive + (hasBonus ? 1 : 0) >= 4;
+    }
+
+    function countObject() {
+      const count = {};
+      for (let idx = 0; idx < skillNames.length; idx++) {
+        if (countArr[idx] > 0) count[skillNames[idx]] = countArr[idx];
+      }
+      return count;
+    }
+
+    const slots = {};
+    function rec(depth) {
+      if (!mayReachHigh(depth)) return;
+      if (targetIdx.length > 0 && !mayStillReachTargets(depth)) return;
+      if (depth === CATS.length) {
+        addExactHighResult(slots, countObject());
+        return;
+      }
+      const cat = CATS[depth];
+      for (const item of arrays[depth]) {
+        if (item) {
+          slots[cat] = item;
+          item._comboSkillIdx.forEach(idx => countArr[idx]++);
+        }
+        rec(depth + 1);
+        if (item) {
+          item._comboSkillIdx.forEach(idx => countArr[idx]--);
+          delete slots[cat];
+        }
+      }
+    }
+
+    rec(0);
+  }
+
+  exactHighSearch();
+  totalCount = highSeen.size;
 
   outer: for (const skillName of pivotSkills) {
     const catMap = SKILL_CAT_MAP.get(skillName) || {};
@@ -1531,7 +1646,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
       const usedSet = new Set(subset);
       const otherCats = emptyCats.filter(c => !usedSet.has(c));
       const arrays = [
-        ...subset.map(c => filt(catMap[c]||[])),
+        ...subset.map(c => sortCandidates(filt(catMap[c]||[]))),
         ...otherCats.map(c => [null, ...otherSlotCandidates[c]])
       ];
       const allCatsOrder = [...subset, ...otherCats];
@@ -1559,9 +1674,11 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
           const key = `${slotKey}|${bonusSkill || ''}`;
           if (seen.has(key)) continue;
           seen.add(key);
+          if (highSeen.has(key)) continue;
 
           const activeCount = normalActiveCount + (bonusSkill ? 1 : 0);
           if (activeCount < 2) continue;
+          if (activeCount >= 4) continue;
           totalCount++;
           tryAdd({ slots, count, bonusSkill, activeCount });
         }
