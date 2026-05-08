@@ -1521,6 +1521,17 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   function slotPatternKey(result) {
     return CATS.map(c => (fixedSlots[c] || result.slots[c])?.no ?? 0).join(',') + `|${result.skillSlot || ''}`;
   }
+  function freeSlotCount(result) {
+    return CATS.filter(c => !fixedSlots[c] && !result.slots[c]).length;
+  }
+  function resultSortKey(result) {
+    return CATS.map(c => (fixedSlots[c] || result.slots[c])?.no ?? 0).join(',');
+  }
+  function compareResultVariants(a, b) {
+    return freeSlotCount(b) - freeSlotCount(a)
+      || (a.skillSlot || '').localeCompare(b.skillSlot || '', 'ja')
+      || resultSortKey(a).localeCompare(resultSortKey(b), 'ja');
+  }
   function tryAdd(result) {
     if (result.activeCount < 2) return;
     const normalized = normalizeResult(result);
@@ -1541,7 +1552,9 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   // - activeCount >= 4 のグループは全部表示（30件超えOK）
   // - activeCount === 3/2 は表示枠や追加表示用に MAX_RESULTS 件まで保持
   function finalize(groups) {
-    const arrays = [...groups.values()].sort((a, b) => b[0].activeCount - a[0].activeCount);
+    const arrays = [...groups.values()]
+      .map(arr => [...arr].sort(compareResultVariants))
+      .sort((a, b) => b[0].activeCount - a[0].activeCount || freeSlotCount(b[0]) - freeSlotCount(a[0]));
     return arrays
       .filter(arr => arr.length > 0)
       .map(arr => ({ ...arr[0], alternatives: arr.slice(1) }));
