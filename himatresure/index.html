@@ -1491,7 +1491,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
 
   function activeKey(result) {
     const active = normalActiveSkills(result.count).map(name => `3:${name}`);
-    const bonus = (result.bonusSkills || []).map(name => `+1:${name}`);
+    const bonus = (result.bonusSkills || []).map(name => `3:${name}`);
     return [...active, ...bonus].join('|');
   }
   function tryAdd(result) {
@@ -1685,11 +1685,7 @@ function comboCardHtml({slots, count, bonusSkills = [], alternatives = []}, fixe
         ${isFixed?'🔒 ':''}No${item.no} ${escapeHtml(item.name)}
       </span>
     </div>`;
-  }).join('') + (bonusSkills.length > 0 ? `
-    <div class="combo-slot-row">
-      <span class="cat-tag cat-tag-bonus">+1</span>
-      <span class="combo-slot-item">選択スキル候補 ${bonusSkills.map(escapeHtml).join(' / ')}</span>
-    </div>` : '');
+  }).join('');
   const activeSkills = Object.entries(count).filter(([,c]) => c>=3).sort((a,b) => b[1]-a[1]);
   const activeBadges = activeSkills.map(([name,cnt]) => {
     const isTarget = targetSkills.includes(name);
@@ -1697,8 +1693,7 @@ function comboCardHtml({slots, count, bonusSkills = [], alternatives = []}, fixe
   });
   const bonusBadges = bonusSkills.map(name => {
     const isTarget = targetSkills.includes(name);
-    const cnt = count[name] || 0;
-    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">+1候補 ${escapeHtml(name)}<span class="combo-skill-count"> ${cnt}+1pt</span></span>`;
+    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(name)}<span class="combo-skill-count"> 3pt</span></span>`;
   });
   const badges = [...activeBadges, ...bonusBadges].join('');
   // 代替装備パターンの折りたたみ
