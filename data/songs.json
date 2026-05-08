@@ -1,22 +1,9 @@
 {
   "schema_version": 1,
-  "updated": "2026-05-08T13:21:27.279Z",
+  "updated": "2026-05-08T13:34:25.110Z",
   "base_url": "https://hinatabokkuri-star.github.io",
   "count": 65,
   "songs": [
-    {
-      "title": "One More Floor",
-      "file": "one_more_floor.mp3",
-      "file_url": "https://hinatabokkuri-star.github.io/music/one_more_floor.mp3",
-      "cover": "covers/one_more_floor.jpg",
-      "cover_url": "https://hinatabokkuri-star.github.io/covers/one_more_floor.jpg",
-      "genre": "game",
-      "bpm": 148,
-      "album": null,
-      "comment": "レトロRPGの平原を右へ進んでいく、明るくかわいいチップチューンBGM。小さな冒険者と丸いモンスターたちが、もう1フロア先の宝物へ向かう。",
-      "lyrics_lrc": "",
-      "lyrics_parsed": []
-    },
     {
       "title": "雪の底",
       "file": "yukinosoko.mp3",
@@ -8432,6 +8419,19 @@
           "text": "んー"
         }
       ]
+    },
+    {
+      "title": "One More Floor",
+      "file": "one_more_floor.mp3",
+      "file_url": "https://hinatabokkuri-star.github.io/music/one_more_floor.mp3",
+      "cover": "covers/one_more_floor.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/one_more_floor.jpg",
+      "genre": "game",
+      "bpm": 148,
+      "album": null,
+      "comment": "レトロRPGの平原を右へ進んでいく、明るくかわいいチップチューンBGM。小さな冒険者と丸いモンスターたちが、もう1フロア先の宝物へ向かう。",
+      "lyrics_lrc": "",
+      "lyrics_parsed": []
     }
   ]
 }
