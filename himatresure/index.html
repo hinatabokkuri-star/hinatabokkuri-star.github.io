@@ -144,7 +144,11 @@
   .equip-search-wrap { display: flex; flex-direction: column; gap: 14px; }
 
   /* スロット選択 */
-  .slots-section-title { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+  .slots-section-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .slots-section-title { font-size: 11px; color: var(--muted); margin: 0; }
+  .slot-sort-controls { display: flex; gap: 4px; margin-left: auto; }
+  .slot-sort-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: inherit; font-size: 11px; padding: 4px 10px; cursor: pointer; }
+  .slot-sort-btn.active { border-color: var(--accent); color: var(--accent); }
   .slots-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
   @media (min-width: 500px) { .slots-grid { grid-template-columns: repeat(2,1fr); } }
   .slot-block { background: var(--panel); border: 1px solid var(--border); padding: 10px 12px; }
@@ -813,7 +817,13 @@
 
       <!-- ① 固定装備スロット -->
       <div>
-        <p class="slots-section-title">① 固定したい装備を選択（未選択 = 空き枠として探索）</p>
+        <div class="slots-section-head">
+          <p class="slots-section-title">① 固定したい装備を選択（未選択 = 空き枠として探索）</p>
+          <div class="slot-sort-controls" aria-label="固定装備の並び順">
+            <button class="slot-sort-btn active" id="slot-sort-no" onclick="setSlotSortMode('no')">No順</button>
+            <button class="slot-sort-btn" id="slot-sort-name" onclick="setSlotSortMode('name')">50音順</button>
+          </div>
+        </div>
         <div class="slots-grid" id="slots-grid"></div>
       </div>
 
@@ -869,6 +879,7 @@ const CATS = ['武器','盾','鎧','アクセサリー','ペット'];
 const CAT_ORDER = {'武器':0,'盾':1,'鎧':2,'アクセサリー':3,'ペット':4};
 const CAT_LABEL = {'武器':'武器','盾':'盾','鎧':'鎧','アクセサリー':'アクセ','ペット':'ペット'};
 const MAX_RESULTS = 30;
+const SLOT_SORT_KEY = 'himatubu_slot_sort';
 function catLabel(cat) { return CAT_LABEL[cat] || cat; }
 function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/g, ch => ({
@@ -878,6 +889,7 @@ function escapeHtml(value) {
 
 let allItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
+let slotSortMode = localStorage.getItem(SLOT_SORT_KEY) === 'name' ? 'name' : 'no';
 let ownedFilter = 'all'; // 'all' | 'owned' | 'unowned'
 let ownedSet = new Set(JSON.parse(localStorage.getItem('himatubu_owned') || '[]'));
 const OWNER_HASH_PREFIX = '#owned=';
@@ -1222,12 +1234,36 @@ function searchBySkill() {
 }
 
 // ━━━ 装備から検索：スロット ━━━
+function updateSlotSortButtons() {
+  document.getElementById('slot-sort-no')?.classList.toggle('active', slotSortMode === 'no');
+  document.getElementById('slot-sort-name')?.classList.toggle('active', slotSortMode === 'name');
+}
+
+function setSlotSortMode(mode) {
+  if (!['no', 'name'].includes(mode) || mode === slotSortMode) return;
+  const checkerState = snapshotCheckerState();
+  slotSortMode = mode;
+  localStorage.setItem(SLOT_SORT_KEY, slotSortMode);
+  buildSlots();
+  restoreCheckerState(checkerState);
+  searchCombinations();
+}
+
+function sortSlotItems(items) {
+  return [...items].sort((a, b) => {
+    if (slotSortMode === 'name') {
+      const byName = a.name.localeCompare(b.name, 'ja', { numeric: true });
+      if (byName !== 0) return byName;
+    }
+    return a.no - b.no;
+  });
+}
+
 function buildSlots() {
   const grid = document.getElementById('slots-grid');
+  updateSlotSortButtons();
   grid.innerHTML = CATS.map(cat => {
-    const options = allItems
-      .filter(i => i.category === cat)
-      .sort((a,b) => a.no - b.no)
+    const options = sortSlotItems(allItems.filter(i => i.category === cat))
       .map(i => `<option value="${i.no}">No${i.no} ${escapeHtml(i.name)}</option>`)
       .join('');
     return `<div class="slot-block">
