@@ -6007,6 +6007,81 @@
     ]
   },
   {
+    "no": 89,
+    "category": "武器",
+    "name": "ボール",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
+      },
+      {
+        "type": "A",
+        "name": "スローアタック",
+        "desc": "スローじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "P",
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 92,
     "category": "武器",
     "name": "リンコロ",
