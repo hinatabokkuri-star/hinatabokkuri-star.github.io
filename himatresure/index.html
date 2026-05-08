@@ -1465,12 +1465,11 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     return;
   }
 
-  // 「自由スロット用」候補：ターゲット指定時は選択スキルを持つ装備に絞って探索を安定させる
-  const targetSet = new Set(targetSkills);
+  // 「自由スロット用」候補：ターゲット指定時も他スキルの同時発動を拾えるよう、発動候補スキル持ちを使う
   const otherSlotCandidates = {};
   emptyCats.forEach(cat => {
     otherSlotCandidates[cat] = filt(ITEMS_BY_CAT[cat])
-      .filter(i => i.skills.some(s => targetSkills.length > 0 ? targetSet.has(s.name) : activatableSet.has(s.name)));
+      .filter(i => i.skills.some(s => activatableSet.has(s.name)));
   });
 
   // 起点スキル：ターゲット指定時はそれを使い、無指定時は activatable 全部
@@ -1479,8 +1478,9 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   // 発動スキルセットでグルーピングして多様性を確保
   // 各グループに保持する最大件数（同パターンの装備違い用）
   const GROUP_LIMIT = 10;
-  const multiGroups = new Map();   // skillSetKey → results[]（activeCount>=2）
-  const singleGroups = new Map();  // skillSetKey → results[]（activeCount===1）
+  const highGroups = new Map();    // skillSetKey → results[]（activeCount>=4）
+  const threeGroups = new Map();   // skillSetKey → results[]（activeCount===3）
+  const twoGroups = new Map();     // skillSetKey → results[]（activeCount===2）
 
   function activeKey(result) {
     const active = normalActiveSkills(result.count).map(name => `3:${name}`);
@@ -1488,8 +1488,10 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     return [...active, ...bonus].join('|');
   }
   function tryAdd(result) {
-    if (result.activeCount === 0) return;
-    const groups = result.activeCount >= 2 ? multiGroups : singleGroups;
+    if (result.activeCount < 2) return;
+    const groups = result.activeCount >= 4 ? highGroups
+                 : result.activeCount === 3 ? threeGroups
+                 : twoGroups;
     const key = activeKey(result);
     if (!groups.has(key)) groups.set(key, []);
     const arr = groups.get(key);
@@ -1497,26 +1499,16 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   }
   // グループから多様性優先で取り出す
   // - 各グループから1件ずつ「代表」として取り、残りは alternatives に格納
-  // - activeCount >= 3 のグループは全部表示（30件超えOK）
-  // - activeCount === 2 は残り枠を埋める
+  // - activeCount >= 4 のグループは全部表示（30件超えOK）
+  // - activeCount === 3/2 は表示枠や追加表示用に MAX_RESULTS 件まで保持
   function finalize(groups) {
     const arrays = [...groups.values()].sort((a, b) => b[0].activeCount - a[0].activeCount);
-    const tier1 = [];
-    const tier2 = [];
-    for (const arr of arrays) {
-      if (!arr.length) continue;
-      const rep = { ...arr[0], alternatives: arr.slice(1) };
-      if (arr[0].activeCount >= 3) tier1.push(rep);
-      else tier2.push(rep);
-    }
-    const tier2Quota = Math.max(0, MAX_RESULTS - tier1.length);
-    return [...tier1, ...tier2.slice(0, tier2Quota)];
+    return arrays
+      .filter(arr => arr.length > 0)
+      .map(arr => ({ ...arr[0], alternatives: arr.slice(1) }));
   }
-  // single（activeCount===1）は常に MAX_RESULTS 件まで（extra扱い）
-  function finalizeSingle(groups) {
-    const arrays = [...groups.values()];
-    const reps = arrays.map(arr => ({ ...arr[0], alternatives: arr.slice(1) }));
-    return reps.slice(0, MAX_RESULTS);
+  function finalizeLimited(groups) {
+    return finalize(groups).slice(0, MAX_RESULTS);
   }
 
   const seen = new Set();
@@ -1569,7 +1561,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
           seen.add(key);
 
           const activeCount = normalActiveCount + (bonusSkill ? 1 : 0);
-          if (activeCount === 0) continue;
+          if (activeCount < 2) continue;
           totalCount++;
           tryAdd({ slots, count, bonusSkill, activeCount });
         }
@@ -1577,12 +1569,14 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     }
   }
 
-  // multi が空なら single を表示し、extra は無し。multi があれば single は extra。
-  const finalMulti = finalize(multiGroups);
-  const finalSingle = finalizeSingle(singleGroups);
-  const base = finalMulti.length > 0 ? finalMulti : finalSingle;
-  const extra = finalMulti.length > 0 ? finalSingle : [];
-  renderComboResults(resultEl, base, totalCount, targetSkills, fixedSlots, extra, stopped);
+  const finalHigh = finalize(highGroups);
+  const finalThree = finalizeLimited(threeGroups);
+  const finalTwo = finalizeLimited(twoGroups);
+  const showThreeByDefault = finalHigh.length + finalThree.length < MAX_RESULTS;
+  const shown = showThreeByDefault ? [...finalHigh, ...finalThree] : finalHigh;
+  const extra = showThreeByDefault ? finalTwo : finalThree;
+  const extraKind = showThreeByDefault ? 2 : 3;
+  renderComboResults(resultEl, shown, totalCount, targetSkills, fixedSlots, extra, stopped, extraKind);
 }
 
 function comboCardHtml({slots, count, bonusSkill = null, alternatives = []}, fixedSlots, targetSkills, isAlt = false) {
@@ -1633,30 +1627,31 @@ function comboCardsHtml(items, fixedSlots, targetSkills) {
   return items.map(it => comboCardHtml(it, fixedSlots, targetSkills, false)).join('');
 }
 
-function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, extra = [], stopped = false) {
-  if (shown.length === 0) {
+function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, extra = [], stopped = false, extraKind = 3) {
+  if (shown.length === 0 && extra.length === 0) {
     resultEl.innerHTML = '<div class="ck-empty">条件を満たす組み合わせが見つかりませんでした</div>';
     return;
   }
   const headerText = targetSkills.length > 0
     ? `「${targetSkills.map(escapeHtml).join('・')}」を発動できる組み合わせ`
     : `発動スキルがある組み合わせ`;
+  const shownMin = shown.some(r => r.activeCount === 3) || (shown.length === 0 && extraKind === 2) ? 3 : 4;
   const totalLabel = stopped
-    ? `（${total.toLocaleString()}件超 中上位${MAX_RESULTS}件・打ち切り）`
-    : (total > MAX_RESULTS ? `（${total.toLocaleString()}件中上位${MAX_RESULTS}件）` : '');
+    ? `（2スキル以上 ${total.toLocaleString()}件超・打ち切り）`
+    : (total > shown.length + extra.length ? `（2スキル以上 ${total.toLocaleString()}件）` : '');
   let html = `<div class="result-header">
-    <strong>${headerText}</strong>：${shown.length}件${totalLabel}
+    <strong>${headerText}</strong>：${shownMin}スキル以上 ${shown.length}件${totalLabel}
   </div>`;
   html += comboCardsHtml(shown, fixedSlots, targetSkills);
   if (extra.length > 0) {
     const extraHtml = comboCardsHtml(extra, fixedSlots, targetSkills);
-    html += `<div id="single-toggle-wrap" style="text-align:center;padding:12px 0">
+    html += `<div id="extra-combo-toggle-wrap" style="text-align:center;padding:12px 0">
       <button class="owned-filter-btn" onclick="
-        document.getElementById('single-results').style.display='block';
+        document.getElementById('extra-combo-results').style.display='block';
         this.parentElement.style.display='none';
-      ">1スキルのみの組み合わせも表示（${extra.length}件）</button>
+      ">${extraKind}スキルの組み合わせも表示（${extra.length}件）</button>
     </div>
-    <div id="single-results" style="display:none">${extraHtml}</div>`;
+    <div id="extra-combo-results" style="display:none">${extraHtml}</div>`;
   }
   resultEl.innerHTML = html;
 }
