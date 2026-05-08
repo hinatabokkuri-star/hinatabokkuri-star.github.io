@@ -1465,11 +1465,12 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     return;
   }
 
-  // 「自由スロット用」候補：何かしら発動可能スキルを持つアイテム（カテゴリ別に1度だけ計算）
+  // 「自由スロット用」候補：ターゲット指定時は選択スキルを持つ装備に絞って探索を安定させる
+  const targetSet = new Set(targetSkills);
   const otherSlotCandidates = {};
   emptyCats.forEach(cat => {
     otherSlotCandidates[cat] = filt(ITEMS_BY_CAT[cat])
-      .filter(i => i.skills.some(s => activatableSet.has(s.name)));
+      .filter(i => i.skills.some(s => targetSkills.length > 0 ? targetSet.has(s.name) : activatableSet.has(s.name)));
   });
 
   // 起点スキル：ターゲット指定時はそれを使い、無指定時は activatable 全部
