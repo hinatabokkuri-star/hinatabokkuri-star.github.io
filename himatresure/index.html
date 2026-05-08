@@ -1755,12 +1755,14 @@ function renderAltPage(id, page) {
   const start = current * pageSize;
   const end = Math.min(start + pageSize, total);
   const body = comboCardsHtml(alts.slice(start, end), stored.fixedSlots, stored.targetSkills);
+  const controls = maxPage === 0 ? '' : `
+      <button class="owned-filter-btn" ${current === 0 ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current - 1})">前へ</button>
+      <button class="owned-filter-btn" ${current === maxPage ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current + 1})">次へ</button>`;
   wrap.dataset.loaded = '1';
   wrap.innerHTML = `
     <div class="alt-pager">
       <span>別装備 ${start + 1}-${end} / ${total}</span>
-      <button class="owned-filter-btn" ${current === 0 ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current - 1})">前へ</button>
-      <button class="owned-filter-btn" ${current === maxPage ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current + 1})">次へ</button>
+      ${controls}
     </div>
     ${body}
   `;
