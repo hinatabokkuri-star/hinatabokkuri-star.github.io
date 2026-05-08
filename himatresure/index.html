@@ -98,6 +98,7 @@
   .cat-tag-鎧           { color: var(--tag-鎧);           border-color: var(--tag-鎧); }
   .cat-tag-アクセサリー { color: var(--tag-アクセサリー); border-color: var(--tag-アクセサリー); }
   .cat-tag-ペット       { color: var(--tag-ペット);       border-color: var(--tag-ペット); }
+  .cat-tag-bonus        { color: var(--accent);           border-color: var(--accent); }
   .card-skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 6px; }
   .skill-row { display: flex; align-items: baseline; gap: 4px; font-size: 12px; min-width: 0; }
   .skill-row span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -788,7 +789,7 @@
 <!-- TAB: チェッカー -->
 <div class="tab-content" id="tab-checker">
   <div class="checker-rule-bar" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-    <span><strong>発動ルール：</strong>武器 / 盾 / 鎧 / アクセサリー / ペット の5スロットのうち<strong>同名スキルが3つ以上</strong>揃うと発動</span>
+    <span><strong>発動ルール：</strong>5スロットの同名スキル<strong>3ポイント以上</strong>で発動。任意スキルに<strong>+1ポイント</strong>できるため、2ポイントのスキルも1つだけ発動可能</span>
     <button class="owned-filter-btn" id="owned-filter-btn-checker" onclick="toggleOwnedFilter()" style="margin-left:auto;flex-shrink:0">★ 所持のみ</button>
     <button class="owned-filter-btn" onclick="clearCheckerSelections()" style="flex-shrink:0">✕ 選択解除</button>
   </div>
@@ -1140,7 +1141,7 @@ function openModal(no) {
   document.getElementById('modal-body').innerHTML = `
     <h2>${typeTag}${escapeHtml(item.name)}</h2>
     <div class="modal-sub"><span>No${item.no}</span><span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span></div>
-    <section><h3>スキル ── 同名3種装備で発動</h3>
+    <section><h3>スキル ── 3pt以上で発動（任意+1あり）</h3>
     <div class="modal-skills">${item.skills.map(s=>`
       <div class="modal-skill-row">
         <span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span>
@@ -1371,6 +1372,8 @@ const TIME_BUDGET_MS = 4000;
 
 function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const resultEl = document.getElementById(resultElId);
+  const ACTIVATION_NEED = 3;
+  const EXTRA_SKILL_POINT = 1;
 
   // 所持フィルター（インデックスは all items 基準なので検索時に適用）
   const ownedPred = ownedFilter === 'owned'   ? (i =>  ownedSet.has(i.no))
@@ -1386,13 +1389,49 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   });
   const emptyCats = CATS.filter(c => !fixedSlots[c]);
 
+  function bonusCandidates(count) {
+    return Object.entries(count)
+      .filter(([,c]) => c === ACTIVATION_NEED - EXTRA_SKILL_POINT)
+      .map(([name]) => name)
+      .sort((a,b) => a.localeCompare(b,'ja'));
+  }
+  function normalActiveSkills(count) {
+    return Object.entries(count)
+      .filter(([,c]) => c >= ACTIVATION_NEED)
+      .map(([name]) => name)
+      .sort((a,b) => a.localeCompare(b,'ja'));
+  }
+  function targetBonusSkill(count, targets) {
+    const shortTargets = targets.filter(sk => (count[sk] || 0) === ACTIVATION_NEED - EXTRA_SKILL_POINT);
+    return shortTargets.length === 1 ? shortTargets[0] : null;
+  }
+  function canActivateTargets(count, targets) {
+    let neededPoint = 0;
+    for (const sk of targets) {
+      const deficit = Math.max(0, ACTIVATION_NEED - (count[sk] || 0));
+      if (deficit > EXTRA_SKILL_POINT) return false;
+      neededPoint += deficit;
+    }
+    return neededPoint <= EXTRA_SKILL_POINT;
+  }
+  function effectiveActiveCount(count, bonusSkill = null) {
+    return normalActiveSkills(count).length + (bonusSkill ? 1 : (bonusCandidates(count).length > 0 ? 1 : 0));
+  }
+  function resultBonusSkills(count, targets) {
+    if (targets.length > 0) {
+      const bonus = targetBonusSkill(count, targets);
+      if (bonus) return [bonus];
+    }
+    return bonusCandidates(count);
+  }
+
   // ターゲット指定時の不可能チェック
   if (targetSkills.length > 0) {
     const impossibleSkills = targetSkills.filter(sk => {
       const fixedCnt = baseCount[sk] || 0;
       const catMap = SKILL_CAT_MAP.get(sk) || {};
       const possibleCats = emptyCats.filter(c => filt(catMap[c]||[]).length > 0).length;
-      return fixedCnt + possibleCats < 3;
+      return fixedCnt + possibleCats < ACTIVATION_NEED - EXTRA_SKILL_POINT;
     });
     if (impossibleSkills.length > 0) {
         resultEl.innerHTML = `<div class="ck-impossible">「${impossibleSkills.map(escapeHtml).join('・')}」は空き枠が足りないため発動不可能です。<br>固定装備を減らすか、別のスキルを選んでください。</div>`;
@@ -1405,7 +1444,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   for (const [name, catMap] of SKILL_CAT_MAP) {
     const fixedCnt = baseCount[name] || 0;
     const emptyCntWithSkill = emptyCats.filter(c => filt(catMap[c]||[]).length > 0).length;
-    if (fixedCnt + emptyCntWithSkill >= 3) activatable.push(name);
+    if (fixedCnt + emptyCntWithSkill >= ACTIVATION_NEED - EXTRA_SKILL_POINT) activatable.push(name);
   }
   const activatableSet = new Set(activatable);
 
@@ -1430,16 +1469,15 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const multiGroups = new Map();   // skillSetKey → results[]（activeCount>=2）
   const singleGroups = new Map();  // skillSetKey → results[]（activeCount===1）
 
-  function activeKey(count) {
-    const active = [];
-    for (const k in count) if (count[k] >= 3) active.push(k);
-    active.sort();
-    return active.join('|');
+  function activeKey(result) {
+    const active = normalActiveSkills(result.count).map(name => `3:${name}`);
+    const bonus = result.bonusSkill ? [`+1:${result.bonusSkill}`] : [];
+    return [...active, ...bonus].join('|');
   }
   function tryAdd(result) {
     if (result.activeCount === 0) return;
     const groups = result.activeCount >= 2 ? multiGroups : singleGroups;
-    const key = activeKey(result.count);
+    const key = activeKey(result);
     if (!groups.has(key)) groups.set(key, []);
     const arr = groups.get(key);
     if (arr.length < GROUP_LIMIT) arr.push(result);
@@ -1477,7 +1515,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   outer: for (const skillName of pivotSkills) {
     const catMap = SKILL_CAT_MAP.get(skillName) || {};
     const fixedCnt = baseCount[skillName] || 0;
-    const needed = Math.max(0, 3 - fixedCnt);
+    const needed = Math.max(0, ACTIVATION_NEED - EXTRA_SKILL_POINT - fixedCnt);
     const catsWithSkill = emptyCats.filter(c => filt(catMap[c]||[]).length > 0);
     if (catsWithSkill.length < needed) continue;
 
@@ -1503,19 +1541,25 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
         const slots = {};
         allCatsOrder.forEach((c, i) => slots[c] = combo[i]);
 
-        const key = CATS.map(c => (fixedSlots[c]||slots[c])?.no ?? 0).join(',');
-        if (seen.has(key)) continue;
-        seen.add(key);
-
         const count = {...baseCount};
         emptyCats.forEach(c => {
           if (slots[c]) slots[c].skills.forEach(s => { count[s.name]=(count[s.name]||0)+1; });
         });
-        // ターゲット指定時：全 target skill が3揃ってる必要
-        if (targetSkills.length > 0 && !targetSkills.every(sk => (count[sk]||0)>=3)) continue;
-        const activeCount = Object.values(count).filter(c => c>=3).length;
-        totalCount++;
-        tryAdd({ slots, count, activeCount });
+        if (targetSkills.length > 0 && !canActivateTargets(count, targetSkills)) continue;
+        const bonusChoices = resultBonusSkills(count, targetSkills);
+        const normalActiveCount = normalActiveSkills(count).length;
+        const choices = bonusChoices.length > 0 ? bonusChoices : [null];
+        const slotKey = CATS.map(c => (fixedSlots[c]||slots[c])?.no ?? 0).join(',');
+        for (const bonusSkill of choices) {
+          const key = `${slotKey}|${bonusSkill || ''}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+
+          const activeCount = normalActiveCount + (bonusSkill ? 1 : 0);
+          if (activeCount === 0) continue;
+          totalCount++;
+          tryAdd({ slots, count, bonusSkill, activeCount });
+        }
       }
     }
   }
@@ -1528,7 +1572,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   renderComboResults(resultEl, base, totalCount, targetSkills, fixedSlots, extra, stopped);
 }
 
-function comboCardHtml({slots, count, alternatives = []}, fixedSlots, targetSkills, isAlt = false) {
+function comboCardHtml({slots, count, bonusSkill = null, alternatives = []}, fixedSlots, targetSkills, isAlt = false) {
   const slotRows = CATS.map(cat => {
     const item = fixedSlots[cat] || slots[cat];
     if (!item) return `<div class="combo-slot-row"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span><span class="combo-slot-empty">─</span></div>`;
@@ -1539,12 +1583,22 @@ function comboCardHtml({slots, count, alternatives = []}, fixedSlots, targetSkil
         ${isFixed?'🔒 ':''}No${item.no} ${escapeHtml(item.name)}
       </span>
     </div>`;
-  }).join('');
+  }).join('') + (bonusSkill ? `
+    <div class="combo-slot-row">
+      <span class="cat-tag cat-tag-bonus">+1</span>
+      <span class="combo-slot-item">選択スキル ${escapeHtml(bonusSkill)}</span>
+    </div>` : '');
   const activeSkills = Object.entries(count).filter(([,c]) => c>=3).sort((a,b) => b[1]-a[1]);
-  const badges = activeSkills.map(([name,cnt]) => {
+  const activeBadges = activeSkills.map(([name,cnt]) => {
     const isTarget = targetSkills.includes(name);
-    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(name)}<span class="combo-skill-count"> ${cnt}/5</span></span>`;
-  }).join('');
+    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(name)}<span class="combo-skill-count"> ${cnt}pt</span></span>`;
+  });
+  const bonusBadge = bonusSkill ? (() => {
+    const isTarget = targetSkills.includes(bonusSkill);
+    const cnt = count[bonusSkill] || 0;
+    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">+1 ${escapeHtml(bonusSkill)}<span class="combo-skill-count"> ${cnt}+1pt</span></span>`;
+  })() : '';
+  const badges = [...activeBadges, bonusBadge].join('');
   // 代替装備パターンの折りたたみ
   let altsHtml = '';
   if (alternatives.length > 0) {
