@@ -805,9 +805,9 @@
 
   <!-- スキルから検索モード -->
   <div class="checker-mode" id="mode-skill">
-    <p class="ck-label" style="margin-bottom:10px">スキルを選択（AND検索）</p>
+    <p class="ck-label" style="margin-bottom:10px">発動させたいスキルを選択</p>
     <div class="skill-checks" id="skill-checks-skill"></div>
-    <button class="search-btn" style="margin-top:12px" onclick="searchBySkill()">🔍 この装備を検索</button>
+    <button class="search-btn" style="margin-top:12px" onclick="searchBySkill()">🔍 組み合わせを検索</button>
     <div id="skill-combo-result" style="margin-top:8px"></div>
   </div>
 
@@ -1206,31 +1206,7 @@ function searchBySkill() {
     resultEl.innerHTML = '<div class="ck-empty">スキルを1つ以上選択してください</div>';
     return;
   }
-  // AND検索: 選択したスキルをすべて持つアイテムを抽出
-  const matched = allItems.filter(item =>
-    targets.every(sk => item.skills.some(s => s.name === sk))
-  );
-  if (matched.length === 0) {
-    resultEl.innerHTML = '<div class="ck-empty">該当する装備がありません</div>';
-    return;
-  }
-  let html = `<div class="result-header">「<strong>${targets.map(escapeHtml).join('」「')}</strong>」を持つ装備：<strong>${matched.length}件</strong></div>`;
-  CATS.forEach(cat => {
-    const items = matched.filter(i => i.category === cat).sort((a,b) => a.no - b.no);
-    if (!items.length) return;
-    html += `<div class="skill-cat-block" style="margin-bottom:8px">
-      <div class="skill-cat-title">
-        <span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span>
-        <span class="skill-cat-count">${items.length}件</span>
-      </div>
-      ${items.map(item => `
-        <div class="skill-item-row" onclick="openModal(${item.no})">
-          <span class="skill-item-no">No${item.no}</span>
-          <span>${escapeHtml(item.name)}</span>
-        </div>`).join('')}
-    </div>`;
-  });
-  resultEl.innerHTML = html;
+  runComboSearch({}, targets, 'skill-combo-result');
 }
 
 // ━━━ 装備から検索：スロット ━━━
