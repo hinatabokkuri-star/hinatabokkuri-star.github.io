@@ -199,6 +199,7 @@
   }
   .alts-toggle:hover { color: var(--accent); border-color: var(--accent); }
   .combo-alts { margin-top: 8px; padding-left: 14px; border-left: 2px solid var(--dim); }
+  .alt-pager { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; color: var(--muted); font-size: 11px; }
   .combo-slots { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
   .combo-slot-row { display: flex; gap: 8px; align-items: center; font-size: 12px; }
   .combo-slot-empty { color: var(--muted); font-size: 11px; }
@@ -1491,8 +1492,6 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const pivotSkills = targetSkills.length > 0 ? targetSkills : activatable;
 
   // 発動スキルセットでグルーピングして多様性を確保
-  // 各グループに保持する最大件数（同パターンの装備違い用）
-  const GROUP_LIMIT = 10;
   const highGroups = new Map();    // skillSetKey → results[]（activeCount>=4）
   const threeGroups = new Map();   // skillSetKey → results[]（activeCount===3）
   const twoGroups = new Map();     // skillSetKey → results[]（activeCount===2）
@@ -1512,7 +1511,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     const key = activeKey(result);
     if (!groups.has(key)) groups.set(key, []);
     const arr = groups.get(key);
-    if (arr.length < GROUP_LIMIT) arr.push(result);
+    arr.push(result);
   }
   // グループから多様性優先で取り出す
   // - 各グループから1件ずつ「代表」として取り、残りは alternatives に格納
@@ -1690,6 +1689,9 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   renderComboResults(resultEl, shown, totalCount, targetSkills, fixedSlots, extra, stopped, extraKind);
 }
 
+const ALT_PAGE_SIZE = 30;
+const ALT_COMBO_STORE = {};
+
 function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixedSlots, targetSkills, isAlt = false) {
   const slotRows = CATS.map(cat => {
     const item = fixedSlots[cat] || slots[cat];
@@ -1720,15 +1722,17 @@ function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixe
   // 代替装備パターンの折りたたみ
   let altsHtml = '';
   if (alternatives.length > 0) {
-    const altCards = alternatives.map(a => comboCardHtml(a, fixedSlots, targetSkills, true)).join('');
+    const altId = `alts-${Math.random().toString(36).slice(2)}`;
+    ALT_COMBO_STORE[altId] = { alternatives, fixedSlots, targetSkills };
     altsHtml = `
       <button class="alts-toggle" onclick="
         const wrap = this.nextElementSibling;
         const open = wrap.style.display !== 'none';
         wrap.style.display = open ? 'none' : '';
         this.textContent = (open ? '▸ ' : '▾ ') + '同じスキル発動の別装備（${alternatives.length}件）';
+        if (!open && !wrap.dataset.loaded) renderAltPage('${altId}', 0);
       ">▸ 同じスキル発動の別装備（${alternatives.length}件）</button>
-      <div class="combo-alts" style="display:none">${altCards}</div>`;
+      <div class="combo-alts" id="${altId}" data-page-size="${ALT_PAGE_SIZE}" style="display:none"></div>`;
   }
   const cls = isAlt ? 'combo-card combo-card-alt' : 'combo-card';
   return `<div class="${cls}"><div class="combo-slots">${slotRows}</div><div class="combo-active-skills">${badges}</div>${altsHtml}</div>`;
@@ -1738,7 +1742,32 @@ function comboCardsHtml(items, fixedSlots, targetSkills) {
   return items.map(it => comboCardHtml(it, fixedSlots, targetSkills, false)).join('');
 }
 
+function renderAltPage(id, page) {
+  const wrap = document.getElementById(id);
+  if (!wrap) return;
+  const stored = ALT_COMBO_STORE[id];
+  if (!stored) return;
+  const pageSize = parseInt(wrap.dataset.pageSize || '30', 10);
+  const alts = stored.alternatives;
+  const total = alts.length;
+  const maxPage = Math.max(0, Math.ceil(total / pageSize) - 1);
+  const current = Math.max(0, Math.min(page, maxPage));
+  const start = current * pageSize;
+  const end = Math.min(start + pageSize, total);
+  const body = comboCardsHtml(alts.slice(start, end), stored.fixedSlots, stored.targetSkills);
+  wrap.dataset.loaded = '1';
+  wrap.innerHTML = `
+    <div class="alt-pager">
+      <span>別装備 ${start + 1}-${end} / ${total}</span>
+      <button class="owned-filter-btn" ${current === 0 ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current - 1})">前へ</button>
+      <button class="owned-filter-btn" ${current === maxPage ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current + 1})">次へ</button>
+    </div>
+    ${body}
+  `;
+}
+
 function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, extra = [], stopped = false, extraKind = 3) {
+  Object.keys(ALT_COMBO_STORE).forEach(id => delete ALT_COMBO_STORE[id]);
   if (shown.length === 0 && extra.length === 0) {
     resultEl.innerHTML = '<div class="ck-empty">条件を満たす組み合わせが見つかりませんでした</div>';
     return;
