@@ -1422,6 +1422,14 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     }
     return neededPoint <= EXTRA_SKILL_POINT;
   }
+  function canActivateTargetsWithSkillSlot(count, targets, skillName) {
+    return targets.every(sk => (count[sk] || 0) + (skillName === sk ? 1 : 0) >= ACTIVATION_NEED);
+  }
+  function skillSlotChoices(count, targets) {
+    const candidates = bonusCandidates(count);
+    const choices = candidates.length > 0 ? candidates : [null];
+    return choices.filter(name => targets.length === 0 || canActivateTargetsWithSkillSlot(count, targets, name));
+  }
 
   // ターゲット指定時の不可能チェック
   if (targetSkills.length > 0) {
@@ -1491,8 +1499,8 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
 
   function activeKey(result) {
     const active = normalActiveSkills(result.count).map(name => `3:${name}`);
-    const bonus = (result.bonusSkills || []).map(name => `3:${name}`);
-    return [...active, ...bonus].join('|');
+    const skillSlot = result.skillSlot ? [`3:${result.skillSlot}`] : [];
+    return [...active, ...skillSlot].join('|');
   }
   function tryAdd(result) {
     if (result.activeCount < 2) return;
@@ -1527,14 +1535,17 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
 
   function addExactHighResult(slots, count) {
     if (targetSkills.length > 0 && !canActivateTargets(count, targetSkills)) return;
-    const bonusSkills = bonusCandidates(count);
+    const choices = skillSlotChoices(count, targetSkills);
     const normalActiveCount = normalActiveSkills(count).length;
-    const activeCount = normalActiveCount + (bonusSkills.length > 0 ? 1 : 0);
-    if (activeCount < 4) return;
     const slotKey = CATS.map(c => (fixedSlots[c] || slots[c])?.no ?? 0).join(',');
-    if (highSeen.has(slotKey)) return;
-    highSeen.add(slotKey);
-    tryAdd({ slots: { ...slots }, count: { ...count }, bonusSkills, activeCount });
+    for (const skillSlot of choices) {
+      const activeCount = normalActiveCount + (skillSlot ? 1 : 0);
+      if (activeCount < 4) continue;
+      const key = `${slotKey}|${skillSlot || ''}`;
+      if (highSeen.has(key)) continue;
+      highSeen.add(key);
+      tryAdd({ slots: { ...slots }, count: { ...count }, skillSlot, activeCount });
+    }
   }
 
   function exactHighSearch() {
@@ -1648,18 +1659,21 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
           if (slots[c]) slots[c].skills.forEach(s => { count[s.name]=(count[s.name]||0)+1; });
         });
         if (targetSkills.length > 0 && !canActivateTargets(count, targetSkills)) continue;
-        const bonusSkills = bonusCandidates(count);
+        const choices = skillSlotChoices(count, targetSkills);
         const normalActiveCount = normalActiveSkills(count).length;
         const slotKey = CATS.map(c => (fixedSlots[c]||slots[c])?.no ?? 0).join(',');
-        if (seen.has(slotKey)) continue;
-        seen.add(slotKey);
-        if (highSeen.has(slotKey)) continue;
+        for (const skillSlot of choices) {
+          const key = `${slotKey}|${skillSlot || ''}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          if (highSeen.has(key)) continue;
 
-        const activeCount = normalActiveCount + (bonusSkills.length > 0 ? 1 : 0);
-        if (activeCount < 2) continue;
-        if (activeCount >= 4) continue;
-        totalCount++;
-        tryAdd({ slots, count, bonusSkills, activeCount });
+          const activeCount = normalActiveCount + (skillSlot ? 1 : 0);
+          if (activeCount < 2) continue;
+          if (activeCount >= 4) continue;
+          totalCount++;
+          tryAdd({ slots, count, skillSlot, activeCount });
+        }
       }
     }
   }
@@ -1674,7 +1688,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   renderComboResults(resultEl, shown, totalCount, targetSkills, fixedSlots, extra, stopped, extraKind);
 }
 
-function comboCardHtml({slots, count, bonusSkills = [], alternatives = []}, fixedSlots, targetSkills, isAlt = false) {
+function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixedSlots, targetSkills, isAlt = false) {
   const slotRows = CATS.map(cat => {
     const item = fixedSlots[cat] || slots[cat];
     if (!item) return `<div class="combo-slot-row"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span><span class="combo-slot-empty">─</span></div>`;
@@ -1685,17 +1699,22 @@ function comboCardHtml({slots, count, bonusSkills = [], alternatives = []}, fixe
         ${isFixed?'🔒 ':''}No${item.no} ${escapeHtml(item.name)}
       </span>
     </div>`;
-  }).join('');
+  }).join('') + (skillSlot ? `
+    <div class="combo-slot-row">
+      <span class="cat-tag cat-tag-bonus">スキル</span>
+      <span class="combo-slot-item">${escapeHtml(skillSlot)}</span>
+    </div>` : '');
   const activeSkills = Object.entries(count).filter(([,c]) => c>=3).sort((a,b) => b[1]-a[1]);
   const activeBadges = activeSkills.map(([name,cnt]) => {
     const isTarget = targetSkills.includes(name);
     return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(name)}<span class="combo-skill-count"> ${cnt}pt</span></span>`;
   });
-  const bonusBadges = bonusSkills.map(name => {
+  const skillSlotBadge = skillSlot ? (() => {
+    const name = skillSlot;
     const isTarget = targetSkills.includes(name);
     return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(name)}<span class="combo-skill-count"> 3pt</span></span>`;
-  });
-  const badges = [...activeBadges, ...bonusBadges].join('');
+  })() : '';
+  const badges = [...activeBadges, skillSlotBadge].join('');
   // 代替装備パターンの折りたたみ
   let altsHtml = '';
   if (alternatives.length > 0) {
