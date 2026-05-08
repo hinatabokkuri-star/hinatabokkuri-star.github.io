@@ -1268,7 +1268,7 @@ function renderSlotSkills(cat, item) {
 }
 
 // M回復スキル判定
-const M_HEAL = new Set(['キュア', 'おいのり', 'めいそう']);
+const M_HEAL = new Set(['キュア', 'おいのり', 'めいそう', 'ライフドレイン']);
 function skillGroup(name, type) {
   if (type === 'A') return 'A';
   if (type === 'M') return M_HEAL.has(name) ? 'M回復' : 'M攻撃';
