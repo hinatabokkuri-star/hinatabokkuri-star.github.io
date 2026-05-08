@@ -1503,15 +1503,38 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     ])].sort((a,b) => a.localeCompare(b,'ja'));
     return active.map(name => `3:${name}`).join('|');
   }
+  function activeNameSet(result) {
+    return new Set([
+      ...normalActiveSkills(result.count),
+      ...(result.skillSlot ? [result.skillSlot] : [])
+    ]);
+  }
+  function normalizeResult(result) {
+    const activeSet = activeNameSet(result);
+    const slots = {};
+    CATS.forEach(cat => {
+      const item = result.slots[cat];
+      slots[cat] = item && item.skills.some(s => activeSet.has(s.name)) ? item : null;
+    });
+    return { ...result, slots };
+  }
+  function slotPatternKey(result) {
+    return CATS.map(c => (fixedSlots[c] || result.slots[c])?.no ?? 0).join(',') + `|${result.skillSlot || ''}`;
+  }
   function tryAdd(result) {
     if (result.activeCount < 2) return;
+    const normalized = normalizeResult(result);
     const groups = result.activeCount >= 4 ? highGroups
                  : result.activeCount === 3 ? threeGroups
                  : twoGroups;
-    const key = activeKey(result);
+    const key = activeKey(normalized);
     if (!groups.has(key)) groups.set(key, []);
     const arr = groups.get(key);
-    arr.push(result);
+    if (!arr._seen) arr._seen = new Set();
+    const patternKey = slotPatternKey(normalized);
+    if (arr._seen.has(patternKey)) return;
+    arr._seen.add(patternKey);
+    arr.push(normalized);
   }
   // グループから多様性優先で取り出す
   // - 各グループから1件ずつ「代表」として取り、残りは alternatives に格納
@@ -1624,7 +1647,6 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   }
 
   exactHighSearch();
-  totalCount = highSeen.size;
 
   outer: for (const skillName of pivotSkills) {
     const catMap = SKILL_CAT_MAP.get(skillName) || {};
@@ -1672,12 +1694,15 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
           const activeCount = normalActiveCount + (skillSlot ? 1 : 0);
           if (activeCount < 2) continue;
           if (activeCount >= 4) continue;
-          totalCount++;
           tryAdd({ slots, count, skillSlot, activeCount });
         }
       }
     }
+
   }
+
+  totalCount = [...highGroups.values(), ...threeGroups.values(), ...twoGroups.values()]
+    .reduce((sum, arr) => sum + arr.length, 0);
 
   const finalHigh = finalize(highGroups);
   const finalThree = finalizeLimited(threeGroups);
