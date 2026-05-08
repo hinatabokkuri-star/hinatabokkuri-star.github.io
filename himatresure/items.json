@@ -29,23 +29,23 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 1500,
