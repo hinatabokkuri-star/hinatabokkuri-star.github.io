@@ -1498,9 +1498,11 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const twoGroups = new Map();     // skillSetKey → results[]（activeCount===2）
 
   function activeKey(result) {
-    const active = normalActiveSkills(result.count).map(name => `3:${name}`);
-    const skillSlot = result.skillSlot ? [`3:${result.skillSlot}`] : [];
-    return [...active, ...skillSlot].join('|');
+    const active = [...new Set([
+      ...normalActiveSkills(result.count),
+      ...(result.skillSlot ? [result.skillSlot] : [])
+    ])].sort((a,b) => a.localeCompare(b,'ja'));
+    return active.map(name => `3:${name}`).join('|');
   }
   function tryAdd(result) {
     if (result.activeCount < 2) return;
