@@ -1029,6 +1029,10 @@ function toggleOwnedFilter() { // チェッカータブから呼ばれる
 // ━━━ グローバルインデックス（allItems ベース、データ更新時のみ再構築） ━━━
 let SKILL_CAT_MAP = null;   // skill name → { category → items[] }
 let ITEMS_BY_CAT  = null;   // category → items[]
+const PROVISIONAL_SKILLS = new Set(['未確認A', '未確認M', '未確認P']);
+function isSearchableSkill(skill) {
+  return skill && !PROVISIONAL_SKILLS.has(skill.name);
+}
 
 function rebuildIndices() {
   SKILL_CAT_MAP = new Map();
@@ -1036,7 +1040,7 @@ function rebuildIndices() {
   CATS.forEach(c => ITEMS_BY_CAT[c] = []);
   allItems.forEach(item => {
     ITEMS_BY_CAT[item.category]?.push(item);
-    item.skills.forEach(s => {
+    item.skills.filter(isSearchableSkill).forEach(s => {
       if (!SKILL_CAT_MAP.has(s.name)) SKILL_CAT_MAP.set(s.name, {});
       const m = SKILL_CAT_MAP.get(s.name);
       if (!m[item.category]) m[item.category] = [];
@@ -1181,7 +1185,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 // ━━━ スキルから検索 ━━━
 function allSkillNames() {
   const set = new Set();
-  allItems.forEach(item => item.skills.forEach(s => set.add(s.name)));
+  allItems.forEach(item => item.skills.filter(isSearchableSkill).forEach(s => set.add(s.name)));
   return [...set].sort((a,b) => a.localeCompare(b,'ja'));
 }
 
@@ -1287,7 +1291,7 @@ function renderSkillChecks(wrap, onchange) {
   const pool = ownedFilter === 'owned'   ? allItems.filter(i =>  ownedSet.has(i.no))
              : ownedFilter === 'unowned' ? allItems.filter(i => !ownedSet.has(i.no))
              : allItems;
-  pool.forEach(item => item.skills.forEach(s => {
+  pool.forEach(item => item.skills.filter(isSearchableSkill).forEach(s => {
     if (!skillMap.has(s.name)) skillMap.set(s.name, new Set());
     skillMap.get(s.name).add(s.type);
   }));
@@ -1398,7 +1402,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const baseCount = {};
   CATS.forEach(cat => {
     if (fixedSlots[cat])
-      fixedSlots[cat].skills.forEach(s => { baseCount[s.name] = (baseCount[s.name]||0)+1; });
+      fixedSlots[cat].skills.filter(isSearchableSkill).forEach(s => { baseCount[s.name] = (baseCount[s.name]||0)+1; });
   });
   const emptyCats = CATS.filter(c => !fixedSlots[c]);
 
@@ -1463,7 +1467,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     skillReach.set(name, fixedCnt + emptyCntWithSkill);
   });
   function candidateScore(item) {
-    return item.skills.reduce((score, s) => {
+    return item.skills.filter(isSearchableSkill).reduce((score, s) => {
       if (targetSet.has(s.name)) score += 1000;
       if (activatableSet.has(s.name)) score += (skillReach.get(s.name) || 0) * 10;
       score += (baseCount[s.name] || 0) * 25;
@@ -1484,7 +1488,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   emptyCats.forEach(cat => {
     otherSlotCandidates[cat] = sortCandidates(
       filt(ITEMS_BY_CAT[cat])
-        .filter(i => i.skills.some(s => activatableSet.has(s.name)))
+        .filter(i => i.skills.filter(isSearchableSkill).some(s => activatableSet.has(s.name)))
     );
   });
 
@@ -1591,7 +1595,12 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     const targetIdx = targetSkills.map(name => skillIndex.get(name)).filter(idx => idx !== undefined);
     const arrays = CATS.map(cat => fixedSlots[cat] ? [null] : sortCandidates(filt(ITEMS_BY_CAT[cat])));
     arrays.forEach(arr => arr.forEach(item => {
-      if (item && !item._comboSkillIdx) item._comboSkillIdx = item.skills.map(s => skillIndex.get(s.name));
+      if (item && !item._comboSkillIdx) {
+        item._comboSkillIdx = item.skills
+          .filter(isSearchableSkill)
+          .map(s => skillIndex.get(s.name))
+          .filter(idx => idx !== undefined);
+      }
     }));
 
     const countArr = new Int8Array(skillNames.length);
@@ -1692,7 +1701,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
 
         const count = {...baseCount};
         emptyCats.forEach(c => {
-          if (slots[c]) slots[c].skills.forEach(s => { count[s.name]=(count[s.name]||0)+1; });
+          if (slots[c]) slots[c].skills.filter(isSearchableSkill).forEach(s => { count[s.name]=(count[s.name]||0)+1; });
         });
         if (targetSkills.length > 0 && !canActivateTargets(count, targetSkills)) continue;
         const choices = skillSlotChoices(count, targetSkills);
