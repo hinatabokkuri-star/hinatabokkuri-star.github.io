@@ -215,6 +215,16 @@
   .combo-skill-count { font-size: 10px; color: var(--muted); }
 
   .ck-empty { text-align: center; color: var(--muted); padding: 30px; font-size: 13px; }
+  .ck-loading {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    color: var(--muted); padding: 24px; font-size: 13px;
+  }
+  .ck-spinner {
+    width: 14px; height: 14px; border: 2px solid var(--border);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin .75s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .ck-impossible { background: var(--panel2); border: 1px solid var(--border); border-left: 3px solid #e74c3c; padding: 12px 14px; font-size: 12px; color: #e74c3c; line-height: 1.8; }
 
   /* ━━━ MODAL ━━━ */
@@ -1219,7 +1229,24 @@ function onSkillModeCheck() {
   document.querySelectorAll('#skill-checks-skill .skill-check-label').forEach(lbl => {
     lbl.classList.toggle('checked', lbl.querySelector('input').checked);
   });
+  comboSearchToken++;
   document.getElementById('skill-combo-result').innerHTML = '';
+}
+
+let comboSearchToken = 0;
+function comboLoadingHtml(label = '組み合わせを検索中') {
+  return `<div class="ck-loading"><span class="ck-spinner"></span><span>${label}...</span></div>`;
+}
+function scheduleComboSearch(fixedSlots, targetSkills, resultElId, label) {
+  const token = ++comboSearchToken;
+  const resultEl = document.getElementById(resultElId);
+  resultEl.innerHTML = comboLoadingHtml(label);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      if (token !== comboSearchToken) return;
+      runComboSearch(fixedSlots, targetSkills, resultElId);
+    });
+  });
 }
 
 function searchBySkill() {
@@ -1229,7 +1256,7 @@ function searchBySkill() {
     resultEl.innerHTML = '<div class="ck-empty">スキルを1つ以上選択してください</div>';
     return;
   }
-  runComboSearch({}, targets, 'skill-combo-result');
+  scheduleComboSearch({}, targets, 'skill-combo-result', 'スキル候補を検索中');
 }
 
 // ━━━ 装備から検索：スロット ━━━
@@ -1337,6 +1364,7 @@ function buildSkillChecks() {
 }
 
 function clearCheckerSelections() {
+  comboSearchToken++;
   document.querySelectorAll('.slot-select').forEach(sel => {
     sel.value = '';
     document.getElementById(`slot-skills-${sel.dataset.cat}`).innerHTML = '';
@@ -1393,11 +1421,12 @@ function searchCombinations() {
   const skills = getTargetSkills();
   const hasFixed = CATS.some(c => fixed[c]);
   if (!hasFixed && skills.length === 0) {
+    comboSearchToken++;
     document.getElementById('combo-result').innerHTML =
       '<div class="ck-empty" style="color:var(--dim)">装備またはスキルを選択すると自動で検索します</div>';
     return;
   }
-  runComboSearch(fixed, skills, 'combo-result');
+  scheduleComboSearch(fixed, skills, 'combo-result', '条件に合う組み合わせを検索中');
 }
 
 // 反復回数の上限（無限ループ防止のセーフティ）
