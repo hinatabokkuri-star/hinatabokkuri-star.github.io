@@ -18769,6 +18769,81 @@
     ]
   },
   {
+    "no": 327,
+    "category": "鎧",
+    "name": "ハネつきぼうし",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 336,
     "category": "鎧",
     "name": "デビルスーツ",
