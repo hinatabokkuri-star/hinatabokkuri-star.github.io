@@ -274,9 +274,17 @@
   .mastery-effect { color: var(--muted); font-size: 11px; }
   .mastery-count { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
 
-  /* ━━━ FOOTER ━━━ */
-  footer { background: var(--panel); border-top: 1px solid var(--border); padding: 16px; text-align: center; font-size: 11px; color: var(--muted); line-height: 2.2; }
-  footer a { color: var(--muted); text-decoration: underline; }
+  /* ━━━ SPECIAL THANKS TAB ━━━ */
+  .thanks-wrap { padding: 16px 12px 80px; max-width: 760px; margin: 0 auto; }
+  .thanks-card {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 18px; color: var(--text); line-height: 1.9; font-size: 13px;
+  }
+  .thanks-section { margin-bottom: 18px; }
+  .thanks-section:last-child { margin-bottom: 0; }
+  .thanks-title { color: var(--accent); font-size: 14px; font-weight: bold; margin-bottom: 6px; }
+  .thanks-provider { margin: 3px 0; }
+  .thanks-note { color: var(--muted); }
 
 
   /* ━━━ UPDATE NOTIFY BANNER ━━━ */
@@ -522,11 +530,12 @@
   }
   .mastery-table td:nth-child(2) { color: #925c10; }
   .drop-link { color: #955f12; font-weight: bold; }
-  footer {
-    background: #e6f0f5;
-    border-top-color: #adbec8;
-    color: #617986;
+  .thanks-card {
+    background: #ffffff;
+    border-color: #cfdde5;
+    color: #314b5a;
   }
+  .thanks-note { color: #617986; }
 
 
   .theme-toggle {
@@ -697,11 +706,12 @@
   body.theme-dark .mastery-table td { border-bottom-color: #314253; }
   body.theme-dark .mastery-table td:nth-child(2) { color: var(--accent); }
   body.theme-dark .drop-link { color: var(--accent); }
-  body.theme-dark footer {
+  body.theme-dark .thanks-card {
     background: var(--panel);
-    border-top-color: var(--border);
-    color: var(--muted);
+    border-color: var(--border);
+    color: var(--text);
   }
+  body.theme-dark .thanks-note { color: var(--muted); }
   body.theme-dark .theme-toggle {
     background: rgba(18,25,34,0.78);
     border-color: #3d5264;
@@ -742,6 +752,7 @@
     <button class="nav-tab active" data-tab="list">📋 装備一覧</button>
     <button class="nav-tab" data-tab="checker">⚡ スキル発動チェッカー</button>
     <button class="nav-tab" data-tab="mastery">⭐ マスタリーボーナス</button>
+    <button class="nav-tab" data-tab="thanks">Special Thunks</button>
   </nav>
 </section>
 
@@ -853,12 +864,26 @@
   <div id="mastery-list" style="padding:8px 12px 80px"></div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div>ひまつぶトレジャー &copy; <a href="https://apps.apple.com/jp/app/%E3%81%B2%E3%81%BE%E3%81%A4%E3%81%B6%E3%83%88%E3%83%AC%E3%82%B8%E3%83%A3%E3%83%BC/id6759699741" target="_blank" rel="noopener">Mitsuhiro Okada</a></div>
-  <div>このページはファンが作成した非公式の攻略データベースです。</div>
-  <div>ゲームの著作権・商標は開発者に帰属します。</div>
-</footer>
+<!-- TAB: Special Thunks -->
+<div class="tab-content" id="tab-thanks">
+  <div class="thanks-wrap">
+    <div class="thanks-card">
+      <div class="thanks-section">
+        <div class="thanks-title">ひまつぶトレジャー開発者</div>
+        <div>© Mitsuhiro Okada</div>
+      </div>
+      <div class="thanks-section">
+        <div class="thanks-title">情報提供者</div>
+        <div class="thanks-provider">プリムラ・プリプリ・プルォンツェル・プ・プチチープ・プルプル・オグラ・プリッツ・プッチン・プラント　さん</div>
+        <div class="thanks-provider">ふぁんとむ　さん</div>
+      </div>
+      <div class="thanks-section thanks-note">
+        <div>このページはファンが作成した非公式の攻略データベースです。</div>
+        <div>ゲームの著作権・商標は開発者に帰属します。</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL -->
 <div id="modal-overlay" role="dialog" aria-modal="true">
