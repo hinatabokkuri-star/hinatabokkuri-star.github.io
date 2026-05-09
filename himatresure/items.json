@@ -332,6 +332,81 @@
     ]
   },
   {
+    "no": 5,
+    "category": "武器",
+    "name": "スピア",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 6,
     "category": "武器",
     "name": "ウッドハンマー",
@@ -450,8 +525,8 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 500,
@@ -525,8 +600,8 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 250,
@@ -610,8 +685,8 @@
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 1000,
@@ -640,8 +715,8 @@
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 9999,
@@ -680,8 +755,8 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 500,
@@ -1702,8 +1777,8 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 250,
@@ -3868,8 +3943,8 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 1500,
@@ -4763,6 +4838,81 @@
     ]
   },
   {
+    "no": 68,
+    "category": "武器",
+    "name": "ノコギリ",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 69,
     "category": "武器",
     "name": "ほうちょう",
@@ -5041,8 +5191,8 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 1500,
@@ -6186,8 +6336,8 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 500,
@@ -6422,6 +6572,81 @@
         "pt": 250,
         "name": null,
         "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 104,
+    "category": "武器",
+    "name": "クリスタルボール",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 500,
@@ -6830,8 +7055,8 @@
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 5000,
@@ -6892,6 +7117,81 @@
         "pt": 1000,
         "name": "スタンギア",
         "effect": "スタンはっせい+5%"
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 119,
+    "category": "武器",
+    "name": "マジックハンド",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 1500,
@@ -7414,8 +7714,8 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 250,
@@ -7940,6 +8240,81 @@
     ]
   },
   {
+    "no": 151,
+    "category": "武器",
+    "name": "ゴールドアックス",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 152,
     "category": "武器",
     "name": "ギガントアックス",
@@ -8410,6 +8785,156 @@
     ]
   },
   {
+    "no": 163,
+    "category": "武器",
+    "name": "ジュエルハンマー",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 166,
+    "category": "武器",
+    "name": "スターロッド",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 171,
     "category": "武器",
     "name": "エレキボウ",
@@ -8561,6 +9086,81 @@
         "pt": 9999,
         "name": "INTバフ",
         "effect": "INTステータス+5%"
+      }
+    ]
+  },
+  {
+    "no": 174,
+    "category": "武器",
+    "name": "ゴールドダイス",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
       }
     ]
   },
@@ -9333,8 +9933,8 @@
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 7500,
@@ -9945,8 +10545,8 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 500,
@@ -13473,6 +14073,81 @@
     ]
   },
   {
+    "no": 248,
+    "category": "盾",
+    "name": "プレゼントボックス",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 249,
     "category": "盾",
     "name": "ショートケーキ",
@@ -13672,8 +14347,8 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 1500,
@@ -13902,8 +14577,8 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 500,
@@ -14881,8 +15556,8 @@
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 3500,
@@ -15176,8 +15851,8 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 1500,
@@ -15426,8 +16101,8 @@
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 7500,
@@ -15706,8 +16381,8 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 250,
@@ -15863,6 +16538,81 @@
         "pt": 100,
         "name": "コインギア",
         "effect": "ドロップコイン+0〜1"
+      },
+      {
+        "pt": 250,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 292,
+    "category": "鎧",
+    "name": "ドワーフアーマー",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
       },
       {
         "pt": 250,
@@ -16280,8 +17030,8 @@
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 3500,
@@ -16686,6 +17436,81 @@
         "pt": 3500,
         "name": null,
         "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 305,
+    "category": "鎧",
+    "name": "たんけんふく",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 5000,
@@ -17439,8 +18264,8 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 1500,
@@ -20089,8 +20914,8 @@
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 5000,
@@ -20341,6 +21166,81 @@
         "pt": 9999,
         "name": "VITバフ",
         "effect": "VITステータス+5%"
+      }
+    ]
+  },
+  {
+    "no": 382,
+    "category": "アクセサリー",
+    "name": "クラウンリング",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "未確認A",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "M",
+        "name": "未確認M",
+        "desc": "スクショ未確認"
+      },
+      {
+        "type": "P",
+        "name": "未確認P",
+        "desc": "スクショ未確認"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
       }
     ]
   },
