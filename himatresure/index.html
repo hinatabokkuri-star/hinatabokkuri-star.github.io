@@ -240,28 +240,23 @@
   .empty { grid-column: 1/-1; text-align: center; color: var(--muted); padding: 60px 20px; font-size: 13px; }
 
   /* ━━━ MASTERY TAB ━━━ */
-  .mastery-radio-bar { display: flex; gap: 8px; padding: 12px 12px 4px; }
-  .mastery-radio-label {
-    display: flex; align-items: center; gap: 6px; cursor: pointer;
-    font-size: 13px; padding: 5px 14px; border: 1px solid var(--border);
-    background: var(--bg); -webkit-tap-highlight-color: transparent;
-    transition: border-color .1s, color .1s;
-  }
-  .mastery-radio-label input { display: none; }
-  .mastery-radio-label.checked { border-color: var(--accent); color: var(--accent); background: #1a1a3a; }
-
   .mastery-bonus-card {
     background: var(--panel); border: 1px solid var(--border);
-    padding: 12px; margin-bottom: 8px;
+    margin-bottom: 8px;
   }
   .mastery-bonus-name {
-    font-size: 14px; color: var(--accent); margin-bottom: 8px;
-    display: flex; align-items: baseline; gap: 8px;
+    width: 100%; border: none; background: none; color: var(--accent);
+    font-family: inherit; font-size: 14px; padding: 10px 12px;
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    text-align: left; -webkit-tap-highlight-color: transparent;
   }
+  .mastery-bonus-name:hover { background: var(--panel2); }
+  .mastery-toggle { width: 1.3em; color: var(--muted); flex-shrink: 0; }
+  .mastery-title { flex: 1; min-width: 5em; }
   .mastery-bonus-minpt {
     font-size: 10px; color: var(--ok); border: 1px solid var(--ok); padding: 1px 6px;
   }
-  .mastery-bonus-rows { display: flex; flex-direction: column; gap: 4px; }
+  .mastery-bonus-rows { display: flex; flex-direction: column; gap: 4px; padding: 0 12px 10px; }
   .mastery-bonus-row {
     display: flex; align-items: center; gap: 8px; font-size: 12px;
     padding: 3px 0; border-bottom: 1px solid var(--panel2);
@@ -385,7 +380,6 @@
   .owned-filter-btn,
   .mode-btn,
   .skill-check-label,
-  .mastery-radio-label,
   .alts-toggle {
     background: #ffffff;
     border-color: #9fb2bd;
@@ -404,8 +398,7 @@
   }
   .filter-btn.active,
   .mode-btn.active,
-  .skill-check-label.checked,
-  .mastery-radio-label.checked {
+  .skill-check-label.checked {
     background: #fff0c9;
     color: #7a4a0c;
     border-color: #c98c24;
@@ -626,7 +619,6 @@
   body.theme-dark .owned-filter-btn,
   body.theme-dark .mode-btn,
   body.theme-dark .skill-check-label,
-  body.theme-dark .mastery-radio-label,
   body.theme-dark .alts-toggle {
     background: #111b24;
     border-color: #3d5264;
@@ -645,7 +637,6 @@
   body.theme-dark .filter-btn.active,
   body.theme-dark .mode-btn.active,
   body.theme-dark .skill-check-label.checked,
-  body.theme-dark .mastery-radio-label.checked,
   body.theme-dark .owned-filter-btn.active {
     background: #2b2a20;
     color: #f4d369;
@@ -853,14 +844,6 @@
 
 <!-- TAB: マスタリーボーナス -->
 <div class="tab-content" id="tab-mastery">
-  <div class="mastery-radio-bar">
-    <label class="mastery-radio-label checked" id="mrlbl-buff">
-      <input type="radio" name="mastery-filter" value="buff" checked onchange="onMasteryFilter(this)">バフのみ
-    </label>
-    <label class="mastery-radio-label" id="mrlbl-all">
-      <input type="radio" name="mastery-filter" value="all" onchange="onMasteryFilter(this)">全表示
-    </label>
-  </div>
   <div id="mastery-list" style="padding:8px 12px 80px"></div>
 </div>
 
@@ -1903,10 +1886,10 @@ window.addEventListener('keydown', e => {
 });
 
 // ━━━ マスタリーボーナス一覧 ━━━
-const BUFF_ORDER = ['ATKバフ','INTバフ','VITバフ','SPDバフ','LUKバフ','OPTバフ','XPバフ'];
+const MASTERY_PRIORITY_ORDER = ['OPTバフ','XPバフ','ATKバフ','INTバフ','VITバフ','SPDバフ','LUKバフ'];
 
-function buffRank(name) {
-  const i = BUFF_ORDER.indexOf(name);
+function masteryRank(name) {
+  const i = MASTERY_PRIORITY_ORDER.indexOf(name);
   return i >= 0 ? i : Infinity;
 }
 
@@ -1921,37 +1904,32 @@ function buildMasteryMap() {
   });
   map.forEach(arr => arr.sort((a,b) => a.pt - b.pt));
   return [...map.entries()].sort(([nameA, rowsA], [nameB, rowsB]) => {
-    const ra = buffRank(nameA), rb = buffRank(nameB);
-    // バフ同士 → BUFF_ORDER順
+    const ra = masteryRank(nameA), rb = masteryRank(nameB);
+    // よく見るボーナスを先頭に置き、それ以外は最低pt昇順、同ptは名前順
     if (ra !== Infinity && rb !== Infinity) return ra - rb;
-    // バフが先
     if (ra !== Infinity) return -1;
     if (rb !== Infinity) return 1;
-    // 非バフ同士 → 最低pt昇順、同ptは名前順
     return rowsA[0].pt - rowsB[0].pt || nameA.localeCompare(nameB, 'ja');
   });
 }
 
 let masteryMap = [];
-let masteryFilter = 'buff';
+const openMasteryNames = new Set(['OPTバフ', 'XPバフ']);
 
-function onMasteryFilter(radio) {
-  masteryFilter = radio.value;
-  document.getElementById('mrlbl-buff').classList.toggle('checked', masteryFilter === 'buff');
-  document.getElementById('mrlbl-all').classList.toggle('checked', masteryFilter === 'all');
+function toggleMasteryGroup(name) {
+  if (openMasteryNames.has(name)) openMasteryNames.delete(name);
+  else openMasteryNames.add(name);
   renderMastery();
 }
 
 function renderMastery() {
   const el = document.getElementById('mastery-list');
-  const filtered = masteryMap.filter(([name]) =>
-    masteryFilter === 'all' || buffRank(name) !== Infinity
-  );
-  if (!filtered.length) {
+  if (!masteryMap.length) {
     el.innerHTML = '<div class="empty">該当なし</div>';
     return;
   }
-  el.innerHTML = filtered.map(([name, rows]) => {
+  el.innerHTML = masteryMap.map(([name, rows]) => {
+    const isOpen = openMasteryNames.has(name);
     const rowsHtml = rows.map(r => `
       <div class="mastery-bonus-row" onclick="openModal(${r.item.no})">
         <span class="mastery-pt">${r.pt}pt</span>
@@ -1960,9 +1938,13 @@ function renderMastery() {
         </span>
       </div>`).join('');
     return `<div class="mastery-bonus-card">
-      <div class="mastery-bonus-name">${escapeHtml(name)}<span class="mastery-effect" style="margin-left:8px">${escapeHtml(rows[0].effect)}</span></div>
-      <div class="mastery-count">${rows.length}件</div>
-      <div class="mastery-bonus-rows">${rowsHtml}</div>
+      <button class="mastery-bonus-name" data-name="${escapeHtml(name)}" onclick="toggleMasteryGroup(this.dataset.name)" aria-expanded="${isOpen}">
+        <span class="mastery-toggle">${isOpen ? '▼' : '▶'}</span>
+        <span class="mastery-title">${escapeHtml(name)}</span>
+        <span class="mastery-count">${rows.length}件</span>
+        <span class="mastery-effect">${escapeHtml(rows[0].effect)}</span>
+      </button>
+      <div class="mastery-bonus-rows" style="display:${isOpen ? '' : 'none'}">${rowsHtml}</div>
     </div>`;
   }).join('');
 }
