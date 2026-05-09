@@ -335,29 +335,34 @@
     "no": 5,
     "category": "武器",
     "name": "スピア",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 422,
+        "name": "ポールスライム"
+      }
+    ],
     "skills": [
       {
         "type": "A",
-        "name": "未確認A",
-        "desc": "スクショ未確認"
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
       },
       {
-        "type": "M",
-        "name": "未確認M",
-        "desc": "スクショ未確認"
+        "type": "A",
+        "name": "ジャブ",
+        "desc": "かるいスピードこうげき (SPD)"
       },
       {
         "type": "P",
-        "name": "未確認P",
-        "desc": "スクショ未確認"
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
       }
     ],
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "メダマギア",
+        "effect": "メダマタイプへのダメージ+10%"
       },
       {
         "pt": 250,
@@ -366,43 +371,43 @@
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ]
   },
@@ -3021,20 +3026,20 @@
     ]
   },
   {
-    "no": 40,
+    "no": 39,
     "category": "武器",
-    "name": "むしどりあみ",
+    "name": "エルダーワンド",
     "drop_from": [],
     "skills": [
       {
         "type": "M",
-        "name": "スローシャワー",
-        "desc": "スローじょうたいにするまほうこうげき (INT)"
+        "name": "ランダムマジック",
+        "desc": "ランダムなまほうこうげき (INT+LUK?)"
       },
       {
-        "type": "P",
-        "name": "ラピッドムーブ",
-        "desc": "いどうスピード+5"
+        "type": "M",
+        "name": "キュア",
+        "desc": "がいふくまほう (INT)"
       },
       {
         "type": "P",
@@ -3045,28 +3050,112 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 1500,
         "name": null,
         "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 40,
+    "category": "武器",
+    "name": "シャベル",
+    "drop_from": [
+      {
+        "no": 442,
+        "name": "アント"
+      },
+      {
+        "no": 433,
+        "name": "ゾンビ"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ボディアタック",
+        "desc": "たいじゅうをのせたこうげき (ATK+VIT)"
+      },
+      {
+        "type": "M",
+        "name": "リーフ",
+        "desc": "くさぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "デスマーチ",
+        "desc": "しぬまであるきつづける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
+      },
+      {
+        "pt": 250,
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
+      },
+      {
+        "pt": 500,
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
+      },
+      {
+        "pt": 1000,
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
+      },
+      {
+        "pt": 1500,
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 2500,
@@ -3739,6 +3828,81 @@
     ]
   },
   {
+    "no": 51,
+    "category": "武器",
+    "name": "ウォーターナイフ",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "M",
+        "name": "チャージ",
+        "desc": "つぎにあたえるダメージをアップ (INT)"
+      },
+      {
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 52,
     "category": "武器",
     "name": "ヒートナイフ",
@@ -3945,6 +4109,86 @@
         "pt": 1000,
         "name": "OPTバフ",
         "effect": "そうびオプションはっせいりつ+5%"
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 55,
+    "category": "武器",
+    "name": "イビルステッキ",
+    "drop_from": [
+      {
+        "no": 451,
+        "name": "アーリアン"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "ダーク",
+        "desc": "やみぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "M",
+        "name": "ライフドレイン",
+        "desc": "HPをうばいとるまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "とどめ",
+        "desc": "ラストヒットのダメージ+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
       },
       {
         "pt": 1500,
@@ -5377,6 +5621,86 @@
     ]
   },
   {
+    "no": 75,
+    "category": "武器",
+    "name": "ヌンチャック",
+    "drop_from": [
+      {
+        "no": 475,
+        "name": "ミノタウロス"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
+      },
+      {
+        "type": "A",
+        "name": "ラッシュ",
+        "desc": "とっしんこうげき (VIT+SPD)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
+      },
+      {
+        "pt": 250,
+        "name": "メダマギア",
+        "effect": "メダマタイプへのダメージ+10%"
+      },
+      {
+        "pt": 500,
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 76,
     "category": "武器",
     "name": "ブーメラン",
@@ -5847,6 +6171,86 @@
     ]
   },
   {
+    "no": 83,
+    "category": "武器",
+    "name": "エクスカリバー",
+    "drop_from": [
+      {
+        "no": 485,
+        "name": "ラディッシュナイト"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ラッシュ",
+        "desc": "とっしんこうげき (VIT+SPD)"
+      },
+      {
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 84,
     "category": "武器",
     "name": "ブーケ",
@@ -6307,6 +6711,170 @@
     ]
   },
   {
+    "no": 90,
+    "category": "武器",
+    "name": "パワーボウ",
+    "drop_from": [
+      {
+        "no": 437,
+        "name": "ゴブリンソルジャー"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "チャージ",
+        "desc": "つぎにあたえるダメージをアップ (INT)"
+      },
+      {
+        "type": "A",
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 91,
+    "category": "武器",
+    "name": "エレキロッド",
+    "drop_from": [
+      {
+        "no": 496,
+        "name": "シープマン"
+      },
+      {
+        "no": 513,
+        "name": "サイクロプス"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "スタンアタック",
+        "desc": "スタンさせるこうげき (ATK)"
+      },
+      {
+        "type": "M",
+        "name": "スタンショック",
+        "desc": "スタンさせるまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 92,
     "category": "武器",
     "name": "リンコロ",
@@ -6457,6 +7025,86 @@
     ]
   },
   {
+    "no": 94,
+    "category": "武器",
+    "name": "アイスボウ",
+    "drop_from": [
+      {
+        "no": 501,
+        "name": "ユニコーン"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "アクセル",
+        "desc": "つぎにあたえるダメージをアップ (SPD)"
+      },
+      {
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
+      },
+      {
+        "pt": 250,
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
+      },
+      {
+        "pt": 500,
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
+      },
+      {
+        "pt": 1000,
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
+      },
+      {
+        "pt": 1500,
+        "name": "メダマギア",
+        "effect": "メダマタイプへのダメージ+10%"
+      },
+      {
+        "pt": 2500,
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
+      },
+      {
+        "pt": 3500,
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
+      },
+      {
+        "pt": 5000,
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
+      },
+      {
+        "pt": 7500,
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
+      },
+      {
+        "pt": 9999,
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
+      }
+    ]
+  },
+  {
     "no": 95,
     "category": "武器",
     "name": "シャイニングロッド",
@@ -6528,6 +7176,161 @@
         "pt": 9999,
         "name": "INTバフ",
         "effect": "INTステータス+5%"
+      }
+    ]
+  },
+  {
+    "no": 97,
+    "category": "武器",
+    "name": "アイスブレイド",
+    "drop_from": [
+      {
+        "no": 523,
+        "name": "ドラキュラ"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "スローアタック",
+        "desc": "スローじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "M",
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "カウンター",
+        "desc": "こうげきをうけるとターンがはやまる (VIT)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 99,
+    "category": "武器",
+    "name": "カオスボウ",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "M",
+        "name": "ダーク",
+        "desc": "やみぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
       }
     ]
   },
@@ -6616,25 +7419,25 @@
     ]
   },
   {
-    "no": 104,
+    "no": 101,
     "category": "武器",
-    "name": "クリスタルボール",
+    "name": "スティックボム",
     "drop_from": [],
     "skills": [
       {
-        "type": "A",
-        "name": "未確認A",
-        "desc": "スクショ未確認"
+        "type": "M",
+        "name": "チャージ",
+        "desc": "つぎにあたえるダメージをアップ (INT)"
       },
       {
         "type": "M",
-        "name": "未確認M",
-        "desc": "スクショ未確認"
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
       },
       {
         "type": "P",
-        "name": "未確認P",
-        "desc": "スクショ未確認"
+        "name": "とどめ",
+        "desc": "ラストヒットのダメージ+50%"
       }
     ],
     "mastery_bonus": [
@@ -6645,8 +7448,172 @@
       },
       {
         "pt": 250,
-        "name": "OPTバフ",
-        "effect": "そうびオプションはっせいりつ+5%"
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 103,
+    "category": "武器",
+    "name": "ストーンアックス",
+    "drop_from": [
+      {
+        "no": 513,
+        "name": "サイクロプス"
+      },
+      {
+        "no": 476,
+        "name": "ドラゴン"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "タックル",
+        "desc": "かるいたいあたりこうげき (VIT)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      },
+      {
+        "type": "P",
+        "name": "とどめ",
+        "desc": "ラストヒットのダメージ+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "スライムギア",
+        "effect": "スライムタイプへのダメージ+10%"
+      },
+      {
+        "pt": 250,
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
+      },
+      {
+        "pt": 500,
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
+      },
+      {
+        "pt": 1000,
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
+      },
+      {
+        "pt": 1500,
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
+      },
+      {
+        "pt": 2500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 3500,
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
+      },
+      {
+        "pt": 5000,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 7500,
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
+      },
+      {
+        "pt": 9999,
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
+      }
+    ]
+  },
+  {
+    "no": 104,
+    "category": "武器",
+    "name": "クリスタルボール",
+    "drop_from": [
+      {
+        "no": 486,
+        "name": "ピーチメイジ"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "ライフドレイン",
+        "desc": "HPをうばいとるまほうこうげき (INT)"
+      },
+      {
+        "type": "M",
+        "name": "キュア",
+        "desc": "がいふくまほう (INT)"
+      },
+      {
+        "type": "P",
+        "name": "コインプラス",
+        "desc": "ドロップコイン+0〜3"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
       },
       {
         "pt": 500,
@@ -7076,6 +8043,86 @@
     ]
   },
   {
+    "no": 116,
+    "category": "武器",
+    "name": "ドラゴンテイル",
+    "drop_from": [
+      {
+        "no": 476,
+        "name": "ドラゴン"
+      }
+    ],
+    "skills": [
+      {
+        "type": "M",
+        "name": "ライフドレイン",
+        "desc": "HPをうばいとるまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "とどめ",
+        "desc": "ラストヒットのダメージ+50%"
+      },
+      {
+        "type": "P",
+        "name": "カウンター",
+        "desc": "こうげきをうけるとターンがはやまる (VIT)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
+      },
+      {
+        "pt": 250,
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
     "no": 118,
     "category": "武器",
     "name": "サンロッド",
@@ -7226,6 +8273,161 @@
     ]
   },
   {
+    "no": 122,
+    "category": "武器",
+    "name": "ネギ",
+    "drop_from": [
+      {
+        "no": 466,
+        "name": "ドラゴンスネーク"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ポイズンアタック",
+        "desc": "どくじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "M",
+        "name": "リーフ",
+        "desc": "くさぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
+      },
+      {
+        "pt": 250,
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
+      },
+      {
+        "pt": 500,
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
+      },
+      {
+        "pt": 1000,
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
+      },
+      {
+        "pt": 1500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 2500,
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
+      },
+      {
+        "pt": 3500,
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
+      },
+      {
+        "pt": 5000,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 7500,
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
+      },
+      {
+        "pt": 9999,
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
+      }
+    ]
+  },
+  {
+    "no": 123,
+    "category": "武器",
+    "name": "クリスタルランス",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
+      },
+      {
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "コインプラス",
+        "desc": "ドロップコイン+0〜3"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
+      },
+      {
+        "pt": 250,
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
+      },
+      {
+        "pt": 500,
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
+      },
+      {
+        "pt": 1000,
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
+      },
+      {
+        "pt": 1500,
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
+      },
+      {
+        "pt": 2500,
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
+      },
+      {
+        "pt": 3500,
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
+      },
+      {
+        "pt": 5000,
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
+      },
+      {
+        "pt": 7500,
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
+      },
+      {
+        "pt": 9999,
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
+      }
+    ]
+  },
+  {
     "no": 125,
     "category": "武器",
     "name": "つりざお",
@@ -7297,6 +8499,246 @@
         "pt": 9999,
         "name": null,
         "effect": null
+      }
+    ]
+  },
+  {
+    "no": 129,
+    "category": "武器",
+    "name": "ゲルダイス",
+    "drop_from": [
+      {
+        "no": 395,
+        "name": "スライム"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "スローアタック",
+        "desc": "スローじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "M",
+        "name": "スローシャワー",
+        "desc": "スローじょうたいにするまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "XPアップ",
+        "desc": "かくとくXP+50%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "アーマーギア",
+        "effect": "アーマータイプへのダメージ+10%"
+      },
+      {
+        "pt": 250,
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
+      },
+      {
+        "pt": 500,
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
+      },
+      {
+        "pt": 1000,
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
+      },
+      {
+        "pt": 1500,
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
+      },
+      {
+        "pt": 2500,
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
+      },
+      {
+        "pt": 3500,
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
+      },
+      {
+        "pt": 5000,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 7500,
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
+      },
+      {
+        "pt": 9999,
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
+      }
+    ]
+  },
+  {
+    "no": 133,
+    "category": "武器",
+    "name": "たいまつ",
+    "drop_from": [
+      {
+        "no": 441,
+        "name": "ワークスライム"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "デスマーチ",
+        "desc": "しぬまであるきつづける"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ]
+  },
+  {
+    "no": 135,
+    "category": "武器",
+    "name": "フレイムハンマー",
+    "drop_from": [
+      {
+        "no": 475,
+        "name": "ミノタウロス"
+      }
+    ],
+    "skills": [
+      {
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+      },
+      {
+        "type": "P",
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
+      },
+      {
+        "pt": 250,
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
+      },
+      {
+        "pt": 500,
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
+      },
+      {
+        "pt": 1000,
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
+      },
+      {
+        "pt": 1500,
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
+      },
+      {
+        "pt": 2500,
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
+      },
+      {
+        "pt": 3500,
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
+      },
+      {
+        "pt": 5000,
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
+      },
+      {
+        "pt": 7500,
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
+      },
+      {
+        "pt": 9999,
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ]
   },
@@ -8466,6 +9908,81 @@
         "pt": 7500,
         "name": "マジックギア",
         "effect": "マジックスキル+5%"
+      },
+      {
+        "pt": 9999,
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
+      }
+    ]
+  },
+  {
+    "no": 154,
+    "category": "武器",
+    "name": "アイシクルエッジ",
+    "drop_from": [],
+    "skills": [
+      {
+        "type": "A",
+        "name": "スローアタック",
+        "desc": "スローじょうたいにするこうげき (ATK)"
+      },
+      {
+        "type": "M",
+        "name": "スローシャワー",
+        "desc": "スローじょうたいにするまほうこうげき (INT)"
+      },
+      {
+        "type": "P",
+        "name": "ラピッドムーブ",
+        "desc": "いどうスピード+5"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
+      },
+      {
+        "pt": 250,
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
+      },
+      {
+        "pt": 500,
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
+      },
+      {
+        "pt": 1000,
+        "name": "スライムギア",
+        "effect": "スライムタイプへのダメージ+10%"
+      },
+      {
+        "pt": 1500,
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
+      },
+      {
+        "pt": 2500,
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
+      },
+      {
+        "pt": 3500,
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
+      },
+      {
+        "pt": 5000,
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
+      },
+      {
+        "pt": 7500,
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 9999,
