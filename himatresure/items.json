@@ -42505,8 +42505,8 @@
   {
     "no": 508,
     "category": "ペット",
-    "name": "マジックゴースト",
-    "monster_type": "アンデッド",
+    "name": "ゴッドアイ",
+    "monster_type": "メダマ",
     "drop_items": [
       {
         "no": null,
@@ -42527,19 +42527,19 @@
     ],
     "skills": [
       {
-        "type": "A",
-        "name": "ランダムアタック",
-        "desc": "うんまかせのこうげき (ATK+LUK?)"
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
       },
       {
         "type": "M",
-        "name": "ソニックウェーブ",
-        "desc": "かぜのまほうこうげき (INT+SPD)"
+        "name": "ランダムマジック",
+        "desc": "ランダムなまほうこうげき (INT+LUK?)"
       },
       {
         "type": "M",
-        "name": "アクア",
-        "desc": "みずぞくせいのまほうこうげき (INTx2)"
+        "name": "おいのり",
+        "desc": "HPをかいふくする (LUK?)"
       }
     ],
     "mastery_bonus": [
