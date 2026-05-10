@@ -8260,8 +8260,8 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 500,
@@ -16684,8 +16684,8 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "OPTバフ",
+        "effect": "そうびオプションはっせいりつ+5%"
       },
       {
         "pt": 500,
