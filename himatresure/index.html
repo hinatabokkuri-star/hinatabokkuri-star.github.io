@@ -84,6 +84,7 @@
   .star-btn.owned { color: #ffcc00; text-shadow: 0 0 6px #ffcc0088; }
   .owned-filter-btn { background: var(--bg); border: 1px solid var(--border); color: var(--muted); font-family: inherit; font-size: 12px; padding: 5px 12px; cursor: pointer; white-space: nowrap; flex-shrink: 0; -webkit-tap-highlight-color: transparent; transition: border-color .1s, color .1s; }
   .owned-filter-btn.active { color: #ffcc00; border-color: #aa8800; background: #1e1a00; }
+  .info-filter-btn.active { color: var(--warn); border-color: var(--warn); background: #211606; }
   .owned-import { margin-top: 7px; }
   .owned-import-panel { margin-top: 7px; padding: 9px; border: 1px solid var(--border); background: var(--panel); }
   .owned-import-help { margin: 0 0 7px; color: var(--muted); font-size: 11px; line-height: 1.6; }
@@ -91,6 +92,7 @@
   .owned-import-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 7px; }
   .owned-import-status { color: var(--muted); font-size: 11px; }
   .card-no { color: var(--muted); font-size: 11px; flex-shrink: 0; }
+  .info-wanted-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 0 2px rgba(243,156,18,0.18); flex-shrink: 0; }
   .card-name { font-size: 15px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .cat-tag { font-size: 10px; padding: 2px 4px; border: 1px solid; white-space: nowrap; min-width: 3.5em; text-align: center; display: inline-block; flex-shrink: 0; }
   .cat-tag-武器         { color: var(--tag-武器);         border-color: var(--tag-武器); }
@@ -424,6 +426,11 @@
     color: #7a4a0c;
     border-color: #c98c24;
   }
+  .info-filter-btn.active {
+    background: #fff3dc;
+    color: #8a5309;
+    border-color: #d19a31;
+  }
 
   .card,
   .slot-block,
@@ -468,6 +475,7 @@
   }
   .star-btn { color: #9aaab4; }
   .star-btn.owned { color: #bd870f; text-shadow: none; }
+  .info-wanted-dot { background: #d28a16; box-shadow: 0 0 0 2px rgba(210,138,22,0.16); }
 
   .cat-tag,
   .skill-type,
@@ -653,6 +661,11 @@
     border-color: #f0c85a;
     box-shadow: none;
   }
+  body.theme-dark .info-filter-btn.active {
+    color: #f4d369;
+    border-color: #f0c85a;
+    background: #2b2a20;
+  }
   body.theme-dark .card,
   body.theme-dark .slot-block,
   body.theme-dark .target-section,
@@ -778,6 +791,7 @@
     <button class="owned-filter-btn active" id="owned-btn-all"   onclick="setOwnedFilter('all')">すべて</button>
     <button class="owned-filter-btn"        id="owned-btn-owned" onclick="setOwnedFilter('owned')">★ 所持のみ</button>
     <button class="owned-filter-btn"        id="owned-btn-unowned" onclick="setOwnedFilter('unowned')">☆ 未所持のみ</button>
+    <button class="owned-filter-btn info-filter-btn" id="info-wanted-btn" onclick="toggleInfoWantedFilter()">情報提供募集</button>
   </div>
   <div class="owned-import">
     <button class="owned-filter-btn" id="owned-import-toggle" onclick="toggleOwnedImportPanel()">所有Noインポート</button>
@@ -910,6 +924,7 @@ function escapeHtml(value) {
 
 let allItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
+let infoWantedOnly = false;
 let slotSortMode = localStorage.getItem(SLOT_SORT_KEY) === 'name' ? 'name' : 'no';
 let ownedFilter = 'all'; // 'all' | 'owned' | 'unowned'
 let ownedSet = new Set(JSON.parse(localStorage.getItem('himatubu_owned') || '[]'));
@@ -1044,11 +1059,17 @@ function setOwnedFilter(mode) {
 function toggleOwnedFilter() { // チェッカータブから呼ばれる
   setOwnedFilter(ownedFilter === 'owned' ? 'all' : 'owned');
 }
+function toggleInfoWantedFilter() {
+  infoWantedOnly = !infoWantedOnly;
+  document.getElementById('info-wanted-btn')?.classList.toggle('active', infoWantedOnly);
+  renderList();
+}
 
 // ━━━ 初期化 ━━━
 // ━━━ グローバルインデックス（allItems ベース、データ更新時のみ再構築） ━━━
 let SKILL_CAT_MAP = null;   // skill name → { category → items[] }
 let ITEMS_BY_CAT  = null;   // category → items[]
+let ITEM_BY_NO = null;      // item no → item
 const PROVISIONAL_SKILLS = new Set(['未確認A', '未確認M', '未確認P']);
 function isSearchableSkill(skill) {
   return skill && !PROVISIONAL_SKILLS.has(skill.name);
@@ -1056,9 +1077,36 @@ function isSearchableSkill(skill) {
 function searchableSkillNames(item) {
   return item._searchableSkillNames || item.skills.filter(isSearchableSkill).map(s => s.name);
 }
+function hasUnknownDropName(drop) {
+  return !drop || !drop.name || /^\?+$/.test(drop.name);
+}
+function needsInfo(item) {
+  const isPet = item.category === 'ペット';
+  const drops = (isPet ? item.drop_items : item.drop_from) || [];
+  if (!item.skills || item.skills.length < 3 || item.skills.some(s => PROVISIONAL_SKILLS.has(s.name))) return true;
+  if (!item.mastery_bonus || item.mastery_bonus.some(b => !b.name || !b.effect)) return true;
+  if (!drops.length || drops.some(hasUnknownDropName)) return true;
+  if (isPet) {
+    return drops.some(d => {
+      if (d.no == null) return true;
+      const equip = ITEM_BY_NO?.get(d.no);
+      if (!equip || equip.category === 'ペット') return true;
+      if (d.name !== equip.name) return true;
+      return !((equip.drop_from || []).some(df => df.no === item.no && df.name === item.name));
+    });
+  }
+  return drops.some(d => {
+    if (d.no == null) return true;
+    const pet = ITEM_BY_NO?.get(d.no);
+    if (!pet || pet.category !== 'ペット') return true;
+    if (d.name !== pet.name) return true;
+    return !((pet.drop_items || []).some(di => di.no === item.no && di.name === item.name));
+  });
+}
 
 function rebuildIndices() {
   SKILL_CAT_MAP = new Map();
+  ITEM_BY_NO = new Map(allItems.map(item => [item.no, item]));
   ITEMS_BY_CAT = {};
   CATS.forEach(c => ITEMS_BY_CAT[c] = []);
   allItems.forEach(item => {
@@ -1111,6 +1159,7 @@ function getFiltered() {
   let items = allItems.filter(item => {
     if (ownedFilter === 'owned'   && !ownedSet.has(item.no)) return false;
     if (ownedFilter === 'unowned' &&  ownedSet.has(item.no)) return false;
+    if (infoWantedOnly && !needsInfo(item)) return false;
     if (currentCat !== 'all' && item.category !== currentCat) return false;
     if (!currentSearch) return true;
     const q = currentSearch;
@@ -1126,6 +1175,9 @@ function getFiltered() {
 
 function renderList() {
   const filtered = getFiltered();
+  const infoWantedCount = allItems.filter(needsInfo).length;
+  const infoBtn = document.getElementById('info-wanted-btn');
+  if (infoBtn) infoBtn.textContent = `情報提供募集（${infoWantedCount}）`;
   const unowned = filtered.filter(i => !ownedSet.has(i.no));
   const catLabel2 = currentCat === 'all' ? '表示中' : catLabel(currentCat);
   const btn = document.getElementById('mark-visible-btn');
@@ -1142,6 +1194,7 @@ function renderList() {
   }
   document.getElementById('grid').innerHTML = filtered.map(item => {
     const isPet = item.category === 'ペット';
+    const infoWanted = needsInfo(item);
     const drops = (isPet ? item.drop_items : item.drop_from) || [];
     const dropNames = drops.filter(d => d.name && d.name !== '???').map(d => escapeHtml(d.name));
     const dropHtml = dropNames.length
@@ -1149,6 +1202,7 @@ function renderList() {
     return `<div class="card${ownedSet.has(item.no)?' owned':''}" onclick="openModal(${item.no})">
       <div class="card-head">
         <span class="card-no">No${item.no}</span>
+        ${infoWanted ? '<span class="info-wanted-dot" title="情報提供募集"></span>' : ''}
         <span class="card-name">${escapeHtml(item.name)}</span>
         <span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span>
         <button class="star-btn${ownedSet.has(item.no)?' owned':''}" onclick="toggleOwned(${item.no},event)" title="所持マーク">★</button>
