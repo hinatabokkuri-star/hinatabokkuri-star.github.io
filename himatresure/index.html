@@ -92,7 +92,7 @@
   .owned-import-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 7px; }
   .owned-import-status { color: var(--muted); font-size: 11px; }
   .card-no { color: var(--muted); font-size: 11px; flex-shrink: 0; }
-  .info-wanted-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 0 2px rgba(243,156,18,0.18); flex-shrink: 0; }
+  .info-wanted-badge { color: var(--warn); border: 1px solid var(--warn); font-size: 10px; line-height: 1; padding: 2px 4px; flex-shrink: 0; }
   .card-name { font-size: 15px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .cat-tag { font-size: 10px; padding: 2px 4px; border: 1px solid; white-space: nowrap; min-width: 3.5em; text-align: center; display: inline-block; flex-shrink: 0; }
   .cat-tag-武器         { color: var(--tag-武器);         border-color: var(--tag-武器); }
@@ -475,7 +475,7 @@
   }
   .star-btn { color: #9aaab4; }
   .star-btn.owned { color: #bd870f; text-shadow: none; }
-  .info-wanted-dot { background: #d28a16; box-shadow: 0 0 0 2px rgba(210,138,22,0.16); }
+  .info-wanted-badge { background: #fff6e6; color: #9a620d; border-color: #d28a16; border-radius: 5px; font-weight: bold; }
 
   .cat-tag,
   .skill-type,
@@ -1202,7 +1202,7 @@ function renderList() {
     return `<div class="card${ownedSet.has(item.no)?' owned':''}" onclick="openModal(${item.no})">
       <div class="card-head">
         <span class="card-no">No${item.no}</span>
-        ${infoWanted ? '<span class="info-wanted-dot" title="情報提供募集"></span>' : ''}
+        ${infoWanted ? '<span class="info-wanted-badge" title="情報提供募集">募</span>' : ''}
         <span class="card-name">${escapeHtml(item.name)}</span>
         <span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span>
         <button class="star-btn${ownedSet.has(item.no)?' owned':''}" onclick="toggleOwned(${item.no},event)" title="所持マーク">★</button>
