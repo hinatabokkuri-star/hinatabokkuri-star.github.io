@@ -1003,54 +1003,58 @@
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ]
   },
   {
     "no": 13,
     "category": "武器",
-    "name": "ウイングブレイド",
+    "name": "ウィングブレイド",
     "drop_from": [
       {
         "no": 396,
         "name": "ウィングアイ"
+      },
+      {
+        "no": 482,
+        "name": "キラービー"
       }
     ],
     "skills": [
@@ -1073,53 +1077,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ]
   },
@@ -1197,13 +1201,13 @@
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ]
   },
@@ -1215,6 +1219,10 @@
       {
         "no": 399,
         "name": "ヒートスライム"
+      },
+      {
+        "no": 477,
+        "name": "フェニックス"
       }
     ],
     "skills": [
@@ -1252,38 +1260,38 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ]
   },
@@ -1295,6 +1303,10 @@
       {
         "no": 400,
         "name": "マンティス"
+      },
+      {
+        "no": 494,
+        "name": "ブレイドホース"
       }
     ],
     "skills": [
@@ -1322,48 +1334,48 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ]
   },
@@ -1617,8 +1629,8 @@
     "name": "ねこじゃらし",
     "drop_from": [
       {
-        "no": 559,
-        "name": "キュウビ"
+        "no": 405,
+        "name": "ボールキャット"
       }
     ],
     "skills": [
@@ -1641,53 +1653,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ]
   },
@@ -1783,6 +1795,10 @@
       {
         "no": 406,
         "name": "ジラフィ"
+      },
+      {
+        "no": 492,
+        "name": "トールベア"
       }
     ],
     "skills": [
@@ -1805,53 +1821,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ]
   },
@@ -1860,6 +1876,10 @@
     "category": "武器",
     "name": "ピコピコハンマー",
     "drop_from": [
+      {
+        "no": 407,
+        "name": "ラバーバニー"
+      },
       {
         "no": 560,
         "name": "ゴブリンクラウン"
@@ -1943,6 +1963,10 @@
       {
         "no": 408,
         "name": "クソデッパ"
+      },
+      {
+        "no": 518,
+        "name": "ラブスライム"
       }
     ],
     "skills": [
@@ -2023,6 +2047,10 @@
       {
         "no": 409,
         "name": "イガグリドッグ"
+      },
+      {
+        "no": 480,
+        "name": "ゴブリンアタック"
       }
     ],
     "skills": [
@@ -2101,6 +2129,10 @@
     "name": "まるた",
     "drop_from": [
       {
+        "no": 411,
+        "name": "スタンピィ"
+      },
+      {
         "no": 426,
         "name": "グリーンマッシュ"
       },
@@ -2154,28 +2186,28 @@
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ]
   },
@@ -2187,6 +2219,10 @@
       {
         "no": 412,
         "name": "タニップ"
+      },
+      {
+        "no": 400,
+        "name": "マンティス"
       }
     ],
     "skills": [
@@ -2234,28 +2270,28 @@
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ]
   },
@@ -2267,6 +2303,10 @@
       {
         "no": 414,
         "name": "パクパクフラワー"
+      },
+      {
+        "no": 468,
+        "name": "マミィベア"
       }
     ],
     "skills": [
@@ -2347,6 +2387,10 @@
       {
         "no": 415,
         "name": "バタフィ"
+      },
+      {
+        "no": 425,
+        "name": "モスキート"
       }
     ],
     "skills": [
@@ -2369,53 +2413,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "ライトギア",
+        "effect": "ひかりダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ]
   },
@@ -2425,20 +2469,12 @@
     "name": "まきもの",
     "drop_from": [
       {
-        "no": 411,
-        "name": "スタンピィ"
-      },
-      {
         "no": 417,
         "name": "クロッピ"
       },
       {
         "no": 487,
         "name": "テング"
-      },
-      {
-        "no": 426,
-        "name": "グリーンマッシュ"
       }
     ],
     "skills": [
@@ -2461,53 +2497,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "アーマーギア",
+        "effect": "アーマータイプへのダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       }
     ]
   },
@@ -2515,7 +2551,16 @@
     "no": 31,
     "category": "武器",
     "name": "アクアハンマー",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 418,
+        "name": "マーダイン"
+      },
+      {
+        "no": 393,
+        "name": "ギョッピィ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -2536,53 +2581,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ]
   },
@@ -2944,53 +2989,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ]
   },
@@ -3000,12 +3045,12 @@
     "name": "ちゅうしゃき",
     "drop_from": [
       {
-        "no": 402,
-        "name": "キラービー"
-      },
-      {
         "no": 425,
         "name": "モスキート"
+      },
+      {
+        "no": 402,
+        "name": "キラービー"
       }
     ],
     "skills": [
@@ -3028,53 +3073,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "スライムギア",
+        "effect": "スライムタイプへのダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "メダマギア",
+        "effect": "メダマタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ]
   },
@@ -3234,7 +3279,7 @@
     "drop_from": [
       {
         "no": 427,
-        "name": "イビルブレード"
+        "name": "イビルプレート"
       },
       {
         "no": 558,
@@ -3245,8 +3290,17 @@
   {
     "no": 40,
     "category": "武器",
-    "name": "むしどりあみ",
-    "drop_from": [],
+    "name": "むしとりあみ",
+    "drop_from": [
+      {
+        "no": 429,
+        "name": "スカルリグ"
+      },
+      {
+        "no": 555,
+        "name": "ベルゼブブ"
+      }
+    ],
     "skills": [
       {
         "type": "M",
@@ -3267,53 +3321,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ]
   },
@@ -3412,7 +3466,7 @@
     "drop_from": [
       {
         "no": 429,
-        "name": "スカルリグ [インセクト]"
+        "name": "スカルリグ"
       },
       {
         "no": 431,
@@ -3541,33 +3595,33 @@
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       }
     ],
     "drop_from": [
@@ -3587,12 +3641,12 @@
     "name": "グリーンボウ",
     "drop_from": [
       {
-        "no": 427,
-        "name": "イビルプレート"
-      },
-      {
         "no": 437,
         "name": "ゴブリンハンター"
+      },
+      {
+        "no": 427,
+        "name": "イビルプレート"
       }
     ],
     "skills": [
@@ -3640,28 +3694,28 @@
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ]
   },
@@ -3703,53 +3757,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ]
   },
@@ -3817,23 +3871,23 @@
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       }
     ]
   },
@@ -3960,48 +4014,48 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "スライムギア",
+        "effect": "スライムタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ],
     "drop_from": [
       {
-        "no": 433,
-        "name": "ゾンビ"
-      },
-      {
         "no": 442,
         "name": "アント"
+      },
+      {
+        "no": 433,
+        "name": "ゾンビ"
       }
     ]
   },
@@ -5254,6 +5308,10 @@
     "name": "ディフェンダー",
     "drop_from": [
       {
+        "no": 461,
+        "name": "アンモン"
+      },
+      {
         "no": 485,
         "name": "ラディッシュナイト"
       }
@@ -5293,8 +5351,8 @@
       },
       {
         "pt": 1000,
-        "name": "ゴブリンギア",
-        "effect": "ゴブリンタイプへのダメージ+10%"
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 1500,
@@ -6006,6 +6064,10 @@
     "name": "フライドチキン",
     "drop_from": [
       {
+        "no": 472,
+        "name": "メガピッピ"
+      },
+      {
         "no": 470,
         "name": "チキンナイト"
       }
@@ -6030,53 +6092,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ]
   },
@@ -6246,7 +6308,7 @@
     "drop_from": [
       {
         "no": 476,
-        "name": "ドラゴン [リザード]"
+        "name": "ドラゴン"
       },
       {
         "no": 479,
@@ -6419,6 +6481,10 @@
       {
         "no": 479,
         "name": "ゴブリンファイター"
+      },
+      {
+        "no": 445,
+        "name": "キラーアント"
       }
     ],
     "skills": [
@@ -6441,53 +6507,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ]
   },
@@ -6651,7 +6717,7 @@
     "drop_from": [
       {
         "no": 482,
-        "name": "ハーピィ"
+        "name": "キラービー"
       },
       {
         "no": 542,
@@ -6914,7 +6980,7 @@
     "drop_from": [
       {
         "no": 459,
-        "name": "マーメイド [アームド]"
+        "name": "マーメイド"
       },
       {
         "no": 486,
@@ -7469,7 +7535,7 @@
       },
       {
         "no": 437,
-        "name": "ゴブリンソルジャー"
+        "name": "ゴブリンハンター"
       }
     ]
   },
@@ -8983,7 +9049,7 @@
       },
       {
         "no": 521,
-        "name": "ヴァンプガール"
+        "name": "ダンシングドール"
       }
     ],
     "skills": [
@@ -9299,12 +9365,12 @@
     ],
     "drop_from": [
       {
-        "no": 521,
-        "name": "ヴァンプガール"
-      },
-      {
         "no": 525,
         "name": "マミー"
+      },
+      {
+        "no": 521,
+        "name": "ダンシングドール"
       }
     ]
   },
@@ -9314,12 +9380,12 @@
     "name": "ムーンロッド",
     "drop_from": [
       {
-        "no": 436,
-        "name": "ゴブリンメイジ"
-      },
-      {
         "no": 526,
         "name": "マジックゴースト"
+      },
+      {
+        "no": 436,
+        "name": "ゴブリンメイジ"
       }
     ],
     "skills": [
@@ -9342,33 +9408,33 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 3500,
@@ -9377,18 +9443,18 @@
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       }
     ]
   },
@@ -9510,53 +9576,53 @@
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "アーマーギア",
+        "effect": "アーマータイプへのダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       }
     ],
     "drop_from": [
       {
-        "no": 515,
-        "name": "プラントドラゴン"
-      },
-      {
         "no": 529,
         "name": "アースワーム"
+      },
+      {
+        "no": 515,
+        "name": "プラントドラゴン"
       }
     ]
   },
@@ -9668,53 +9734,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ],
     "drop_from": [
@@ -9731,28 +9797,32 @@
   {
     "no": 118,
     "category": "武器",
-    "name": "サンロッド",
+    "name": "スティンガー",
     "drop_from": [
       {
-        "no": 533,
-        "name": "ヒートウィング"
+        "no": 402,
+        "name": "キラービー"
+      },
+      {
+        "no": 409,
+        "name": "イガグリドッグ"
       }
     ],
     "skills": [
       {
-        "type": "M",
-        "name": "フレア",
-        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
+        "type": "A",
+        "name": "ジャブ",
+        "desc": "かるいスピードこうげき (SPD)"
       },
       {
-        "type": "M",
-        "name": "めいそう",
-        "desc": "HPをかいふくする (Lv)"
+        "type": "A",
+        "name": "スタンアタック",
+        "desc": "スタンさせるこうげき (ATK)"
       },
       {
         "type": "P",
-        "name": "XPアップ",
-        "desc": "かくとくXP+50%"
+        "name": "デスマーチ",
+        "desc": "しぬまであるきつづける"
       }
     ],
     "mastery_bonus": [
@@ -9812,22 +9882,31 @@
     "no": 119,
     "category": "武器",
     "name": "マジックハンド",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 535,
+        "name": "キャリーアイ"
+      },
+      {
+        "no": 544,
+        "name": "クリオネイク"
+      }
+    ],
     "skills": [
       {
         "type": "A",
-        "name": "未確認A",
-        "desc": "スクショ未確認"
+        "name": "ジャブ",
+        "desc": "かるいスピードこうげき (SPD)"
       },
       {
-        "type": "M",
-        "name": "未確認M",
-        "desc": "スクショ未確認"
+        "type": "A",
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
       },
       {
         "type": "P",
-        "name": "未確認P",
-        "desc": "スクショ未確認"
+        "name": "コインプラス",
+        "desc": "ドロップコイン+0〜3"
       }
     ],
     "mastery_bonus": [
@@ -9907,70 +9986,70 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "アーマーギア",
+        "effect": "アーマータイプへのダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ],
     "drop_from": [
       {
-        "no": 535,
-        "name": "キャリーアイ"
-      },
-      {
         "no": 536,
         "name": "フランケン"
+      },
+      {
+        "no": 535,
+        "name": "キャリーアイ"
       }
     ]
   },
   {
     "no": 121,
     "category": "武器",
-    "name": "ヘビナイフ",
+    "name": "ベノムナイフ",
     "skills": [
       {
         "type": "A",
@@ -10001,43 +10080,43 @@
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ],
     "drop_from": [
@@ -10222,7 +10301,7 @@
   {
     "no": 124,
     "category": "武器",
-    "name": "ほうきグローブ",
+    "name": "ぼうつきグローブ",
     "skills": [
       {
         "type": "A",
@@ -10243,63 +10322,63 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "メダマギア",
+        "effect": "メダマタイプへのダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ],
     "drop_from": [
       {
-        "no": 510,
-        "name": "ルルーマン"
-      },
-      {
         "no": 542,
         "name": "オクトポッド"
+      },
+      {
+        "no": 510,
+        "name": "ルルーマン"
       }
     ]
   },
@@ -10308,6 +10387,10 @@
     "category": "武器",
     "name": "つりざお",
     "drop_from": [
+      {
+        "no": 543,
+        "name": "ダウン"
+      },
       {
         "no": 398,
         "name": "ニードルタートル"
@@ -10357,33 +10440,33 @@
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ]
   },
@@ -12074,7 +12157,7 @@
       },
       {
         "no": 471,
-        "name": "スモウトリ [アニマル]"
+        "name": "スモウトリ"
       }
     ],
     "skills": [
@@ -12887,7 +12970,7 @@
       },
       {
         "no": 482,
-        "name": "ハーピィ"
+        "name": "キラービー"
       }
     ]
   },
@@ -13729,7 +13812,7 @@
       },
       {
         "no": 521,
-        "name": "ヴァンプガール"
+        "name": "ダンシングドール"
       }
     ],
     "skills": [
@@ -14817,7 +14900,7 @@
       },
       {
         "no": 414,
-        "name": "カリバクラワー"
+        "name": "パクパクフラワー"
       }
     ],
     "skills": [
@@ -15061,7 +15144,7 @@
       },
       {
         "no": 471,
-        "name": "スモウトリ [アニマル]"
+        "name": "スモウトリ"
       },
       {
         "no": 566,
@@ -15552,11 +15635,11 @@
       },
       {
         "no": 484,
-        "name": "ビッグヒール"
+        "name": "キャロットウォーリア"
       },
       {
         "no": 488,
-        "name": "クリッパリ"
+        "name": "ワンタクロス"
       }
     ],
     "skills": [
@@ -17030,7 +17113,7 @@
     "drop_from": [
       {
         "no": 429,
-        "name": "スカルリグ [インセクト]"
+        "name": "スカルリグ"
       },
       {
         "no": 565,
@@ -17357,7 +17440,7 @@
     "drop_from": [
       {
         "no": 433,
-        "name": "ゾンビ [アンデッド]"
+        "name": "ゾンビ"
       },
       {
         "no": 433,
@@ -18420,7 +18503,7 @@
     "drop_from": [
       {
         "no": 461,
-        "name": "アンモン [アームド]"
+        "name": "アンモン"
       },
       {
         "no": 557,
@@ -18508,7 +18591,7 @@
     "drop_from": [
       {
         "no": 461,
-        "name": "アンモン [アームド]"
+        "name": "アンモン"
       },
       {
         "no": 462,
@@ -18764,7 +18847,7 @@
     "drop_from": [
       {
         "no": 465,
-        "name": "トルネ [デビル]"
+        "name": "トルネ"
       },
       {
         "no": 512,
@@ -19016,7 +19099,7 @@
       },
       {
         "no": 469,
-        "name": "ダディベア [アニマル]"
+        "name": "ダディベア"
       },
       {
         "no": 469,
@@ -23297,7 +23380,7 @@
     "drop_from": [
       {
         "no": 404,
-        "name": "ビッグテール"
+        "name": "ビッグデール"
       },
       {
         "no": 559,
@@ -23530,7 +23613,7 @@
     "drop_from": [
       {
         "no": 406,
-        "name": "ジライ"
+        "name": "ジラフィ"
       },
       {
         "no": 557,
@@ -23699,7 +23782,7 @@
       },
       {
         "no": 469,
-        "name": "ダディベア [アニマル]"
+        "name": "ダディベア"
       }
     ],
     "skills": [
@@ -23943,7 +24026,7 @@
     "drop_from": [
       {
         "no": 432,
-        "name": "ファントム"
+        "name": "ブラックゴースト"
       }
     ],
     "skills": [
@@ -24855,7 +24938,7 @@
     "drop_from": [
       {
         "no": 433,
-        "name": "ゾンビ [アンデッド]"
+        "name": "ゾンビ"
       },
       {
         "no": 539,
@@ -25424,7 +25507,7 @@
     "drop_from": [
       {
         "no": 443,
-        "name": "トールリザ"
+        "name": "トールバット"
       },
       {
         "no": 567,
@@ -26262,7 +26345,7 @@
     "drop_from": [
       {
         "no": 471,
-        "name": "スモウトリ [アニマル]"
+        "name": "スモウトリ"
       },
       {
         "no": 547,
@@ -26506,7 +26589,7 @@
     "drop_from": [
       {
         "no": 476,
-        "name": "ドラゴン [リザード]"
+        "name": "ドラゴン"
       },
       {
         "no": 476,
@@ -26838,7 +26921,7 @@
     "drop_from": [
       {
         "no": 480,
-        "name": "ゴブリンアタック [ゴブリン]"
+        "name": "ゴブリンアタック"
       },
       {
         "no": 481,
@@ -27645,7 +27728,7 @@
       },
       {
         "no": 500,
-        "name": "ゴッドアイ"
+        "name": "イエティ"
       }
     ]
   },
@@ -28149,7 +28232,7 @@
       },
       {
         "no": 521,
-        "name": "ヴァンプガール"
+        "name": "ダンシングドール"
       }
     ]
   },
@@ -29196,7 +29279,7 @@
       },
       {
         "no": 477,
-        "name": "フェニックス [アンデッド]"
+        "name": "フェニックス"
       },
       {
         "no": 512,
@@ -29525,7 +29608,7 @@
     "drop_from": [
       {
         "no": 453,
-        "name": "マミキット"
+        "name": "マーキャット"
       },
       {
         "no": 497,
@@ -29720,7 +29803,7 @@
     "drop_from": [
       {
         "no": 469,
-        "name": "ダディベア [アニマル]"
+        "name": "ダディベア"
       },
       {
         "no": 520,
@@ -30340,7 +30423,7 @@
     "drop_from": [
       {
         "no": 433,
-        "name": "ゾンビ [アンデッド]"
+        "name": "ゾンビ"
       },
       {
         "no": 434,
@@ -30520,7 +30603,7 @@
     "drop_from": [
       {
         "no": 461,
-        "name": "アンモン [アームド]"
+        "name": "アンモン"
       },
       {
         "no": 470,
@@ -31377,7 +31460,7 @@
     "drop_from": [
       {
         "no": 406,
-        "name": "ジライ"
+        "name": "ジラフィ"
       },
       {
         "no": 417,
@@ -31545,7 +31628,7 @@
     "drop_from": [
       {
         "no": 482,
-        "name": "ハーピィ"
+        "name": "キラービー"
       },
       {
         "no": 516,
@@ -31809,7 +31892,7 @@
     "drop_from": [
       {
         "no": 429,
-        "name": "スカルバド"
+        "name": "スカルリグ"
       },
       {
         "no": 554,
@@ -32249,7 +32332,7 @@
       },
       {
         "no": 472,
-        "name": "メガヒッピー"
+        "name": "メガピッピ"
       },
       {
         "no": 520,
@@ -32612,7 +32695,7 @@
     "drop_from": [
       {
         "no": 480,
-        "name": "ゴブリンタンク"
+        "name": "ゴブリンアタック"
       },
       {
         "no": 481,
@@ -32827,6 +32910,10 @@
       {
         "no": null,
         "name": "アクアアーマー"
+      },
+      {
+        "no": 31,
+        "name": "アクアハンマー"
       }
     ],
     "skills": [
@@ -33105,7 +33192,7 @@
     "drop_items": [
       {
         "no": 13,
-        "name": "ウイングブレイド"
+        "name": "ウィングブレイド"
       },
       {
         "no": 172,
@@ -33514,6 +33601,10 @@
       {
         "no": null,
         "name": "アクアソープ"
+      },
+      {
+        "no": 27,
+        "name": "リーフカッター"
       }
     ],
     "skills": [
@@ -33712,6 +33803,10 @@
       {
         "no": null,
         "name": "クサイ"
+      },
+      {
+        "no": 118,
+        "name": "スティンガー"
       }
     ],
     "skills": [
@@ -33987,6 +34082,10 @@
       {
         "no": null,
         "name": "ダイヤ"
+      },
+      {
+        "no": 20,
+        "name": "ねこじゃらし"
       }
     ],
     "skills": [
@@ -34189,6 +34288,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 23,
+        "name": "ピコピコハンマー"
       }
     ],
     "skills": [
@@ -34387,6 +34490,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 118,
+        "name": "スティンガー"
       }
     ],
     "skills": [
@@ -34567,10 +34674,6 @@
     "monster_type": null,
     "drop_items": [
       {
-        "no": 30,
-        "name": "まきもの"
-      },
-      {
         "no": 235,
         "name": "ラダーシールド"
       },
@@ -34589,6 +34692,10 @@
       {
         "no": 6,
         "name": "ウッドハンマー"
+      },
+      {
+        "no": 26,
+        "name": "まるた"
       }
     ],
     "skills": [
@@ -35284,6 +35391,10 @@
       {
         "no": null,
         "name": "ゾミール"
+      },
+      {
+        "no": 31,
+        "name": "アクアハンマー"
       }
     ],
     "skills": [
@@ -36048,6 +36159,10 @@
       {
         "no": null,
         "name": "パワフライエッジ"
+      },
+      {
+        "no": 29,
+        "name": "バタフライエッジ"
       }
     ]
   },
@@ -36080,10 +36195,6 @@
       {
         "no": null,
         "name": "???"
-      },
-      {
-        "no": 30,
-        "name": "まきもの"
       }
     ],
     "skills": [
@@ -36367,6 +36478,10 @@
       {
         "no": null,
         "name": "ねじりあみ"
+      },
+      {
+        "no": 40,
+        "name": "むしとりあみ"
       }
     ],
     "skills": [
@@ -36771,6 +36886,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 48,
+        "name": "シャベル"
       }
     ],
     "skills": [
@@ -37053,7 +37172,7 @@
       },
       {
         "no": 59,
-        "name": "ヒーリングワンド"
+        "name": "アクアランス"
       },
       {
         "no": 113,
@@ -37947,6 +38066,10 @@
       {
         "no": null,
         "name": "ダイアアーワールド"
+      },
+      {
+        "no": 78,
+        "name": "アックス"
       }
     ],
     "skills": [
@@ -39542,6 +39665,10 @@
       {
         "no": null,
         "name": "ベビーアーマー"
+      },
+      {
+        "no": 64,
+        "name": "ディフェンダー"
       }
     ],
     "skills": [
@@ -40237,6 +40364,10 @@
       {
         "no": null,
         "name": "ぼうずちょう"
+      },
+      {
+        "no": 28,
+        "name": "フラワーハンマー"
       }
     ],
     "skills": [
@@ -40633,6 +40764,10 @@
       {
         "no": null,
         "name": "????"
+      },
+      {
+        "no": 73,
+        "name": "フライドチキン"
       }
     ],
     "skills": [
@@ -41146,6 +41281,10 @@
       {
         "no": 77,
         "name": "おおぬさ"
+      },
+      {
+        "no": 15,
+        "name": "ファイヤーロッド"
       }
     ],
     "skills": [
@@ -41445,6 +41584,10 @@
       {
         "no": 79,
         "name": "ゴブリンキラー"
+      },
+      {
+        "no": 25,
+        "name": "かなぼう"
       }
     ],
     "skills": [
@@ -41643,6 +41786,10 @@
       {
         "no": null,
         "name": "ぎゅうじゃ"
+      },
+      {
+        "no": 13,
+        "name": "ウィングブレイド"
       }
     ],
     "skills": [
@@ -42702,6 +42849,10 @@
       {
         "no": null,
         "name": "ワスちゃんリスマー"
+      },
+      {
+        "no": 22,
+        "name": "にょいぼう"
       }
     ]
   },
@@ -42827,6 +42978,10 @@
       {
         "no": null,
         "name": "ダイヤーゴルド"
+      },
+      {
+        "no": 16,
+        "name": "かたな"
       }
     ],
     "skills": [
@@ -44467,7 +44622,7 @@
     "drop_items": [
       {
         "no": 124,
-        "name": "ほうきグローブ"
+        "name": "ぼうつきグローブ"
       },
       {
         "no": 383,
@@ -45150,7 +45305,7 @@
     "drop_items": [
       {
         "no": 106,
-        "name": "アマゾンボウ"
+        "name": "アマウェンボウ"
       },
       {
         "no": 134,
@@ -45268,6 +45423,10 @@
       {
         "no": 107,
         "name": "ラブリーハンマー"
+      },
+      {
+        "no": 24,
+        "name": "ハブラシ"
       }
     ]
   },
@@ -45464,7 +45623,7 @@
   {
     "no": 521,
     "category": "ペット",
-    "name": "ヴァンプガール",
+    "name": "ダンシングドール",
     "skills": [
       {
         "type": "A",
@@ -46322,7 +46481,7 @@
     "drop_items": [
       {
         "no": 106,
-        "name": "アマゾンボウ"
+        "name": "アマウェンボウ"
       },
       {
         "no": 115,
@@ -46721,10 +46880,6 @@
     "monster_type": "アニマル",
     "drop_items": [
       {
-        "no": 118,
-        "name": "サンロッド"
-      },
-      {
         "no": 184,
         "name": "フレイムガード"
       },
@@ -46937,6 +47092,10 @@
       {
         "no": null,
         "name": "マジックリング"
+      },
+      {
+        "no": 119,
+        "name": "マジックハンド"
       }
     ]
   },
@@ -47215,7 +47374,7 @@
       },
       {
         "no": 121,
-        "name": "ヘビナイフ"
+        "name": "ベノムナイフ"
       },
       {
         "no": 231,
@@ -47611,7 +47770,7 @@
       },
       {
         "no": 124,
-        "name": "ほうきグローブ"
+        "name": "ぼうつきグローブ"
       },
       {
         "no": 161,
@@ -47721,6 +47880,10 @@
       {
         "no": null,
         "name": "ワリざお"
+      },
+      {
+        "no": 125,
+        "name": "つりざお"
       }
     ]
   },
@@ -47822,6 +47985,10 @@
       {
         "no": null,
         "name": "ロブキマス"
+      },
+      {
+        "no": 119,
+        "name": "マジックハンド"
       }
     ]
   },
@@ -48399,7 +48566,7 @@
     "drop_items": [
       {
         "no": 121,
-        "name": "ヘビナイフ"
+        "name": "ベノムナイフ"
       },
       {
         "no": 130,
@@ -48921,6 +49088,10 @@
       {
         "no": null,
         "name": "れいどりあ"
+      },
+      {
+        "no": 40,
+        "name": "むしとりあみ"
       }
     ]
   },
@@ -49294,10 +49465,6 @@
     ],
     "monster_type": "アニマル",
     "drop_items": [
-      {
-        "no": 20,
-        "name": "ねこじゃらし"
-      },
       {
         "no": 133,
         "name": "たいまつ"
