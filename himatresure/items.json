@@ -7636,7 +7636,16 @@
     "no": 92,
     "category": "武器",
     "name": "リンコロ",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 497,
+        "name": "パカール"
+      },
+      {
+        "no": 468,
+        "name": "マミィベア"
+      }
+    ],
     "skills": [
       {
         "type": "A",
@@ -14495,23 +14504,27 @@
       {
         "no": 524,
         "name": "ビッグアイ"
+      },
+      {
+        "no": 517,
+        "name": "ツインスライム"
       }
     ],
     "skills": [
       {
         "type": "A",
-        "name": "未確認A",
-        "desc": "スクショ未確認"
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
       },
       {
         "type": "M",
-        "name": "未確認M",
-        "desc": "スクショ未確認"
+        "name": "ランダムマジック",
+        "desc": "ランダムなまほうこうげき (INT+LUK?)"
       },
       {
         "type": "P",
-        "name": "未確認P",
-        "desc": "スクショ未確認"
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
       }
     ],
     "mastery_bonus": [
@@ -25457,32 +25470,36 @@
     "name": "たんけんふく",
     "drop_from": [
       {
+        "no": 456,
+        "name": "マーマン"
+      },
+      {
         "no": 442,
         "name": "アント"
       }
     ],
     "skills": [
       {
-        "type": "A",
-        "name": "未確認A",
-        "desc": "スクショ未確認"
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
       },
       {
         "type": "M",
-        "name": "未確認M",
-        "desc": "スクショ未確認"
+        "name": "めいそう",
+        "desc": "HPをかいふくする (Lv)"
       },
       {
         "type": "P",
-        "name": "未確認P",
-        "desc": "スクショ未確認"
+        "name": "コインプラス",
+        "desc": "ドロップコイン+0〜3"
       }
     ],
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
       },
       {
         "pt": 250,
@@ -25491,23 +25508,23 @@
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "メダマギア",
+        "effect": "メダマタイプへのダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 3500,
@@ -25516,18 +25533,18 @@
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ]
   },
@@ -27261,22 +27278,31 @@
     "no": 327,
     "category": "鎧",
     "name": "ハネつきぼうし",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 488,
+        "name": "ワンタクロス"
+      },
+      {
+        "no": 512,
+        "name": "ワイループ"
+      }
+    ],
     "skills": [
       {
         "type": "A",
-        "name": "未確認A",
-        "desc": "スクショ未確認"
+        "name": "ラッキーパンチ",
+        "desc": "かるいランダムこうげき (LUK?)"
       },
       {
         "type": "M",
-        "name": "未確認M",
-        "desc": "スクショ未確認"
+        "name": "リーフ",
+        "desc": "くさぞくせいのまほうこうげき (INTx2)"
       },
       {
         "type": "P",
-        "name": "未確認P",
-        "desc": "スクショ未確認"
+        "name": "ステップムーブ",
+        "desc": "ステップいどうになる"
       }
     ],
     "mastery_bonus": [
@@ -27287,48 +27313,48 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ライトギア",
+        "effect": "ひかりダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ]
   },
@@ -32018,51 +32044,55 @@
     "name": "クラウンリング",
     "drop_from": [
       {
-        "no": 548,
-        "name": "スライムキング"
-      },
-      {
         "no": 562,
         "name": "ゴブリンキング"
+      },
+      {
+        "no": 459,
+        "name": "マーメイド"
+      },
+      {
+        "no": 548,
+        "name": "スライムキング"
       }
     ],
     "skills": [
       {
-        "type": "A",
-        "name": "未確認A",
-        "desc": "スクショ未確認"
+        "type": "M",
+        "name": "ライト",
+        "desc": "ひかりぞくせいのまほうこうげき (INTx2)"
       },
       {
         "type": "M",
-        "name": "未確認M",
-        "desc": "スクショ未確認"
+        "name": "おいのり",
+        "desc": "HPをかいふくする (LUK?)"
       },
       {
         "type": "P",
-        "name": "未確認P",
-        "desc": "スクショ未確認"
+        "name": "エンカウンター",
+        "desc": "モンスターしゅつげんりつアップ"
       }
     ],
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "スライムギア",
+        "effect": "スライムタイプへのダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ライトギア",
+        "effect": "ひかりダメージ+10%"
       },
       {
         "pt": 1500,
@@ -32071,28 +32101,28 @@
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ]
   },
@@ -39407,12 +39437,12 @@
         "name": "さや"
       },
       {
-        "no": null,
-        "name": "たいまんふく"
-      },
-      {
         "no": 4,
         "name": "ロングソード"
+      },
+      {
+        "no": 305,
+        "name": "たんけんふく"
       }
     ]
   },
@@ -39643,6 +39673,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 382,
+        "name": "クラウンリング"
       }
     ],
     "skills": [
@@ -40544,6 +40578,10 @@
       {
         "no": 28,
         "name": "フラワーハンマー"
+      },
+      {
+        "no": 92,
+        "name": "リンコロ"
       }
     ],
     "skills": [
@@ -42639,12 +42677,12 @@
         "name": "トルネフラック"
       },
       {
-        "no": null,
-        "name": "川ねつきぼうし"
-      },
-      {
         "no": 85,
         "name": "バトルフラッグ"
+      },
+      {
+        "no": 327,
+        "name": "ハネつきぼうし"
       }
     ]
   },
@@ -43552,8 +43590,8 @@
         "name": "クロール"
       },
       {
-        "no": null,
-        "name": "ソンコロ"
+        "no": 92,
+        "name": "リンコロ"
       }
     ]
   },
@@ -45051,8 +45089,8 @@
         "name": "フェザーリング"
       },
       {
-        "no": null,
-        "name": "川ねつきぼうし"
+        "no": 327,
+        "name": "ハネつきぼうし"
       }
     ]
   },
@@ -45536,8 +45574,8 @@
         "name": "アマゾンエッジ"
       },
       {
-        "no": null,
-        "name": "ゴールドサイズ"
+        "no": 174,
+        "name": "ゴールドダイス"
       }
     ]
   },
