@@ -562,6 +562,9 @@
     border-radius: 999px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.18);
   }
+  .lang-toggle {
+    bottom: 96px;
+  }
   .theme-toggle button {
     border: 1px solid transparent;
     background: transparent;
@@ -574,7 +577,9 @@
     cursor: pointer;
   }
   body.theme-light #theme-light,
-  body.theme-dark #theme-dark {
+  body.theme-dark #theme-dark,
+  body.lang-ja #lang-ja,
+  body.lang-en #lang-en {
     background: #1c3341;
     color: #fff5d5;
     border-color: #304c5c;
@@ -737,6 +742,10 @@
 <div class="theme-toggle" aria-label="テーマ切替">
   <button id="theme-light" type="button" onclick="setSiteTheme('light')">明るめ</button>
   <button id="theme-dark" type="button" onclick="setSiteTheme('dark')">暗め</button>
+</div>
+<div class="theme-toggle lang-toggle" aria-label="言語切替">
+  <button id="lang-ja" type="button" onclick="setLanguage('ja')">日本語</button>
+  <button id="lang-en" type="button" onclick="setLanguage('en')">EN</button>
 </div>
 
 <!-- UPDATE NOTIFY BANNER -->
@@ -913,13 +922,161 @@ setSiteTheme(localStorage.getItem('himatresure_theme') || 'light');
 const CATS = ['武器','盾','鎧','アクセサリー','ペット'];
 const CAT_ORDER = {'武器':0,'盾':1,'鎧':2,'アクセサリー':3,'ペット':4};
 const CAT_LABEL = {'武器':'武器','盾':'盾','鎧':'鎧','アクセサリー':'アクセ','ペット':'ペット'};
+const CAT_LABEL_EN = {'武器':'Weapon','盾':'Shield','鎧':'Armor','アクセサリー':'Ring','ペット':'Pet'};
 const MAX_RESULTS = 30;
 const SLOT_SORT_KEY = 'himatubu_slot_sort';
-function catLabel(cat) { return CAT_LABEL[cat] || cat; }
+const LANG_KEY = 'himatresure_lang';
+let currentLang = 'ja';
+let i18nEn = null;
+let i18nLoadPromise = null;
+function catLabel(cat) { return currentLang === 'en' ? (i18nEn?.categories?.[cat] || CAT_LABEL_EN[cat] || cat) : (CAT_LABEL[cat] || cat); }
 function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/g, ch => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[ch]));
+}
+
+const UI_TEXT = {
+  ja: {
+    searchPlaceholder: '名前・スキル・入手元で検索…',
+    sortNo: 'No順',
+    sortName: '名前順',
+    all: 'すべて',
+    ownedOnly: '★ 所持のみ',
+    unownedOnly: '☆ 未所持のみ',
+    infoWanted: '情報提供募集',
+    ownedImport: '所有Noインポート',
+    ownedImportHelp: '持っている装備Noを貼り付けると★に追加します。カンマ、空白、改行、No付き表記のどれでもOKです。',
+    importRead: '読み込む',
+    importClear: '入力を消す',
+    count: n => `${n} 件`,
+    visibleLabel: '表示中',
+    markVisible: (label, n) => `★ ${label}を全件所有済みに（${n}件）`,
+    unmarkVisible: (label, n) => `☆ ${label}の★を全解除（${n}件）`,
+    drop: 'ドロップ',
+    dropFrom: '入手元',
+    noMatches: '該当する装備がありません',
+    infoBadge: '情報提供募集',
+    modalSkills: 'スキル -- 3pt以上で発動（任意+1あり）',
+    modalMastery: (known, total) => `マスタリーボーナス（解放済 ${known}/${total}）`,
+    locked: '???',
+    checkerEmpty: '装備またはスキルを選択すると自動で検索します',
+    skillSlot: 'スキル',
+    more: (shown, total) => `さらに表示（${shown} / ${total}）`,
+    sameSkillAlts: n => `同じスキル発動の別装備（${n}件）`,
+    altRange: (start, end, total) => `別装備 ${start}-${end} / ${total}`,
+    prev: '前へ',
+    next: '次へ',
+    comboHeaderTargets: skills => `「${skills.join('・')}」を発動できる組み合わせ`,
+    comboHeaderAny: '発動スキルがある組み合わせ',
+    comboHeaderCount: (min, shown, label) => `${min}スキル以上 ${shown}件${label}`,
+    comboTotalStopped: (kind, total) => `（${kind}スキル以上 ${total.toLocaleString()}件超・打ち切り）`,
+    comboTotal: (kind, total) => `（${kind}スキル以上 ${total.toLocaleString()}件）`,
+    extraCombos: (kind, total) => `${kind}スキルの組み合わせも表示（${total}件）`,
+    noCombos: '条件を満たす組み合わせが見つかりませんでした',
+    searchTargetsRequired: 'スキルを1つ以上選択してください',
+    loadingCombo: '組み合わせを検索中',
+    loadingSkill: 'スキル候補を検索中',
+    loadingCondition: '条件に合う組み合わせを検索中',
+    impossible: skills => `「${skills.join('・')}」は空き枠が足りないため発動不可能です。<br>固定装備を減らすか、別のスキルを選んでください。`,
+    groupLabels: { A: 'A　物理', 'M攻撃': 'M　魔法攻撃', 'M回復': 'M　魔法回復', P: 'P　パッシブ', '複合': '複合　type混在' }
+  },
+  en: {
+    searchPlaceholder: 'Search names, skills, or sources...',
+    sortNo: 'No.',
+    sortName: 'Name',
+    all: 'All',
+    ownedOnly: '★ Owned',
+    unownedOnly: '☆ Unowned',
+    infoWanted: 'Needs info',
+    ownedImport: 'Import owned Nos',
+    ownedImportHelp: 'Paste owned equipment Nos. Commas, spaces, line breaks, and No-prefixed text are all OK.',
+    importRead: 'Import',
+    importClear: 'Clear',
+    count: n => `${n} items`,
+    visibleLabel: 'Visible',
+    markVisible: (label, n) => `Mark all ${label} as owned (${n})`,
+    unmarkVisible: (label, n) => `Unmark all ${label} stars (${n})`,
+    drop: 'Drops',
+    dropFrom: 'Dropped by',
+    noMatches: 'No matching equipment',
+    infoBadge: 'Needs info',
+    modalSkills: 'Skills -- active at 3pt or more (+1 optional)',
+    modalMastery: (known, total) => `Mastery bonuses (${known}/${total} known)`,
+    locked: '???',
+    checkerEmpty: 'Select equipment or skills to search automatically',
+    skillSlot: 'Skill',
+    more: (shown, total) => `Show more (${shown} / ${total})`,
+    sameSkillAlts: n => `Alternative equipment for the same active skills (${n})`,
+    altRange: (start, end, total) => `Alternatives ${start}-${end} / ${total}`,
+    prev: 'Prev',
+    next: 'Next',
+    comboHeaderTargets: skills => `Combinations that activate ${skills.join(' / ')}`,
+    comboHeaderAny: 'Combinations with active skills',
+    comboHeaderCount: (min, shown, label) => `${shown} result(s), ${min}+ skills${label}`,
+    comboTotalStopped: (kind, total) => ` (${kind}+ skills, over ${total.toLocaleString()}, stopped)`,
+    comboTotal: (kind, total) => ` (${kind}+ skills, ${total.toLocaleString()} total)`,
+    extraCombos: (kind, total) => `Show ${kind}-skill combinations (${total})`,
+    noCombos: 'No combinations matched',
+    searchTargetsRequired: 'Select at least one skill',
+    loadingCombo: 'Searching combinations',
+    loadingSkill: 'Searching skill candidates',
+    loadingCondition: 'Searching matching combinations',
+    impossible: skills => `${skills.join(' / ')} cannot be activated with the remaining empty slots.<br>Remove fixed equipment or choose another skill.`,
+    groupLabels: { A: 'A Physical', 'M攻撃': 'M Magic Attack', 'M回復': 'M Magic Heal', P: 'P Passive', '複合': 'Mixed type' }
+  }
+};
+function ui(key, ...args) {
+  const value = UI_TEXT[currentLang]?.[key] ?? UI_TEXT.ja[key] ?? key;
+  return typeof value === 'function' ? value(...args) : value;
+}
+function translateItemName(itemOrNo, fallback = '') {
+  const no = typeof itemOrNo === 'object' ? itemOrNo?.no : itemOrNo;
+  const local = typeof itemOrNo === 'object' ? itemOrNo?.name : fallback;
+  return currentLang === 'en' ? (i18nEn?.items?.[String(no)] || local || fallback) : (local || fallback);
+}
+function translateDropName(drop) {
+  if (!drop) return '';
+  if (currentLang === 'en' && drop.no != null) return i18nEn?.items?.[String(drop.no)] || drop.name || '';
+  return drop.name || '';
+}
+function translateSkillName(name) {
+  return currentLang === 'en' ? (i18nEn?.skills?.[name]?.name || name) : name;
+}
+function translateSkillDesc(skill) {
+  if (currentLang === 'en') return i18nEn?.skills?.[skill.name]?.desc || skill.desc || '';
+  return skill.desc || '';
+}
+function translateMasteryName(name) {
+  return currentLang === 'en' ? (i18nEn?.mastery?.[name]?.name || name) : name;
+}
+function translateMasteryEffect(row) {
+  if (currentLang === 'en') return i18nEn?.mastery?.[row.name]?.effect || row.effect || '';
+  return row.effect || '';
+}
+function translateMonsterType(item) {
+  if (currentLang === 'en') return i18nEn?.petMonsterTypes?.[String(item.no)] || i18nEn?.monsterTypes?.[item.monster_type] || item.monster_type || '';
+  return item.monster_type || '';
+}
+function translatedSearchValues(item) {
+  const values = [item.name, String(item.no)];
+  if (i18nEn?.items?.[String(item.no)]) values.push(i18nEn.items[String(item.no)]);
+  (item.skills || []).forEach(s => {
+    values.push(s.name, s.desc || '');
+    if (i18nEn?.skills?.[s.name]) values.push(i18nEn.skills[s.name].name, i18nEn.skills[s.name].desc || '');
+  });
+  (item.drop_from || item.drop_items || []).forEach(d => {
+    values.push(d.name || '');
+    if (d.no != null && i18nEn?.items?.[String(d.no)]) values.push(i18nEn.items[String(d.no)]);
+  });
+  (item.mastery_bonus || []).forEach(b => {
+    values.push(b.name || '', b.effect || '');
+    if (i18nEn?.mastery?.[b.name]) values.push(i18nEn.mastery[b.name].name, i18nEn.mastery[b.name].effect || '');
+  });
+  return values;
+}
+function includesSearch(value, query) {
+  return String(value ?? '').toLowerCase().includes(query);
 }
 
 let allItems = [];
@@ -929,6 +1086,97 @@ let slotSortMode = localStorage.getItem(SLOT_SORT_KEY) === 'name' ? 'name' : 'no
 let ownedFilter = 'all'; // 'all' | 'owned' | 'unowned'
 let ownedSet = new Set(JSON.parse(localStorage.getItem('himatubu_owned') || '[]'));
 const OWNER_HASH_PREFIX = '#owned=';
+
+function refreshLanguageButtons() {
+  document.body.classList.toggle('lang-en', currentLang === 'en');
+  document.body.classList.toggle('lang-ja', currentLang !== 'en');
+}
+async function loadEnglishI18n() {
+  if (i18nEn) return i18nEn;
+  if (!i18nLoadPromise) {
+    i18nLoadPromise = fetch('i18n-en.json?v=' + Date.now())
+      .then(res => {
+        if (!res.ok) throw new Error('i18n load failed');
+        return res.json();
+      })
+      .then(data => {
+        i18nEn = data;
+        return data;
+      })
+      .catch(err => {
+        i18nLoadPromise = null;
+        console.warn(err);
+        return null;
+      });
+  }
+  return i18nLoadPromise;
+}
+function refreshStaticLanguageText() {
+  document.documentElement.lang = currentLang === 'en' ? 'en' : 'ja';
+  document.getElementById('search').placeholder = ui('searchPlaceholder');
+  document.querySelector('#sort option[value="no"]').textContent = ui('sortNo');
+  document.querySelector('#sort option[value="name"]').textContent = ui('sortName');
+  document.querySelector('.filter-btn[data-cat="all"]').textContent = ui('all');
+  CATS.forEach(cat => {
+    const btn = document.querySelector(`.filter-btn[data-cat="${cat}"]`);
+    if (btn) btn.textContent = catLabel(cat);
+  });
+  document.getElementById('owned-btn-all').textContent = ui('all');
+  document.getElementById('owned-btn-owned').textContent = ui('ownedOnly');
+  document.getElementById('owned-btn-unowned').textContent = ui('unownedOnly');
+  document.getElementById('info-wanted-btn').textContent = ui('infoWanted');
+  document.getElementById('owned-import-toggle').textContent = ui('ownedImport');
+  document.querySelector('.owned-import-help').textContent = ui('ownedImportHelp');
+  document.querySelector('.owned-import-actions button:nth-child(1)').textContent = ui('importRead');
+  document.querySelector('.owned-import-actions button:nth-child(2)').textContent = ui('importClear');
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    const labels = currentLang === 'en'
+      ? { list: 'Items', checker: 'Skill Checker', mastery: 'Mastery', thanks: 'Special Thanks' }
+      : { list: '📋 装備一覧', checker: '⚡ スキル発動チェッカー', mastery: '⭐ マスタリーボーナス', thanks: 'Special Thunks' };
+    tab.textContent = labels[tab.dataset.tab] || tab.textContent;
+  });
+  document.querySelector('.checker-rule-bar span').innerHTML = currentLang === 'en'
+    ? '<strong>Rule:</strong> A skill activates at <strong>3+ points</strong> across the 5 slots. One optional skill can receive <strong>+1 point</strong>, so one 2-point skill can also activate.'
+    : '<strong>発動ルール：</strong>5スロットの同名スキル<strong>3ポイント以上</strong>で発動。任意スキルに<strong>+1ポイント</strong>できるため、2ポイントのスキルも1つだけ発動可能';
+  document.getElementById('owned-filter-btn-checker').textContent = ownedFilter === 'unowned' ? ui('unownedOnly') : ui('ownedOnly');
+  document.querySelector('.checker-rule-bar button:nth-of-type(2)').textContent = currentLang === 'en' ? 'Clear' : '✕ 選択解除';
+  document.querySelector('.mode-btn[data-mode="equip"]').textContent = currentLang === 'en' ? 'Combinations' : '🎒 組み合わせ検索';
+  document.querySelector('.mode-btn[data-mode="skill"]').textContent = currentLang === 'en' ? 'By Skill' : '🔍 スキルから検索';
+  document.querySelector('#mode-skill .ck-label').textContent = currentLang === 'en' ? 'Select skills to activate' : '発動させたいスキルを選択';
+  document.querySelector('#mode-skill .search-btn').textContent = currentLang === 'en' ? 'Search combinations' : '🔍 組み合わせを検索';
+  document.querySelector('.slots-section-title').textContent = currentLang === 'en'
+    ? '1. Select fixed equipment (blank = search that slot)'
+    : '① 固定したい装備を選択（未選択 = 空き枠として探索）';
+  document.getElementById('slot-sort-no').textContent = ui('sortNo');
+  document.getElementById('slot-sort-name').textContent = currentLang === 'en' ? 'Name' : '50音順';
+  document.querySelector('.target-title').textContent = currentLang === 'en'
+    ? '2. Select target skills (optional; blank = list active skills)'
+    : '② 発動させたいスキルを選択（複数可・未選択 = 発動するスキルを全列挙）';
+}
+function refreshLanguageViews() {
+  refreshLanguageButtons();
+  refreshStaticLanguageText();
+  if (!allItems.length) return;
+  const checkerState = snapshotCheckerState();
+  renderList();
+  buildSkillChecksForSkillMode();
+  buildSlots();
+  buildSkillChecks();
+  restoreCheckerState(checkerState);
+  masteryMap = buildMasteryMap();
+  if (document.getElementById('tab-mastery').classList.contains('active')) renderMastery();
+}
+async function setLanguage(lang) {
+  currentLang = lang === 'en' ? 'en' : 'ja';
+  try { localStorage.setItem(LANG_KEY, currentLang); } catch(e) {}
+  refreshLanguageButtons();
+  if (currentLang === 'en') await loadEnglishI18n();
+  refreshLanguageViews();
+}
+function initLanguagePreference() {
+  currentLang = localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'ja';
+  refreshLanguageButtons();
+}
 
 function saveOwned() {
   localStorage.setItem('himatubu_owned', JSON.stringify([...ownedSet]));
@@ -1050,7 +1298,7 @@ function setOwnedFilter(mode) {
   const cb = document.getElementById('owned-filter-btn-checker');
   if (cb) {
     cb.classList.toggle('active', mode !== 'all');
-    cb.textContent = mode === 'unowned' ? '☆ 未所持のみ' : '★ 所持のみ';
+    cb.textContent = mode === 'unowned' ? ui('unownedOnly') : ui('ownedOnly');
   }
   buildSlots(); buildSkillChecks(); buildSkillChecksForSkillMode();
   restoreCheckerState(checkerState);
@@ -1133,6 +1381,7 @@ async function init() {
     document.getElementById('grid').innerHTML = '<div class="empty">データ読み込み失敗</div>';
     return;
   }
+  if (currentLang === 'en') await loadEnglishI18n();
   rebuildIndices();
   // ページロード時：前回より増えていたら通知
   const prev = parseInt(localStorage.getItem(UNB_KEY) || '0', 10);
@@ -1145,10 +1394,12 @@ async function init() {
   }
   localStorage.setItem(UNB_KEY, String(allItems.length));
   localStorage.setItem(UNB_SIG_KEY, currentDataSignature);
+  refreshStaticLanguageText();
   renderList();
   buildSkillChecksForSkillMode();
   buildSlots();
   buildSkillChecks();
+  document.getElementById('combo-result').innerHTML = `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
   masteryMap = buildMasteryMap();
   startDataPoll();
   loadOwnerOwnedItemsFromHash();
@@ -1162,13 +1413,11 @@ function getFiltered() {
     if (infoWantedOnly && !needsInfo(item)) return false;
     if (currentCat !== 'all' && item.category !== currentCat) return false;
     if (!currentSearch) return true;
-    const q = currentSearch;
-    if (item.name.includes(q) || String(item.no).includes(q)) return true;
-    if (item.skills.some(s => s.name.includes(q) || (s.desc && s.desc.includes(q)))) return true;
-    return (item.drop_from || item.drop_items || []).some(d => d.name && d.name.includes(q));
+    const q = currentSearch.toLowerCase();
+    return translatedSearchValues(item).some(value => includesSearch(value, q));
   });
   if (currentSort === 'no')   items.sort((a,b) => a.no - b.no);
-  if (currentSort === 'name') items.sort((a,b) => a.name.localeCompare(b.name,'ja'));
+  if (currentSort === 'name') items.sort((a,b) => translateItemName(a).localeCompare(translateItemName(b), currentLang === 'en' ? 'en' : 'ja'));
   if (currentSort === 'cat')  items.sort((a,b) => CAT_ORDER[a.category] - CAT_ORDER[b.category] || a.no - b.no);
   return items;
 }
@@ -1177,38 +1426,38 @@ function renderList() {
   const filtered = getFiltered();
   const infoWantedCount = allItems.filter(needsInfo).length;
   const infoBtn = document.getElementById('info-wanted-btn');
-  if (infoBtn) infoBtn.textContent = `情報提供募集（${infoWantedCount}）`;
+  if (infoBtn) infoBtn.textContent = `${ui('infoWanted')}（${infoWantedCount}）`;
   const unowned = filtered.filter(i => !ownedSet.has(i.no));
-  const catLabel2 = currentCat === 'all' ? '表示中' : catLabel(currentCat);
+  const catLabel2 = currentCat === 'all' ? ui('visibleLabel') : catLabel(currentCat);
   const btn = document.getElementById('mark-visible-btn');
   btn.style.display = unowned.length ? '' : 'none';
-  btn.textContent = `★ ${catLabel2}を全件所有済みに（${unowned.length}件）`;
+  btn.textContent = ui('markVisible', catLabel2, unowned.length);
   const owned = filtered.filter(i => ownedSet.has(i.no));
   const unBtn = document.getElementById('unmark-visible-btn');
   unBtn.style.display = owned.length ? '' : 'none';
-  unBtn.textContent = `☆ ${catLabel2}の★を全解除（${owned.length}件）`;
-  document.getElementById('count').textContent = `${filtered.length} 件`;
+  unBtn.textContent = ui('unmarkVisible', catLabel2, owned.length);
+  document.getElementById('count').textContent = ui('count', filtered.length);
   if (!filtered.length) {
-    document.getElementById('grid').innerHTML = '<div class="empty">該当する装備がありません</div>';
+    document.getElementById('grid').innerHTML = `<div class="empty">${ui('noMatches')}</div>`;
     return;
   }
   document.getElementById('grid').innerHTML = filtered.map(item => {
     const isPet = item.category === 'ペット';
     const infoWanted = needsInfo(item);
     const drops = (isPet ? item.drop_items : item.drop_from) || [];
-    const dropNames = drops.filter(d => d.name && d.name !== '???').map(d => escapeHtml(d.name));
+    const dropNames = drops.filter(d => d.name && d.name !== '???').map(d => escapeHtml(translateDropName(d)));
     const dropHtml = dropNames.length
-      ? `<div class="card-drop">${isPet?'ドロップ':'入手元'}：<span>${dropNames.join('、')}</span></div>` : '';
+      ? `<div class="card-drop">${isPet ? ui('drop') : ui('dropFrom')}：<span>${dropNames.join(currentLang === 'en' ? ', ' : '、')}</span></div>` : '';
     return `<div class="card${ownedSet.has(item.no)?' owned':''}" onclick="openModal(${item.no})">
       <div class="card-head">
         <span class="card-no">No${item.no}</span>
-        ${infoWanted ? '<span class="info-wanted-badge" title="情報提供募集">募</span>' : ''}
-        <span class="card-name">${escapeHtml(item.name)}</span>
+        ${infoWanted ? `<span class="info-wanted-badge" title="${ui('infoBadge')}">${currentLang === 'en' ? '!' : '募'}</span>` : ''}
+        <span class="card-name">${escapeHtml(translateItemName(item))}</span>
         <span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span>
         <button class="star-btn${ownedSet.has(item.no)?' owned':''}" onclick="toggleOwned(${item.no},event)" title="所持マーク">★</button>
       </div>
       <div class="card-skills">
-        ${item.skills.map(s=>`<div class="skill-row"><span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span><span>${escapeHtml(s.name)}</span></div>`).join('')}
+        ${item.skills.map(s=>`<div class="skill-row"><span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span><span>${escapeHtml(translateSkillName(s.name))}</span></div>`).join('')}
       </div>
       ${dropHtml}
     </div>`;
@@ -1222,33 +1471,34 @@ function openModal(no) {
   const isPet = item.category === 'ペット';
   const drops = (isPet ? item.drop_items : item.drop_from) || [];
   const dropHtml = drops.length ? `
-    <section><h3>${isPet?'ドロップリスト':'入手元'}</h3>
+    <section><h3>${isPet ? ui('drop') : ui('dropFrom')}</h3>
     <div class="drop-list">${drops.map(d => {
       if (!d.name || d.name === '???') return '<span style="color:var(--dim)">???</span>';
       const linked = d.no != null && allItems.find(i => i.no === d.no);
-      const label = escapeHtml((d.no ? `No${d.no} ` : '') + d.name);
+      const label = escapeHtml((d.no ? `No${d.no} ` : '') + translateDropName(d));
       return linked ? `<a class="drop-link" onclick="openModal(${d.no})">${label}</a>` : label;
     }).join('<br>')}</div></section>` : '';
   const knownBonus = item.mastery_bonus.filter(b => b.name).length;
   const masteryRows = item.mastery_bonus.map(b =>
     `<tr class="${b.name?'':'locked'}"><td>${b.pt}pt</td>${b.name
-      ?`<td>${escapeHtml(b.name)}</td><td>${escapeHtml(b.effect)}</td>`
-      :`<td colspan="2" style="color:var(--dim)">???</td>`}</tr>`
+      ?`<td>${escapeHtml(translateMasteryName(b.name))}</td><td>${escapeHtml(translateMasteryEffect(b))}</td>`
+      :`<td colspan="2" style="color:var(--dim)">${ui('locked')}</td>`}</tr>`
   ).join('');
-  const typeTag = item.monster_type
-    ? `<span style="font-size:11px;color:var(--tag-ペット);margin-right:4px">[${escapeHtml(item.monster_type)}]</span>` : '';
+  const monsterType = translateMonsterType(item);
+  const typeTag = monsterType
+    ? `<span style="font-size:11px;color:var(--tag-ペット);margin-right:4px">[${escapeHtml(monsterType)}]</span>` : '';
   document.getElementById('modal-body').innerHTML = `
-    <h2>${typeTag}${escapeHtml(item.name)}</h2>
+    <h2>${typeTag}${escapeHtml(translateItemName(item))}</h2>
     <div class="modal-sub"><span>No${item.no}</span><span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span></div>
-    <section><h3>スキル ── 3pt以上で発動（任意+1あり）</h3>
+    <section><h3>${ui('modalSkills')}</h3>
     <div class="modal-skills">${item.skills.map(s=>`
       <div class="modal-skill-row">
         <span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span>
-        <span class="skill-name-col">${escapeHtml(s.name)}</span>
-        <span class="skill-desc-col">${escapeHtml(s.desc||'')}</span>
+        <span class="skill-name-col">${escapeHtml(translateSkillName(s.name))}</span>
+        <span class="skill-desc-col">${escapeHtml(translateSkillDesc(s))}</span>
       </div>`).join('')}</div></section>
     ${dropHtml}
-    <section><h3>マスタリーボーナス（解放済 ${knownBonus}/${item.mastery_bonus.length}）</h3>
+    <section><h3>${ui('modalMastery', knownBonus, item.mastery_bonus.length)}</h3>
     <table class="mastery-table"><tbody>${masteryRows}</tbody></table></section>`;
   document.getElementById('modal-overlay').classList.add('open');
   document.getElementById('modal-overlay').scrollTop = 0;
@@ -1307,10 +1557,10 @@ function searchBySkill() {
   const targets = getSkillModeTargets();
   const resultEl = document.getElementById('skill-combo-result');
   if (targets.length === 0) {
-    resultEl.innerHTML = '<div class="ck-empty">スキルを1つ以上選択してください</div>';
+    resultEl.innerHTML = `<div class="ck-empty">${ui('searchTargetsRequired')}</div>`;
     return;
   }
-  scheduleComboSearch({}, targets, 'skill-combo-result', 'スキル候補を検索中');
+  scheduleComboSearch({}, targets, 'skill-combo-result', ui('loadingSkill'));
 }
 
 // ━━━ 装備から検索：スロット ━━━
@@ -1332,7 +1582,7 @@ function setSlotSortMode(mode) {
 function sortSlotItems(items) {
   return [...items].sort((a, b) => {
     if (slotSortMode === 'name') {
-      const byName = a.name.localeCompare(b.name, 'ja', { numeric: true });
+      const byName = translateItemName(a).localeCompare(translateItemName(b), currentLang === 'en' ? 'en' : 'ja', { numeric: true });
       if (byName !== 0) return byName;
     }
     return a.no - b.no;
@@ -1344,12 +1594,12 @@ function buildSlots() {
   updateSlotSortButtons();
   grid.innerHTML = CATS.map(cat => {
     const options = sortSlotItems(allItems.filter(i => i.category === cat))
-      .map(i => `<option value="${i.no}">No${i.no} ${escapeHtml(i.name)}</option>`)
+      .map(i => `<option value="${i.no}">No${i.no} ${escapeHtml(translateItemName(i))}</option>`)
       .join('');
     return `<div class="slot-block">
       <div class="slot-label"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span></div>
       <select class="slot-select" data-cat="${cat}" onchange="onSlotChange('${cat}')">
-        <option value="">── 空き（探索対象） ──</option>
+        <option value="">${currentLang === 'en' ? '-- Empty (search slot) --' : '── 空き（探索対象） ──'}</option>
         ${options}
       </select>
       <div class="slot-skills" id="slot-skills-${cat}"></div>
@@ -1367,7 +1617,7 @@ function onSlotChange(cat) {
 function renderSlotSkills(cat, item) {
   const el = document.getElementById(`slot-skills-${cat}`);
   el.innerHTML = item
-    ? item.skills.map(s=>`<div class="slot-skill-chip"><span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span><span style="font-size:11px">${escapeHtml(s.name)}</span></div>`).join('')
+    ? item.skills.map(s=>`<div class="slot-skill-chip"><span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span><span style="font-size:11px">${escapeHtml(translateSkillName(s.name))}</span></div>`).join('')
     : '';
 }
 
@@ -1400,14 +1650,14 @@ function renderSkillChecks(wrap, onchange) {
     const typeList = [...types];
     groups[skillCheckGroup(name, types)].push([name, typeList.join('/'), typeList[0]]);
   });
-  GROUP_ORDER.forEach(g => groups[g].sort((a,b) => a[0].localeCompare(b[0],'ja')));
+  GROUP_ORDER.forEach(g => groups[g].sort((a,b) => translateSkillName(a[0]).localeCompare(translateSkillName(b[0]), currentLang === 'en' ? 'en' : 'ja')));
 
   wrap.innerHTML = GROUP_ORDER.filter(g => groups[g].length > 0).map(g => `
-    <div style="width:100%;font-size:10px;color:var(--muted);margin:8px 0 4px;border-bottom:1px solid var(--border);padding-bottom:2px">${GROUP_LABEL[g]}</div>
+    <div style="width:100%;font-size:10px;color:var(--muted);margin:8px 0 4px;border-bottom:1px solid var(--border);padding-bottom:2px">${ui('groupLabels')[g] || GROUP_LABEL[g]}</div>
     ${groups[g].map(([name, typeLabel, typeClass]) => `
       <label class="skill-check-label">
         <input type="checkbox" value="${escapeHtml(name)}" onchange="${onchange}">
-        <span class="stype st-${typeClass}">${escapeHtml(typeLabel)}</span>${escapeHtml(name)}
+        <span class="stype st-${typeClass}">${escapeHtml(typeLabel)}</span>${escapeHtml(translateSkillName(name))}
       </label>`).join('')}
   `).join('');
 }
@@ -1428,7 +1678,7 @@ function clearCheckerSelections() {
     cb.closest('label').classList.remove('checked');
   });
   document.getElementById('combo-result').innerHTML =
-    '<div class="ck-empty" style="color:var(--dim)">装備またはスキルを選択すると自動で検索します</div>';
+    `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
 }
 
 function onCheckChange(checkbox) {
@@ -1477,10 +1727,10 @@ function searchCombinations() {
   if (!hasFixed && skills.length === 0) {
     comboSearchToken++;
     document.getElementById('combo-result').innerHTML =
-      '<div class="ck-empty" style="color:var(--dim)">装備またはスキルを選択すると自動で検索します</div>';
+      `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
     return;
   }
-  scheduleComboSearch(fixed, skills, 'combo-result', '条件に合う組み合わせを検索中');
+  scheduleComboSearch(fixed, skills, 'combo-result', ui('loadingCondition'));
 }
 
 // 反復回数の上限（無限ループ防止のセーフティ）
@@ -1546,7 +1796,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
       return fixedCnt + possibleCats < ACTIVATION_NEED - EXTRA_SKILL_POINT;
     });
     if (impossibleSkills.length > 0) {
-        resultEl.innerHTML = `<div class="ck-impossible">「${impossibleSkills.map(escapeHtml).join('・')}」は空き枠が足りないため発動不可能です。<br>固定装備を減らすか、別のスキルを選んでください。</div>`;
+        resultEl.innerHTML = `<div class="ck-impossible">${ui('impossible', impossibleSkills.map(translateSkillName))}</div>`;
       return;
     }
   }
@@ -1581,7 +1831,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   }
 
   if (activatable.length === 0) {
-    resultEl.innerHTML = '<div class="ck-empty">条件を満たす組み合わせが見つかりませんでした</div>';
+    resultEl.innerHTML = `<div class="ck-empty">${ui('noCombos')}</div>`;
     return;
   }
 
@@ -2060,23 +2310,23 @@ function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixe
     return `<div class="combo-slot-row">
       <span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span>
       <span class="combo-slot-item" onclick="openModal(${item.no})" style="${isFixed?'color:var(--muted)':''}">
-        ${isFixed?'🔒 ':''}No${item.no} ${escapeHtml(item.name)}
+        ${isFixed?'🔒 ':''}No${item.no} ${escapeHtml(translateItemName(item))}
       </span>
     </div>`;
   }).join('') + (skillSlot ? `
     <div class="combo-slot-row">
-      <span class="cat-tag cat-tag-bonus">スキル</span>
-      <span class="combo-slot-item">${escapeHtml(skillSlot)}</span>
+      <span class="cat-tag cat-tag-bonus">${ui('skillSlot')}</span>
+      <span class="combo-slot-item">${escapeHtml(translateSkillName(skillSlot))}</span>
     </div>` : '');
   const activeSkills = Object.entries(count).filter(([,c]) => c>=3).sort((a,b) => b[1]-a[1]);
   const activeBadges = activeSkills.map(([name,cnt]) => {
     const isTarget = targetSkills.includes(name);
-    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(name)}<span class="combo-skill-count"> ${cnt}pt</span></span>`;
+    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(translateSkillName(name))}<span class="combo-skill-count"> ${cnt}pt</span></span>`;
   });
   const skillSlotBadge = skillSlot ? (() => {
     const name = skillSlot;
     const isTarget = targetSkills.includes(name);
-    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(name)}<span class="combo-skill-count"> 3pt</span></span>`;
+    return `<span class="combo-skill-badge ${isTarget?'target':'bonus'}">${escapeHtml(translateSkillName(name))}<span class="combo-skill-count"> 3pt</span></span>`;
   })() : '';
   const badges = [...activeBadges, skillSlotBadge].join('');
   // 代替装備パターンの折りたたみ
@@ -2089,9 +2339,9 @@ function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixe
         const wrap = this.nextElementSibling;
         const open = wrap.style.display !== 'none';
         wrap.style.display = open ? 'none' : '';
-        this.textContent = (open ? '▸ ' : '▾ ') + '同じスキル発動の別装備（${alternatives.length}件）';
+        this.textContent = (open ? '▸ ' : '▾ ') + '${ui('sameSkillAlts', alternatives.length)}';
         if (!open && !wrap.dataset.loaded) renderAltPage('${altId}', 0);
-      ">▸ 同じスキル発動の別装備（${alternatives.length}件）</button>
+      ">▸ ${ui('sameSkillAlts', alternatives.length)}</button>
       <div class="combo-alts" id="${altId}" data-page-size="${ALT_PAGE_SIZE}" style="display:none"></div>`;
   }
   const cls = isAlt ? 'combo-card combo-card-alt' : 'combo-card';
@@ -2109,7 +2359,7 @@ function renderInitialComboCards(items, fixedSlots, targetSkills) {
   MAIN_COMBO_STORE[id] = { items, fixedSlots, targetSkills, rendered: MAIN_PAGE_SIZE };
   return `<div id="${id}">${comboCardsHtml(initial, fixedSlots, targetSkills)}</div>
     <div class="alt-pager" style="justify-content:center;padding:8px 0 12px">
-      <button class="owned-filter-btn" onclick="renderMoreComboResults('${id}', this)">さらに表示（${MAIN_PAGE_SIZE} / ${items.length}）</button>
+      <button class="owned-filter-btn" onclick="renderMoreComboResults('${id}', this)">${ui('more', MAIN_PAGE_SIZE, items.length)}</button>
     </div>`;
 }
 
@@ -2123,7 +2373,7 @@ function renderMoreComboResults(id, btn) {
   stored.rendered = end;
   if (btn) {
     if (end >= stored.items.length) btn.parentElement.style.display = 'none';
-    else btn.textContent = `さらに表示（${end} / ${stored.items.length}）`;
+    else btn.textContent = ui('more', end, stored.items.length);
   }
 }
 
@@ -2141,12 +2391,12 @@ function renderAltPage(id, page) {
   const end = Math.min(start + pageSize, total);
   const body = comboCardsHtml(alts.slice(start, end), stored.fixedSlots, stored.targetSkills);
   const controls = maxPage === 0 ? '' : `
-      <button class="owned-filter-btn" ${current === 0 ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current - 1})">前へ</button>
-      <button class="owned-filter-btn" ${current === maxPage ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current + 1})">次へ</button>`;
+      <button class="owned-filter-btn" ${current === 0 ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current - 1})">${ui('prev')}</button>
+      <button class="owned-filter-btn" ${current === maxPage ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current + 1})">${ui('next')}</button>`;
   wrap.dataset.loaded = '1';
   wrap.innerHTML = `
     <div class="alt-pager">
-      <span>別装備 ${start + 1}-${end} / ${total}</span>
+      <span>${ui('altRange', start + 1, end, total)}</span>
       ${controls}
     </div>
     ${body}
@@ -2157,18 +2407,19 @@ function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, ex
   Object.keys(ALT_COMBO_STORE).forEach(id => delete ALT_COMBO_STORE[id]);
   Object.keys(MAIN_COMBO_STORE).forEach(id => delete MAIN_COMBO_STORE[id]);
   if (shown.length === 0 && extra.length === 0) {
-    resultEl.innerHTML = '<div class="ck-empty">条件を満たす組み合わせが見つかりませんでした</div>';
+    resultEl.innerHTML = `<div class="ck-empty">${ui('noCombos')}</div>`;
     return;
   }
+  const targetNames = targetSkills.map(translateSkillName);
   const headerText = targetSkills.length > 0
-    ? `「${targetSkills.map(escapeHtml).join('・')}」を発動できる組み合わせ`
-    : `発動スキルがある組み合わせ`;
+    ? ui('comboHeaderTargets', targetNames)
+    : ui('comboHeaderAny');
   const shownMin = shown.some(r => r.activeCount === 3) || (shown.length === 0 && extraKind === 2) ? 3 : 4;
   const totalLabel = stopped
-    ? `（${totalKind}スキル以上 ${total.toLocaleString()}件超・打ち切り）`
-    : (total > shown.length + extra.length ? `（${totalKind}スキル以上 ${total.toLocaleString()}件）` : '');
+    ? ui('comboTotalStopped', totalKind, total)
+    : (total > shown.length + extra.length ? ui('comboTotal', totalKind, total) : '');
   let html = `<div class="result-header">
-    <strong>${headerText}</strong>：${shownMin}スキル以上 ${shown.length}件${totalLabel}
+    <strong>${escapeHtml(headerText)}</strong>：${ui('comboHeaderCount', shownMin, shown.length, totalLabel)}
   </div>`;
   html += renderInitialComboCards(shown, fixedSlots, targetSkills);
   if (extra.length > 0) {
@@ -2177,7 +2428,7 @@ function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, ex
       <button class="owned-filter-btn" onclick="
         document.getElementById('extra-combo-results').style.display='block';
         this.parentElement.style.display='none';
-      ">${extraKind}スキルの組み合わせも表示（${extra.length}件）</button>
+      ">${ui('extraCombos', extraKind, extra.length)}</button>
     </div>
     <div id="extra-combo-results" style="display:none">${extraHtml}</div>`;
   }
@@ -2265,15 +2516,15 @@ function renderMastery() {
       <div class="mastery-bonus-row" onclick="openModal(${r.item.no})">
         <span class="mastery-pt">${r.pt}pt</span>
         <span class="mastery-item-name">
-          <span class="cat-tag cat-tag-${r.item.category}" style="margin-right:5px">${catLabel(r.item.category)}</span>No${r.item.no} ${escapeHtml(r.item.name)}
+          <span class="cat-tag cat-tag-${r.item.category}" style="margin-right:5px">${catLabel(r.item.category)}</span>No${r.item.no} ${escapeHtml(translateItemName(r.item))}
         </span>
       </div>`).join('');
     return `<div class="mastery-bonus-card">
       <button class="mastery-bonus-name" data-name="${escapeHtml(name)}" onclick="toggleMasteryGroup(this.dataset.name)" aria-expanded="${isOpen}">
         <span class="mastery-toggle">${isOpen ? '▼' : '▶'}</span>
-        <span class="mastery-title">${escapeHtml(name)}</span>
-        <span class="mastery-count">${rows.length}件</span>
-        <span class="mastery-effect">${escapeHtml(rows[0].effect)}</span>
+        <span class="mastery-title">${escapeHtml(translateMasteryName(name))}</span>
+        <span class="mastery-count">${currentLang === 'en' ? `${rows.length} items` : `${rows.length}件`}</span>
+        <span class="mastery-effect">${escapeHtml(translateMasteryEffect({ name, effect: rows[0].effect }))}</span>
       </button>
       <div class="mastery-bonus-rows" style="display:${isOpen ? '' : 'none'}">${rowsHtml}</div>
     </div>`;
@@ -2366,6 +2617,7 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
   });
 });
 
+initLanguagePreference();
 init();
 </script>
 </body>
