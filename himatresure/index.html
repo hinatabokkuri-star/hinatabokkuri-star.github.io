@@ -1173,8 +1173,15 @@ async function setLanguage(lang) {
   if (currentLang === 'en') await loadEnglishI18n();
   refreshLanguageViews();
 }
+function defaultLanguageFromSystem() {
+  const langs = navigator.languages?.length ? navigator.languages : [navigator.language || ''];
+  const primary = String(langs[0] || '').toLowerCase();
+  return primary.startsWith('ja') ? 'ja' : 'en';
+}
 function initLanguagePreference() {
-  currentLang = localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'ja';
+  let saved = '';
+  try { saved = localStorage.getItem(LANG_KEY) || ''; } catch(e) {}
+  currentLang = saved === 'ja' || saved === 'en' ? saved : defaultLanguageFromSystem();
   refreshLanguageButtons();
 }
 
