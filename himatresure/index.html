@@ -75,6 +75,22 @@
   #grid { padding: 8px 10px 80px; display: grid; grid-template-columns: 1fr; gap: 8px; }
   @media (min-width: 500px) { #grid { grid-template-columns: repeat(2,1fr); } }
   @media (min-width: 840px) { #grid { grid-template-columns: repeat(3,1fr); } }
+  #grid.compact { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; padding: 8px 8px 80px; }
+  #grid.compact .card { min-width: 0; min-height: 70px; padding: 7px 5px 6px 8px; display: flex; flex-direction: column; gap: 4px; }
+  #grid.compact .card::before { width: 3px; border-radius: 8px 0 0 8px; }
+  #grid.compact .card:hover { transform: none; }
+  .compact-top { display: flex; align-items: center; gap: 2px; min-width: 0; }
+  .compact-card .card-no { font-size: 10px; line-height: 1; }
+  .compact-card .info-wanted-badge { font-size: 9px; padding: 1px 3px; }
+  .compact-card .star-btn { margin-left: auto; min-width: 24px; min-height: 24px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .compact-name { flex: 1; color: var(--text); font-size: 12px; line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: break-all; }
+  .compact-card .compact-cat { align-self: flex-start; max-width: 100%; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-size: 9px; padding: 1px 3px; }
+  @media (max-width: 360px) {
+    #grid.compact { gap: 4px; padding-left: 5px; padding-right: 5px; }
+    #grid.compact .card { min-height: 66px; padding-right: 4px; }
+    .compact-name { font-size: 11px; }
+    .compact-card .star-btn { min-width: 22px; min-height: 22px; font-size: 17px; }
+  }
 
   /* ━━━ CARD ━━━ */
   .card { background: var(--panel); border: 1px solid var(--border); padding: 11px 12px; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: border-color .1s; }
@@ -85,8 +101,8 @@
   .owned-filter-btn { background: var(--bg); border: 1px solid var(--border); color: var(--muted); font-family: inherit; font-size: 12px; padding: 5px 12px; cursor: pointer; white-space: nowrap; flex-shrink: 0; -webkit-tap-highlight-color: transparent; transition: border-color .1s, color .1s; }
   .owned-filter-btn.active { color: #ffcc00; border-color: #aa8800; background: #1e1a00; }
   .info-filter-btn.active { color: var(--warn); border-color: var(--warn); background: #211606; }
-  .owned-import { margin-top: 7px; }
-  .owned-import-panel { margin-top: 7px; padding: 9px; border: 1px solid var(--border); background: var(--panel); }
+  .owned-import { margin-top: 7px; display: flex; align-items: flex-start; gap: 6px; flex-wrap: wrap; }
+  .owned-import-panel { flex: 0 0 100%; margin-top: 1px; padding: 9px; border: 1px solid var(--border); background: var(--panel); }
   .owned-import-help { margin: 0 0 7px; color: var(--muted); font-size: 11px; line-height: 1.6; }
   #owned-import-text { width: 100%; min-height: 72px; box-sizing: border-box; resize: vertical; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: inherit; font-size: 12px; line-height: 1.5; padding: 8px; }
   .owned-import-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 7px; }
@@ -803,6 +819,7 @@
     <button class="owned-filter-btn info-filter-btn" id="info-wanted-btn" onclick="toggleInfoWantedFilter()">情報提供募集</button>
   </div>
   <div class="owned-import">
+    <button class="owned-filter-btn" id="list-view-toggle" onclick="toggleListViewMode()">簡易5列</button>
     <button class="owned-filter-btn" id="owned-import-toggle" onclick="toggleOwnedImportPanel()">所有Noインポート</button>
     <div class="owned-import-panel" id="owned-import-panel" style="display:none">
       <p class="owned-import-help">持っている装備Noを貼り付けると★に追加します。カンマ、空白、改行、No付き表記のどれでもOKです。</p>
@@ -926,6 +943,7 @@ const CAT_LABEL_EN = {'武器':'Weapon','盾':'Shield','鎧':'Armor','アクセ�
 const MAX_RESULTS = 30;
 const SLOT_SORT_KEY = 'himatubu_slot_sort';
 const LANG_KEY = 'himatresure_lang';
+const LIST_VIEW_KEY = 'himatresure_list_view';
 let currentLang = 'ja';
 let i18nEn = null;
 let i18nLoadPromise = null;
@@ -945,6 +963,7 @@ const UI_TEXT = {
     ownedOnly: '★ 所持のみ',
     unownedOnly: '☆ 未所持のみ',
     infoWanted: '情報提供募集',
+    compactView: '簡易5列',
     ownedImport: '所有Noインポート',
     ownedImportHelp: '持っている装備Noを貼り付けると★に追加します。カンマ、空白、改行、No付き表記のどれでもOKです。',
     importRead: '読み込む',
@@ -989,6 +1008,7 @@ const UI_TEXT = {
     ownedOnly: '★ Owned',
     unownedOnly: '☆ Unowned',
     infoWanted: 'Needs info',
+    compactView: 'Compact 5-col',
     ownedImport: 'Import owned Nos',
     ownedImportHelp: 'Paste owned equipment Nos. Commas, spaces, line breaks, and No-prefixed text are all OK.',
     importRead: 'Import',
@@ -1083,6 +1103,7 @@ let allItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
 let infoWantedOnly = false;
 let slotSortMode = localStorage.getItem(SLOT_SORT_KEY) === 'name' ? 'name' : 'no';
+let listViewMode = localStorage.getItem(LIST_VIEW_KEY) === 'compact' ? 'compact' : 'full';
 let ownedFilter = 'all'; // 'all' | 'owned' | 'unowned'
 let ownedSet = new Set(JSON.parse(localStorage.getItem('himatubu_owned') || '[]'));
 const OWNER_HASH_PREFIX = '#owned=';
@@ -1125,6 +1146,7 @@ function refreshStaticLanguageText() {
   document.getElementById('owned-btn-owned').textContent = ui('ownedOnly');
   document.getElementById('owned-btn-unowned').textContent = ui('unownedOnly');
   document.getElementById('info-wanted-btn').textContent = ui('infoWanted');
+  refreshListViewToggle();
   document.getElementById('owned-import-toggle').textContent = ui('ownedImport');
   document.querySelector('.owned-import-help').textContent = ui('ownedImportHelp');
   document.querySelector('.owned-import-actions button:nth-child(1)').textContent = ui('importRead');
@@ -1187,6 +1209,22 @@ function initLanguagePreference() {
 
 function saveOwned() {
   localStorage.setItem('himatubu_owned', JSON.stringify([...ownedSet]));
+}
+function refreshListViewToggle() {
+  const btn = document.getElementById('list-view-toggle');
+  if (!btn) return;
+  btn.textContent = ui('compactView');
+  btn.classList.toggle('active', listViewMode === 'compact');
+  btn.setAttribute('aria-pressed', listViewMode === 'compact' ? 'true' : 'false');
+}
+function setListViewMode(mode) {
+  listViewMode = mode === 'compact' ? 'compact' : 'full';
+  localStorage.setItem(LIST_VIEW_KEY, listViewMode);
+  refreshListViewToggle();
+  renderList();
+}
+function toggleListViewMode() {
+  setListViewMode(listViewMode === 'compact' ? 'full' : 'compact');
 }
 function refreshOwnedViews() {
   const checkerState = snapshotCheckerState();
@@ -1431,6 +1469,9 @@ function getFiltered() {
 
 function renderList() {
   const filtered = getFiltered();
+  const grid = document.getElementById('grid');
+  grid.classList.toggle('compact', listViewMode === 'compact');
+  refreshListViewToggle();
   const infoWantedCount = allItems.filter(needsInfo).length;
   const infoBtn = document.getElementById('info-wanted-btn');
   if (infoBtn) infoBtn.textContent = `${ui('infoWanted')}（${infoWantedCount}）`;
@@ -1445,12 +1486,23 @@ function renderList() {
   unBtn.textContent = ui('unmarkVisible', catLabel2, owned.length);
   document.getElementById('count').textContent = ui('count', filtered.length);
   if (!filtered.length) {
-    document.getElementById('grid').innerHTML = `<div class="empty">${ui('noMatches')}</div>`;
+    grid.innerHTML = `<div class="empty">${ui('noMatches')}</div>`;
     return;
   }
-  document.getElementById('grid').innerHTML = filtered.map(item => {
+  grid.innerHTML = filtered.map(item => {
     const isPet = item.category === 'ペット';
     const infoWanted = needsInfo(item);
+    if (listViewMode === 'compact') {
+      return `<div class="card compact-card${ownedSet.has(item.no)?' owned':''}" onclick="openModal(${item.no})">
+        <div class="compact-top">
+          <span class="card-no">No${item.no}</span>
+          ${infoWanted ? `<span class="info-wanted-badge" title="${ui('infoBadge')}">${currentLang === 'en' ? '!' : '募'}</span>` : ''}
+          <button class="star-btn${ownedSet.has(item.no)?' owned':''}" onclick="toggleOwned(${item.no},event)" title="所持マーク">★</button>
+        </div>
+        <div class="compact-name">${escapeHtml(translateItemName(item))}</div>
+        <span class="cat-tag cat-tag-${item.category} compact-cat">${catLabel(item.category)}</span>
+      </div>`;
+    }
     const drops = (isPet ? item.drop_items : item.drop_from) || [];
     const dropNames = drops.filter(d => d.name && d.name !== '???').map(d => escapeHtml(translateDropName(d)));
     const dropHtml = dropNames.length
