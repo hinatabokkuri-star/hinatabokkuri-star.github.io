@@ -8335,28 +8335,28 @@
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アーマーギア",
+        "effect": "アーマータイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ],
     "drop_from": [
       {
-        "no": 509,
-        "name": "マンドラゴラ"
-      },
-      {
         "no": 510,
         "name": "ルルーマン"
+      },
+      {
+        "no": 509,
+        "name": "マンドラゴラ"
       }
     ]
   },
@@ -8394,43 +8394,43 @@
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       }
     ],
     "drop_from": [
@@ -8691,7 +8691,7 @@
   {
     "no": 106,
     "category": "武器",
-    "name": "アマゾンボウ",
+    "name": "アマウェンボウ",
     "skills": [
       {
         "type": "A",
@@ -8811,66 +8811,71 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "スライムギア",
+        "effect": "スライムタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ],
     "drop_from": [
       {
-        "no": 506,
-        "name": "ブライトエンジェル"
-      },
-      {
         "no": 518,
         "name": "ラブスライム"
+      },
+      {
+        "no": 506,
+        "name": "ブライトエンジェル"
       }
     ]
   },
   {
     "no": 108,
     "category": "武器",
-    "name": "アマゾンボウ",
-    "drop_from": [],
+    "name": "マラカス",
+    "drop_from": [
+      {
+        "no": 519,
+        "name": "チェリースライム"
+      }
+    ],
     "skills": [
       {
-        "type": "A",
-        "name": "スローアタック",
-        "desc": "スローじょうたいにするこうげき (ATK)"
+        "type": "M",
+        "name": "マジックボール",
+        "desc": "かるいまほうこうげき (INT)"
       },
       {
-        "type": "M",
-        "name": "おいのり",
-        "desc": "HPをかいふくする (LUK?)"
+        "type": "A",
+        "name": "ラッキーパンチ",
+        "desc": "かるいランダムこうげき (LUK?)"
       },
       {
         "type": "P",
@@ -8881,53 +8886,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": "デビルギア",
-        "effect": "デビルタイプへのダメージ+10%"
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 250,
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
+      },
+      {
+        "pt": 500,
         "name": "SPDバフ",
         "effect": "SPDステータス+5%"
       },
       {
-        "pt": 500,
-        "name": "スライムギア",
-        "effect": "スライムタイプへのダメージ+10%"
-      },
-      {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ]
   },
@@ -44005,10 +44010,6 @@
     "monster_type": "アニマル",
     "drop_items": [
       {
-        "no": 107,
-        "name": "ラブリーハンマー"
-      },
-      {
         "no": 244,
         "name": "ホーリーガード"
       },
@@ -44023,6 +44024,10 @@
       {
         "no": null,
         "name": "ホーリーゆう"
+      },
+      {
+        "no": 107,
+        "name": "ラブリーハンマー"
       }
     ]
   },
@@ -44304,10 +44309,6 @@
     "monster_type": "アニマル",
     "drop_items": [
       {
-        "no": 101,
-        "name": "スティックボム"
-      },
-      {
         "no": 337,
         "name": "めいさいふく"
       },
@@ -44322,6 +44323,10 @@
       {
         "no": 100,
         "name": "スコップ"
+      },
+      {
+        "no": 101,
+        "name": "スティックボム"
       }
     ]
   },
@@ -44401,10 +44406,6 @@
     "monster_type": "アニマル",
     "drop_items": [
       {
-        "no": 101,
-        "name": "スティックボム"
-      },
-      {
         "no": 124,
         "name": "ほうきグローブ"
       },
@@ -44419,6 +44420,10 @@
       {
         "no": null,
         "name": "ルーティクウェア"
+      },
+      {
+        "no": 101,
+        "name": "スティックボム"
       }
     ]
   },
@@ -44428,10 +44433,6 @@
     "name": "グリフォン",
     "monster_type": "アニマル",
     "drop_items": [
-      {
-        "no": 102,
-        "name": "しゃくじょう"
-      },
       {
         "no": 171,
         "name": "エレキボウ"
@@ -44455,6 +44456,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 102,
+        "name": "しゃくじょう"
       }
     ],
     "skills": [
@@ -45185,10 +45190,6 @@
     "monster_type": "スライム",
     "drop_items": [
       {
-        "no": 107,
-        "name": "ラブリーハンマー"
-      },
-      {
         "no": 339,
         "name": "アイドルドレス"
       },
@@ -45203,6 +45204,10 @@
       {
         "no": null,
         "name": "ルリブラン"
+      },
+      {
+        "no": 107,
+        "name": "ラブリーハンマー"
       }
     ]
   },
@@ -45294,11 +45299,7 @@
         "name": "ラッキーリング"
       },
       {
-        "no": null,
-        "name": "マラカス"
-      },
-      {
-        "no": null,
+        "no": 108,
         "name": "マラカス"
       }
     ]
@@ -48939,10 +48940,6 @@
     "monster_type": "アニマル",
     "drop_items": [
       {
-        "no": 102,
-        "name": "しゃくじょう"
-      },
-      {
         "no": 134,
         "name": "パラソル"
       },
@@ -48957,6 +48954,10 @@
       {
         "no": 380,
         "name": "スピンリング"
+      },
+      {
+        "no": 102,
+        "name": "しゃくじょう"
       }
     ]
   },
