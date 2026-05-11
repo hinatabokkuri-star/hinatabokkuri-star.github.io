@@ -445,6 +445,14 @@
     "name": "ウッドハンマー",
     "drop_from": [
       {
+        "no": 411,
+        "name": "スタンピィ"
+      },
+      {
+        "no": 431,
+        "name": "スケルトン"
+      },
+      {
         "no": 401,
         "name": "バグスカルゴ"
       }
@@ -494,8 +502,8 @@
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ダメージギア",
+        "effect": "あたえるダメージ+5%"
       },
       {
         "pt": 3500,
@@ -527,6 +535,10 @@
       {
         "no": 436,
         "name": "ゴブリンメイジ"
+      },
+      {
+        "no": 413,
+        "name": "シードアイ"
       },
       {
         "no": 450,
@@ -563,43 +575,43 @@
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ライトギア",
+        "effect": "ひかりダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       }
     ]
   },
@@ -615,6 +627,10 @@
       {
         "no": 444,
         "name": "フックスパイダー"
+      },
+      {
+        "no": 496,
+        "name": "シーフマン"
       }
     ],
     "skills": [
@@ -652,38 +668,38 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ]
   },
@@ -693,8 +709,16 @@
     "name": "ウッドダイス",
     "drop_from": [
       {
+        "no": 394,
+        "name": "リーフィ"
+      },
+      {
         "no": 404,
         "name": "ビッグデール"
+      },
+      {
+        "no": 452,
+        "name": "ラブラブ"
       }
     ],
     "skills": [
@@ -742,8 +766,8 @@
       },
       {
         "pt": 2500,
-        "name": "アクアギア",
-        "effect": "みずダメージ+10%"
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 3500,
@@ -772,6 +796,10 @@
     "category": "武器",
     "name": "きのえだ",
     "drop_from": [
+      {
+        "no": 392,
+        "name": "ツィギー"
+      },
       {
         "no": 408,
         "name": "クソデッパ"
@@ -885,53 +913,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ]
   },
@@ -32702,6 +32730,10 @@
       {
         "no": 1,
         "name": "ぼくとう"
+      },
+      {
+        "no": 10,
+        "name": "きのえだ"
       }
     ],
     "skills": [
@@ -32894,8 +32926,8 @@
         "name": "リーフリング"
       },
       {
-        "no": null,
-        "name": "ウッドサイズ"
+        "no": 9,
+        "name": "ウッドダイス"
       }
     ],
     "skills": [
@@ -34557,6 +34589,10 @@
       {
         "no": null,
         "name": "ラウンドシールド"
+      },
+      {
+        "no": 6,
+        "name": "ウッドハンマー"
       }
     ],
     "skills": [
@@ -34759,6 +34795,10 @@
       {
         "no": 12,
         "name": "リーフロッド"
+      },
+      {
+        "no": 7,
+        "name": "スタッフ"
       }
     ],
     "skills": [
@@ -36537,6 +36577,10 @@
       {
         "no": null,
         "name": "???"
+      },
+      {
+        "no": 6,
+        "name": "ウッドハンマー"
       }
     ],
     "skills": [
@@ -38680,8 +38724,8 @@
         "name": "スピンリング"
       },
       {
-        "no": null,
-        "name": "グッドダイス"
+        "no": 9,
+        "name": "ウッドダイス"
       },
       {
         "no": null,
@@ -43048,8 +43092,8 @@
         "name": "コットンシールド"
       },
       {
-        "no": null,
-        "name": "グッドボウ"
+        "no": 8,
+        "name": "ウッドボウ"
       },
       {
         "no": null,
