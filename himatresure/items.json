@@ -34732,28 +34732,28 @@
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ]
   },
@@ -36310,43 +36310,43 @@
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ],
     "monster_type": "インセクト",
@@ -37107,8 +37107,8 @@
         "name": "アンデッドリング"
       },
       {
-        "no": null,
-        "name": "???"
+        "no": 175,
+        "name": "ソウルイーター"
       },
       {
         "no": null,
@@ -37144,48 +37144,48 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "スライムギア",
+        "effect": "スライムタイプへのダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ]
   },
@@ -37218,48 +37218,48 @@
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "アンデッドギア",
+        "effect": "アンデッドタイプへのダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ],
     "monster_type": "アンデッド",
