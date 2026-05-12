@@ -11816,33 +11816,33 @@
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ダメージギア",
+        "effect": "あたえるダメージ+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ],
     "drop_from": [
