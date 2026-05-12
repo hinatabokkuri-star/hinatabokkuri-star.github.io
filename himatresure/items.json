@@ -25896,7 +25896,7 @@
   {
     "no": 309,
     "category": "鎧",
-    "name": "ゾンドレス",
+    "name": "サンドレス",
     "skills": [
       {
         "type": "M",
@@ -39172,7 +39172,7 @@
       },
       {
         "no": 309,
-        "name": "ゾンドレス"
+        "name": "サンドレス"
       },
       {
         "no": 380,
@@ -48038,80 +48038,76 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アニマルギア",
+        "effect": "アニマルタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ],
     "monster_type": "アニマル",
     "drop_items": [
       {
-        "no": 54,
-        "name": "ドリルランス"
-      },
-      {
         "no": 123,
         "name": "クリスタルランス"
       },
       {
-        "no": 247,
-        "name": "シルバーシールド"
+        "no": 309,
+        "name": "サンドレス"
+      },
+      {
+        "no": 54,
+        "name": "ドリルランス"
       },
       {
         "no": 263,
         "name": "スターシールド"
       },
       {
-        "no": 309,
-        "name": "ゾンドレス"
-      },
-      {
-        "no": null,
-        "name": "ゲソドレス"
+        "no": 247,
+        "name": "シルバーシールド"
       }
     ]
   },
@@ -49582,11 +49578,11 @@
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ],
-    "monster_type": "アニマル",
+    "monster_type": "アンデッド",
     "drop_items": [
       {
         "no": 134,
@@ -49597,16 +49593,16 @@
         "name": "スターシールド"
       },
       {
+        "no": 102,
+        "name": "しゃくじょう"
+      },
+      {
         "no": 313,
         "name": "サムライアーマー"
       },
       {
         "no": 380,
         "name": "スピンリング"
-      },
-      {
-        "no": 102,
-        "name": "しゃくじょう"
       }
     ]
   },
@@ -49649,57 +49645,57 @@
       },
       {
         "pt": 1000,
-        "name": "デビルギア",
-        "effect": "デビルタイプへのダメージ+10%"
+        "name": "ライトギア",
+        "effect": "ひかりダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ライトギア",
+        "effect": "ひかりダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "フレアギア",
+        "effect": "ほのおダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
     ],
-    "monster_type": "アニマル",
+    "monster_type": "アンデッド",
     "drop_items": [
-      {
-        "no": 52,
-        "name": "ヒートナイフ"
-      },
       {
         "no": 135,
         "name": "フレイムハンマー"
       },
       {
-        "no": 223,
-        "name": "クロックガード"
-      },
-      {
         "no": 283,
         "name": "むぎわらぼうし"
+      },
+      {
+        "no": 52,
+        "name": "ヒートナイフ"
+      },
+      {
+        "no": 223,
+        "name": "クロックガード"
       },
       {
         "no": 379,
@@ -49731,80 +49727,76 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ],
-    "monster_type": "アニマル",
+    "monster_type": "デビル",
     "drop_items": [
-      {
-        "no": 39,
-        "name": "エルダーワンド"
-      },
-      {
-        "no": 127,
-        "name": "ブラックダイス"
-      },
       {
         "no": 136,
         "name": "ほうき"
-      },
-      {
-        "no": 167,
-        "name": "ブラックロッド"
       },
       {
         "no": 301,
         "name": "ブラックローブ"
       },
       {
-        "no": null,
-        "name": "エルダーソード"
+        "no": 127,
+        "name": "ブラックダイス"
+      },
+      {
+        "no": 167,
+        "name": "ブラックロッド"
+      },
+      {
+        "no": 39,
+        "name": "エルダーワンド"
       }
     ]
   },
@@ -49867,30 +49859,22 @@
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ],
-    "monster_type": "アニマル",
+    "monster_type": "アンデッド",
     "drop_items": [
-      {
-        "no": 133,
-        "name": "たいまつ"
-      },
-      {
-        "no": 168,
-        "name": "マジカルボウ"
-      },
       {
         "no": 264,
         "name": "ムーンガード"
@@ -49902,6 +49886,14 @@
       {
         "no": 20,
         "name": "ねこじゃらし"
+      },
+      {
+        "no": 133,
+        "name": "たいまつ"
+      },
+      {
+        "no": 168,
+        "name": "マジカルボウ"
       }
     ]
   },
