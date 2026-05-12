@@ -11700,6 +11700,10 @@
       {
         "no": 564,
         "name": "デーモン"
+      },
+      {
+        "no": 472,
+        "name": "メガピッピ"
       }
     ],
     "skills": [
@@ -15875,6 +15879,10 @@
       {
         "no": 407,
         "name": "ラバーバニー"
+      },
+      {
+        "no": 468,
+        "name": "マミィベア"
       }
     ],
     "skills": [
@@ -19309,6 +19317,10 @@
       {
         "no": 538,
         "name": "ポイズンスライム"
+      },
+      {
+        "no": 472,
+        "name": "メガピッピ"
       }
     ],
     "skills": [
@@ -37640,53 +37652,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ]
   },
@@ -37853,38 +37865,38 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "シールドギア",
+        "effect": "うけるダメージ-5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "メダマギア",
+        "effect": "メダマタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ]
   },
@@ -37973,23 +37985,23 @@
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "メダマギア",
+        "effect": "メダマタイプへのダメージ+10%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ]
   },
@@ -40645,8 +40657,8 @@
         "name": "エプロン"
       },
       {
-        "no": null,
-        "name": "ぷえろり"
+        "no": 190,
+        "name": "うさちゃん"
       },
       {
         "no": null,
@@ -41045,12 +41057,12 @@
         "name": "ペロペロキャンディ"
       },
       {
-        "no": null,
-        "name": "????"
+        "no": 231,
+        "name": "タマゴ"
       },
       {
-        "no": null,
-        "name": "????"
+        "no": 140,
+        "name": "グラビティロッド"
       },
       {
         "no": null,
