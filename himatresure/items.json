@@ -2902,11 +2902,15 @@
   {
     "no": 35,
     "category": "武器",
-    "name": "スタブナイフ",
+    "name": "スタンナイフ",
     "drop_from": [
       {
         "no": 423,
         "name": "ゲレゲレ"
+      },
+      {
+        "no": 464,
+        "name": "サボティ"
       }
     ],
     "skills": [
@@ -2949,34 +2953,37 @@
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "スライムギア",
+        "effect": "スライムタイプへのダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "ライトギア",
+        "effect": "ひかりダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       }
+    ],
+    "verified_fields": [
+      "name"
     ]
   },
   {
@@ -36171,7 +36178,7 @@
     "drop_items": [
       {
         "no": 35,
-        "name": "スタブナイフ"
+        "name": "スタンナイフ"
       },
       {
         "no": 176,
@@ -40334,7 +40341,7 @@
         "name": "スパイクリング"
       },
       {
-        "no": null,
+        "no": 35,
         "name": "スタンナイフ"
       }
     ],
