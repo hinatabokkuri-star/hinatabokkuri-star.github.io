@@ -23253,12 +23253,12 @@
     "name": "はっぱ",
     "drop_from": [
       {
-        "no": 394,
-        "name": "リーフィ"
-      },
-      {
         "no": 413,
         "name": "シードアイ"
+      },
+      {
+        "no": 394,
+        "name": "リーフィ"
       }
     ],
     "skills": [
@@ -23301,33 +23301,33 @@
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ポイズンギア",
+        "effect": "どくはっせい+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "インセクトギア",
+        "effect": "インセクトタイプへのダメージ+10%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ]
   },
@@ -50115,64 +50115,68 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ],
     "monster_type": "ゴブリン",
     "drop_items": [
       {
-        "no": 163,
-        "name": "ジュエルハンマー"
-      },
-      {
         "no": 265,
         "name": "アンプシールド"
+      },
+      {
+        "no": 382,
+        "name": "クラウンリング"
+      },
+      {
+        "no": 163,
+        "name": "ジュエルハンマー"
       },
       {
         "no": 338,
@@ -50181,10 +50185,6 @@
       {
         "no": 361,
         "name": "ゴブリング"
-      },
-      {
-        "no": 382,
-        "name": "クラウンリング"
       }
     ]
   },
@@ -50406,57 +50406,65 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ],
     "monster_type": "アンデッド",
     "drop_items": [
+      {
+        "no": 267,
+        "name": "グリモア"
+      },
+      {
+        "no": 381,
+        "name": "スカルリング"
+      },
       {
         "no": 149,
         "name": "デスサイズ"
@@ -50466,16 +50474,8 @@
         "name": "スカルガード"
       },
       {
-        "no": 267,
-        "name": "グリモア"
-      },
-      {
         "no": 273,
         "name": "ニンジャローブ"
-      },
-      {
-        "no": 381,
-        "name": "スカルリング"
       }
     ]
   },
@@ -50528,28 +50528,28 @@
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "デビルギア",
+        "effect": "デビルタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ],
     "monster_type": "デビル",
@@ -50559,12 +50559,12 @@
         "name": "カオスハンマー"
       },
       {
-        "no": 182,
-        "name": "ガントレット"
-      },
-      {
         "no": 268,
         "name": "マタドールマント"
+      },
+      {
+        "no": 182,
+        "name": "ガントレット"
       },
       {
         "no": 341,
@@ -50734,8 +50734,8 @@
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       }
     ],
     "monster_type": null,
