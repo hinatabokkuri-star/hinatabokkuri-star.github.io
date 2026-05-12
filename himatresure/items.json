@@ -24167,82 +24167,87 @@
   {
     "no": 289,
     "category": "鎧",
-    "name": "ゴーストローブ",
+    "name": "カッパー",
     "drop_from": [
       {
-        "no": 432,
-        "name": "ブラックゴースト"
+        "no": 485,
+        "name": "ラディッシュナイト"
+      },
+      {
+        "no": 417,
+        "name": "クロッピ"
       }
     ],
     "skills": [
       {
-        "type": "A",
-        "name": "スローアタック",
-        "desc": "スローじょうたいにするこうげき (ATK)"
+        "type": "M",
+        "name": "チャージ",
+        "desc": "つぎにあたえるダメージをアップ (INT)"
       },
       {
         "type": "M",
-        "name": "ダーク",
-        "desc": "やみぞくせいのまほうこうげき (INTx2)"
+        "name": "アクア",
+        "desc": "みずぞくせいのまほうこうげき (INTx2)"
       },
       {
         "type": "P",
-        "name": "デスマーチ",
-        "desc": "しぬまであるきつづける"
+        "name": "ふいうち",
+        "desc": "せんせいこうげきをしかける"
       }
     ],
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "シールドギア",
+        "effect": "うけるダメージ-5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "スローギア",
+        "effect": "スローはっせい+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アクアギア",
+        "effect": "みずダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
-    ]
+    ],
+    "verified_by_user": true
   },
   {
     "no": 290,
@@ -35486,8 +35491,8 @@
         "name": "スプリングリング"
       },
       {
-        "no": null,
-        "name": "???"
+        "no": 289,
+        "name": "カッパー"
       },
       {
         "no": null,
@@ -42450,7 +42455,7 @@
         "name": "エクスカリバー"
       },
       {
-        "no": null,
+        "no": 289,
         "name": "カッパー"
       },
       {
