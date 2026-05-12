@@ -960,26 +960,10 @@ const CAT_RANGES = {
   'アクセサリー': [345, 391],
   'ペット': [392, 568]
 };
-const FEEDBACK_FORMS = {
-  empty: {
-    url: 'https://docs.google.com/forms/d/e/1FAIpQLSdiNr450rlfqeqJGFfFFKol3HnVoETPCgBn1e_b2rI2PjQYmQ/viewform',
-    fields: {
-      kind: 'entry.1368187648',
-      no: 'entry.1605343322',
-      category: 'entry.1389548115',
-      name: 'entry.1528299595',
-      pageUrl: 'entry.1782720535'
-    }
-  },
-  correction: {
-    url: 'https://docs.google.com/forms/d/e/1FAIpQLSfDajWuQUKTJeATgeEmBzagw657yLXopxA1Kk8HBYYBumAjRA/viewform',
-    fields: {
-      kind: 'entry.1682414188',
-      no: 'entry.764723465',
-      category: 'entry.1718167178',
-      name: 'entry.2096773043',
-      pageUrl: 'entry.689649539'
-    }
+const FEEDBACK_FORM = {
+  url: 'https://docs.google.com/forms/d/e/1FAIpQLSd4kqE3VFuNwVSv80VcPb71z6R2jlejzJqx2yxY5gpittgZGA/viewform',
+  fields: {
+    pageUrl: 'entry.1681958702'
   }
 };
 const MAX_RESULTS = 30;
@@ -1024,7 +1008,7 @@ const UI_TEXT = {
     missingBadge: 'なし',
     missingNote: 'このNoはまだ画像未確認です。入手画面の画像があれば投稿できます。',
     submitImage: '画像投稿',
-    submitCorrection: '修正報告',
+    submitImageCorrection: '画像投稿・修正',
     locked: '???',
     checkerEmpty: '装備またはスキルを選択すると自動で検索します',
     skillSlot: 'スキル',
@@ -1074,7 +1058,7 @@ const UI_TEXT = {
     missingBadge: 'None',
     missingNote: 'This No. has not been verified by an item screenshot yet. You can submit a screenshot from the item screen.',
     submitImage: 'Submit image',
-    submitCorrection: 'Report correction',
+    submitImageCorrection: 'Submit image / correction',
     locked: '???',
     checkerEmpty: 'Select equipment or skills to search automatically',
     skillSlot: 'Skill',
@@ -1181,18 +1165,13 @@ function itemPageUrl(item) {
   return url.toString();
 }
 function feedbackUrl(item) {
-  const form = item._missing ? FEEDBACK_FORMS.empty : FEEDBACK_FORMS.correction;
   const params = new URLSearchParams({
-    [form.fields.kind]: item._missing ? '空番画像投稿' : '既存修正',
-    [form.fields.no]: String(item.no),
-    [form.fields.category]: item.category,
-    [form.fields.name]: item._missing ? 'なし' : item.name,
-    [form.fields.pageUrl]: itemPageUrl(item)
+    [FEEDBACK_FORM.fields.pageUrl]: itemPageUrl(item)
   });
-  return `${form.url}?${params.toString()}`;
+  return `${FEEDBACK_FORM.url}?${params.toString()}`;
 }
 function feedbackButtonHtml(item) {
-  const label = item._missing ? ui('submitImage') : ui('submitCorrection');
+  const label = item._missing ? ui('submitImage') : ui('submitImageCorrection');
   return `<div class="feedback-actions"><a class="feedback-btn" href="${feedbackUrl(item)}" target="_blank" rel="noopener">${label}</a></div>`;
 }
 function openItemFromQuery() {
