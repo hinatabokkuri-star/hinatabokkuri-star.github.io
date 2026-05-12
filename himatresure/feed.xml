@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>ひまつぶトレジャー攻略 装備図鑑・スキル組み合わせ検索</title>
+    <link>https://hinatabokkuri-star.github.io/himatresure/</link>
+    <description>インディーズゲーム「ひまつぶトレジャー」の装備図鑑・攻略サポートツール。全568件の武器、盾、鎧、アクセサリー、ペットのスキル、入手元、ドロップ、マスタリーボーナスを検索できます。</description>
+    <language>ja</language>
+    <lastBuildDate>Tue, 12 May 2026 18:38:13 GMT</lastBuildDate>
+    <item><title>ひまつぶトレジャー攻略 装備図鑑・スキル組み合わせ検索</title><link>https://hinatabokkuri-star.github.io/himatresure/</link><guid>https://hinatabokkuri-star.github.io/himatresure/</guid><description>インディーズゲーム「ひまつぶトレジャー」の装備図鑑・攻略サポートツール。全568件の武器、盾、鎧、アクセサリー、ペットのスキル、入手元、ドロップ、マスタリーボーナスを検索できます。</description></item>
+    <item><title>スキル一覧 - ひまつぶトレジャー攻略</title><link>https://hinatabokkuri-star.github.io/himatresure/skills/</link><guid>https://hinatabokkuri-star.github.io/himatresure/skills/</guid><description>スキルごとの装備・ペット一覧。</description></item>
+    <item><title>マスタリー一覧 - ひまつぶトレジャー攻略</title><link>https://hinatabokkuri-star.github.io/himatresure/mastery/</link><guid>https://hinatabokkuri-star.github.io/himatresure/mastery/</guid><description>マスタリーボーナスごとの装備・ペット一覧。</description></item>
+    <item><title>ペット別ドロップ一覧 - ひまつぶトレジャー攻略</title><link>https://hinatabokkuri-star.github.io/himatresure/drops/</link><guid>https://hinatabokkuri-star.github.io/himatresure/drops/</guid><description>ペットごとのドロップ装備一覧。</description></item>
+  </channel>
+</rss>
