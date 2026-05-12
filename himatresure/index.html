@@ -265,6 +265,19 @@
   .mastery-table .locked td { color: var(--dim); }
   .drop-list { font-size: 12px; line-height: 2; }
   .drop-link { color: var(--accent); text-decoration: none; cursor: pointer; }
+  .placeholder-card { border-style: dashed; background: var(--panel2); }
+  .placeholder-card .card-name,
+  .placeholder-card .compact-name { color: var(--muted); }
+  .feedback-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+  .feedback-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 34px; padding: 7px 12px; border: 1px solid var(--accent);
+    color: var(--accent); background: var(--panel2); text-decoration: none;
+    font-family: inherit; font-size: 12px; line-height: 1.4; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .feedback-btn:hover { background: rgba(232,184,75,0.08); }
+  .placeholder-note { color: var(--muted); font-size: 12px; line-height: 1.8; }
   .empty { grid-column: 1/-1; text-align: center; color: var(--muted); padding: 60px 20px; font-size: 13px; }
 
   /* ━━━ MASTERY TAB ━━━ */
@@ -940,6 +953,35 @@ const CATS = ['武器','盾','鎧','アクセサリー','ペット'];
 const CAT_ORDER = {'武器':0,'盾':1,'鎧':2,'アクセサリー':3,'ペット':4};
 const CAT_LABEL = {'武器':'武器','盾':'盾','鎧':'鎧','アクセサリー':'アクセ','ペット':'ペット'};
 const CAT_LABEL_EN = {'武器':'Weapon','盾':'Shield','鎧':'Armor','アクセサリー':'Ring','ペット':'Pet'};
+const CAT_RANGES = {
+  '武器': [1, 175],
+  '盾': [176, 268],
+  '鎧': [269, 344],
+  'アクセサリー': [345, 391],
+  'ペット': [392, 568]
+};
+const FEEDBACK_FORMS = {
+  empty: {
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLSdiNr450rlfqeqJGFfFFKol3HnVoETPCgBn1e_b2rI2PjQYmQ/viewform',
+    fields: {
+      kind: 'entry.1368187648',
+      no: 'entry.1605343322',
+      category: 'entry.1389548115',
+      name: 'entry.1528299595',
+      pageUrl: 'entry.1782720535'
+    }
+  },
+  correction: {
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLSfDajWuQUKTJeATgeEmBzagw657yLXopxA1Kk8HBYYBumAjRA/viewform',
+    fields: {
+      kind: 'entry.1682414188',
+      no: 'entry.764723465',
+      category: 'entry.1718167178',
+      name: 'entry.2096773043',
+      pageUrl: 'entry.689649539'
+    }
+  }
+};
 const MAX_RESULTS = 30;
 const SLOT_SORT_KEY = 'himatubu_slot_sort';
 const LANG_KEY = 'himatresure_lang';
@@ -978,6 +1020,11 @@ const UI_TEXT = {
     infoBadge: '情報提供募集',
     modalSkills: 'スキル -- 3pt以上で発動（任意+1あり）',
     modalMastery: (known, total) => `マスタリーボーナス（解放済 ${known}/${total}）`,
+    missingName: 'なし',
+    missingBadge: 'なし',
+    missingNote: 'このNoはまだ画像未確認です。入手画面の画像があれば投稿できます。',
+    submitImage: '画像投稿',
+    submitCorrection: '修正報告',
     locked: '???',
     checkerEmpty: '装備またはスキルを選択すると自動で検索します',
     skillSlot: 'スキル',
@@ -1023,6 +1070,11 @@ const UI_TEXT = {
     infoBadge: 'Needs info',
     modalSkills: 'Skills -- active at 3pt or more (+1 optional)',
     modalMastery: (known, total) => `Mastery bonuses (${known}/${total} known)`,
+    missingName: 'None',
+    missingBadge: 'None',
+    missingNote: 'This No. has not been verified by an item screenshot yet. You can submit a screenshot from the item screen.',
+    submitImage: 'Submit image',
+    submitCorrection: 'Report correction',
     locked: '???',
     checkerEmpty: 'Select equipment or skills to search automatically',
     skillSlot: 'Skill',
@@ -1053,6 +1105,7 @@ function ui(key, ...args) {
 function translateItemName(itemOrNo, fallback = '') {
   const no = typeof itemOrNo === 'object' ? itemOrNo?.no : itemOrNo;
   const local = typeof itemOrNo === 'object' ? itemOrNo?.name : fallback;
+  if (typeof itemOrNo === 'object' && itemOrNo?._missing) return ui('missingName');
   return currentLang === 'en' ? (i18nEn?.items?.[String(no)] || local || fallback) : (local || fallback);
 }
 function translateDropName(drop) {
@@ -1098,8 +1151,59 @@ function translatedSearchValues(item) {
 function includesSearch(value, query) {
   return String(value ?? '').toLowerCase().includes(query);
 }
+function makeMissingItem(no, category) {
+  return {
+    no,
+    category,
+    name: 'なし',
+    skills: [],
+    mastery_bonus: [],
+    drop_from: [],
+    drop_items: [],
+    _missing: true
+  };
+}
+function buildCatalogItems(items) {
+  const byNo = new Map(items.map(item => [item.no, item]));
+  const missing = [];
+  CATS.forEach(cat => {
+    const [min, max] = CAT_RANGES[cat];
+    for (let no = min; no <= max; no++) {
+      if (!byNo.has(no)) missing.push(makeMissingItem(no, cat));
+    }
+  });
+  return [...items, ...missing].sort((a, b) => a.no - b.no);
+}
+function itemPageUrl(item) {
+  const url = new URL(location.href);
+  url.hash = '';
+  url.searchParams.set('no', item.no);
+  return url.toString();
+}
+function feedbackUrl(item) {
+  const form = item._missing ? FEEDBACK_FORMS.empty : FEEDBACK_FORMS.correction;
+  const params = new URLSearchParams({
+    [form.fields.kind]: item._missing ? '空番画像投稿' : '既存修正',
+    [form.fields.no]: String(item.no),
+    [form.fields.category]: item.category,
+    [form.fields.name]: item._missing ? 'なし' : item.name,
+    [form.fields.pageUrl]: itemPageUrl(item)
+  });
+  return `${form.url}?${params.toString()}`;
+}
+function feedbackButtonHtml(item) {
+  const label = item._missing ? ui('submitImage') : ui('submitCorrection');
+  return `<div class="feedback-actions"><a class="feedback-btn" href="${feedbackUrl(item)}" target="_blank" rel="noopener">${label}</a></div>`;
+}
+function openItemFromQuery() {
+  const no = parseInt(new URLSearchParams(location.search).get('no') || '', 10);
+  if (Number.isFinite(no) && catalogItems.some(item => item.no === no)) {
+    setTimeout(() => openModal(no), 0);
+  }
+}
 
 let allItems = [];
+let catalogItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
 let infoWantedOnly = false;
 let slotSortMode = localStorage.getItem(SLOT_SORT_KEY) === 'name' ? 'name' : 'no';
@@ -1297,12 +1401,12 @@ function toggleOwned(no, e) {
   renderList();
 }
 function markVisibleOwned() {
-  getFiltered().forEach(i => ownedSet.add(i.no));
+  getFiltered().filter(i => !i._missing).forEach(i => ownedSet.add(i.no));
   saveOwned();
   renderList();
 }
 function unmarkVisibleOwned() {
-  getFiltered().forEach(i => ownedSet.delete(i.no));
+  getFiltered().filter(i => !i._missing).forEach(i => ownedSet.delete(i.no));
   saveOwned();
   renderList();
 }
@@ -1374,6 +1478,7 @@ function hasUnknownDropName(drop) {
   return !drop || !drop.name || /^\?+$/.test(drop.name);
 }
 function needsInfo(item) {
+  if (item._missing) return true;
   const isPet = item.category === 'ペット';
   const drops = (isPet ? item.drop_items : item.drop_from) || [];
   if (!item.skills || item.skills.length < 3 || item.skills.some(s => PROVISIONAL_SKILLS.has(s.name))) return true;
@@ -1422,6 +1527,7 @@ async function init() {
   try {
     const res = await fetch('items.json?v=' + Date.now());
     allItems = await res.json();
+    catalogItems = buildCatalogItems(allItems);
   } catch(e) {
     document.getElementById('grid').innerHTML = '<div class="empty">データ読み込み失敗</div>';
     return;
@@ -1441,6 +1547,7 @@ async function init() {
   localStorage.setItem(UNB_SIG_KEY, currentDataSignature);
   refreshStaticLanguageText();
   renderList();
+  openItemFromQuery();
   buildSkillChecksForSkillMode();
   buildSlots();
   buildSkillChecks();
@@ -1452,7 +1559,8 @@ async function init() {
 
 // ━━━ 一覧 ━━━
 function getFiltered() {
-  let items = allItems.filter(item => {
+  let items = catalogItems.filter(item => {
+    if (item._missing && ownedFilter !== 'all') return false;
     if (ownedFilter === 'owned'   && !ownedSet.has(item.no)) return false;
     if (ownedFilter === 'unowned' &&  ownedSet.has(item.no)) return false;
     if (infoWantedOnly && !needsInfo(item)) return false;
@@ -1472,15 +1580,15 @@ function renderList() {
   const grid = document.getElementById('grid');
   grid.classList.toggle('compact', listViewMode === 'compact');
   refreshListViewToggle();
-  const infoWantedCount = allItems.filter(needsInfo).length;
+  const infoWantedCount = catalogItems.filter(needsInfo).length;
   const infoBtn = document.getElementById('info-wanted-btn');
   if (infoBtn) infoBtn.textContent = `${ui('infoWanted')}（${infoWantedCount}）`;
-  const unowned = filtered.filter(i => !ownedSet.has(i.no));
+  const unowned = filtered.filter(i => !i._missing && !ownedSet.has(i.no));
   const catLabel2 = currentCat === 'all' ? ui('visibleLabel') : catLabel(currentCat);
   const btn = document.getElementById('mark-visible-btn');
   btn.style.display = unowned.length ? '' : 'none';
   btn.textContent = ui('markVisible', catLabel2, unowned.length);
-  const owned = filtered.filter(i => ownedSet.has(i.no));
+  const owned = filtered.filter(i => !i._missing && ownedSet.has(i.no));
   const unBtn = document.getElementById('unmark-visible-btn');
   unBtn.style.display = owned.length ? '' : 'none';
   unBtn.textContent = ui('unmarkVisible', catLabel2, owned.length);
@@ -1492,12 +1600,15 @@ function renderList() {
   grid.innerHTML = filtered.map(item => {
     const isPet = item.category === 'ペット';
     const infoWanted = needsInfo(item);
+    const cardClasses = `${ownedSet.has(item.no) && !item._missing ? ' owned' : ''}${item._missing ? ' placeholder-card' : ''}`;
+    const wantedBadge = infoWanted ? `<span class="info-wanted-badge" title="${ui('infoBadge')}">${item._missing ? ui('missingBadge') : (currentLang === 'en' ? '!' : '募')}</span>` : '';
+    const starButton = item._missing ? '' : `<button class="star-btn${ownedSet.has(item.no)?' owned':''}" onclick="toggleOwned(${item.no},event)" title="所持マーク">★</button>`;
     if (listViewMode === 'compact') {
-      return `<div class="card compact-card${ownedSet.has(item.no)?' owned':''}" onclick="openModal(${item.no})">
+      return `<div class="card compact-card${cardClasses}" onclick="openModal(${item.no})">
         <div class="compact-top">
           <span class="card-no">No${item.no}</span>
-          ${infoWanted ? `<span class="info-wanted-badge" title="${ui('infoBadge')}">${currentLang === 'en' ? '!' : '募'}</span>` : ''}
-          <button class="star-btn${ownedSet.has(item.no)?' owned':''}" onclick="toggleOwned(${item.no},event)" title="所持マーク">★</button>
+          ${wantedBadge}
+          ${starButton}
         </div>
         <div class="compact-name">${escapeHtml(translateItemName(item))}</div>
         <span class="cat-tag cat-tag-${item.category} compact-cat">${catLabel(item.category)}</span>
@@ -1507,17 +1618,17 @@ function renderList() {
     const dropNames = drops.filter(d => d.name && d.name !== '???').map(d => escapeHtml(translateDropName(d)));
     const dropHtml = dropNames.length
       ? `<div class="card-drop">${isPet ? ui('drop') : ui('dropFrom')}：<span>${dropNames.join(currentLang === 'en' ? ', ' : '、')}</span></div>` : '';
-    return `<div class="card${ownedSet.has(item.no)?' owned':''}" onclick="openModal(${item.no})">
+    return `<div class="card${cardClasses}" onclick="openModal(${item.no})">
       <div class="card-head">
         <span class="card-no">No${item.no}</span>
-        ${infoWanted ? `<span class="info-wanted-badge" title="${ui('infoBadge')}">${currentLang === 'en' ? '!' : '募'}</span>` : ''}
+        ${wantedBadge}
         <span class="card-name">${escapeHtml(translateItemName(item))}</span>
         <span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span>
-        <button class="star-btn${ownedSet.has(item.no)?' owned':''}" onclick="toggleOwned(${item.no},event)" title="所持マーク">★</button>
+        ${starButton}
       </div>
-      <div class="card-skills">
+      ${item._missing ? `<div class="card-drop">${escapeHtml(ui('missingNote'))}</div>` : `<div class="card-skills">
         ${item.skills.map(s=>`<div class="skill-row"><span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span><span>${escapeHtml(translateSkillName(s.name))}</span></div>`).join('')}
-      </div>
+      </div>`}
       ${dropHtml}
     </div>`;
   }).join('');
@@ -1525,15 +1636,27 @@ function renderList() {
 
 // ━━━ モーダル ━━━
 function openModal(no) {
-  const item = allItems.find(i => i.no === no);
+  const item = catalogItems.find(i => i.no === no);
   if (!item) return;
+  if (item._missing) {
+    document.getElementById('modal-body').innerHTML = `
+      <h2>${escapeHtml(translateItemName(item))}</h2>
+      <div class="modal-sub"><span>No${item.no}</span><span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span></div>
+      <section><h3>${ui('infoBadge')}</h3>
+      <div class="placeholder-note">${escapeHtml(ui('missingNote'))}</div></section>
+      ${feedbackButtonHtml(item)}`;
+    document.getElementById('modal-overlay').classList.add('open');
+    document.getElementById('modal-overlay').scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    return;
+  }
   const isPet = item.category === 'ペット';
   const drops = (isPet ? item.drop_items : item.drop_from) || [];
   const dropHtml = drops.length ? `
     <section><h3>${isPet ? ui('drop') : ui('dropFrom')}</h3>
     <div class="drop-list">${drops.map(d => {
       if (!d.name || d.name === '???') return '<span style="color:var(--dim)">???</span>';
-      const linked = d.no != null && allItems.find(i => i.no === d.no);
+      const linked = d.no != null && catalogItems.find(i => i.no === d.no);
       const label = escapeHtml((d.no ? `No${d.no} ` : '') + translateDropName(d));
       return linked ? `<a class="drop-link" onclick="openModal(${d.no})">${label}</a>` : label;
     }).join('<br>')}</div></section>` : '';
@@ -1558,7 +1681,8 @@ function openModal(no) {
       </div>`).join('')}</div></section>
     ${dropHtml}
     <section><h3>${ui('modalMastery', knownBonus, item.mastery_bonus.length)}</h3>
-    <table class="mastery-table"><tbody>${masteryRows}</tbody></table></section>`;
+    <table class="mastery-table"><tbody>${masteryRows}</tbody></table></section>
+    ${feedbackButtonHtml(item)}`;
   document.getElementById('modal-overlay').classList.add('open');
   document.getElementById('modal-overlay').scrollTop = 0;
   document.body.style.overflow = 'hidden';
@@ -2644,6 +2768,7 @@ function unbOk() {
   // 新データを即反映
   if (pendingItems) {
     allItems = pendingItems;
+    catalogItems = buildCatalogItems(allItems);
     pendingItems = null;
     currentDataSignature = dataSignature(allItems);
     rebuildIndices();
