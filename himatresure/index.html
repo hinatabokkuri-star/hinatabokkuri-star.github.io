@@ -1467,6 +1467,7 @@ function needsInfo(item) {
   if (!item.skills || item.skills.length < 3 || item.skills.some(s => PROVISIONAL_SKILLS.has(s.name))) return true;
   if (!item.mastery_bonus || item.mastery_bonus.some(b => !b.name || !b.effect)) return true;
   if (!drops.length || drops.some(hasUnknownDropName)) return true;
+  if (isPet && drops.length !== 5) return true;
   if (isPet) {
     return drops.some(d => {
       if (d.no == null) return true;
