@@ -8102,7 +8102,7 @@
   {
     "no": 97,
     "category": "武器",
-    "name": "アイスブレイド",
+    "name": "アイスブランド",
     "skills": [
       {
         "type": "A",
@@ -10780,6 +10780,10 @@
       {
         "no": 547,
         "name": "メガスライム"
+      },
+      {
+        "no": 534,
+        "name": "ヴォルガス"
       }
     ]
   },
@@ -17573,6 +17577,10 @@
       {
         "no": 433,
         "name": "ゾンビ"
+      },
+      {
+        "no": 536,
+        "name": "フランケン"
       }
     ],
     "skills": [
@@ -18581,7 +18589,12 @@
     "no": 222,
     "category": "盾",
     "name": "キュウキュウガード",
-    "drop_from": [],
+    "drop_from": [
+      {
+        "no": 536,
+        "name": "フランケン"
+      }
+    ],
     "skills": [
       {
         "type": "M",
@@ -19432,6 +19445,10 @@
       {
         "no": 474,
         "name": "ガスフレイム"
+      },
+      {
+        "no": 534,
+        "name": "ヴォルガス"
       }
     ],
     "skills": [
@@ -26048,6 +26065,10 @@
       {
         "no": 455,
         "name": "サリオン"
+      },
+      {
+        "no": 524,
+        "name": "ビッグアイ"
       }
     ],
     "skills": [
@@ -26703,6 +26724,10 @@
       {
         "no": 475,
         "name": "ミノタウロス"
+      },
+      {
+        "no": 534,
+        "name": "ヴォルガス"
       }
     ],
     "skills": [
@@ -44310,7 +44335,7 @@
     "drop_items": [
       {
         "no": 97,
-        "name": "アイスブレイド"
+        "name": "アイスブランド"
       },
       {
         "no": 123,
@@ -46232,72 +46257,72 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "ムーブギア",
+        "effect": "いどうスピード+1"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "ダークギア",
+        "effect": "やみダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "SPDバフ",
+        "effect": "SPDステータス+5%"
       }
     ],
-    "monster_type": "アンデッド",
+    "monster_type": "デビル",
     "drop_items": [
-      {
-        "no": 97,
-        "name": "アイスブレイド"
-      },
       {
         "no": 111,
         "name": "ブラッドソード"
       },
       {
-        "no": 264,
-        "name": "ムーンガード"
-      },
-      {
         "no": 340,
         "name": "シルクハット"
+      },
+      {
+        "no": 97,
+        "name": "アイスブランド"
+      },
+      {
+        "no": 264,
+        "name": "ムーンガード"
       },
       {
         "no": 374,
@@ -46344,50 +46369,42 @@
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "LUKバフ",
+        "effect": "LUKステータス+5%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "スタンギア",
+        "effect": "スタンはっせい+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "マジックギア",
+        "effect": "マジックスキル+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "メダマギア",
+        "effect": "メダマタイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "INTバフ",
+        "effect": "INTステータス+5%"
       }
     ],
     "monster_type": "メダマ",
     "drop_items": [
-      {
-        "no": 174,
-        "name": "ゴールドダイス"
-      },
-      {
-        "no": 203,
-        "name": "クリスタルガード"
-      },
       {
         "no": 250,
         "name": "メダマガード"
@@ -46397,8 +46414,16 @@
         "name": "メダマリング"
       },
       {
-        "no": null,
-        "name": "パラディアマント"
+        "no": 174,
+        "name": "ゴールドダイス"
+      },
+      {
+        "no": 203,
+        "name": "クリスタルガード"
+      },
+      {
+        "no": 311,
+        "name": "パラディンマント"
       }
     ]
   },
@@ -46826,61 +46851,57 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "コインギア",
+        "effect": "ドロップコイン+0〜1"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "リーフギア",
+        "effect": "くさダメージ+10%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "クリティカルギア",
+        "effect": "クリティカル+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       }
     ],
-    "monster_type": "インセクト",
+    "monster_type": "リザード",
     "drop_items": [
-      {
-        "no": 106,
-        "name": "アマウェンボウ"
-      },
       {
         "no": 115,
         "name": "グリーンランス"
@@ -46890,12 +46911,16 @@
         "name": "グルグルロープ"
       },
       {
-        "no": 388,
-        "name": "リカバリーリング"
+        "no": 106,
+        "name": "アマウェンボウ"
       },
       {
         "no": null,
         "name": "モグラハンマー"
+      },
+      {
+        "no": 388,
+        "name": "リカバリーリング"
       }
     ]
   },
@@ -47368,7 +47393,7 @@
         "effect": "ATKステータス+5%"
       }
     ],
-    "monster_type": "アニマル",
+    "monster_type": "スライム",
     "drop_items": [
       {
         "no": 346,
@@ -47379,12 +47404,16 @@
         "name": "ボンバーリング"
       },
       {
-        "no": null,
-        "name": "ホノルリング"
+        "no": 128,
+        "name": "スライムバスター"
       },
       {
-        "no": null,
-        "name": "ルーサーガード"
+        "no": 232,
+        "name": "アトミックシールド"
+      },
+      {
+        "no": 319,
+        "name": "バーサーカーパンツ"
       }
     ]
   },
@@ -47547,8 +47576,7 @@
       },
       {
         "pt": 3500,
-        "name": "アーマーギア",
-        "effect": "アーマータイプへのダメージ+10%"
+        "name": "アーマーギア"
       },
       {
         "pt": 5000,
@@ -47566,27 +47594,27 @@
         "effect": "VITステータス+5%"
       }
     ],
-    "monster_type": "アーマー",
+    "monster_type": "アンデッド",
     "drop_items": [
       {
         "no": 120,
         "name": "チェーンソー"
       },
       {
-        "no": 164,
-        "name": "スターブレイカー"
-      },
-      {
         "no": 342,
         "name": "ホッケーマスク"
       },
       {
-        "no": null,
-        "name": "キョウキュウガード"
+        "no": 222,
+        "name": "キュウキュウガード"
       },
       {
-        "no": null,
-        "name": "ブレイストーン"
+        "no": 164,
+        "name": "スターブレイカー"
+      },
+      {
+        "no": 210,
+        "name": "グレイブストーン"
       }
     ]
   },
