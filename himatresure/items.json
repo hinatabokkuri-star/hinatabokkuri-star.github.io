@@ -9532,53 +9532,53 @@
     "mastery_bonus": [
       {
         "pt": 100,
-        "name": null,
-        "effect": null
+        "name": "ゴブリンギア",
+        "effect": "ゴブリンタイプへのダメージ+10%"
       },
       {
         "pt": 250,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       },
       {
         "pt": 500,
-        "name": null,
-        "effect": null
+        "name": "アーマーギア",
+        "effect": "アーマータイプへのダメージ+10%"
       },
       {
         "pt": 1000,
-        "name": null,
-        "effect": null
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
       },
       {
         "pt": 1500,
-        "name": null,
-        "effect": null
+        "name": "リザードギア",
+        "effect": "リザードタイプへのダメージ+10%"
       },
       {
         "pt": 2500,
-        "name": null,
-        "effect": null
+        "name": "アクションギア",
+        "effect": "アクションスキル+5%"
       },
       {
         "pt": 3500,
-        "name": null,
-        "effect": null
+        "name": "VITバフ",
+        "effect": "VITステータス+5%"
       },
       {
         "pt": 5000,
-        "name": null,
-        "effect": null
+        "name": "XPギア",
+        "effect": "かくとくXP+5%"
       },
       {
         "pt": 7500,
-        "name": null,
-        "effect": null
+        "name": "アーマーギア",
+        "effect": "アーマータイプへのダメージ+10%"
       },
       {
         "pt": 9999,
-        "name": null,
-        "effect": null
+        "name": "ATKバフ",
+        "effect": "ATKステータス+5%"
       }
     ],
     "drop_from": [
