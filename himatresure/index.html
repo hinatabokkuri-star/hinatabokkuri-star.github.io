@@ -1225,7 +1225,7 @@ function formatSpawnAreas(areas) {
 }
 function formatSpawnPoint(point) {
   const value = typeof point === 'number' ? point : point?.m ?? point?.km ?? point?.point;
-  return Number.isFinite(value) ? `${value}m` : '';
+  return Number.isFinite(value) ? `${value}km` : '';
 }
 function formatSpawnPoints(points) {
   return (points || []).map(formatSpawnPoint).filter(Boolean);
@@ -2730,7 +2730,7 @@ function areaOverlapsBand(area, band) {
 }
 
 function formatFloorBand(row) {
-  if (row.kind === 'point') return `${row.point_m}m`;
+  if (row.kind === 'point') return `${row.point_km}km`;
   return `${row.start_km}km-${row.end_km}km`;
 }
 
@@ -2768,7 +2768,7 @@ function buildFloorDropRows() {
   pointRows.forEach((items, point) => {
     rows.push({
       kind: 'point',
-      point_m: point,
+      point_km: point,
       start_km: point,
       end_km: point,
       items: items.sort((a, b) => CAT_ORDER[a.category] - CAT_ORDER[b.category] || a.no - b.no)
@@ -2795,7 +2795,7 @@ function getFilteredFloorRows() {
   const q = floorSearch.toLowerCase();
   return floorDropRows.map(row => {
     const range = formatFloorBand(row).toLowerCase();
-    const bareRange = row.kind === 'point' ? String(row.point_m) : `${row.start_km}-${row.end_km}`;
+    const bareRange = row.kind === 'point' ? String(row.point_km) : `${row.start_km}-${row.end_km}`;
     const rangeMatches = q && (range.includes(q) || bareRange.includes(q));
     const items = row.items.filter(item => {
       if (currentFloorCat !== 'all' && item.category !== currentFloorCat) return false;
