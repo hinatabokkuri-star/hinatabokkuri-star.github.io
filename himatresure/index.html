@@ -1241,10 +1241,6 @@ function translatedSearchValues(item) {
     values.push(d.name || '');
     if (d.no != null && i18nEn?.items?.[String(d.no)]) values.push(i18nEn.items[String(d.no)]);
   });
-  formatSpawnAreas(item.obtain_areas).forEach(area => values.push(area));
-  formatSpawnPoints(item.obtain_points).forEach(point => values.push(point));
-  formatSpawnAreas(item.spawn_areas).forEach(area => values.push(area));
-  formatSpawnPoints(item.spawn_points).forEach(point => values.push(point));
   (item.mastery_bonus || []).forEach(b => {
     values.push(b.name || '', b.effect || '');
     if (i18nEn?.mastery?.[b.name]) values.push(i18nEn.mastery[b.name].name, i18nEn.mastery[b.name].effect || '');
