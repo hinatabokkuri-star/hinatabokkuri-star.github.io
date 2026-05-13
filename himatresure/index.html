@@ -301,6 +301,8 @@
   .mastery-table td:nth-child(2) { color: var(--accent); width: 110px; }
   .mastery-table .locked td { color: var(--dim); }
   .drop-list { font-size: 12px; line-height: 2; }
+  .area-list { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; line-height: 1.6; }
+  .area-list span { white-space: nowrap; color: var(--text); }
   .drop-link { color: var(--accent); text-decoration: none; cursor: pointer; }
   .placeholder-card { border-style: dashed; background: var(--panel2); }
   .placeholder-card .card-name,
@@ -1624,11 +1626,11 @@ function openModal(no) {
   const obtainAreas = !isPet ? formatSpawnAreas(item.obtain_areas) : [];
   const obtainHtml = obtainAreas.length ? `
     <section><h3>${ui('obtainArea')}</h3>
-    <div class="drop-list">${obtainAreas.map(area => escapeHtml(area)).join('<br>')}</div></section>` : '';
+    <div class="area-list">${obtainAreas.map(area => `<span>${escapeHtml(area)}</span>`).join('')}</div></section>` : '';
   const spawnAreas = isPet ? formatSpawnAreas(item.spawn_areas) : [];
   const spawnHtml = spawnAreas.length ? `
     <section><h3>${ui('spawnArea')}</h3>
-    <div class="drop-list">${spawnAreas.map(area => escapeHtml(area)).join('<br>')}</div></section>` : '';
+    <div class="area-list">${spawnAreas.map(area => `<span>${escapeHtml(area)}</span>`).join('')}</div></section>` : '';
   document.getElementById('modal-body').innerHTML = `
     <h2>${typeTag}${escapeHtml(translateItemName(item))}</h2>
     <div class="modal-sub"><span>No${item.no}</span><span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span></div>
