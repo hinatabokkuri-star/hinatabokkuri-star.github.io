@@ -992,7 +992,7 @@
   <div class="floor-wrap">
     <div class="floor-controls">
       <div class="floor-search-row">
-        <input id="floor-search" type="search" placeholder="階層・装備名で検索…" autocomplete="off">
+        <input id="floor-search" type="search" placeholder="階層・アイテム名で検索…" autocomplete="off">
       </div>
       <div class="floor-cat-bar">
         <button class="owned-filter-btn active" data-floor-cat="all">すべて</button>
@@ -1000,6 +1000,7 @@
         <button class="owned-filter-btn" data-floor-cat="盾">盾</button>
         <button class="owned-filter-btn" data-floor-cat="鎧">鎧</button>
         <button class="owned-filter-btn" data-floor-cat="アクセサリー">アクセ</button>
+        <button class="owned-filter-btn" data-floor-cat="ペット">ペット</button>
       </div>
       <div class="floor-summary" id="floor-summary"></div>
     </div>
@@ -1088,8 +1089,8 @@ const UI_TEXT = {
     ownedImportHelp: '持っている装備Noを貼り付けると★に追加します。カンマ、空白、改行、No付き表記のどれでもOKです。',
     importRead: '読み込む',
     importClear: '入力を消す',
-    floorSearchPlaceholder: '階層・装備名・Noで検索…',
-    floorSummary: (shown, total, items) => `${shown}/${total} 階層を表示・該当装備 ${items}件`,
+    floorSearchPlaceholder: '階層・アイテム名・Noで検索…',
+    floorSummary: (shown, total, items) => `${shown}/${total} 階層を表示・該当アイテム ${items}件`,
     floorEmpty: '該当する階層ドロップがありません',
     count: n => `${n} 件`,
     visibleLabel: '表示中',
@@ -1140,7 +1141,7 @@ const UI_TEXT = {
     importRead: 'Import',
     importClear: 'Clear',
     floorSearchPlaceholder: 'Search floors, item names, or Nos...',
-    floorSummary: (shown, total, items) => `${shown}/${total} floors shown, ${items} matching items`,
+    floorSummary: (shown, total, items) => `${shown}/${total} floors shown, ${items} matching drops`,
     floorEmpty: 'No floor drops matched',
     count: n => `${n} items`,
     visibleLabel: 'Visible',
@@ -1334,7 +1335,7 @@ function refreshStaticLanguageText() {
   });
   document.getElementById('floor-search').placeholder = ui('floorSearchPlaceholder');
   document.querySelector('.floor-cat-bar [data-floor-cat="all"]').textContent = ui('all');
-  CATS.filter(cat => cat !== 'ペット').forEach(cat => {
+  CATS.forEach(cat => {
     const btn = document.querySelector(`.floor-cat-bar [data-floor-cat="${cat}"]`);
     if (btn) btn.textContent = catLabel(cat);
   });
@@ -2719,17 +2720,21 @@ function formatFloorBand(row) {
   return `${row.start_km}km-${row.end_km}km`;
 }
 
+function floorDropAreas(item) {
+  return item.category === 'ペット' ? (item.spawn_areas || []) : (item.obtain_areas || []);
+}
+
 function buildFloorDropRows() {
-  const equipment = allItems.filter(item => item.category !== 'ペット');
-  const boundaries = [...new Set(equipment.flatMap(item =>
-    (item.obtain_areas || []).flatMap(area => [area.start_km, area.end_km])
+  const drops = allItems.filter(item => floorDropAreas(item).length);
+  const boundaries = [...new Set(drops.flatMap(item =>
+    floorDropAreas(item).flatMap(area => [area.start_km, area.end_km])
   ).filter(Number.isFinite))].sort((a, b) => a - b);
   const rows = [];
   for (let i = 0; i < boundaries.length - 1; i++) {
     const band = { start_km: boundaries[i], end_km: boundaries[i + 1] };
     if (band.start_km >= band.end_km) continue;
-    const items = equipment
-      .filter(item => (item.obtain_areas || []).some(area => areaOverlapsBand(area, band)))
+    const items = drops
+      .filter(item => floorDropAreas(item).some(area => areaOverlapsBand(area, band)))
       .sort((a, b) => CAT_ORDER[a.category] - CAT_ORDER[b.category] || a.no - b.no);
     if (items.length) rows.push({ ...band, items });
   }
@@ -2742,6 +2747,8 @@ function floorItemMatches(item, q) {
     translateItemName(item),
     item.category,
     catLabel(item.category),
+    item.monster_type || '',
+    translateMonsterType(item),
     String(item.no),
     `no${item.no}`
   ];
