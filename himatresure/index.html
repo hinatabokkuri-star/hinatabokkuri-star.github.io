@@ -340,6 +340,45 @@
   .mastery-effect { color: var(--muted); font-size: 11px; }
   .mastery-count { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
 
+  /* ━━━ FLOOR DROPS TAB ━━━ */
+  #tab-floors { padding: 14px 12px 80px; }
+  .floor-wrap { max-width: 980px; margin: 0 auto; }
+  .floor-controls {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 10px 12px; margin-bottom: 10px;
+  }
+  .floor-search-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  #floor-search {
+    flex: 1; min-width: 0; background: var(--bg); border: 1px solid var(--border);
+    color: var(--text); font-family: inherit; font-size: 13px; padding: 8px 10px; outline: none;
+  }
+  #floor-search:focus { border-color: var(--accent); }
+  #floor-search::placeholder { color: var(--muted); }
+  .floor-cat-bar { display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .floor-cat-bar::-webkit-scrollbar { display: none; }
+  .floor-summary { color: var(--muted); font-size: 11px; line-height: 1.7; margin-top: 8px; }
+  .floor-list { display: grid; gap: 8px; }
+  .floor-card {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 10px 12px; display: grid; grid-template-columns: 112px 1fr; gap: 10px;
+  }
+  .floor-range { color: var(--accent); font-size: 14px; line-height: 1.4; white-space: nowrap; }
+  .floor-count { color: var(--muted); font-size: 11px; margin-top: 3px; }
+  .floor-items { display: flex; flex-wrap: wrap; gap: 5px; min-width: 0; }
+  .floor-item-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    font-family: inherit; font-size: 12px; line-height: 1.4; padding: 3px 6px;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .floor-item-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .floor-item-no { color: var(--muted); font-size: 10px; }
+  .floor-item-chip .cat-tag { min-width: 0; font-size: 9px; padding: 1px 3px; }
+  @media (max-width: 540px) {
+    .floor-card { grid-template-columns: 1fr; gap: 7px; }
+    .floor-range { font-size: 13px; }
+  }
+
   /* ━━━ SPECIAL THANKS TAB ━━━ */
   .thanks-wrap { padding: 16px 12px 80px; max-width: 760px; margin: 0 auto; }
   .thanks-card {
@@ -440,6 +479,7 @@
     border-radius: 8px;
   }
   #search:focus,
+  #floor-search:focus,
   .sort-select:focus,
   .ck-select:focus,
   .slot-select:focus {
@@ -451,6 +491,7 @@
   .owned-filter-btn,
   .mode-btn,
   .skill-check-label,
+  .floor-item-chip,
   .alts-toggle {
     background: #ffffff;
     border-color: #9fb2bd;
@@ -497,6 +538,8 @@
   .skill-cat-block,
   .combo-card,
   .mastery-bonus-card,
+  .floor-controls,
+  .floor-card,
   .checker-rule-bar {
     background: var(--panel);
     border-color: #a9bac5;
@@ -683,6 +726,7 @@
     box-shadow: none;
   }
   body.theme-dark #search,
+  body.theme-dark #floor-search,
   body.theme-dark .sort-select,
   body.theme-dark .ck-select,
   body.theme-dark .slot-select {
@@ -691,6 +735,7 @@
     color: var(--text);
   }
   body.theme-dark #search:focus,
+  body.theme-dark #floor-search:focus,
   body.theme-dark .sort-select:focus,
   body.theme-dark .ck-select:focus,
   body.theme-dark .slot-select:focus {
@@ -700,6 +745,7 @@
   body.theme-dark .owned-filter-btn,
   body.theme-dark .mode-btn,
   body.theme-dark .skill-check-label,
+  body.theme-dark .floor-item-chip,
   body.theme-dark .alts-toggle {
     background: #111b24;
     border-color: #3d5264;
@@ -735,6 +781,8 @@
   body.theme-dark .skill-cat-block,
   body.theme-dark .combo-card,
   body.theme-dark .mastery-bonus-card,
+  body.theme-dark .floor-controls,
+  body.theme-dark .floor-card,
   body.theme-dark .checker-rule-bar {
     background: var(--panel);
     border-color: #3a5062;
@@ -833,6 +881,7 @@
     <button class="nav-tab active" data-tab="list">📋 装備一覧</button>
     <button class="nav-tab" data-tab="checker">⚡ スキル発動チェッカー</button>
     <button class="nav-tab" data-tab="mastery">⭐ マスタリーボーナス</button>
+    <button class="nav-tab" data-tab="floors">🧭 階層ドロップ</button>
     <button class="nav-tab" data-tab="thanks">Special Thunks</button>
   </nav>
 </section>
@@ -938,6 +987,26 @@
   <div id="mastery-list" style="padding:8px 12px 80px"></div>
 </div>
 
+<!-- TAB: 階層ドロップ -->
+<div class="tab-content" id="tab-floors">
+  <div class="floor-wrap">
+    <div class="floor-controls">
+      <div class="floor-search-row">
+        <input id="floor-search" type="search" placeholder="階層・装備名で検索…" autocomplete="off">
+      </div>
+      <div class="floor-cat-bar">
+        <button class="owned-filter-btn active" data-floor-cat="all">すべて</button>
+        <button class="owned-filter-btn" data-floor-cat="武器">武器</button>
+        <button class="owned-filter-btn" data-floor-cat="盾">盾</button>
+        <button class="owned-filter-btn" data-floor-cat="鎧">鎧</button>
+        <button class="owned-filter-btn" data-floor-cat="アクセサリー">アクセ</button>
+      </div>
+      <div class="floor-summary" id="floor-summary"></div>
+    </div>
+    <div class="floor-list" id="floor-drop-list"></div>
+  </div>
+</div>
+
 <!-- TAB: Special Thunks -->
 <div class="tab-content" id="tab-thanks">
   <div class="thanks-wrap">
@@ -1019,6 +1088,9 @@ const UI_TEXT = {
     ownedImportHelp: '持っている装備Noを貼り付けると★に追加します。カンマ、空白、改行、No付き表記のどれでもOKです。',
     importRead: '読み込む',
     importClear: '入力を消す',
+    floorSearchPlaceholder: '階層・装備名・Noで検索…',
+    floorSummary: (shown, total, items) => `${shown}/${total} 階層を表示・該当装備 ${items}件`,
+    floorEmpty: '該当する階層ドロップがありません',
     count: n => `${n} 件`,
     visibleLabel: '表示中',
     markVisible: (label, n) => `★ ${label}を全件所有済みに（${n}件）`,
@@ -1067,6 +1139,9 @@ const UI_TEXT = {
     ownedImportHelp: 'Paste owned equipment Nos. Commas, spaces, line breaks, and No-prefixed text are all OK.',
     importRead: 'Import',
     importClear: 'Clear',
+    floorSearchPlaceholder: 'Search floors, item names, or Nos...',
+    floorSummary: (shown, total, items) => `${shown}/${total} floors shown, ${items} matching items`,
+    floorEmpty: 'No floor drops matched',
     count: n => `${n} items`,
     visibleLabel: 'Visible',
     markVisible: (label, n) => `Mark all ${label} as owned (${n})`,
@@ -1202,6 +1277,7 @@ function openItemFromQuery() {
 let allItems = [];
 let catalogItems = [];
 let currentCat = 'all', currentSearch = '', currentSort = 'no';
+let currentFloorCat = 'all', floorSearch = '', floorDropRows = [];
 let slotSortMode = localStorage.getItem(SLOT_SORT_KEY) === 'name' ? 'name' : 'no';
 let listViewMode = localStorage.getItem(LIST_VIEW_KEY) === 'compact' ? 'compact' : 'full';
 let ownedFilter = 'all'; // 'all' | 'owned' | 'unowned'
@@ -1252,9 +1328,15 @@ function refreshStaticLanguageText() {
   document.querySelector('.owned-import-actions button:nth-child(2)').textContent = ui('importClear');
   document.querySelectorAll('.nav-tab').forEach(tab => {
     const labels = currentLang === 'en'
-      ? { list: 'Items', checker: 'Skill Checker', mastery: 'Mastery', thanks: 'Special Thanks' }
-      : { list: '📋 装備一覧', checker: '⚡ スキル発動チェッカー', mastery: '⭐ マスタリーボーナス', thanks: 'Special Thunks' };
+      ? { list: 'Items', checker: 'Skill Checker', mastery: 'Mastery', floors: 'Floor Drops', thanks: 'Special Thanks' }
+      : { list: '📋 装備一覧', checker: '⚡ スキル発動チェッカー', mastery: '⭐ マスタリーボーナス', floors: '🧭 階層ドロップ', thanks: 'Special Thunks' };
     tab.textContent = labels[tab.dataset.tab] || tab.textContent;
+  });
+  document.getElementById('floor-search').placeholder = ui('floorSearchPlaceholder');
+  document.querySelector('.floor-cat-bar [data-floor-cat="all"]').textContent = ui('all');
+  CATS.filter(cat => cat !== 'ペット').forEach(cat => {
+    const btn = document.querySelector(`.floor-cat-bar [data-floor-cat="${cat}"]`);
+    if (btn) btn.textContent = catLabel(cat);
   });
   document.querySelector('.checker-rule-bar span').innerHTML = currentLang === 'en'
     ? '<strong>Rule:</strong> A skill activates at <strong>3+ points</strong> across the 5 slots. One optional skill can receive <strong>+1 point</strong>, so one 2-point skill can also activate.'
@@ -1286,6 +1368,8 @@ function refreshLanguageViews() {
   restoreCheckerState(checkerState);
   masteryMap = buildMasteryMap();
   if (document.getElementById('tab-mastery').classList.contains('active')) renderMastery();
+  floorDropRows = buildFloorDropRows();
+  if (document.getElementById('tab-floors').classList.contains('active')) renderFloorDrops();
 }
 async function setLanguage(lang) {
   currentLang = lang === 'en' ? 'en' : 'ja';
@@ -1516,6 +1600,7 @@ async function init() {
   buildSkillChecks();
   document.getElementById('combo-result').innerHTML = `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
   masteryMap = buildMasteryMap();
+  floorDropRows = buildFloorDropRows();
   startDataPoll();
   loadOwnerOwnedItemsFromHash();
 }
@@ -2596,6 +2681,18 @@ document.getElementById('search').addEventListener('input', e => {
 document.getElementById('sort').addEventListener('change', e => {
   currentSort = e.target.value; renderList();
 });
+document.getElementById('floor-search').addEventListener('input', e => {
+  floorSearch = e.target.value.trim();
+  renderFloorDrops();
+});
+document.querySelectorAll('[data-floor-cat]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-floor-cat]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFloorCat = btn.dataset.floorCat;
+    renderFloorDrops();
+  });
+});
 
 // Owner-only convenience: use #owned=1,2,3 on the URL, or type "myitems" outside inputs.
 window.addEventListener('hashchange', () => {
@@ -2612,6 +2709,86 @@ window.addEventListener('keydown', e => {
     loadOwnerOwnedItems();
   }
 });
+
+// ━━━ 階層ドロップ一覧 ━━━
+function areaOverlapsBand(area, band) {
+  return area && area.start_km < band.end_km && area.end_km > band.start_km;
+}
+
+function formatFloorBand(row) {
+  return `${row.start_km}km-${row.end_km}km`;
+}
+
+function buildFloorDropRows() {
+  const equipment = allItems.filter(item => item.category !== 'ペット');
+  const boundaries = [...new Set(equipment.flatMap(item =>
+    (item.obtain_areas || []).flatMap(area => [area.start_km, area.end_km])
+  ).filter(Number.isFinite))].sort((a, b) => a - b);
+  const rows = [];
+  for (let i = 0; i < boundaries.length - 1; i++) {
+    const band = { start_km: boundaries[i], end_km: boundaries[i + 1] };
+    if (band.start_km >= band.end_km) continue;
+    const items = equipment
+      .filter(item => (item.obtain_areas || []).some(area => areaOverlapsBand(area, band)))
+      .sort((a, b) => CAT_ORDER[a.category] - CAT_ORDER[b.category] || a.no - b.no);
+    if (items.length) rows.push({ ...band, items });
+  }
+  return rows;
+}
+
+function floorItemMatches(item, q) {
+  const values = [
+    item.name,
+    translateItemName(item),
+    item.category,
+    catLabel(item.category),
+    String(item.no),
+    `no${item.no}`
+  ];
+  return values.some(value => includesSearch(value, q));
+}
+
+function getFilteredFloorRows() {
+  const q = floorSearch.toLowerCase();
+  return floorDropRows.map(row => {
+    const range = formatFloorBand(row).toLowerCase();
+    const bareRange = `${row.start_km}-${row.end_km}`;
+    const rangeMatches = q && (range.includes(q) || bareRange.includes(q));
+    const items = row.items.filter(item => {
+      if (currentFloorCat !== 'all' && item.category !== currentFloorCat) return false;
+      if (!q || rangeMatches) return true;
+      return floorItemMatches(item, q);
+    });
+    return { ...row, items };
+  }).filter(row => row.items.length);
+}
+
+function renderFloorDrops() {
+  const el = document.getElementById('floor-drop-list');
+  const summary = document.getElementById('floor-summary');
+  const rows = getFilteredFloorRows();
+  const itemHits = rows.reduce((sum, row) => sum + row.items.length, 0);
+  summary.textContent = ui('floorSummary', rows.length, floorDropRows.length, itemHits);
+  if (!rows.length) {
+    el.innerHTML = `<div class="empty">${escapeHtml(ui('floorEmpty'))}</div>`;
+    return;
+  }
+  el.innerHTML = rows.map(row => `
+    <section class="floor-card">
+      <div>
+        <div class="floor-range">${escapeHtml(formatFloorBand(row))}</div>
+        <div class="floor-count">${row.items.length}${currentLang === 'en' ? ' items' : '件'}</div>
+      </div>
+      <div class="floor-items">
+        ${row.items.map(item => `
+          <button type="button" class="floor-item-chip" onclick="openModal(${item.no})">
+            <span class="cat-tag cat-tag-${item.category}">${escapeHtml(catLabel(item.category))}</span>
+            <span class="floor-item-no">No${item.no}</span>
+            <span>${escapeHtml(translateItemName(item))}</span>
+          </button>`).join('')}
+      </div>
+    </section>`).join('');
+}
 
 // ━━━ マスタリーボーナス一覧 ━━━
 const MASTERY_PRIORITY_ORDER = ['OPTバフ','XPバフ','ATKバフ','INTバフ','VITバフ','SPDバフ','LUKバフ'];
@@ -2687,6 +2864,7 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
     document.getElementById('toolbar').style.display = isList ? '' : 'none';
     document.getElementById('count-bar').style.display = isList ? '' : 'none';
     if (tab.dataset.tab === 'mastery') renderMastery();
+    if (tab.dataset.tab === 'floors') renderFloorDrops();
   });
 });
 
@@ -2740,6 +2918,8 @@ function unbOk() {
     buildSlots();
     buildSkillChecks();
     masteryMap = buildMasteryMap();
+    floorDropRows = buildFloorDropRows();
+    if (document.getElementById('tab-floors').classList.contains('active')) renderFloorDrops();
   }
   localStorage.setItem(UNB_KEY, String(allItems.length));
   localStorage.setItem(UNB_SIG_KEY, currentDataSignature);
