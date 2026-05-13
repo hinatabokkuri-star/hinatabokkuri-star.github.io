@@ -1223,6 +1223,13 @@ function formatSpawnArea(area) {
 function formatSpawnAreas(areas) {
   return (areas || []).map(formatSpawnArea).filter(Boolean);
 }
+function formatSpawnPoint(point) {
+  const value = typeof point === 'number' ? point : point?.m ?? point?.km ?? point?.point;
+  return Number.isFinite(value) ? `${value}m` : '';
+}
+function formatSpawnPoints(points) {
+  return (points || []).map(formatSpawnPoint).filter(Boolean);
+}
 function translatedSearchValues(item) {
   const values = [item.name, String(item.no)];
   if (i18nEn?.items?.[String(item.no)]) values.push(i18nEn.items[String(item.no)]);
@@ -1235,7 +1242,9 @@ function translatedSearchValues(item) {
     if (d.no != null && i18nEn?.items?.[String(d.no)]) values.push(i18nEn.items[String(d.no)]);
   });
   formatSpawnAreas(item.obtain_areas).forEach(area => values.push(area));
+  formatSpawnPoints(item.obtain_points).forEach(point => values.push(point));
   formatSpawnAreas(item.spawn_areas).forEach(area => values.push(area));
+  formatSpawnPoints(item.spawn_points).forEach(point => values.push(point));
   (item.mastery_bonus || []).forEach(b => {
     values.push(b.name || '', b.effect || '');
     if (i18nEn?.mastery?.[b.name]) values.push(i18nEn.mastery[b.name].name, i18nEn.mastery[b.name].effect || '');
@@ -1710,13 +1719,17 @@ function openModal(no) {
   const typeTag = monsterType
     ? `<span style="font-size:11px;color:var(--tag-ペット);margin-right:4px">[${escapeHtml(monsterType)}]</span>` : '';
   const obtainAreas = !isPet ? formatSpawnAreas(item.obtain_areas) : [];
-  const obtainHtml = obtainAreas.length ? `
+  const obtainPoints = !isPet ? formatSpawnPoints(item.obtain_points) : [];
+  const obtainLocations = [...obtainAreas, ...obtainPoints];
+  const obtainHtml = obtainLocations.length ? `
     <section><h3>${ui('obtainArea')}</h3>
-    <div class="area-list">${obtainAreas.map(area => `<span>${escapeHtml(area)}</span>`).join('')}</div></section>` : '';
+    <div class="area-list">${obtainLocations.map(location => `<span>${escapeHtml(location)}</span>`).join('')}</div></section>` : '';
   const spawnAreas = isPet ? formatSpawnAreas(item.spawn_areas) : [];
-  const spawnHtml = spawnAreas.length ? `
+  const spawnPoints = isPet ? formatSpawnPoints(item.spawn_points) : [];
+  const spawnLocations = [...spawnAreas, ...spawnPoints];
+  const spawnHtml = spawnLocations.length ? `
     <section><h3>${ui('spawnArea')}</h3>
-    <div class="area-list">${spawnAreas.map(area => `<span>${escapeHtml(area)}</span>`).join('')}</div></section>` : '';
+    <div class="area-list">${spawnLocations.map(location => `<span>${escapeHtml(location)}</span>`).join('')}</div></section>` : '';
   document.getElementById('modal-body').innerHTML = `
     <h2>${typeTag}${escapeHtml(translateItemName(item))}</h2>
     <div class="modal-sub"><span>No${item.no}</span><span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span></div>
@@ -2717,6 +2730,7 @@ function areaOverlapsBand(area, band) {
 }
 
 function formatFloorBand(row) {
+  if (row.kind === 'point') return `${row.point_m}m`;
   return `${row.start_km}km-${row.end_km}km`;
 }
 
@@ -2724,9 +2738,14 @@ function floorDropAreas(item) {
   return item.category === 'ペット' ? (item.spawn_areas || []) : (item.obtain_areas || []);
 }
 
+function floorDropPoints(item) {
+  return item.category === 'ペット' ? (item.spawn_points || []) : (item.obtain_points || []);
+}
+
 function buildFloorDropRows() {
-  const drops = allItems.filter(item => floorDropAreas(item).length);
-  const boundaries = [...new Set(drops.flatMap(item =>
+  const drops = allItems.filter(item => floorDropAreas(item).length || floorDropPoints(item).length);
+  const areaDrops = drops.filter(item => floorDropAreas(item).length);
+  const boundaries = [...new Set(areaDrops.flatMap(item =>
     floorDropAreas(item).flatMap(area => [area.start_km, area.end_km])
   ).filter(Number.isFinite))].sort((a, b) => a - b);
   const rows = [];
@@ -2738,7 +2757,24 @@ function buildFloorDropRows() {
       .sort((a, b) => CAT_ORDER[a.category] - CAT_ORDER[b.category] || a.no - b.no);
     if (items.length) rows.push({ ...band, items });
   }
-  return rows;
+  const pointRows = new Map();
+  drops.forEach(item => {
+    floorDropPoints(item).forEach(point => {
+      if (!Number.isFinite(point)) return;
+      if (!pointRows.has(point)) pointRows.set(point, []);
+      pointRows.get(point).push(item);
+    });
+  });
+  pointRows.forEach((items, point) => {
+    rows.push({
+      kind: 'point',
+      point_m: point,
+      start_km: point,
+      end_km: point,
+      items: items.sort((a, b) => CAT_ORDER[a.category] - CAT_ORDER[b.category] || a.no - b.no)
+    });
+  });
+  return rows.sort((a, b) => a.start_km - b.start_km || (a.kind === 'point' ? 1 : 0) - (b.kind === 'point' ? 1 : 0) || a.end_km - b.end_km);
 }
 
 function floorItemMatches(item, q) {
@@ -2759,7 +2795,7 @@ function getFilteredFloorRows() {
   const q = floorSearch.toLowerCase();
   return floorDropRows.map(row => {
     const range = formatFloorBand(row).toLowerCase();
-    const bareRange = `${row.start_km}-${row.end_km}`;
+    const bareRange = row.kind === 'point' ? String(row.point_m) : `${row.start_km}-${row.end_km}`;
     const rangeMatches = q && (range.includes(q) || bareRange.includes(q));
     const items = row.items.filter(item => {
       if (currentFloorCat !== 'all' && item.category !== currentFloorCat) return false;

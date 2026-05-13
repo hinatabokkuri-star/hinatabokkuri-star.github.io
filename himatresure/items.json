@@ -307,6 +307,10 @@
         "end_km": 3570
       }
     ],
+    "obtain_points": [
+      106,
+      412
+    ],
     "skills": [
       {
         "type": "A",
@@ -424,6 +428,9 @@
         "start_km": 4670,
         "end_km": 4710
       }
+    ],
+    "obtain_points": [
+      52
     ],
     "skills": [
       {
@@ -546,6 +553,9 @@
         "start_km": 3470,
         "end_km": 3510
       }
+    ],
+    "obtain_points": [
+      334
     ],
     "skills": [
       {
@@ -1295,6 +1305,9 @@
         "end_km": 3470
       }
     ],
+    "obtain_points": [
+      848
+    ],
     "skills": [
       {
         "type": "M",
@@ -1621,6 +1634,9 @@
         "end_km": 1290
       }
     ],
+    "obtain_points": [
+      1106
+    ],
     "skills": [
       {
         "type": "M",
@@ -1836,6 +1852,9 @@
         "start_km": 1450,
         "end_km": 1470
       }
+    ],
+    "obtain_points": [
+      1768
     ],
     "skills": [
       {
@@ -2288,6 +2307,9 @@
         "start_km": 1670,
         "end_km": 1710
       }
+    ],
+    "obtain_points": [
+      4168
     ],
     "skills": [
       {
@@ -3393,6 +3415,9 @@
         "end_km": 3470
       }
     ],
+    "obtain_points": [
+      1613
+    ],
     "skills": [
       {
         "type": "M",
@@ -3718,6 +3743,9 @@
         "start_km": 3830,
         "end_km": 3870
       }
+    ],
+    "obtain_points": [
+      1926
     ],
     "skills": [
       {
@@ -4536,6 +4564,9 @@
         "end_km": 2630
       }
     ],
+    "obtain_points": [
+      3970
+    ],
     "skills": [
       {
         "type": "M",
@@ -5130,6 +5161,9 @@
         "end_km": 4330
       }
     ],
+    "obtain_points": [
+      966
+    ],
     "skills": [
       {
         "type": "A",
@@ -5578,6 +5612,9 @@
         "end_km": 4670
       }
     ],
+    "obtain_points": [
+      2850
+    ],
     "skills": [
       {
         "type": "M",
@@ -6010,6 +6047,9 @@
         "end_km": 3130
       }
     ],
+    "obtain_points": [
+      3186
+    ],
     "skills": [
       {
         "type": "M",
@@ -6294,6 +6334,9 @@
         "start_km": 4450,
         "end_km": 4490
       }
+    ],
+    "obtain_points": [
+      732
     ]
   },
   {
@@ -7122,6 +7165,9 @@
         "end_km": 3450
       }
     ],
+    "obtain_points": [
+      3446
+    ],
     "skills": [
       {
         "type": "A",
@@ -7451,6 +7497,9 @@
         "start_km": 2770,
         "end_km": 2810
       }
+    ],
+    "obtain_points": [
+      412
     ],
     "skills": [
       {
@@ -8848,6 +8897,9 @@
         "end_km": 4330
       }
     ],
+    "obtain_points": [
+      664
+    ],
     "skills": [
       {
         "type": "M",
@@ -8945,6 +8997,9 @@
         "start_km": 4370,
         "end_km": 4410
       }
+    ],
+    "obtain_points": [
+      590
     ],
     "skills": [
       {
@@ -9500,6 +9555,9 @@
         "end_km": 4790
       }
     ],
+    "obtain_points": [
+      252
+    ],
     "skills": [
       {
         "type": "M",
@@ -9692,6 +9750,9 @@
         "end_km": 2810
       }
     ],
+    "obtain_points": [
+      1233
+    ],
     "skills": [
       {
         "type": "M",
@@ -9789,6 +9850,9 @@
         "start_km": 4310,
         "end_km": 4330
       }
+    ],
+    "obtain_points": [
+      2968
     ],
     "skills": [
       {
@@ -12920,6 +12984,9 @@
         "start_km": 4870,
         "end_km": 4910
       }
+    ],
+    "obtain_points": [
+      2434
     ]
   },
   {
@@ -13284,6 +13351,9 @@
         "end_km": 4090
       }
     ],
+    "obtain_points": [
+      1366
+    ],
     "skills": [
       {
         "type": "A",
@@ -13381,6 +13451,9 @@
         "start_km": 4370,
         "end_km": 4390
       }
+    ],
+    "obtain_points": [
+      3446
     ],
     "skills": [
       {
@@ -14228,6 +14301,9 @@
         "start_km": 4790,
         "end_km": 4810
       }
+    ],
+    "obtain_points": [
+      3628
     ]
   },
   {
@@ -14436,6 +14512,9 @@
         "start_km": 4710,
         "end_km": 4730
       }
+    ],
+    "obtain_points": [
+      3074
     ]
   },
   {
@@ -14648,6 +14727,9 @@
         "start_km": 4530,
         "end_km": 4570
       }
+    ],
+    "obtain_points": [
+      3806
     ]
   },
   {
@@ -14966,6 +15048,9 @@
         "start_km": 4850,
         "end_km": 4890
       }
+    ],
+    "obtain_points": [
+      4168
     ]
   },
   {
@@ -15459,6 +15544,9 @@
         "start_km": 4970,
         "end_km": 4990
       }
+    ],
+    "obtain_points": [
+      2048
     ],
     "skills": [
       {
@@ -16002,6 +16090,10 @@
         "end_km": 2470
       }
     ],
+    "obtain_points": [
+      848,
+      2154
+    ],
     "skills": [
       {
         "type": "M",
@@ -16099,6 +16191,9 @@
         "start_km": 2810,
         "end_km": 2850
       }
+    ],
+    "obtain_points": [
+      590
     ],
     "skills": [
       {
@@ -16270,6 +16365,9 @@
         "start_km": 4870,
         "end_km": 4910
       }
+    ],
+    "obtain_points": [
+      1485
     ]
   },
   {
@@ -16299,6 +16397,9 @@
         "start_km": 2870,
         "end_km": 2910
       }
+    ],
+    "obtain_points": [
+      334
     ],
     "skills": [
       {
@@ -16402,6 +16503,9 @@
         "end_km": 4910
       }
     ],
+    "obtain_points": [
+      166
+    ],
     "skills": [
       {
         "type": "A",
@@ -16504,6 +16608,9 @@
         "end_km": 4770
       }
     ],
+    "obtain_points": [
+      2434
+    ],
     "skills": [
       {
         "type": "A",
@@ -16601,6 +16708,9 @@
         "start_km": 1450,
         "end_km": 1470
       }
+    ],
+    "obtain_points": [
+      4650
     ],
     "skills": [
       {
@@ -16704,6 +16814,9 @@
         "end_km": 3070
       }
     ],
+    "obtain_points": [
+      52
+    ],
     "skills": [
       {
         "type": "A",
@@ -16802,6 +16915,9 @@
         "end_km": 3710
       }
     ],
+    "obtain_points": [
+      3628
+    ],
     "skills": [
       {
         "type": "M",
@@ -16899,6 +17015,9 @@
         "start_km": 4290,
         "end_km": 4330
       }
+    ],
+    "obtain_points": [
+      590
     ],
     "skills": [
       {
@@ -17004,6 +17123,9 @@
         "start_km": 4850,
         "end_km": 4870
       }
+    ],
+    "obtain_points": [
+      106
     ],
     "skills": [
       {
@@ -17171,6 +17293,9 @@
         "start_km": 4570,
         "end_km": 4610
       }
+    ],
+    "obtain_points": [
+      1926
     ]
   },
   {
@@ -17273,6 +17398,9 @@
         "start_km": 4710,
         "end_km": 4750
       }
+    ],
+    "obtain_points": [
+      1233
     ]
   },
   {
@@ -17302,6 +17430,9 @@
         "start_km": 2830,
         "end_km": 2850
       }
+    ],
+    "obtain_points": [
+      412
     ],
     "skills": [
       {
@@ -17473,6 +17604,9 @@
         "start_km": 4790,
         "end_km": 4830
       }
+    ],
+    "obtain_points": [
+      3446
     ]
   },
   {
@@ -17522,6 +17656,9 @@
         "start_km": 3430,
         "end_km": 3450
       }
+    ],
+    "obtain_points": [
+      664
     ],
     "skills": [
       {
@@ -17624,6 +17761,9 @@
         "start_km": 3310,
         "end_km": 3330
       }
+    ],
+    "obtain_points": [
+      3970
     ],
     "skills": [
       {
@@ -17795,6 +17935,9 @@
         "start_km": 4770,
         "end_km": 4790
       }
+    ],
+    "obtain_points": [
+      2968
     ]
   },
   {
@@ -17893,6 +18036,9 @@
         "start_km": 4210,
         "end_km": 4230
       }
+    ],
+    "obtain_points": [
+      1613
     ]
   },
   {
@@ -17926,6 +18072,9 @@
         "start_km": 1250,
         "end_km": 1290
       }
+    ],
+    "obtain_points": [
+      1106
     ],
     "skills": [
       {
@@ -18024,6 +18173,9 @@
         "start_km": 4750,
         "end_km": 4770
       }
+    ],
+    "obtain_points": [
+      4388
     ],
     "skills": [
       {
@@ -18195,6 +18347,9 @@
         "start_km": 4830,
         "end_km": 4870
       }
+    ],
+    "obtain_points": [
+      3186
     ]
   },
   {
@@ -18293,6 +18448,9 @@
         "start_km": 4970,
         "end_km": 5010
       }
+    ],
+    "obtain_points": [
+      2154
     ]
   },
   {
@@ -18326,6 +18484,9 @@
         "start_km": 4650,
         "end_km": 4690
       }
+    ],
+    "obtain_points": [
+      2048
     ],
     "skills": [
       {
@@ -18493,6 +18654,9 @@
         "start_km": 4810,
         "end_km": 4830
       }
+    ],
+    "obtain_points": [
+      2850
     ]
   },
   {
@@ -18591,6 +18755,9 @@
         "start_km": 4490,
         "end_km": 4510
       }
+    ],
+    "obtain_points": [
+      4168
     ]
   },
   {
@@ -18689,6 +18856,9 @@
         "start_km": 4370,
         "end_km": 4390
       }
+    ],
+    "obtain_points": [
+      732
     ]
   },
   {
@@ -18787,6 +18957,9 @@
         "start_km": 2790,
         "end_km": 2810
       }
+    ],
+    "obtain_points": [
+      1366
     ]
   },
   {
@@ -18820,6 +18993,9 @@
         "start_km": 3030,
         "end_km": 3050
       }
+    ],
+    "obtain_points": [
+      2290
     ],
     "skills": [
       {
@@ -18922,6 +19098,9 @@
         "start_km": 1210,
         "end_km": 1250
       }
+    ],
+    "obtain_points": [
+      3294
     ],
     "skills": [
       {
@@ -19089,6 +19268,9 @@
         "start_km": 4970,
         "end_km": 4990
       }
+    ],
+    "obtain_points": [
+      2588
     ]
   },
   {
@@ -19118,6 +19300,9 @@
         "start_km": 3590,
         "end_km": 3630
       }
+    ],
+    "obtain_points": [
+      2712
     ],
     "skills": [
       {
@@ -19301,6 +19486,9 @@
         "start_km": 4850,
         "end_km": 4890
       }
+    ],
+    "obtain_points": [
+      506
     ]
   },
   {
@@ -20043,6 +20231,9 @@
         "end_km": 5010
       }
     ],
+    "obtain_points": [
+      52
+    ],
     "skills": [
       {
         "type": "M",
@@ -20620,6 +20811,9 @@
         "start_km": 2770,
         "end_km": 2810
       }
+    ],
+    "obtain_points": [
+      106
     ],
     "skills": [
       {
@@ -21337,6 +21531,9 @@
         "end_km": 3450
       }
     ],
+    "obtain_points": [
+      166
+    ],
     "skills": [
       {
         "type": "A",
@@ -21549,6 +21746,9 @@
         "end_km": 730
       }
     ],
+    "obtain_points": [
+      3806
+    ],
     "skills": [
       {
         "type": "A",
@@ -21651,6 +21851,9 @@
         "end_km": 3750
       }
     ],
+    "obtain_points": [
+      252
+    ],
     "skills": [
       {
         "type": "M",
@@ -21752,6 +21955,9 @@
         "start_km": 3450,
         "end_km": 3470
       }
+    ],
+    "obtain_points": [
+      3294
     ],
     "skills": [
       {
@@ -22327,6 +22533,9 @@
         "end_km": 4390
       }
     ],
+    "obtain_points": [
+      334
+    ],
     "skills": [
       {
         "type": "M",
@@ -22428,6 +22637,9 @@
         "start_km": 3350,
         "end_km": 3390
       }
+    ],
+    "obtain_points": [
+      2712
     ],
     "skills": [
       {
@@ -22661,6 +22873,9 @@
         "end_km": 4990
       }
     ],
+    "obtain_points": [
+      412
+    ],
     "skills": [
       {
         "type": "A",
@@ -22762,6 +22977,9 @@
         "start_km": 2590,
         "end_km": 2630
       }
+    ],
+    "obtain_points": [
+      4650
     ],
     "skills": [
       {
@@ -23345,6 +23563,9 @@
         "end_km": 4770
       }
     ],
+    "obtain_points": [
+      506
+    ],
     "skills": [
       {
         "type": "A",
@@ -23446,6 +23667,10 @@
         "start_km": 4550,
         "end_km": 4590
       }
+    ],
+    "obtain_points": [
+      166,
+      590
     ],
     "skills": [
       {
@@ -23663,6 +23888,9 @@
         "end_km": 4670
       }
     ],
+    "obtain_points": [
+      334
+    ],
     "skills": [
       {
         "type": "A",
@@ -23784,6 +24012,9 @@
         "start_km": 4730,
         "end_km": 4750
       }
+    ],
+    "obtain_points": [
+      664
     ],
     "skills": [
       {
@@ -24839,6 +25070,10 @@
         "end_km": 3370
       }
     ],
+    "obtain_points": [
+      966,
+      1768
+    ],
     "skills": [
       {
         "type": "M",
@@ -25051,6 +25286,9 @@
         "end_km": 2810
       }
     ],
+    "obtain_points": [
+      1106
+    ],
     "skills": [
       {
         "type": "A",
@@ -25152,6 +25390,9 @@
         "start_km": 3410,
         "end_km": 3430
       }
+    ],
+    "obtain_points": [
+      2290
     ],
     "skills": [
       {
@@ -25400,6 +25641,9 @@
         "start_km": 4470,
         "end_km": 4510
       }
+    ],
+    "obtain_points": [
+      1106
     ],
     "skills": [
       {
@@ -25730,6 +25974,10 @@
         "start_km": 3110,
         "end_km": 3150
       }
+    ],
+    "obtain_points": [
+      1366,
+      3074
     ],
     "skills": [
       {
@@ -26080,6 +26328,9 @@
         "start_km": 3990,
         "end_km": 4030
       }
+    ],
+    "obtain_points": [
+      1613
     ],
     "skills": [
       {
@@ -26491,6 +26742,9 @@
         "start_km": 4670,
         "end_km": 4710
       }
+    ],
+    "obtain_points": [
+      1768
     ]
   },
   {
@@ -26939,6 +27193,9 @@
         "start_km": 4010,
         "end_km": 4030
       }
+    ],
+    "obtain_points": [
+      1926
     ]
   },
   {
@@ -26972,6 +27229,9 @@
         "start_km": 4790,
         "end_km": 4830
       }
+    ],
+    "obtain_points": [
+      732
     ],
     "skills": [
       {
@@ -27204,6 +27464,9 @@
         "start_km": 3850,
         "end_km": 3870
       }
+    ],
+    "obtain_points": [
+      2290
     ],
     "skills": [
       {
@@ -27509,6 +27772,9 @@
         "start_km": 4850,
         "end_km": 4870
       }
+    ],
+    "obtain_points": [
+      2434
     ]
   },
   {
@@ -27783,6 +28049,9 @@
         "end_km": 4570
       }
     ],
+    "obtain_points": [
+      2712
+    ],
     "skills": [
       {
         "type": "A",
@@ -27905,6 +28174,9 @@
         "end_km": 3050
       }
     ],
+    "obtain_points": [
+      2850
+    ],
     "skills": [
       {
         "type": "M",
@@ -28002,6 +28274,9 @@
         "start_km": 3810,
         "end_km": 3850
       }
+    ],
+    "obtain_points": [
+      252
     ],
     "skills": [
       {
@@ -28109,6 +28384,10 @@
         "end_km": 4550
       }
     ],
+    "obtain_points": [
+      1485,
+      2968
+    ],
     "skills": [
       {
         "type": "A",
@@ -28214,6 +28493,9 @@
         "start_km": 3090,
         "end_km": 3130
       }
+    ],
+    "obtain_points": [
+      3186
     ],
     "skills": [
       {
@@ -28442,6 +28724,9 @@
         "start_km": 4450,
         "end_km": 4490
       }
+    ],
+    "obtain_points": [
+      3294
     ],
     "skills": [
       {
@@ -28845,6 +29130,9 @@
         "start_km": 4710,
         "end_km": 4730
       }
+    ],
+    "obtain_points": [
+      2588
     ]
   },
   {
@@ -28894,6 +29182,9 @@
         "start_km": 2250,
         "end_km": 2270
       }
+    ],
+    "obtain_points": [
+      3628
     ],
     "skills": [
       {
@@ -29114,6 +29405,10 @@
         "start_km": 3250,
         "end_km": 3290
       }
+    ],
+    "obtain_points": [
+      966,
+      3806
     ],
     "skills": [
       {
@@ -29415,6 +29710,9 @@
         "start_km": 4810,
         "end_km": 4850
       }
+    ],
+    "obtain_points": [
+      4168
     ]
   },
   {
@@ -29464,6 +29762,9 @@
         "start_km": 3990,
         "end_km": 4030
       }
+    ],
+    "obtain_points": [
+      4388
     ],
     "skills": [
       {
@@ -29761,6 +30062,9 @@
         "start_km": 4610,
         "end_km": 4630
       }
+    ],
+    "obtain_points": [
+      4650
     ]
   },
   {
@@ -29908,6 +30212,9 @@
         "start_km": 1390,
         "end_km": 1410
       }
+    ],
+    "obtain_points": [
+      52
     ],
     "skills": [
       {
@@ -30079,6 +30386,9 @@
         "start_km": 4790,
         "end_km": 4810
       }
+    ],
+    "obtain_points": [
+      1768
     ]
   },
   {
@@ -30345,6 +30655,9 @@
         "end_km": 3850
       }
     ],
+    "obtain_points": [
+      4650
+    ],
     "skills": [
       {
         "type": "A",
@@ -30442,6 +30755,9 @@
         "start_km": 3150,
         "end_km": 3170
       }
+    ],
+    "obtain_points": [
+      506
     ],
     "skills": [
       {
@@ -31127,6 +31443,9 @@
         "end_km": 2270
       }
     ],
+    "obtain_points": [
+      106
+    ],
     "skills": [
       {
         "type": "A",
@@ -31228,6 +31547,9 @@
         "start_km": 1650,
         "end_km": 1690
       }
+    ],
+    "obtain_points": [
+      4168
     ],
     "skills": [
       {
@@ -31669,6 +31991,9 @@
         "end_km": 2850
       }
     ],
+    "obtain_points": [
+      166
+    ],
     "skills": [
       {
         "type": "A",
@@ -31998,6 +32323,9 @@
         "start_km": 2110,
         "end_km": 2130
       }
+    ],
+    "obtain_points": [
+      3970
     ],
     "skills": [
       {
@@ -33482,6 +33810,9 @@
         "end_km": 4830
       }
     ],
+    "obtain_points": [
+      506
+    ],
     "skills": [
       {
         "type": "M",
@@ -33583,6 +33914,9 @@
         "start_km": 4350,
         "end_km": 4390
       }
+    ],
+    "obtain_points": [
+      664
     ],
     "skills": [
       {
@@ -34138,6 +34472,9 @@
         "end_km": 3130
       }
     ],
+    "obtain_points": [
+      3186
+    ],
     "skills": [
       {
         "type": "A",
@@ -34578,6 +34915,9 @@
         "end_km": 3330
       }
     ],
+    "obtain_points": [
+      2712
+    ],
     "skills": [
       {
         "type": "A",
@@ -34675,6 +35015,9 @@
         "start_km": 4530,
         "end_km": 4570
       }
+    ],
+    "obtain_points": [
+      848
     ],
     "skills": [
       {
@@ -34888,6 +35231,9 @@
         "end_km": 4570
       }
     ],
+    "obtain_points": [
+      966
+    ],
     "skills": [
       {
         "type": "A",
@@ -34985,6 +35331,9 @@
         "start_km": 2490,
         "end_km": 2530
       }
+    ],
+    "obtain_points": [
+      2588
     ],
     "skills": [
       {
@@ -35156,6 +35505,9 @@
         "start_km": 4230,
         "end_km": 4250
       }
+    ],
+    "obtain_points": [
+      2968
     ]
   },
   {
@@ -35296,6 +35648,9 @@
         "end_km": 4970
       }
     ],
+    "obtain_points": [
+      1233
+    ],
     "skills": [
       {
         "type": "A",
@@ -35398,6 +35753,9 @@
         "end_km": 2790
       }
     ],
+    "obtain_points": [
+      3074
+    ],
     "skills": [
       {
         "type": "A",
@@ -35499,6 +35857,9 @@
         "start_km": 4730,
         "end_km": 4770
       }
+    ],
+    "obtain_points": [
+      2434
     ],
     "skills": [
       {
@@ -35780,6 +36141,9 @@
         "start_km": 3590,
         "end_km": 3630
       }
+    ],
+    "obtain_points": [
+      1366
     ]
   },
   {
@@ -35903,6 +36267,9 @@
         "start_km": 4370,
         "end_km": 4410
       }
+    ],
+    "obtain_points": [
+      1485
     ],
     "skills": [
       {
@@ -36104,6 +36471,9 @@
         "end_km": 4790
       }
     ],
+    "obtain_points": [
+      1613
+    ],
     "skills": [
       {
         "type": "M",
@@ -36201,6 +36571,9 @@
         "start_km": 2790,
         "end_km": 2830
       }
+    ],
+    "obtain_points": [
+      2290
     ],
     "skills": [
       {
@@ -36482,6 +36855,9 @@
         "start_km": 3990,
         "end_km": 4030
       }
+    ],
+    "obtain_points": [
+      3806
     ]
   },
   {
@@ -36690,6 +37066,9 @@
         "start_km": 3850,
         "end_km": 3870
       }
+    ],
+    "obtain_points": [
+      1926
     ]
   },
   {
@@ -36788,6 +37167,9 @@
         "start_km": 2830,
         "end_km": 2850
       }
+    ],
+    "obtain_points": [
+      2850
     ]
   },
   {
@@ -36890,6 +37272,9 @@
         "start_km": 4150,
         "end_km": 4170
       }
+    ],
+    "obtain_points": [
+      2154
     ]
   },
   {
@@ -36992,6 +37377,9 @@
         "start_km": 4850,
         "end_km": 4870
       }
+    ],
+    "obtain_points": [
+      2048
     ]
   },
   {
@@ -37432,6 +37820,9 @@
         "start_km": 3030,
         "end_km": 3050
       }
+    ],
+    "obtain_points": [
+      4388
     ]
   },
   {
@@ -37978,6 +38369,9 @@
         "start_km": 4450,
         "end_km": 4470
       }
+    ],
+    "obtain_points": [
+      3294
     ]
   },
   {
@@ -38142,6 +38536,9 @@
         "end_km": 5010
       }
     ],
+    "obtain_points": [
+      52
+    ],
     "skills": [
       {
         "type": "A",
@@ -38259,6 +38656,9 @@
         "start_km": 4470,
         "end_km": 4510
       }
+    ],
+    "obtain_points": [
+      3074
     ],
     "skills": [
       {
@@ -38378,6 +38778,9 @@
         "end_km": 4950
       }
     ],
+    "obtain_points": [
+      848
+    ],
     "skills": [
       {
         "type": "A",
@@ -38496,6 +38899,9 @@
         "end_km": 3730
       }
     ],
+    "obtain_points": [
+      252
+    ],
     "skills": [
       {
         "type": "A",
@@ -38609,6 +39015,9 @@
         "start_km": 4970,
         "end_km": 4990
       }
+    ],
+    "obtain_points": [
+      2048
     ],
     "skills": [
       {
@@ -38792,6 +39201,9 @@
         "start_km": 4930,
         "end_km": 4970
       }
+    ],
+    "obtain_points": [
+      732
     ]
   },
   {
@@ -38841,6 +39253,9 @@
         "start_km": 4710,
         "end_km": 4730
       }
+    ],
+    "obtain_points": [
+      3628
     ],
     "skills": [
       {
@@ -38964,6 +39379,9 @@
         "end_km": 4790
       }
     ],
+    "obtain_points": [
+      2290
+    ],
     "skills": [
       {
         "type": "A",
@@ -39081,6 +39499,9 @@
         "start_km": 3190,
         "end_km": 3210
       }
+    ],
+    "obtain_points": [
+      3186
     ],
     "skills": [
       {
@@ -39203,6 +39624,9 @@
         "start_km": 4930,
         "end_km": 4950
       }
+    ],
+    "obtain_points": [
+      664
     ],
     "skills": [
       {
@@ -39390,6 +39814,9 @@
         "start_km": 3470,
         "end_km": 3510
       }
+    ],
+    "obtain_points": [
+      2048
     ]
   },
   {
@@ -39439,6 +39866,9 @@
         "start_km": 4150,
         "end_km": 4170
       }
+    ],
+    "obtain_points": [
+      2850
     ],
     "skills": [
       {
@@ -39558,6 +39988,9 @@
         "end_km": 4970
       }
     ],
+    "obtain_points": [
+      2968
+    ],
     "skills": [
       {
         "type": "A",
@@ -39672,6 +40105,9 @@
         "end_km": 3150
       }
     ],
+    "obtain_points": [
+      2588
+    ],
     "skills": [
       {
         "type": "M",
@@ -39785,6 +40221,9 @@
         "start_km": 4510,
         "end_km": 4530
       }
+    ],
+    "obtain_points": [
+      1233
     ],
     "skills": [
       {
@@ -39904,6 +40343,9 @@
         "end_km": 2890
       }
     ],
+    "obtain_points": [
+      106
+    ],
     "skills": [
       {
         "type": "A",
@@ -40009,6 +40451,10 @@
         "start_km": 4350,
         "end_km": 4390
       }
+    ],
+    "obtain_points": [
+      590,
+      4388
     ],
     "skills": [
       {
@@ -40128,6 +40574,9 @@
         "end_km": 4070
       }
     ],
+    "obtain_points": [
+      166
+    ],
     "skills": [
       {
         "type": "A",
@@ -40245,6 +40694,9 @@
         "start_km": 4450,
         "end_km": 4490
       }
+    ],
+    "obtain_points": [
+      2712
     ],
     "skills": [
       {
@@ -40364,6 +40816,9 @@
         "end_km": 4170
       }
     ],
+    "obtain_points": [
+      412
+    ],
     "skills": [
       {
         "type": "A",
@@ -40482,6 +40937,9 @@
         "end_km": 4910
       }
     ],
+    "obtain_points": [
+      506
+    ],
     "skills": [
       {
         "type": "A",
@@ -40595,6 +41053,9 @@
         "start_km": 4990,
         "end_km": 5010
       }
+    ],
+    "obtain_points": [
+      732
     ],
     "skills": [
       {
@@ -40717,6 +41178,9 @@
         "start_km": 4230,
         "end_km": 4250
       }
+    ],
+    "obtain_points": [
+      1485
     ],
     "skills": [
       {
@@ -40844,6 +41308,10 @@
         "end_km": 4730
       }
     ],
+    "obtain_points": [
+      1768,
+      4988
+    ],
     "skills": [
       {
         "type": "A",
@@ -40965,6 +41433,10 @@
         "start_km": 4230,
         "end_km": 4270
       }
+    ],
+    "obtain_points": [
+      2154,
+      4988
     ],
     "skills": [
       {
@@ -41096,6 +41568,10 @@
         "end_km": 4750
       }
     ],
+    "obtain_points": [
+      1926,
+      4988
+    ],
     "skills": [
       {
         "type": "A",
@@ -41217,6 +41693,10 @@
         "start_km": 2790,
         "end_km": 2830
       }
+    ],
+    "obtain_points": [
+      1233,
+      4988
     ],
     "skills": [
       {
@@ -41340,6 +41820,10 @@
         "end_km": 3790
       }
     ],
+    "obtain_points": [
+      3806,
+      4988
+    ],
     "skills": [
       {
         "type": "A",
@@ -41457,6 +41941,9 @@
         "start_km": 4570,
         "end_km": 4610
       }
+    ],
+    "obtain_points": [
+      848
     ],
     "skills": [
       {
@@ -41580,6 +42067,9 @@
         "end_km": 4850
       }
     ],
+    "obtain_points": [
+      3446
+    ],
     "skills": [
       {
         "type": "A",
@@ -41697,6 +42187,9 @@
         "start_km": 4530,
         "end_km": 4570
       }
+    ],
+    "obtain_points": [
+      1106
     ],
     "skills": [
       {
@@ -41888,6 +42381,9 @@
         "start_km": 3450,
         "end_km": 3470
       }
+    ],
+    "obtain_points": [
+      334
     ]
   },
   {
@@ -41953,6 +42449,9 @@
         "start_km": 4030,
         "end_km": 4050
       }
+    ],
+    "obtain_points": [
+      3446
     ],
     "skills": [
       {
@@ -42140,6 +42639,9 @@
         "start_km": 4710,
         "end_km": 4750
       }
+    ],
+    "obtain_points": [
+      2434
     ]
   },
   {
@@ -42258,6 +42760,9 @@
         "start_km": 4830,
         "end_km": 4850
       }
+    ],
+    "obtain_points": [
+      1366
     ]
   },
   {
@@ -42376,6 +42881,9 @@
         "start_km": 4590,
         "end_km": 4610
       }
+    ],
+    "obtain_points": [
+      3970
     ]
   },
   {
@@ -42494,6 +43002,9 @@
         "start_km": 4850,
         "end_km": 4890
       }
+    ],
+    "obtain_points": [
+      4650
     ]
   },
   {
@@ -42531,6 +43042,10 @@
         "start_km": 4190,
         "end_km": 4210
       }
+    ],
+    "obtain_points": [
+      3628,
+      4388
     ],
     "skills": [
       {
@@ -42718,6 +43233,9 @@
         "start_km": 3150,
         "end_km": 3170
       }
+    ],
+    "obtain_points": [
+      3074
     ]
   },
   {
@@ -42767,6 +43285,9 @@
         "start_km": 3550,
         "end_km": 3570
       }
+    ],
+    "obtain_points": [
+      966
     ],
     "skills": [
       {
@@ -42889,6 +43410,9 @@
         "start_km": 4910,
         "end_km": 4930
       }
+    ],
+    "obtain_points": [
+      252
     ],
     "skills": [
       {
@@ -43080,6 +43604,9 @@
         "start_km": 4230,
         "end_km": 4250
       }
+    ],
+    "obtain_points": [
+      2588
     ]
   },
   {
@@ -43198,6 +43725,9 @@
         "start_km": 4610,
         "end_km": 4650
       }
+    ],
+    "obtain_points": [
+      3294
     ]
   },
   {
@@ -43247,6 +43777,9 @@
         "start_km": 3810,
         "end_km": 3850
       }
+    ],
+    "obtain_points": [
+      3970
     ],
     "skills": [
       {
@@ -43438,6 +43971,9 @@
         "start_km": 4870,
         "end_km": 4890
       }
+    ],
+    "obtain_points": [
+      2154
     ]
   },
   {
@@ -43487,6 +44023,9 @@
         "start_km": 3590,
         "end_km": 3630
       }
+    ],
+    "obtain_points": [
+      1613
     ],
     "skills": [
       {
@@ -43605,6 +44144,9 @@
         "start_km": 4790,
         "end_km": 4810
       }
+    ],
+    "obtain_points": [
+      1485
     ],
     "skills": [
       {
@@ -44256,6 +44798,9 @@
     "name": "キラーサーペント",
     "monster_type": "リザード",
     "spawn_areas": [],
+    "spawn_points": [
+      52
+    ],
     "drop_items": [
       {
         "no": 182,
@@ -44925,6 +45470,9 @@
     "name": "キャタピラー",
     "monster_type": "インセクト",
     "spawn_areas": [],
+    "spawn_points": [
+      106
+    ],
     "drop_items": [
       {
         "no": 187,
@@ -45713,6 +46261,9 @@
     "name": "ハングリードッグ",
     "monster_type": "アニマル",
     "spawn_areas": [],
+    "spawn_points": [
+      166
+    ],
     "drop_items": [
       {
         "no": 193,
@@ -46382,6 +46933,9 @@
     "name": "マンイーター",
     "monster_type": "メダマ",
     "spawn_areas": [],
+    "spawn_points": [
+      252
+    ],
     "drop_items": [
       {
         "no": 348,
@@ -47124,6 +47678,9 @@
     ],
     "monster_type": "スライム",
     "spawn_areas": [],
+    "spawn_points": [
+      334
+    ],
     "drop_items": [
       {
         "no": 5,
@@ -47728,6 +48285,9 @@
     "name": "タイラント",
     "monster_type": "リザード",
     "spawn_areas": [],
+    "spawn_points": [
+      412
+    ],
     "drop_items": [
       {
         "no": 205,
@@ -48466,6 +49026,9 @@
     ],
     "monster_type": "アンデッド",
     "spawn_areas": [],
+    "spawn_points": [
+      506
+    ],
     "drop_items": [
       {
         "no": 211,
@@ -48955,6 +49518,9 @@
     "name": "ゴブリンギャング",
     "monster_type": "ゴブリン",
     "spawn_areas": [],
+    "spawn_points": [
+      590
+    ],
     "drop_items": [
       {
         "no": 212,
@@ -49624,6 +50190,9 @@
     "name": "キラーアント",
     "monster_type": "インセクト",
     "spawn_areas": [],
+    "spawn_points": [
+      664
+    ],
     "drop_items": [
       {
         "no": 215,
@@ -50350,6 +50919,9 @@
     ],
     "monster_type": "デビル",
     "spawn_areas": [],
+    "spawn_points": [
+      732
+    ],
     "drop_items": [
       {
         "no": 169,
@@ -50946,6 +51518,9 @@
     "name": "ウンディーネ",
     "monster_type": null,
     "spawn_areas": [],
+    "spawn_points": [
+      848
+    ],
     "drop_items": [
       {
         "no": 347,
@@ -51504,6 +52079,9 @@
     "name": "バトルクラブ",
     "monster_type": "アームド",
     "spawn_areas": [],
+    "spawn_points": [
+      966
+    ],
     "drop_items": [
       {
         "no": 224,
@@ -52062,6 +52640,9 @@
     "name": "サボキング",
     "monster_type": null,
     "spawn_areas": [],
+    "spawn_points": [
+      1106
+    ],
     "drop_items": [
       {
         "no": 229,
@@ -52723,6 +53304,9 @@
     "name": "ダチョーン",
     "monster_type": "アニマル",
     "spawn_areas": [],
+    "spawn_points": [
+      1233
+    ],
     "drop_items": [
       {
         "no": 359,
@@ -53346,6 +53930,9 @@
     ],
     "monster_type": "リザード",
     "spawn_areas": [],
+    "spawn_points": [
+      1366
+    ],
     "drop_items": [
       {
         "no": 232,
@@ -53597,6 +54184,9 @@
     "name": "ゴブリンロード",
     "monster_type": "ゴブリン",
     "spawn_areas": [],
+    "spawn_points": [
+      1485
+    ],
     "drop_items": [
       {
         "no": 367,
@@ -54335,6 +54925,9 @@
     ],
     "monster_type": "アニマル",
     "spawn_areas": [],
+    "spawn_points": [
+      1613
+    ],
     "drop_items": [
       {
         "no": 235,
@@ -55030,6 +55623,9 @@
     "name": "ブレイドホース",
     "monster_type": "アームド",
     "spawn_areas": [],
+    "spawn_points": [
+      1768
+    ],
     "drop_items": [
       {
         "no": 238,
@@ -55687,6 +56283,9 @@
     "name": "イエティ",
     "monster_type": "アニマル",
     "spawn_areas": [],
+    "spawn_points": [
+      1926
+    ],
     "drop_items": [
       {
         "no": 242,
@@ -56195,6 +56794,9 @@
     ],
     "monster_type": "メダマ",
     "spawn_areas": [],
+    "spawn_points": [
+      2048
+    ],
     "drop_items": [
       {
         "no": 349,
@@ -56565,6 +57167,9 @@
     "name": "ゴッドアイ",
     "monster_type": "メダマ",
     "spawn_areas": [],
+    "spawn_points": [
+      2154
+    ],
     "drop_items": [
       {
         "no": 369,
@@ -57073,6 +57678,9 @@
     ],
     "monster_type": "アニマル",
     "spawn_areas": [],
+    "spawn_points": [
+      2290
+    ],
     "drop_items": [
       {
         "no": 171,
@@ -57443,6 +58051,9 @@
     "name": "ドラゴンライダー",
     "monster_type": "リザード",
     "spawn_areas": [],
+    "spawn_points": [
+      2434
+    ],
     "drop_items": [
       {
         "no": 247,
@@ -57947,6 +58558,9 @@
     ],
     "monster_type": "スライム",
     "spawn_areas": [],
+    "spawn_points": [
+      2588
+    ],
     "drop_items": [
       {
         "no": 358,
@@ -58390,6 +59004,9 @@
     ],
     "monster_type": "メダマ",
     "spawn_areas": [],
+    "spawn_points": [
+      2712
+    ],
     "drop_items": [
       {
         "no": 250,
@@ -58833,6 +59450,9 @@
     ],
     "monster_type": "デビル",
     "spawn_areas": [],
+    "spawn_points": [
+      2850
+    ],
     "drop_items": [
       {
         "no": 251,
@@ -59157,6 +59777,9 @@
     ],
     "monster_type": "アーマー",
     "spawn_areas": [],
+    "spawn_points": [
+      2968
+    ],
     "drop_items": [
       {
         "no": 253,
@@ -59481,6 +60104,9 @@
     ],
     "monster_type": "スライム",
     "spawn_areas": [],
+    "spawn_points": [
+      3074
+    ],
     "drop_items": [
       {
         "no": 346,
@@ -59805,6 +60431,9 @@
     ],
     "monster_type": "アームド",
     "spawn_areas": [],
+    "spawn_points": [
+      3186
+    ],
     "drop_items": [
       {
         "no": 254,
@@ -60129,6 +60758,9 @@
     ],
     "monster_type": "スライム",
     "spawn_areas": [],
+    "spawn_points": [
+      3294
+    ],
     "drop_items": [
       {
         "no": 256,
@@ -60564,6 +61196,9 @@
     ],
     "monster_type": "インセクト",
     "spawn_areas": [],
+    "spawn_points": [
+      3446
+    ],
     "drop_items": [
       {
         "no": 374,
@@ -61003,6 +61638,9 @@
     ],
     "monster_type": "スライム",
     "spawn_areas": [],
+    "spawn_points": [
+      3628
+    ],
     "drop_items": [
       {
         "no": 126,
@@ -61434,6 +62072,9 @@
     ],
     "monster_type": "インセクト",
     "spawn_areas": [],
+    "spawn_points": [
+      3806
+    ],
     "drop_items": [
       {
         "no": 130,
@@ -61754,6 +62395,9 @@
     ],
     "monster_type": "デビル",
     "spawn_areas": [],
+    "spawn_points": [
+      3970
+    ],
     "drop_items": [
       {
         "no": 380,
@@ -62185,6 +62829,9 @@
     ],
     "monster_type": "アンデッド",
     "spawn_areas": [],
+    "spawn_points": [
+      4168
+    ],
     "drop_items": [
       {
         "no": 264,
@@ -62505,6 +63152,9 @@
     ],
     "monster_type": "ゴブリン",
     "spawn_areas": [],
+    "spawn_points": [
+      4388
+    ],
     "drop_items": [
       {
         "no": 265,
@@ -62825,6 +63475,9 @@
     ],
     "monster_type": "アンデッド",
     "spawn_areas": [],
+    "spawn_points": [
+      4650
+    ],
     "drop_items": [
       {
         "no": 267,
@@ -63145,6 +63798,9 @@
     ],
     "monster_type": null,
     "spawn_areas": [],
+    "spawn_points": [
+      4988
+    ],
     "drop_items": [
       {
         "no": 368,
