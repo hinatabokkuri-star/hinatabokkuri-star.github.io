@@ -33259,6 +33259,28 @@
     "category": "ペット",
     "name": "ツィギー",
     "monster_type": null,
+    "spawn_areas": [
+      {
+        "start_km": 0,
+        "end_km": 30
+      },
+      {
+        "start_km": 70,
+        "end_km": 110
+      },
+      {
+        "start_km": 1530,
+        "end_km": 1550
+      },
+      {
+        "start_km": 3770,
+        "end_km": 3790
+      },
+      {
+        "start_km": 4990,
+        "end_km": 5010
+      }
+    ],
     "drop_items": [
       {
         "no": 10,
@@ -33356,6 +33378,20 @@
     "category": "ペット",
     "name": "ギョッピィ",
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 10,
+        "end_km": 30
+      },
+      {
+        "start_km": 270,
+        "end_km": 310
+      },
+      {
+        "start_km": 750,
+        "end_km": 770
+      }
+    ],
     "drop_items": [
       {
         "no": 11,
@@ -33456,6 +33492,20 @@
     "category": "ペット",
     "name": "リーフィ",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 10,
+        "end_km": 50
+      },
+      {
+        "start_km": 190,
+        "end_km": 210
+      },
+      {
+        "start_km": 1630,
+        "end_km": 1650
+      }
+    ],
     "drop_items": [
       {
         "no": 12,
@@ -33553,6 +33603,24 @@
     "category": "ペット",
     "name": "スライム",
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 30,
+        "end_km": 50
+      },
+      {
+        "start_km": 310,
+        "end_km": 350
+      },
+      {
+        "start_km": 770,
+        "end_km": 810
+      },
+      {
+        "start_km": 1390,
+        "end_km": 1410
+      }
+    ],
     "drop_items": [
       {
         "no": 180,
@@ -33650,6 +33718,24 @@
     "category": "ペット",
     "name": "ウィングアイ",
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 30,
+        "end_km": 70
+      },
+      {
+        "start_km": 670,
+        "end_km": 710
+      },
+      {
+        "start_km": 1010,
+        "end_km": 1050
+      },
+      {
+        "start_km": 1210,
+        "end_km": 1250
+      }
+    ],
     "drop_items": [
       {
         "no": 13,
@@ -33747,6 +33833,7 @@
     "category": "ペット",
     "name": "キラーサーペント",
     "monster_type": "リザード",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 182,
@@ -33913,6 +34000,24 @@
       }
     ],
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 50,
+        "end_km": 70
+      },
+      {
+        "start_km": 390,
+        "end_km": 430
+      },
+      {
+        "start_km": 830,
+        "end_km": 850
+      },
+      {
+        "start_km": 1250,
+        "end_km": 1290
+      }
+    ],
     "drop_items": [
       {
         "no": 14,
@@ -34010,6 +34115,24 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 50,
+        "end_km": 90
+      },
+      {
+        "start_km": 290,
+        "end_km": 330
+      },
+      {
+        "start_km": 990,
+        "end_km": 1030
+      },
+      {
+        "start_km": 3030,
+        "end_km": 3070
+      }
+    ],
     "drop_items": [
       {
         "no": 15,
@@ -34038,6 +34161,20 @@
     "category": "ペット",
     "name": "マンティス",
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 70,
+        "end_km": 90
+      },
+      {
+        "start_km": 230,
+        "end_km": 270
+      },
+      {
+        "start_km": 1450,
+        "end_km": 1470
+      }
+    ],
     "drop_items": [
       {
         "no": 16,
@@ -34135,6 +34272,24 @@
     "category": "ペット",
     "name": "バグスカルゴ",
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 90,
+        "end_km": 110
+      },
+      {
+        "start_km": 330,
+        "end_km": 370
+      },
+      {
+        "start_km": 2570,
+        "end_km": 2590
+      },
+      {
+        "start_km": 3250,
+        "end_km": 3290
+      }
+    ],
     "drop_items": [
       {
         "no": 17,
@@ -34232,6 +34387,24 @@
     "category": "ペット",
     "name": "キラービー",
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 90,
+        "end_km": 130
+      },
+      {
+        "start_km": 210,
+        "end_km": 250
+      },
+      {
+        "start_km": 1630,
+        "end_km": 1670
+      },
+      {
+        "start_km": 2650,
+        "end_km": 2690
+      }
+    ],
     "drop_items": [
       {
         "no": 18,
@@ -34329,6 +34502,7 @@
     "category": "ペット",
     "name": "キャタピラー",
     "monster_type": "インセクト",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 187,
@@ -34426,6 +34600,24 @@
     "category": "ペット",
     "name": "ビッグテール",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 110,
+        "end_km": 130
+      },
+      {
+        "start_km": 170,
+        "end_km": 190
+      },
+      {
+        "start_km": 1190,
+        "end_km": 1210
+      },
+      {
+        "start_km": 1650,
+        "end_km": 1690
+      }
+    ],
     "drop_items": [
       {
         "no": 19,
@@ -34523,6 +34715,24 @@
     "category": "ペット",
     "name": "ボールキャット",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 110,
+        "end_km": 150
+      },
+      {
+        "start_km": 750,
+        "end_km": 790
+      },
+      {
+        "start_km": 1270,
+        "end_km": 1310
+      },
+      {
+        "start_km": 1670,
+        "end_km": 1710
+      }
+    ],
     "drop_items": [
       {
         "no": 20,
@@ -34620,6 +34830,24 @@
     "category": "ペット",
     "name": "ジラフィ",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 130,
+        "end_km": 150
+      },
+      {
+        "start_km": 910,
+        "end_km": 930
+      },
+      {
+        "start_km": 1210,
+        "end_km": 1230
+      },
+      {
+        "start_km": 1690,
+        "end_km": 1730
+      }
+    ],
     "drop_items": [
       {
         "no": 22,
@@ -34717,6 +34945,24 @@
     "category": "ペット",
     "name": "ラバーバニー",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 130,
+        "end_km": 170
+      },
+      {
+        "start_km": 1070,
+        "end_km": 1090
+      },
+      {
+        "start_km": 1370,
+        "end_km": 1390
+      },
+      {
+        "start_km": 2890,
+        "end_km": 2910
+      }
+    ],
     "drop_items": [
       {
         "no": 23,
@@ -34814,6 +35060,24 @@
     "category": "ペット",
     "name": "クソデッパ",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 150,
+        "end_km": 170
+      },
+      {
+        "start_km": 570,
+        "end_km": 590
+      },
+      {
+        "start_km": 2990,
+        "end_km": 3030
+      },
+      {
+        "start_km": 4050,
+        "end_km": 4070
+      }
+    ],
     "drop_items": [
       {
         "no": 24,
@@ -34911,6 +35175,24 @@
     "category": "ペット",
     "name": "イガグリドッグ",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 150,
+        "end_km": 190
+      },
+      {
+        "start_km": 590,
+        "end_km": 610
+      },
+      {
+        "start_km": 1150,
+        "end_km": 1170
+      },
+      {
+        "start_km": 1410,
+        "end_km": 1430
+      }
+    ],
     "drop_items": [
       {
         "no": 25,
@@ -35008,6 +35290,7 @@
     "category": "ペット",
     "name": "ハングリードッグ",
     "monster_type": "アニマル",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 193,
@@ -35105,6 +35388,24 @@
     "category": "ペット",
     "name": "スタンピィ",
     "monster_type": null,
+    "spawn_areas": [
+      {
+        "start_km": 170,
+        "end_km": 210
+      },
+      {
+        "start_km": 430,
+        "end_km": 470
+      },
+      {
+        "start_km": 1610,
+        "end_km": 1630
+      },
+      {
+        "start_km": 3910,
+        "end_km": 3930
+      }
+    ],
     "drop_items": [
       {
         "no": 26,
@@ -35202,6 +35503,24 @@
     "category": "ペット",
     "name": "タニップ",
     "monster_type": null,
+    "spawn_areas": [
+      {
+        "start_km": 190,
+        "end_km": 230
+      },
+      {
+        "start_km": 450,
+        "end_km": 490
+      },
+      {
+        "start_km": 1590,
+        "end_km": 1630
+      },
+      {
+        "start_km": 1970,
+        "end_km": 1990
+      }
+    ],
     "drop_items": [
       {
         "no": 27,
@@ -35299,6 +35618,20 @@
     "category": "ペット",
     "name": "シードアイ",
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 210,
+        "end_km": 230
+      },
+      {
+        "start_km": 370,
+        "end_km": 410
+      },
+      {
+        "start_km": 710,
+        "end_km": 730
+      }
+    ],
     "drop_items": [
       {
         "no": 195,
@@ -35396,6 +35729,24 @@
     "category": "ペット",
     "name": "パクパクフラワー",
     "monster_type": null,
+    "spawn_areas": [
+      {
+        "start_km": 230,
+        "end_km": 250
+      },
+      {
+        "start_km": 930,
+        "end_km": 970
+      },
+      {
+        "start_km": 1110,
+        "end_km": 1130
+      },
+      {
+        "start_km": 3710,
+        "end_km": 3750
+      }
+    ],
     "drop_items": [
       {
         "no": 28,
@@ -35493,6 +35844,24 @@
     "category": "ペット",
     "name": "バタフィ",
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 250,
+        "end_km": 270
+      },
+      {
+        "start_km": 930,
+        "end_km": 950
+      },
+      {
+        "start_km": 1790,
+        "end_km": 1810
+      },
+      {
+        "start_km": 2110,
+        "end_km": 2130
+      }
+    ],
     "drop_items": [
       {
         "no": 29,
@@ -35590,6 +35959,7 @@
     "category": "ペット",
     "name": "マンイーター",
     "monster_type": "メダマ",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 348,
@@ -35687,6 +36057,24 @@
     "category": "ペット",
     "name": "ケロッピ",
     "monster_type": null,
+    "spawn_areas": [
+      {
+        "start_km": 250,
+        "end_km": 290
+      },
+      {
+        "start_km": 810,
+        "end_km": 830
+      },
+      {
+        "start_km": 2050,
+        "end_km": 2090
+      },
+      {
+        "start_km": 3450,
+        "end_km": 3470
+      }
+    ],
     "drop_items": [
       {
         "no": 30,
@@ -35784,6 +36172,24 @@
     "category": "ペット",
     "name": "マーダイン",
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 270,
+        "end_km": 290
+      },
+      {
+        "start_km": 410,
+        "end_km": 450
+      },
+      {
+        "start_km": 470,
+        "end_km": 510
+      },
+      {
+        "start_km": 3290,
+        "end_km": 3310
+      }
+    ],
     "drop_items": [
       {
         "no": 31,
@@ -35881,6 +36287,24 @@
     "category": "ペット",
     "name": "エンジェルスライム",
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 290,
+        "end_km": 310
+      },
+      {
+        "start_km": 870,
+        "end_km": 890
+      },
+      {
+        "start_km": 1970,
+        "end_km": 2010
+      },
+      {
+        "start_km": 2450,
+        "end_km": 2470
+      }
+    ],
     "drop_items": [
       {
         "no": 32,
@@ -36047,6 +36471,24 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 310,
+        "end_km": 330
+      },
+      {
+        "start_km": 530,
+        "end_km": 550
+      },
+      {
+        "start_km": 2530,
+        "end_km": 2570
+      },
+      {
+        "start_km": 3830,
+        "end_km": 3870
+      }
+    ],
     "drop_items": [
       {
         "no": 33,
@@ -36144,6 +36586,24 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 330,
+        "end_km": 350
+      },
+      {
+        "start_km": 870,
+        "end_km": 910
+      },
+      {
+        "start_km": 2070,
+        "end_km": 2110
+      },
+      {
+        "start_km": 3190,
+        "end_km": 3210
+      }
+    ],
     "drop_items": [
       {
         "no": 34,
@@ -36241,6 +36701,7 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 5,
@@ -36269,6 +36730,24 @@
     "category": "ペット",
     "name": "ゲレゲレ",
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 350,
+        "end_km": 370
+      },
+      {
+        "start_km": 510,
+        "end_km": 530
+      },
+      {
+        "start_km": 790,
+        "end_km": 810
+      },
+      {
+        "start_km": 1330,
+        "end_km": 1350
+      }
+    ],
     "drop_items": [
       {
         "no": 35,
@@ -36435,6 +36914,24 @@
       }
     ],
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 350,
+        "end_km": 390
+      },
+      {
+        "start_km": 850,
+        "end_km": 870
+      },
+      {
+        "start_km": 1830,
+        "end_km": 1870
+      },
+      {
+        "start_km": 3350,
+        "end_km": 3390
+      }
+    ],
     "drop_items": [
       {
         "no": 5,
@@ -36532,6 +37029,24 @@
       }
     ],
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 370,
+        "end_km": 390
+      },
+      {
+        "start_km": 550,
+        "end_km": 570
+      },
+      {
+        "start_km": 1470,
+        "end_km": 1490
+      },
+      {
+        "start_km": 3830,
+        "end_km": 3850
+      }
+    ],
     "drop_items": [
       {
         "no": 37,
@@ -36560,6 +37075,24 @@
     "category": "ペット",
     "name": "グリーンマッシュ",
     "monster_type": null,
+    "spawn_areas": [
+      {
+        "start_km": 390,
+        "end_km": 410
+      },
+      {
+        "start_km": 650,
+        "end_km": 670
+      },
+      {
+        "start_km": 1070,
+        "end_km": 1110
+      },
+      {
+        "start_km": 2290,
+        "end_km": 2330
+      }
+    ],
     "drop_items": [
       {
         "no": 38,
@@ -36657,6 +37190,24 @@
     "category": "ペット",
     "name": "イビルプレート",
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 410,
+        "end_km": 430
+      },
+      {
+        "start_km": 970,
+        "end_km": 990
+      },
+      {
+        "start_km": 1570,
+        "end_km": 1590
+      },
+      {
+        "start_km": 3910,
+        "end_km": 3950
+      }
+    ],
     "drop_items": [
       {
         "no": 39,
@@ -36754,6 +37305,7 @@
     "category": "ペット",
     "name": "タイラント",
     "monster_type": "リザード",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 205,
@@ -36851,6 +37403,24 @@
     "category": "ペット",
     "name": "スカルバグ",
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 430,
+        "end_km": 450
+      },
+      {
+        "start_km": 990,
+        "end_km": 1010
+      },
+      {
+        "start_km": 1850,
+        "end_km": 1870
+      },
+      {
+        "start_km": 2590,
+        "end_km": 2630
+      }
+    ],
     "drop_items": [
       {
         "no": 40,
@@ -36948,6 +37518,24 @@
     "category": "ペット",
     "name": "マッドマン",
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 450,
+        "end_km": 470
+      },
+      {
+        "start_km": 610,
+        "end_km": 650
+      },
+      {
+        "start_km": 1030,
+        "end_km": 1070
+      },
+      {
+        "start_km": 1330,
+        "end_km": 1370
+      }
+    ],
     "drop_items": [
       {
         "no": 41,
@@ -37045,6 +37633,20 @@
     "category": "ペット",
     "name": "スケルトン",
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 470,
+        "end_km": 490
+      },
+      {
+        "start_km": 1870,
+        "end_km": 1890
+      },
+      {
+        "start_km": 3930,
+        "end_km": 3950
+      }
+    ],
     "drop_items": [
       {
         "no": 42,
@@ -37211,6 +37813,24 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 490,
+        "end_km": 510
+      },
+      {
+        "start_km": 1990,
+        "end_km": 2030
+      },
+      {
+        "start_km": 3210,
+        "end_km": 3230
+      },
+      {
+        "start_km": 3930,
+        "end_km": 3970
+      }
+    ],
     "drop_items": [
       {
         "no": 43,
@@ -37239,6 +37859,24 @@
     "category": "ペット",
     "name": "ゾンビ",
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 490,
+        "end_km": 530
+      },
+      {
+        "start_km": 970,
+        "end_km": 1010
+      },
+      {
+        "start_km": 2010,
+        "end_km": 2030
+      },
+      {
+        "start_km": 3970,
+        "end_km": 3990
+      }
+    ],
     "drop_items": [
       {
         "no": 210,
@@ -37405,6 +38043,7 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 211,
@@ -37433,6 +38072,24 @@
     "category": "ペット",
     "name": "ゴブリンナイト",
     "monster_type": "ゴブリン",
+    "spawn_areas": [
+      {
+        "start_km": 510,
+        "end_km": 550
+      },
+      {
+        "start_km": 1410,
+        "end_km": 1450
+      },
+      {
+        "start_km": 1770,
+        "end_km": 1790
+      },
+      {
+        "start_km": 4350,
+        "end_km": 4390
+      }
+    ],
     "drop_items": [
       {
         "no": 4,
@@ -37530,6 +38187,20 @@
     "category": "ペット",
     "name": "ゴブリンメイジ",
     "monster_type": "ゴブリン",
+    "spawn_areas": [
+      {
+        "start_km": 530,
+        "end_km": 570
+      },
+      {
+        "start_km": 1370,
+        "end_km": 1410
+      },
+      {
+        "start_km": 4230,
+        "end_km": 4270
+      }
+    ],
     "drop_items": [
       {
         "no": 7,
@@ -37627,6 +38298,24 @@
     "category": "ペット",
     "name": "ゴブリンハンター",
     "monster_type": "ゴブリン",
+    "spawn_areas": [
+      {
+        "start_km": 550,
+        "end_km": 590
+      },
+      {
+        "start_km": 1470,
+        "end_km": 1510
+      },
+      {
+        "start_km": 2190,
+        "end_km": 2230
+      },
+      {
+        "start_km": 4330,
+        "end_km": 4370
+      }
+    ],
     "drop_items": [
       {
         "no": 44,
@@ -37724,6 +38413,28 @@
     "category": "ペット",
     "name": "ゴブリンモンク",
     "monster_type": "ゴブリン",
+    "spawn_areas": [
+      {
+        "start_km": 570,
+        "end_km": 610
+      },
+      {
+        "start_km": 1150,
+        "end_km": 1190
+      },
+      {
+        "start_km": 1450,
+        "end_km": 1490
+      },
+      {
+        "start_km": 2390,
+        "end_km": 2410
+      },
+      {
+        "start_km": 4270,
+        "end_km": 4310
+      }
+    ],
     "drop_items": [
       {
         "no": 45,
@@ -37821,6 +38532,7 @@
     "category": "ペット",
     "name": "ゴブリンギャング",
     "monster_type": "ゴブリン",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 212,
@@ -37918,6 +38630,24 @@
     "category": "ペット",
     "name": "アイアンテール",
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 590,
+        "end_km": 630
+      },
+      {
+        "start_km": 950,
+        "end_km": 970
+      },
+      {
+        "start_km": 1230,
+        "end_km": 1270
+      },
+      {
+        "start_km": 2150,
+        "end_km": 2190
+      }
+    ],
     "drop_items": [
       {
         "no": 17,
@@ -38015,6 +38745,24 @@
     "category": "ペット",
     "name": "ワークスライム",
     "monster_type": "アームド",
+    "spawn_areas": [
+      {
+        "start_km": 610,
+        "end_km": 630
+      },
+      {
+        "start_km": 1170,
+        "end_km": 1190
+      },
+      {
+        "start_km": 1350,
+        "end_km": 1370
+      },
+      {
+        "start_km": 2970,
+        "end_km": 3010
+      }
+    ],
     "drop_items": [
       {
         "no": 47,
@@ -38181,6 +38929,20 @@
       }
     ],
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 630,
+        "end_km": 650
+      },
+      {
+        "start_km": 1030,
+        "end_km": 1050
+      },
+      {
+        "start_km": 2850,
+        "end_km": 2890
+      }
+    ],
     "drop_items": [
       {
         "no": 48,
@@ -38209,6 +38971,24 @@
     "category": "ペット",
     "name": "トールバット",
     "monster_type": null,
+    "spawn_areas": [
+      {
+        "start_km": 630,
+        "end_km": 670
+      },
+      {
+        "start_km": 2490,
+        "end_km": 2510
+      },
+      {
+        "start_km": 3270,
+        "end_km": 3290
+      },
+      {
+        "start_km": 4650,
+        "end_km": 4670
+      }
+    ],
     "drop_items": [
       {
         "no": 49,
@@ -38306,6 +39086,24 @@
     "category": "ペット",
     "name": "フックスパイダー",
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 650,
+        "end_km": 690
+      },
+      {
+        "start_km": 890,
+        "end_km": 930
+      },
+      {
+        "start_km": 1130,
+        "end_km": 1150
+      },
+      {
+        "start_km": 2250,
+        "end_km": 2270
+      }
+    ],
     "drop_items": [
       {
         "no": 50,
@@ -38403,6 +39201,7 @@
     "category": "ペット",
     "name": "キラーアント",
     "monster_type": "インセクト",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 215,
@@ -38569,6 +39368,20 @@
       }
     ],
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 670,
+        "end_km": 690
+      },
+      {
+        "start_km": 1930,
+        "end_km": 1970
+      },
+      {
+        "start_km": 3250,
+        "end_km": 3270
+      }
+    ],
     "drop_items": [
       {
         "no": 51,
@@ -38597,6 +39410,20 @@
     "category": "ペット",
     "name": "レッドアイ",
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 690,
+        "end_km": 710
+      },
+      {
+        "start_km": 1310,
+        "end_km": 1330
+      },
+      {
+        "start_km": 2530,
+        "end_km": 2550
+      }
+    ],
     "drop_items": [
       {
         "no": 52,
@@ -38763,6 +39590,20 @@
       }
     ],
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 690,
+        "end_km": 730
+      },
+      {
+        "start_km": 2370,
+        "end_km": 2410
+      },
+      {
+        "start_km": 3110,
+        "end_km": 3130
+      }
+    ],
     "drop_items": [
       {
         "no": 53,
@@ -38791,6 +39632,20 @@
     "category": "ペット",
     "name": "ドリルアイ",
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 710,
+        "end_km": 750
+      },
+      {
+        "start_km": 1050,
+        "end_km": 1070
+      },
+      {
+        "start_km": 3090,
+        "end_km": 3110
+      }
+    ],
     "drop_items": [
       {
         "no": 54,
@@ -38888,6 +39743,24 @@
     "category": "ペット",
     "name": "デビルアイ",
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 730,
+        "end_km": 750
+      },
+      {
+        "start_km": 2170,
+        "end_km": 2210
+      },
+      {
+        "start_km": 2630,
+        "end_km": 2650
+      },
+      {
+        "start_km": 4450,
+        "end_km": 4490
+      }
+    ],
     "drop_items": [
       {
         "no": 55,
@@ -39054,6 +39927,7 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 169,
@@ -39151,6 +40025,24 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 730,
+        "end_km": 770
+      },
+      {
+        "start_km": 1890,
+        "end_km": 1930
+      },
+      {
+        "start_km": 2450,
+        "end_km": 2490
+      },
+      {
+        "start_km": 3590,
+        "end_km": 3610
+      }
+    ],
     "drop_items": [
       {
         "no": 56,
@@ -39179,6 +40071,24 @@
     "category": "ペット",
     "name": "マーキャット",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 770,
+        "end_km": 790
+      },
+      {
+        "start_km": 1710,
+        "end_km": 1730
+      },
+      {
+        "start_km": 2470,
+        "end_km": 2490
+      },
+      {
+        "start_km": 3470,
+        "end_km": 3510
+      }
+    ],
     "drop_items": [
       {
         "no": 57,
@@ -39276,6 +40186,20 @@
     "category": "ペット",
     "name": "ドクターフィッシュ",
     "monster_type": null,
+    "spawn_areas": [
+      {
+        "start_km": 790,
+        "end_km": 830
+      },
+      {
+        "start_km": 1950,
+        "end_km": 1970
+      },
+      {
+        "start_km": 3350,
+        "end_km": 3370
+      }
+    ],
     "drop_items": [
       {
         "no": 58,
@@ -39373,6 +40297,24 @@
     "category": "ペット",
     "name": "サハギン",
     "monster_type": "アームド",
+    "spawn_areas": [
+      {
+        "start_km": 810,
+        "end_km": 850
+      },
+      {
+        "start_km": 1430,
+        "end_km": 1450
+      },
+      {
+        "start_km": 2050,
+        "end_km": 2070
+      },
+      {
+        "start_km": 3310,
+        "end_km": 3330
+      }
+    ],
     "drop_items": [
       {
         "no": 59,
@@ -39539,6 +40481,20 @@
       }
     ],
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 830,
+        "end_km": 870
+      },
+      {
+        "start_km": 3370,
+        "end_km": 3410
+      },
+      {
+        "start_km": 4670,
+        "end_km": 4710
+      }
+    ],
     "drop_items": [
       {
         "no": 60,
@@ -39567,6 +40523,7 @@
     "category": "ペット",
     "name": "ウンディーネ",
     "monster_type": null,
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 347,
@@ -39664,6 +40621,24 @@
     "category": "ペット",
     "name": "コーラルナイト",
     "monster_type": "アームド",
+    "spawn_areas": [
+      {
+        "start_km": 850,
+        "end_km": 890
+      },
+      {
+        "start_km": 1810,
+        "end_km": 1850
+      },
+      {
+        "start_km": 2310,
+        "end_km": 2330
+      },
+      {
+        "start_km": 3430,
+        "end_km": 3450
+      }
+    ],
     "drop_items": [
       {
         "no": 61,
@@ -39761,6 +40736,24 @@
     "category": "ペット",
     "name": "マーメイド",
     "monster_type": "アームド",
+    "spawn_areas": [
+      {
+        "start_km": 890,
+        "end_km": 910
+      },
+      {
+        "start_km": 2090,
+        "end_km": 2110
+      },
+      {
+        "start_km": 3330,
+        "end_km": 3350
+      },
+      {
+        "start_km": 4190,
+        "end_km": 4210
+      }
+    ],
     "drop_items": [
       {
         "no": 62,
@@ -39858,6 +40851,24 @@
     "category": "ペット",
     "name": "ストーンクラブ",
     "monster_type": "アームド",
+    "spawn_areas": [
+      {
+        "start_km": 910,
+        "end_km": 950
+      },
+      {
+        "start_km": 1290,
+        "end_km": 1310
+      },
+      {
+        "start_km": 2810,
+        "end_km": 2830
+      },
+      {
+        "start_km": 3410,
+        "end_km": 3450
+      }
+    ],
     "drop_items": [
       {
         "no": 63,
@@ -39955,6 +40966,24 @@
     "category": "ペット",
     "name": "アンモン",
     "monster_type": "アームド",
+    "spawn_areas": [
+      {
+        "start_km": 950,
+        "end_km": 990
+      },
+      {
+        "start_km": 2030,
+        "end_km": 2050
+      },
+      {
+        "start_km": 2950,
+        "end_km": 2990
+      },
+      {
+        "start_km": 3330,
+        "end_km": 3370
+      }
+    ],
     "drop_items": [
       {
         "no": 64,
@@ -40052,6 +41081,7 @@
     "category": "ペット",
     "name": "バトルクラブ",
     "monster_type": "アームド",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 224,
@@ -40149,6 +41179,24 @@
     "category": "ペット",
     "name": "スコーピオン",
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 1010,
+        "end_km": 1030
+      },
+      {
+        "start_km": 1290,
+        "end_km": 1330
+      },
+      {
+        "start_km": 2650,
+        "end_km": 2670
+      },
+      {
+        "start_km": 3550,
+        "end_km": 3570
+      }
+    ],
     "drop_items": [
       {
         "no": 65,
@@ -40246,6 +41294,24 @@
     "category": "ペット",
     "name": "サボティ",
     "monster_type": null,
+    "spawn_areas": [
+      {
+        "start_km": 1050,
+        "end_km": 1090
+      },
+      {
+        "start_km": 1530,
+        "end_km": 1570
+      },
+      {
+        "start_km": 2170,
+        "end_km": 2190
+      },
+      {
+        "start_km": 2770,
+        "end_km": 2810
+      }
+    ],
     "drop_items": [
       {
         "no": 66,
@@ -40343,6 +41409,24 @@
     "category": "ペット",
     "name": "トルネ",
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 1090,
+        "end_km": 1110
+      },
+      {
+        "start_km": 1510,
+        "end_km": 1530
+      },
+      {
+        "start_km": 1870,
+        "end_km": 1910
+      },
+      {
+        "start_km": 3410,
+        "end_km": 3430
+      }
+    ],
     "drop_items": [
       {
         "no": 67,
@@ -40440,6 +41524,24 @@
     "category": "ペット",
     "name": "ドラゴンスネーク",
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 1090,
+        "end_km": 1130
+      },
+      {
+        "start_km": 1590,
+        "end_km": 1610
+      },
+      {
+        "start_km": 2250,
+        "end_km": 2290
+      },
+      {
+        "start_km": 3050,
+        "end_km": 3070
+      }
+    ],
     "drop_items": [
       {
         "no": 68,
@@ -40537,6 +41639,7 @@
     "category": "ペット",
     "name": "サボキング",
     "monster_type": null,
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 229,
@@ -40634,6 +41737,20 @@
     "category": "ペット",
     "name": "マミィベア",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1110,
+        "end_km": 1150
+      },
+      {
+        "start_km": 2210,
+        "end_km": 2230
+      },
+      {
+        "start_km": 2490,
+        "end_km": 2530
+      }
+    ],
     "drop_items": [
       {
         "no": 69,
@@ -40731,6 +41848,20 @@
     "category": "ペット",
     "name": "ダディベア",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1130,
+        "end_km": 1170
+      },
+      {
+        "start_km": 2210,
+        "end_km": 2250
+      },
+      {
+        "start_km": 3130,
+        "end_km": 3150
+      }
+    ],
     "drop_items": [
       {
         "no": 70,
@@ -40828,6 +41959,24 @@
     "category": "ペット",
     "name": "チキンナイト",
     "monster_type": "アームド",
+    "spawn_areas": [
+      {
+        "start_km": 1170,
+        "end_km": 1210
+      },
+      {
+        "start_km": 1490,
+        "end_km": 1530
+      },
+      {
+        "start_km": 1790,
+        "end_km": 1830
+      },
+      {
+        "start_km": 4230,
+        "end_km": 4250
+      }
+    ],
     "drop_items": [
       {
         "no": 71,
@@ -40925,6 +42074,20 @@
     "category": "ペット",
     "name": "スモウトリ",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1190,
+        "end_km": 1230
+      },
+      {
+        "start_km": 1730,
+        "end_km": 1750
+      },
+      {
+        "start_km": 2870,
+        "end_km": 2910
+      }
+    ],
     "drop_items": [
       {
         "no": 72,
@@ -41022,6 +42185,24 @@
     "category": "ペット",
     "name": "メガピッピ",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1230,
+        "end_km": 1250
+      },
+      {
+        "start_km": 1910,
+        "end_km": 1930
+      },
+      {
+        "start_km": 2110,
+        "end_km": 2150
+      },
+      {
+        "start_km": 4070,
+        "end_km": 4110
+      }
+    ],
     "drop_items": [
       {
         "no": 73,
@@ -41119,6 +42300,7 @@
     "category": "ペット",
     "name": "ダチョーン",
     "monster_type": "アニマル",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 359,
@@ -41216,6 +42398,20 @@
     "category": "ペット",
     "name": "ガスフレイム",
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 1250,
+        "end_km": 1270
+      },
+      {
+        "start_km": 2510,
+        "end_km": 2530
+      },
+      {
+        "start_km": 3110,
+        "end_km": 3150
+      }
+    ],
     "drop_items": [
       {
         "no": 74,
@@ -41313,6 +42509,24 @@
     "category": "ペット",
     "name": "ミノタウロス",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1270,
+        "end_km": 1290
+      },
+      {
+        "start_km": 1550,
+        "end_km": 1590
+      },
+      {
+        "start_km": 2330,
+        "end_km": 2370
+      },
+      {
+        "start_km": 2750,
+        "end_km": 2790
+      }
+    ],
     "drop_items": [
       {
         "no": 75,
@@ -41410,6 +42624,24 @@
     "category": "ペット",
     "name": "ドラゴン",
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 1310,
+        "end_km": 1350
+      },
+      {
+        "start_km": 2390,
+        "end_km": 2430
+      },
+      {
+        "start_km": 2950,
+        "end_km": 2970
+      },
+      {
+        "start_km": 4730,
+        "end_km": 4770
+      }
+    ],
     "drop_items": [
       {
         "no": 76,
@@ -41507,6 +42739,24 @@
     "category": "ペット",
     "name": "フェニックス",
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 1350,
+        "end_km": 1390
+      },
+      {
+        "start_km": 2130,
+        "end_km": 2170
+      },
+      {
+        "start_km": 2750,
+        "end_km": 2770
+      },
+      {
+        "start_km": 4750,
+        "end_km": 4790
+      }
+    ],
     "drop_items": [
       {
         "no": 77,
@@ -41673,6 +42923,7 @@
       }
     ],
     "monster_type": "リザード",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 232,
@@ -41770,6 +43021,20 @@
       }
     ],
     "monster_type": "ゴブリン",
+    "spawn_areas": [
+      {
+        "start_km": 1390,
+        "end_km": 1430
+      },
+      {
+        "start_km": 4190,
+        "end_km": 4230
+      },
+      {
+        "start_km": 4290,
+        "end_km": 4330
+      }
+    ],
     "drop_items": [
       {
         "no": 76,
@@ -41798,6 +43063,20 @@
     "category": "ペット",
     "name": "ゴブリンタンク",
     "monster_type": "ゴブリン",
+    "spawn_areas": [
+      {
+        "start_km": 1430,
+        "end_km": 1470
+      },
+      {
+        "start_km": 4210,
+        "end_km": 4250
+      },
+      {
+        "start_km": 4370,
+        "end_km": 4410
+      }
+    ],
     "drop_items": [
       {
         "no": 79,
@@ -41895,6 +43174,7 @@
     "category": "ペット",
     "name": "ゴブリンロード",
     "monster_type": "ゴブリン",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 367,
@@ -41992,6 +43272,24 @@
     "category": "ペット",
     "name": "ハーピィ",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1490,
+        "end_km": 1510
+      },
+      {
+        "start_km": 1750,
+        "end_km": 1770
+      },
+      {
+        "start_km": 2930,
+        "end_km": 2950
+      },
+      {
+        "start_km": 4710,
+        "end_km": 4750
+      }
+    ],
     "drop_items": [
       {
         "no": 80,
@@ -42158,6 +43456,24 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1510,
+        "end_km": 1550
+      },
+      {
+        "start_km": 2610,
+        "end_km": 2650
+      },
+      {
+        "start_km": 3490,
+        "end_km": 3510
+      },
+      {
+        "start_km": 4510,
+        "end_km": 4550
+      }
+    ],
     "drop_items": [
       {
         "no": 46,
@@ -42186,6 +43502,20 @@
     "category": "ペット",
     "name": "キャロットウォーリア",
     "monster_type": "アームド",
+    "spawn_areas": [
+      {
+        "start_km": 1550,
+        "end_km": 1570
+      },
+      {
+        "start_km": 3070,
+        "end_km": 3090
+      },
+      {
+        "start_km": 3670,
+        "end_km": 3710
+      }
+    ],
     "drop_items": [
       {
         "no": 82,
@@ -42352,6 +43682,24 @@
       }
     ],
     "monster_type": "アーマー",
+    "spawn_areas": [
+      {
+        "start_km": 1570,
+        "end_km": 1610
+      },
+      {
+        "start_km": 1890,
+        "end_km": 1910
+      },
+      {
+        "start_km": 2430,
+        "end_km": 2450
+      },
+      {
+        "start_km": 4270,
+        "end_km": 4290
+      }
+    ],
     "drop_items": [
       {
         "no": 83,
@@ -42449,6 +43797,24 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1610,
+        "end_km": 1650
+      },
+      {
+        "start_km": 1950,
+        "end_km": 1990
+      },
+      {
+        "start_km": 2550,
+        "end_km": 2590
+      },
+      {
+        "start_km": 4770,
+        "end_km": 4790
+      }
+    ],
     "drop_items": [
       {
         "no": 84,
@@ -42546,6 +43912,7 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 235,
@@ -42643,6 +44010,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1650,
+        "end_km": 1670
+      },
+      {
+        "start_km": 2330,
+        "end_km": 2350
+      },
+      {
+        "start_km": 2790,
+        "end_km": 2830
+      }
+    ],
     "drop_items": [
       {
         "no": 85,
@@ -42740,6 +44121,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1670,
+        "end_km": 1690
+      },
+      {
+        "start_km": 1910,
+        "end_km": 1950
+      },
+      {
+        "start_km": 2810,
+        "end_km": 2850
+      }
+    ],
     "drop_items": [
       {
         "no": 144,
@@ -42837,6 +44232,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1690,
+        "end_km": 1710
+      },
+      {
+        "start_km": 2270,
+        "end_km": 2310
+      },
+      {
+        "start_km": 2790,
+        "end_km": 2810
+      }
+    ],
     "drop_items": [
       {
         "no": 86,
@@ -42934,6 +44343,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1710,
+        "end_km": 1750
+      },
+      {
+        "start_km": 2670,
+        "end_km": 2690
+      },
+      {
+        "start_km": 4310,
+        "end_km": 4330
+      }
+    ],
     "drop_items": [
       {
         "no": 87,
@@ -43031,6 +44454,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1730,
+        "end_km": 1770
+      },
+      {
+        "start_km": 2230,
+        "end_km": 2250
+      },
+      {
+        "start_km": 3990,
+        "end_km": 4030
+      }
+    ],
     "drop_items": [
       {
         "no": 88,
@@ -43128,6 +44565,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1750,
+        "end_km": 1790
+      },
+      {
+        "start_km": 2370,
+        "end_km": 2390
+      },
+      {
+        "start_km": 4550,
+        "end_km": 4590
+      }
+    ],
     "drop_items": [
       {
         "no": 89,
@@ -43156,6 +44607,7 @@
     "category": "ペット",
     "name": "ブレイドホース",
     "monster_type": "アームド",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 238,
@@ -43322,6 +44774,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1770,
+        "end_km": 1810
+      },
+      {
+        "start_km": 2630,
+        "end_km": 2670
+      },
+      {
+        "start_km": 3690,
+        "end_km": 3710
+      }
+    ],
     "drop_items": [
       {
         "no": 90,
@@ -43419,6 +44885,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1810,
+        "end_km": 1830
+      },
+      {
+        "start_km": 2350,
+        "end_km": 2370
+      },
+      {
+        "start_km": 4010,
+        "end_km": 4030
+      }
+    ],
     "drop_items": [
       {
         "no": 91,
@@ -43516,6 +44996,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1830,
+        "end_km": 1850
+      },
+      {
+        "start_km": 2130,
+        "end_km": 2150
+      },
+      {
+        "start_km": 2910,
+        "end_km": 2950
+      }
+    ],
     "drop_items": [
       {
         "no": 92,
@@ -43613,6 +45107,24 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 1850,
+        "end_km": 1890
+      },
+      {
+        "start_km": 2590,
+        "end_km": 2610
+      },
+      {
+        "start_km": 3870,
+        "end_km": 3910
+      },
+      {
+        "start_km": 4930,
+        "end_km": 4970
+      }
+    ],
     "drop_items": [
       {
         "no": 93,
@@ -43710,6 +45222,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1930,
+        "end_km": 1950
+      },
+      {
+        "start_km": 3990,
+        "end_km": 4010
+      },
+      {
+        "start_km": 4570,
+        "end_km": 4610
+      }
+    ],
     "drop_items": [
       {
         "no": 69,
@@ -43738,6 +45264,7 @@
     "category": "ペット",
     "name": "イエティ",
     "monster_type": "アニマル",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 242,
@@ -43904,6 +45431,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 1990,
+        "end_km": 2010
+      },
+      {
+        "start_km": 2270,
+        "end_km": 2290
+      },
+      {
+        "start_km": 2830,
+        "end_km": 2850
+      }
+    ],
     "drop_items": [
       {
         "no": 95,
@@ -44001,6 +45542,24 @@
       }
     ],
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 2010,
+        "end_km": 2050
+      },
+      {
+        "start_km": 2690,
+        "end_km": 2730
+      },
+      {
+        "start_km": 3370,
+        "end_km": 3390
+      },
+      {
+        "start_km": 4150,
+        "end_km": 4170
+      }
+    ],
     "drop_items": [
       {
         "no": 96,
@@ -44098,6 +45657,24 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 2030,
+        "end_km": 2070
+      },
+      {
+        "start_km": 2830,
+        "end_km": 2870
+      },
+      {
+        "start_km": 3530,
+        "end_km": 3570
+      },
+      {
+        "start_km": 4850,
+        "end_km": 4870
+      }
+    ],
     "drop_items": [
       {
         "no": 97,
@@ -44195,6 +45772,7 @@
       }
     ],
     "monster_type": "メダマ",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 349,
@@ -44292,6 +45870,24 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 2070,
+        "end_km": 2090
+      },
+      {
+        "start_km": 3050,
+        "end_km": 3090
+      },
+      {
+        "start_km": 4410,
+        "end_km": 4430
+      },
+      {
+        "start_km": 4790,
+        "end_km": 4830
+      }
+    ],
     "drop_items": [
       {
         "no": 98,
@@ -44389,6 +45985,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 2090,
+        "end_km": 2130
+      },
+      {
+        "start_km": 2350,
+        "end_km": 2390
+      },
+      {
+        "start_km": 4010,
+        "end_km": 4050
+      }
+    ],
     "drop_items": [
       {
         "no": 244,
@@ -44486,6 +46096,24 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 2150,
+        "end_km": 2170
+      },
+      {
+        "start_km": 2710,
+        "end_km": 2750
+      },
+      {
+        "start_km": 3230,
+        "end_km": 3250
+      },
+      {
+        "start_km": 4610,
+        "end_km": 4630
+      }
+    ],
     "drop_items": [
       {
         "no": 99,
@@ -44514,6 +46142,7 @@
     "category": "ペット",
     "name": "ゴッドアイ",
     "monster_type": "メダマ",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 369,
@@ -44680,6 +46309,24 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 2190,
+        "end_km": 2210
+      },
+      {
+        "start_km": 2410,
+        "end_km": 2450
+      },
+      {
+        "start_km": 2930,
+        "end_km": 2970
+      },
+      {
+        "start_km": 3710,
+        "end_km": 3730
+      }
+    ],
     "drop_items": [
       {
         "no": 100,
@@ -44777,6 +46424,20 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 2230,
+        "end_km": 2270
+      },
+      {
+        "start_km": 2890,
+        "end_km": 2930
+      },
+      {
+        "start_km": 3150,
+        "end_km": 3170
+      }
+    ],
     "drop_items": [
       {
         "no": 101,
@@ -44805,6 +46466,24 @@
     "category": "ペット",
     "name": "グリフォン",
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 2290,
+        "end_km": 2310
+      },
+      {
+        "start_km": 2550,
+        "end_km": 2570
+      },
+      {
+        "start_km": 2730,
+        "end_km": 2750
+      },
+      {
+        "start_km": 3030,
+        "end_km": 3050
+      }
+    ],
     "drop_items": [
       {
         "no": 102,
@@ -44971,6 +46650,7 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 171,
@@ -45068,6 +46748,20 @@
       }
     ],
     "monster_type": "アーマー",
+    "spawn_areas": [
+      {
+        "start_km": 2310,
+        "end_km": 2350
+      },
+      {
+        "start_km": 2690,
+        "end_km": 2710
+      },
+      {
+        "start_km": 3850,
+        "end_km": 3870
+      }
+    ],
     "drop_items": [
       {
         "no": 91,
@@ -45096,6 +46790,24 @@
     "category": "ペット",
     "name": "アクアドラゴン",
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 2410,
+        "end_km": 2430
+      },
+      {
+        "start_km": 3450,
+        "end_km": 3490
+      },
+      {
+        "start_km": 4250,
+        "end_km": 4270
+      },
+      {
+        "start_km": 4910,
+        "end_km": 4950
+      }
+    ],
     "drop_items": [
       {
         "no": 104,
@@ -45193,6 +46905,24 @@
     "category": "ペット",
     "name": "プラントドラゴン",
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 2430,
+        "end_km": 2470
+      },
+      {
+        "start_km": 2910,
+        "end_km": 2930
+      },
+      {
+        "start_km": 3770,
+        "end_km": 3810
+      },
+      {
+        "start_km": 4910,
+        "end_km": 4930
+      }
+    ],
     "drop_items": [
       {
         "no": 105,
@@ -45290,6 +47020,7 @@
     "category": "ペット",
     "name": "ドラゴンライダー",
     "monster_type": "リザード",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 247,
@@ -45456,6 +47187,20 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 2470,
+        "end_km": 2510
+      },
+      {
+        "start_km": 3190,
+        "end_km": 3230
+      },
+      {
+        "start_km": 3590,
+        "end_km": 3630
+      }
+    ],
     "drop_items": [
       {
         "no": 106,
@@ -45553,6 +47298,24 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 2510,
+        "end_km": 2550
+      },
+      {
+        "start_km": 2990,
+        "end_km": 3010
+      },
+      {
+        "start_km": 3290,
+        "end_km": 3330
+      },
+      {
+        "start_km": 4030,
+        "end_km": 4050
+      }
+    ],
     "drop_items": [
       {
         "no": 107,
@@ -45650,6 +47413,20 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 2570,
+        "end_km": 2610
+      },
+      {
+        "start_km": 3130,
+        "end_km": 3170
+      },
+      {
+        "start_km": 3750,
+        "end_km": 3790
+      }
+    ],
     "drop_items": [
       {
         "no": 108,
@@ -45747,6 +47524,7 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 358,
@@ -45844,6 +47622,24 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 2610,
+        "end_km": 2630
+      },
+      {
+        "start_km": 3010,
+        "end_km": 3030
+      },
+      {
+        "start_km": 3510,
+        "end_km": 3550
+      },
+      {
+        "start_km": 4650,
+        "end_km": 4690
+      }
+    ],
     "drop_items": [
       {
         "no": 109,
@@ -45941,6 +47737,24 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 2670,
+        "end_km": 2710
+      },
+      {
+        "start_km": 3210,
+        "end_km": 3250
+      },
+      {
+        "start_km": 3750,
+        "end_km": 3770
+      },
+      {
+        "start_km": 4610,
+        "end_km": 4650
+      }
+    ],
     "drop_items": [
       {
         "no": 110,
@@ -46038,6 +47852,24 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 2710,
+        "end_km": 2730
+      },
+      {
+        "start_km": 3650,
+        "end_km": 3690
+      },
+      {
+        "start_km": 4090,
+        "end_km": 4130
+      },
+      {
+        "start_km": 4810,
+        "end_km": 4850
+      }
+    ],
     "drop_items": [
       {
         "no": 111,
@@ -46135,6 +47967,7 @@
       }
     ],
     "monster_type": "メダマ",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 250,
@@ -46232,6 +48065,24 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 2730,
+        "end_km": 2770
+      },
+      {
+        "start_km": 3490,
+        "end_km": 3530
+      },
+      {
+        "start_km": 3890,
+        "end_km": 3910
+      },
+      {
+        "start_km": 4870,
+        "end_km": 4890
+      }
+    ],
     "drop_items": [
       {
         "no": 112,
@@ -46329,6 +48180,24 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 2770,
+        "end_km": 2790
+      },
+      {
+        "start_km": 3510,
+        "end_km": 3530
+      },
+      {
+        "start_km": 4130,
+        "end_km": 4150
+      },
+      {
+        "start_km": 4630,
+        "end_km": 4650
+      }
+    ],
     "drop_items": [
       {
         "no": 113,
@@ -46426,6 +48295,24 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 2850,
+        "end_km": 2870
+      },
+      {
+        "start_km": 3670,
+        "end_km": 3690
+      },
+      {
+        "start_km": 3950,
+        "end_km": 3990
+      },
+      {
+        "start_km": 4870,
+        "end_km": 4910
+      }
+    ],
     "drop_items": [
       {
         "no": 114,
@@ -46523,6 +48410,7 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 251,
@@ -46620,6 +48508,20 @@
       }
     ],
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 2870,
+        "end_km": 2890
+      },
+      {
+        "start_km": 3390,
+        "end_km": 3430
+      },
+      {
+        "start_km": 3810,
+        "end_km": 3850
+      }
+    ],
     "drop_items": [
       {
         "no": 115,
@@ -46717,6 +48619,24 @@
       }
     ],
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 2970,
+        "end_km": 2990
+      },
+      {
+        "start_km": 3790,
+        "end_km": 3810
+      },
+      {
+        "start_km": 4350,
+        "end_km": 4370
+      },
+      {
+        "start_km": 4930,
+        "end_km": 4950
+      }
+    ],
     "drop_items": [
       {
         "no": 41,
@@ -46814,6 +48734,7 @@
       }
     ],
     "monster_type": "アーマー",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 253,
@@ -46911,6 +48832,24 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 3010,
+        "end_km": 3050
+      },
+      {
+        "start_km": 3150,
+        "end_km": 3190
+      },
+      {
+        "start_km": 3870,
+        "end_km": 3890
+      },
+      {
+        "start_km": 4470,
+        "end_km": 4510
+      }
+    ],
     "drop_items": [
       {
         "no": 117,
@@ -47008,6 +48947,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 3070,
+        "end_km": 3110
+      },
+      {
+        "start_km": 3570,
+        "end_km": 3610
+      },
+      {
+        "start_km": 4070,
+        "end_km": 4090
+      }
+    ],
     "drop_items": [
       {
         "no": 118,
@@ -47105,6 +49058,7 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 346,
@@ -47202,6 +49156,20 @@
       }
     ],
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 3090,
+        "end_km": 3130
+      },
+      {
+        "start_km": 3170,
+        "end_km": 3190
+      },
+      {
+        "start_km": 4370,
+        "end_km": 4390
+      }
+    ],
     "drop_items": [
       {
         "no": 119,
@@ -47299,6 +49267,24 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 3170,
+        "end_km": 3210
+      },
+      {
+        "start_km": 3530,
+        "end_km": 3550
+      },
+      {
+        "start_km": 4430,
+        "end_km": 4470
+      },
+      {
+        "start_km": 4830,
+        "end_km": 4870
+      }
+    ],
     "drop_items": [
       {
         "no": 120,
@@ -47396,6 +49382,7 @@
       }
     ],
     "monster_type": "アームド",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 254,
@@ -47493,6 +49480,20 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 3230,
+        "end_km": 3270
+      },
+      {
+        "start_km": 3690,
+        "end_km": 3730
+      },
+      {
+        "start_km": 4450,
+        "end_km": 4470
+      }
+    ],
     "drop_items": [
       {
         "no": 99,
@@ -47590,6 +49591,24 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 3270,
+        "end_km": 3310
+      },
+      {
+        "start_km": 3630,
+        "end_km": 3670
+      },
+      {
+        "start_km": 4170,
+        "end_km": 4190
+      },
+      {
+        "start_km": 4690,
+        "end_km": 4730
+      }
+    ],
     "drop_items": [
       {
         "no": 122,
@@ -47687,6 +49706,7 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 256,
@@ -47784,6 +49804,24 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 3310,
+        "end_km": 3350
+      },
+      {
+        "start_km": 3550,
+        "end_km": 3590
+      },
+      {
+        "start_km": 4530,
+        "end_km": 4550
+      },
+      {
+        "start_km": 4690,
+        "end_km": 4710
+      }
+    ],
     "drop_items": [
       {
         "no": 123,
@@ -47881,6 +49919,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 3390,
+        "end_km": 3410
+      },
+      {
+        "start_km": 3730,
+        "end_km": 3750
+      },
+      {
+        "start_km": 4210,
+        "end_km": 4230
+      }
+    ],
     "drop_items": [
       {
         "no": 80,
@@ -47978,6 +50030,20 @@
       }
     ],
     "monster_type": "メダマ",
+    "spawn_areas": [
+      {
+        "start_km": 3430,
+        "end_km": 3470
+      },
+      {
+        "start_km": 3610,
+        "end_km": 3650
+      },
+      {
+        "start_km": 4550,
+        "end_km": 4570
+      }
+    ],
     "drop_items": [
       {
         "no": 125,
@@ -48075,6 +50141,7 @@
       }
     ],
     "monster_type": "インセクト",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 374,
@@ -48172,6 +50239,24 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 3470,
+        "end_km": 3490
+      },
+      {
+        "start_km": 3610,
+        "end_km": 3630
+      },
+      {
+        "start_km": 4290,
+        "end_km": 4310
+      },
+      {
+        "start_km": 4790,
+        "end_km": 4810
+      }
+    ],
     "drop_items": [
       {
         "no": 126,
@@ -48269,6 +50354,24 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 3570,
+        "end_km": 3590
+      },
+      {
+        "start_km": 4110,
+        "end_km": 4150
+      },
+      {
+        "start_km": 4330,
+        "end_km": 4350
+      },
+      {
+        "start_km": 4730,
+        "end_km": 4750
+      }
+    ],
     "drop_items": [
       {
         "no": 127,
@@ -48366,6 +50469,20 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [
+      {
+        "start_km": 3630,
+        "end_km": 3650
+      },
+      {
+        "start_km": 4570,
+        "end_km": 4590
+      },
+      {
+        "start_km": 4710,
+        "end_km": 4730
+      }
+    ],
     "drop_items": [
       {
         "no": 128,
@@ -48463,6 +50580,7 @@
       }
     ],
     "monster_type": "スライム",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 126,
@@ -48560,6 +50678,20 @@
       }
     ],
     "monster_type": "リザード",
+    "spawn_areas": [
+      {
+        "start_km": 3650,
+        "end_km": 3670
+      },
+      {
+        "start_km": 3810,
+        "end_km": 3830
+      },
+      {
+        "start_km": 4130,
+        "end_km": 4170
+      }
+    ],
     "drop_items": [
       {
         "no": 51,
@@ -48657,6 +50789,20 @@
       }
     ],
     "monster_type": "インセクト",
+    "spawn_areas": [
+      {
+        "start_km": 3730,
+        "end_km": 3770
+      },
+      {
+        "start_km": 3890,
+        "end_km": 3930
+      },
+      {
+        "start_km": 4530,
+        "end_km": 4570
+      }
+    ],
     "drop_items": [
       {
         "no": 121,
@@ -48754,6 +50900,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 3790,
+        "end_km": 3830
+      },
+      {
+        "start_km": 4030,
+        "end_km": 4070
+      },
+      {
+        "start_km": 4510,
+        "end_km": 4530
+      }
+    ],
     "drop_items": [
       {
         "no": 131,
@@ -48851,6 +51011,7 @@
       }
     ],
     "monster_type": "インセクト",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 130,
@@ -48948,6 +51109,20 @@
       }
     ],
     "monster_type": "アニマル",
+    "spawn_areas": [
+      {
+        "start_km": 3850,
+        "end_km": 3890
+      },
+      {
+        "start_km": 4090,
+        "end_km": 4110
+      },
+      {
+        "start_km": 4490,
+        "end_km": 4510
+      }
+    ],
     "drop_items": [
       {
         "no": 132,
@@ -49045,6 +51220,20 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 3950,
+        "end_km": 3970
+      },
+      {
+        "start_km": 4430,
+        "end_km": 4450
+      },
+      {
+        "start_km": 4850,
+        "end_km": 4890
+      }
+    ],
     "drop_items": [
       {
         "no": 42,
@@ -49142,6 +51331,7 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 380,
@@ -49239,6 +51429,20 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 3970,
+        "end_km": 4010
+      },
+      {
+        "start_km": 4110,
+        "end_km": 4130
+      },
+      {
+        "start_km": 4590,
+        "end_km": 4610
+      }
+    ],
     "drop_items": [
       {
         "no": 134,
@@ -49336,6 +51540,20 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [
+      {
+        "start_km": 4050,
+        "end_km": 4090
+      },
+      {
+        "start_km": 4390,
+        "end_km": 4410
+      },
+      {
+        "start_km": 4830,
+        "end_km": 4850
+      }
+    ],
     "drop_items": [
       {
         "no": 135,
@@ -49433,6 +51651,20 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 4150,
+        "end_km": 4190
+      },
+      {
+        "start_km": 4490,
+        "end_km": 4530
+      },
+      {
+        "start_km": 4810,
+        "end_km": 4830
+      }
+    ],
     "drop_items": [
       {
         "no": 136,
@@ -49530,6 +51762,7 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 264,
@@ -49627,6 +51860,20 @@
       }
     ],
     "monster_type": "ゴブリン",
+    "spawn_areas": [
+      {
+        "start_km": 4170,
+        "end_km": 4210
+      },
+      {
+        "start_km": 4310,
+        "end_km": 4350
+      },
+      {
+        "start_km": 4750,
+        "end_km": 4770
+      }
+    ],
     "drop_items": [
       {
         "no": 23,
@@ -49724,6 +51971,20 @@
       }
     ],
     "monster_type": "ゴブリン",
+    "spawn_areas": [
+      {
+        "start_km": 4250,
+        "end_km": 4290
+      },
+      {
+        "start_km": 4390,
+        "end_km": 4430
+      },
+      {
+        "start_km": 4970,
+        "end_km": 4990
+      }
+    ],
     "drop_items": [
       {
         "no": 96,
@@ -49821,6 +52082,7 @@
       }
     ],
     "monster_type": "ゴブリン",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 265,
@@ -49918,6 +52180,20 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 4410,
+        "end_km": 4450
+      },
+      {
+        "start_km": 4590,
+        "end_km": 4630
+      },
+      {
+        "start_km": 4950,
+        "end_km": 4970
+      }
+    ],
     "drop_items": [
       {
         "no": 139,
@@ -50015,6 +52291,20 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 4470,
+        "end_km": 4490
+      },
+      {
+        "start_km": 4630,
+        "end_km": 4670
+      },
+      {
+        "start_km": 4950,
+        "end_km": 4990
+      }
+    ],
     "drop_items": [
       {
         "no": 140,
@@ -50112,6 +52402,7 @@
       }
     ],
     "monster_type": "アンデッド",
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 267,
@@ -50209,6 +52500,20 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 4670,
+        "end_km": 4690
+      },
+      {
+        "start_km": 4890,
+        "end_km": 4910
+      },
+      {
+        "start_km": 4990,
+        "end_km": 5010
+      }
+    ],
     "drop_items": [
       {
         "no": 141,
@@ -50306,6 +52611,20 @@
       }
     ],
     "monster_type": "デビル",
+    "spawn_areas": [
+      {
+        "start_km": 4770,
+        "end_km": 4810
+      },
+      {
+        "start_km": 4890,
+        "end_km": 4930
+      },
+      {
+        "start_km": 4970,
+        "end_km": 5010
+      }
+    ],
     "drop_items": [
       {
         "no": 142,
@@ -50403,6 +52722,7 @@
       }
     ],
     "monster_type": null,
+    "spawn_areas": [],
     "drop_items": [
       {
         "no": 368,

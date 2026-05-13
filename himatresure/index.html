@@ -1006,7 +1006,7 @@ function escapeHtml(value) {
 
 const UI_TEXT = {
   ja: {
-    searchPlaceholder: '名前・スキル・入手元で検索…',
+    searchPlaceholder: '名前・スキル・入手元・出現位置で検索…',
     sortNo: 'No順',
     sortName: '名前順',
     all: 'すべて',
@@ -1023,6 +1023,7 @@ const UI_TEXT = {
     unmarkVisible: (label, n) => `☆ ${label}の★を全解除（${n}件）`,
     drop: 'ドロップ',
     dropFrom: '入手元',
+    spawnArea: '出現位置',
     noMatches: '該当する装備がありません',
     modalSkills: 'スキル -- 3pt以上で発動（任意+1あり）',
     modalMastery: (known, total) => `マスタリーボーナス（解放済 ${known}/${total}）`,
@@ -1052,7 +1053,7 @@ const UI_TEXT = {
     groupLabels: { A: 'A　物理', 'M攻撃': 'M　魔法攻撃', 'M回復': 'M　魔法回復', P: 'P　パッシブ', '複合': '複合　type混在' }
   },
   en: {
-    searchPlaceholder: 'Search names, skills, or sources...',
+    searchPlaceholder: 'Search names, skills, sources, or areas...',
     sortNo: 'No.',
     sortName: 'Name',
     all: 'All',
@@ -1069,6 +1070,7 @@ const UI_TEXT = {
     unmarkVisible: (label, n) => `Unmark all ${label} stars (${n})`,
     drop: 'Drops',
     dropFrom: 'Dropped by',
+    spawnArea: 'Spawn area',
     noMatches: 'No matching equipment',
     modalSkills: 'Skills -- active at 3pt or more (+1 optional)',
     modalMastery: (known, total) => `Mastery bonuses (${known}/${total} known)`,
@@ -1131,6 +1133,16 @@ function translateMonsterType(item) {
   if (currentLang === 'en') return i18nEn?.petMonsterTypes?.[String(item.no)] || i18nEn?.monsterTypes?.[item.monster_type] || item.monster_type || '';
   return item.monster_type || '';
 }
+function formatSpawnArea(area) {
+  if (typeof area === 'string') return area;
+  const start = area?.start_km ?? area?.start ?? area?.from;
+  const end = area?.end_km ?? area?.end ?? area?.to;
+  if (start == null || end == null) return '';
+  return `${start}km-${end}km`;
+}
+function formatSpawnAreas(areas) {
+  return (areas || []).map(formatSpawnArea).filter(Boolean);
+}
 function translatedSearchValues(item) {
   const values = [item.name, String(item.no)];
   if (i18nEn?.items?.[String(item.no)]) values.push(i18nEn.items[String(item.no)]);
@@ -1142,6 +1154,7 @@ function translatedSearchValues(item) {
     values.push(d.name || '');
     if (d.no != null && i18nEn?.items?.[String(d.no)]) values.push(i18nEn.items[String(d.no)]);
   });
+  formatSpawnAreas(item.spawn_areas).forEach(area => values.push(area));
   (item.mastery_bonus || []).forEach(b => {
     values.push(b.name || '', b.effect || '');
     if (i18nEn?.mastery?.[b.name]) values.push(i18nEn.mastery[b.name].name, i18nEn.mastery[b.name].effect || '');
@@ -1605,6 +1618,10 @@ function openModal(no) {
   const monsterType = translateMonsterType(item);
   const typeTag = monsterType
     ? `<span style="font-size:11px;color:var(--tag-ペット);margin-right:4px">[${escapeHtml(monsterType)}]</span>` : '';
+  const spawnAreas = isPet ? formatSpawnAreas(item.spawn_areas) : [];
+  const spawnHtml = spawnAreas.length ? `
+    <section><h3>${ui('spawnArea')}</h3>
+    <div class="drop-list">${spawnAreas.map(area => escapeHtml(area)).join('<br>')}</div></section>` : '';
   document.getElementById('modal-body').innerHTML = `
     <h2>${typeTag}${escapeHtml(translateItemName(item))}</h2>
     <div class="modal-sub"><span>No${item.no}</span><span class="cat-tag cat-tag-${item.category}">${catLabel(item.category)}</span></div>
@@ -1615,6 +1632,7 @@ function openModal(no) {
         <span class="skill-name-col">${escapeHtml(translateSkillName(s.name))}</span>
         <span class="skill-desc-col">${escapeHtml(translateSkillDesc(s))}</span>
       </div>`).join('')}</div></section>
+    ${spawnHtml}
     ${dropHtml}
     <section><h3>${ui('modalMastery', knownBonus, item.mastery_bonus.length)}</h3>
     <table class="mastery-table"><tbody>${masteryRows}</tbody></table></section>`;
