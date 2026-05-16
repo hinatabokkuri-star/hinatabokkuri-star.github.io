@@ -1041,38 +1041,58 @@
 
   /* MV card */
   .mv-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+    display: flex;
+    gap: 0.85rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    padding: 0.1rem 0 0.7rem;
     margin-bottom: 0.5rem;
+    scrollbar-width: thin;
   }
   .mv-card {
+    flex: 0 0 clamp(160px, 24vw, 220px);
     background: var(--bg2);
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s;
     border: 1px solid var(--border);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
   .mv-card:hover { transform: translateY(-3px); border-color: var(--pink); }
   .mv-thumb {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 9 / 16;
     background: #000 center/cover no-repeat;
     position: relative;
+    overflow: hidden;
+  }
+  .mv-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(0,0,0,0.72), transparent 48%),
+      linear-gradient(to right, rgba(255,255,255,0.12), transparent 18%, transparent 82%, rgba(255,255,255,0.08));
+    pointer-events: none;
   }
   .mv-thumb::before {
     content: '▶';
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2.5rem;
+    font-size: 1.35rem;
     color: #fff;
     background: rgba(0,0,0,0.6);
-    width: 60px; height: 60px;
+    width: 48px; height: 48px;
     border-radius: 50%;
     display: grid; place-items: center;
-    padding-left: 5px;
+    padding-left: 3px;
     transition: background 0.2s;
+    z-index: 1;
   }
   .mv-card:hover .mv-thumb::before { background: var(--pink); }
   .mv-meta {
@@ -1086,6 +1106,21 @@
     font-size: 0.7rem;
     color: var(--text-dim);
     line-height: 1.4;
+  }
+  .mv-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.45rem;
+  }
+  .mv-badge {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    color: #07070a;
+    background: var(--amber);
+    border-radius: 999px;
+    padding: 0.16rem 0.42rem;
   }
 
   /* Chip count badge */
@@ -1354,6 +1389,10 @@
     border-radius: 12px;
     overflow: hidden;
     position: relative;
+  }
+  .mv-modal-inner.is-shorts {
+    max-width: min(430px, calc((100vh - 5rem) * 9 / 16));
+    aspect-ratio: 9 / 16;
   }
   .mv-modal-inner iframe {
     width: 100%; height: 100%;
@@ -1651,13 +1690,23 @@
     <div class="mv-card" data-yt="JubpAaRiTmo" data-yt-type="shorts">
       <div class="mv-thumb" style="background-image: url('covers/yami_doki.jpg')"></div>
       <div class="mv-meta">
+        <div class="mv-badges"><span class="mv-badge">Shorts</span><span class="mv-badge">AI MV</span></div>
         <div class="mv-title">病みDOKI</div>
         <div class="mv-comment">地雷女×オタク男のデュエット、Kling AI MV（1:54フル尺）</div>
+      </div>
+    </div>
+    <div class="mv-card" data-yt="UiXFIfW2rpk" data-yt-type="shorts">
+      <div class="mv-thumb" style="background-image: url('covers/kono_koe_ga_todoku_made.jpg')"></div>
+      <div class="mv-meta">
+        <div class="mv-badges"><span class="mv-badge">Shorts</span><span class="mv-badge">AI Music</span></div>
+        <div class="mv-title">この声が届くまで</div>
+        <div class="mv-comment">海を越えて声を届ける、サッカー日本代表応援MV</div>
       </div>
     </div>
     <div class="mv-card" data-yt="v2vuBKkNf_s">
       <div class="mv-thumb" style="background-image: url('covers/fly_away_buttfly.jpg')"></div>
       <div class="mv-meta">
+        <div class="mv-badges"><span class="mv-badge">MV</span><span class="mv-badge">Eurobeat</span></div>
         <div class="mv-title">fly away buttfly ①</div>
         <div class="mv-comment">90年代ユーロビートへのオマージュMV</div>
       </div>
@@ -1909,7 +1958,7 @@
 
 <!-- MV inline modal -->
 <div id="mvModal" class="mv-modal">
-  <div class="mv-modal-inner">
+  <div class="mv-modal-inner" id="mvModalInner">
     <button class="mv-modal-close" id="mvModalClose">×</button>
     <iframe id="mvIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
@@ -3366,11 +3415,13 @@ initAutoScroll();
 
 // MV inline player
 const mvModal = document.getElementById('mvModal');
+const mvModalInner = document.getElementById('mvModalInner');
 const mvIframe = document.getElementById('mvIframe');
 document.querySelectorAll('.mv-card').forEach(card => {
   card.addEventListener('click', () => {
     const id = card.dataset.yt;
     const type = card.dataset.ytType;
+    mvModalInner.classList.toggle('is-shorts', type === 'shorts');
     const url = type === 'shorts'
       ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`
       : `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
@@ -3386,6 +3437,7 @@ mvModal.addEventListener('click', (e) => {
 });
 function closeMvModal() {
   mvModal.classList.remove('active');
+  mvModalInner.classList.remove('is-shorts');
   mvIframe.src = '';
 }
 document.addEventListener('keydown', (e) => {
