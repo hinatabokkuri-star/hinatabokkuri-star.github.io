@@ -1160,6 +1160,7 @@ const UI_TEXT = {
     masteryProgressNone: '未取得',
     masteryProgressUpTo: pt => `${pt}ptまで取得済み`,
     masteryMarkTitle: pt => `${pt}ptまで取得済みにする`,
+    masteryUnmarkTitle: (pt, prev) => prev > 0 ? `${pt}ptを解除して${prev}ptまで戻す` : `${pt}ptを解除して未取得に戻す`,
     masteryReset: '未取得に戻す',
     missingName: 'なし',
     missingTitle: '未登録',
@@ -1216,6 +1217,7 @@ const UI_TEXT = {
     masteryProgressNone: 'Not acquired',
     masteryProgressUpTo: pt => `Acquired through ${pt}pt`,
     masteryMarkTitle: pt => `Mark acquired through ${pt}pt`,
+    masteryUnmarkTitle: (pt, prev) => prev > 0 ? `Unmark ${pt}pt and return to ${prev}pt` : `Unmark ${pt}pt and return to not acquired`,
     masteryReset: 'Reset',
     missingName: 'None',
     missingTitle: 'Not listed',
@@ -1497,6 +1499,22 @@ function getMasteryProgress(no) {
 function isMasteryAcquired(no, pt) {
   return Number(pt) > 0 && getMasteryProgress(no) >= Number(pt);
 }
+function previousMasteryPoint(no, pt) {
+  const itemNo = Number(no);
+  const point = Number(pt);
+  const item = catalogItems.find(i => i.no === itemNo) || allItems.find(i => i.no === itemNo);
+  const points = (item?.mastery_bonus || [])
+    .map(b => Number(b.pt))
+    .filter(p => Number.isFinite(p) && p > 0 && p < point)
+    .sort((a,b) => a - b);
+  return points.length ? points[points.length - 1] : 0;
+}
+function masteryToggleTitle(no, pt) {
+  const point = Number(pt);
+  return isMasteryAcquired(no, point)
+    ? ui('masteryUnmarkTitle', point, previousMasteryPoint(no, point))
+    : ui('masteryMarkTitle', point);
+}
 function masteryProgressLabel(pt) {
   return pt > 0 ? ui('masteryProgressUpTo', pt) : ui('masteryProgressNone');
 }
@@ -1505,10 +1523,14 @@ function refreshMasteryProgressUi(no) {
   document.querySelectorAll(`[data-mastery-no="${no}"]`).forEach(row => {
     const pt = Number(row.dataset.masteryPt || 0);
     const acquired = pt > 0 && current >= pt;
+    const title = masteryToggleTitle(no, pt);
     row.classList.toggle('acquired', acquired);
+    row.title = title;
     row.querySelectorAll('.mastery-mark-btn').forEach(btn => {
       btn.classList.toggle('acquired', acquired);
       btn.textContent = acquired ? '✓' : '';
+      btn.title = title;
+      btn.setAttribute('aria-label', title);
     });
   });
   document.querySelectorAll(`[data-mastery-progress-no="${no}"]`).forEach(el => {
@@ -1524,7 +1546,10 @@ function setMasteryProgress(no, pt, e) {
   const itemNo = Number(no);
   const point = Number(pt);
   if (!Number.isFinite(itemNo) || !Number.isFinite(point)) return;
-  if (point > 0) masteryProgress.set(itemNo, point);
+  const nextPoint = point > 0 && getMasteryProgress(itemNo) >= point
+    ? previousMasteryPoint(itemNo, point)
+    : point;
+  if (nextPoint > 0) masteryProgress.set(itemNo, nextPoint);
   else masteryProgress.delete(itemNo);
   saveMasteryProgress();
   refreshMasteryProgressUi(itemNo);
@@ -1850,7 +1875,7 @@ function openModal(no) {
     </div>` : '';
   const masteryRows = masteryBonuses.map(b => {
     const acquired = isMasteryAcquired(item.no, b.pt);
-    const markTitle = escapeHtml(ui('masteryMarkTitle', b.pt));
+    const markTitle = escapeHtml(masteryToggleTitle(item.no, b.pt));
     return `<tr class="${b.name?'':'locked'}${acquired?' acquired':''}" data-mastery-no="${item.no}" data-mastery-pt="${b.pt}" onclick="setMasteryProgress(${item.no},${b.pt},event)" title="${markTitle}">
       <td><button type="button" class="mastery-mark-btn${acquired?' acquired':''}" onclick="setMasteryProgress(${item.no},${b.pt},event)" aria-label="${markTitle}" title="${markTitle}">${acquired?'✓':''}</button></td>
       <td>${b.pt}pt</td>${b.name
@@ -3026,7 +3051,7 @@ function renderMastery() {
     const doneCount = rows.filter(r => isMasteryAcquired(r.item.no, r.pt)).length;
     const rowsHtml = rows.map(r => {
       const acquired = isMasteryAcquired(r.item.no, r.pt);
-      const markTitle = escapeHtml(ui('masteryMarkTitle', r.pt));
+      const markTitle = escapeHtml(masteryToggleTitle(r.item.no, r.pt));
       return `
       <div class="mastery-bonus-row${acquired?' acquired':''}" data-mastery-no="${r.item.no}" data-mastery-pt="${r.pt}" onclick="setMasteryProgress(${r.item.no},${r.pt},event)" title="${markTitle}">
         <button type="button" class="mastery-mark-btn${acquired?' acquired':''}" onclick="setMasteryProgress(${r.item.no},${r.pt},event)" aria-label="${markTitle}" title="${markTitle}">${acquired?'✓':''}</button>
