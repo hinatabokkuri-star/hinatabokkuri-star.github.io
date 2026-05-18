@@ -310,11 +310,29 @@
   .modal-skill-row { display: grid; grid-template-columns: 28px auto 1fr; gap: 6px; align-items: baseline; font-size: 12px; }
   .skill-name-col { color: var(--text); }
   .skill-desc-col { color: var(--muted); font-size: 11px; }
+  .mastery-progress-panel {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    background: var(--panel2); border: 1px solid var(--border);
+    padding: 8px 10px; margin-bottom: 8px; font-size: 12px;
+  }
+  .mastery-progress-value { color: var(--ok); }
+  .mastery-reset-btn {
+    background: var(--bg); border: 1px solid var(--border); color: var(--muted);
+    font-family: inherit; font-size: 11px; padding: 3px 8px; cursor: pointer;
+    white-space: nowrap; -webkit-tap-highlight-color: transparent;
+  }
+  .mastery-reset-btn:not(:disabled):hover { border-color: var(--accent); color: var(--accent); }
+  .mastery-reset-btn:disabled { opacity: .45; cursor: default; }
   .mastery-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  .mastery-table td { padding: 4px 6px; border-bottom: 1px solid #1e1e40; vertical-align: top; }
-  .mastery-table td:first-child { color: var(--muted); white-space: nowrap; width: 60px; }
-  .mastery-table td:nth-child(2) { color: var(--accent); width: 110px; }
+  .mastery-table tr { cursor: pointer; }
+  .mastery-table td { padding: 4px 6px; border-bottom: 1px solid #1e1e40; vertical-align: middle; }
+  .mastery-table tr:hover td { background: var(--panel2); }
+  .mastery-table tr.acquired td { background: rgba(78,203,113,0.10); }
+  .mastery-table td:first-child { width: 28px; padding-right: 2px; text-align: center; }
+  .mastery-table td:nth-child(2) { color: var(--muted); white-space: nowrap; width: 60px; }
+  .mastery-table td:nth-child(3) { color: var(--accent); width: 110px; }
   .mastery-table .locked td { color: var(--dim); }
+  .mastery-table .locked.acquired td { color: var(--muted); }
   .drop-list { font-size: 12px; line-height: 2; }
   .area-list { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; line-height: 1.6; }
   .area-list span { white-space: nowrap; color: var(--text); }
@@ -349,11 +367,24 @@
     cursor: pointer;
   }
   .mastery-bonus-row:last-child { border-bottom: none; }
+  .mastery-bonus-row.acquired { background: rgba(78,203,113,0.10); }
   .mastery-bonus-row:hover .mastery-item-name { color: var(--accent); }
+  .mastery-mark-btn {
+    width: 18px; height: 18px; border: 1px solid var(--border); background: var(--bg);
+    color: var(--dim); font-family: inherit; font-size: 12px; line-height: 1;
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .mastery-mark-btn.acquired { color: var(--ok); border-color: var(--ok); background: rgba(78,203,113,0.12); }
   .mastery-pt { color: var(--muted); width: 52px; flex-shrink: 0; font-size: 11px; }
   .mastery-item-name { flex: 1; }
-  .mastery-effect { color: var(--muted); font-size: 11px; }
-  .mastery-count { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .mastery-item-open {
+    min-width: 0; border: none; background: none; color: inherit; font-family: inherit;
+    font-size: inherit; text-align: left; cursor: pointer; padding: 0;
+  }
+  .mastery-item-open:hover { color: var(--accent); }
+  .mastery-effect { color: var(--muted); font-size: 11px; min-width: 0; }
+  .mastery-count { font-size: 11px; color: var(--muted); margin-bottom: 4px; white-space: nowrap; flex-shrink: 0; }
 
   /* ━━━ FLOOR DROPS TAB ━━━ */
   #tab-floors { padding: 14px 12px 80px; }
@@ -701,6 +732,7 @@
     color: #fff5d5;
     border-color: #304c5c;
   }
+  body.modal-open .theme-toggle { display: none; }
 
   body.theme-dark {
     --bg:      #121922;
@@ -1086,6 +1118,7 @@ const MAX_RESULTS = 30;
 const SLOT_SORT_KEY = 'himatubu_slot_sort';
 const LANG_KEY = 'himatresure_lang';
 const LIST_VIEW_KEY = 'himatresure_list_view';
+const MASTERY_PROGRESS_KEY = 'himatubu_mastery_progress';
 let currentLang = 'ja';
 let i18nEn = null;
 let i18nLoadPromise = null;
@@ -1123,6 +1156,11 @@ const UI_TEXT = {
     noMatches: '該当する装備がありません',
     modalSkills: 'スキル -- 3pt以上で発動（任意+1あり）',
     modalMastery: (known, total) => `マスタリーボーナス（解放済 ${known}/${total}）`,
+    masteryProgress: '獲得状況',
+    masteryProgressNone: '未取得',
+    masteryProgressUpTo: pt => `${pt}ptまで取得済み`,
+    masteryMarkTitle: pt => `${pt}ptまで取得済みにする`,
+    masteryReset: '未取得に戻す',
     missingName: 'なし',
     missingTitle: '未登録',
     missingNote: 'このNoはまだ未登録です。',
@@ -1174,6 +1212,11 @@ const UI_TEXT = {
     noMatches: 'No matching equipment',
     modalSkills: 'Skills -- active at 3pt or more (+1 optional)',
     modalMastery: (known, total) => `Mastery bonuses (${known}/${total} known)`,
+    masteryProgress: 'Progress',
+    masteryProgressNone: 'Not acquired',
+    masteryProgressUpTo: pt => `Acquired through ${pt}pt`,
+    masteryMarkTitle: pt => `Mark acquired through ${pt}pt`,
+    masteryReset: 'Reset',
     missingName: 'None',
     missingTitle: 'Not listed',
     missingNote: 'This No. is not listed yet.',
@@ -1308,6 +1351,7 @@ let slotSortMode = localStorage.getItem(SLOT_SORT_KEY) === 'name' ? 'name' : 'no
 let listViewMode = localStorage.getItem(LIST_VIEW_KEY) === 'compact' ? 'compact' : 'full';
 let ownedFilter = 'all'; // 'all' | 'owned' | 'unowned'
 let ownedSet = new Set(JSON.parse(localStorage.getItem('himatubu_owned') || '[]'));
+let masteryProgress = loadMasteryProgress();
 const OWNER_HASH_PREFIX = '#owned=';
 
 function refreshLanguageButtons() {
@@ -1423,6 +1467,67 @@ function initLanguagePreference() {
   try { saved = localStorage.getItem(LANG_KEY) || ''; } catch(e) {}
   currentLang = saved === 'ja' || saved === 'en' ? saved : defaultLanguageFromSystem();
   refreshLanguageButtons();
+}
+
+function loadMasteryProgress() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(MASTERY_PROGRESS_KEY) || '{}');
+    const entries = Array.isArray(raw) ? raw : Object.entries(raw);
+    const map = new Map();
+    entries.forEach(entry => {
+      const no = Number(Array.isArray(entry) ? entry[0] : entry?.no);
+      const pt = Number(Array.isArray(entry) ? entry[1] : entry?.pt);
+      if (Number.isFinite(no) && Number.isFinite(pt) && pt > 0) map.set(no, pt);
+    });
+    return map;
+  } catch(e) {
+    return new Map();
+  }
+}
+function saveMasteryProgress() {
+  const data = {};
+  [...masteryProgress.entries()].sort((a,b) => a[0] - b[0]).forEach(([no, pt]) => {
+    if (pt > 0) data[no] = pt;
+  });
+  localStorage.setItem(MASTERY_PROGRESS_KEY, JSON.stringify(data));
+}
+function getMasteryProgress(no) {
+  return masteryProgress.get(Number(no)) || 0;
+}
+function isMasteryAcquired(no, pt) {
+  return Number(pt) > 0 && getMasteryProgress(no) >= Number(pt);
+}
+function masteryProgressLabel(pt) {
+  return pt > 0 ? ui('masteryProgressUpTo', pt) : ui('masteryProgressNone');
+}
+function refreshMasteryProgressUi(no) {
+  const current = getMasteryProgress(no);
+  document.querySelectorAll(`[data-mastery-no="${no}"]`).forEach(row => {
+    const pt = Number(row.dataset.masteryPt || 0);
+    const acquired = pt > 0 && current >= pt;
+    row.classList.toggle('acquired', acquired);
+    row.querySelectorAll('.mastery-mark-btn').forEach(btn => {
+      btn.classList.toggle('acquired', acquired);
+      btn.textContent = acquired ? '✓' : '';
+    });
+  });
+  document.querySelectorAll(`[data-mastery-progress-no="${no}"]`).forEach(el => {
+    el.textContent = masteryProgressLabel(current);
+  });
+  document.querySelectorAll(`[data-mastery-reset-no="${no}"]`).forEach(btn => {
+    btn.disabled = current <= 0;
+  });
+  if (document.getElementById('tab-mastery')?.classList.contains('active')) renderMastery();
+}
+function setMasteryProgress(no, pt, e) {
+  if (e) e.stopPropagation();
+  const itemNo = Number(no);
+  const point = Number(pt);
+  if (!Number.isFinite(itemNo) || !Number.isFinite(point)) return;
+  if (point > 0) masteryProgress.set(itemNo, point);
+  else masteryProgress.delete(itemNo);
+  saveMasteryProgress();
+  refreshMasteryProgressUi(itemNo);
 }
 
 function saveOwned() {
@@ -1722,6 +1827,7 @@ function openModal(no) {
     document.getElementById('modal-overlay').classList.add('open');
     document.getElementById('modal-overlay').scrollTop = 0;
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
     return;
   }
   const isPet = item.category === 'ペット';
@@ -1734,12 +1840,23 @@ function openModal(no) {
       const label = escapeHtml((d.no ? `No${d.no} ` : '') + translateDropName(d));
       return linked ? `<a class="drop-link" onclick="openModal(${d.no})">${label}</a>` : label;
     }).join('<br>')}</div></section>` : '';
-  const knownBonus = item.mastery_bonus.filter(b => b.name).length;
-  const masteryRows = item.mastery_bonus.map(b =>
-    `<tr class="${b.name?'':'locked'}"><td>${b.pt}pt</td>${b.name
-      ?`<td>${escapeHtml(translateMasteryName(b.name))}</td><td>${escapeHtml(translateMasteryEffect(b))}</td>`
-      :`<td colspan="2" style="color:var(--dim)">${ui('locked')}</td>`}</tr>`
-  ).join('');
+  const masteryBonuses = item.mastery_bonus || [];
+  const masteryProgressPt = getMasteryProgress(item.no);
+  const knownBonus = masteryBonuses.filter(b => b.name).length;
+  const masteryProgressHtml = masteryBonuses.length ? `
+    <div class="mastery-progress-panel">
+      <span>${ui('masteryProgress')}：<span class="mastery-progress-value" data-mastery-progress-no="${item.no}">${escapeHtml(masteryProgressLabel(masteryProgressPt))}</span></span>
+      <button class="mastery-reset-btn" data-mastery-reset-no="${item.no}" onclick="setMasteryProgress(${item.no},0,event)" ${masteryProgressPt > 0 ? '' : 'disabled'}>${escapeHtml(ui('masteryReset'))}</button>
+    </div>` : '';
+  const masteryRows = masteryBonuses.map(b => {
+    const acquired = isMasteryAcquired(item.no, b.pt);
+    const markTitle = escapeHtml(ui('masteryMarkTitle', b.pt));
+    return `<tr class="${b.name?'':'locked'}${acquired?' acquired':''}" data-mastery-no="${item.no}" data-mastery-pt="${b.pt}" onclick="setMasteryProgress(${item.no},${b.pt},event)" title="${markTitle}">
+      <td><button type="button" class="mastery-mark-btn${acquired?' acquired':''}" onclick="setMasteryProgress(${item.no},${b.pt},event)" aria-label="${markTitle}" title="${markTitle}">${acquired?'✓':''}</button></td>
+      <td>${b.pt}pt</td>${b.name
+        ?`<td>${escapeHtml(translateMasteryName(b.name))}</td><td>${escapeHtml(translateMasteryEffect(b))}</td>`
+        :`<td colspan="2" style="color:var(--dim)">${ui('locked')}</td>`}</tr>`;
+  }).join('');
   const monsterType = translateMonsterType(item);
   const typeTag = monsterType
     ? `<span style="font-size:11px;color:var(--tag-ペット);margin-right:4px">[${escapeHtml(monsterType)}]</span>` : '';
@@ -1768,15 +1885,18 @@ function openModal(no) {
     ${obtainHtml}
     ${spawnHtml}
     ${dropHtml}
-    <section><h3>${ui('modalMastery', knownBonus, item.mastery_bonus.length)}</h3>
+    <section><h3>${ui('modalMastery', knownBonus, masteryBonuses.length)}</h3>
+    ${masteryProgressHtml}
     <table class="mastery-table"><tbody>${masteryRows}</tbody></table></section>`;
   document.getElementById('modal-overlay').classList.add('open');
   document.getElementById('modal-overlay').scrollTop = 0;
   document.body.style.overflow = 'hidden';
+  document.body.classList.add('modal-open');
 }
 function closeModal() {
   document.getElementById('modal-overlay').classList.remove('open');
   document.body.style.overflow = '';
+  document.body.classList.remove('modal-open');
 }
 document.getElementById('modal-close').addEventListener('click', closeModal);
 document.getElementById('modal-overlay').addEventListener('click', e => {
@@ -2903,18 +3023,24 @@ function renderMastery() {
   }
   el.innerHTML = masteryMap.map(([name, rows]) => {
     const isOpen = openMasteryNames.has(name);
-    const rowsHtml = rows.map(r => `
-      <div class="mastery-bonus-row" onclick="openModal(${r.item.no})">
+    const doneCount = rows.filter(r => isMasteryAcquired(r.item.no, r.pt)).length;
+    const rowsHtml = rows.map(r => {
+      const acquired = isMasteryAcquired(r.item.no, r.pt);
+      const markTitle = escapeHtml(ui('masteryMarkTitle', r.pt));
+      return `
+      <div class="mastery-bonus-row${acquired?' acquired':''}" data-mastery-no="${r.item.no}" data-mastery-pt="${r.pt}" onclick="setMasteryProgress(${r.item.no},${r.pt},event)" title="${markTitle}">
+        <button type="button" class="mastery-mark-btn${acquired?' acquired':''}" onclick="setMasteryProgress(${r.item.no},${r.pt},event)" aria-label="${markTitle}" title="${markTitle}">${acquired?'✓':''}</button>
         <span class="mastery-pt">${r.pt}pt</span>
-        <span class="mastery-item-name">
+        <button type="button" class="mastery-item-name mastery-item-open" onclick="event.stopPropagation();openModal(${r.item.no})">
           <span class="cat-tag cat-tag-${r.item.category}" style="margin-right:5px">${catLabel(r.item.category)}</span>No${r.item.no} ${escapeHtml(translateItemName(r.item))}
-        </span>
-      </div>`).join('');
+        </button>
+      </div>`;
+    }).join('');
     return `<div class="mastery-bonus-card">
       <button class="mastery-bonus-name" data-name="${escapeHtml(name)}" onclick="toggleMasteryGroup(this.dataset.name)" aria-expanded="${isOpen}">
         <span class="mastery-toggle">${isOpen ? '▼' : '▶'}</span>
         <span class="mastery-title">${escapeHtml(translateMasteryName(name))}</span>
-        <span class="mastery-count">${currentLang === 'en' ? `${rows.length} items` : `${rows.length}件`}</span>
+        <span class="mastery-count">${currentLang === 'en' ? `${doneCount}/${rows.length} acquired` : `${doneCount}/${rows.length}取得`}</span>
         <span class="mastery-effect">${escapeHtml(translateMasteryEffect({ name, effect: rows[0].effect }))}</span>
       </button>
       <div class="mastery-bonus-rows" style="display:${isOpen ? '' : 'none'}">${rowsHtml}</div>
