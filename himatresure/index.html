@@ -202,10 +202,13 @@
   .skill-cat-title { font-size: 11px; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
   .skill-cat-count { font-size: 11px; margin-left: auto; color: var(--ok); }
   .skill-cat-count.none { color: var(--muted); }
-  .skill-item-row { font-size: 12px; padding: 4px 0; border-bottom: 1px solid var(--panel2); display: flex; gap: 6px; align-items: baseline; cursor: pointer; }
+  .skill-result-section + .skill-result-section { margin-top: 16px; }
+  .skill-result-title { font-size: 13px; font-weight: 700; color: var(--accent); margin: 0 0 8px; }
+  .skill-item-row { font-size: 12px; padding: 4px 0; border: 0; border-bottom: 1px solid var(--panel2); display: flex; gap: 6px; align-items: baseline; cursor: pointer; width: 100%; background: transparent; color: inherit; text-align: left; font-family: inherit; }
   .skill-item-row:last-child { border-bottom: none; }
   .skill-item-row:hover { color: var(--accent); }
   .skill-item-no { color: var(--muted); font-size: 11px; flex-shrink: 0; }
+  .skill-item-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .skill-summary { background: var(--panel2); border: 1px solid var(--border); padding: 12px 14px; margin-bottom: 14px; font-size: 12px; line-height: 2; }
   .skill-summary .ok { color: var(--ok); }
   .skill-summary .ng { color: var(--muted); }
@@ -1000,9 +1003,9 @@
 
   <!-- スキルから検索モード -->
   <div class="checker-mode" id="mode-skill">
-    <p class="ck-label" style="margin-bottom:10px">発動させたいスキルを選択</p>
+    <p class="ck-label" style="margin-bottom:10px">探したいスキルを選択（複数選択時はスキル別に表示）</p>
     <div class="skill-checks" id="skill-checks-skill"></div>
-    <button class="search-btn" style="margin-top:12px" onclick="searchBySkill()">🔍 組み合わせを検索</button>
+    <button class="search-btn" style="margin-top:12px" onclick="searchBySkill()">🔍 該当装備を表示</button>
     <div id="skill-combo-result" style="margin-top:8px"></div>
   </div>
 
@@ -1167,6 +1170,12 @@ const UI_TEXT = {
     missingNote: 'このNoはまだ未登録です。',
     locked: '???',
     checkerEmpty: '装備またはスキルを選択すると自動で検索します',
+    skillSearchLabel: '探したいスキルを選択（複数選択時はスキル別に表示）',
+    skillSearchButton: '🔍 該当装備を表示',
+    skillSearchSelected: '選択スキル',
+    skillSearchUnique: n => `該当装備 ${n}件（重複除外）`,
+    skillSearchSection: (skill, n) => `「${skill}」を持つ装備 ${n}件`,
+    skillSearchNone: '該当なし',
     skillSlot: 'スキル',
     more: (shown, total) => `さらに表示（${shown} / ${total}）`,
     sameSkillAlts: n => `同じスキル発動の別装備（${n}件）`,
@@ -1224,6 +1233,12 @@ const UI_TEXT = {
     missingNote: 'This No. is not listed yet.',
     locked: '???',
     checkerEmpty: 'Select equipment or skills to search automatically',
+    skillSearchLabel: 'Select skills to find equipment (multiple selections are shown by skill)',
+    skillSearchButton: 'Search equipment',
+    skillSearchSelected: 'Selected skills',
+    skillSearchUnique: n => `${n} unique matching item(s)`,
+    skillSearchSection: (skill, n) => `${n} item(s) with ${skill}`,
+    skillSearchNone: 'None',
     skillSlot: 'Skill',
     more: (shown, total) => `Show more (${shown} / ${total})`,
     sameSkillAlts: n => `Alternative equipment for the same active skills (${n})`,
@@ -1425,8 +1440,8 @@ function refreshStaticLanguageText() {
   document.querySelector('.checker-rule-bar button:nth-of-type(2)').textContent = currentLang === 'en' ? 'Clear' : '✕ 選択解除';
   document.querySelector('.mode-btn[data-mode="equip"]').textContent = currentLang === 'en' ? 'Combinations' : '🎒 組み合わせ検索';
   document.querySelector('.mode-btn[data-mode="skill"]').textContent = currentLang === 'en' ? 'By Skill' : '🔍 スキルから検索';
-  document.querySelector('#mode-skill .ck-label').textContent = currentLang === 'en' ? 'Select skills to activate' : '発動させたいスキルを選択';
-  document.querySelector('#mode-skill .search-btn').textContent = currentLang === 'en' ? 'Search combinations' : '🔍 組み合わせを検索';
+  document.querySelector('#mode-skill .ck-label').textContent = ui('skillSearchLabel');
+  document.querySelector('#mode-skill .search-btn').textContent = ui('skillSearchButton');
   document.querySelector('.slots-section-title').textContent = currentLang === 'en'
     ? '1. Select fixed equipment (blank = search that slot)'
     : '① 固定したい装備を選択（未選択 = 空き枠として探索）';
@@ -1975,7 +1990,54 @@ function searchBySkill() {
     resultEl.innerHTML = `<div class="ck-empty">${ui('searchTargetsRequired')}</div>`;
     return;
   }
-  scheduleComboSearch({}, targets, 'skill-combo-result', ui('loadingSkill'));
+  comboSearchToken++;
+  const pool = allItems.filter(item => {
+    if (ownedFilter === 'owned' && !ownedSet.has(item.no)) return false;
+    if (ownedFilter === 'unowned' && ownedSet.has(item.no)) return false;
+    return true;
+  });
+  const uniqueNos = new Set();
+  const sections = targets.map(target => {
+    const byCat = {};
+    CATS.forEach(cat => byCat[cat] = []);
+    pool.forEach(item => {
+      if (!searchableSkillNames(item).includes(target)) return;
+      byCat[item.category]?.push(item);
+      uniqueNos.add(item.no);
+    });
+    const total = CATS.reduce((sum, cat) => sum + byCat[cat].length, 0);
+    const catBlocks = CATS.map(cat => renderSkillSearchCatBlock(cat, byCat[cat], target)).join('');
+    return `<section class="skill-result-section">
+      <p class="skill-result-title">${escapeHtml(ui('skillSearchSection', translateSkillName(target), total))}</p>
+      <div class="skill-result-grid">${catBlocks}</div>
+    </section>`;
+  }).join('');
+  const filterLabel = ownedFilter === 'owned' ? ui('ownedOnly')
+    : ownedFilter === 'unowned' ? ui('unownedOnly')
+    : ui('all');
+  resultEl.innerHTML = `<div class="skill-summary">
+      <div><strong>${escapeHtml(ui('skillSearchSelected'))}：</strong>${targets.map(t => escapeHtml(translateSkillName(t))).join(currentLang === 'en' ? ', ' : '、')}</div>
+      <div><span class="${uniqueNos.size ? 'ok' : 'ng'}">${escapeHtml(ui('skillSearchUnique', uniqueNos.size))}</span> <span class="ng">/ ${escapeHtml(filterLabel)}</span></div>
+    </div>${sections}`;
+}
+
+function renderSkillSearchCatBlock(cat, items, target) {
+  const rows = [...items].sort((a, b) => a.no - b.no).map(item => {
+    const skill = item.skills.find(s => isSearchableSkill(s) && s.name === target);
+    return `<button type="button" class="skill-item-row" onclick="openModal(${item.no})">
+      <span class="skill-item-no">No${item.no}</span>
+      <span class="skill-type st-${skill?.type || ''}">${escapeHtml(skill?.type || '')}</span>
+      <span class="skill-item-name">${escapeHtml(translateItemName(item))}</span>
+      ${ownedSet.has(item.no) ? '<span title="owned">★</span>' : ''}
+    </button>`;
+  }).join('') || `<div class="ck-empty" style="padding:4px 0;color:var(--muted)">${escapeHtml(ui('skillSearchNone'))}</div>`;
+  return `<div class="skill-cat-block">
+    <div class="skill-cat-title">
+      <span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span>
+      <span class="skill-cat-count${items.length ? '' : ' none'}">${escapeHtml(ui('count', items.length))}</span>
+    </div>
+    ${rows}
+  </div>`;
 }
 
 // ━━━ 装備から検索：スロット ━━━
@@ -2092,8 +2154,13 @@ function clearCheckerSelections() {
     cb.checked = false;
     cb.closest('label').classList.remove('checked');
   });
+  document.querySelectorAll('#skill-checks-skill input').forEach(cb => {
+    cb.checked = false;
+    cb.closest('label').classList.remove('checked');
+  });
   document.getElementById('combo-result').innerHTML =
     `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
+  document.getElementById('skill-combo-result').innerHTML = '';
 }
 
 function onCheckChange(checkbox) {
