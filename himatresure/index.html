@@ -237,9 +237,9 @@
   .exclude-section-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
   .exclude-title { font-size: 11px; color: var(--muted); margin-right: auto; }
   .exclude-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; }
-  .excluded-item-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; min-height: 24px; align-items: center; }
+  .excluded-item-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; align-items: center; }
   .excluded-chip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 11px; padding: 3px 7px; }
-  .excluded-chip.empty { color: var(--muted); border-style: dashed; }
+  .excluded-empty { color: var(--muted); font-size: 11px; padding: 0 2px; }
   .excluded-chip button,
   .exclude-item-btn {
     border: 0; background: transparent; color: var(--muted);
@@ -1689,7 +1689,7 @@ function renderCheckerExcludeControls() {
       .map(no => ITEM_BY_NO?.get(no) || allItems.find(item => item.no === no) || { no, name: `No${no}` });
     chips.innerHTML = items.length
       ? items.map(item => `<span class="excluded-chip"><span>${escapeHtml(item.name === `No${item.no}` ? `No${item.no}` : checkerItemLabel(item))}</span><button type="button" onclick="removeExcludedItem(${item.no})" aria-label="remove">×</button></span>`).join('')
-      : `<span class="excluded-chip empty">${escapeHtml(ui('excludeEmpty'))}</span>`;
+      : `<span class="excluded-empty">${escapeHtml(ui('excludeEmpty'))}</span>`;
   }
 }
 function refreshCheckerAfterFilterChange() {
