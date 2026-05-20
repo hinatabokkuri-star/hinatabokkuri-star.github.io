@@ -1663,6 +1663,10 @@ function renderCheckerExcludeControls() {
   const maxBtn = document.getElementById('exclude-max-mastery-btn');
   const clearBtn = document.getElementById('exclude-clear-btn');
   const title = document.querySelector('.exclude-title');
+  const fixedCats = new Set(CATS.filter(cat => {
+    const sel = document.querySelector(`.slot-select[data-cat="${cat}"]`);
+    return !!sel?.value;
+  }));
   if (title) title.textContent = ui('excludeTitle');
   if (maxBtn) {
     maxBtn.textContent = ui('excludeMaxMastered');
@@ -1675,6 +1679,7 @@ function renderCheckerExcludeControls() {
   }
   if (select) {
     const groups = CATS.map(cat => {
+      if (fixedCats.has(cat)) return '';
       const options = sortSlotItems(allItems.filter(item => item.category === cat && !isCheckerExcluded(item)))
         .map(item => `<option value="${item.no}">${escapeHtml(checkerItemLabel(item))}</option>`)
         .join('');
@@ -1856,6 +1861,7 @@ function restoreCheckerState(state) {
     const no = parseInt(sel.value);
     renderSlotSkills(cat, !unused && no ? allItems.find(i => i.no === no) : null, unused);
   });
+  renderCheckerExcludeControls();
   restoreCheckedSkills('#skill-checks', state.equipSkills);
   restoreCheckedSkills('#skill-checks-skill', state.skillModeSkills);
   searchCombinations();
@@ -2256,6 +2262,7 @@ function onSlotChange(cat) {
   const no = parseInt(sel.value);
   const item = !unused && no ? allItems.find(i => i.no === no) : null;
   renderSlotSkills(cat, item, unused);
+  renderCheckerExcludeControls();
   searchCombinations();
 }
 function renderSlotSkills(cat, item, unused = false) {
@@ -2316,10 +2323,11 @@ function buildSkillChecks() {
 
 function clearCheckerSelections() {
   comboSearchToken++;
-  document.querySelectorAll('.slot-select').forEach(sel => {
+  document.querySelectorAll('.slot-select[data-cat]').forEach(sel => {
     sel.value = '';
     document.getElementById(`slot-skills-${sel.dataset.cat}`).innerHTML = '';
   });
+  renderCheckerExcludeControls();
   document.querySelectorAll('#skill-checks input').forEach(cb => {
     cb.checked = false;
     cb.closest('label').classList.remove('checked');
