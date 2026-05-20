@@ -230,6 +230,24 @@
   .slot-select:focus { border-color: var(--accent); }
   .slot-skills { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; min-height: 0; }
   .slot-skill-chip { font-size: 11px; display: flex; align-items: baseline; gap: 5px; }
+  .slot-disabled-note { color: var(--muted); font-size: 11px; }
+
+  /* 除外設定 */
+  .exclude-section { background: var(--panel); border: 1px solid var(--border); padding: 12px; }
+  .exclude-section-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .exclude-title { font-size: 11px; color: var(--muted); margin-right: auto; }
+  .exclude-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+  .excluded-item-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; min-height: 24px; align-items: center; }
+  .excluded-chip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 11px; padding: 3px 7px; }
+  .excluded-chip.empty { color: var(--muted); border-style: dashed; }
+  .excluded-chip button,
+  .exclude-item-btn {
+    border: 0; background: transparent; color: var(--muted);
+    font: inherit; cursor: pointer; padding: 0 2px; line-height: 1;
+  }
+  .excluded-chip button:hover,
+  .exclude-item-btn:hover { color: var(--accent); }
+  .combo-slot-disabled { color: var(--muted); font-size: 11px; }
 
   /* スキル目標選択 */
   .target-section { background: var(--panel); border: 1px solid var(--border); padding: 12px; }
@@ -584,6 +602,7 @@
 
   .card,
   .slot-block,
+  .exclude-section,
   .target-section,
   .skill-cat-block,
   .combo-card,
@@ -660,6 +679,7 @@
   .skill-row span:last-child { font-weight: 600; }
   .skill-row { color: #203440; }
   .slot-block,
+  .exclude-section,
   .target-section,
   .skill-cat-block,
   .combo-card,
@@ -829,6 +849,7 @@
   }
   body.theme-dark .card,
   body.theme-dark .slot-block,
+  body.theme-dark .exclude-section,
   body.theme-dark .target-section,
   body.theme-dark .skill-cat-block,
   body.theme-dark .combo-card,
@@ -1025,9 +1046,24 @@
         <div class="slots-grid" id="slots-grid"></div>
       </div>
 
-      <!-- ② 目標スキル -->
+      <!-- ② 除外装備 -->
+      <div class="exclude-section">
+        <div class="exclude-section-head">
+          <div class="exclude-title">② 除外する装備</div>
+          <button class="owned-filter-btn" id="exclude-max-mastery-btn" onclick="toggleExcludeMaxMastered()">9999除外</button>
+        </div>
+        <div class="exclude-controls">
+          <select class="slot-select" id="exclude-item-select" onchange="addExcludedItemFromSelect(this)">
+            <option value="">除外アイテムを追加</option>
+          </select>
+          <button class="owned-filter-btn" id="exclude-clear-btn" onclick="clearExcludedItems()">除外解除</button>
+        </div>
+        <div class="excluded-item-chips" id="excluded-item-chips"></div>
+      </div>
+
+      <!-- ③ 目標スキル -->
       <div class="target-section">
-        <p class="target-title">② 発動させたいスキルを選択（複数可・未選択 = 発動するスキルを全列挙）</p>
+        <p class="target-title">③ 発動させたいスキルを選択（複数可・未選択 = 発動するスキルを全列挙）</p>
         <div class="skill-checks" id="skill-checks"></div>
       </div>
 
@@ -1122,6 +1158,9 @@ const SLOT_SORT_KEY = 'himatubu_slot_sort';
 const LANG_KEY = 'himatresure_lang';
 const LIST_VIEW_KEY = 'himatresure_list_view';
 const MASTERY_PROGRESS_KEY = 'himatubu_mastery_progress';
+const CHECKER_EXCLUDED_KEY = 'himatubu_checker_excluded';
+const CHECKER_EXCLUDE_MAX_KEY = 'himatubu_checker_exclude_max_mastery';
+const UNUSED_SLOT_VALUE = '__unused__';
 let currentLang = 'ja';
 let i18nEn = null;
 let i18nLoadPromise = null;
@@ -1190,6 +1229,16 @@ const UI_TEXT = {
     extraCombos: (kind, total) => `${kind}スキルの組み合わせも表示（${total}件）`,
     noCombos: '条件を満たす組み合わせが見つかりませんでした',
     searchTargetsRequired: 'スキルを1つ以上選択してください',
+    slotsTitle: '① 固定したい装備を選択（未選択 = 空き枠として探索 / 使用しない = 部位除外）',
+    slotEmptyOption: '── 空き（探索対象） ──',
+    slotUnusedOption: '── 使用しない（部位除外） ──',
+    slotUnusedLabel: '使用しない',
+    excludeTitle: '② 除外する装備',
+    excludeSelectPlaceholder: '除外アイテムを追加',
+    excludeMaxMastered: '9999除外',
+    excludeClear: '個別除外解除',
+    excludeEmpty: '除外なし',
+    targetTitle: '③ 発動させたいスキルを選択（複数可・未選択 = 発動するスキルを全列挙）',
     loadingCombo: '組み合わせを検索中',
     loadingSkill: 'スキル候補を検索中',
     loadingCondition: '条件に合う組み合わせを検索中',
@@ -1253,6 +1302,16 @@ const UI_TEXT = {
     extraCombos: (kind, total) => `Show ${kind}-skill combinations (${total})`,
     noCombos: 'No combinations matched',
     searchTargetsRequired: 'Select at least one skill',
+    slotsTitle: '1. Select fixed equipment (blank = search that slot / unused = exclude slot)',
+    slotEmptyOption: '-- Empty (search slot) --',
+    slotUnusedOption: '-- Do not use this slot --',
+    slotUnusedLabel: 'Not used',
+    excludeTitle: '2. Excluded equipment',
+    excludeSelectPlaceholder: 'Add excluded item',
+    excludeMaxMastered: 'Exclude 9999',
+    excludeClear: 'Clear item excludes',
+    excludeEmpty: 'No excluded items',
+    targetTitle: '3. Select target skills (optional; blank = list active skills)',
     loadingCombo: 'Searching combinations',
     loadingSkill: 'Searching skill candidates',
     loadingCondition: 'Searching matching combinations',
@@ -1369,6 +1428,8 @@ let listViewMode = localStorage.getItem(LIST_VIEW_KEY) === 'compact' ? 'compact'
 let ownedFilter = 'all'; // 'all' | 'owned' | 'unowned'
 let ownedSet = new Set(JSON.parse(localStorage.getItem('himatubu_owned') || '[]'));
 let masteryProgress = loadMasteryProgress();
+let checkerExcludedSet = loadNoSet(CHECKER_EXCLUDED_KEY);
+let excludeMaxMastered = localStorage.getItem(CHECKER_EXCLUDE_MAX_KEY) === '1';
 const OWNER_HASH_PREFIX = '#owned=';
 
 function refreshLanguageButtons() {
@@ -1442,14 +1503,11 @@ function refreshStaticLanguageText() {
   document.querySelector('.mode-btn[data-mode="skill"]').textContent = currentLang === 'en' ? 'By Skill' : '🔍 スキルから検索';
   document.querySelector('#mode-skill .ck-label').textContent = ui('skillSearchLabel');
   document.querySelector('#mode-skill .search-btn').textContent = ui('skillSearchButton');
-  document.querySelector('.slots-section-title').textContent = currentLang === 'en'
-    ? '1. Select fixed equipment (blank = search that slot)'
-    : '① 固定したい装備を選択（未選択 = 空き枠として探索）';
+  document.querySelector('.slots-section-title').textContent = ui('slotsTitle');
   document.getElementById('slot-sort-no').textContent = ui('sortNo');
   document.getElementById('slot-sort-name').textContent = currentLang === 'en' ? 'Name' : '50音順';
-  document.querySelector('.target-title').textContent = currentLang === 'en'
-    ? '2. Select target skills (optional; blank = list active skills)'
-    : '② 発動させたいスキルを選択（複数可・未選択 = 発動するスキルを全列挙）';
+  document.querySelector('.target-title').textContent = ui('targetTitle');
+  renderCheckerExcludeControls();
   requestAnimationFrame(updateNavScrollHints);
 }
 function refreshLanguageViews() {
@@ -1568,6 +1626,109 @@ function setMasteryProgress(no, pt, e) {
   else masteryProgress.delete(itemNo);
   saveMasteryProgress();
   refreshMasteryProgressUi(itemNo);
+  if (excludeMaxMastered) refreshCheckerAfterFilterChange();
+  else renderCheckerExcludeControls();
+}
+
+function loadNoSet(key) {
+  try {
+    const raw = JSON.parse(localStorage.getItem(key) || '[]');
+    const values = Array.isArray(raw) ? raw : [];
+    return new Set(values.map(Number).filter(Number.isFinite));
+  } catch(e) {
+    return new Set();
+  }
+}
+function saveNoSet(key, set) {
+  localStorage.setItem(key, JSON.stringify([...set].sort((a,b) => a - b)));
+}
+function isMaxMastered(item) {
+  return item && getMasteryProgress(item.no) >= 9999;
+}
+function isCheckerExcluded(item) {
+  return !!item && (checkerExcludedSet.has(item.no) || (excludeMaxMastered && isMaxMastered(item)));
+}
+function checkerSearchFilter(item) {
+  if (!item || isCheckerExcluded(item)) return false;
+  if (ownedFilter === 'owned' && !ownedSet.has(item.no)) return false;
+  if (ownedFilter === 'unowned' && ownedSet.has(item.no)) return false;
+  return true;
+}
+function checkerItemLabel(item) {
+  return `No${item.no} ${translateItemName(item)}`;
+}
+function renderCheckerExcludeControls() {
+  const select = document.getElementById('exclude-item-select');
+  const chips = document.getElementById('excluded-item-chips');
+  const maxBtn = document.getElementById('exclude-max-mastery-btn');
+  const clearBtn = document.getElementById('exclude-clear-btn');
+  const title = document.querySelector('.exclude-title');
+  if (title) title.textContent = ui('excludeTitle');
+  if (maxBtn) {
+    maxBtn.textContent = ui('excludeMaxMastered');
+    maxBtn.classList.toggle('active', excludeMaxMastered);
+    maxBtn.setAttribute('aria-pressed', excludeMaxMastered ? 'true' : 'false');
+  }
+  if (clearBtn) {
+    clearBtn.textContent = ui('excludeClear');
+    clearBtn.disabled = checkerExcludedSet.size === 0;
+  }
+  if (select) {
+    const groups = CATS.map(cat => {
+      const options = sortSlotItems(allItems.filter(item => item.category === cat && !isCheckerExcluded(item)))
+        .map(item => `<option value="${item.no}">${escapeHtml(checkerItemLabel(item))}</option>`)
+        .join('');
+      return options ? `<optgroup label="${escapeHtml(catLabel(cat))}">${options}</optgroup>` : '';
+    }).join('');
+    select.innerHTML = `<option value="">${escapeHtml(ui('excludeSelectPlaceholder'))}</option>${groups}`;
+    select.value = '';
+  }
+  if (chips) {
+    const items = [...checkerExcludedSet]
+      .sort((a,b) => a - b)
+      .map(no => ITEM_BY_NO?.get(no) || allItems.find(item => item.no === no) || { no, name: `No${no}` });
+    chips.innerHTML = items.length
+      ? items.map(item => `<span class="excluded-chip"><span>${escapeHtml(item.name === `No${item.no}` ? `No${item.no}` : checkerItemLabel(item))}</span><button type="button" onclick="removeExcludedItem(${item.no})" aria-label="remove">×</button></span>`).join('')
+      : `<span class="excluded-chip empty">${escapeHtml(ui('excludeEmpty'))}</span>`;
+  }
+}
+function refreshCheckerAfterFilterChange() {
+  const state = snapshotCheckerState();
+  buildSlots();
+  buildSkillChecks();
+  restoreCheckerState(state);
+  renderCheckerExcludeControls();
+}
+function addExcludedItem(no) {
+  const itemNo = Number(no);
+  if (!Number.isFinite(itemNo) || checkerExcludedSet.has(itemNo)) return;
+  checkerExcludedSet.add(itemNo);
+  saveNoSet(CHECKER_EXCLUDED_KEY, checkerExcludedSet);
+  refreshCheckerAfterFilterChange();
+}
+function addExcludedItemFromSelect(select) {
+  addExcludedItem(select.value);
+}
+function removeExcludedItem(no) {
+  const itemNo = Number(no);
+  if (!checkerExcludedSet.delete(itemNo)) return;
+  saveNoSet(CHECKER_EXCLUDED_KEY, checkerExcludedSet);
+  refreshCheckerAfterFilterChange();
+}
+function clearExcludedItems() {
+  if (checkerExcludedSet.size === 0) return;
+  checkerExcludedSet.clear();
+  saveNoSet(CHECKER_EXCLUDED_KEY, checkerExcludedSet);
+  refreshCheckerAfterFilterChange();
+}
+function toggleExcludeMaxMastered() {
+  excludeMaxMastered = !excludeMaxMastered;
+  localStorage.setItem(CHECKER_EXCLUDE_MAX_KEY, excludeMaxMastered ? '1' : '0');
+  refreshCheckerAfterFilterChange();
+}
+function excludeItemFromChecker(no, e) {
+  if (e) e.stopPropagation();
+  addExcludedItem(no);
 }
 
 function saveOwned() {
@@ -1593,6 +1754,7 @@ function refreshOwnedViews() {
   const checkerState = snapshotCheckerState();
   buildSlots(); buildSkillChecks(); buildSkillChecksForSkillMode();
   restoreCheckerState(checkerState);
+  renderCheckerExcludeControls();
   renderList();
 }
 async function loadOwnerOwnedItems() {
@@ -1690,8 +1852,9 @@ function restoreCheckerState(state) {
     const sel = document.querySelector(`.slot-select[data-cat="${cat}"]`);
     if (!sel) return;
     sel.value = [...sel.options].some(opt => opt.value === state.slots?.[cat]) ? state.slots[cat] : '';
+    const unused = sel.value === UNUSED_SLOT_VALUE;
     const no = parseInt(sel.value);
-    renderSlotSkills(cat, no ? allItems.find(i => i.no === no) : null);
+    renderSlotSkills(cat, !unused && no ? allItems.find(i => i.no === no) : null, unused);
   });
   restoreCheckedSkills('#skill-checks', state.equipSkills);
   restoreCheckedSkills('#skill-checks-skill', state.skillModeSkills);
@@ -1710,6 +1873,7 @@ function setOwnedFilter(mode) {
   }
   buildSlots(); buildSkillChecks(); buildSkillChecksForSkillMode();
   restoreCheckerState(checkerState);
+  renderCheckerExcludeControls();
   renderList();
 }
 function toggleOwnedFilter() { // チェッカータブから呼ばれる
@@ -1777,6 +1941,7 @@ async function init() {
   openItemFromQuery();
   buildSkillChecksForSkillMode();
   buildSlots();
+  renderCheckerExcludeControls();
   buildSkillChecks();
   document.getElementById('combo-result').innerHTML = `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
   masteryMap = buildMasteryMap();
@@ -1971,14 +2136,14 @@ let comboSearchToken = 0;
 function comboLoadingHtml(label = '組み合わせを検索中') {
   return `<div class="ck-loading"><span class="ck-spinner"></span><span>${label}...</span></div>`;
 }
-function scheduleComboSearch(fixedSlots, targetSkills, resultElId, label) {
+function scheduleComboSearch(fixedSlots, targetSkills, resultElId, label, disabledCats = new Set()) {
   const token = ++comboSearchToken;
   const resultEl = document.getElementById(resultElId);
   resultEl.innerHTML = comboLoadingHtml(label);
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       if (token !== comboSearchToken) return;
-      runComboSearch(fixedSlots, targetSkills, resultElId);
+      runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats);
     });
   });
 }
@@ -2070,13 +2235,14 @@ function buildSlots() {
   const grid = document.getElementById('slots-grid');
   updateSlotSortButtons();
   grid.innerHTML = CATS.map(cat => {
-    const options = sortSlotItems(allItems.filter(i => i.category === cat))
+    const options = sortSlotItems(allItems.filter(i => i.category === cat && !isCheckerExcluded(i)))
       .map(i => `<option value="${i.no}">No${i.no} ${escapeHtml(translateItemName(i))}</option>`)
       .join('');
     return `<div class="slot-block">
       <div class="slot-label"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span></div>
       <select class="slot-select" data-cat="${cat}" onchange="onSlotChange('${cat}')">
-        <option value="">${currentLang === 'en' ? '-- Empty (search slot) --' : '── 空き（探索対象） ──'}</option>
+        <option value="">${escapeHtml(ui('slotEmptyOption'))}</option>
+        <option value="${UNUSED_SLOT_VALUE}">${escapeHtml(ui('slotUnusedOption'))}</option>
         ${options}
       </select>
       <div class="slot-skills" id="slot-skills-${cat}"></div>
@@ -2086,14 +2252,17 @@ function buildSlots() {
 
 function onSlotChange(cat) {
   const sel = document.querySelector(`.slot-select[data-cat="${cat}"]`);
+  const unused = sel.value === UNUSED_SLOT_VALUE;
   const no = parseInt(sel.value);
-  const item = no ? allItems.find(i => i.no === no) : null;
-  renderSlotSkills(cat, item);
+  const item = !unused && no ? allItems.find(i => i.no === no) : null;
+  renderSlotSkills(cat, item, unused);
   searchCombinations();
 }
-function renderSlotSkills(cat, item) {
+function renderSlotSkills(cat, item, unused = false) {
   const el = document.getElementById(`slot-skills-${cat}`);
-  el.innerHTML = item
+  el.innerHTML = unused
+    ? `<div class="slot-disabled-note">${escapeHtml(ui('slotUnusedLabel'))}</div>`
+    : item
     ? item.skills.map(s=>`<div class="slot-skill-chip"><span class="skill-type st-${s.type}">${escapeHtml(s.type)}</span><span style="font-size:11px">${escapeHtml(translateSkillName(s.name))}</span></div>`).join('')
     : '';
 }
@@ -2112,12 +2281,13 @@ function skillCheckGroup(name, types) {
   return skillGroup(name, [...types][0]);
 }
 
-function renderSkillChecks(wrap, onchange) {
+function renderSkillChecks(wrap, onchange, applyCheckerExclusions = false) {
   const skillMap = new Map();
   const pool = ownedFilter === 'owned'   ? allItems.filter(i =>  ownedSet.has(i.no))
              : ownedFilter === 'unowned' ? allItems.filter(i => !ownedSet.has(i.no))
              : allItems;
-  pool.forEach(item => item.skills.filter(isSearchableSkill).forEach(s => {
+  const filteredPool = applyCheckerExclusions ? pool.filter(item => !isCheckerExcluded(item)) : pool;
+  filteredPool.forEach(item => item.skills.filter(isSearchableSkill).forEach(s => {
     if (!skillMap.has(s.name)) skillMap.set(s.name, new Set());
     skillMap.get(s.name).add(s.type);
   }));
@@ -2141,7 +2311,7 @@ function renderSkillChecks(wrap, onchange) {
 
 // ━━━ 装備から検索：スキルチェックボックス ━━━
 function buildSkillChecks() {
-  renderSkillChecks(document.getElementById('skill-checks'), 'onCheckChange(this)');
+  renderSkillChecks(document.getElementById('skill-checks'), 'onCheckChange(this)', true);
 }
 
 function clearCheckerSelections() {
@@ -2173,14 +2343,25 @@ function getTargetSkills() {
   return [...document.querySelectorAll('#skill-checks input:checked')].map(c => c.value);
 }
 
-function getFixedSlots() {
-  const slots = {};
+function getCheckerSlotState() {
+  const fixedSlots = {};
+  const disabledCats = new Set();
   CATS.forEach(cat => {
     const sel = document.querySelector(`.slot-select[data-cat="${cat}"]`);
+    if (sel?.value === UNUSED_SLOT_VALUE) {
+      fixedSlots[cat] = null;
+      disabledCats.add(cat);
+      return;
+    }
     const no = parseInt(sel?.value);
-    slots[cat] = no ? allItems.find(i => i.no === no) || null : null;
+    const item = no ? allItems.find(i => i.no === no) || null : null;
+    fixedSlots[cat] = item && !isCheckerExcluded(item) ? item : null;
   });
-  return slots;
+  return { fixedSlots, disabledCats };
+}
+
+function getFixedSlots() {
+  return getCheckerSlotState().fixedSlots;
 }
 
 // ━━━ 組み合わせ探索 ━━━
@@ -2203,16 +2384,16 @@ function* cartesianGen(arrays) {
 }
 
 function searchCombinations() {
-  const fixed = getFixedSlots();
+  const { fixedSlots: fixed, disabledCats } = getCheckerSlotState();
   const skills = getTargetSkills();
   const hasFixed = CATS.some(c => fixed[c]);
-  if (!hasFixed && skills.length === 0) {
+  if (!hasFixed && disabledCats.size === 0 && skills.length === 0) {
     comboSearchToken++;
     document.getElementById('combo-result').innerHTML =
       `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
     return;
   }
-  scheduleComboSearch(fixed, skills, 'combo-result', ui('loadingCondition'));
+  scheduleComboSearch(fixed, skills, 'combo-result', ui('loadingCondition'), disabledCats);
 }
 
 // 反復回数の上限（無限ループ防止のセーフティ）
@@ -2220,16 +2401,13 @@ const ITER_CAP = 5_000_000;
 // 時間予算（ミリ秒）：超えたら部分結果で打ち切り
 const TIME_BUDGET_MS = 4000;
 
-function runComboSearch(fixedSlots, targetSkills, resultElId) {
+function runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats = new Set()) {
   const resultEl = document.getElementById(resultElId);
   const ACTIVATION_NEED = 3;
   const EXTRA_SKILL_POINT = 1;
 
-  // 所持フィルター（インデックスは all items 基準なので検索時に適用）
-  const ownedPred = ownedFilter === 'owned'   ? (i =>  ownedSet.has(i.no))
-                  : ownedFilter === 'unowned' ? (i => !ownedSet.has(i.no))
-                  : null;
-  const filt = arr => ownedPred ? arr.filter(ownedPred) : arr;
+  // インデックスは all items 基準なので、検索時に所持・除外フィルターを適用する
+  const filt = arr => arr.filter(checkerSearchFilter);
 
   // 固定スロットのベーススキルカウント
   const baseCount = {};
@@ -2237,7 +2415,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     if (fixedSlots[cat])
       searchableSkillNames(fixedSlots[cat]).forEach(name => { baseCount[name] = (baseCount[name]||0)+1; });
   });
-  const emptyCats = CATS.filter(c => !fixedSlots[c]);
+  const emptyCats = CATS.filter(c => !fixedSlots[c] && !disabledCats.has(c));
 
   function bonusCandidates(count) {
     return Object.entries(count)
@@ -2415,9 +2593,10 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
     const skillIndex = new Map(skillNames.map((name, idx) => [name, idx]));
     const targetIdx = targetSkills.map(name => skillIndex.has(name) ? skillIndex.get(name) : -1);
     const candidateCache = new Map();
+    const isClosedCat = cat => !!fixedSlots[cat] || disabledCats.has(cat);
 
     function targetHitCount(cat) {
-      if (targetSkills.length === 0 || fixedSlots[cat]) return 0;
+      if (targetSkills.length === 0 || isClosedCat(cat)) return 0;
       return filt(SKILL_CAT_MAP.get(targetSkills[0])?.[cat] || []).length
         + targetSkills.slice(1).reduce((sum, name) => {
           const rows = filt(SKILL_CAT_MAP.get(name)?.[cat] || []);
@@ -2436,15 +2615,15 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
       return rows;
     }
     const searchCats = [...CATS].sort((a, b) => {
-      if (!!fixedSlots[a] !== !!fixedSlots[b]) return fixedSlots[a] ? -1 : 1;
+      if (isClosedCat(a) !== isClosedCat(b)) return isClosedCat(a) ? -1 : 1;
       if (targetSkills.length > 0) {
         const ta = targetHitCount(a), tb = targetHitCount(b);
         if ((ta > 0) !== (tb > 0)) return ta > 0 ? -1 : 1;
         if (ta !== tb) return ta - tb;
       }
-      return (fixedSlots[a] ? 0 : candidateRows(a).length) - (fixedSlots[b] ? 0 : candidateRows(b).length);
+      return (isClosedCat(a) ? 0 : candidateRows(a).length) - (isClosedCat(b) ? 0 : candidateRows(b).length);
     });
-    const arrays = searchCats.map(cat => fixedSlots[cat] ? [null] : [null, ...candidateRows(cat)]);
+    const arrays = searchCats.map(cat => isClosedCat(cat) ? [null] : [null, ...candidateRows(cat)]);
 
     const countArr = new Int8Array(skillNames.length);
     Object.entries(baseCount).forEach(([name, cnt]) => {
@@ -2776,7 +2955,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId) {
   const shown = showThreeByDefault ? [...finalHigh, ...finalThree] : finalHigh;
   const extra = showThreeByDefault ? finalTwo : finalThree;
   const extraKind = showThreeByDefault ? 2 : 3;
-  renderComboResults(resultEl, shown, totalCount, targetSkills, fixedSlots, extra, stopped, extraKind, totalKind);
+  renderComboResults(resultEl, shown, totalCount, targetSkills, fixedSlots, extra, stopped, extraKind, totalKind, disabledCats);
 }
 
 const ALT_PAGE_SIZE = 30;
@@ -2784,8 +2963,11 @@ const ALT_COMBO_STORE = {};
 const MAIN_PAGE_SIZE = 120;
 const MAIN_COMBO_STORE = {};
 
-function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixedSlots, targetSkills, isAlt = false) {
+function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixedSlots, targetSkills, isAlt = false, disabledCats = new Set()) {
   const slotRows = CATS.map(cat => {
+    if (disabledCats.has(cat)) {
+      return `<div class="combo-slot-row"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span><span class="combo-slot-disabled">${escapeHtml(ui('slotUnusedLabel'))}</span></div>`;
+    }
     const item = fixedSlots[cat] || slots[cat];
     if (!item) return `<div class="combo-slot-row"><span class="cat-tag cat-tag-${cat}">${catLabel(cat)}</span><span class="combo-slot-empty">─</span></div>`;
     const isFixed = !!fixedSlots[cat];
@@ -2794,6 +2976,7 @@ function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixe
       <span class="combo-slot-item" onclick="openModal(${item.no})" style="${isFixed?'color:var(--muted)':''}">
         ${isFixed?'🔒 ':''}No${item.no} ${escapeHtml(translateItemName(item))}
       </span>
+      ${isFixed ? '' : `<button type="button" class="exclude-item-btn" onclick="excludeItemFromChecker(${item.no}, event)" title="${escapeHtml(ui('excludeSelectPlaceholder'))}" aria-label="${escapeHtml(ui('excludeSelectPlaceholder'))}">×</button>`}
     </div>`;
   }).join('') + (skillSlot ? `
     <div class="combo-slot-row">
@@ -2815,7 +2998,7 @@ function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixe
   let altsHtml = '';
   if (alternatives.length > 0) {
     const altId = `alts-${Math.random().toString(36).slice(2)}`;
-    ALT_COMBO_STORE[altId] = { alternatives, fixedSlots, targetSkills };
+    ALT_COMBO_STORE[altId] = { alternatives, fixedSlots, targetSkills, disabledCats };
     altsHtml = `
       <button class="alts-toggle" onclick="
         const wrap = this.nextElementSibling;
@@ -2830,16 +3013,16 @@ function comboCardHtml({slots, count, skillSlot = null, alternatives = []}, fixe
   return `<div class="${cls}"><div class="combo-slots">${slotRows}</div><div class="combo-active-skills">${badges}</div>${altsHtml}</div>`;
 }
 
-function comboCardsHtml(items, fixedSlots, targetSkills) {
-  return items.map(it => comboCardHtml(it, fixedSlots, targetSkills, false)).join('');
+function comboCardsHtml(items, fixedSlots, targetSkills, disabledCats = new Set()) {
+  return items.map(it => comboCardHtml(it, fixedSlots, targetSkills, false, disabledCats)).join('');
 }
 
-function renderInitialComboCards(items, fixedSlots, targetSkills) {
-  if (items.length <= MAIN_PAGE_SIZE) return comboCardsHtml(items, fixedSlots, targetSkills);
+function renderInitialComboCards(items, fixedSlots, targetSkills, disabledCats = new Set()) {
+  if (items.length <= MAIN_PAGE_SIZE) return comboCardsHtml(items, fixedSlots, targetSkills, disabledCats);
   const id = `main-combos-${Math.random().toString(36).slice(2)}`;
   const initial = items.slice(0, MAIN_PAGE_SIZE);
-  MAIN_COMBO_STORE[id] = { items, fixedSlots, targetSkills, rendered: MAIN_PAGE_SIZE };
-  return `<div id="${id}">${comboCardsHtml(initial, fixedSlots, targetSkills)}</div>
+  MAIN_COMBO_STORE[id] = { items, fixedSlots, targetSkills, disabledCats, rendered: MAIN_PAGE_SIZE };
+  return `<div id="${id}">${comboCardsHtml(initial, fixedSlots, targetSkills, disabledCats)}</div>
     <div class="alt-pager" style="justify-content:center;padding:8px 0 12px">
       <button class="owned-filter-btn" onclick="renderMoreComboResults('${id}', this)">${ui('more', MAIN_PAGE_SIZE, items.length)}</button>
     </div>`;
@@ -2851,7 +3034,7 @@ function renderMoreComboResults(id, btn) {
   if (!stored || !wrap) return;
   const start = stored.rendered;
   const end = Math.min(start + MAIN_PAGE_SIZE, stored.items.length);
-  wrap.insertAdjacentHTML('beforeend', comboCardsHtml(stored.items.slice(start, end), stored.fixedSlots, stored.targetSkills));
+  wrap.insertAdjacentHTML('beforeend', comboCardsHtml(stored.items.slice(start, end), stored.fixedSlots, stored.targetSkills, stored.disabledCats));
   stored.rendered = end;
   if (btn) {
     if (end >= stored.items.length) btn.parentElement.style.display = 'none';
@@ -2871,7 +3054,7 @@ function renderAltPage(id, page) {
   const current = Math.max(0, Math.min(page, maxPage));
   const start = current * pageSize;
   const end = Math.min(start + pageSize, total);
-  const body = comboCardsHtml(alts.slice(start, end), stored.fixedSlots, stored.targetSkills);
+  const body = comboCardsHtml(alts.slice(start, end), stored.fixedSlots, stored.targetSkills, stored.disabledCats);
   const controls = maxPage === 0 ? '' : `
       <button class="owned-filter-btn" ${current === 0 ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current - 1})">${ui('prev')}</button>
       <button class="owned-filter-btn" ${current === maxPage ? 'disabled' : ''} onclick="renderAltPage('${id}', ${current + 1})">${ui('next')}</button>`;
@@ -2885,7 +3068,7 @@ function renderAltPage(id, page) {
   `;
 }
 
-function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, extra = [], stopped = false, extraKind = 3, totalKind = 2) {
+function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, extra = [], stopped = false, extraKind = 3, totalKind = 2, disabledCats = new Set()) {
   Object.keys(ALT_COMBO_STORE).forEach(id => delete ALT_COMBO_STORE[id]);
   Object.keys(MAIN_COMBO_STORE).forEach(id => delete MAIN_COMBO_STORE[id]);
   if (shown.length === 0 && extra.length === 0) {
@@ -2903,9 +3086,9 @@ function renderComboResults(resultEl, shown, total, targetSkills, fixedSlots, ex
   let html = `<div class="result-header">
     <strong>${escapeHtml(headerText)}</strong>：${ui('comboHeaderCount', shownMin, shown.length, totalLabel)}
   </div>`;
-  html += renderInitialComboCards(shown, fixedSlots, targetSkills);
+  html += renderInitialComboCards(shown, fixedSlots, targetSkills, disabledCats);
   if (extra.length > 0) {
-    const extraHtml = comboCardsHtml(extra, fixedSlots, targetSkills);
+    const extraHtml = comboCardsHtml(extra, fixedSlots, targetSkills, disabledCats);
     html += `<div id="extra-combo-toggle-wrap" style="text-align:center;padding:12px 0">
       <button class="owned-filter-btn" onclick="
         document.getElementById('extra-combo-results').style.display='block';
@@ -3207,6 +3390,7 @@ function unbOk() {
     renderList();
     buildSkillChecksForSkillMode();
     buildSlots();
+    renderCheckerExcludeControls();
     buildSkillChecks();
     masteryMap = buildMasteryMap();
     floorDropRows = buildFloorDropRows();
