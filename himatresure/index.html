@@ -2260,6 +2260,10 @@ function scheduleComboIndexSearch(targetSkills, resultElId, label, disabledCats 
     .then(indexData => {
       if (token !== comboSearchToken) return;
       if (!renderComboIndexSearch(indexData, targetSkills, resultEl, disabledCats)) {
+        if (targetSkills.length > 0 || disabledCats.size > 0 || ownedFilter !== 'all' || checkerExcludedSet.size > 0 || excludeMaxMastered) {
+          scheduleComboSearch({}, targetSkills, resultElId, label, disabledCats);
+          return;
+        }
         resultEl.innerHTML = `<div class="ck-empty">${ui('noCombos')}</div>`;
       }
     })
@@ -2510,7 +2514,8 @@ function searchCombinations() {
   const { fixedSlots: fixed, disabledCats } = getCheckerSlotState();
   const skills = getTargetSkills();
   const hasFixed = CATS.some(c => fixed[c]);
-  if (!hasFixed) {
+  const hasDynamicFilter = skills.length > 0 || disabledCats.size > 0 || ownedFilter !== 'all' || checkerExcludedSet.size > 0 || excludeMaxMastered;
+  if (!hasFixed && !hasDynamicFilter) {
     scheduleComboIndexSearch(skills, 'combo-result', ui('loadingCondition'), disabledCats);
     return;
   }
