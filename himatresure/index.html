@@ -1242,6 +1242,7 @@ const UI_TEXT = {
     loadingCombo: '組み合わせを検索中',
     loadingSkill: 'スキル候補を検索中',
     loadingCondition: '条件に合う組み合わせを検索中',
+    comboIndexMissing: '高速インデックスを読み込めませんでした。条件を指定すると通常検索できます。',
     impossible: skills => `「${skills.join('・')}」は空き枠が足りないため発動不可能です。<br>固定装備を減らすか、別のスキルを選んでください。`,
     groupLabels: { A: 'A　物理', 'M攻撃': 'M　魔法攻撃', 'M回復': 'M　魔法回復', P: 'P　パッシブ', '複合': '複合　type混在' }
   },
@@ -1315,6 +1316,7 @@ const UI_TEXT = {
     loadingCombo: 'Searching combinations',
     loadingSkill: 'Searching skill candidates',
     loadingCondition: 'Searching matching combinations',
+    comboIndexMissing: 'Fast combo index could not be loaded. Add a condition to use the normal search.',
     impossible: skills => `${skills.join(' / ')} cannot be activated with the remaining empty slots.<br>Remove fixed equipment or choose another skill.`,
     groupLabels: { A: 'A Physical', 'M攻撃': 'M Magic Attack', 'M回復': 'M Magic Heal', P: 'P Passive', '複合': 'Mixed type' }
   }
@@ -1949,11 +1951,12 @@ async function init() {
   buildSlots();
   renderCheckerExcludeControls();
   buildSkillChecks();
-  document.getElementById('combo-result').innerHTML = `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
+  document.getElementById('combo-result').innerHTML = comboLoadingHtml(ui('loadingCondition'));
   masteryMap = buildMasteryMap();
   floorDropRows = buildFloorDropRows();
   startDataPoll();
   loadOwnerOwnedItemsFromHash();
+  searchCombinations();
 }
 
 // ━━━ 一覧 ━━━
@@ -2152,6 +2155,118 @@ function scheduleComboSearch(fixedSlots, targetSkills, resultElId, label, disabl
       runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats);
     });
   });
+}
+
+let comboIndexData = null;
+let comboIndexPromise = null;
+function resetComboIndexCache() {
+  comboIndexData = null;
+  comboIndexPromise = null;
+}
+function loadComboIndex() {
+  if (comboIndexData) return Promise.resolve(comboIndexData);
+  if (!comboIndexPromise) {
+    comboIndexPromise = fetch('combo-index.json?v=' + Date.now())
+      .then(res => {
+        if (!res.ok) throw new Error('combo index load failed');
+        return res.json();
+      })
+      .then(data => {
+        if (!data || !Array.isArray(data.groups)) throw new Error('invalid combo index');
+        if (data.source?.items && data.source.items !== allItems.length) throw new Error('stale combo index');
+        comboIndexData = data;
+        return data;
+      })
+      .catch(err => {
+        comboIndexPromise = null;
+        throw err;
+      });
+  }
+  return comboIndexPromise;
+}
+function comboIndexVariantAllowed(row, disabledCats) {
+  for (let i = 0; i < CATS.length; i++) {
+    const no = row[i];
+    if (disabledCats.has(CATS[i]) && no) return false;
+    if (!no) continue;
+    const item = ITEM_BY_NO.get(no);
+    if (!checkerSearchFilter(item)) return false;
+  }
+  return true;
+}
+function comboNormalActiveSkills(count) {
+  return Object.entries(count)
+    .filter(([, c]) => c >= 3)
+    .map(([name]) => name)
+    .sort((a, b) => a.localeCompare(b, 'ja'));
+}
+function comboActiveNameSet(result) {
+  return new Set([
+    ...comboNormalActiveSkills(result.count),
+    ...(result.skillSlot ? [result.skillSlot] : [])
+  ]);
+}
+function comboIndexRowToResult(row) {
+  const slots = {};
+  CATS.forEach((cat, index) => {
+    const no = row[index];
+    slots[cat] = no ? ITEM_BY_NO.get(no) || null : null;
+  });
+  const count = {};
+  CATS.forEach(cat => {
+    const item = slots[cat];
+    if (!item) return;
+    searchableSkillNames(item).forEach(name => { count[name] = (count[name] || 0) + 1; });
+  });
+  const skillSlot = row[5] || null;
+  const activeCount = comboNormalActiveSkills(count).length + (skillSlot ? 1 : 0);
+  return { slots, count, skillSlot, activeCount };
+}
+function renderComboIndexSearch(indexData, targetSkills, resultEl, disabledCats = new Set()) {
+  const targetSet = new Set(targetSkills);
+  const results = [];
+  for (const group of indexData.groups) {
+    if (targetSkills.length > 0 && !targetSkills.every(skill => group.a.includes(skill))) continue;
+    const variants = group.v
+      .filter(row => comboIndexVariantAllowed(row, disabledCats))
+      .map(comboIndexRowToResult)
+      .filter(result => {
+        if (targetSet.size === 0) return result.activeCount >= 2;
+        const active = comboActiveNameSet(result);
+        return targetSkills.every(skill => active.has(skill));
+      });
+    if (variants.length === 0) continue;
+    const [representative, ...alternatives] = variants;
+    results.push({ ...representative, alternatives });
+  }
+
+  if (results.length === 0) return false;
+  const high = results.filter(result => result.activeCount >= 4);
+  const three = results.filter(result => result.activeCount === 3);
+  const two = results.filter(result => result.activeCount === 2);
+  const showThreeByDefault = high.length + three.length < MAX_RESULTS;
+  const shown = showThreeByDefault ? [...high, ...three] : high;
+  const extra = showThreeByDefault ? two.slice(0, MAX_RESULTS) : three.slice(0, MAX_RESULTS);
+  const extraKind = showThreeByDefault ? 2 : 3;
+  const totalKind = 2;
+  renderComboResults(resultEl, shown, results.length, targetSkills, {}, extra, false, extraKind, totalKind, disabledCats);
+  return true;
+}
+function scheduleComboIndexSearch(targetSkills, resultElId, label, disabledCats = new Set()) {
+  const token = ++comboSearchToken;
+  const resultEl = document.getElementById(resultElId);
+  resultEl.innerHTML = comboLoadingHtml(label);
+  loadComboIndex()
+    .then(indexData => {
+      if (token !== comboSearchToken) return;
+      if (!renderComboIndexSearch(indexData, targetSkills, resultEl, disabledCats)) {
+        resultEl.innerHTML = `<div class="ck-empty">${ui('noCombos')}</div>`;
+      }
+    })
+    .catch(() => {
+      if (token !== comboSearchToken) return;
+      resultEl.innerHTML = `<div class="ck-empty" style="color:var(--dim)">${ui('comboIndexMissing')}</div>`;
+    });
 }
 
 function searchBySkill() {
@@ -2395,10 +2510,8 @@ function searchCombinations() {
   const { fixedSlots: fixed, disabledCats } = getCheckerSlotState();
   const skills = getTargetSkills();
   const hasFixed = CATS.some(c => fixed[c]);
-  if (!hasFixed && disabledCats.size === 0 && skills.length === 0) {
-    comboSearchToken++;
-    document.getElementById('combo-result').innerHTML =
-      `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
+  if (!hasFixed) {
+    scheduleComboIndexSearch(skills, 'combo-result', ui('loadingCondition'), disabledCats);
     return;
   }
   scheduleComboSearch(fixed, skills, 'combo-result', ui('loadingCondition'), disabledCats);
@@ -3395,6 +3508,7 @@ function unbOk() {
     pendingItems = null;
     currentDataSignature = dataSignature(allItems);
     rebuildIndices();
+    resetComboIndexCache();
     renderList();
     buildSkillChecksForSkillMode();
     buildSlots();
