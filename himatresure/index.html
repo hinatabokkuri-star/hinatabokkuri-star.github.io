@@ -2135,21 +2135,711 @@ function onSkillModeCheck() {
     lbl.classList.toggle('checked', lbl.querySelector('input').checked);
   });
   comboSearchToken++;
+  cancelActiveComboWorker();
   document.getElementById('skill-combo-result').innerHTML = '';
 }
 
+function comboSearchWorkerBootstrap() {
+  const CATS = ['武器','盾','鎧','アクセサリー','ペット'];
+  const PROVISIONAL_SKILLS = new Set(['未確認A', '未確認M', '未確認P']);
+  const ACTIVATION_NEED = 3;
+  const EXTRA_SKILL_POINT = 1;
+  const MAX_RESULTS = 30;
+  const ITER_CAP = 5_000_000;
+
+  self.onmessage = event => {
+    try {
+      const result = runWorkerComboSearch(event.data);
+      self.postMessage({ type: 'result', result });
+    } catch (err) {
+      self.postMessage({ type: 'error', message: err && err.message ? err.message : String(err) });
+    }
+  };
+
+  function isSearchableSkill(skill) {
+    return skill && skill.name && !PROVISIONAL_SKILLS.has(skill.name);
+  }
+  function searchableSkillNames(item) {
+    return item._skillNames || [];
+  }
+  function kSubsets(arr, k) {
+    if (k === 0) return [[]];
+    if (arr.length < k) return [];
+    const first = arr[0];
+    const rest = arr.slice(1);
+    return kSubsets(rest, k - 1).map(s => [first].concat(s)).concat(kSubsets(rest, k));
+  }
+  function compactSlots(slots) {
+    return CATS.map(cat => slots[cat] && slots[cat].no ? slots[cat].no : 0);
+  }
+  function compactResult(result) {
+    return {
+      r: compactSlots(result.slots).concat([result.skillSlot || '']),
+      a: (result.alternatives || []).map(alt => compactSlots(alt.slots).concat([alt.skillSlot || '']))
+    };
+  }
+
+  function runWorkerComboSearch(request) {
+    const items = request.items || [];
+    items.forEach(item => {
+      item._skillNames = (item.skills || []).filter(isSearchableSkill).map(skill => skill.name);
+    });
+    const itemByNo = new Map(items.map(item => [item.no, item]));
+    const ownedSet = new Set(request.ownedNos || []);
+    const excludedSet = new Set(request.excludedNos || []);
+    const maxMasteredSet = new Set(request.maxMasteredNos || []);
+    const disabledCats = new Set(request.disabledCats || []);
+    const targetSkills = request.targetSkills || [];
+    const ownedFilter = request.ownedFilter || 'all';
+
+    const fixedSlots = {};
+    CATS.forEach(cat => {
+      const no = request.fixedSlotNos && request.fixedSlotNos[cat] ? request.fixedSlotNos[cat] : 0;
+      fixedSlots[cat] = no ? itemByNo.get(no) || null : null;
+    });
+
+    function isExcluded(item) {
+      return !!item && (excludedSet.has(item.no) || (request.excludeMaxMastered && maxMasteredSet.has(item.no)));
+    }
+    function checkerSearchFilter(item) {
+      if (!item || isExcluded(item)) return false;
+      if (ownedFilter === 'owned' && !ownedSet.has(item.no)) return false;
+      if (ownedFilter === 'unowned' && ownedSet.has(item.no)) return false;
+      return true;
+    }
+
+    const itemsByCat = {};
+    const skillCatMap = new Map();
+    CATS.forEach(cat => { itemsByCat[cat] = []; });
+    for (const item of items) {
+      if (itemsByCat[item.category]) itemsByCat[item.category].push(item);
+      for (const name of searchableSkillNames(item)) {
+        if (!skillCatMap.has(name)) skillCatMap.set(name, {});
+        const byCat = skillCatMap.get(name);
+        if (!byCat[item.category]) byCat[item.category] = [];
+        byCat[item.category].push(item);
+      }
+    }
+
+    const filt = arr => (arr || []).filter(checkerSearchFilter);
+    const baseCount = {};
+    CATS.forEach(cat => {
+      if (fixedSlots[cat]) {
+        searchableSkillNames(fixedSlots[cat]).forEach(name => { baseCount[name] = (baseCount[name] || 0) + 1; });
+      }
+    });
+    const emptyCats = CATS.filter(cat => !fixedSlots[cat] && !disabledCats.has(cat));
+
+    function bonusCandidates(count) {
+      return Object.entries(count)
+        .filter(([, value]) => value === ACTIVATION_NEED - EXTRA_SKILL_POINT)
+        .map(([name]) => name)
+        .sort((a, b) => a.localeCompare(b, 'ja'));
+    }
+    function normalActiveSkills(count) {
+      return Object.entries(count)
+        .filter(([, value]) => value >= ACTIVATION_NEED)
+        .map(([name]) => name)
+        .sort((a, b) => a.localeCompare(b, 'ja'));
+    }
+    function canActivateTargets(count, targets) {
+      let neededPoint = 0;
+      for (const skill of targets) {
+        const deficit = Math.max(0, ACTIVATION_NEED - (count[skill] || 0));
+        if (deficit > EXTRA_SKILL_POINT) return false;
+        neededPoint += deficit;
+      }
+      return neededPoint <= EXTRA_SKILL_POINT;
+    }
+    function canActivateTargetsWithSkillSlot(count, targets, skillName) {
+      return targets.every(skill => (count[skill] || 0) + (skillName === skill ? 1 : 0) >= ACTIVATION_NEED);
+    }
+    function skillSlotChoices(count, targets) {
+      const candidates = bonusCandidates(count);
+      const choices = candidates.length > 0 ? candidates : [null];
+      return choices.filter(name => targets.length === 0 || canActivateTargetsWithSkillSlot(count, targets, name));
+    }
+
+    if (targetSkills.length > 0) {
+      const impossibleSkills = targetSkills.filter(skill => {
+        const fixedCnt = baseCount[skill] || 0;
+        const catMap = skillCatMap.get(skill) || {};
+        const possibleCats = emptyCats.filter(cat => filt(catMap[cat] || []).length > 0).length;
+        return fixedCnt + possibleCats < ACTIVATION_NEED - EXTRA_SKILL_POINT;
+      });
+      if (impossibleSkills.length > 0) {
+        return { kind: 'impossible', impossibleSkills };
+      }
+    }
+
+    const activatable = [];
+    for (const [name, catMap] of skillCatMap) {
+      const fixedCnt = baseCount[name] || 0;
+      const emptyCntWithSkill = emptyCats.filter(cat => filt(catMap[cat] || []).length > 0).length;
+      if (fixedCnt + emptyCntWithSkill >= ACTIVATION_NEED - EXTRA_SKILL_POINT) activatable.push(name);
+    }
+    if (activatable.length === 0) {
+      return { kind: 'empty' };
+    }
+
+    const activatableSet = new Set(activatable);
+    const targetSet = new Set(targetSkills);
+    const skillReach = new Map();
+    activatable.forEach(name => {
+      const catMap = skillCatMap.get(name) || {};
+      const fixedCnt = baseCount[name] || 0;
+      const emptyCntWithSkill = emptyCats.filter(cat => filt(catMap[cat] || []).length > 0).length;
+      skillReach.set(name, fixedCnt + emptyCntWithSkill);
+    });
+    function candidateScore(item) {
+      return searchableSkillNames(item).reduce((score, name) => {
+        if (targetSet.has(name)) score += 1000;
+        if (activatableSet.has(name)) score += (skillReach.get(name) || 0) * 10;
+        score += (baseCount[name] || 0) * 25;
+        return score;
+      }, 0);
+    }
+    function sortCandidates(arr) {
+      return [...arr].sort((a, b) => candidateScore(b) - candidateScore(a) || a.no - b.no);
+    }
+
+    const otherSlotCandidates = {};
+    emptyCats.forEach(cat => {
+      otherSlotCandidates[cat] = sortCandidates(
+        filt(itemsByCat[cat]).filter(item => searchableSkillNames(item).some(name => activatableSet.has(name)))
+      );
+    });
+    const pivotSkills = targetSkills.length > 0 ? targetSkills : activatable;
+    const highGroups = new Map();
+    const threeGroups = new Map();
+    const twoGroups = new Map();
+
+    function activeKey(result) {
+      const active = [...new Set(normalActiveSkills(result.count).concat(result.skillSlot ? [result.skillSlot] : []))]
+        .sort((a, b) => a.localeCompare(b, 'ja'));
+      return active.map(name => '3:' + name).join('|');
+    }
+    function activeNameSet(result) {
+      return new Set(normalActiveSkills(result.count).concat(result.skillSlot ? [result.skillSlot] : []));
+    }
+    function normalizeResult(result) {
+      const activeSet = activeNameSet(result);
+      const slots = {};
+      CATS.forEach(cat => {
+        const item = result.slots[cat];
+        const names = item ? searchableSkillNames(item) : [];
+        slots[cat] = item && names.some(name => activeSet.has(name)) ? item : null;
+      });
+      return { ...result, slots };
+    }
+    function slotPatternKey(result) {
+      return CATS.map(cat => (fixedSlots[cat] || result.slots[cat]) ? (fixedSlots[cat] || result.slots[cat]).no : 0).join(',') + '|' + (result.skillSlot || '');
+    }
+    function freeSlotCount(result) {
+      return CATS.filter(cat => !fixedSlots[cat] && !result.slots[cat]).length;
+    }
+    function resultSortKey(result) {
+      return CATS.map(cat => (fixedSlots[cat] || result.slots[cat]) ? (fixedSlots[cat] || result.slots[cat]).no : 0).join(',');
+    }
+    function compareResultVariants(a, b) {
+      return freeSlotCount(b) - freeSlotCount(a)
+        || (a.skillSlot || '').localeCompare(b.skillSlot || '', 'ja')
+        || resultSortKey(a).localeCompare(resultSortKey(b), 'ja');
+    }
+    function tryAdd(result) {
+      if (result.activeCount < 2) return;
+      const normalized = normalizeResult(result);
+      const groups = result.activeCount >= 4 ? highGroups : result.activeCount === 3 ? threeGroups : twoGroups;
+      const key = activeKey(normalized);
+      if (!groups.has(key)) groups.set(key, []);
+      const arr = groups.get(key);
+      if (!arr._seen) arr._seen = new Set();
+      const patternKey = slotPatternKey(normalized);
+      if (arr._seen.has(patternKey)) return;
+      arr._seen.add(patternKey);
+      arr.push(normalized);
+    }
+    function finalize(groups) {
+      const arrays = [...groups.values()]
+        .map(arr => [...arr].sort(compareResultVariants))
+        .sort((a, b) => b[0].activeCount - a[0].activeCount || freeSlotCount(b[0]) - freeSlotCount(a[0]));
+      return arrays
+        .filter(arr => arr.length > 0)
+        .map(arr => ({ ...arr[0], alternatives: arr.slice(1) }));
+    }
+    function finalizeLimited(groups) {
+      return finalize(groups).slice(0, MAX_RESULTS);
+    }
+
+    const seen = new Set();
+    const highSeen = new Set();
+    let iters = 0;
+    let stopped = false;
+    let totalKind = 2;
+
+    function exactHighSearch() {
+      const skillNames = activatable;
+      const skillIndex = new Map(skillNames.map((name, idx) => [name, idx]));
+      const targetIdx = targetSkills.map(name => skillIndex.has(name) ? skillIndex.get(name) : -1);
+      const candidateCache = new Map();
+      const isClosedCat = cat => !!fixedSlots[cat] || disabledCats.has(cat);
+
+      function targetHitCount(cat) {
+        if (targetSkills.length === 0 || isClosedCat(cat)) return 0;
+        return filt((skillCatMap.get(targetSkills[0]) || {})[cat] || []).length
+          + targetSkills.slice(1).reduce((sum, name) => sum + filt((skillCatMap.get(name) || {})[cat] || []).length, 0);
+      }
+      function candidateRows(cat) {
+        if (candidateCache.has(cat)) return candidateCache.get(cat);
+        const rows = sortCandidates(filt(itemsByCat[cat])).map(item => ({
+          item,
+          idxs: searchableSkillNames(item).map(name => skillIndex.get(name)).filter(idx => idx !== undefined)
+        }));
+        candidateCache.set(cat, rows);
+        return rows;
+      }
+
+      const searchCats = [...CATS].sort((a, b) => {
+        if (isClosedCat(a) !== isClosedCat(b)) return isClosedCat(a) ? -1 : 1;
+        if (targetSkills.length > 0) {
+          const ta = targetHitCount(a), tb = targetHitCount(b);
+          if ((ta > 0) !== (tb > 0)) return ta > 0 ? -1 : 1;
+          if (ta !== tb) return ta - tb;
+        }
+        return (isClosedCat(a) ? 0 : candidateRows(a).length) - (isClosedCat(b) ? 0 : candidateRows(b).length);
+      });
+      const arrays = searchCats.map(cat => isClosedCat(cat) ? [null] : [null].concat(candidateRows(cat)));
+      const countArr = new Int8Array(skillNames.length);
+      Object.entries(baseCount).forEach(([name, cnt]) => {
+        const idx = skillIndex.get(name);
+        if (idx !== undefined) countArr[idx] = cnt;
+      });
+      const remaining = Array(searchCats.length + 1).fill(null).map(() => new Int8Array(skillNames.length));
+      for (let depth = searchCats.length - 1; depth >= 0; depth--) {
+        remaining[depth].set(remaining[depth + 1]);
+        const present = new Set();
+        arrays[depth].forEach(row => row && row.idxs && row.idxs.forEach(idx => present.add(idx)));
+        present.forEach(idx => remaining[depth][idx]++);
+      }
+      function mayStillReachTargets(depth) {
+        for (const idx of targetIdx) {
+          if (idx < 0) return false;
+          if (countArr[idx] + remaining[depth][idx] < ACTIVATION_NEED - EXTRA_SKILL_POINT) return false;
+        }
+        return true;
+      }
+      function mayReachHigh(depth) {
+        let possibleActive = 0;
+        let hasBonus = false;
+        for (let idx = 0; idx < skillNames.length; idx++) {
+          const maxPossible = countArr[idx] + remaining[depth][idx];
+          if (maxPossible >= ACTIVATION_NEED) possibleActive++;
+          else if (maxPossible >= ACTIVATION_NEED - EXTRA_SKILL_POINT) hasBonus = true;
+        }
+        return possibleActive + (hasBonus ? 1 : 0) >= 4;
+      }
+      function countObject() {
+        const count = {};
+        for (let idx = 0; idx < skillNames.length; idx++) {
+          if (countArr[idx] > 0) count[skillNames[idx]] = countArr[idx];
+        }
+        return count;
+      }
+      function targetSatisfiedByChoice(choiceIdx) {
+        for (const idx of targetIdx) {
+          if (idx < 0) return false;
+          if (countArr[idx] + (choiceIdx === idx ? 1 : 0) < ACTIVATION_NEED) return false;
+        }
+        return true;
+      }
+      function addExactHighResult(slots) {
+        let normalActiveCount = 0;
+        const bonusIdx = [];
+        for (let idx = 0; idx < skillNames.length; idx++) {
+          if (countArr[idx] >= ACTIVATION_NEED) normalActiveCount++;
+          else if (countArr[idx] === ACTIVATION_NEED - EXTRA_SKILL_POINT) bonusIdx.push(idx);
+        }
+        const choices = bonusIdx.length > 0 ? bonusIdx.sort((a, b) => skillNames[a].localeCompare(skillNames[b], 'ja')) : [-1];
+        if (normalActiveCount + (choices[0] >= 0 ? 1 : 0) < 4) return;
+        const slotKey = CATS.map(cat => (fixedSlots[cat] || slots[cat]) ? (fixedSlots[cat] || slots[cat]).no : 0).join(',');
+        let count = null;
+        for (const choiceIdx of choices) {
+          if (targetSkills.length > 0 && !targetSatisfiedByChoice(choiceIdx)) continue;
+          const skillSlot = choiceIdx >= 0 ? skillNames[choiceIdx] : null;
+          const activeCount = normalActiveCount + (skillSlot ? 1 : 0);
+          if (activeCount < 4) continue;
+          const key = slotKey + '|' + (skillSlot || '');
+          if (highSeen.has(key)) continue;
+          highSeen.add(key);
+          if (!count) count = countObject();
+          tryAdd({ slots: { ...slots }, count: { ...count }, skillSlot, activeCount });
+        }
+      }
+
+      const slots = {};
+      function rec(depth) {
+        if (!mayReachHigh(depth)) return;
+        if (targetIdx.length > 0 && !mayStillReachTargets(depth)) return;
+        if (depth === searchCats.length) {
+          addExactHighResult(slots);
+          return;
+        }
+        const cat = searchCats[depth];
+        for (const row of arrays[depth]) {
+          if (row && !row.idxs.some(idx => countArr[idx] + 1 + remaining[depth + 1][idx] >= ACTIVATION_NEED - EXTRA_SKILL_POINT)) continue;
+          if (row) {
+            slots[cat] = row.item;
+            row.idxs.forEach(idx => countArr[idx]++);
+          }
+          rec(depth + 1);
+          if (row) {
+            row.idxs.forEach(idx => countArr[idx]--);
+            delete slots[cat];
+          }
+        }
+      }
+
+      rec(0);
+    }
+
+    function targetedExactHighSearch() {
+      const skillNames = activatable;
+      const skillIndex = new Map(skillNames.map((name, idx) => [name, idx]));
+      const targetIdx = targetSkills.map(name => skillIndex.has(name) ? skillIndex.get(name) : -1);
+      const candidateCache = new Map();
+      const targetCandidateCache = new Map();
+      function makeRow(item) {
+        return {
+          item,
+          idxs: searchableSkillNames(item).map(name => skillIndex.get(name)).filter(idx => idx !== undefined)
+        };
+      }
+      function candidateRows(cat) {
+        if (candidateCache.has(cat)) return candidateCache.get(cat);
+        const rows = sortCandidates(filt(itemsByCat[cat])).map(makeRow);
+        candidateCache.set(cat, rows);
+        return rows;
+      }
+      function targetRows(cat, skillName) {
+        const key = cat + '|' + skillName;
+        if (targetCandidateCache.has(key)) return targetCandidateCache.get(key);
+        const rows = sortCandidates(filt((skillCatMap.get(skillName) || {})[cat] || [])).map(makeRow);
+        targetCandidateCache.set(key, rows);
+        return rows;
+      }
+      function countObject(countArr) {
+        const count = {};
+        for (let idx = 0; idx < skillNames.length; idx++) {
+          if (countArr[idx] > 0) count[skillNames[idx]] = countArr[idx];
+        }
+        return count;
+      }
+      function targetSatisfiedByChoice(countArr, choiceIdx) {
+        for (const idx of targetIdx) {
+          if (idx < 0) return false;
+          if (countArr[idx] + (choiceIdx === idx ? 1 : 0) < ACTIVATION_NEED) return false;
+        }
+        return true;
+      }
+      function addHighResult(slots, countArr) {
+        let normalActiveCount = 0;
+        const bonusIdx = [];
+        for (let idx = 0; idx < skillNames.length; idx++) {
+          if (countArr[idx] >= ACTIVATION_NEED) normalActiveCount++;
+          else if (countArr[idx] === ACTIVATION_NEED - EXTRA_SKILL_POINT) bonusIdx.push(idx);
+        }
+        const choices = bonusIdx.length > 0 ? bonusIdx.sort((a, b) => skillNames[a].localeCompare(skillNames[b], 'ja')) : [-1];
+        if (normalActiveCount + (choices[0] >= 0 ? 1 : 0) < 4) return;
+        const slotKey = CATS.map(cat => (fixedSlots[cat] || slots[cat]) ? (fixedSlots[cat] || slots[cat]).no : 0).join(',');
+        let count = null;
+        for (const choiceIdx of choices) {
+          if (!targetSatisfiedByChoice(countArr, choiceIdx)) continue;
+          const skillSlot = choiceIdx >= 0 ? skillNames[choiceIdx] : null;
+          const activeCount = normalActiveCount + (skillSlot ? 1 : 0);
+          if (activeCount < 4) continue;
+          const key = slotKey + '|' + (skillSlot || '');
+          if (highSeen.has(key)) continue;
+          highSeen.add(key);
+          if (!count) count = countObject(countArr);
+          tryAdd({ slots: { ...slots }, count: { ...count }, skillSlot, activeCount });
+        }
+      }
+      function buildRemaining(arrays) {
+        const remaining = Array(arrays.length + 1).fill(null).map(() => new Int8Array(skillNames.length));
+        for (let depth = arrays.length - 1; depth >= 0; depth--) {
+          remaining[depth].set(remaining[depth + 1]);
+          const present = new Set();
+          arrays[depth].forEach(row => row && row.idxs && row.idxs.forEach(idx => present.add(idx)));
+          present.forEach(idx => remaining[depth][idx]++);
+        }
+        return remaining;
+      }
+      function mayStillReachTargets(countArr, remaining, depth) {
+        for (const idx of targetIdx) {
+          if (idx < 0) return false;
+          if (countArr[idx] + remaining[depth][idx] < ACTIVATION_NEED - EXTRA_SKILL_POINT) return false;
+        }
+        return true;
+      }
+      function mayReachHigh(countArr, remaining, depth) {
+        let possibleActive = 0;
+        let hasBonus = false;
+        for (let idx = 0; idx < skillNames.length; idx++) {
+          const maxPossible = countArr[idx] + remaining[depth][idx];
+          if (maxPossible >= ACTIVATION_NEED) possibleActive++;
+          else if (maxPossible >= ACTIVATION_NEED - EXTRA_SKILL_POINT) hasBonus = true;
+        }
+        return possibleActive + (hasBonus ? 1 : 0) >= 4;
+      }
+
+      for (const skillName of targetSkills) {
+        const fixedCnt = baseCount[skillName] || 0;
+        const needed = Math.max(0, ACTIVATION_NEED - EXTRA_SKILL_POINT - fixedCnt);
+        const catsWithSkill = emptyCats
+          .filter(cat => targetRows(cat, skillName).length > 0)
+          .sort((a, b) => targetRows(a, skillName).length - targetRows(b, skillName).length);
+        if (catsWithSkill.length < needed) continue;
+        const pivotCatRank = new Map(catsWithSkill.map((cat, idx) => [cat, idx]));
+        const subsets = needed === 0 ? [[]] : kSubsets(catsWithSkill, needed);
+        for (const subset of subsets) {
+          const usedSet = new Set(subset);
+          const lastPivotRank = needed === 0 ? -1 : Math.max(...subset.map(cat => pivotCatRank.get(cat)));
+          const otherCats = emptyCats
+            .filter(cat => !usedSet.has(cat))
+            .sort((a, b) => candidateRows(a).length - candidateRows(b).length);
+          const searchCats = subset.concat(otherCats);
+          const arrays = subset.map(cat => targetRows(cat, skillName)).concat(otherCats.map(cat => {
+            const rows = needed > 0 && ((pivotCatRank.get(cat) ?? Infinity) < lastPivotRank)
+              ? candidateRows(cat).filter(row => !searchableSkillNames(row.item).includes(skillName))
+              : candidateRows(cat);
+            return [null].concat(rows);
+          }));
+          const remaining = buildRemaining(arrays);
+          const countArr = new Int8Array(skillNames.length);
+          Object.entries(baseCount).forEach(([name, cnt]) => {
+            const idx = skillIndex.get(name);
+            if (idx !== undefined) countArr[idx] = cnt;
+          });
+          const slots = {};
+          function rec(depth) {
+            if (!mayReachHigh(countArr, remaining, depth)) return;
+            if (!mayStillReachTargets(countArr, remaining, depth)) return;
+            if (depth === searchCats.length) {
+              addHighResult(slots, countArr);
+              return;
+            }
+            const cat = searchCats[depth];
+            for (const row of arrays[depth]) {
+              if (row && !row.idxs.some(idx => countArr[idx] + 1 + remaining[depth + 1][idx] >= ACTIVATION_NEED - EXTRA_SKILL_POINT)) continue;
+              if (row) {
+                slots[cat] = row.item;
+                row.idxs.forEach(idx => countArr[idx]++);
+              }
+              rec(depth + 1);
+              if (row) {
+                row.idxs.forEach(idx => countArr[idx]--);
+                delete slots[cat];
+              }
+            }
+          }
+          rec(0);
+        }
+      }
+    }
+
+    if (targetSkills.length > 0) targetedExactHighSearch();
+    else exactHighSearch();
+
+    if (highGroups.size >= MAX_RESULTS) {
+      totalKind = 4;
+    } else {
+      outer: for (const skillName of pivotSkills) {
+        const catMap = skillCatMap.get(skillName) || {};
+        const fixedCnt = baseCount[skillName] || 0;
+        const needed = Math.max(0, ACTIVATION_NEED - EXTRA_SKILL_POINT - fixedCnt);
+        const catsWithSkill = emptyCats.filter(cat => filt(catMap[cat] || []).length > 0);
+        if (catsWithSkill.length < needed) continue;
+        const subsets = needed === 0 ? [[]] : kSubsets(catsWithSkill, needed);
+        for (const subset of subsets) {
+          const usedSet = new Set(subset);
+          const otherCats = emptyCats.filter(cat => !usedSet.has(cat));
+          const arrays = subset.map(cat => sortCandidates(filt(catMap[cat] || [])))
+            .concat(otherCats.map(cat => [null].concat(otherSlotCandidates[cat])));
+          const allCatsOrder = subset.concat(otherCats);
+          const slots = {};
+          function recLow(depth) {
+            if (stopped) return;
+            if (depth === allCatsOrder.length) {
+              if (++iters >= ITER_CAP) {
+                stopped = true;
+                return;
+              }
+              const count = { ...baseCount };
+              emptyCats.forEach(cat => {
+                if (slots[cat]) searchableSkillNames(slots[cat]).forEach(name => { count[name] = (count[name] || 0) + 1; });
+              });
+              if (targetSkills.length > 0 && !canActivateTargets(count, targetSkills)) return;
+              const choices = skillSlotChoices(count, targetSkills);
+              const normalActiveCount = normalActiveSkills(count).length;
+              const slotKey = CATS.map(cat => (fixedSlots[cat] || slots[cat]) ? (fixedSlots[cat] || slots[cat]).no : 0).join(',');
+              for (const skillSlot of choices) {
+                const key = slotKey + '|' + (skillSlot || '');
+                if (seen.has(key)) continue;
+                seen.add(key);
+                if (highSeen.has(key)) continue;
+                const activeCount = normalActiveCount + (skillSlot ? 1 : 0);
+                if (activeCount < 2 || activeCount >= 4) continue;
+                tryAdd({ slots: { ...slots }, count: { ...count }, skillSlot, activeCount });
+              }
+              return;
+            }
+            const cat = allCatsOrder[depth];
+            for (const item of arrays[depth]) {
+              if (item) slots[cat] = item;
+              recLow(depth + 1);
+              if (item) delete slots[cat];
+              if (stopped) return;
+            }
+          }
+          recLow(0);
+          if (stopped) break outer;
+        }
+      }
+    }
+
+    const totalCount = [...highGroups.values(), ...threeGroups.values(), ...twoGroups.values()]
+      .reduce((sum, arr) => sum + arr.length, 0);
+    const finalHigh = finalize(highGroups);
+    const finalThree = finalizeLimited(threeGroups);
+    const finalTwo = finalizeLimited(twoGroups);
+    const showThreeByDefault = finalHigh.length + finalThree.length < MAX_RESULTS;
+    return {
+      kind: 'results',
+      shown: (showThreeByDefault ? finalHigh.concat(finalThree) : finalHigh).map(compactResult),
+      extra: (showThreeByDefault ? finalTwo : finalThree).map(compactResult),
+      totalCount,
+      stopped,
+      extraKind: showThreeByDefault ? 2 : 3,
+      totalKind
+    };
+  }
+}
+
 let comboSearchToken = 0;
+let activeComboWorker = null;
+let comboWorkerItemsCache = null;
 function comboLoadingHtml(label = '組み合わせを検索中') {
   return `<div class="ck-loading"><span class="ck-spinner"></span><span>${label}...</span></div>`;
+}
+function compactComboWorkerItems() {
+  if (!comboWorkerItemsCache || comboWorkerItemsCache.length !== allItems.length) {
+    comboWorkerItemsCache = allItems.map(item => ({
+      no: item.no,
+      category: item.category,
+      name: item.name,
+      skills: (item.skills || []).map(skill => ({ name: skill.name }))
+    }));
+  }
+  return comboWorkerItemsCache;
+}
+function createComboWorker() {
+  if (!window.Worker || !window.Blob || !window.URL) return null;
+  const source = `(${comboSearchWorkerBootstrap.toString()})();`;
+  const url = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+  const worker = new Worker(url);
+  worker._comboUrl = url;
+  return worker;
+}
+function terminateComboWorker(worker) {
+  if (!worker) return;
+  worker.terminate();
+  if (worker._comboUrl) URL.revokeObjectURL(worker._comboUrl);
+}
+function cancelActiveComboWorker() {
+  terminateComboWorker(activeComboWorker);
+  activeComboWorker = null;
+}
+function comboWorkerRowToResult(row, fixedSlots = {}) {
+  const slots = {};
+  CATS.forEach((cat, index) => {
+    const no = row[index];
+    slots[cat] = no ? ITEM_BY_NO.get(no) || null : null;
+  });
+  const count = {};
+  CATS.forEach(cat => {
+    const item = fixedSlots[cat] || slots[cat];
+    if (!item) return;
+    searchableSkillNames(item).forEach(name => { count[name] = (count[name] || 0) + 1; });
+  });
+  const skillSlot = row[5] || null;
+  const activeCount = comboNormalActiveSkills(count).length + (skillSlot ? 1 : 0);
+  return { slots, count, skillSlot, activeCount };
+}
+function comboWorkerHydrateResult(entry, fixedSlots) {
+  const result = comboWorkerRowToResult(entry.r, fixedSlots);
+  result.alternatives = (entry.a || []).map(row => comboWorkerRowToResult(row, fixedSlots));
+  return result;
+}
+function renderComboWorkerResult(resultEl, workerResult, targetSkills, fixedSlots, disabledCats) {
+  if (workerResult.kind === 'impossible') {
+    resultEl.innerHTML = `<div class="ck-impossible">${ui('impossible', workerResult.impossibleSkills.map(translateSkillName))}</div>`;
+    return;
+  }
+  if (workerResult.kind === 'empty') {
+    resultEl.innerHTML = `<div class="ck-empty">${ui('noCombos')}</div>`;
+    return;
+  }
+  const shown = (workerResult.shown || []).map(entry => comboWorkerHydrateResult(entry, fixedSlots));
+  const extra = (workerResult.extra || []).map(entry => comboWorkerHydrateResult(entry, fixedSlots));
+  renderComboResults(resultEl, shown, workerResult.totalCount || shown.length + extra.length,
+    targetSkills, fixedSlots, extra, !!workerResult.stopped, workerResult.extraKind || 3, workerResult.totalKind || 2, disabledCats);
 }
 function scheduleComboSearch(fixedSlots, targetSkills, resultElId, label, disabledCats = new Set()) {
   const token = ++comboSearchToken;
   const resultEl = document.getElementById(resultElId);
   resultEl.innerHTML = comboLoadingHtml(label);
+  cancelActiveComboWorker();
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       if (token !== comboSearchToken) return;
-      runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats);
+      const worker = createComboWorker();
+      if (!worker) {
+        runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats);
+        return;
+      }
+      activeComboWorker = worker;
+      worker.onmessage = event => {
+        if (token !== comboSearchToken) {
+          terminateComboWorker(worker);
+          return;
+        }
+        terminateComboWorker(worker);
+        if (activeComboWorker === worker) activeComboWorker = null;
+        if (event.data?.type === 'result') {
+          renderComboWorkerResult(resultEl, event.data.result, targetSkills, fixedSlots, disabledCats);
+          return;
+        }
+        runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats);
+      };
+      worker.onerror = () => {
+        if (token !== comboSearchToken) return;
+        terminateComboWorker(worker);
+        if (activeComboWorker === worker) activeComboWorker = null;
+        runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats);
+      };
+      const fixedSlotNos = {};
+      CATS.forEach(cat => { fixedSlotNos[cat] = fixedSlots[cat]?.no || 0; });
+      worker.postMessage({
+        items: compactComboWorkerItems(),
+        fixedSlotNos,
+        targetSkills,
+        disabledCats: [...disabledCats],
+        ownedFilter,
+        ownedNos: [...ownedSet],
+        excludedNos: [...checkerExcludedSet],
+        excludeMaxMastered,
+        maxMasteredNos: excludeMaxMastered ? allItems.filter(isMaxMastered).map(item => item.no) : []
+      });
     });
   });
 }
@@ -2161,6 +2851,7 @@ function resetComboQueryCache() {
   comboQueryManifest = null;
   comboQueryManifestPromise = null;
   comboQueryPayloadCache.clear();
+  comboWorkerItemsCache = null;
 }
 function comboQueryHashString(text) {
   let hash = 2166136261;
@@ -2275,6 +2966,7 @@ function renderComboQueryPayload(payload, targetSkills, resultEl) {
 }
 function scheduleComboQuerySearch(targetSkills, resultElId, label) {
   const token = ++comboSearchToken;
+  cancelActiveComboWorker();
   const resultEl = document.getElementById(resultElId);
   resultEl.innerHTML = comboLoadingHtml(label);
   const key = comboQueryKey(targetSkills);
@@ -2299,6 +2991,7 @@ function searchBySkill() {
     return;
   }
   comboSearchToken++;
+  cancelActiveComboWorker();
   const pool = allItems.filter(item => {
     if (ownedFilter === 'owned' && !ownedSet.has(item.no)) return false;
     if (ownedFilter === 'unowned' && ownedSet.has(item.no)) return false;
@@ -2460,6 +3153,7 @@ function buildSkillChecks() {
 
 function clearCheckerSelections() {
   comboSearchToken++;
+  cancelActiveComboWorker();
   document.querySelectorAll('.slot-select[data-cat]').forEach(sel => {
     sel.value = '';
     document.getElementById(`slot-skills-${sel.dataset.cat}`).innerHTML = '';
@@ -2534,6 +3228,7 @@ function searchCombinations() {
   const hasFixed = CATS.some(c => fixed[c]);
   if (!hasFixed && disabledCats.size === 0 && skills.length === 0) {
     comboSearchToken++;
+    cancelActiveComboWorker();
     document.getElementById('combo-result').innerHTML =
       `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
     return;
