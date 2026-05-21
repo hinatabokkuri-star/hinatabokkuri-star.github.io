@@ -1951,12 +1951,11 @@ async function init() {
   buildSlots();
   renderCheckerExcludeControls();
   buildSkillChecks();
-  document.getElementById('combo-result').innerHTML = comboLoadingHtml(ui('loadingCondition'));
+  document.getElementById('combo-result').innerHTML = `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
   masteryMap = buildMasteryMap();
   floorDropRows = buildFloorDropRows();
   startDataPoll();
   loadOwnerOwnedItemsFromHash();
-  searchCombinations();
 }
 
 // ━━━ 一覧 ━━━
@@ -2514,9 +2513,10 @@ function searchCombinations() {
   const { fixedSlots: fixed, disabledCats } = getCheckerSlotState();
   const skills = getTargetSkills();
   const hasFixed = CATS.some(c => fixed[c]);
-  const hasDynamicFilter = skills.length > 0 || disabledCats.size > 0 || ownedFilter !== 'all' || checkerExcludedSet.size > 0 || excludeMaxMastered;
-  if (!hasFixed && !hasDynamicFilter) {
-    scheduleComboIndexSearch(skills, 'combo-result', ui('loadingCondition'), disabledCats);
+  if (!hasFixed && disabledCats.size === 0 && skills.length === 0) {
+    comboSearchToken++;
+    document.getElementById('combo-result').innerHTML =
+      `<div class="ck-empty" style="color:var(--dim)">${ui('checkerEmpty')}</div>`;
     return;
   }
   scheduleComboSearch(fixed, skills, 'combo-result', ui('loadingCondition'), disabledCats);
