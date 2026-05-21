@@ -2259,6 +2259,43 @@ function comboSearchWorkerBootstrap() {
       const choices = candidates.length > 0 ? candidates : [null];
       return choices.filter(name => targets.length === 0 || canActivateTargetsWithSkillSlot(count, targets, name));
     }
+    function canReachTargetSetTogether() {
+      if (targetSkills.length === 0) return true;
+      const zeroVector = targetSkills.map(() => 0).join(',');
+      let states = new Set([targetSkills.map(name => Math.min(ACTIVATION_NEED, baseCount[name] || 0)).join(',')]);
+      for (const cat of emptyCats) {
+        const vectors = new Set([zeroVector]);
+        for (const item of filt(itemsByCat[cat] || [])) {
+          const names = searchableSkillNames(item);
+          const vector = targetSkills.map(skill => names.filter(name => name === skill).length);
+          if (vector.some(Boolean)) vectors.add(vector.join(','));
+        }
+        const next = new Set();
+        for (const stateKey of states) {
+          const state = stateKey.split(',').map(Number);
+          for (const vectorKey of vectors) {
+            const vector = vectorKey.split(',').map(Number);
+            next.add(state.map((value, idx) => Math.min(ACTIVATION_NEED, value + vector[idx])).join(','));
+          }
+        }
+        states = next;
+      }
+      for (const stateKey of states) {
+        const counts = stateKey.split(',').map(Number);
+        let neededPoint = 0;
+        let possible = true;
+        for (const count of counts) {
+          const deficit = Math.max(0, ACTIVATION_NEED - count);
+          if (deficit > EXTRA_SKILL_POINT) {
+            possible = false;
+            break;
+          }
+          neededPoint += deficit;
+        }
+        if (possible && neededPoint <= EXTRA_SKILL_POINT) return true;
+      }
+      return false;
+    }
 
     if (targetSkills.length > 0) {
       const impossibleSkills = targetSkills.filter(skill => {
@@ -2269,6 +2306,9 @@ function comboSearchWorkerBootstrap() {
       });
       if (impossibleSkills.length > 0) {
         return { kind: 'impossible', impossibleSkills };
+      }
+      if (!canReachTargetSetTogether()) {
+        return { kind: 'empty' };
       }
     }
 
@@ -2650,7 +2690,7 @@ function comboSearchWorkerBootstrap() {
     if (targetSkills.length > 0) targetedExactHighSearch();
     else exactHighSearch();
 
-    if (highGroups.size >= MAX_RESULTS) {
+    if (highGroups.size >= MAX_RESULTS || (targetSkills.length > 0 && highGroups.size > 0)) {
       totalKind = 4;
     } else {
       outer: for (const skillName of pivotSkills) {
@@ -3290,6 +3330,43 @@ function runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats = new
     const choices = candidates.length > 0 ? candidates : [null];
     return choices.filter(name => targets.length === 0 || canActivateTargetsWithSkillSlot(count, targets, name));
   }
+  function canReachTargetSetTogether() {
+    if (targetSkills.length === 0) return true;
+    const zeroVector = targetSkills.map(() => 0).join(',');
+    let states = new Set([targetSkills.map(name => Math.min(ACTIVATION_NEED, baseCount[name] || 0)).join(',')]);
+    for (const cat of emptyCats) {
+      const vectors = new Set([zeroVector]);
+      for (const item of filt(ITEMS_BY_CAT[cat] || [])) {
+        const names = searchableSkillNames(item);
+        const vector = targetSkills.map(skill => names.filter(name => name === skill).length);
+        if (vector.some(Boolean)) vectors.add(vector.join(','));
+      }
+      const next = new Set();
+      for (const stateKey of states) {
+        const state = stateKey.split(',').map(Number);
+        for (const vectorKey of vectors) {
+          const vector = vectorKey.split(',').map(Number);
+          next.add(state.map((value, idx) => Math.min(ACTIVATION_NEED, value + vector[idx])).join(','));
+        }
+      }
+      states = next;
+    }
+    for (const stateKey of states) {
+      const counts = stateKey.split(',').map(Number);
+      let neededPoint = 0;
+      let possible = true;
+      for (const count of counts) {
+        const deficit = Math.max(0, ACTIVATION_NEED - count);
+        if (deficit > EXTRA_SKILL_POINT) {
+          possible = false;
+          break;
+        }
+        neededPoint += deficit;
+      }
+      if (possible && neededPoint <= EXTRA_SKILL_POINT) return true;
+    }
+    return false;
+  }
 
   // ターゲット指定時の不可能チェック
   if (targetSkills.length > 0) {
@@ -3301,6 +3378,10 @@ function runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats = new
     });
     if (impossibleSkills.length > 0) {
         resultEl.innerHTML = `<div class="ck-impossible">${ui('impossible', impossibleSkills.map(translateSkillName))}</div>`;
+      return;
+    }
+    if (!canReachTargetSetTogether()) {
+      resultEl.innerHTML = `<div class="ck-empty">${ui('noCombos')}</div>`;
       return;
     }
   }
@@ -3733,7 +3814,7 @@ function runComboSearch(fixedSlots, targetSkills, resultElId, disabledCats = new
   if (targetSkills.length > 0) targetedExactHighSearch();
   else exactHighSearch();
 
-  if (highGroups.size >= MAX_RESULTS) {
+  if (highGroups.size >= MAX_RESULTS || (targetSkills.length > 0 && highGroups.size > 0)) {
     totalKind = 4;
   } else {
     outer: for (const skillName of pivotSkills) {
