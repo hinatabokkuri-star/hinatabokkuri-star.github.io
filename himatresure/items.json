@@ -13384,19 +13384,19 @@
     ],
     "skills": [
       {
-        "type": "A",
-        "name": "ジャブ",
-        "desc": "かるいスピードこうげき (SPD)"
+        "type": "M",
+        "name": "フレア",
+        "desc": "ほのおぞくせいのまほうこうげき (INTx2)"
       },
       {
-        "type": "A",
-        "name": "スタンアタック",
-        "desc": "スタンさせるこうげき (ATK)"
+        "type": "M",
+        "name": "めいそう",
+        "desc": "HPをかいふくする (Lv)"
       },
       {
         "type": "P",
-        "name": "デスマーチ",
-        "desc": "しぬまであるきつづける"
+        "name": "XPアップ",
+        "desc": "かくとくXP+50%"
       }
     ],
     "mastery_bonus": [
