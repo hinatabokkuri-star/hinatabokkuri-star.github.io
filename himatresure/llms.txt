@@ -1,6 +1,6 @@
 # ひまつぶトレジャー攻略 装備図鑑・スキル組み合わせ検索
 
-インディーズゲーム「ひまつぶトレジャー」の装備図鑑・攻略サポートツール。全569件の武器、盾、鎧、アクセサリー、ペットのスキル、入手元、ドロップ、マスタリーボーナスを検索できます。
+インディーズゲーム「ひまつぶトレジャー」の装備図鑑・攻略サポートツール。全570件の武器、盾、鎧、アクセサリー、ペットのスキル、入手元、ドロップ、マスタリーボーナスを検索できます。
 
 ## Key URLs
 - Main app: https://hinatabokkuri-star.github.io/himatresure/
@@ -10,12 +10,12 @@
 - Sitemap: https://hinatabokkuri-star.github.io/himatresure/sitemap.xml
 
 ## Data Scope
-- Total entries: 569
+- Total entries: 570
 - 武器: 175
 - 盾: 93
 - 鎧: 76
 - アクセサリー: 47
-- ペット: 178
+- ペット: 179
 
 ## Notes
 - Item pages are available at https://hinatabokkuri-star.github.io/himatresure/item/no-001/ style URLs.
