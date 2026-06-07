@@ -86,7 +86,8 @@ self.addEventListener('fetch', event => {
   // 音楽 mp3 はSW介入しない（ネイティブのRangeで安定再生）
   // 旧実装はRange時に全体DL→sliceしていたため、Androidで大きいファイルが
   // audio要素のタイムアウトを超えてerror→自動スキップを誘発していた
-  if (url.pathname.startsWith('/music/')) return;
+  // 対象: /music/ 本体・/dousoukai/audio/ 同窓会BGM など全mp3
+  if (url.pathname.endsWith('.mp3')) return;
 
   // ジャケ画像・Suno CDN → 安定キャッシュ（Range無関係）
   const isCoverLike = url.pathname.startsWith('/covers/')
