@@ -114,9 +114,10 @@
   .card .scene-use b{ color:var(--amber-d); }
 
   /* ---- take buttons ---- */
-  .takes{ display:flex; flex-wrap:wrap; gap:12px; }
+  .takes{ display:flex; flex-direction:column; gap:12px; }
+  .take-row{ display:flex; gap:10px; align-items:stretch; }
   .take{
-    flex:1 1 200px;
+    flex:1 1 auto;
     display:flex; align-items:center; gap:12px;
     min-height:64px;
     background:var(--play); color:#fff;
@@ -135,6 +136,36 @@
   .take.active{ background:var(--amber); box-shadow:0 2px 0 var(--amber-d); }
   .take.active:hover{ background:#c47a00; }
   .take:focus-visible{ outline:4px solid #ffd27a; outline-offset:2px; }
+
+  /* ---- download buttons (blue = save to device) ---- */
+  .dl{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+    min-width:98px; padding:8px 14px;
+    background:#2f5f8f; color:#fff; border-radius:14px;
+    text-decoration:none; font-family:inherit; font-weight:700; font-size:16px;
+    box-shadow:0 2px 0 #224868;
+  }
+  .dl:hover{ background:#356aa0; }
+  .dl:active{ transform:translateY(2px); box-shadow:0 0 0 #224868; }
+  .dl .dli{ font-size:22px; line-height:1; }
+  .dl:focus-visible{ outline:4px solid #9ec5e8; outline-offset:2px; }
+
+  /* ---- bulk download ---- */
+  .bulk-box{ text-align:center; margin:22px 0 6px; }
+  .bulk{
+    display:inline-flex; align-items:center; gap:14px;
+    background:#2f5f8f; color:#fff; text-decoration:none;
+    border-radius:16px; padding:16px 26px;
+    font-family:inherit; font-weight:800; font-size:21px;
+    box-shadow:0 3px 0 #224868;
+  }
+  .bulk:hover{ background:#356aa0; }
+  .bulk:active{ transform:translateY(2px); box-shadow:0 0 0 #224868; }
+  .bulk .bi{ font-size:30px; }
+  .bulk .bt{ display:flex; flex-direction:column; line-height:1.25; text-align:left; }
+  .bulk .bt small{ font-size:14px; font-weight:600; opacity:.92; }
+  .bulk:focus-visible{ outline:4px solid #9ec5e8; outline-offset:2px; }
+  .bulk-note{ font-size:15px; color:var(--ink-soft); margin:10px auto 0; max-width:580px; }
 
   /* ---- fixed bottom player ---- */
   #player{
@@ -191,7 +222,16 @@
   <div class="note">
     <b>テイク1・テイク2について</b><br>
     同じ曲風の「別テイク（別演奏）」です。会場の雰囲気や進行に合わせて、合うほうをお選びください。<br>
-    <b>ボタンを押すと再生</b>、もう一度押すと止まります。画面下の操作バーで、音量や頭出し、くりかえし再生もできます。
+    <b>ボタンを押すと再生</b>、もう一度押すと止まります。画面下の操作バーで、音量や頭出し、くりかえし再生もできます。<br>
+    <b style="color:#1d7a43">緑のボタン</b>でその場で再生、<b style="color:#2f5f8f">青のボタン</b>でこの端末に保存（ダウンロード）できます。
+  </div>
+
+  <div class="bulk-box">
+    <a class="bulk" href="https://pub-f2b81be41b2b4aedb2d7072a28737c03.r2.dev/dousoukai/dousoukai_bgm_all.zip">
+      <span class="bi">📦</span>
+      <span class="bt">全曲まとめてダウンロード<small>ZIP形式・全33曲・約110MB</small></span>
+    </a>
+    <p class="bulk-note">パソコンでまとめて保存したいときにおすすめです。ファイルを開く（展開する）と、曲ごとのMP3が入っています。1曲だけ欲しいときは、各曲の青い「保存」ボタンをお使いください。</p>
   </div>
 
   <nav class="toc">
@@ -290,9 +330,15 @@ GROUPS.forEach(g=>{
     card.className='card';
     const takesHtml = d.takes.map(t=>{
       const [label,file,dur]=t;
-      return `<button class="take" data-file="${AUDIO_DIR+file}" data-title="${d.name}｜${label}">
-        <span class="icon">▶</span><span class="label">${label}</span><span class="time">${fmt(dur)}</span>
-      </button>`;
+      const dlName = (label==='再生') ? `${d.name}.mp3` : `${d.name} ${label}.mp3`;
+      return `<div class="take-row">
+        <button class="take" data-file="${AUDIO_DIR+file}" data-title="${d.name}｜${label}">
+          <span class="icon">▶</span><span class="label">${label}</span><span class="time">${fmt(dur)}</span>
+        </button>
+        <a class="dl" href="${AUDIO_DIR+file}" download="${dlName}" aria-label="${dlName} を保存">
+          <span class="dli">⬇</span><span class="dlt">保存</span>
+        </a>
+      </div>`;
     }).join('');
     card.innerHTML = `<h3>${d.name}</h3>
       <p class="desc">${d.desc}</p>

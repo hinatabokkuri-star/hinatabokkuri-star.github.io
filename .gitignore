@@ -1,2 +1,5 @@
 himatresure/items/*.png
 himatresure/temp/
+
+# bulk download ZIP is hosted on Cloudflare R2, not in-repo (exceeds GitHub 100MB limit)
+dousoukai/dousoukai_bgm_all.zip
