@@ -93,29 +93,8 @@
     box-shadow:0 5px 18px rgba(176,111,0,.20);
     animation:panelBeat 1.9s ease-in-out infinite;
   }
-  .featured-card.is-playing::before,
-  .card.is-playing::before{
-    content:"♪";
-    position:absolute;
-    right:18px;
-    top:10px;
-    color:rgba(176,111,0,.48);
-    font-size:28px;
-    font-weight:800;
-    animation:floatNote 2.4s ease-in-out infinite;
-    pointer-events:none;
-  }
-  .featured-card.is-playing::after,
-  .card.is-playing::after{
-    content:"💧";
-    position:absolute;
-    right:46px;
-    top:18px;
-    font-size:18px;
-    opacity:.72;
-    animation:tearDrop 2.8s ease-in-out infinite;
-    pointer-events:none;
-  }
+  .featured-card.school-panel,
+  .school-grid > .school-panel{ padding:12px 14px; }
   .school-name{
     margin:0 0 10px;
     font-size:18px;
@@ -236,8 +215,13 @@
   .dl:focus-visible{ outline:4px solid #9ec5e8; outline-offset:2px; }
 
   .school-panel .takes{ gap:10px; }
-  .school-panel .take-row{ gap:6px; }
+  .school-panel .take-row{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 50px;
+    gap:8px;
+  }
   .school-panel .take{
+    min-width:0;
     min-height:52px;
     padding:8px 8px;
     gap:5px;
@@ -248,8 +232,9 @@
   .school-panel .take .label{ white-space:nowrap; }
   .school-panel .take .time{ display:none; }
   .school-panel .dl{
-    min-width:52px;
-    padding:6px 6px;
+    width:50px;
+    min-width:0;
+    padding:6px 4px;
     border-radius:12px;
     font-size:14px;
   }
@@ -310,6 +295,31 @@
   .pl-vol{ display:flex; align-items:center; gap:8px; max-width:280px; margin:10px auto 0; }
   .pl-vol .vico{ font-size:20px; }
 
+  #noteOverlay{
+    position:fixed;
+    inset:0;
+    z-index:45;
+    pointer-events:none;
+    overflow:hidden;
+    opacity:0;
+    transition:opacity .35s ease;
+  }
+  #noteOverlay.active{ opacity:1; }
+  .floating-note{
+    position:absolute;
+    left:var(--x);
+    bottom:-12vh;
+    color:var(--color);
+    font-size:var(--size);
+    font-weight:800;
+    line-height:1;
+    opacity:0;
+    text-shadow:0 3px 10px rgba(255,255,255,.65);
+    filter:drop-shadow(0 2px 6px rgba(60,45,15,.16));
+    will-change:transform,opacity;
+    animation:driftNote var(--dur) linear forwards;
+  }
+
   @keyframes panelBeat{
     0%,100%{ transform:translateY(0); }
     50%{ transform:translateY(-2px); }
@@ -318,24 +328,16 @@
     0%,100%{ transform:scale(1); }
     50%{ transform:scale(1.18); }
   }
-  @keyframes floatNote{
-    0%{ transform:translateY(10px) rotate(-8deg); opacity:.15; }
-    35%{ opacity:.62; }
-    100%{ transform:translateY(-18px) rotate(10deg); opacity:0; }
-  }
-  @keyframes tearDrop{
-    0%,25%{ transform:translateY(-3px) scale(.8); opacity:0; }
-    45%{ opacity:.75; }
-    100%{ transform:translateY(24px) scale(1); opacity:0; }
+  @keyframes driftNote{
+    0%{ transform:translate3d(0,0,0) rotate(var(--rot-start)); opacity:0; }
+    12%,78%{ opacity:var(--alpha); }
+    100%{ transform:translate3d(var(--drift),-112vh,0) rotate(var(--rot-end)); opacity:0; }
   }
   @media (prefers-reduced-motion: reduce){
     .featured-card.is-playing,
     .card.is-playing,
-    .take.active .icon,
-    .featured-card.is-playing::before,
-    .featured-card.is-playing::after,
-    .card.is-playing::before,
-    .card.is-playing::after{ animation:none; }
+    .take.active .icon{ animation:none; }
+    #noteOverlay{ display:none; }
   }
 
   footer{ text-align:center; color:var(--ink-soft); font-size:14px; padding:34px 16px 10px; }
@@ -384,6 +386,8 @@
     HINATABOKKURI ／ 同窓会用 校歌アレンジ BGM集
   </footer>
 </div>
+
+<div id="noteOverlay" aria-hidden="true"></div>
 
 <!-- fixed player -->
 <div id="player" aria-live="polite">
@@ -558,8 +562,13 @@ const vol = document.getElementById('vol');
 const btnPlay = document.getElementById('btnPlay');
 const btnRestart = document.getElementById('btnRestart');
 const btnLoop = document.getElementById('btnLoop');
+const noteOverlay = document.getElementById('noteOverlay');
+const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+const NOTE_CHARS = ['♪','♫','♬','♩','♭','♯'];
+const NOTE_COLORS = ['#b06f00','#1d7a43','#2f5f8f','#b4558a','#7c5ac7','#c47a00','#268c83'];
 let currentBtn = null;
 let seeking = false;
+let noteTimer = null;
 
 // restore volume
 const savedVol = localStorage.getItem('dousoukai_vol');
@@ -601,6 +610,43 @@ function markPlaying(on){
   document.querySelectorAll('.is-playing').forEach(el=>el.classList.remove('is-playing'));
   const card = activeCard();
   if(on && card) card.classList.add('is-playing');
+  on ? startNoteOverlay() : stopNoteOverlay();
+}
+function spawnFloatingNote(spread=false){
+  if(!noteOverlay || reduceMotionQuery.matches) return;
+  const note = document.createElement('span');
+  const size = Math.round(24 + Math.random()*34);
+  note.className = 'floating-note';
+  note.textContent = NOTE_CHARS[Math.floor(Math.random()*NOTE_CHARS.length)];
+  note.style.setProperty('--x', (Math.random()*96 + 2).toFixed(2) + 'vw');
+  note.style.setProperty('--size', size + 'px');
+  note.style.setProperty('--color', NOTE_COLORS[Math.floor(Math.random()*NOTE_COLORS.length)]);
+  note.style.setProperty('--alpha', (0.18 + Math.random()*0.30).toFixed(2));
+  note.style.setProperty('--dur', (8 + Math.random()*6).toFixed(2) + 's');
+  note.style.setProperty('--drift', (Math.random()*32 - 16).toFixed(2) + 'vw');
+  note.style.setProperty('--rot-start', (Math.random()*40 - 20).toFixed(1) + 'deg');
+  note.style.setProperty('--rot-end', (Math.random()*150 - 75).toFixed(1) + 'deg');
+  if(spread) note.style.bottom = (Math.random()*86 - 8).toFixed(2) + 'vh';
+  note.addEventListener('animationend',()=>note.remove(),{once:true});
+  noteOverlay.appendChild(note);
+}
+function startNoteOverlay(){
+  if(!noteOverlay || reduceMotionQuery.matches) return;
+  noteOverlay.classList.add('active');
+  if(noteTimer) return;
+  for(let i=0;i<12;i+=1) window.setTimeout(()=>spawnFloatingNote(true), i*95);
+  noteTimer = window.setInterval(()=>spawnFloatingNote(false), 430);
+}
+function stopNoteOverlay(){
+  if(!noteOverlay) return;
+  if(noteTimer){
+    window.clearInterval(noteTimer);
+    noteTimer = null;
+  }
+  noteOverlay.classList.remove('active');
+  window.setTimeout(()=>{
+    if(noteOverlay && !noteOverlay.classList.contains('active')) noteOverlay.replaceChildren();
+  },900);
 }
 
 audio.addEventListener('play',()=>{
