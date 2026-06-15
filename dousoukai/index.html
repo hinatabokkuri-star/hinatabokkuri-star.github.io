@@ -194,7 +194,8 @@
   .take:hover{ background:#1f8a4b; }
   .take:active{ transform:translateY(2px); box-shadow:0 0 0 var(--play-d); }
   .take .icon{ font-size:24px; width:26px; text-align:center; }
-  .take .label{ flex:1; text-align:left; }
+  .take .label{ flex:1; min-width:0; text-align:left; }
+  .take .short-label{ display:none; }
   .take .time{ font-size:16px; font-weight:600; opacity:.9; }
   .take.active{ background:var(--amber); box-shadow:0 2px 0 var(--amber-d); }
   .take.active:hover{ background:#c47a00; }
@@ -225,11 +226,19 @@
     min-height:52px;
     padding:8px 8px;
     gap:5px;
+    justify-content:center;
     border-radius:12px;
     font-size:15px;
   }
   .school-panel .take .icon{ width:18px; font-size:20px; }
-  .school-panel .take .label{ white-space:nowrap; }
+  .school-panel .take .label{
+    flex:0 1 auto;
+    min-width:0;
+    overflow:hidden;
+    text-align:center;
+    text-overflow:clip;
+    white-space:nowrap;
+  }
   .school-panel .take .time{ display:none; }
   .school-panel .dl{
     width:50px;
@@ -239,6 +248,10 @@
     font-size:14px;
   }
   .school-panel .dl .dli{ font-size:18px; }
+  @media(max-width:520px){
+    .school-panel .take .full-label{ display:none; }
+    .school-panel .take .short-label{ display:inline; }
+  }
 
   /* ---- bulk download ---- */
   .bulk-box{ text-align:center; margin:22px 0 6px; }
@@ -368,11 +381,11 @@
   </section>
 
   <div class="bulk-box">
-    <a class="bulk" href="https://pub-f2b81be41b2b4aedb2d7072a28737c03.r2.dev/dousoukai/dousoukai_bgm_all.zip">
+    <a class="bulk" href="https://github.com/hinatabokkuri-star/hinatabokkuri-star.github.io/releases/download/dousoukai-bgm-2026-06-15/dousoukai_bgm_all.zip">
       <span class="bi">📦</span>
-      <span class="bt">弥栄小学校分をまとめてダウンロード<small>ZIP形式・全33曲・約110MB</small></span>
+      <span class="bt">両校分をまとめてダウンロード<small>ZIP形式・全71曲・約210MB</small></span>
     </a>
-    <p class="bulk-note">前回作成した弥栄小学校分のまとめ保存用です。有済小学校分は、各曲の青い「保存」ボタンから1曲ずつ保存できます。</p>
+    <p class="bulk-note">弥栄小学校・有済小学校の全曲を学校別フォルダにまとめています。各曲の青い「保存」ボタンから1曲ずつ保存もできます。</p>
   </div>
 
   <nav class="toc">
@@ -468,14 +481,20 @@ const BONUS_BY_SCHOOL = {
 
 function fmt(s){ s=Math.floor(s||0); const m=Math.floor(s/60); const ss=String(s%60).padStart(2,'0'); return m+':'+ss; }
 function getTakes(d, schoolId){ return d.schools && d.schools[schoolId] ? d.schools[schoolId] : []; }
+function compactTakeLabel(label){
+  const m = label.match(/^テイク\s*(\d+)$/);
+  if(m) return `T${m[1]}`;
+  return label === '再生' ? '聴く' : label;
+}
 function takeRowsHtml(d, schoolId){
   return getTakes(d, schoolId).map(t=>{
     const [label,file,dur]=t;
+    const compactLabel = compactTakeLabel(label);
     const schoolName = SCHOOLS[schoolId].name;
     const dlName = `${schoolName} ${d.name} ${label}.mp3`;
     return `<div class="take-row">
       <button class="take" data-file="${AUDIO_DIR+file}" data-title="${schoolName}｜${d.name}｜${label}">
-        <span class="icon">▶</span><span class="label">${label}</span><span class="time">${fmt(dur)}</span>
+        <span class="icon">▶</span><span class="label"><span class="full-label">${label}</span><span class="short-label">${compactLabel}</span></span><span class="time">${fmt(dur)}</span>
       </button>
       <a class="dl" href="${AUDIO_DIR+file}" download="${dlName}" aria-label="${dlName} を保存">
         <span class="dli">⬇</span><span class="dlt">保存</span>
