@@ -67,6 +67,64 @@
   }
   .note b{ color:var(--amber-d); }
 
+  /* ---- featured school songs ---- */
+  .featured{ margin:26px 0 30px; scroll-margin-top:14px; }
+  .featured h2{ margin:0 0 10px; font-size:23px; color:var(--amber-d); }
+  .featured-lead{ margin:0 0 14px; font-size:16px; color:var(--ink-soft); }
+  .featured-grid,
+  .school-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:10px;
+  }
+  .featured-card,
+  .school-panel{
+    position:relative;
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:#fffdf7;
+    padding:12px;
+    min-width:0;
+  }
+  .featured-card{ box-shadow:var(--shadow); }
+  .featured-card.is-playing,
+  .card.is-playing{
+    border-color:var(--amber);
+    box-shadow:0 5px 18px rgba(176,111,0,.20);
+    animation:panelBeat 1.9s ease-in-out infinite;
+  }
+  .featured-card.is-playing::before,
+  .card.is-playing::before{
+    content:"♪";
+    position:absolute;
+    right:18px;
+    top:10px;
+    color:rgba(176,111,0,.48);
+    font-size:28px;
+    font-weight:800;
+    animation:floatNote 2.4s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .featured-card.is-playing::after,
+  .card.is-playing::after{
+    content:"💧";
+    position:absolute;
+    right:46px;
+    top:18px;
+    font-size:18px;
+    opacity:.72;
+    animation:tearDrop 2.8s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .school-name{
+    margin:0 0 10px;
+    font-size:18px;
+    line-height:1.35;
+    color:var(--amber-d);
+    font-weight:800;
+  }
+  .school-sub{ margin:0 0 10px; font-size:14px; color:var(--ink-soft); }
+
   /* ---- table of contents ---- */
   .toc h2{ font-size:20px; margin:26px 0 12px; color:var(--ink); }
   .toc-grid{ display:grid; grid-template-columns:1fr; gap:12px; }
@@ -97,6 +155,8 @@
 
   /* ---- arrangement card ---- */
   .card{
+    position:relative;
+    overflow:hidden;
     background:var(--paper);
     border:2px solid var(--line);
     border-radius:16px;
@@ -112,6 +172,30 @@
     padding:8px 12px; margin:0 0 14px;
   }
   .card .scene-use b{ color:var(--amber-d); }
+
+  .card .school-grid{ margin-top:14px; }
+  .bonus-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:14px;
+    margin-top:16px;
+  }
+  .bonus-column{ min-width:0; }
+  .bonus-column-head{
+    margin:0 0 12px;
+    padding:10px 12px;
+    border-left:6px solid var(--amber);
+    background:#fffdf7;
+    color:var(--amber-d);
+    font-weight:800;
+    border-radius:10px;
+  }
+  .bonus-column-head small{
+    display:block;
+    color:var(--ink-soft);
+    font-size:13px;
+    font-weight:600;
+  }
 
   /* ---- take buttons ---- */
   .takes{ display:flex; flex-direction:column; gap:12px; }
@@ -136,6 +220,7 @@
   .take.active{ background:var(--amber); box-shadow:0 2px 0 var(--amber-d); }
   .take.active:hover{ background:#c47a00; }
   .take:focus-visible{ outline:4px solid #ffd27a; outline-offset:2px; }
+  .take.active .icon{ animation:playBeat .72s ease-in-out infinite; }
 
   /* ---- download buttons (blue = save to device) ---- */
   .dl{
@@ -149,6 +234,26 @@
   .dl:active{ transform:translateY(2px); box-shadow:0 0 0 #224868; }
   .dl .dli{ font-size:22px; line-height:1; }
   .dl:focus-visible{ outline:4px solid #9ec5e8; outline-offset:2px; }
+
+  .school-panel .takes{ gap:10px; }
+  .school-panel .take-row{ gap:6px; }
+  .school-panel .take{
+    min-height:52px;
+    padding:8px 8px;
+    gap:5px;
+    border-radius:12px;
+    font-size:15px;
+  }
+  .school-panel .take .icon{ width:18px; font-size:20px; }
+  .school-panel .take .label{ white-space:nowrap; }
+  .school-panel .take .time{ display:none; }
+  .school-panel .dl{
+    min-width:52px;
+    padding:6px 6px;
+    border-radius:12px;
+    font-size:14px;
+  }
+  .school-panel .dl .dli{ font-size:18px; }
 
   /* ---- bulk download ---- */
   .bulk-box{ text-align:center; margin:22px 0 6px; }
@@ -205,6 +310,34 @@
   .pl-vol{ display:flex; align-items:center; gap:8px; max-width:280px; margin:10px auto 0; }
   .pl-vol .vico{ font-size:20px; }
 
+  @keyframes panelBeat{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-2px); }
+  }
+  @keyframes playBeat{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.18); }
+  }
+  @keyframes floatNote{
+    0%{ transform:translateY(10px) rotate(-8deg); opacity:.15; }
+    35%{ opacity:.62; }
+    100%{ transform:translateY(-18px) rotate(10deg); opacity:0; }
+  }
+  @keyframes tearDrop{
+    0%,25%{ transform:translateY(-3px) scale(.8); opacity:0; }
+    45%{ opacity:.75; }
+    100%{ transform:translateY(24px) scale(1); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .featured-card.is-playing,
+    .card.is-playing,
+    .take.active .icon,
+    .featured-card.is-playing::before,
+    .featured-card.is-playing::after,
+    .card.is-playing::before,
+    .card.is-playing::after{ animation:none; }
+  }
+
   footer{ text-align:center; color:var(--ink-soft); font-size:14px; padding:34px 16px 10px; }
 </style>
 </head>
@@ -213,7 +346,7 @@
 <header>
   <div class="wrap">
     <h1>同窓会用 校歌アレンジ BGM集</h1>
-    <p class="lead">母校の校歌をもとに、同窓会や記念行事で使いやすいよう、さまざまな雰囲気にアレンジしたBGM集です。聴いてみたいボタンを押すと、その場で再生できます。気に入った曲を、会の場面に合わせてお使いください。</p>
+    <p class="lead">弥栄小学校・有済小学校の校歌をもとに、同窓会や記念行事で使いやすいよう、さまざまな雰囲気にアレンジしたBGM集です。聴いてみたいボタンを押すと、その場で再生できます。気に入った曲を、会の場面に合わせてお使いください。</p>
   </div>
 </header>
 
@@ -226,12 +359,18 @@
     <b style="color:#1d7a43">緑のボタン</b>でその場で再生、<b style="color:#2f5f8f">青のボタン</b>でこの端末に保存（ダウンロード）できます。
   </div>
 
+  <section class="featured" id="school-songs">
+    <h2>まず校歌を聴く</h2>
+    <p class="featured-lead">2つの小学校を横に並べています。最初に校歌そのものの雰囲気を確認したいときはこちらからどうぞ。</p>
+    <div class="featured-grid" id="featuredSongs"></div>
+  </section>
+
   <div class="bulk-box">
     <a class="bulk" href="https://pub-f2b81be41b2b4aedb2d7072a28737c03.r2.dev/dousoukai/dousoukai_bgm_all.zip">
       <span class="bi">📦</span>
-      <span class="bt">全曲まとめてダウンロード<small>ZIP形式・全33曲・約110MB</small></span>
+      <span class="bt">弥栄小学校分をまとめてダウンロード<small>ZIP形式・全33曲・約110MB</small></span>
     </a>
-    <p class="bulk-note">パソコンでまとめて保存したいときにおすすめです。ファイルを開く（展開する）と、曲ごとのMP3が入っています。1曲だけ欲しいときは、各曲の青い「保存」ボタンをお使いください。</p>
+    <p class="bulk-note">前回作成した弥栄小学校分のまとめ保存用です。有済小学校分は、各曲の青い「保存」ボタンから1曲ずつ保存できます。</p>
   </div>
 
   <nav class="toc">
@@ -272,80 +411,139 @@
 
 <script>
 // ===== arrangement data =====
+const AUDIO_DIR = 'audio/';
+const SCHOOL_ORDER = ['yasaka','arisai'];
+const SCHOOLS = {
+  yasaka:{ name:'弥栄小学校', sub:'前回作成分' },
+  arisai:{ name:'有済小学校', sub:'今回追加分' },
+};
+
 const ARR = {
-  lounge_jazz:   { name:'ホテルラウンジ風ジャズ版', desc:'ピアノ・クラリネット・ミュートトランペット・ストリングスをイメージした、上品なラウンジジャズ風。昭和のホテルラウンジのような落ち着いた雰囲気です。', scene:'開場中・歓談・食事・受付・同窓会全体のBGM', takes:[['テイク1','lounge_jazz_1.mp3',179],['テイク2','lounge_jazz_2.mp3',184]] },
-  piano_trio:    { name:'ピアノ・トリオ版', desc:'ピアノ・ウッドベース・ブラシドラムの小編成ジャズ。落ち着いた上品な響きで、長い時間流しても使いやすい曲調です。', scene:'歓談・食事中・受付・会場BGM全般', takes:[['テイク1','piano_trio_1.mp3',117],['テイク2','piano_trio_2.mp3',149]] },
-  bossa:         { name:'ボサノバ喫茶版', desc:'ガットギター・エレピ・フルートをイメージした、やわらかなボサノバ調。昭和の喫茶店のような、落ち着いた懐かしさとおしゃれな雰囲気です。', scene:'歓談・食事中・受付・リラックスした会場BGM', takes:[['テイク1','bossa_1.mp3',123],['テイク2','bossa_2.mp3',138]] },
-  nostalgic_jazz:{ name:'ノスタルジックジャズ版', desc:'落ち着いたジャズの響きで校歌をアレンジ。派手すぎず、会話の邪魔になりにくい曲調です。', scene:'受付・歓談・食事中・開会前のBGM', takes:[['テイク1','nostalgic_jazz_1.mp3',177],['テイク2','nostalgic_jazz_2.mp3',149]] },
+  chorus:{ name:'合唱版', desc:'校歌本来の雰囲気に近い、合唱を意識したアレンジ。式典らしさや母校への思いを、最も直接的に感じられる音源です。', scene:'開会・閉会・校歌紹介・記念映像・全員で思い出を共有する場面', schools:{ yasaka:[['テイク1','chorus_1.mp3',131],['テイク2','chorus_2.mp3',133]], arisai:[['テイク1','arisai_chorus_1.mp3',98],['テイク2','arisai_chorus_2.mp3',107]] } },
 
-  strings_piano: { name:'ストリングス＋ピアノ 映画音楽版', desc:'ピアノと弦楽器を中心にした、やさしく感動的なアレンジ。懐かしさ・感謝・再会の喜びをしっとりと表現しています。', scene:'写真スライド・恩師紹介・思い出映像・静かな歓談・感動的な場面', takes:[['テイク1','strings_piano_1.mp3',159],['テイク2','strings_piano_2.mp3',153]] },
-  harmonica_folk:{ name:'ハーモニカ＋ギターの郷愁フォーク版', desc:'ハーモニカとアコースティックギターを中心にした、素朴で温かなアレンジ。昔の通学路や学生時代の記憶を思い起こさせます。', scene:'写真スライド・閉会前・歓談・懐かしさを演出したい場面', takes:[['テイク1','harmonica_folk_1.mp3',146],['テイク2','harmonica_folk_2.mp3',134]] },
-  humming:       { name:'鼻歌・ハミング合唱版', desc:'歌詞をはっきり歌わず、ハミングや鼻歌のような雰囲気で校歌を表現。同級生が昔を思い出し、そっと口ずさんでいるような温かさがあります。', scene:'写真スライド・閉会前・エンドロール・静かに振り返る場面', takes:[['テイク1','humming_1.mp3',83],['テイク2','humming_2.mp3',93]] },
+  lounge_jazz:{ name:'ホテルラウンジ風ジャズ版', desc:'ピアノ・クラリネット・ミュートトランペット・ストリングスをイメージした、上品なラウンジジャズ風。昭和のホテルラウンジのような落ち着いた雰囲気です。', scene:'開場中・歓談・食事・受付・同窓会全体のBGM', schools:{ yasaka:[['テイク1','lounge_jazz_1.mp3',179],['テイク2','lounge_jazz_2.mp3',184]], arisai:[['テイク1','arisai_lounge_jazz_1.mp3',139],['テイク2','arisai_lounge_jazz_2.mp3',171]] } },
+  piano_trio:{ name:'ピアノ・トリオ版', desc:'ピアノ・ウッドベース・ブラシドラムの小編成ジャズ。落ち着いた上品な響きで、長い時間流しても使いやすい曲調です。', scene:'歓談・食事中・受付・会場BGM全般', schools:{ yasaka:[['テイク1','piano_trio_1.mp3',117],['テイク2','piano_trio_2.mp3',149]], arisai:[['テイク1','arisai_piano_trio_1.mp3',137],['テイク2','arisai_piano_trio_2.mp3',135]] } },
+  bossa:{ name:'ボサノバ喫茶版', desc:'ガットギター・エレピ・フルートをイメージした、やわらかなボサノバ調。昭和の喫茶店のような、落ち着いた懐かしさとおしゃれな雰囲気です。', scene:'歓談・食事中・受付・リラックスした会場BGM', schools:{ yasaka:[['テイク1','bossa_1.mp3',123],['テイク2','bossa_2.mp3',138]], arisai:[['テイク1','arisai_bossa_1.mp3',149],['テイク2','arisai_bossa_2.mp3',143]] } },
+  nostalgic_jazz:{ name:'ノスタルジックジャズ版', desc:'落ち着いたジャズの響きで校歌をアレンジ。派手すぎず、会話の邪魔になりにくい曲調です。', scene:'受付・歓談・食事中・開会前のBGM', schools:{ yasaka:[['テイク1','nostalgic_jazz_1.mp3',177],['テイク2','nostalgic_jazz_2.mp3',149]], arisai:[['テイク1','arisai_nostalgic_jazz_1.mp3',170],['テイク2','arisai_nostalgic_jazz_2.mp3',137]] } },
 
-  full_orchestra:{ name:'フルオーケストラ式典版', desc:'校歌の旋律を壮麗なオーケストラで表現した、最も式典向きのアレンジ。堂々とした雰囲気で節目の場面にふさわしい曲調です。', scene:'開会・閉会・記念映像のクライマックス・集合写真・式典演出', takes:[['テイク1','full_orchestra_1.mp3',164],['テイク2','full_orchestra_2.mp3',149]] },
-  orchestra:     { name:'オーケストラ版', desc:'弦楽器・木管・金管を中心とした、広がりのあるオーケストラアレンジ。格式があり、記念行事らしい華やかさを演出できます。', scene:'開会前BGM・入場・記念映像・集合写真スライド・式典的な場面', takes:[['再生','orchestra_2.mp3',152]] },
-  chorus:        { name:'合唱版', desc:'校歌本来の雰囲気に近い、合唱を意識したアレンジ。式典らしさや母校への思いを、最も直接的に感じられる音源です。', scene:'開会・閉会・校歌紹介・記念映像・全員で思い出を共有する場面', takes:[['テイク1','chorus_1.mp3',131],['テイク2','chorus_2.mp3',133]] },
-  woodwind:      { name:'木管五重奏版', desc:'フルート・オーボエ・クラリネット・ファゴット・ホルンをイメージした室内楽風アレンジ。上品で落ち着いた雰囲気です。', scene:'恩師紹介・写真スライド・受付・静かな歓談・式典前後のBGM', takes:[['テイク1','woodwind_1.mp3',209],['テイク2','woodwind_2.mp3',179]] },
-  closing_reprise:{ name:'閉会リプライズ版', desc:'同窓会の締めくくりに合う、穏やかで温かいアレンジ。感謝や再会の余韻を残しながら、やさしく会を締めます。', scene:'閉会・退場・エンドロール・最後の写真スライド', takes:[['テイク1','closing_reprise_1.mp3',154],['テイク2','closing_reprise_2.mp3',129]] },
+  strings_piano:{ name:'ストリングス＋ピアノ 映画音楽版', desc:'ピアノと弦楽器を中心にした、やさしく感動的なアレンジ。懐かしさ・感謝・再会の喜びをしっとりと表現しています。', scene:'写真スライド・恩師紹介・思い出映像・静かな歓談・感動的な場面', schools:{ yasaka:[['テイク1','strings_piano_1.mp3',159],['テイク2','strings_piano_2.mp3',153]], arisai:[['テイク1','arisai_strings_piano_1.mp3',101],['テイク2','arisai_strings_piano_2.mp3',103]] } },
+  harmonica_folk:{ name:'ハーモニカ＋ギターの郷愁フォーク版', desc:'ハーモニカとアコースティックギターを中心にした、素朴で温かなアレンジ。昔の通学路や学生時代の記憶を思い起こさせます。', scene:'写真スライド・閉会前・歓談・懐かしさを演出したい場面', schools:{ yasaka:[['テイク1','harmonica_folk_1.mp3',146],['テイク2','harmonica_folk_2.mp3',134]], arisai:[['テイク1','arisai_harmonica_folk_1.mp3',125],['テイク2','arisai_harmonica_folk_2.mp3',164]] } },
+  humming:{ name:'鼻歌・ハミング合唱版', desc:'歌詞をはっきり歌わず、ハミングや鼻歌のような雰囲気で校歌を表現。同級生が昔を思い出し、そっと口ずさんでいるような温かさがあります。', scene:'写真スライド・閉会前・エンドロール・静かに振り返る場面', schools:{ yasaka:[['テイク1','humming_1.mp3',83],['テイク2','humming_2.mp3',93]], arisai:[['テイク1','arisai_humming_1.mp3',79],['テイク2','arisai_humming_2.mp3',72]] } },
 
-  swing:         { name:'軽いスウィング版', desc:'軽快なリズムとジャズ風の響きを取り入れた、明るく楽しいアレンジ。少し華やかな曲調です。', scene:'乾杯後・歓談後半・写真撮影・会場を明るくしたい場面', takes:[['テイク1','swing_1.mp3',162],['テイク2','swing_2.mp3',177]] },
-  showa_kayo:    { name:'昭和歌謡インスト版', desc:'サックス・エレピ・ストリングスをイメージした昭和歌謡風のインスト。懐かしいテレビ音楽やレコードのような雰囲気です。', scene:'歓談・余興・聴き比べ企画・昭和らしい懐かしさを演出したい場面', takes:[['テイク1','showa_kayo_1.mp3',164],['テイク2','showa_kayo_2.mp3',152]] },
+  full_orchestra:{ name:'フルオーケストラ式典版', desc:'校歌の旋律を壮麗なオーケストラで表現した、最も式典向きのアレンジ。堂々とした雰囲気で節目の場面にふさわしい曲調です。', scene:'開会・閉会・記念映像のクライマックス・集合写真・式典演出', schools:{ yasaka:[['テイク1','full_orchestra_1.mp3',164],['テイク2','full_orchestra_2.mp3',149]], arisai:[['テイク1','arisai_full_orchestra_1.mp3',119],['テイク2','arisai_full_orchestra_2.mp3',117]] } },
+  orchestra:{ name:'オーケストラ版', desc:'弦楽器・木管・金管を中心とした、広がりのあるオーケストラアレンジ。格式があり、記念行事らしい華やかさを演出できます。', scene:'開会前BGM・入場・記念映像・集合写真スライド・式典的な場面', schools:{ yasaka:[['再生','orchestra_2.mp3',152]], arisai:[['テイク1','arisai_orchestra_1.mp3',160],['テイク2','arisai_orchestra_2.mp3',133]] } },
+  woodwind:{ name:'木管五重奏版', desc:'フルート・オーボエ・クラリネット・ファゴット・ホルンをイメージした室内楽風アレンジ。上品で落ち着いた雰囲気です。', scene:'恩師紹介・写真スライド・受付・静かな歓談・式典前後のBGM', schools:{ yasaka:[['テイク1','woodwind_1.mp3',209],['テイク2','woodwind_2.mp3',179]], arisai:[['テイク1','arisai_woodwind_1.mp3',144],['テイク2','arisai_woodwind_2.mp3',83]] } },
+  closing_reprise:{ name:'閉会リプライズ版', desc:'同窓会の締めくくりに合う、穏やかで温かいアレンジ。感謝や再会の余韻を残しながら、やさしく会を締めます。', scene:'閉会・退場・エンドロール・最後の写真スライド', schools:{ yasaka:[['テイク1','closing_reprise_1.mp3',154],['テイク2','closing_reprise_2.mp3',129]], arisai:[['テイク1','arisai_closing_reprise_1.mp3',108],['テイク2','arisai_closing_reprise_2.mp3',103]] } },
 
-  chindon:       { name:'チンドン屋・昭和商店街版', desc:'クラリネット・アコーディオン・チンドン太鼓をイメージした昭和の商店街風。懐かしく少しユーモラスで、会場の笑顔を誘う変わり種です。', scene:'余興・聴き比べ企画・サプライズ演出・歓談中のアクセント', takes:[['テイク1','chindon_1.mp3',132],['テイク2','chindon_2.mp3',141]] },
-  africa:        { name:'アフリカ音楽版', desc:'カリンバ・マリンバ・アコースティックギター・パーカッションをイメージした、明るく温かいアレンジ。軽やかで遊び心のある雰囲気です。', scene:'余興・歓談中の変化球BGM・聴き比べ企画・会場を明るくしたい場面', takes:[['テイク1','africa_1.mp3',144],['テイク2','africa_2.mp3',163]] },
-  electronic:    { name:'電子音楽版', desc:'シンセサイザーや電子音を中心にした近未来的なアレンジ。原曲のメロディを残しつつ、現代的で意外性のある雰囲気です。', scene:'余興・映像演出・聴き比べ企画・若い世代も交えた演出', takes:[['再生','electronic_1.mp3',153]] },
-  minimal:       { name:'ミニマル・ネオクラシカル電子音楽版', desc:'ピアノ・弦楽器・控えめな電子音を組み合わせた、現代的で静かなアレンジ。未来的でありながら派手すぎず、校歌の旋律を落ち着いた形で聴かせます。', scene:'映像演出・スライドショー・余興・少し変わった雰囲気を出したい場面', takes:[['再生','minimal_1.mp3',151]] },
+  swing:{ name:'軽いスウィング版', desc:'軽快なリズムとジャズ風の響きを取り入れた、明るく楽しいアレンジ。少し華やかな曲調です。', scene:'乾杯後・歓談後半・写真撮影・会場を明るくしたい場面', schools:{ yasaka:[['テイク1','swing_1.mp3',162],['テイク2','swing_2.mp3',177]], arisai:[['テイク1','arisai_swing_1.mp3',212],['テイク2','arisai_swing_2.mp3',145]] } },
+  showa_kayo:{ name:'昭和歌謡インスト版', desc:'サックス・エレピ・ストリングスをイメージした昭和歌謡風のインスト。懐かしいテレビ音楽やレコードのような雰囲気です。', scene:'歓談・余興・聴き比べ企画・昭和らしい懐かしさを演出したい場面', schools:{ yasaka:[['テイク1','showa_kayo_1.mp3',164],['テイク2','showa_kayo_2.mp3',152]], arisai:[['テイク1','arisai_showa_kayo_1.mp3',97],['テイク2','arisai_showa_kayo_2.mp3',139]] } },
+
+  chindon:{ name:'チンドン屋・昭和商店街版', desc:'クラリネット・アコーディオン・チンドン太鼓をイメージした昭和の商店街風。懐かしく少しユーモラスで、会場の笑顔を誘う変わり種です。', scene:'余興・聴き比べ企画・サプライズ演出・歓談中のアクセント', schools:{ yasaka:[['テイク1','chindon_1.mp3',132],['テイク2','chindon_2.mp3',141]] } },
+  africa:{ name:'アフリカ音楽版', desc:'カリンバ・マリンバ・アコースティックギター・パーカッションをイメージした、明るく温かいアレンジ。軽やかで遊び心のある雰囲気です。', scene:'余興・歓談中の変化球BGM・聴き比べ企画・会場を明るくしたい場面', schools:{ yasaka:[['テイク1','africa_1.mp3',144],['テイク2','africa_2.mp3',163]] } },
+  electronic:{ name:'電子音楽版', desc:'シンセサイザーや電子音を中心にした近未来的なアレンジ。原曲のメロディを残しつつ、現代的で意外性のある雰囲気です。', scene:'余興・映像演出・聴き比べ企画・若い世代も交えた演出', schools:{ yasaka:[['再生','electronic_1.mp3',153]] } },
+  minimal:{ name:'ミニマル・ネオクラシカル電子音楽版', desc:'ピアノ・弦楽器・控えめな電子音を組み合わせた、現代的で静かなアレンジ。未来的でありながら派手すぎず、校歌の旋律を落ち着いた形で聴かせます。', scene:'映像演出・スライドショー・余興・少し変わった雰囲気を出したい場面', schools:{ yasaka:[['再生','minimal_1.mp3',151]] } },
+  sports_march:{ name:'昭和運動会マーチ版', desc:'入場行進や運動会を思い出す、明るく元気なマーチ風アレンジ。余興として会場の空気を少し楽しく変えたい場面に向きます。', scene:'余興・聴き比べ企画・歓談中のアクセント', schools:{ arisai:[['テイク1','arisai_sports_march_1.mp3',65],['テイク2','arisai_sports_march_2.mp3',65]] } },
+  hawaiian:{ name:'ハワイアン・ウクレレ版', desc:'ウクレレや南国風のゆったりした響きで校歌をアレンジ。肩の力を抜いて楽しめる、軽いおまけ曲です。', scene:'余興・歓談中の変化球BGM・リラックスした場面', schools:{ arisai:[['テイク1','arisai_hawaiian_1.mp3',134],['テイク2','arisai_hawaiian_2.mp3',109]] } },
+  toy_music:{ name:'おもちゃの音楽会版', desc:'トイピアノや小さな打楽器をイメージした、子どもっぽくかわいいアレンジ。校歌が少しだけおゆうぎ会のように聞こえる遊び枠です。', scene:'余興・聴き比べ企画・会場を和ませたい場面', schools:{ arisai:[['テイク1','arisai_toy_music_1.mp3',65],['テイク2','arisai_toy_music_2.mp3',73]] } },
+  horror:{ name:'旧校舎ホラー風版', desc:'短調の雰囲気やオルゴール風の響きで、校歌を少し不思議で怖い雰囲気にした余興アレンジです。', scene:'余興・聴き比べ企画・サプライズ演出', schools:{ arisai:[['テイク1','arisai_horror_1.mp3',114],['テイク2','arisai_horror_2.mp3',95]] } },
+  bon_odori:{ name:'盆踊り版', desc:'太鼓や笛をイメージした、校歌が夏祭りの盆踊りになったようなアレンジ。分かりやすいおまけ枠です。', scene:'余興・聴き比べ企画・明るく笑える場面', schools:{ arisai:[['テイク1','arisai_bon_odori_1.mp3',127],['テイク2','arisai_bon_odori_2.mp3',129]] } },
 };
 
 const GROUPS = [
-  { id:'relax',     ico:'🍵', title:'開場前・受付・歓談・食事中', sub:'落ち着いて、会話の邪魔にならないBGM', items:['lounge_jazz','piano_trio','bossa','nostalgic_jazz'] },
-  { id:'memory',    ico:'📷', title:'写真スライド・思い出映像', sub:'しっとり懐かしく、感動的な場面に', items:['strings_piano','harmonica_folk','humming'] },
-  { id:'ceremony',  ico:'🎓', title:'開会・閉会・記念撮影', sub:'式典・節目にふさわしい、格式ある曲調', items:['full_orchestra','orchestra','chorus','woodwind','closing_reprise'] },
-  { id:'lively',    ico:'🥂', title:'乾杯後・歓談を盛り上げる', sub:'明るく華やかに、会場をあたためる', items:['swing','showa_kayo'] },
-  { id:'fun',       ico:'🎉', title:'余興・聴き比べ', sub:'変わり種・意外性のあるアレンジ', items:['chindon','africa','electronic','minimal'] },
+  { id:'relax', ico:'🍵', title:'開場前・受付・歓談・食事中', sub:'落ち着いて、会話の邪魔にならないBGM', items:['lounge_jazz','piano_trio','bossa','nostalgic_jazz'] },
+  { id:'memory', ico:'📷', title:'写真スライド・思い出映像', sub:'しっとり懐かしく、感動的な場面に', items:['strings_piano','harmonica_folk','humming'] },
+  { id:'ceremony', ico:'🎓', title:'開会・閉会・記念撮影', sub:'式典・節目にふさわしい、格式ある曲調', items:['full_orchestra','orchestra','woodwind','closing_reprise'] },
+  { id:'lively', ico:'🥂', title:'乾杯後・歓談を盛り上げる', sub:'明るく華やかに、会場をあたためる', items:['swing','showa_kayo'] },
+  { id:'fun', ico:'🎉', title:'余興・聴き比べ', sub:'学校ごとに違う、遊び心のあるおまけアレンジ', bonus:true },
 ];
 
-const AUDIO_DIR = 'audio/';
+const BONUS_BY_SCHOOL = {
+  yasaka:['chindon','africa','electronic','minimal'],
+  arisai:['sports_march','hawaiian','toy_music','horror','bon_odori'],
+};
+
 function fmt(s){ s=Math.floor(s||0); const m=Math.floor(s/60); const ss=String(s%60).padStart(2,'0'); return m+':'+ss; }
+function getTakes(d, schoolId){ return d.schools && d.schools[schoolId] ? d.schools[schoolId] : []; }
+function takeRowsHtml(d, schoolId){
+  return getTakes(d, schoolId).map(t=>{
+    const [label,file,dur]=t;
+    const schoolName = SCHOOLS[schoolId].name;
+    const dlName = `${schoolName} ${d.name} ${label}.mp3`;
+    return `<div class="take-row">
+      <button class="take" data-file="${AUDIO_DIR+file}" data-title="${schoolName}｜${d.name}｜${label}">
+        <span class="icon">▶</span><span class="label">${label}</span><span class="time">${fmt(dur)}</span>
+      </button>
+      <a class="dl" href="${AUDIO_DIR+file}" download="${dlName}" aria-label="${dlName} を保存">
+        <span class="dli">⬇</span><span class="dlt">保存</span>
+      </a>
+    </div>`;
+  }).join('');
+}
+function schoolPanelHtml(d, schoolId){
+  const rows = takeRowsHtml(d, schoolId);
+  if(!rows) return '';
+  const school = SCHOOLS[schoolId];
+  return `<div class="school-panel">
+    <h4 class="school-name">${school.name}</h4>
+    <div class="takes">${rows}</div>
+  </div>`;
+}
 
 // ===== render =====
 const tocEl = document.getElementById('toc');
 const scenesEl = document.getElementById('scenes');
+const featuredSongsEl = document.getElementById('featuredSongs');
+
+featuredSongsEl.innerHTML = SCHOOL_ORDER.map(schoolId=>{
+  const school = SCHOOLS[schoolId];
+  return `<div class="featured-card school-panel">
+    <h3 class="school-name">${school.name}</h3>
+    <p class="school-sub">${school.sub} ／ 合唱版</p>
+    <div class="takes">${takeRowsHtml(ARR.chorus, schoolId)}</div>
+  </div>`;
+}).join('');
 
 GROUPS.forEach(g=>{
-  // toc
   const a = document.createElement('a');
   a.className='toc-btn'; a.href='#'+g.id;
   a.innerHTML = `<span class="ico">${g.ico}</span><span><span>${g.title}</span><span class="sub">${g.sub}</span></span>`;
   tocEl.appendChild(a);
 
-  // section
   const sec = document.createElement('section');
   sec.className='scene'; sec.id=g.id;
   sec.innerHTML = `<div class="scene-head"><span class="ico">${g.ico}</span><div><h2>${g.title}</h2><div class="sub">${g.sub}</div></div></div>`;
 
-  g.items.forEach(key=>{
-    const d = ARR[key];
-    const card = document.createElement('div');
-    card.className='card';
-    const takesHtml = d.takes.map(t=>{
-      const [label,file,dur]=t;
-      const dlName = (label==='再生') ? `${d.name}.mp3` : `${d.name} ${label}.mp3`;
-      return `<div class="take-row">
-        <button class="take" data-file="${AUDIO_DIR+file}" data-title="${d.name}｜${label}">
-          <span class="icon">▶</span><span class="label">${label}</span><span class="time">${fmt(dur)}</span>
-        </button>
-        <a class="dl" href="${AUDIO_DIR+file}" download="${dlName}" aria-label="${dlName} を保存">
-          <span class="dli">⬇</span><span class="dlt">保存</span>
-        </a>
+  if(g.bonus){
+    const bonusWrap = document.createElement('div');
+    bonusWrap.className = 'bonus-grid';
+    bonusWrap.innerHTML = SCHOOL_ORDER.map(schoolId=>{
+      const items = BONUS_BY_SCHOOL[schoolId].map(key=>{
+        const d = ARR[key];
+        return `<div class="card school-panel">
+          <h3>${d.name}</h3>
+          <p class="desc">${d.desc}</p>
+          <div class="scene-use"><b>こんな場面に：</b>${d.scene}</div>
+          <div class="takes">${takeRowsHtml(d, schoolId)}</div>
+        </div>`;
+      }).join('');
+      return `<div class="bonus-column">
+        <div class="bonus-column-head">${SCHOOLS[schoolId].name}<small>${SCHOOLS[schoolId].sub}の余興枠</small></div>
+        ${items}
       </div>`;
     }).join('');
-    card.innerHTML = `<h3>${d.name}</h3>
-      <p class="desc">${d.desc}</p>
-      <div class="scene-use"><b>こんな場面に：</b>${d.scene}</div>
-      <div class="takes">${takesHtml}</div>`;
-    sec.appendChild(card);
-  });
+    sec.appendChild(bonusWrap);
+  } else {
+    g.items.forEach(key=>{
+      const d = ARR[key];
+      const card = document.createElement('div');
+      card.className='card';
+      card.innerHTML = `<h3>${d.name}</h3>
+        <p class="desc">${d.desc}</p>
+        <div class="scene-use"><b>こんな場面に：</b>${d.scene}</div>
+        <div class="school-grid">${SCHOOL_ORDER.map(schoolId=>schoolPanelHtml(d, schoolId)).join('')}</div>`;
+      sec.appendChild(card);
+    });
+  }
   scenesEl.appendChild(sec);
 });
 
@@ -373,35 +571,51 @@ document.querySelectorAll('.take').forEach(btn=>{
     const file = btn.dataset.file;
     if(currentBtn===btn){
       // toggle same track
-      if(audio.paused){ audio.play(); } else { audio.pause(); }
+      if(audio.paused){ playCurrent(); } else { audio.pause(); }
       return;
     }
     // new track
     setActive(btn);
     plTitle.innerHTML = '♪ ' + btn.dataset.title.replace('｜','<span class="badge"> ｜ </span>');
     audio.src = file;
-    audio.play();
+    playCurrent();
     player.classList.add('show');
   });
 });
 
+function playCurrent(){
+  const result = audio.play();
+  if(result && typeof result.catch === 'function'){
+    result.catch(()=>markPlaying(false));
+  }
+}
 function setActive(btn){
   if(currentBtn) { currentBtn.classList.remove('active'); setIcon(currentBtn,'▶'); }
+  markPlaying(false);
   currentBtn = btn;
   btn.classList.add('active');
 }
 function setIcon(btn,ch){ const i=btn.querySelector('.icon'); if(i) i.textContent=ch; }
+function activeCard(){ return currentBtn ? currentBtn.closest('.card,.featured-card') : null; }
+function markPlaying(on){
+  document.querySelectorAll('.is-playing').forEach(el=>el.classList.remove('is-playing'));
+  const card = activeCard();
+  if(on && card) card.classList.add('is-playing');
+}
 
 audio.addEventListener('play',()=>{
   btnPlay.textContent='⏸ 一時停止';
   if(currentBtn) setIcon(currentBtn,'⏸');
+  markPlaying(true);
 });
 audio.addEventListener('pause',()=>{
   btnPlay.textContent='▶ 再生';
   if(currentBtn && !audio.ended) setIcon(currentBtn,'▶');
+  markPlaying(false);
 });
 audio.addEventListener('ended',()=>{
   if(currentBtn) setIcon(currentBtn,'▶');
+  markPlaying(false);
 });
 audio.addEventListener('loadedmetadata',()=>{ plDur.textContent=fmt(audio.duration); });
 audio.addEventListener('timeupdate',()=>{
@@ -410,8 +624,8 @@ audio.addEventListener('timeupdate',()=>{
   if(audio.duration){ seek.value = Math.round(audio.currentTime/audio.duration*1000); }
 });
 
-btnPlay.addEventListener('click',()=>{ if(!audio.src) return; audio.paused?audio.play():audio.pause(); });
-btnRestart.addEventListener('click',()=>{ if(!audio.src) return; audio.currentTime=0; audio.play(); });
+btnPlay.addEventListener('click',()=>{ if(!audio.src) return; audio.paused?playCurrent():audio.pause(); });
+btnRestart.addEventListener('click',()=>{ if(!audio.src) return; audio.currentTime=0; playCurrent(); });
 btnLoop.addEventListener('click',()=>{
   audio.loop=!audio.loop;
   btnLoop.classList.toggle('on',audio.loop);
