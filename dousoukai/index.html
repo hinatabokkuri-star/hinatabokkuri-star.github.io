@@ -361,7 +361,7 @@
 <header>
   <div class="wrap">
     <h1>同窓会用 校歌アレンジ BGM集</h1>
-    <p class="lead">弥栄小学校・有済小学校の校歌をもとに、同窓会や記念行事で使いやすいよう、さまざまな雰囲気にアレンジしたBGM集です。聴いてみたいボタンを押すと、その場で再生できます。気に入った曲を、会の場面に合わせてお使いください。</p>
+    <p class="lead">粟田小学校・有済小学校の校歌をもとに、同窓会や記念行事で使いやすいよう、さまざまな雰囲気にアレンジしたBGM集です。聴いてみたいボタンを押すと、その場で再生できます。気に入った曲を、会の場面に合わせてお使いください。</p>
   </div>
 </header>
 
@@ -385,7 +385,7 @@
       <span class="bi">📦</span>
       <span class="bt">両校分をまとめてダウンロード<small>ZIP形式・全71曲・約210MB</small></span>
     </a>
-    <p class="bulk-note">弥栄小学校・有済小学校の全曲を学校別フォルダにまとめています。各曲の青い「保存」ボタンから1曲ずつ保存もできます。</p>
+    <p class="bulk-note">粟田小学校・有済小学校の全曲を学校別フォルダにまとめています。各曲の青い「保存」ボタンから1曲ずつ保存もできます。</p>
   </div>
 
   <nav class="toc">
@@ -431,7 +431,7 @@
 const AUDIO_DIR = 'audio/';
 const SCHOOL_ORDER = ['yasaka','arisai'];
 const SCHOOLS = {
-  yasaka:{ name:'弥栄小学校', sub:'前回作成分' },
+  yasaka:{ name:'粟田小学校', sub:'前回作成分' },
   arisai:{ name:'有済小学校', sub:'今回追加分' },
 };
 
@@ -588,11 +588,15 @@ const NOTE_COLORS = ['#b06f00','#1d7a43','#2f5f8f','#b4558a','#7c5ac7','#c47a00'
 let currentBtn = null;
 let seeking = false;
 let noteTimer = null;
+let audioContext = null;
+let audioSource = null;
+let gainNode = null;
+let currentVolume = 0.9;
 
 // restore volume
 const savedVol = localStorage.getItem('dousoukai_vol');
-audio.volume = savedVol!==null ? Number(savedVol) : 0.9;
-vol.value = Math.round(audio.volume*100);
+const initialVolume = savedVol!==null ? Number(savedVol) : 0.9;
+setAppVolume(initialVolume);
 
 document.querySelectorAll('.take').forEach(btn=>{
   btn.addEventListener('click',()=>{
@@ -611,7 +615,43 @@ document.querySelectorAll('.take').forEach(btn=>{
   });
 });
 
+function getAudioContextClass(){
+  return window.AudioContext || window.webkitAudioContext;
+}
+function ensureAudioRouting(){
+  if(gainNode){
+    if(audioContext && audioContext.state === 'suspended'){
+      audioContext.resume().catch(()=>{});
+    }
+    return;
+  }
+  const AudioContextClass = getAudioContextClass();
+  if(!AudioContextClass) return;
+  try{
+    audioContext = new AudioContextClass();
+    audioSource = audioContext.createMediaElementSource(audio);
+    gainNode = audioContext.createGain();
+    gainNode.gain.value = currentVolume;
+    audioSource.connect(gainNode).connect(audioContext.destination);
+    if(audioContext.state === 'suspended') audioContext.resume().catch(()=>{});
+  }catch(e){
+    audioContext = null;
+    audioSource = null;
+    gainNode = null;
+  }
+}
+function setAppVolume(value){
+  const normalized = Math.max(0, Math.min(1, Number(value) || 0));
+  currentVolume = normalized;
+  try{ audio.volume = normalized; }catch(e){}
+  if(gainNode) gainNode.gain.value = normalized;
+  vol.value = Math.round(normalized*100);
+}
+function saveAppVolume(){
+  localStorage.setItem('dousoukai_vol', currentVolume);
+}
 function playCurrent(){
+  ensureAudioRouting();
   const result = audio.play();
   if(result && typeof result.catch === 'function'){
     result.catch(()=>markPlaying(false));
@@ -700,7 +740,10 @@ btnLoop.addEventListener('click',()=>{
 
 seek.addEventListener('input',()=>{ seeking=true; if(audio.duration) plCur.textContent=fmt(seek.value/1000*audio.duration); });
 seek.addEventListener('change',()=>{ if(audio.duration) audio.currentTime=seek.value/1000*audio.duration; seeking=false; });
-vol.addEventListener('input',()=>{ audio.volume=vol.value/100; localStorage.setItem('dousoukai_vol',audio.volume); });
+vol.addEventListener('pointerdown',ensureAudioRouting);
+vol.addEventListener('touchstart',ensureAudioRouting,{passive:true});
+vol.addEventListener('input',()=>{ setAppVolume(vol.value/100); saveAppVolume(); });
+vol.addEventListener('change',()=>{ setAppVolume(vol.value/100); saveAppVolume(); });
 </script>
 </body>
 </html>
