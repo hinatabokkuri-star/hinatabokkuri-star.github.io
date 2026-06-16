@@ -1,27 +1,27 @@
 window.DOUSOUKAI_BGM_DATA = {
   AUDIO_DIR: 'audio/',
   NAV_TABS: [
-    { id:'playlist', label:'PL', name:'プレイリスト', href:'playlist/', theme:{ accent:'#2f5f8f', dark:'#244b73', light:'#e8f1fb', play:'#1d7a43' } },
-    { id:'yasaka_jhs', label:'弥栄', name:'弥栄中学校', schoolId:'yasaka_jhs', hash:'yasaka', theme:{ accent:'#6a4ea3', dark:'#503b83', light:'#f0ecfb', play:'#1d7a43' } },
-    { id:'yasaka', label:'粟田', name:'粟田小学校', schoolId:'yasaka', hash:'awata', theme:{ accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', play:'#1d7a43' } },
-    { id:'yusai', label:'有済', name:'有済小学校', schoolId:'yusai', hash:'yusai', theme:{ accent:'#16775f', dark:'#0f5847', light:'#e3f5ee', play:'#1d7a43' } },
+    { id:'playlist', label:'全曲再生', name:'全曲再生', href:'playlist/', theme:{ accent:'#2f5f8f', dark:'#244b73', light:'#e8f1fb', bg:'#eef4fb', play:'#1d7a43' } },
+    { id:'yasaka_jhs', label:'弥栄', name:'弥栄中学校', schoolId:'yasaka_jhs', hash:'yasaka', theme:{ accent:'#6a4ea3', dark:'#503b83', light:'#f0ecfb', bg:'#f6f2ff', play:'#1d7a43' } },
+    { id:'yasaka', label:'粟田', name:'粟田小学校', schoolId:'yasaka', hash:'awata', theme:{ accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', bg:'#faf5ea', play:'#1d7a43' } },
+    { id:'yusai', label:'有済', name:'有済小学校', schoolId:'yusai', hash:'yusai', theme:{ accent:'#16775f', dark:'#0f5847', light:'#e3f5ee', bg:'#eefaf6', play:'#1d7a43' } },
   ],
   SCHOOL_ORDER: ['yasaka_jhs','yasaka','yusai'],
   SCHOOLS: {
     yasaka_jhs:{
       name:'弥栄中学校',
       hash:'yasaka',
-      theme:{ accent:'#6a4ea3', dark:'#503b83', light:'#f0ecfb', play:'#1d7a43' },
+      theme:{ accent:'#6a4ea3', dark:'#503b83', light:'#f0ecfb', bg:'#f6f2ff', play:'#1d7a43' },
     },
     yasaka:{
       name:'粟田小学校',
       hash:'awata',
-      theme:{ accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', play:'#1d7a43' },
+      theme:{ accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', bg:'#faf5ea', play:'#1d7a43' },
     },
     yusai:{
       name:'有済小学校',
       hash:'yusai',
-      theme:{ accent:'#16775f', dark:'#0f5847', light:'#e3f5ee', play:'#1d7a43' },
+      theme:{ accent:'#16775f', dark:'#0f5847', light:'#e3f5ee', bg:'#eefaf6', play:'#1d7a43' },
     },
   },
   ARR: {

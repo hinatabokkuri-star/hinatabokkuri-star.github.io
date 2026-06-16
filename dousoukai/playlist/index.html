@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#b06f00">
-<title>同窓会用 校歌アレンジ プレイリスト</title>
+<meta name="theme-color" content="#2f5f8f">
+<title>同窓会用 校歌アレンジ 全曲再生</title>
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
 <style>
@@ -16,22 +16,22 @@
     --accent:#2f5f8f;
     --accent-dark:#244b73;
     --accent-light:#e8f1fb;
+    --accent-bg:#eef4fb;
     --play:#1d7a43;
     --play-dark:#155c32;
     --shadow:0 2px 8px rgba(60,45,15,.10);
   }
   *{ box-sizing:border-box; }
-  html{ -webkit-text-size-adjust:100%; scroll-padding-top:92px; }
+  html{ -webkit-text-size-adjust:100%; scroll-padding-top:164px; }
   body{
     margin:0;
     min-height:100vh;
-    background:
-      linear-gradient(180deg,#fcf8ef 0%,var(--accent-light) 100%) fixed;
+    background:linear-gradient(180deg,#fcf8ef 0%,var(--accent-bg) 100%) fixed;
     color:var(--ink);
     font-family:"Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",Meiryo,system-ui,sans-serif;
     font-size:18px;
     line-height:1.65;
-    padding-bottom:232px;
+    padding-bottom:224px;
     -webkit-font-smoothing:antialiased;
   }
   .wrap{ max-width:900px; margin:0 auto; padding:0 16px; }
@@ -54,6 +54,7 @@
     font-size:16px;
     text-align:left;
   }
+
   .school-dock{
     position:sticky;
     top:0;
@@ -64,9 +65,37 @@
     backdrop-filter:blur(8px);
   }
   .dock-inner{ max-width:900px; margin:0 auto; padding:10px 16px 12px; }
+  .playlist-cta{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:60px;
+    margin-bottom:10px;
+    border:2px solid var(--accent);
+    border-radius:16px;
+    background:#f3f8ff;
+    color:var(--accent-dark);
+    text-decoration:none;
+    font-size:22px;
+    font-weight:900;
+    box-shadow:var(--shadow);
+  }
+  .playlist-cta.is-current{
+    background:var(--accent);
+    color:#fff;
+    box-shadow:0 8px 20px rgba(36,75,115,.18);
+  }
+  .playlist-cta:focus-visible,
+  .school-tab:focus-visible,
+  .track-main:focus-visible,
+  .player-actions button:focus-visible,
+  .pick:focus-within{
+    outline:4px solid #ffd27a;
+    outline-offset:2px;
+  }
   .school-tabs{
     display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-columns:repeat(3,minmax(0,1fr));
     gap:8px;
   }
   .school-tab{
@@ -83,23 +112,11 @@
     font-weight:900;
     padding:9px 8px;
     text-align:center;
-    cursor:pointer;
-    box-shadow:var(--shadow);
-    opacity:.76;
     text-decoration:none;
-    transition:transform .08s ease, opacity .12s ease, box-shadow .12s ease;
+    box-shadow:var(--shadow);
+    opacity:.86;
   }
-  .school-tab.active{
-    opacity:1;
-    box-shadow:0 8px 20px rgba(60,45,15,.12);
-    transform:translateY(-1px);
-  }
-  .school-tab:focus-visible,
-  .track-main:focus-visible,
-  .player-controls button:focus-visible,
-  .mode-btn:focus-visible,
-  .mini-btn:focus-visible,
-  .pick:focus-within{ outline:4px solid #ffd27a; outline-offset:2px; }
+  .school-tab:hover{ opacity:1; transform:translateY(-1px); }
 
   .playlist-head{
     display:flex;
@@ -246,7 +263,6 @@
     font-size:17px;
     font-weight:900;
     line-height:1.32;
-    white-space:normal;
   }
   .track-sub{
     display:block;
@@ -272,11 +288,12 @@
     right:0;
     bottom:0;
     z-index:50;
-    background:#2b2620;
+    background:rgba(35,31,26,.96);
     color:#fff;
     border-top:4px solid var(--accent);
     padding:12px 16px calc(14px + env(safe-area-inset-bottom));
     box-shadow:0 -4px 16px rgba(0,0,0,.25);
+    backdrop-filter:blur(10px);
   }
   .player-inner{ max-width:900px; margin:0 auto; }
   .player-title{
@@ -284,9 +301,13 @@
     text-align:center;
     font-size:16px;
     font-weight:900;
-    white-space:nowrap;
+    line-height:1.35;
+    min-height:44px;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    white-space:normal;
     overflow:hidden;
-    text-overflow:ellipsis;
   }
   .player-meta{
     margin-bottom:10px;
@@ -333,14 +354,13 @@
     border:3px solid #fff;
     cursor:pointer;
   }
-  .player-controls{
+  .player-actions{
     display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:8px;
-    margin-bottom:10px;
   }
-  .player-controls button{
-    min-height:42px;
+  .player-actions button{
+    min-height:44px;
     border:0;
     border-radius:12px;
     padding:8px 12px;
@@ -351,53 +371,25 @@
     font-weight:900;
     cursor:pointer;
   }
-  .player-controls .play{
-    background:var(--play);
-    box-shadow:0 2px 0 var(--play-dark);
-  }
-  .mode-row,
-  .selection-row{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:10px;
-  }
-  .mode-btn,
-  .mini-btn{
-    min-height:38px;
-    border:2px solid #5b5447;
-    border-radius:12px;
-    padding:6px 12px;
-    background:transparent;
-    color:#fff;
-    font-family:inherit;
-    font-size:14px;
-    font-weight:900;
-    cursor:pointer;
-  }
-  .mode-btn.active{
-    border-color:var(--accent);
-    background:var(--accent-light);
-    color:var(--accent-dark);
-  }
-  .mode-btn:disabled{
+  .player-actions button:disabled{
     opacity:.45;
     cursor:default;
   }
-  .selection-count{
-    color:#e9e0cf;
-    font-size:14px;
-    font-weight:800;
+  .play-btn{
+    background:var(--play);
+    box-shadow:0 2px 0 var(--play-dark);
   }
-  .volume-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    max-width:320px;
-    margin:0 auto;
+  .random-btn{
+    grid-column:1 / -1;
+    background:transparent;
+    border:2px solid #7c8ea8;
   }
+  .random-btn.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    box-shadow:0 6px 16px rgba(36,75,115,.22);
+  }
+
   footer{
     padding:28px 16px 10px;
     color:var(--ink-soft);
@@ -406,10 +398,10 @@
   }
 
   @media(max-width:520px){
-    body{ font-size:17px; padding-bottom:272px; }
+    body{ font-size:17px; padding-bottom:244px; }
     h1{ font-size:24px; }
     .dock-inner{ padding:8px 12px 10px; }
-    .school-tabs{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .playlist-cta{ min-height:56px; font-size:20px; }
     .school-tab{ min-height:48px; font-size:17px; }
     .playlist-head{ align-items:flex-start; flex-direction:column; gap:2px; }
     .track-card{ grid-template-columns:46px minmax(0,1fr); gap:8px; }
@@ -423,21 +415,21 @@
     .num{ width:32px; height:32px; border-radius:10px; font-size:14px; }
     .track-title{ font-size:16px; }
     .duration{ font-size:13px; }
-    .player-controls button{ padding:8px 8px; font-size:15px; }
-    .mode-btn,.mini-btn{ min-height:36px; padding:6px 10px; }
+    .player-actions button{ padding:8px 8px; font-size:15px; }
   }
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <h1>校歌アレンジ プレイリスト</h1>
-    <p class="lead">弥栄中学校・粟田小学校・有済小学校の全曲をまとめた再生専用ページです。下のプレイヤーから順番再生と、チェックした曲だけのランダム再生を切り替えられます。</p>
+    <h1>全曲再生プレイリスト</h1>
+    <p class="lead">弥栄中学校・粟田小学校・有済小学校の曲をまとめた再生専用ページです。聴きたい曲はそのまま押して再生、左のチェックを入れた曲だけをランダム再生できます。</p>
   </div>
 </header>
 
 <div class="school-dock">
   <div class="dock-inner">
+    <a class="playlist-cta is-current" href="./" aria-current="page">全曲再生</a>
     <div class="school-tabs" id="schoolTabs" aria-label="学校切り替え"></div>
   </div>
 </div>
@@ -447,38 +439,25 @@
     <h2 id="playlistTitle">全曲プレイリスト</h2>
     <div class="count" id="trackCount"></div>
   </div>
-  <p class="hint">全曲を一覧で再生できます。チェックを外した曲は、下の「チェック曲ランダム」の対象から外れます。</p>
+  <p class="hint">左のチェックが入っている曲だけが「チェック曲ランダム」の対象になります。チェック状態は次回もそのまま残ります。</p>
   <div id="playlist"></div>
 </main>
 
 <footer>HINATABOKKURI ／ 同窓会用 校歌アレンジ BGM集</footer>
 
-<div id="player">
+<div id="player" aria-live="polite">
   <div class="player-inner">
-    <div class="player-title" id="playerTitle">曲を選んでください</div>
-    <div class="player-meta" id="playerMeta">順番再生</div>
+    <div class="player-title" id="playerTitle">曲を選ぶか、ランダム再生を押してください</div>
+    <div class="player-meta" id="playerMeta">個別再生 ｜ ランダム対象 0曲</div>
     <div class="seek-row">
       <span class="time" id="curTime">0:00</span>
       <input type="range" id="seek" min="0" max="1000" value="0" step="1" aria-label="再生位置">
       <span class="time" id="durTime">0:00</span>
     </div>
-    <div class="player-controls">
-      <button id="startBtn" type="button">先頭から</button>
-      <button class="play" id="playBtn" type="button">▶ 再生</button>
-      <button id="nextBtn" type="button">次へ</button>
-    </div>
-    <div class="mode-row">
-      <button class="mode-btn active" id="sequenceBtn" type="button">順番再生</button>
-      <button class="mode-btn" id="randomBtn" type="button">チェック曲ランダム</button>
-    </div>
-    <div class="selection-row">
-      <span class="selection-count" id="selectionCount">チェック 0曲</span>
-      <button class="mini-btn" id="selectAllBtn" type="button">全選択</button>
-      <button class="mini-btn" id="clearSelectionBtn" type="button">解除</button>
-    </div>
-    <div class="volume-row">
-      <span>音量</span>
-      <input type="range" id="vol" min="0" max="100" value="90" aria-label="音量">
+    <div class="player-actions">
+      <button class="play-btn" id="playBtn" type="button">▶ 再生</button>
+      <button id="restartBtn" type="button">↺ 最初から</button>
+      <button class="random-btn" id="randomBtn" type="button" aria-pressed="false">🎲 チェック曲ランダム</button>
     </div>
   </div>
 </div>
@@ -489,6 +468,8 @@
 const { NAV_TABS, SCHOOL_ORDER, SCHOOLS, ARR, GROUPS, BONUS_BY_SCHOOL } = window.DOUSOUKAI_BGM_DATA;
 const AUDIO_BASE = '../audio/';
 const PLAYLIST_SELECTION_KEY = 'dousoukai_playlist_selected_all';
+const PLAYLIST_THEME = NAV_TABS.find(tab => tab.id === 'playlist')?.theme || { accent:'#2f5f8f', dark:'#244b73', light:'#e8f1fb', bg:'#eef4fb', play:'#1d7a43' };
+const themeMeta = document.querySelector('meta[name="theme-color"]');
 const schoolTabsEl = document.getElementById('schoolTabs');
 const playlistEl = document.getElementById('playlist');
 const playlistTitle = document.getElementById('playlistTitle');
@@ -498,30 +479,16 @@ const playerMeta = document.getElementById('playerMeta');
 const curTime = document.getElementById('curTime');
 const durTime = document.getElementById('durTime');
 const seek = document.getElementById('seek');
-const vol = document.getElementById('vol');
-const startBtn = document.getElementById('startBtn');
 const playBtn = document.getElementById('playBtn');
-const nextBtn = document.getElementById('nextBtn');
-const sequenceBtn = document.getElementById('sequenceBtn');
+const restartBtn = document.getElementById('restartBtn');
 const randomBtn = document.getElementById('randomBtn');
-const selectionCount = document.getElementById('selectionCount');
-const selectAllBtn = document.getElementById('selectAllBtn');
-const clearSelectionBtn = document.getElementById('clearSelectionBtn');
 const audio = document.getElementById('audio');
-const themeMeta = document.querySelector('meta[name="theme-color"]');
 
 let tracks = [];
 let currentIndex = -1;
 let seeking = false;
-let playMode = 'sequence';
-let audioContext = null;
-let audioSource = null;
-let gainNode = null;
-let currentVolume = 0.9;
+let randomMode = false;
 let selectionSet = null;
-
-const savedVol = localStorage.getItem('dousoukai_vol');
-setAppVolume(savedVol !== null ? Number(savedVol) : 0.9);
 
 function fmt(s){
   s = Math.floor(s || 0);
@@ -534,24 +501,22 @@ function tabBySchoolId(schoolId){
 }
 function getSchoolTheme(schoolId){
   const theme = SCHOOLS[schoolId] && SCHOOLS[schoolId].theme;
-  return theme || { accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', play:'#1d7a43' };
+  return theme || { accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', bg:'#faf5ea', play:'#1d7a43' };
 }
 function applyPlaylistTheme(){
-  const tab = NAV_TABS.find(item => item.id === 'playlist');
-  const theme = tab && tab.theme ? tab.theme : { accent:'#2f5f8f', dark:'#244b73', light:'#e8f1fb', play:'#1d7a43' };
-  document.documentElement.style.setProperty('--accent', theme.accent);
-  document.documentElement.style.setProperty('--accent-dark', theme.dark);
-  document.documentElement.style.setProperty('--accent-light', theme.light);
-  document.documentElement.style.setProperty('--play', theme.play || theme.accent);
-  if(themeMeta) themeMeta.setAttribute('content', theme.accent);
+  document.documentElement.style.setProperty('--accent', PLAYLIST_THEME.accent || '#2f5f8f');
+  document.documentElement.style.setProperty('--accent-dark', PLAYLIST_THEME.dark || '#244b73');
+  document.documentElement.style.setProperty('--accent-light', PLAYLIST_THEME.light || '#e8f1fb');
+  document.documentElement.style.setProperty('--accent-bg', PLAYLIST_THEME.bg || '#eef4fb');
+  document.documentElement.style.setProperty('--play', PLAYLIST_THEME.play || '#1d7a43');
+  if(themeMeta) themeMeta.setAttribute('content', PLAYLIST_THEME.accent || '#2f5f8f');
 }
 function renderTabs(){
-  schoolTabsEl.innerHTML = NAV_TABS.map(tab => {
-    const theme = tab.theme || (tab.schoolId ? getSchoolTheme(tab.schoolId) : {});
+  schoolTabsEl.innerHTML = SCHOOL_ORDER.map(schoolId => {
+    const tab = tabBySchoolId(schoolId);
+    const theme = getSchoolTheme(schoolId);
     const style = `--school-accent:${theme.accent || '#e3d9c4'};--school-dark:${theme.dark || '#2b2620'};--school-light:${theme.light || '#ffffff'};`;
-    const href = tab.id === 'playlist' ? './' : `../#${tab.hash}`;
-    const current = tab.id === 'playlist';
-    return `<a class="school-tab${current ? ' active' : ''}" href="${href}" ${current ? 'aria-current="page"' : ''} style="${style}"><span>${tab.label}</span></a>`;
+    return `<a class="school-tab" href="../#${tab ? tab.hash : schoolId}" style="${style}"><span>${tab ? tab.label : SCHOOLS[schoolId].name}</span></a>`;
   }).join('');
 }
 function arrangementKeysForSchool(schoolId){
@@ -608,10 +573,7 @@ function selectedIndices(){
   return tracks.map((track, index) => selectionSet.has(track.file) ? index : -1).filter(index => index >= 0);
 }
 function renderPlaylist(){
-  tracks = buildAllTracks();
-  initSelection();
   playlistTitle.textContent = '全曲プレイリスト';
-  trackCount.textContent = `${tracks.length}曲`;
   let html = '';
   let index = 0;
   SCHOOL_ORDER.forEach(schoolId => {
@@ -643,7 +605,6 @@ function renderPlaylist(){
   playlistEl.innerHTML = html;
   playlistEl.querySelectorAll('.track-main').forEach(btn => {
     btn.addEventListener('click', () => {
-      setPlayMode('sequence');
       playTrack(Number(btn.dataset.index));
     });
   });
@@ -660,88 +621,62 @@ function toggleTrackSelection(file, checked){
   const card = playlistEl.querySelector(`.track-card[data-file="${file}"]`);
   if(card) card.classList.toggle('selected', checked);
   updateSelectionSummary();
-  updatePlayerMeta();
 }
-function selectAllTracks(){
-  tracks.forEach(track => selectionSet.add(track.file));
-  saveSelection();
-  renderPlaylist();
-  updatePlayerMeta();
-}
-function clearTrackSelection(){
-  selectionSet = new Set();
-  saveSelection();
-  renderPlaylist();
-  updatePlayerMeta();
-}
-function getAudioContextClass(){
-  return window.AudioContext || window.webkitAudioContext;
-}
-function ensureAudioRouting(){
-  if(gainNode){
-    if(audioContext && audioContext.state === 'suspended') audioContext.resume().catch(()=>{});
-    return;
-  }
-  const AudioContextClass = getAudioContextClass();
-  if(!AudioContextClass) return;
-  try{
-    audioContext = new AudioContextClass();
-    audioSource = audioContext.createMediaElementSource(audio);
-    gainNode = audioContext.createGain();
-    gainNode.gain.value = currentVolume;
-    audioSource.connect(gainNode).connect(audioContext.destination);
-    if(audioContext.state === 'suspended') audioContext.resume().catch(()=>{});
-  }catch(e){
-    audioContext = null;
-    audioSource = null;
-    gainNode = null;
-  }
-}
-function setAppVolume(value){
-  const normalized = Math.max(0, Math.min(1, Number(value) || 0));
-  currentVolume = normalized;
-  try{ audio.volume = normalized; }catch(e){}
-  if(gainNode) gainNode.gain.value = normalized;
-  vol.value = Math.round(normalized * 100);
-}
-function setPlayMode(mode){
-  playMode = mode;
-  sequenceBtn.classList.toggle('active', mode === 'sequence');
-  randomBtn.classList.toggle('active', mode === 'random');
-  startBtn.textContent = mode === 'random' ? 'ランダム開始' : '先頭から';
+function setRandomMode(on){
+  randomMode = Boolean(on) && selectedIndices().length > 0;
+  randomBtn.classList.toggle('active', randomMode);
+  randomBtn.setAttribute('aria-pressed', randomMode);
   updatePlayerMeta();
 }
 function updateSelectionSummary(){
-  const count = selectedIndices().length;
-  selectionCount.textContent = `チェック ${count}曲`;
-  randomBtn.disabled = count === 0;
-  if(count === 0 && playMode === 'random'){
-    setPlayMode('sequence');
+  const selectedCount = selectedIndices().length;
+  trackCount.textContent = `全${tracks.length}曲 / ランダム対象 ${selectedCount}曲`;
+  randomBtn.disabled = selectedCount === 0;
+  if(selectedCount === 0 && randomMode){
+    setRandomMode(false);
+  }else{
+    updatePlayerMeta();
   }
 }
 function updatePlayerMeta(){
   const selectedCount = selectedIndices().length;
-  const modeLabel = playMode === 'random' ? 'チェック曲ランダム' : '順番再生';
-  playerMeta.textContent = `全曲プレイリスト ｜ ${modeLabel} ｜ チェック ${selectedCount}曲`;
+  const modeLabel = randomMode ? 'チェック曲ランダム再生中' : '個別再生';
+  playerMeta.textContent = `${modeLabel} ｜ ランダム対象 ${selectedCount}曲`;
 }
-function playTrack(index){
+function updatePlayerButtons(){
+  const hasTrack = currentIndex >= 0;
+  playBtn.disabled = !hasTrack;
+  restartBtn.disabled = !hasTrack;
+  playBtn.textContent = hasTrack && !audio.paused ? '⏸ 一時停止' : '▶ 再生';
+}
+function updateActiveTrack(){
+  document.querySelectorAll('.track-card').forEach(card => {
+    card.classList.toggle('active', Number(card.dataset.index) === currentIndex);
+  });
+}
+function playTrack(index, options = {}){
   if(index < 0 || index >= tracks.length) return;
+  const keepRandom = Boolean(options.keepRandom);
+  if(!keepRandom) setRandomMode(false);
   currentIndex = index;
   const track = tracks[index];
-  audio.src = AUDIO_BASE + track.file;
+  const src = AUDIO_BASE + track.file;
   playerTitle.textContent = `${track.schoolName} ｜ ${track.title} ｜ ${track.label}`;
+  curTime.textContent = '0:00';
+  durTime.textContent = fmt(track.dur);
+  seek.value = 0;
   updateActiveTrack();
   updatePlayerMeta();
-  ensureAudioRouting();
+  updatePlayerButtons();
+  if(audio.src.endsWith('/' + track.file) || audio.src.endsWith(track.file)){
+    audio.currentTime = 0;
+  }else{
+    audio.src = src;
+  }
   const result = audio.play();
-  if(result && typeof result.catch === 'function') result.catch(()=>{});
+  if(result && typeof result.catch === 'function') result.catch(() => updatePlayerButtons());
 }
-function nextSequentialIndex(){
-  if(!tracks.length) return -1;
-  if(currentIndex < 0) return 0;
-  return currentIndex + 1 < tracks.length ? currentIndex + 1 : -1;
-}
-function randomIndex(excludeCurrent=true){
+function randomIndex(excludeCurrent = true){
   const pool = selectedIndices();
   if(!pool.length) return -1;
   if(excludeCurrent && pool.length > 1){
@@ -750,84 +685,57 @@ function randomIndex(excludeCurrent=true){
   }
   return pool[Math.floor(Math.random() * pool.length)];
 }
-function startCurrentMode(){
-  if(playMode === 'random'){
-    const index = randomIndex(false);
-    if(index >= 0) playTrack(index);
-    return;
-  }
-  if(tracks.length) playTrack(0);
+function startRandomPlayback(){
+  const index = randomIndex(currentIndex >= 0);
+  if(index < 0) return;
+  setRandomMode(true);
+  playTrack(index, { keepRandom:true });
 }
-function playNext(){
-  if(playMode === 'random'){
-    const index = randomIndex(true);
-    if(index >= 0) playTrack(index);
-    return;
-  }
-  const index = nextSequentialIndex();
-  if(index >= 0) playTrack(index);
+function resetCurrentTrack(){
+  if(currentIndex < 0 || !audio.src) return;
+  audio.currentTime = 0;
+  const result = audio.play();
+  if(result && typeof result.catch === 'function') result.catch(() => updatePlayerButtons());
 }
 function resetPlayer(){
-  playerTitle.textContent = '曲を選んでください';
+  playerTitle.textContent = '曲を選ぶか、ランダム再生を押してください';
   curTime.textContent = '0:00';
   durTime.textContent = '0:00';
   seek.value = 0;
-  playBtn.textContent = '▶ 再生';
   updatePlayerMeta();
+  updatePlayerButtons();
   updateActiveTrack();
-}
-function updateActiveTrack(){
-  document.querySelectorAll('.track-card').forEach(card => {
-    card.classList.toggle('active', Number(card.dataset.index) === currentIndex);
-  });
-}
-function updatePlayState(){
-  playBtn.textContent = audio.paused ? '▶ 再生' : '⏸ 一時停止';
 }
 
 applyPlaylistTheme();
 renderTabs();
+tracks = buildAllTracks();
+initSelection();
 renderPlaylist();
-setPlayMode('sequence');
 resetPlayer();
 
-startBtn.addEventListener('click', () => startCurrentMode());
 playBtn.addEventListener('click', () => {
-  if(currentIndex < 0){
-    startCurrentMode();
-    return;
-  }
+  if(currentIndex < 0 || !audio.src) return;
   if(audio.paused){
-    ensureAudioRouting();
-    audio.play().catch(()=>{});
+    audio.play().catch(() => updatePlayerButtons());
   }else{
     audio.pause();
   }
 });
-nextBtn.addEventListener('click', () => playNext());
-sequenceBtn.addEventListener('click', () => setPlayMode('sequence'));
+restartBtn.addEventListener('click', () => resetCurrentTrack());
 randomBtn.addEventListener('click', () => {
   if(randomBtn.disabled) return;
-  setPlayMode('random');
-  startCurrentMode();
+  startRandomPlayback();
 });
-selectAllBtn.addEventListener('click', () => selectAllTracks());
-clearSelectionBtn.addEventListener('click', () => clearTrackSelection());
 
-audio.addEventListener('play', updatePlayState);
-audio.addEventListener('pause', updatePlayState);
+audio.addEventListener('play', updatePlayerButtons);
+audio.addEventListener('pause', updatePlayerButtons);
 audio.addEventListener('ended', () => {
-  updatePlayState();
-  if(playMode === 'random'){
-    const index = randomIndex(true);
-    if(index >= 0) playTrack(index);
-    return;
-  }
-  const index = nextSequentialIndex();
-  if(index >= 0) playTrack(index);
+  updatePlayerButtons();
+  if(randomMode) startRandomPlayback();
 });
 audio.addEventListener('loadedmetadata', () => {
-  durTime.textContent = fmt(audio.duration);
+  durTime.textContent = fmt(audio.duration || (currentIndex >= 0 ? tracks[currentIndex].dur : 0));
 });
 audio.addEventListener('timeupdate', () => {
   if(seeking) return;
@@ -841,16 +749,6 @@ seek.addEventListener('input', () => {
 seek.addEventListener('change', () => {
   if(audio.duration) audio.currentTime = seek.value / 1000 * audio.duration;
   seeking = false;
-});
-vol.addEventListener('pointerdown', ensureAudioRouting);
-vol.addEventListener('touchstart', ensureAudioRouting, { passive:true });
-vol.addEventListener('input', () => {
-  setAppVolume(vol.value / 100);
-  localStorage.setItem('dousoukai_vol', currentVolume);
-});
-vol.addEventListener('change', () => {
-  setAppVolume(vol.value / 100);
-  localStorage.setItem('dousoukai_vol', currentVolume);
 });
 </script>
 </body>

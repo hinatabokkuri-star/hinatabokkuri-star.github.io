@@ -22,7 +22,7 @@
     --shadow:0 2px 8px rgba(60,45,15,.10);
   }
   *{box-sizing:border-box}
-  html{ -webkit-text-size-adjust:100%; }
+  html{ -webkit-text-size-adjust:100%; scroll-padding-top:176px; }
   body{
     margin:0;
     background:var(--bg);
@@ -91,10 +91,37 @@
   .mode-link:hover,.mode-link:focus{ border-color:var(--amber); outline:none; }
 
   /* ---- school switch ---- */
-  .school-switch{ margin:22px 0 24px; }
+  .school-dock{
+    position:sticky;
+    top:0;
+    z-index:30;
+    background:rgba(252,248,239,.94);
+    border-bottom:2px solid rgba(0,0,0,.06);
+    box-shadow:0 5px 16px rgba(60,45,15,.08);
+    backdrop-filter:blur(8px);
+    margin:0 0 24px;
+  }
+  .dock-inner{ padding:12px 0 14px; }
+  .playlist-cta{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:60px;
+    margin-bottom:10px;
+    border:2px solid #2f5f8f;
+    border-radius:16px;
+    background:#f3f8ff;
+    color:#244b73;
+    text-decoration:none;
+    font-size:22px;
+    font-weight:900;
+    box-shadow:var(--shadow);
+  }
+  .playlist-cta:hover,
+  .playlist-cta:focus{ outline:none; border-color:#244b73; background:#e8f1fb; }
   .school-tabs{
     display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-columns:repeat(3,minmax(0,1fr));
     gap:8px;
   }
   .school-tab{
@@ -114,11 +141,14 @@
     box-shadow:var(--shadow);
     text-align:center;
     text-decoration:none;
-    opacity:.76;
+    opacity:.84;
   }
   .school-tab.active{
     opacity:1;
     transform:translateY(-1px);
+    background:var(--school-accent,var(--paper));
+    color:#fff;
+    box-shadow:0 8px 20px rgba(60,45,15,.14);
   }
   .school-tab:focus-visible{ outline:4px solid #ffd27a; outline-offset:2px; }
 
@@ -173,7 +203,8 @@
   .toc-grid{ display:grid; grid-template-columns:1fr; gap:12px; }
   @media(min-width:560px){ .toc-grid{ grid-template-columns:1fr 1fr; } }
   @media(max-width:520px){
-    .school-tabs{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .playlist-cta{ min-height:56px; font-size:20px; }
+    .school-tabs{ grid-template-columns:repeat(3,minmax(0,1fr)); }
     .school-tab{ min-height:48px; font-size:17px; }
   }
   .toc-btn{
@@ -425,9 +456,18 @@
 <header>
   <div class="wrap">
     <h1>同窓会用 校歌アレンジ BGM集</h1>
-    <p class="lead">同窓会や記念行事で使いやすいよう、校歌をさまざまな雰囲気にアレンジしたBGM集です。上のタブでプレイリスト再生と学校別の曲一覧を切り替えられます。</p>
+    <p class="lead">同窓会や記念行事で使いやすいよう、校歌をさまざまな雰囲気にアレンジしたBGM集です。固定ヘッダーから全曲再生ページと学校別の曲一覧を切り替えられます。</p>
   </div>
 </header>
+
+<div class="school-dock">
+  <div class="wrap">
+    <div class="dock-inner">
+      <a class="playlist-cta" href="playlist/" aria-label="全曲再生ページへ">全曲再生</a>
+      <div class="school-tabs" id="schoolTabs" aria-label="学校切り替え"></div>
+    </div>
+  </div>
+</div>
 
 <div class="wrap">
 
@@ -437,10 +477,6 @@
     <b>ボタンを押すと再生</b>、もう一度押すと止まります。画面下の操作バーで、音量や頭出し、くりかえし再生もできます。<br>
     <b style="color:#1d7a43">緑のボタン</b>でその場で再生、<b style="color:#2f5f8f">青のボタン</b>でこの端末に保存（ダウンロード）できます。
   </div>
-
-  <section class="school-switch" aria-label="ページ切り替え">
-    <div class="school-tabs" id="schoolTabs"></div>
-  </section>
 
   <section class="featured" id="school-songs">
     <h2>まず校歌を聴く</h2>
@@ -498,6 +534,7 @@
 <script>
 // ===== arrangement data =====
 const { AUDIO_DIR, NAV_TABS, SCHOOL_ORDER, SCHOOLS, ARR, GROUPS, BONUS_BY_SCHOOL } = window.DOUSOUKAI_BGM_DATA;
+const themeMeta = document.querySelector('meta[name="theme-color"]');
 
 function fmt(s){ s=Math.floor(s||0); const m=Math.floor(s/60); const ss=String(s%60).padStart(2,'0'); return m+':'+ss; }
 function getTakes(d, schoolId){ return d.schools && d.schools[schoolId] ? d.schools[schoolId] : []; }
@@ -541,9 +578,25 @@ const schoolTabsEl = document.getElementById('schoolTabs');
 function tabById(id){
   return NAV_TABS.find(tab=>tab.id===id) || null;
 }
+function tabBySchoolId(schoolId){
+  return NAV_TABS.find(tab=>tab.schoolId===schoolId) || null;
+}
 function schoolIdForTab(tabId){
   const tab = tabById(tabId);
   return tab && tab.schoolId ? tab.schoolId : null;
+}
+function getSchoolTheme(schoolId){
+  const theme = SCHOOLS[schoolId] && SCHOOLS[schoolId].theme;
+  return theme || { accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', bg:'#faf5ea', play:'#1d7a43' };
+}
+function applySchoolTheme(schoolId){
+  const theme = getSchoolTheme(schoolId);
+  document.documentElement.style.setProperty('--bg', theme.bg || '#faf5ea');
+  document.documentElement.style.setProperty('--amber', theme.accent || '#b06f00');
+  document.documentElement.style.setProperty('--amber-d', theme.dark || '#8a5600');
+  document.documentElement.style.setProperty('--amber-l', theme.light || '#fff3dc');
+  document.documentElement.style.setProperty('--play', theme.play || '#1d7a43');
+  if(themeMeta) themeMeta.setAttribute('content', theme.accent || '#b06f00');
 }
 function tabFromHash(){
   const raw = decodeURIComponent(location.hash.replace(/^#/,''));
@@ -554,20 +607,18 @@ function initialTab(){
   if(fromHash) return fromHash;
   const storedRaw = localStorage.getItem('dousoukai_school');
   const stored = storedRaw === 'arisai' ? 'yusai' : storedRaw;
-  return SCHOOL_ORDER.includes(stored) ? stored : 'yasaka';
+  return SCHOOL_ORDER.includes(stored) ? stored : SCHOOL_ORDER[0];
 }
 let activeTab = initialTab();
 
 function renderSchoolTabs(){
-  schoolTabsEl.innerHTML = NAV_TABS.map(tab=>{
-    const current = tab.id === activeTab;
-    const theme = tab.theme || (tab.schoolId && SCHOOLS[tab.schoolId] ? SCHOOLS[tab.schoolId].theme : {}) || {};
+  schoolTabsEl.innerHTML = SCHOOL_ORDER.map(schoolId=>{
+    const tab = tabBySchoolId(schoolId);
+    const current = schoolId === activeTab;
+    const theme = getSchoolTheme(schoolId);
     const style = `--school-accent:${theme.accent || '#e3d9c4'};--school-dark:${theme.dark || '#2b2620'};--school-light:${theme.light || '#ffffff'};`;
-    if(tab.id === 'playlist'){
-      return `<a class="school-tab" href="playlist/" style="${style}"><span>${tab.label}</span></a>`;
-    }
-    return `<button class="school-tab${current?' active':''}" type="button" data-tab="${tab.id}" aria-pressed="${current}" style="${style}">
-      <span>${tab.label}</span>
+    return `<button class="school-tab${current?' active':''}" type="button" data-tab="${schoolId}" aria-pressed="${current}" style="${style}">
+      <span>${tab ? tab.label : SCHOOLS[schoolId].name}</span>
     </button>`;
   }).join('');
   schoolTabsEl.querySelectorAll('button.school-tab').forEach(btn=>{
@@ -633,6 +684,8 @@ function renderTocAndScenes(){
   });
 }
 function renderSchoolPage(){
+  const schoolId = schoolIdForTab(activeTab);
+  if(schoolId) applySchoolTheme(schoolId);
   renderSchoolTabs();
   renderFeatured();
   renderTocAndScenes();
@@ -652,7 +705,7 @@ function resetPlaybackForSchoolChange(){
 }
 function selectSchool(schoolId, updateHash=true){
   const tab = tabById(schoolId);
-  if(!tab || tab.id === 'playlist' || schoolId===activeTab) return;
+  if(!tab || schoolId===activeTab) return;
   resetPlaybackForSchoolChange();
   activeTab = schoolId;
   if(tab.schoolId) localStorage.setItem('dousoukai_school', tab.schoolId);
