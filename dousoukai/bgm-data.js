@@ -2,8 +2,16 @@ window.DOUSOUKAI_BGM_DATA = {
   AUDIO_DIR: 'audio/',
   SCHOOL_ORDER: ['yasaka','yusai'],
   SCHOOLS: {
-    yasaka:{ name:'粟田小学校', sub:'前回作成分', hash:'awata' },
-    yusai:{ name:'有済小学校', sub:'今回追加分', hash:'yusai' },
+    yasaka:{
+      name:'粟田小学校',
+      hash:'awata',
+      theme:{ accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', play:'#1d7a43' },
+    },
+    yusai:{
+      name:'有済小学校',
+      hash:'yusai',
+      theme:{ accent:'#16775f', dark:'#0f5847', light:'#e3f5ee', play:'#1d7a43' },
+    },
   },
   ARR: {
     chorus:{ name:'合唱版', desc:'校歌本来の雰囲気に近い、合唱を意識したアレンジ。式典らしさや母校への思いを、最も直接的に感じられる音源です。', scene:'開会・閉会・校歌紹介・記念映像・全員で思い出を共有する場面', schools:{ yasaka:[['テイク1','chorus_1.mp3',131],['テイク2','chorus_2.mp3',133]], yusai:[['テイク1','arisai_chorus_1.mp3',98],['テイク2','arisai_chorus_2.mp3',107]] } },

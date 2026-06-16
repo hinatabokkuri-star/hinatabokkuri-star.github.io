@@ -99,31 +99,25 @@
   }
   .school-tab{
     display:flex;
-    flex-direction:column;
+    align-items:center;
     justify-content:center;
     min-height:62px;
-    border:2px solid var(--line);
+    border:2px solid var(--school-accent,var(--line));
     border-radius:14px;
-    background:var(--paper);
-    color:var(--ink);
+    background:var(--school-light,var(--paper));
+    color:var(--school-dark,var(--ink));
     font-family:inherit;
     font-size:18px;
-    font-weight:800;
+    font-weight:900;
     padding:10px 12px;
     cursor:pointer;
     box-shadow:var(--shadow);
-    text-align:left;
-  }
-  .school-tab small{
-    margin-top:2px;
-    color:var(--ink-soft);
-    font-size:13px;
-    font-weight:600;
+    text-align:center;
+    opacity:.76;
   }
   .school-tab.active{
-    border-color:var(--amber);
-    background:var(--amber-l);
-    color:var(--amber-d);
+    opacity:1;
+    transform:translateY(-1px);
   }
   .school-tab:focus-visible{ outline:4px solid #ffd27a; outline-offset:2px; }
 
@@ -552,8 +546,10 @@ function renderSchoolTabs(){
   schoolTabsEl.innerHTML = SCHOOL_ORDER.map(schoolId=>{
     const school = SCHOOLS[schoolId];
     const current = schoolId === activeSchool;
-    return `<button class="school-tab${current?' active':''}" type="button" data-school="${schoolId}" aria-pressed="${current}">
-      <span>${school.name}</span><small>${school.sub}</small>
+    const theme = school.theme || {};
+    const style = `--school-accent:${theme.accent || '#e3d9c4'};--school-dark:${theme.dark || '#2b2620'};--school-light:${theme.light || '#ffffff'};`;
+    return `<button class="school-tab${current?' active':''}" type="button" data-school="${schoolId}" aria-pressed="${current}" style="${style}">
+      <span>${school.name}</span>
     </button>`;
   }).join('');
   schoolTabsEl.querySelectorAll('.school-tab').forEach(btn=>{
@@ -564,7 +560,7 @@ function renderFeatured(){
   const school = SCHOOLS[activeSchool];
   featuredSongsEl.innerHTML = `<div class="featured-card school-panel">
     <h3 class="school-name">${school.name}</h3>
-    <p class="school-sub">${school.sub} ／ 合唱版</p>
+    <p class="school-sub">合唱版</p>
     <div class="takes">${takeRowsHtml(ARR.chorus, activeSchool)}</div>
   </div>`;
 }
