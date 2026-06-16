@@ -13,9 +13,9 @@
     --ink:#2b2620;
     --ink-soft:#5b5447;
     --line:#e3d9c4;
-    --accent:#b06f00;
-    --accent-dark:#8a5600;
-    --accent-light:#fff3dc;
+    --accent:#2f5f8f;
+    --accent-dark:#244b73;
+    --accent-light:#e8f1fb;
     --play:#1d7a43;
     --play-dark:#155c32;
     --shadow:0 2px 8px rgba(60,45,15,.10);
@@ -54,32 +54,6 @@
     font-size:16px;
     text-align:left;
   }
-  .page-nav{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:14px;
-    flex-wrap:wrap;
-  }
-  .page-nav a{
-    display:inline-flex;
-    align-items:center;
-    min-height:40px;
-    padding:7px 12px;
-    border:2px solid var(--line);
-    border-radius:12px;
-    background:var(--paper);
-    color:var(--ink);
-    text-decoration:none;
-    font-size:15px;
-    font-weight:800;
-  }
-  .page-nav a.current{
-    border-color:var(--accent);
-    background:var(--accent-light);
-    color:var(--accent-dark);
-  }
-
   .school-dock{
     position:sticky;
     top:0;
@@ -92,26 +66,27 @@
   .dock-inner{ max-width:900px; margin:0 auto; padding:10px 16px 12px; }
   .school-tabs{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-    gap:10px;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:8px;
   }
   .school-tab{
     display:flex;
     align-items:center;
     justify-content:center;
-    min-height:56px;
+    min-height:52px;
     border:2px solid var(--school-accent,var(--line));
-    border-radius:14px;
+    border-radius:12px;
     background:var(--school-light,var(--paper));
     color:var(--school-dark,var(--ink));
     font-family:inherit;
-    font-size:17px;
+    font-size:18px;
     font-weight:900;
-    padding:10px 12px;
+    padding:9px 8px;
     text-align:center;
     cursor:pointer;
     box-shadow:var(--shadow);
     opacity:.76;
+    text-decoration:none;
     transition:transform .08s ease, opacity .12s ease, box-shadow .12s ease;
   }
   .school-tab.active{
@@ -160,6 +135,10 @@
     color:var(--accent-dark);
     font-size:20px;
     font-weight:900;
+  }
+  .school-section .group-title{
+    border-left-color:var(--section-accent,var(--accent));
+    color:var(--section-dark,var(--accent-dark));
   }
   .track-list{
     display:grid;
@@ -248,6 +227,19 @@
     color:#fff;
   }
   .track-copy{ min-width:0; }
+  .school-badge{
+    display:inline-flex;
+    align-items:center;
+    min-height:22px;
+    margin-right:7px;
+    padding:1px 7px;
+    border-radius:999px;
+    background:var(--badge-light,#fff3dc);
+    color:var(--badge-dark,#8a5600);
+    font-size:12px;
+    font-weight:900;
+    vertical-align:1px;
+  }
   .track-title{
     display:block;
     min-width:0;
@@ -417,8 +409,8 @@
     body{ font-size:17px; padding-bottom:272px; }
     h1{ font-size:24px; }
     .dock-inner{ padding:8px 12px 10px; }
-    .school-tabs{ grid-template-columns:1fr; }
-    .school-tab{ min-height:52px; font-size:16px; }
+    .school-tabs{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .school-tab{ min-height:48px; font-size:17px; }
     .playlist-head{ align-items:flex-start; flex-direction:column; gap:2px; }
     .track-card{ grid-template-columns:46px minmax(0,1fr); gap:8px; }
     .pick{ min-height:68px; }
@@ -440,11 +432,7 @@
 <header>
   <div class="wrap">
     <h1>校歌アレンジ プレイリスト</h1>
-    <p class="lead">学校ごとに曲をまとめています。下のプレイヤーから順番再生と、チェックした曲だけのランダム再生を切り替えられます。</p>
-    <nav class="page-nav" aria-label="ページ切り替え">
-      <a href="../">曲を選ぶ</a>
-      <a class="current" href="./">プレイリスト</a>
-    </nav>
+    <p class="lead">弥栄中学校・粟田小学校・有済小学校の全曲をまとめた再生専用ページです。下のプレイヤーから順番再生と、チェックした曲だけのランダム再生を切り替えられます。</p>
   </div>
 </header>
 
@@ -456,10 +444,10 @@
 
 <main class="wrap">
   <div class="playlist-head">
-    <h2 id="playlistTitle">プレイリスト</h2>
+    <h2 id="playlistTitle">全曲プレイリスト</h2>
     <div class="count" id="trackCount"></div>
   </div>
-  <p class="hint">左のチェックを付けた曲だけ、下の「チェック曲ランダム」でエンドレス再生できます。</p>
+  <p class="hint">全曲を一覧で再生できます。チェックを外した曲は、下の「チェック曲ランダム」の対象から外れます。</p>
   <div id="playlist"></div>
 </main>
 
@@ -498,8 +486,9 @@
 <audio id="audio" preload="none"></audio>
 <script src="../bgm-data.js"></script>
 <script>
-const { SCHOOL_ORDER, SCHOOLS, ARR, GROUPS, BONUS_BY_SCHOOL } = window.DOUSOUKAI_BGM_DATA;
+const { NAV_TABS, SCHOOL_ORDER, SCHOOLS, ARR, GROUPS, BONUS_BY_SCHOOL } = window.DOUSOUKAI_BGM_DATA;
 const AUDIO_BASE = '../audio/';
+const PLAYLIST_SELECTION_KEY = 'dousoukai_playlist_selected_all';
 const schoolTabsEl = document.getElementById('schoolTabs');
 const playlistEl = document.getElementById('playlist');
 const playlistTitle = document.getElementById('playlistTitle');
@@ -521,7 +510,6 @@ const clearSelectionBtn = document.getElementById('clearSelectionBtn');
 const audio = document.getElementById('audio');
 const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-let activeSchool = initialSchool();
 let tracks = [];
 let currentIndex = -1;
 let seeking = false;
@@ -530,7 +518,7 @@ let audioContext = null;
 let audioSource = null;
 let gainNode = null;
 let currentVolume = 0.9;
-const selectionCache = {};
+let selectionSet = null;
 
 const savedVol = localStorage.getItem('dousoukai_vol');
 setAppVolume(savedVol !== null ? Number(savedVol) : 0.9);
@@ -541,45 +529,30 @@ function fmt(s){
   const ss = String(s % 60).padStart(2,'0');
   return `${m}:${ss}`;
 }
-function schoolFromHash(){
-  const raw = decodeURIComponent(location.hash.replace(/^#/,''));
-  return SCHOOL_ORDER.find(id => id === raw || SCHOOLS[id].hash === raw) || null;
-}
-function initialSchool(){
-  const fromHash = schoolFromHash();
-  if(fromHash) return fromHash;
-  const storedRaw = localStorage.getItem('dousoukai_school');
-  const stored = storedRaw === 'arisai' ? 'yusai' : storedRaw;
-  return SCHOOL_ORDER.includes(stored) ? stored : SCHOOL_ORDER[0];
-}
-function selectionKey(schoolId){
-  return `dousoukai_playlist_selected_${schoolId}`;
+function tabBySchoolId(schoolId){
+  return NAV_TABS.find(tab => tab.schoolId === schoolId) || null;
 }
 function getSchoolTheme(schoolId){
   const theme = SCHOOLS[schoolId] && SCHOOLS[schoolId].theme;
   return theme || { accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', play:'#1d7a43' };
 }
-function applySchoolTheme(schoolId){
-  const theme = getSchoolTheme(schoolId);
+function applyPlaylistTheme(){
+  const tab = NAV_TABS.find(item => item.id === 'playlist');
+  const theme = tab && tab.theme ? tab.theme : { accent:'#2f5f8f', dark:'#244b73', light:'#e8f1fb', play:'#1d7a43' };
   document.documentElement.style.setProperty('--accent', theme.accent);
   document.documentElement.style.setProperty('--accent-dark', theme.dark);
   document.documentElement.style.setProperty('--accent-light', theme.light);
   document.documentElement.style.setProperty('--play', theme.play || theme.accent);
   if(themeMeta) themeMeta.setAttribute('content', theme.accent);
 }
-function getSelectionSet(schoolId){
-  if(selectionCache[schoolId]) return selectionCache[schoolId];
-  let stored = [];
-  try{
-    stored = JSON.parse(localStorage.getItem(selectionKey(schoolId)) || '[]');
-  }catch(e){
-    stored = [];
-  }
-  selectionCache[schoolId] = new Set(Array.isArray(stored) ? stored : []);
-  return selectionCache[schoolId];
-}
-function saveSelectionSet(schoolId){
-  localStorage.setItem(selectionKey(schoolId), JSON.stringify([...getSelectionSet(schoolId)]));
+function renderTabs(){
+  schoolTabsEl.innerHTML = NAV_TABS.map(tab => {
+    const theme = tab.theme || (tab.schoolId ? getSchoolTheme(tab.schoolId) : {});
+    const style = `--school-accent:${theme.accent || '#e3d9c4'};--school-dark:${theme.dark || '#2b2620'};--school-light:${theme.light || '#ffffff'};`;
+    const href = tab.id === 'playlist' ? './' : `../#${tab.hash}`;
+    const current = tab.id === 'playlist';
+    return `<a class="school-tab${current ? ' active' : ''}" href="${href}" ${current ? 'aria-current="page"' : ''} style="${style}"><span>${tab.label}</span></a>`;
+  }).join('');
 }
 function arrangementKeysForSchool(schoolId){
   const keys = ['chorus'];
@@ -591,15 +564,7 @@ function arrangementKeysForSchool(schoolId){
   });
   return keys;
 }
-function groupTitleForKey(key, schoolId){
-  if(key === 'chorus') return '校歌';
-  const group = GROUPS.find(g => {
-    const keys = g.bonus ? (BONUS_BY_SCHOOL[schoolId] || []) : g.items;
-    return keys.includes(key);
-  });
-  return group ? `${group.ico} ${group.title}` : 'その他';
-}
-function buildTracks(schoolId){
+function buildSchoolTracks(schoolId){
   const result = [];
   arrangementKeysForSchool(schoolId).forEach(key => {
     const d = ARR[key];
@@ -607,8 +572,9 @@ function buildTracks(schoolId){
     takes.forEach(take => {
       const [label, file, dur] = take;
       result.push({
-        key,
-        group: groupTitleForKey(key, schoolId),
+        schoolId,
+        schoolName: SCHOOLS[schoolId].name,
+        schoolShort: (tabBySchoolId(schoolId) || {}).label || SCHOOLS[schoolId].name,
         title: d.name,
         label,
         file,
@@ -619,67 +585,66 @@ function buildTracks(schoolId){
   });
   return result;
 }
-function selectedIndices(){
-  const selected = getSelectionSet(activeSchool);
-  return tracks.map((track,index)=> selected.has(track.file) ? index : -1).filter(index => index >= 0);
+function buildAllTracks(){
+  return SCHOOL_ORDER.flatMap(schoolId => buildSchoolTracks(schoolId));
 }
-function updateSelectionSummary(){
-  const count = selectedIndices().length;
-  selectionCount.textContent = `チェック ${count}曲`;
-  randomBtn.disabled = count === 0;
-  if(count === 0 && playMode === 'random'){
-    setPlayMode('sequence');
+function initSelection(){
+  if(selectionSet) return;
+  let stored = [];
+  try{
+    stored = JSON.parse(localStorage.getItem(PLAYLIST_SELECTION_KEY) || '[]');
+  }catch(e){
+    stored = [];
   }
+  const existingFiles = new Set(tracks.map(track => track.file));
+  const filtered = Array.isArray(stored) ? stored.filter(file => existingFiles.has(file)) : [];
+  selectionSet = filtered.length ? new Set(filtered) : new Set(tracks.map(track => track.file));
+  saveSelection();
 }
-function renderTabs(){
-  schoolTabsEl.innerHTML = SCHOOL_ORDER.map(schoolId => {
-    const school = SCHOOLS[schoolId];
-    const theme = getSchoolTheme(schoolId);
-    const active = schoolId === activeSchool;
-    const style = `--school-accent:${theme.accent};--school-dark:${theme.dark};--school-light:${theme.light};`;
-    return `<button class="school-tab${active ? ' active' : ''}" type="button" data-school="${schoolId}" aria-pressed="${active}" style="${style}">
-      <span>${school.name}</span>
-    </button>`;
-  }).join('');
-  schoolTabsEl.querySelectorAll('.school-tab').forEach(btn => {
-    btn.addEventListener('click', () => selectSchool(btn.dataset.school));
-  });
+function saveSelection(){
+  localStorage.setItem(PLAYLIST_SELECTION_KEY, JSON.stringify([...selectionSet]));
+}
+function selectedIndices(){
+  return tracks.map((track, index) => selectionSet.has(track.file) ? index : -1).filter(index => index >= 0);
 }
 function renderPlaylist(){
-  tracks = buildTracks(activeSchool);
-  const selected = getSelectionSet(activeSchool);
-  const school = SCHOOLS[activeSchool];
-  playlistTitle.textContent = `${school.name} プレイリスト`;
+  tracks = buildAllTracks();
+  initSelection();
+  playlistTitle.textContent = '全曲プレイリスト';
   trackCount.textContent = `${tracks.length}曲`;
-  let previousGroup = '';
   let html = '';
-  tracks.forEach((track,index) => {
-    if(track.group !== previousGroup){
-      if(previousGroup) html += '</div></section>';
-      html += `<section class="group"><h3 class="group-title">${track.group}</h3><div class="track-list">`;
-      previousGroup = track.group;
-    }
-    const isSelected = selected.has(track.file);
-    html += `<article class="track-card${isSelected ? ' selected' : ''}" data-index="${index}" data-file="${track.file}">
-      <label class="pick" aria-label="${track.title} をランダム対象にする">
-        <input class="pick-input" type="checkbox" data-file="${track.file}" ${isSelected ? 'checked' : ''}>
-        <span class="pick-box">✓</span>
-      </label>
-      <button class="track-main" type="button" data-index="${index}">
-        <span class="num">${String(index + 1).padStart(2,'0')}</span>
-        <span class="track-copy">
-          <span class="track-title">${track.title} ／ ${track.label}</span>
-          <span class="track-sub">${track.scene}</span>
-        </span>
-        <span class="duration">${fmt(track.dur)}</span>
-      </button>
-    </article>`;
+  let index = 0;
+  SCHOOL_ORDER.forEach(schoolId => {
+    const school = SCHOOLS[schoolId];
+    const theme = getSchoolTheme(schoolId);
+    const schoolTracks = tracks.filter(track => track.schoolId === schoolId);
+    if(!schoolTracks.length) return;
+    html += `<section class="group school-section"><h3 class="group-title" style="--section-accent:${theme.accent};--section-dark:${theme.dark};">${school.name}</h3><div class="track-list">`;
+    schoolTracks.forEach(track => {
+      const isSelected = selectionSet.has(track.file);
+      html += `<article class="track-card${isSelected ? ' selected' : ''}" data-index="${index}" data-file="${track.file}">
+        <label class="pick" aria-label="${track.schoolName} ${track.title} をランダム対象にする">
+          <input class="pick-input" type="checkbox" data-file="${track.file}" ${isSelected ? 'checked' : ''}>
+          <span class="pick-box">✓</span>
+        </label>
+        <button class="track-main" type="button" data-index="${index}">
+          <span class="num">${String(index + 1).padStart(2,'0')}</span>
+          <span class="track-copy">
+            <span class="track-title"><span class="school-badge" style="--badge-light:${theme.light};--badge-dark:${theme.dark};">${track.schoolShort}</span>${track.title} ／ ${track.label}</span>
+            <span class="track-sub">${track.schoolName} ・ ${track.scene}</span>
+          </span>
+          <span class="duration">${fmt(track.dur)}</span>
+        </button>
+      </article>`;
+      index += 1;
+    });
+    html += '</div></section>';
   });
-  playlistEl.innerHTML = html ? html + '</div></section>' : '';
+  playlistEl.innerHTML = html;
   playlistEl.querySelectorAll('.track-main').forEach(btn => {
     btn.addEventListener('click', () => {
       setPlayMode('sequence');
-      playIndex(Number(btn.dataset.index));
+      playTrack(Number(btn.dataset.index));
     });
   });
   playlistEl.querySelectorAll('.pick-input').forEach(input => {
@@ -688,38 +653,24 @@ function renderPlaylist(){
   updateActiveTrack();
   updateSelectionSummary();
 }
-function selectSchool(schoolId, updateHash=true){
-  if(!SCHOOLS[schoolId] || schoolId === activeSchool) return;
-  audio.pause();
-  currentIndex = -1;
-  activeSchool = schoolId;
-  localStorage.setItem('dousoukai_school', schoolId);
-  applySchoolTheme(schoolId);
-  renderTabs();
-  renderPlaylist();
-  resetPlayer();
-  if(updateHash) history.replaceState(null, '', '#' + SCHOOLS[schoolId].hash);
-}
 function toggleTrackSelection(file, checked){
-  const selected = getSelectionSet(activeSchool);
-  if(checked) selected.add(file);
-  else selected.delete(file);
-  saveSelectionSet(activeSchool);
+  if(checked) selectionSet.add(file);
+  else selectionSet.delete(file);
+  saveSelection();
   const card = playlistEl.querySelector(`.track-card[data-file="${file}"]`);
   if(card) card.classList.toggle('selected', checked);
   updateSelectionSummary();
   updatePlayerMeta();
 }
 function selectAllTracks(){
-  const selected = getSelectionSet(activeSchool);
-  tracks.forEach(track => selected.add(track.file));
-  saveSelectionSet(activeSchool);
+  tracks.forEach(track => selectionSet.add(track.file));
+  saveSelection();
   renderPlaylist();
   updatePlayerMeta();
 }
 function clearTrackSelection(){
-  selectionCache[activeSchool] = new Set();
-  saveSelectionSet(activeSchool);
+  selectionSet = new Set();
+  saveSelection();
   renderPlaylist();
   updatePlayerMeta();
 }
@@ -760,19 +711,25 @@ function setPlayMode(mode){
   startBtn.textContent = mode === 'random' ? 'ランダム開始' : '先頭から';
   updatePlayerMeta();
 }
+function updateSelectionSummary(){
+  const count = selectedIndices().length;
+  selectionCount.textContent = `チェック ${count}曲`;
+  randomBtn.disabled = count === 0;
+  if(count === 0 && playMode === 'random'){
+    setPlayMode('sequence');
+  }
+}
 function updatePlayerMeta(){
-  const school = SCHOOLS[activeSchool];
   const selectedCount = selectedIndices().length;
   const modeLabel = playMode === 'random' ? 'チェック曲ランダム' : '順番再生';
-  playerMeta.textContent = `${school.name} ｜ ${modeLabel} ｜ チェック ${selectedCount}曲`;
+  playerMeta.textContent = `全曲プレイリスト ｜ ${modeLabel} ｜ チェック ${selectedCount}曲`;
 }
 function playTrack(index){
   if(index < 0 || index >= tracks.length) return;
   currentIndex = index;
   const track = tracks[index];
-  const school = SCHOOLS[activeSchool];
   audio.src = AUDIO_BASE + track.file;
-  playerTitle.textContent = `${school.name} ｜ ${track.title} ｜ ${track.label}`;
+  playerTitle.textContent = `${track.schoolName} ｜ ${track.title} ｜ ${track.label}`;
   updateActiveTrack();
   updatePlayerMeta();
   ensureAudioRouting();
@@ -789,9 +746,7 @@ function randomIndex(excludeCurrent=true){
   if(!pool.length) return -1;
   if(excludeCurrent && pool.length > 1){
     const filtered = pool.filter(index => index !== currentIndex);
-    if(filtered.length){
-      return filtered[Math.floor(Math.random() * filtered.length)];
-    }
+    if(filtered.length) return filtered[Math.floor(Math.random() * filtered.length)];
   }
   return pool[Math.floor(Math.random() * pool.length)];
 }
@@ -830,7 +785,7 @@ function updatePlayState(){
   playBtn.textContent = audio.paused ? '▶ 再生' : '⏸ 一時停止';
 }
 
-applySchoolTheme(activeSchool);
+applyPlaylistTheme();
 renderTabs();
 renderPlaylist();
 setPlayMode('sequence');
@@ -896,10 +851,6 @@ vol.addEventListener('input', () => {
 vol.addEventListener('change', () => {
   setAppVolume(vol.value / 100);
   localStorage.setItem('dousoukai_vol', currentVolume);
-});
-window.addEventListener('hashchange', () => {
-  const schoolId = schoolFromHash();
-  if(schoolId) selectSchool(schoolId, false);
 });
 </script>
 </body>

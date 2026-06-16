@@ -94,25 +94,26 @@
   .school-switch{ margin:22px 0 24px; }
   .school-tabs{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:10px;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:8px;
   }
   .school-tab{
     display:flex;
     align-items:center;
     justify-content:center;
-    min-height:62px;
+    min-height:52px;
     border:2px solid var(--school-accent,var(--line));
-    border-radius:14px;
+    border-radius:12px;
     background:var(--school-light,var(--paper));
     color:var(--school-dark,var(--ink));
     font-family:inherit;
     font-size:18px;
     font-weight:900;
-    padding:10px 12px;
+    padding:9px 8px;
     cursor:pointer;
     box-shadow:var(--shadow);
     text-align:center;
+    text-decoration:none;
     opacity:.76;
   }
   .school-tab.active{
@@ -149,6 +150,15 @@
   }
   .featured-card.school-panel,
   .school-grid > .school-panel{ padding:14px 16px; }
+  .pending-card{
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:#fffdf7;
+    padding:18px;
+    box-shadow:var(--shadow);
+  }
+  .pending-card h2{ margin:0 0 8px; color:var(--amber-d); font-size:23px; }
+  .pending-card p{ margin:0; color:var(--ink-soft); font-size:16px; }
   .school-name{
     margin:0 0 10px;
     font-size:18px;
@@ -162,6 +172,10 @@
   .toc h2{ font-size:20px; margin:26px 0 12px; color:var(--ink); }
   .toc-grid{ display:grid; grid-template-columns:1fr; gap:12px; }
   @media(min-width:560px){ .toc-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:520px){
+    .school-tabs{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .school-tab{ min-height:48px; font-size:17px; }
+  }
   .toc-btn{
     display:flex; align-items:center; gap:12px;
     background:var(--paper); border:2px solid var(--line);
@@ -411,7 +425,7 @@
 <header>
   <div class="wrap">
     <h1>同窓会用 校歌アレンジ BGM集</h1>
-    <p class="lead">粟田小学校・有済小学校の校歌をもとに、同窓会や記念行事で使いやすいよう、さまざまな雰囲気にアレンジしたBGM集です。聴いてみたいボタンを押すと、その場で再生できます。気に入った曲を、会の場面に合わせてお使いください。</p>
+    <p class="lead">同窓会や記念行事で使いやすいよう、校歌をさまざまな雰囲気にアレンジしたBGM集です。上のタブでプレイリスト再生と学校別の曲一覧を切り替えられます。</p>
   </div>
 </header>
 
@@ -424,12 +438,7 @@
     <b style="color:#1d7a43">緑のボタン</b>でその場で再生、<b style="color:#2f5f8f">青のボタン</b>でこの端末に保存（ダウンロード）できます。
   </div>
 
-  <a class="mode-link" href="playlist/">
-    <span><b>プレイリスト再生ページへ</b><span>学校別に曲を並べて、連続再生しやすい画面です。</span></span>
-    <span class="arrow">›</span>
-  </a>
-
-  <section class="school-switch" aria-label="学校切り替え">
+  <section class="school-switch" aria-label="ページ切り替え">
     <div class="school-tabs" id="schoolTabs"></div>
   </section>
 
@@ -442,7 +451,7 @@
   <div class="bulk-box">
     <a class="bulk" href="https://github.com/hinatabokkuri-star/hinatabokkuri-star.github.io/releases/download/dousoukai-bgm-2026-06-15/dousoukai_bgm_all.zip">
       <span class="bi">📦</span>
-      <span class="bt">両校分をまとめてダウンロード<small>ZIP形式・全71曲・約210MB</small></span>
+      <span class="bt">小学校2校分をまとめてダウンロード<small>ZIP形式・全71曲・約210MB</small></span>
     </a>
     <p class="bulk-note">粟田小学校・有済小学校の全曲を学校別フォルダにまとめています。各曲の青い「保存」ボタンから1曲ずつ保存もできます。</p>
   </div>
@@ -488,7 +497,7 @@
 <script src="bgm-data.js"></script>
 <script>
 // ===== arrangement data =====
-const { AUDIO_DIR, SCHOOL_ORDER, SCHOOLS, ARR, GROUPS, BONUS_BY_SCHOOL } = window.DOUSOUKAI_BGM_DATA;
+const { AUDIO_DIR, NAV_TABS, SCHOOL_ORDER, SCHOOLS, ARR, GROUPS, BONUS_BY_SCHOOL } = window.DOUSOUKAI_BGM_DATA;
 
 function fmt(s){ s=Math.floor(s||0); const m=Math.floor(s/60); const ss=String(s%60).padStart(2,'0'); return m+':'+ss; }
 function getTakes(d, schoolId){ return d.schools && d.schools[schoolId] ? d.schools[schoolId] : []; }
@@ -529,50 +538,58 @@ const scenesEl = document.getElementById('scenes');
 const featuredSongsEl = document.getElementById('featuredSongs');
 const schoolTabsEl = document.getElementById('schoolTabs');
 
-function schoolFromHash(){
-  const raw = decodeURIComponent(location.hash.replace(/^#/,''));
-  return SCHOOL_ORDER.find(id=>id===raw || SCHOOLS[id].hash===raw) || null;
+function tabById(id){
+  return NAV_TABS.find(tab=>tab.id===id) || null;
 }
-function initialSchool(){
-  const fromHash = schoolFromHash();
+function schoolIdForTab(tabId){
+  const tab = tabById(tabId);
+  return tab && tab.schoolId ? tab.schoolId : null;
+}
+function tabFromHash(){
+  const raw = decodeURIComponent(location.hash.replace(/^#/,''));
+  return NAV_TABS.find(tab=>tab.id===raw || tab.hash===raw)?.id || null;
+}
+function initialTab(){
+  const fromHash = tabFromHash();
   if(fromHash) return fromHash;
   const storedRaw = localStorage.getItem('dousoukai_school');
   const stored = storedRaw === 'arisai' ? 'yusai' : storedRaw;
-  return SCHOOL_ORDER.includes(stored) ? stored : SCHOOL_ORDER[0];
+  return SCHOOL_ORDER.includes(stored) ? stored : 'yasaka';
 }
-let activeSchool = initialSchool();
+let activeTab = initialTab();
 
 function renderSchoolTabs(){
-  schoolTabsEl.innerHTML = SCHOOL_ORDER.map(schoolId=>{
-    const school = SCHOOLS[schoolId];
-    const current = schoolId === activeSchool;
-    const theme = school.theme || {};
+  schoolTabsEl.innerHTML = NAV_TABS.map(tab=>{
+    const current = tab.id === activeTab;
+    const theme = tab.theme || (tab.schoolId && SCHOOLS[tab.schoolId] ? SCHOOLS[tab.schoolId].theme : {}) || {};
     const style = `--school-accent:${theme.accent || '#e3d9c4'};--school-dark:${theme.dark || '#2b2620'};--school-light:${theme.light || '#ffffff'};`;
-    return `<button class="school-tab${current?' active':''}" type="button" data-school="${schoolId}" aria-pressed="${current}" style="${style}">
-      <span>${school.name}</span>
+    if(tab.id === 'playlist'){
+      return `<a class="school-tab" href="playlist/" style="${style}"><span>${tab.label}</span></a>`;
+    }
+    return `<button class="school-tab${current?' active':''}" type="button" data-tab="${tab.id}" aria-pressed="${current}" style="${style}">
+      <span>${tab.label}</span>
     </button>`;
   }).join('');
-  schoolTabsEl.querySelectorAll('.school-tab').forEach(btn=>{
-    btn.addEventListener('click',()=>selectSchool(btn.dataset.school));
+  schoolTabsEl.querySelectorAll('button.school-tab').forEach(btn=>{
+    btn.addEventListener('click',()=>selectSchool(btn.dataset.tab));
   });
 }
 function renderFeatured(){
-  const school = SCHOOLS[activeSchool];
+  const schoolId = schoolIdForTab(activeTab);
+  if(!schoolId) return;
+  const school = SCHOOLS[schoolId];
   featuredSongsEl.innerHTML = `<div class="featured-card school-panel">
     <h3 class="school-name">${school.name}</h3>
     <p class="school-sub">合唱版</p>
-    <div class="takes">${takeRowsHtml(ARR.chorus, activeSchool)}</div>
+    <div class="takes">${takeRowsHtml(ARR.chorus, schoolId)}</div>
   </div>`;
 }
 function renderTocAndScenes(){
   tocEl.innerHTML = '';
   scenesEl.innerHTML = '';
+  const schoolId = schoolIdForTab(activeTab);
+  if(!schoolId) return;
   GROUPS.forEach(g=>{
-    const a = document.createElement('a');
-    a.className='toc-btn'; a.href='#'+g.id;
-    a.innerHTML = `<span class="ico">${g.ico}</span><span><span>${g.title}</span><span class="sub">${g.sub}</span></span>`;
-    tocEl.appendChild(a);
-
     const sec = document.createElement('section');
     sec.className='scene'; sec.id=g.id;
     sec.innerHTML = `<div class="scene-head"><span class="ico">${g.ico}</span><div><h2>${g.title}</h2><div class="sub">${g.sub}</div></div></div>`;
@@ -580,20 +597,22 @@ function renderTocAndScenes(){
     if(g.bonus){
       const bonusWrap = document.createElement('div');
       bonusWrap.className = 'bonus-grid';
-      bonusWrap.innerHTML = (BONUS_BY_SCHOOL[activeSchool] || []).map(key=>{
+      bonusWrap.innerHTML = (BONUS_BY_SCHOOL[schoolId] || []).map(key=>{
         const d = ARR[key];
         return `<div class="card school-panel">
           <h3>${d.name}</h3>
           <p class="desc">${d.desc}</p>
           <div class="scene-use"><b>こんな場面に：</b>${d.scene}</div>
-          <div class="takes">${takeRowsHtml(d, activeSchool)}</div>
+          <div class="takes">${takeRowsHtml(d, schoolId)}</div>
         </div>`;
       }).join('');
+      if(!bonusWrap.innerHTML.trim()) return;
       sec.appendChild(bonusWrap);
     } else {
+      let cardCount = 0;
       g.items.forEach(key=>{
         const d = ARR[key];
-        const panel = schoolPanelHtml(d, activeSchool);
+        const panel = schoolPanelHtml(d, schoolId);
         if(!panel) return;
         const card = document.createElement('div');
         card.className='card';
@@ -602,8 +621,14 @@ function renderTocAndScenes(){
           <div class="scene-use"><b>こんな場面に：</b>${d.scene}</div>
           <div class="school-grid">${panel}</div>`;
         sec.appendChild(card);
+        cardCount += 1;
       });
+      if(cardCount === 0) return;
     }
+    const a = document.createElement('a');
+    a.className='toc-btn'; a.href='#'+g.id;
+    a.innerHTML = `<span class="ico">${g.ico}</span><span><span>${g.title}</span><span class="sub">${g.sub}</span></span>`;
+    tocEl.appendChild(a);
     scenesEl.appendChild(sec);
   });
 }
@@ -626,13 +651,14 @@ function resetPlaybackForSchoolChange(){
   plDur.textContent = '0:00';
 }
 function selectSchool(schoolId, updateHash=true){
-  if(!SCHOOLS[schoolId] || schoolId===activeSchool) return;
+  const tab = tabById(schoolId);
+  if(!tab || tab.id === 'playlist' || schoolId===activeTab) return;
   resetPlaybackForSchoolChange();
-  activeSchool = schoolId;
-  localStorage.setItem('dousoukai_school', schoolId);
+  activeTab = schoolId;
+  if(tab.schoolId) localStorage.setItem('dousoukai_school', tab.schoolId);
   renderSchoolPage();
   bindTakeButtons();
-  if(updateHash) history.replaceState(null,'','#'+SCHOOLS[schoolId].hash);
+  if(updateHash) history.replaceState(null,'','#'+tab.hash);
 }
 renderSchoolPage();
 
@@ -684,7 +710,7 @@ function bindTakeButtons(){
 }
 bindTakeButtons();
 window.addEventListener('hashchange',()=>{
-  const schoolId = schoolFromHash();
+  const schoolId = tabFromHash();
   if(schoolId) selectSchool(schoolId,false);
 });
 

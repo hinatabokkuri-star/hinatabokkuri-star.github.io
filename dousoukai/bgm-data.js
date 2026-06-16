@@ -1,7 +1,18 @@
 window.DOUSOUKAI_BGM_DATA = {
   AUDIO_DIR: 'audio/',
-  SCHOOL_ORDER: ['yasaka','yusai'],
+  NAV_TABS: [
+    { id:'playlist', label:'PL', name:'プレイリスト', href:'playlist/', theme:{ accent:'#2f5f8f', dark:'#244b73', light:'#e8f1fb', play:'#1d7a43' } },
+    { id:'yasaka_jhs', label:'弥栄', name:'弥栄中学校', schoolId:'yasaka_jhs', hash:'yasaka', theme:{ accent:'#6a4ea3', dark:'#503b83', light:'#f0ecfb', play:'#1d7a43' } },
+    { id:'yasaka', label:'粟田', name:'粟田小学校', schoolId:'yasaka', hash:'awata', theme:{ accent:'#b06f00', dark:'#8a5600', light:'#fff3dc', play:'#1d7a43' } },
+    { id:'yusai', label:'有済', name:'有済小学校', schoolId:'yusai', hash:'yusai', theme:{ accent:'#16775f', dark:'#0f5847', light:'#e3f5ee', play:'#1d7a43' } },
+  ],
+  SCHOOL_ORDER: ['yasaka_jhs','yasaka','yusai'],
   SCHOOLS: {
+    yasaka_jhs:{
+      name:'弥栄中学校',
+      hash:'yasaka',
+      theme:{ accent:'#6a4ea3', dark:'#503b83', light:'#f0ecfb', play:'#1d7a43' },
+    },
     yasaka:{
       name:'粟田小学校',
       hash:'awata',
@@ -14,14 +25,17 @@ window.DOUSOUKAI_BGM_DATA = {
     },
   },
   ARR: {
-    chorus:{ name:'合唱版', desc:'校歌本来の雰囲気に近い、合唱を意識したアレンジ。式典らしさや母校への思いを、最も直接的に感じられる音源です。', scene:'開会・閉会・校歌紹介・記念映像・全員で思い出を共有する場面', schools:{ yasaka:[['テイク1','chorus_1.mp3',131],['テイク2','chorus_2.mp3',133]], yusai:[['テイク1','arisai_chorus_1.mp3',98],['テイク2','arisai_chorus_2.mp3',107]] } },
+    chorus:{ name:'合唱版', desc:'校歌本来の雰囲気に近い、合唱を意識したアレンジ。式典らしさや母校への思いを、最も直接的に感じられる音源です。', scene:'開会・閉会・校歌紹介・記念映像・全員で思い出を共有する場面', schools:{ yasaka_jhs:[['テイク1','yasaka_jhs_chorus_1.mp3',160],['テイク2','yasaka_jhs_chorus_2.mp3',173]], yasaka:[['テイク1','chorus_1.mp3',131],['テイク2','chorus_2.mp3',133]], yusai:[['テイク1','arisai_chorus_1.mp3',98],['テイク2','arisai_chorus_2.mp3',107]] } },
 
     lounge_jazz:{ name:'ホテルラウンジ風ジャズ版', desc:'ピアノ・クラリネット・ミュートトランペット・ストリングスをイメージした、上品なラウンジジャズ風。昭和のホテルラウンジのような落ち着いた雰囲気です。', scene:'開場中・歓談・食事・受付・同窓会全体のBGM', schools:{ yasaka:[['テイク1','lounge_jazz_1.mp3',179],['テイク2','lounge_jazz_2.mp3',184]], yusai:[['テイク1','arisai_lounge_jazz_1.mp3',139],['テイク2','arisai_lounge_jazz_2.mp3',171]] } },
     piano_trio:{ name:'ピアノ・トリオ版', desc:'ピアノ・ウッドベース・ブラシドラムの小編成ジャズ。落ち着いた上品な響きで、長い時間流しても使いやすい曲調です。', scene:'歓談・食事中・受付・会場BGM全般', schools:{ yasaka:[['テイク1','piano_trio_1.mp3',117],['テイク2','piano_trio_2.mp3',149]], yusai:[['テイク1','arisai_piano_trio_1.mp3',137],['テイク2','arisai_piano_trio_2.mp3',135]] } },
     bossa:{ name:'ボサノバ喫茶版', desc:'ガットギター・エレピ・フルートをイメージした、やわらかなボサノバ調。昭和の喫茶店のような、落ち着いた懐かしさとおしゃれな雰囲気です。', scene:'歓談・食事中・受付・リラックスした会場BGM', schools:{ yasaka:[['テイク1','bossa_1.mp3',123],['テイク2','bossa_2.mp3',138]], yusai:[['テイク1','arisai_bossa_1.mp3',149],['テイク2','arisai_bossa_2.mp3',143]] } },
     nostalgic_jazz:{ name:'ノスタルジックジャズ版', desc:'落ち着いたジャズの響きで校歌をアレンジ。派手すぎず、会話の邪魔になりにくい曲調です。', scene:'受付・歓談・食事中・開会前のBGM', schools:{ yasaka:[['テイク1','nostalgic_jazz_1.mp3',177],['テイク2','nostalgic_jazz_2.mp3',149]], yusai:[['テイク1','arisai_nostalgic_jazz_1.mp3',170],['テイク2','arisai_nostalgic_jazz_2.mp3',137]] } },
+    yasaka_jhs_jazz:{ name:'ジャズバラード版', desc:'クラシック寄りのジャズバラードで校歌を包んだアレンジ。落ち着いたスウィング感があり、会話を邪魔しにくい上品な雰囲気です。', scene:'受付・歓談・食事中・開会前のBGM', schools:{ yasaka_jhs:[['テイク1','yasaka_jhs_jazz_1.mp3',161],['テイク2','yasaka_jhs_jazz_2.mp3',158]] } },
+    yasaka_jhs_piano:{ name:'ソロピアノ喫茶版', desc:'ソロピアノで校歌の旋律を丁寧にたどる、昭和の喫茶店のような静かなアレンジ。長く流しても耳に当たりにくい曲調です。', scene:'歓談・食事中・受付・静かな会場BGM', schools:{ yasaka_jhs:[['テイク1','yasaka_jhs_piano_1.mp3',196],['テイク2','yasaka_jhs_piano_2.mp3',205]] } },
 
     strings_piano:{ name:'ストリングス＋ピアノ 映画音楽版', desc:'ピアノと弦楽器を中心にした、やさしく感動的なアレンジ。懐かしさ・感謝・再会の喜びをしっとりと表現しています。', scene:'写真スライド・恩師紹介・思い出映像・静かな歓談・感動的な場面', schools:{ yasaka:[['テイク1','strings_piano_1.mp3',159],['テイク2','strings_piano_2.mp3',153]], yusai:[['テイク1','arisai_strings_piano_1.mp3',101],['テイク2','arisai_strings_piano_2.mp3',103]] } },
+    yasaka_jhs_strings_piano:{ name:'ピアノ＋弦楽 映画音楽版', desc:'ピアノと弦楽で校歌の旋律をまっすぐ聴かせる、しっとりした映画音楽風アレンジ。思い出映像や締めの場面に向く感傷的な曲調です。', scene:'写真スライド・思い出映像・閉会前・感動的な場面', schools:{ yasaka_jhs:[['テイク1','yasaka_jhs_strings_piano_1.mp3',168],['テイク2','yasaka_jhs_strings_piano_2.mp3',184]] } },
     harmonica_folk:{ name:'ハーモニカ＋ギターの郷愁フォーク版', desc:'ハーモニカとアコースティックギターを中心にした、素朴で温かなアレンジ。昔の通学路や学生時代の記憶を思い起こさせます。', scene:'写真スライド・閉会前・歓談・懐かしさを演出したい場面', schools:{ yasaka:[['テイク1','harmonica_folk_1.mp3',146],['テイク2','harmonica_folk_2.mp3',134]], yusai:[['テイク1','arisai_harmonica_folk_1.mp3',125],['テイク2','arisai_harmonica_folk_2.mp3',164]] } },
     humming:{ name:'鼻歌・ハミング合唱版', desc:'歌詞をはっきり歌わず、ハミングや鼻歌のような雰囲気で校歌を表現。同級生が昔を思い出し、そっと口ずさんでいるような温かさがあります。', scene:'写真スライド・閉会前・エンドロール・静かに振り返る場面', schools:{ yasaka:[['テイク1','humming_1.mp3',83],['テイク2','humming_2.mp3',93]], yusai:[['テイク1','arisai_humming_1.mp3',79],['テイク2','arisai_humming_2.mp3',72]] } },
 
@@ -44,13 +58,14 @@ window.DOUSOUKAI_BGM_DATA = {
     bon_odori:{ name:'盆踊り版', desc:'太鼓や笛をイメージした、校歌が夏祭りの盆踊りになったようなアレンジ。分かりやすいおまけ枠です。', scene:'余興・聴き比べ企画・明るく笑える場面', schools:{ yusai:[['テイク1','arisai_bon_odori_1.mp3',127],['テイク2','arisai_bon_odori_2.mp3',129]] } },
   },
   GROUPS: [
-    { id:'relax', ico:'🍵', title:'開場前・受付・歓談・食事中', sub:'落ち着いて、会話の邪魔にならないBGM', items:['lounge_jazz','piano_trio','bossa','nostalgic_jazz'] },
-    { id:'memory', ico:'📷', title:'写真スライド・思い出映像', sub:'しっとり懐かしく、感動的な場面に', items:['strings_piano','harmonica_folk','humming'] },
+    { id:'relax', ico:'🍵', title:'開場前・受付・歓談・食事中', sub:'落ち着いて、会話の邪魔にならないBGM', items:['lounge_jazz','piano_trio','bossa','nostalgic_jazz','yasaka_jhs_jazz','yasaka_jhs_piano'] },
+    { id:'memory', ico:'📷', title:'写真スライド・思い出映像', sub:'しっとり懐かしく、感動的な場面に', items:['strings_piano','yasaka_jhs_strings_piano','harmonica_folk','humming'] },
     { id:'ceremony', ico:'🎓', title:'開会・閉会・記念撮影', sub:'式典・節目にふさわしい、格式ある曲調', items:['full_orchestra','orchestra','woodwind','closing_reprise'] },
     { id:'lively', ico:'🥂', title:'乾杯後・歓談を盛り上げる', sub:'明るく華やかに、会場をあたためる', items:['swing','showa_kayo'] },
     { id:'fun', ico:'🎉', title:'余興・聴き比べ', sub:'学校ごとに違う、遊び心のあるおまけアレンジ', bonus:true },
   ],
   BONUS_BY_SCHOOL: {
+    yasaka_jhs:[],
     yasaka:['chindon','africa','electronic','minimal'],
     yusai:['sports_march','hawaiian','toy_music','horror','bon_odori'],
   },
