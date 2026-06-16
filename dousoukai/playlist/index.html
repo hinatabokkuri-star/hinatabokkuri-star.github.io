@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#b06f00">
+<title>同窓会用 校歌アレンジ プレイリスト</title>
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<style>
+  :root{
+    --bg:#faf5ea;
+    --paper:#ffffff;
+    --ink:#2b2620;
+    --ink-soft:#5b5447;
+    --line:#e3d9c4;
+    --amber:#b06f00;
+    --amber-d:#8a5600;
+    --amber-l:#fff3dc;
+    --play:#1d7a43;
+    --play-d:#155c32;
+    --blue:#2f5f8f;
+    --shadow:0 2px 8px rgba(60,45,15,.10);
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; scroll-padding-top:142px; }
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",Meiryo,system-ui,sans-serif;
+    font-size:18px;
+    line-height:1.65;
+    padding-bottom:184px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 16px; }
+  header{
+    background:linear-gradient(180deg,#fff8ec,#f6ecd6);
+    border-bottom:3px solid var(--amber);
+    padding:24px 0 18px;
+    text-align:center;
+  }
+  h1{
+    margin:0 0 8px;
+    color:var(--amber-d);
+    font-size:28px;
+    letter-spacing:.02em;
+  }
+  .lead{
+    margin:0 auto;
+    max-width:680px;
+    color:var(--ink-soft);
+    font-size:16px;
+    text-align:left;
+  }
+  .page-nav{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+  .page-nav a{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    min-height:40px;
+    padding:7px 12px;
+    border:2px solid var(--line);
+    border-radius:12px;
+    background:var(--paper);
+    color:var(--ink);
+    text-decoration:none;
+    font-weight:800;
+    font-size:15px;
+  }
+  .page-nav a.current{
+    border-color:var(--amber);
+    background:var(--amber-l);
+    color:var(--amber-d);
+  }
+  .school-dock{
+    position:sticky;
+    top:0;
+    z-index:30;
+    background:rgba(250,245,234,.96);
+    border-bottom:2px solid rgba(176,111,0,.28);
+    box-shadow:0 5px 16px rgba(60,45,15,.10);
+    backdrop-filter:blur(8px);
+  }
+  .dock-inner{ max-width:880px; margin:0 auto; padding:10px 16px 12px; }
+  .school-tabs{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+  .school-tab{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    min-height:58px;
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:17px;
+    font-weight:800;
+    padding:9px 12px;
+    cursor:pointer;
+    text-align:left;
+    box-shadow:var(--shadow);
+  }
+  .school-tab small{
+    color:var(--ink-soft);
+    font-size:12px;
+    font-weight:700;
+  }
+  .school-tab.active{
+    border-color:var(--amber);
+    background:var(--amber-l);
+    color:var(--amber-d);
+  }
+  .dock-controls{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto auto;
+    gap:8px;
+    margin-top:10px;
+  }
+  .control-btn,
+  .toggle-next{
+    min-height:44px;
+    border:0;
+    border-radius:12px;
+    padding:8px 12px;
+    font-family:inherit;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .control-btn.primary{
+    background:var(--play);
+    color:#fff;
+    box-shadow:0 2px 0 var(--play-d);
+  }
+  .control-btn.secondary{
+    background:#4a443a;
+    color:#fff;
+  }
+  .toggle-next{
+    background:var(--paper);
+    border:2px solid var(--line);
+    color:var(--ink);
+  }
+  .toggle-next.on{
+    border-color:var(--amber);
+    background:var(--amber-l);
+    color:var(--amber-d);
+  }
+  .control-btn:focus-visible,
+  .toggle-next:focus-visible,
+  .school-tab:focus-visible,
+  .track-main:focus-visible,
+  .save:focus-visible{ outline:4px solid #ffd27a; outline-offset:2px; }
+
+  .playlist-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:14px;
+    margin:24px 0 12px;
+  }
+  .playlist-head h2{
+    margin:0;
+    color:var(--amber-d);
+    font-size:24px;
+  }
+  .count{
+    color:var(--ink-soft);
+    font-size:14px;
+    white-space:nowrap;
+  }
+  .now-card{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    gap:12px;
+    align-items:center;
+    margin:18px 0;
+    padding:14px 16px;
+    border:2px solid var(--line);
+    border-radius:16px;
+    background:#fffdf7;
+    box-shadow:var(--shadow);
+  }
+  .now-dot{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:var(--amber-l);
+    color:var(--amber-d);
+    font-weight:900;
+  }
+  .now-title{
+    min-width:0;
+    font-weight:900;
+    line-height:1.35;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .now-meta{ color:var(--ink-soft); font-size:14px; }
+  .group{ margin:22px 0 28px; }
+  .group-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 0 10px;
+    padding-left:10px;
+    border-left:7px solid var(--amber);
+    color:var(--amber-d);
+    font-size:20px;
+    font-weight:900;
+  }
+  .track-list{
+    display:grid;
+    gap:10px;
+  }
+  .track-card{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 58px;
+    gap:10px;
+    align-items:stretch;
+  }
+  .track-main{
+    display:grid;
+    grid-template-columns:42px minmax(0,1fr) auto;
+    gap:10px;
+    align-items:center;
+    min-height:66px;
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:inherit;
+    text-align:left;
+    padding:10px 12px;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+  }
+  .track-main:hover{ border-color:var(--amber); background:#fffdf7; }
+  .track-card.active .track-main{
+    border-color:var(--amber);
+    background:var(--amber-l);
+  }
+  .num{
+    display:grid;
+    place-items:center;
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    background:#f5ead6;
+    color:var(--amber-d);
+    font-weight:900;
+    font-variant-numeric:tabular-nums;
+  }
+  .track-card.active .num{
+    background:var(--play);
+    color:#fff;
+  }
+  .track-title{
+    display:block;
+    min-width:0;
+    font-size:17px;
+    font-weight:900;
+    line-height:1.32;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .track-sub{
+    display:block;
+    min-width:0;
+    color:var(--ink-soft);
+    font-size:13px;
+    line-height:1.35;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .track-copy{ min-width:0; }
+  .duration{
+    color:var(--ink-soft);
+    font-size:14px;
+    font-weight:800;
+    font-variant-numeric:tabular-nums;
+  }
+  .save{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-width:0;
+    border-radius:14px;
+    background:var(--blue);
+    color:#fff;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:900;
+    box-shadow:0 2px 0 #224868;
+  }
+  .save b{ font-size:18px; line-height:1; }
+
+  #player{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:50;
+    background:#2b2620;
+    color:#fff;
+    border-top:4px solid var(--amber);
+    padding:12px 16px calc(14px + env(safe-area-inset-bottom));
+    box-shadow:0 -4px 16px rgba(0,0,0,.25);
+  }
+  .player-inner{ max-width:880px; margin:0 auto; }
+  .player-title{
+    margin-bottom:8px;
+    text-align:center;
+    font-size:16px;
+    font-weight:900;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .seek-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .time{
+    min-width:46px;
+    text-align:center;
+    color:#e9e0cf;
+    font-size:14px;
+    font-variant-numeric:tabular-nums;
+  }
+  input[type=range]{
+    -webkit-appearance:none;
+    appearance:none;
+    flex:1;
+    height:10px;
+    border-radius:6px;
+    background:#5b5447;
+    outline:none;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:var(--amber);
+    border:3px solid #fff;
+    cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:var(--amber);
+    border:3px solid #fff;
+    cursor:pointer;
+  }
+  .player-controls{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .player-controls button{
+    min-height:42px;
+    border:0;
+    border-radius:12px;
+    padding:8px 14px;
+    color:#fff;
+    background:#4a443a;
+    font-family:inherit;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+  }
+  .player-controls .play{
+    min-width:138px;
+    background:var(--play);
+    font-size:19px;
+  }
+  .volume-row{ display:flex; align-items:center; gap:8px; max-width:300px; margin:10px auto 0; }
+  footer{ padding:28px 16px 10px; color:var(--ink-soft); font-size:13px; text-align:center; }
+
+  @media(max-width:520px){
+    body{ font-size:17px; padding-bottom:190px; }
+    h1{ font-size:24px; }
+    .dock-inner{ padding:8px 12px 10px; }
+    .school-tab{ min-height:54px; font-size:16px; padding:8px 10px; }
+    .dock-controls{ grid-template-columns:1fr 48px 48px; }
+    .control-btn,.toggle-next{ padding:6px 8px; font-size:14px; }
+    .toggle-next{ grid-column:1 / 4; min-height:36px; }
+    .playlist-head{ align-items:flex-start; flex-direction:column; gap:2px; }
+    .track-card{ grid-template-columns:minmax(0,1fr) 52px; gap:8px; }
+    .track-main{ grid-template-columns:36px minmax(0,1fr) 44px; gap:8px; min-height:62px; padding:9px 10px; }
+    .num{ width:32px; height:32px; border-radius:10px; font-size:14px; }
+    .track-title{ font-size:16px; }
+    .duration{ font-size:13px; }
+    .save{ font-size:12px; border-radius:12px; }
+    .player-controls button{ padding:8px 10px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>校歌アレンジ プレイリスト</h1>
+    <p class="lead">学校ごとに曲をまとめて、会場でそのまま流しやすい順番に並べています。</p>
+    <nav class="page-nav" aria-label="ページ切り替え">
+      <a href="../">曲を選ぶ</a>
+      <a class="current" href="./">プレイリスト</a>
+    </nav>
+  </div>
+</header>
+
+<div class="school-dock">
+  <div class="dock-inner">
+    <div class="school-tabs" id="schoolTabs" aria-label="学校切り替え"></div>
+    <div class="dock-controls">
+      <button class="control-btn primary" id="playAll" type="button">▶ 先頭から再生</button>
+      <button class="control-btn secondary" id="prevBtn" type="button" aria-label="前の曲">前</button>
+      <button class="control-btn secondary" id="nextBtn" type="button" aria-label="次の曲">次</button>
+      <button class="toggle-next on" id="autoNext" type="button" aria-pressed="true">自動で次へ</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="now-card" aria-live="polite">
+    <div class="now-dot" id="nowDot">♪</div>
+    <div>
+      <div class="now-title" id="nowTitle">未再生</div>
+      <div class="now-meta" id="nowMeta">学校を選んで再生できます</div>
+    </div>
+  </section>
+
+  <div class="playlist-head">
+    <h2 id="playlistTitle">プレイリスト</h2>
+    <div class="count" id="trackCount"></div>
+  </div>
+  <div id="playlist"></div>
+</main>
+
+<footer>HINATABOKKURI ／ 同窓会用 校歌アレンジ BGM集</footer>
+
+<div id="player">
+  <div class="player-inner">
+    <div class="player-title" id="playerTitle">曲を選んでください</div>
+    <div class="seek-row">
+      <span class="time" id="curTime">0:00</span>
+      <input type="range" id="seek" min="0" max="1000" value="0" step="1" aria-label="再生位置">
+      <span class="time" id="durTime">0:00</span>
+    </div>
+    <div class="player-controls">
+      <button id="restartBtn" type="button">最初から</button>
+      <button class="play" id="playBtn" type="button">▶ 再生</button>
+      <button id="nextPlayerBtn" type="button">次へ</button>
+    </div>
+    <div class="volume-row">
+      <span>音量</span>
+      <input type="range" id="vol" min="0" max="100" value="90" aria-label="音量">
+    </div>
+  </div>
+</div>
+
+<audio id="audio" preload="none"></audio>
+<script src="../bgm-data.js"></script>
+<script>
+const { SCHOOL_ORDER, SCHOOLS, ARR, GROUPS, BONUS_BY_SCHOOL } = window.DOUSOUKAI_BGM_DATA;
+const AUDIO_BASE = '../audio/';
+const schoolTabsEl = document.getElementById('schoolTabs');
+const playlistEl = document.getElementById('playlist');
+const playlistTitle = document.getElementById('playlistTitle');
+const trackCount = document.getElementById('trackCount');
+const nowTitle = document.getElementById('nowTitle');
+const nowMeta = document.getElementById('nowMeta');
+const nowDot = document.getElementById('nowDot');
+const audio = document.getElementById('audio');
+const playerTitle = document.getElementById('playerTitle');
+const curTime = document.getElementById('curTime');
+const durTime = document.getElementById('durTime');
+const seek = document.getElementById('seek');
+const vol = document.getElementById('vol');
+const playBtn = document.getElementById('playBtn');
+const restartBtn = document.getElementById('restartBtn');
+const nextPlayerBtn = document.getElementById('nextPlayerBtn');
+const playAllBtn = document.getElementById('playAll');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const autoNextBtn = document.getElementById('autoNext');
+
+let activeSchool = initialSchool();
+let tracks = [];
+let currentIndex = -1;
+let seeking = false;
+let autoAdvance = true;
+let audioContext = null;
+let audioSource = null;
+let gainNode = null;
+let currentVolume = 0.9;
+
+const savedVol = localStorage.getItem('dousoukai_vol');
+setAppVolume(savedVol !== null ? Number(savedVol) : 0.9);
+
+function fmt(s){
+  s = Math.floor(s || 0);
+  const m = Math.floor(s / 60);
+  const ss = String(s % 60).padStart(2,'0');
+  return `${m}:${ss}`;
+}
+function schoolFromHash(){
+  const raw = decodeURIComponent(location.hash.replace(/^#/,''));
+  return SCHOOL_ORDER.find(id => id === raw || SCHOOLS[id].hash === raw) || null;
+}
+function initialSchool(){
+  const fromHash = schoolFromHash();
+  if(fromHash) return fromHash;
+  const storedRaw = localStorage.getItem('dousoukai_school');
+  const stored = storedRaw === 'arisai' ? 'yusai' : storedRaw;
+  return SCHOOL_ORDER.includes(stored) ? stored : SCHOOL_ORDER[0];
+}
+function arrangementKeysForSchool(schoolId){
+  const keys = ['chorus'];
+  GROUPS.forEach(group => {
+    const groupKeys = group.bonus ? (BONUS_BY_SCHOOL[schoolId] || []) : group.items;
+    groupKeys.forEach(key => {
+      if(!keys.includes(key)) keys.push(key);
+    });
+  });
+  return keys;
+}
+function groupTitleForKey(key, schoolId){
+  if(key === 'chorus') return '校歌';
+  const group = GROUPS.find(g => {
+    const keys = g.bonus ? (BONUS_BY_SCHOOL[schoolId] || []) : g.items;
+    return keys.includes(key);
+  });
+  return group ? `${group.ico} ${group.title}` : 'その他';
+}
+function buildTracks(schoolId){
+  const result = [];
+  arrangementKeysForSchool(schoolId).forEach(key => {
+    const d = ARR[key];
+    const takes = d.schools && d.schools[schoolId] ? d.schools[schoolId] : [];
+    takes.forEach(take => {
+      const [label, file, dur] = take;
+      result.push({
+        key,
+        group: groupTitleForKey(key, schoolId),
+        title: d.name,
+        label,
+        file,
+        dur,
+        scene: d.scene,
+        schoolId,
+      });
+    });
+  });
+  return result;
+}
+function renderTabs(){
+  schoolTabsEl.innerHTML = SCHOOL_ORDER.map(schoolId => {
+    const school = SCHOOLS[schoolId];
+    const active = schoolId === activeSchool;
+    return `<button class="school-tab${active ? ' active' : ''}" type="button" data-school="${schoolId}" aria-pressed="${active}">
+      <span>${school.name}</span><small>${school.sub}</small>
+    </button>`;
+  }).join('');
+  schoolTabsEl.querySelectorAll('.school-tab').forEach(btn => {
+    btn.addEventListener('click', () => selectSchool(btn.dataset.school));
+  });
+}
+function renderPlaylist(){
+  tracks = buildTracks(activeSchool);
+  const school = SCHOOLS[activeSchool];
+  playlistTitle.textContent = `${school.name} プレイリスト`;
+  trackCount.textContent = `${tracks.length}曲`;
+  let previousGroup = '';
+  let html = '';
+  tracks.forEach((track, index) => {
+    if(track.group !== previousGroup){
+      if(previousGroup) html += '</div></section>';
+      html += `<section class="group"><h3 class="group-title">${track.group}</h3><div class="track-list">`;
+      previousGroup = track.group;
+    }
+    const dlName = `${school.name} ${track.title} ${track.label}.mp3`;
+    html += `<article class="track-card" data-index="${index}">
+      <button class="track-main" type="button" data-index="${index}">
+        <span class="num">${String(index + 1).padStart(2,'0')}</span>
+        <span class="track-copy">
+          <span class="track-title">${track.title} ／ ${track.label}</span>
+          <span class="track-sub">${track.scene}</span>
+        </span>
+        <span class="duration">${fmt(track.dur)}</span>
+      </button>
+      <a class="save" href="${AUDIO_BASE + track.file}" download="${dlName}" aria-label="${dlName} を保存"><b>↓</b>保存</a>
+    </article>`;
+  });
+  playlistEl.innerHTML = html ? html + '</div></section>' : '';
+  playlistEl.querySelectorAll('.track-main').forEach(btn => {
+    btn.addEventListener('click', () => playIndex(Number(btn.dataset.index)));
+  });
+  updateActiveTrack();
+}
+function selectSchool(schoolId, updateHash=true){
+  if(!SCHOOLS[schoolId] || schoolId === activeSchool) return;
+  audio.pause();
+  currentIndex = -1;
+  activeSchool = schoolId;
+  localStorage.setItem('dousoukai_school', schoolId);
+  renderTabs();
+  renderPlaylist();
+  resetNow();
+  if(updateHash) history.replaceState(null, '', '#' + SCHOOLS[schoolId].hash);
+}
+function getAudioContextClass(){
+  return window.AudioContext || window.webkitAudioContext;
+}
+function ensureAudioRouting(){
+  if(gainNode){
+    if(audioContext && audioContext.state === 'suspended') audioContext.resume().catch(()=>{});
+    return;
+  }
+  const AudioContextClass = getAudioContextClass();
+  if(!AudioContextClass) return;
+  try{
+    audioContext = new AudioContextClass();
+    audioSource = audioContext.createMediaElementSource(audio);
+    gainNode = audioContext.createGain();
+    gainNode.gain.value = currentVolume;
+    audioSource.connect(gainNode).connect(audioContext.destination);
+    if(audioContext.state === 'suspended') audioContext.resume().catch(()=>{});
+  }catch(e){
+    audioContext = null;
+    audioSource = null;
+    gainNode = null;
+  }
+}
+function setAppVolume(value){
+  const normalized = Math.max(0, Math.min(1, Number(value) || 0));
+  currentVolume = normalized;
+  try{ audio.volume = normalized; }catch(e){}
+  if(gainNode) gainNode.gain.value = normalized;
+  vol.value = Math.round(normalized * 100);
+}
+function playIndex(index){
+  if(index < 0 || index >= tracks.length) return;
+  currentIndex = index;
+  const track = tracks[index];
+  const school = SCHOOLS[activeSchool];
+  audio.src = AUDIO_BASE + track.file;
+  playerTitle.textContent = `${school.name} ｜ ${track.title} ｜ ${track.label}`;
+  nowTitle.textContent = `${track.title} ／ ${track.label}`;
+  nowMeta.textContent = `${school.name}・${track.group}・${fmt(track.dur)}`;
+  nowDot.textContent = String(index + 1).padStart(2,'0');
+  updateActiveTrack();
+  ensureAudioRouting();
+  const result = audio.play();
+  if(result && typeof result.catch === 'function') result.catch(()=>{});
+}
+function playRelative(delta){
+  if(!tracks.length) return;
+  const next = currentIndex < 0 ? 0 : currentIndex + delta;
+  if(next < 0 || next >= tracks.length) return;
+  playIndex(next);
+}
+function resetNow(){
+  playerTitle.textContent = '曲を選んでください';
+  nowTitle.textContent = '未再生';
+  nowMeta.textContent = `${SCHOOLS[activeSchool].name}・${tracks.length}曲`;
+  nowDot.textContent = '♪';
+  curTime.textContent = '0:00';
+  durTime.textContent = '0:00';
+  seek.value = 0;
+  playBtn.textContent = '▶ 再生';
+}
+function updateActiveTrack(){
+  document.querySelectorAll('.track-card').forEach(card => {
+    card.classList.toggle('active', Number(card.dataset.index) === currentIndex);
+  });
+}
+function updatePlayState(){
+  playBtn.textContent = audio.paused ? '▶ 再生' : '⏸ 一時停止';
+}
+
+renderTabs();
+renderPlaylist();
+resetNow();
+
+playAllBtn.addEventListener('click', () => playIndex(0));
+prevBtn.addEventListener('click', () => playRelative(-1));
+nextBtn.addEventListener('click', () => playRelative(1));
+nextPlayerBtn.addEventListener('click', () => playRelative(1));
+restartBtn.addEventListener('click', () => {
+  if(currentIndex < 0) return;
+  audio.currentTime = 0;
+  ensureAudioRouting();
+  audio.play().catch(()=>{});
+});
+playBtn.addEventListener('click', () => {
+  if(currentIndex < 0){
+    playIndex(0);
+    return;
+  }
+  if(audio.paused){
+    ensureAudioRouting();
+    audio.play().catch(()=>{});
+  }else{
+    audio.pause();
+  }
+});
+autoNextBtn.addEventListener('click', () => {
+  autoAdvance = !autoAdvance;
+  autoNextBtn.classList.toggle('on', autoAdvance);
+  autoNextBtn.setAttribute('aria-pressed', autoAdvance ? 'true' : 'false');
+  autoNextBtn.textContent = autoAdvance ? '自動で次へ' : '1曲で停止';
+});
+audio.addEventListener('play', updatePlayState);
+audio.addEventListener('pause', updatePlayState);
+audio.addEventListener('ended', () => {
+  updatePlayState();
+  if(autoAdvance && currentIndex + 1 < tracks.length){
+    playIndex(currentIndex + 1);
+  }
+});
+audio.addEventListener('loadedmetadata', () => { durTime.textContent = fmt(audio.duration); });
+audio.addEventListener('timeupdate', () => {
+  if(seeking) return;
+  curTime.textContent = fmt(audio.currentTime);
+  if(audio.duration) seek.value = Math.round(audio.currentTime / audio.duration * 1000);
+});
+seek.addEventListener('input', () => {
+  seeking = true;
+  if(audio.duration) curTime.textContent = fmt(seek.value / 1000 * audio.duration);
+});
+seek.addEventListener('change', () => {
+  if(audio.duration) audio.currentTime = seek.value / 1000 * audio.duration;
+  seeking = false;
+});
+vol.addEventListener('pointerdown', ensureAudioRouting);
+vol.addEventListener('touchstart', ensureAudioRouting, { passive:true });
+vol.addEventListener('input', () => {
+  setAppVolume(vol.value / 100);
+  localStorage.setItem('dousoukai_vol', currentVolume);
+});
+vol.addEventListener('change', () => {
+  setAppVolume(vol.value / 100);
+  localStorage.setItem('dousoukai_vol', currentVolume);
+});
+window.addEventListener('hashchange', () => {
+  const schoolId = schoolFromHash();
+  if(schoolId) selectSchool(schoolId, false);
+});
+</script>
+</body>
+</html>
