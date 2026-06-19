@@ -121,7 +121,7 @@
   .playlist-cta:focus{ outline:none; border-color:#244b73; background:#e8f1fb; }
   .school-tabs{
     display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-columns:repeat(4,minmax(0,1fr));
     gap:8px;
   }
   .school-tab{
@@ -204,8 +204,8 @@
   @media(min-width:560px){ .toc-grid{ grid-template-columns:1fr 1fr; } }
   @media(max-width:520px){
     .playlist-cta{ min-height:56px; font-size:20px; }
-    .school-tabs{ grid-template-columns:repeat(3,minmax(0,1fr)); }
-    .school-tab{ min-height:48px; font-size:17px; }
+    .school-tabs{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .school-tab{ min-height:48px; font-size:16px; }
   }
   .toc-btn{
     display:flex; align-items:center; gap:12px;
@@ -456,7 +456,7 @@
 <header>
   <div class="wrap">
     <h1>同窓会用 校歌アレンジ BGM集</h1>
-    <p class="lead">同窓会や記念行事で使いやすいよう、校歌をさまざまな雰囲気にアレンジしたBGM集です。固定ヘッダーから全曲再生ページと学校別の曲一覧を切り替えられます。</p>
+    <p class="lead">同窓会や記念行事で使いやすいよう、校歌をさまざまな雰囲気にアレンジしたBGM集です。固定ヘッダーから全曲再生ページ、学校別の曲一覧、朗読音声へ移動できます。</p>
   </div>
 </header>
 
@@ -612,6 +612,9 @@ function initialTab(){
 let activeTab = initialTab();
 
 function renderSchoolTabs(){
+  const narrationLink = `<a class="school-tab narration-link" href="narration/" aria-label="朗読音声ページへ" style="--school-accent:#7b4d8f;--school-dark:#5d396e;--school-light:#f5ecfa;">
+      <span>朗読</span>
+    </a>`;
   schoolTabsEl.innerHTML = SCHOOL_ORDER.map(schoolId=>{
     const tab = tabBySchoolId(schoolId);
     const current = schoolId === activeTab;
@@ -620,7 +623,7 @@ function renderSchoolTabs(){
     return `<button class="school-tab${current?' active':''}" type="button" data-tab="${schoolId}" aria-pressed="${current}" style="${style}">
       <span>${tab ? tab.label : SCHOOLS[schoolId].name}</span>
     </button>`;
-  }).join('');
+  }).join('') + narrationLink;
   schoolTabsEl.querySelectorAll('button.school-tab').forEach(btn=>{
     btn.addEventListener('click',()=>selectSchool(btn.dataset.tab));
   });

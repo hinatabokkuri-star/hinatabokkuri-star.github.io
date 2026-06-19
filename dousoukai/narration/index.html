@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7b4d8f">
+<title>同窓会用 朗読音声</title>
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<style>
+  :root{
+    --bg:#faf5ea;
+    --paper:#ffffff;
+    --ink:#2b2620;
+    --ink-soft:#5b5447;
+    --line:#e3d9c4;
+    --accent:#7b4d8f;
+    --accent-dark:#5d396e;
+    --accent-light:#f5ecfa;
+    --blue:#2f5f8f;
+    --blue-dark:#244b73;
+    --green:#1d7a43;
+    --green-dark:#155c32;
+    --shadow:0 2px 8px rgba(60,45,15,.10);
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(180deg,#fff8ec 0%,var(--bg) 50%,#f2edf7 100%) fixed;
+    color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",Meiryo,system-ui,sans-serif;
+    font-size:18px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:920px; margin:0 auto; padding:0 16px; }
+  header{
+    background:linear-gradient(180deg,#fff9ef,var(--accent-light));
+    border-bottom:3px solid var(--accent);
+    padding:26px 0 20px;
+    text-align:center;
+  }
+  h1{
+    margin:0 0 8px;
+    color:var(--accent-dark);
+    font-size:30px;
+    letter-spacing:.02em;
+  }
+  .lead{
+    margin:0 auto;
+    max-width:720px;
+    color:var(--ink-soft);
+    font-size:16px;
+    text-align:left;
+  }
+  .school-dock{
+    position:sticky;
+    top:0;
+    z-index:30;
+    background:rgba(252,248,239,.94);
+    border-bottom:2px solid rgba(0,0,0,.06);
+    box-shadow:0 5px 16px rgba(60,45,15,.08);
+    backdrop-filter:blur(8px);
+  }
+  .dock-inner{ padding:12px 0 14px; }
+  .playlist-cta{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:58px;
+    margin-bottom:10px;
+    border:2px solid var(--blue);
+    border-radius:16px;
+    background:#f3f8ff;
+    color:var(--blue-dark);
+    text-decoration:none;
+    font-size:21px;
+    font-weight:900;
+    box-shadow:var(--shadow);
+  }
+  .playlist-cta:hover,
+  .playlist-cta:focus{ outline:none; border-color:var(--blue-dark); background:#e8f1fb; }
+  .school-tabs{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:8px;
+  }
+  .school-tab{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:52px;
+    border:2px solid var(--school-accent,var(--line));
+    border-radius:12px;
+    background:var(--school-light,var(--paper));
+    color:var(--school-dark,var(--ink));
+    font-size:18px;
+    font-weight:900;
+    padding:9px 8px;
+    text-align:center;
+    text-decoration:none;
+    box-shadow:var(--shadow);
+    opacity:.86;
+  }
+  .school-tab.active{
+    opacity:1;
+    background:var(--school-accent,var(--accent));
+    color:#fff;
+    box-shadow:0 8px 20px rgba(60,45,15,.14);
+  }
+  .school-tab:hover,
+  .school-tab:focus{ opacity:1; transform:translateY(-1px); outline:none; }
+  .school-tab:focus-visible,
+  .save:focus-visible,
+  audio:focus-visible{ outline:4px solid #ffd27a; outline-offset:2px; }
+
+  main{ padding:26px 0 34px; }
+  .note{
+    background:#fffdf7;
+    border:2px solid var(--line);
+    border-radius:14px;
+    padding:16px 18px;
+    margin:0 0 24px;
+    box-shadow:var(--shadow);
+  }
+  .note b{ color:var(--accent-dark); }
+  .section{
+    margin:30px 0 34px;
+  }
+  .section-head{
+    border-left:8px solid var(--accent);
+    padding:4px 0 4px 14px;
+    margin:0 0 14px;
+  }
+  .section-head h2{
+    margin:0;
+    color:var(--accent-dark);
+    font-size:24px;
+  }
+  .section-head p{
+    margin:2px 0 0;
+    color:var(--ink-soft);
+    font-size:15px;
+  }
+  .voice-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  @media(min-width:760px){
+    .voice-grid{ grid-template-columns:1fr 1fr; }
+  }
+  .voice-card{
+    border:2px solid var(--line);
+    border-radius:16px;
+    background:var(--paper);
+    box-shadow:var(--shadow);
+    padding:18px;
+    min-width:0;
+  }
+  .voice-card h3{
+    margin:0 0 6px;
+    font-size:22px;
+    color:var(--ink);
+  }
+  .voice-card .voice-sub{
+    margin:0 0 14px;
+    color:var(--ink-soft);
+    font-size:15px;
+  }
+  .track{
+    border-top:1px solid var(--line);
+    padding:14px 0 0;
+    margin:14px 0 0;
+  }
+  .track:first-of-type{
+    border-top:0;
+    padding-top:0;
+    margin-top:0;
+  }
+  .track-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    margin:0 0 10px;
+  }
+  .track-title{
+    margin:0;
+    font-size:18px;
+    font-weight:900;
+    color:var(--accent-dark);
+  }
+  .track-meta{
+    display:block;
+    color:var(--ink-soft);
+    font-size:14px;
+    font-weight:500;
+  }
+  .duration{
+    flex:0 0 auto;
+    min-width:54px;
+    border-radius:999px;
+    background:var(--accent-light);
+    color:var(--accent-dark);
+    font-size:14px;
+    font-weight:900;
+    text-align:center;
+    padding:3px 9px;
+  }
+  audio{
+    display:block;
+    width:100%;
+    min-height:44px;
+  }
+  .actions{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:10px;
+  }
+  .save{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:42px;
+    padding:8px 14px;
+    border:2px solid var(--blue);
+    border-radius:12px;
+    background:#f3f8ff;
+    color:var(--blue-dark);
+    text-decoration:none;
+    font-weight:900;
+    font-size:15px;
+  }
+  .save:hover,
+  .save:focus{ background:#e8f1fb; outline:none; }
+  footer{
+    padding:28px 16px 34px;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+  @media(max-width:520px){
+    h1{ font-size:27px; }
+    body{ font-size:17px; }
+    .playlist-cta{ min-height:56px; font-size:19px; }
+    .school-tab{ min-height:48px; font-size:16px; }
+    .voice-card{ padding:16px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>同窓会用 朗読音声</h1>
+    <p class="lead">映像付き朗読で使うための読み修正済み音声です。男声・女声それぞれに、ゆっくり目とさらにゆっくりの2種類を用意しています。</p>
+  </div>
+</header>
+
+<div class="school-dock">
+  <div class="wrap">
+    <div class="dock-inner">
+      <a class="playlist-cta" href="../playlist/" aria-label="全曲再生ページへ">全曲再生</a>
+      <div class="school-tabs" aria-label="ページ切り替え">
+        <a class="school-tab" href="../#yasaka" style="--school-accent:#6a4ea3;--school-dark:#503b83;--school-light:#f0ecfb;">弥栄</a>
+        <a class="school-tab" href="../#awata" style="--school-accent:#b06f00;--school-dark:#8a5600;--school-light:#fff3dc;">粟田</a>
+        <a class="school-tab" href="../#yusai" style="--school-accent:#16775f;--school-dark:#0f5847;--school-light:#e3f5ee;">有済</a>
+        <a class="school-tab active" href="./" aria-current="page" style="--school-accent:#7b4d8f;--school-dark:#5d396e;--school-light:#f5ecfa;">朗読</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="note">
+    <b>使い分け</b><br>
+    通常確認用は間の余白を短めにした通し確認向けです。写真演出用はシーンの切り替わりに合わせて余白を長めに入れています。音声が重ならないよう、1つ再生すると他の音声は停止します。
+  </div>
+
+  <section class="section" aria-labelledby="check-title">
+    <div class="section-head">
+      <h2 id="check-title">通常確認用</h2>
+      <p>まず聞き通して確認しやすい、余白短めの版です。</p>
+    </div>
+    <div class="voice-grid">
+      <article class="voice-card">
+        <h3>Keita 男声</h3>
+        <p class="voice-sub">落ち着いた男性アナウンス寄りの声です。</p>
+
+        <div class="track">
+          <div class="track-head">
+            <p class="track-title">ゆっくり目<span class="track-meta">通常確認用</span></p>
+            <span class="duration">5:49</span>
+          </div>
+          <audio controls preload="metadata" src="../audio/narration/yasaka-keita-reading-check-slow.mp3"></audio>
+          <div class="actions"><a class="save" href="../audio/narration/yasaka-keita-reading-check-slow.mp3" download="弥栄朗読_Keita_通常確認用_ゆっくり目.mp3">保存</a></div>
+        </div>
+
+        <div class="track">
+          <div class="track-head">
+            <p class="track-title">さらにゆっくり<span class="track-meta">通常確認用</span></p>
+            <span class="duration">6:46</span>
+          </div>
+          <audio controls preload="metadata" src="../audio/narration/yasaka-keita-reading-check-extra-slow.mp3"></audio>
+          <div class="actions"><a class="save" href="../audio/narration/yasaka-keita-reading-check-extra-slow.mp3" download="弥栄朗読_Keita_通常確認用_さらにゆっくり.mp3">保存</a></div>
+        </div>
+      </article>
+
+      <article class="voice-card">
+        <h3>Konoha 女声</h3>
+        <p class="voice-sub">聞き取りやすい女性アナウンス寄りの声です。</p>
+
+        <div class="track">
+          <div class="track-head">
+            <p class="track-title">ゆっくり目<span class="track-meta">通常確認用</span></p>
+            <span class="duration">5:53</span>
+          </div>
+          <audio controls preload="metadata" src="../audio/narration/yasaka-konoha-reading-check-slow.mp3"></audio>
+          <div class="actions"><a class="save" href="../audio/narration/yasaka-konoha-reading-check-slow.mp3" download="弥栄朗読_Konoha_通常確認用_ゆっくり目.mp3">保存</a></div>
+        </div>
+
+        <div class="track">
+          <div class="track-head">
+            <p class="track-title">さらにゆっくり<span class="track-meta">通常確認用</span></p>
+            <span class="duration">6:51</span>
+          </div>
+          <audio controls preload="metadata" src="../audio/narration/yasaka-konoha-reading-check-extra-slow.mp3"></audio>
+          <div class="actions"><a class="save" href="../audio/narration/yasaka-konoha-reading-check-extra-slow.mp3" download="弥栄朗読_Konoha_通常確認用_さらにゆっくり.mp3">保存</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="scene-title">
+    <div class="section-head">
+      <h2 id="scene-title">写真演出用</h2>
+      <p>シーンの区切りに合わせて、間を長めにした本番向けの版です。</p>
+    </div>
+    <div class="voice-grid">
+      <article class="voice-card">
+        <h3>Keita 男声</h3>
+        <p class="voice-sub">映像の場面転換に合わせやすい男声版です。</p>
+
+        <div class="track">
+          <div class="track-head">
+            <p class="track-title">ゆっくり目<span class="track-meta">写真演出用</span></p>
+            <span class="duration">7:39</span>
+          </div>
+          <audio controls preload="metadata" src="../audio/narration/yasaka-keita-reading-scene-slow.mp3"></audio>
+          <div class="actions"><a class="save" href="../audio/narration/yasaka-keita-reading-scene-slow.mp3" download="弥栄朗読_Keita_写真演出用_ゆっくり目.mp3">保存</a></div>
+        </div>
+
+        <div class="track">
+          <div class="track-head">
+            <p class="track-title">さらにゆっくり<span class="track-meta">写真演出用</span></p>
+            <span class="duration">8:54</span>
+          </div>
+          <audio controls preload="metadata" src="../audio/narration/yasaka-keita-reading-scene-extra-slow.mp3"></audio>
+          <div class="actions"><a class="save" href="../audio/narration/yasaka-keita-reading-scene-extra-slow.mp3" download="弥栄朗読_Keita_写真演出用_さらにゆっくり.mp3">保存</a></div>
+        </div>
+      </article>
+
+      <article class="voice-card">
+        <h3>Konoha 女声</h3>
+        <p class="voice-sub">映像の場面転換に合わせやすい女声版です。</p>
+
+        <div class="track">
+          <div class="track-head">
+            <p class="track-title">ゆっくり目<span class="track-meta">写真演出用</span></p>
+            <span class="duration">7:44</span>
+          </div>
+          <audio controls preload="metadata" src="../audio/narration/yasaka-konoha-reading-scene-slow.mp3"></audio>
+          <div class="actions"><a class="save" href="../audio/narration/yasaka-konoha-reading-scene-slow.mp3" download="弥栄朗読_Konoha_写真演出用_ゆっくり目.mp3">保存</a></div>
+        </div>
+
+        <div class="track">
+          <div class="track-head">
+            <p class="track-title">さらにゆっくり<span class="track-meta">写真演出用</span></p>
+            <span class="duration">8:59</span>
+          </div>
+          <audio controls preload="metadata" src="../audio/narration/yasaka-konoha-reading-scene-extra-slow.mp3"></audio>
+          <div class="actions"><a class="save" href="../audio/narration/yasaka-konoha-reading-scene-extra-slow.mp3" download="弥栄朗読_Konoha_写真演出用_さらにゆっくり.mp3">保存</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  HINATABOKKURI ／ 同窓会用 朗読音声
+</footer>
+
+<script>
+document.querySelectorAll('audio').forEach(audio=>{
+  audio.addEventListener('play',()=>{
+    document.querySelectorAll('audio').forEach(other=>{
+      if(other !== audio) other.pause();
+    });
+  });
+});
+</script>
+</body>
+</html>
