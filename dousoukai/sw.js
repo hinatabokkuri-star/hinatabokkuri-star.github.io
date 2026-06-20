@@ -8,11 +8,7 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
-    const keys = await caches.keys();
-    await Promise.all(keys.map(key => {
-      if(key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME) return caches.delete(key);
-      return Promise.resolve(false);
-    }));
+    // Old audio caches are cleaned after the page migrates reusable files.
     await self.clients.claim();
   })());
 });
