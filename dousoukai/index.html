@@ -900,5 +900,6 @@ vol.addEventListener('touchstart',ensureAudioRouting,{passive:true});
 vol.addEventListener('input',()=>{ setAppVolume(vol.value/100); saveAppVolume(); });
 vol.addEventListener('change',()=>{ setAppVolume(vol.value/100); saveAppVolume(); });
 </script>
+<script src="offline-cache.js" defer></script>
 </body>
 </html>

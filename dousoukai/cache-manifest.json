@@ -1,0 +1,498 @@
+{
+  "version": "2026-06-20-v1",
+  "cacheName": "dousoukai-offline-2026-06-20-v1",
+  "generatedAt": "2026-06-20T18:00:39",
+  "core": [
+    "./",
+    "index.html",
+    "playlist/",
+    "playlist/index.html",
+    "narration/",
+    "narration/index.html",
+    "bgm-data.js",
+    "offline-cache.js",
+    "cache-manifest.json"
+  ],
+  "audio": [
+    {
+      "url": "audio/africa_1.mp3",
+      "bytes": 3523173
+    },
+    {
+      "url": "audio/africa_2.mp3",
+      "bytes": 3874261
+    },
+    {
+      "url": "audio/arisai_bon_odori_1.mp3",
+      "bytes": 2962278
+    },
+    {
+      "url": "audio/arisai_bon_odori_2.mp3",
+      "bytes": 3005142
+    },
+    {
+      "url": "audio/arisai_bossa_1.mp3",
+      "bytes": 3517470
+    },
+    {
+      "url": "audio/arisai_bossa_2.mp3",
+      "bytes": 3437910
+    },
+    {
+      "url": "audio/arisai_chorus_1.mp3",
+      "bytes": 2167926
+    },
+    {
+      "url": "audio/arisai_chorus_2.mp3",
+      "bytes": 2336862
+    },
+    {
+      "url": "audio/arisai_closing_reprise_1.mp3",
+      "bytes": 2467158
+    },
+    {
+      "url": "audio/arisai_closing_reprise_2.mp3",
+      "bytes": 2350902
+    },
+    {
+      "url": "audio/arisai_full_orchestra_1.mp3",
+      "bytes": 2772966
+    },
+    {
+      "url": "audio/arisai_full_orchestra_2.mp3",
+      "bytes": 2724222
+    },
+    {
+      "url": "audio/arisai_harmonica_folk_1.mp3",
+      "bytes": 2846358
+    },
+    {
+      "url": "audio/arisai_harmonica_folk_2.mp3",
+      "bytes": 3717870
+    },
+    {
+      "url": "audio/arisai_hawaiian_1.mp3",
+      "bytes": 3224310
+    },
+    {
+      "url": "audio/arisai_hawaiian_2.mp3",
+      "bytes": 2585862
+    },
+    {
+      "url": "audio/arisai_horror_1.mp3",
+      "bytes": 2748342
+    },
+    {
+      "url": "audio/arisai_horror_2.mp3",
+      "bytes": 2241750
+    },
+    {
+      "url": "audio/arisai_humming_1.mp3",
+      "bytes": 1695822
+    },
+    {
+      "url": "audio/arisai_humming_2.mp3",
+      "bytes": 1517934
+    },
+    {
+      "url": "audio/arisai_lounge_jazz_1.mp3",
+      "bytes": 3114150
+    },
+    {
+      "url": "audio/arisai_lounge_jazz_2.mp3",
+      "bytes": 3791814
+    },
+    {
+      "url": "audio/arisai_nostalgic_jazz_1.mp3",
+      "bytes": 3853590
+    },
+    {
+      "url": "audio/arisai_nostalgic_jazz_2.mp3",
+      "bytes": 3103110
+    },
+    {
+      "url": "audio/arisai_orchestra_1.mp3",
+      "bytes": 3653574
+    },
+    {
+      "url": "audio/arisai_orchestra_2.mp3",
+      "bytes": 3052710
+    },
+    {
+      "url": "audio/arisai_piano_trio_1.mp3",
+      "bytes": 3174294
+    },
+    {
+      "url": "audio/arisai_piano_trio_2.mp3",
+      "bytes": 3190182
+    },
+    {
+      "url": "audio/arisai_showa_kayo_1.mp3",
+      "bytes": 2293614
+    },
+    {
+      "url": "audio/arisai_showa_kayo_2.mp3",
+      "bytes": 3294582
+    },
+    {
+      "url": "audio/arisai_sports_march_1.mp3",
+      "bytes": 1471686
+    },
+    {
+      "url": "audio/arisai_sports_march_2.mp3",
+      "bytes": 1495638
+    },
+    {
+      "url": "audio/arisai_strings_piano_1.mp3",
+      "bytes": 2301270
+    },
+    {
+      "url": "audio/arisai_strings_piano_2.mp3",
+      "bytes": 2368182
+    },
+    {
+      "url": "audio/arisai_swing_1.mp3",
+      "bytes": 4873590
+    },
+    {
+      "url": "audio/arisai_swing_2.mp3",
+      "bytes": 3226086
+    },
+    {
+      "url": "audio/arisai_toy_music_1.mp3",
+      "bytes": 1529958
+    },
+    {
+      "url": "audio/arisai_toy_music_2.mp3",
+      "bytes": 1726518
+    },
+    {
+      "url": "audio/arisai_woodwind_1.mp3",
+      "bytes": 3381750
+    },
+    {
+      "url": "audio/arisai_woodwind_2.mp3",
+      "bytes": 1817358
+    },
+    {
+      "url": "audio/bossa_1.mp3",
+      "bytes": 2869060
+    },
+    {
+      "url": "audio/bossa_2.mp3",
+      "bytes": 3218168
+    },
+    {
+      "url": "audio/chindon_1.mp3",
+      "bytes": 3124866
+    },
+    {
+      "url": "audio/chindon_2.mp3",
+      "bytes": 3176779
+    },
+    {
+      "url": "audio/chorus_1.mp3",
+      "bytes": 2976714
+    },
+    {
+      "url": "audio/chorus_2.mp3",
+      "bytes": 3000416
+    },
+    {
+      "url": "audio/closing_reprise_1.mp3",
+      "bytes": 3542202
+    },
+    {
+      "url": "audio/closing_reprise_2.mp3",
+      "bytes": 3037982
+    },
+    {
+      "url": "audio/electronic_1.mp3",
+      "bytes": 3513125
+    },
+    {
+      "url": "audio/full_orchestra_1.mp3",
+      "bytes": 3836229
+    },
+    {
+      "url": "audio/full_orchestra_2.mp3",
+      "bytes": 3597581
+    },
+    {
+      "url": "audio/harmonica_folk_1.mp3",
+      "bytes": 3483216
+    },
+    {
+      "url": "audio/harmonica_folk_2.mp3",
+      "bytes": 3083601
+    },
+    {
+      "url": "audio/humming_1.mp3",
+      "bytes": 1809808
+    },
+    {
+      "url": "audio/humming_2.mp3",
+      "bytes": 1974096
+    },
+    {
+      "url": "audio/lounge_jazz_1.mp3",
+      "bytes": 4112780
+    },
+    {
+      "url": "audio/lounge_jazz_2.mp3",
+      "bytes": 4151090
+    },
+    {
+      "url": "audio/minimal_1.mp3",
+      "bytes": 3649641
+    },
+    {
+      "url": "audio/narration/koki-reading-elevenlabs-sakura.mp3",
+      "bytes": 778593
+    },
+    {
+      "url": "audio/narration/koki-song-take1.mp3",
+      "bytes": 5581717
+    },
+    {
+      "url": "audio/narration/koki-song-take2.mp3",
+      "bytes": 5477305
+    },
+    {
+      "url": "audio/narration/yasaka-keita-reading-check-extra-slow.mp3",
+      "bytes": 9368685
+    },
+    {
+      "url": "audio/narration/yasaka-keita-reading-check-normal.mp3",
+      "bytes": 7575021
+    },
+    {
+      "url": "audio/narration/yasaka-keita-reading-check-slow.mp3",
+      "bytes": 8372184
+    },
+    {
+      "url": "audio/narration/yasaka-keita-reading-scene-extra-slow.mp3",
+      "bytes": 12022893
+    },
+    {
+      "url": "audio/narration/yasaka-keita-reading-scene-normal.mp3",
+      "bytes": 10229229
+    },
+    {
+      "url": "audio/narration/yasaka-keita-reading-scene-slow.mp3",
+      "bytes": 11026643
+    },
+    {
+      "url": "audio/narration/yasaka-konoha-reading-check-extra-slow.mp3",
+      "bytes": 9483885
+    },
+    {
+      "url": "audio/narration/yasaka-konoha-reading-check-normal.mp3",
+      "bytes": 7667181
+    },
+    {
+      "url": "audio/narration/yasaka-konoha-reading-check-slow.mp3",
+      "bytes": 8474375
+    },
+    {
+      "url": "audio/narration/yasaka-konoha-reading-scene-extra-slow.mp3",
+      "bytes": 12138093
+    },
+    {
+      "url": "audio/narration/yasaka-konoha-reading-scene-normal.mp3",
+      "bytes": 10321389
+    },
+    {
+      "url": "audio/narration/yasaka-konoha-reading-scene-slow.mp3",
+      "bytes": 11128834
+    },
+    {
+      "url": "audio/nostalgic_jazz_1.mp3",
+      "bytes": 4040759
+    },
+    {
+      "url": "audio/nostalgic_jazz_2.mp3",
+      "bytes": 3450288
+    },
+    {
+      "url": "audio/orchestra_2.mp3",
+      "bytes": 3595168
+    },
+    {
+      "url": "audio/piano_trio_1.mp3",
+      "bytes": 2886640
+    },
+    {
+      "url": "audio/piano_trio_2.mp3",
+      "bytes": 3567269
+    },
+    {
+      "url": "audio/showa_kayo_1.mp3",
+      "bytes": 3961474
+    },
+    {
+      "url": "audio/showa_kayo_2.mp3",
+      "bytes": 3682041
+    },
+    {
+      "url": "audio/strings_piano_1.mp3",
+      "bytes": 3780455
+    },
+    {
+      "url": "audio/strings_piano_2.mp3",
+      "bytes": 3544629
+    },
+    {
+      "url": "audio/swing_1.mp3",
+      "bytes": 3773293
+    },
+    {
+      "url": "audio/swing_2.mp3",
+      "bytes": 4332435
+    },
+    {
+      "url": "audio/woodwind_1.mp3",
+      "bytes": 4901614
+    },
+    {
+      "url": "audio/woodwind_2.mp3",
+      "bytes": 4173265
+    },
+    {
+      "url": "audio/yasaka_jhs_andes_1.mp3",
+      "bytes": 3471870
+    },
+    {
+      "url": "audio/yasaka_jhs_andes_2.mp3",
+      "bytes": 3685254
+    },
+    {
+      "url": "audio/yasaka_jhs_balkan_1.mp3",
+      "bytes": 3022806
+    },
+    {
+      "url": "audio/yasaka_jhs_balkan_2.mp3",
+      "bytes": 3460086
+    },
+    {
+      "url": "audio/yasaka_jhs_bossa_1.mp3",
+      "bytes": 3781086
+    },
+    {
+      "url": "audio/yasaka_jhs_bossa_2.mp3",
+      "bytes": 3841110
+    },
+    {
+      "url": "audio/yasaka_jhs_chorus_1.mp3",
+      "bytes": 3715518
+    },
+    {
+      "url": "audio/yasaka_jhs_chorus_2.mp3",
+      "bytes": 3957846
+    },
+    {
+      "url": "audio/yasaka_jhs_closing_reprise_1.mp3",
+      "bytes": 3642510
+    },
+    {
+      "url": "audio/yasaka_jhs_closing_reprise_2.mp3",
+      "bytes": 4947222
+    },
+    {
+      "url": "audio/yasaka_jhs_full_orchestra_1.mp3",
+      "bytes": 3691206
+    },
+    {
+      "url": "audio/yasaka_jhs_full_orchestra_2.mp3",
+      "bytes": 4347870
+    },
+    {
+      "url": "audio/yasaka_jhs_gamelan_1.mp3",
+      "bytes": 3599910
+    },
+    {
+      "url": "audio/yasaka_jhs_gamelan_2.mp3",
+      "bytes": 2984502
+    },
+    {
+      "url": "audio/yasaka_jhs_harmonica_folk_1.mp3",
+      "bytes": 3979038
+    },
+    {
+      "url": "audio/yasaka_jhs_harmonica_folk_2.mp3",
+      "bytes": 4533030
+    },
+    {
+      "url": "audio/yasaka_jhs_irish_1.mp3",
+      "bytes": 3910182
+    },
+    {
+      "url": "audio/yasaka_jhs_irish_2.mp3",
+      "bytes": 4087734
+    },
+    {
+      "url": "audio/yasaka_jhs_jazz_1.mp3",
+      "bytes": 3563094
+    },
+    {
+      "url": "audio/yasaka_jhs_jazz_2.mp3",
+      "bytes": 3429270
+    },
+    {
+      "url": "audio/yasaka_jhs_music_box_1.mp3",
+      "bytes": 2691414
+    },
+    {
+      "url": "audio/yasaka_jhs_music_box_2.mp3",
+      "bytes": 3441150
+    },
+    {
+      "url": "audio/yasaka_jhs_orchestra_1.mp3",
+      "bytes": 3705558
+    },
+    {
+      "url": "audio/yasaka_jhs_orchestra_2.mp3",
+      "bytes": 4078518
+    },
+    {
+      "url": "audio/yasaka_jhs_piano_1.mp3",
+      "bytes": 4633998
+    },
+    {
+      "url": "audio/yasaka_jhs_piano_2.mp3",
+      "bytes": 4959054
+    },
+    {
+      "url": "audio/yasaka_jhs_showa_kayo_1.mp3",
+      "bytes": 3474654
+    },
+    {
+      "url": "audio/yasaka_jhs_showa_kayo_2.mp3",
+      "bytes": 4181910
+    },
+    {
+      "url": "audio/yasaka_jhs_strings_piano_1.mp3",
+      "bytes": 3847566
+    },
+    {
+      "url": "audio/yasaka_jhs_strings_piano_2.mp3",
+      "bytes": 4254390
+    },
+    {
+      "url": "audio/yasaka_jhs_swing_1.mp3",
+      "bytes": 3765390
+    },
+    {
+      "url": "audio/yasaka_jhs_swing_2.mp3",
+      "bytes": 3846966
+    },
+    {
+      "url": "audio/yasaka_jhs_woodwind_1.mp3",
+      "bytes": 3339702
+    },
+    {
+      "url": "audio/yasaka_jhs_woodwind_2.mp3",
+      "bytes": 3246126
+    }
+  ]
+}
