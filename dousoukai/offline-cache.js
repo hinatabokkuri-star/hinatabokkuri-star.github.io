@@ -3,6 +3,8 @@
   const baseUrl = new URL('./', scriptUrl);
   const manifestUrl = new URL('cache-manifest.json', baseUrl);
   const swUrl = new URL('sw.js', baseUrl);
+  const activeKey = 'dousoukai_offline_cache_active';
+  const activeTtlMs = 45000;
 
   const unsupported = !('serviceWorker' in navigator) || !('caches' in window) || !('fetch' in window);
   let manifest = null;
@@ -11,6 +13,7 @@
   let coreItems = [];
   let ui = null;
   let isCaching = false;
+  let activeTimer = null;
 
   function onReady(fn){
     if(document.readyState === 'loading'){
@@ -136,10 +139,10 @@
       <div class="offline-cache-head">
         <div>
           <p class="offline-cache-title">オフライン再生用 音源保存</p>
-          <p class="offline-cache-status">保存状況を確認しています。</p>
+          <p class="offline-cache-status">保存状況を確認しています。未保存分は自動で保存します。</p>
         </div>
         <div class="offline-cache-actions">
-          <button class="primary" type="button" data-cache-start>全音源を保存</button>
+          <button class="primary" type="button" data-cache-start>今すぐ保存</button>
           <button type="button" data-cache-check>状況確認</button>
         </div>
       </div>
@@ -152,7 +155,7 @@
 
     const startButton = panel.querySelector('[data-cache-start]');
     const checkButton = panel.querySelector('[data-cache-check]');
-    startButton.addEventListener('click', () => cacheAllAudio());
+    startButton.addEventListener('click', () => cacheAllAudio({ manual:true }));
     checkButton.addEventListener('click', () => updateStatus());
 
     return {
@@ -205,10 +208,49 @@
     const storage = await storageText();
     setProgress(cachedCount, total);
     ui.panel.dataset.state = cachedCount === total ? 'done' : 'ready';
-    ui.status.textContent = `保存済み ${cachedCount} / ${total} 本`;
+    ui.status.textContent = cachedCount === total ? `保存済み ${cachedCount} / ${total} 本` : `保存済み ${cachedCount} / ${total} 本。未保存分を自動保存します。`;
     ui.detail.textContent = `音源 ${formatBytes(cachedBytes)} / 約${formatBytes(totalBytes)}${storage ? ` ・ ${storage}` : ''}`;
     ui.startButton.disabled = isCaching || cachedCount === total;
-    ui.startButton.textContent = cachedCount === total ? '保存済み' : '全音源を保存';
+    ui.startButton.textContent = cachedCount === total ? '保存済み' : '今すぐ保存';
+  }
+
+  function readActiveLock(){
+    try{
+      return JSON.parse(localStorage.getItem(activeKey) || 'null');
+    }catch(error){
+      return null;
+    }
+  }
+
+  function isAnotherCacheActive(){
+    const active = readActiveLock();
+    if(!active || active.cacheName !== cacheName) return false;
+    return Date.now() - Number(active.time || 0) < activeTtlMs;
+  }
+
+  function markActive(){
+    try{
+      localStorage.setItem(activeKey, JSON.stringify({ cacheName, time:Date.now() }));
+    }catch(error){
+      // Ignore storage write errors; the cache process can still continue.
+    }
+  }
+
+  function startActiveHeartbeat(){
+    markActive();
+    if(activeTimer) window.clearInterval(activeTimer);
+    activeTimer = window.setInterval(markActive, 15000);
+  }
+
+  function stopActiveHeartbeat(){
+    if(activeTimer){
+      window.clearInterval(activeTimer);
+      activeTimer = null;
+    }
+    const active = readActiveLock();
+    if(active && active.cacheName === cacheName){
+      try{ localStorage.removeItem(activeKey); }catch(error){}
+    }
   }
 
   async function fetchAndCache(cache, entry){
@@ -241,12 +283,25 @@
     }
   }
 
-  async function cacheAllAudio(){
+  async function cacheAllAudio(options = {}){
     if(isCaching || !manifest) return;
+    if(isAnotherCacheActive()){
+      ui.status.textContent = '別のタブで音源を保存中です。';
+      ui.detail.textContent = 'このページでは保存状況だけ確認します。';
+      return;
+    }
+    if(!navigator.onLine){
+      ui.panel.dataset.state = 'error';
+      ui.status.textContent = 'オフラインのため保存を開始できません。';
+      ui.detail.textContent = 'ネット接続がある場所でページを開くと、自動で保存を再開します。';
+      return;
+    }
     isCaching = true;
     ui.panel.dataset.state = 'working';
     ui.startButton.disabled = true;
     ui.checkButton.disabled = true;
+    ui.startButton.textContent = '保存中';
+    startActiveHeartbeat();
 
     const persisted = await requestPersistence();
     const cache = await caches.open(cacheName);
@@ -263,21 +318,35 @@
         failed += 1;
       }
       done += 1;
+      markActive();
       setProgress(done, total);
-      ui.status.textContent = `保存中 ${done} / ${total} 本`;
+      ui.status.textContent = `${options.manual ? '保存中' : '自動保存中'} ${done} / ${total} 本`;
       ui.detail.textContent = `${item.url || item}${persisted ? ' ・ 永続保存を許可済み' : ''}`;
       await new Promise(resolve => setTimeout(resolve, 20));
     }
 
     isCaching = false;
+    stopActiveHeartbeat();
     ui.checkButton.disabled = false;
     await updateStatus();
     if(failed){
       ui.panel.dataset.state = 'error';
       ui.status.textContent = `保存できなかった音源があります: ${failed} 本`;
-      ui.detail.textContent = '通信状態を確認して、もう一度「全音源を保存」を押してください。保存済みの音源は再取得しません。';
+      ui.detail.textContent = '通信状態を確認してください。次にページを開くと未保存分だけ自動で再開します。';
       ui.startButton.disabled = false;
     }
+  }
+
+  async function startAutoCacheIfNeeded(){
+    if(!manifest || !audioItems.length || isCaching) return;
+    const { cachedCount } = await cachedAudioInfo();
+    if(cachedCount >= audioItems.length) return;
+    if(!navigator.onLine){
+      ui.panel.dataset.state = 'error';
+      ui.status.textContent = 'オフラインです。ネット接続後にページを開くと自動保存します。';
+      return;
+    }
+    window.setTimeout(() => cacheAllAudio({ auto:true }), 900);
   }
 
   async function init(){
@@ -300,6 +369,7 @@
       await navigator.serviceWorker.register(swUrl.href, { scope: baseUrl.pathname });
       await navigator.serviceWorker.ready;
       await updateStatus();
+      await startAutoCacheIfNeeded();
     }catch(error){
       ui.panel.dataset.state = 'error';
       ui.status.textContent = '保存機能の準備に失敗しました。';
