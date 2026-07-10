@@ -393,6 +393,10 @@
       {
         "no": 456,
         "name": "マーマン"
+      },
+      {
+        "no": 573,
+        "name": "ゴブリンおおい"
       }
     ],
     "obtain_areas": [
@@ -765,6 +769,10 @@
       {
         "no": 450,
         "name": "デビルアイ"
+      },
+      {
+        "no": 573,
+        "name": "ゴブリンおおい"
       }
     ],
     "obtain_areas": [
@@ -2048,6 +2056,10 @@
       {
         "no": 409,
         "name": "イガグリドッグ"
+      },
+      {
+        "no": 571,
+        "name": "キングはかせ"
       }
     ],
     "obtain_areas": [
@@ -9660,6 +9672,10 @@
       {
         "no": 471,
         "name": "スモウトリ"
+      },
+      {
+        "no": 573,
+        "name": "ゴブリンおおい"
       }
     ],
     "obtain_areas": [
@@ -10921,6 +10937,10 @@
       {
         "no": 561,
         "name": "ゴブリンビショップ"
+      },
+      {
+        "no": 573,
+        "name": "ゴブリンおおい"
       }
     ],
     "obtain_areas": [
@@ -13642,6 +13662,10 @@
       {
         "no": 536,
         "name": "フランケン"
+      },
+      {
+        "no": 571,
+        "name": "キングはかせ"
       }
     ],
     "obtain_areas": [
@@ -16955,6 +16979,10 @@
       {
         "no": 548,
         "name": "スライムキング"
+      },
+      {
+        "no": 572,
+        "name": "ゴールドスライム"
       }
     ],
     "obtain_areas": [
@@ -19337,6 +19365,10 @@
       {
         "no": 524,
         "name": "ビッグアイ"
+      },
+      {
+        "no": 572,
+        "name": "ゴールドスライム"
       }
     ],
     "obtain_areas": [
@@ -21063,6 +21095,10 @@
       {
         "no": 546,
         "name": "ソニックスライム"
+      },
+      {
+        "no": 571,
+        "name": "キングはかせ"
       }
     ],
     "obtain_areas": [
@@ -24386,6 +24422,10 @@
       {
         "no": 532,
         "name": "ファイヤーボール"
+      },
+      {
+        "no": 571,
+        "name": "キングはかせ"
       }
     ],
     "obtain_areas": [
@@ -24504,6 +24544,10 @@
       {
         "no": 526,
         "name": "マジックゴースト"
+      },
+      {
+        "no": 573,
+        "name": "ゴブリンおおい"
       }
     ],
     "obtain_areas": [
@@ -25532,6 +25576,10 @@
       {
         "no": 535,
         "name": "キャリーアイ"
+      },
+      {
+        "no": 571,
+        "name": "キングはかせ"
       }
     ],
     "obtain_areas": [
@@ -28194,6 +28242,10 @@
       {
         "no": 528,
         "name": "アヌビス"
+      },
+      {
+        "no": 572,
+        "name": "ゴールドスライム"
       }
     ],
     "obtain_areas": [
@@ -40145,6 +40197,10 @@
       {
         "no": 520,
         "name": "メニースライム"
+      },
+      {
+        "no": 572,
+        "name": "ゴールドスライム"
       }
     ],
     "obtain_areas": [
@@ -41856,6 +41912,10 @@
       {
         "no": 568,
         "name": "まおう"
+      },
+      {
+        "no": 572,
+        "name": "ゴールドスライム"
       }
     ],
     "obtain_areas": [
@@ -64066,7 +64126,9 @@
     ],
     "monster_type": null,
     "spawn_areas": [],
-    "spawn_points": [],
+    "spawn_points": [
+      14988
+    ],
     "drop_items": [
       {
         "no": 53,
@@ -64087,6 +64149,309 @@
       {
         "no": 295,
         "name": "スキンヘッド"
+      }
+    ]
+  },
+  {
+    "no": 571,
+    "category": "ペット",
+    "name": "キングはかせ",
+    "skills": [
+      {
+        "type": "A",
+        "name": "ラッキーパンチ",
+        "desc": "かるいランダムこうげき (LUK?)"
+      },
+      {
+        "type": "A",
+        "name": "スタンアタック",
+        "desc": "スタンさせるこうげき (ATK)"
+      },
+      {
+        "type": "P",
+        "name": "クリティカル+20%",
+        "desc": "クリティカル+20%"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 250,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 1000,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 1500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 2500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 3500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 5000,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 7500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 9999,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      }
+    ],
+    "monster_type": null,
+    "spawn_areas": [],
+    "spawn_points": [
+      19988
+    ],
+    "drop_items": [
+      {
+        "no": 120,
+        "name": "チェンソー"
+      },
+      {
+        "no": 18,
+        "name": "スティンガー"
+      },
+      {
+        "no": 218,
+        "name": "ばくだん"
+      },
+      {
+        "no": 189,
+        "name": "タイヤ"
+      },
+      {
+        "no": 228,
+        "name": "チェーン"
+      }
+    ]
+  },
+  {
+    "no": 572,
+    "category": "ペット",
+    "name": "ゴールドスライム",
+    "skills": [
+      {
+        "type": "A",
+        "name": "ラッキーパンチ",
+        "desc": "かるいランダムこうげき (LUK?)"
+      },
+      {
+        "type": "A",
+        "name": "ランダムアタック",
+        "desc": "うんまかせのこうげき (ATK+LUK?)"
+      },
+      {
+        "type": "M",
+        "name": "おいのり",
+        "desc": "HPをかいふくする (LUK?)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 250,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 1500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 2500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 3500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 5000,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 7500,
+        "name": null,
+        "effect": null
+      },
+      {
+        "pt": 9999,
+        "name": null,
+        "effect": null
+      }
+    ],
+    "monster_type": "スライム",
+    "spawn_areas": [],
+    "spawn_points": [
+      24988
+    ],
+    "drop_items": [
+      {
+        "no": 174,
+        "name": "ゴールドダイス"
+      },
+      {
+        "no": 151,
+        "name": "ゴールドアックス"
+      },
+      {
+        "no": 251,
+        "name": "ゴールドシールド"
+      },
+      {
+        "no": 358,
+        "name": "コインリング"
+      },
+      {
+        "no": 372,
+        "name": "ラッキーリング"
+      }
+    ]
+  },
+  {
+    "no": 573,
+    "category": "ペット",
+    "name": "ゴブリンおおい",
+    "skills": [
+      {
+        "type": "A",
+        "name": "ラッシュ",
+        "desc": "とっしんこうげき (VIT+SPD)"
+      },
+      {
+        "type": "A",
+        "name": "マジックアタック",
+        "desc": "まりょくをまとったこうげき (ATK+INT)"
+      },
+      {
+        "type": "M",
+        "name": "リーフ",
+        "desc": "くさぞくせいのまほうこうげき (INTx2)"
+      }
+    ],
+    "mastery_bonus": [
+      {
+        "pt": 100,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 250,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 1000,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 1500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 2500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 3500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 5000,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 7500,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      },
+      {
+        "pt": 9999,
+        "name": "XPバフ",
+        "effect": "ドロップXP+0〜1"
+      }
+    ],
+    "monster_type": "ゴブリン",
+    "spawn_areas": [],
+    "spawn_points": [
+      29988
+    ],
+    "drop_items": [
+      {
+        "no": 96,
+        "name": "ホーリーロッド"
+      },
+      {
+        "no": 219,
+        "name": "ブック"
+      },
+      {
+        "no": 4,
+        "name": "ロングソード"
+      },
+      {
+        "no": 7,
+        "name": "スタッフ"
+      },
+      {
+        "no": 85,
+        "name": "バトルフラッグ"
       }
     ]
   }
