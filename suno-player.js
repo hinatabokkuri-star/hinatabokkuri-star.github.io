@@ -17,7 +17,11 @@
       this._rate = 1;
       this._state = { paused: true, currentTime: 0, duration: NaN, readyState: 0 };
       window.addEventListener('message', event => this._receive(event));
-      frame.addEventListener('load', () => this._send('hello'));
+      frame.addEventListener('load', () => {
+        if (!this.active) return;
+        this._frameLoaded = true;
+        this._send('hello');
+      });
       setInterval(() => {
         if (!this.active) return;
         if (this.connected && Date.now() - this._lastSeen > 10000) {
@@ -33,6 +37,7 @@
       if (!validId.test(song.sunoId || '')) throw new TypeError('Invalid Suno song ID');
       this.active = true;
       this.connected = false;
+      this._frameLoaded = false;
       this.songId = song.sunoId;
       this.token = crypto.randomUUID();
       this._pendingPlay = false;
@@ -49,6 +54,7 @@
     deactivate() {
       this.active = false;
       this.connected = false;
+      this._frameLoaded = false;
       this.token = null;
       this._pendingPlay = false;
       this._pendingSeek = null;
@@ -96,6 +102,7 @@
       if (this.connected) this._send('pause');
       else {
         // Reloading the official frame stops playback even without the bridge.
+        this._frameLoaded = false;
         this.frame.src = this.embedUrl;
         this._state.paused = true;
         this.dispatchEvent(new Event('pause'));
@@ -104,7 +111,7 @@
 
     _show(message) { this.status.textContent = message; }
     _send(command, extra = {}) {
-      if (!this.active || !this.token) return;
+      if (!this.active || !this.token || !this._frameLoaded) return;
       this.frame.contentWindow?.postMessage({
         channel, type: 'command', songId: this.songId, token: this.token,
         command, ...extra
@@ -118,7 +125,7 @@
     }
 
     _receive(event) {
-      if (!this.active || event.origin !== origin || event.source !== this.frame.contentWindow) return;
+      if (!this.active || !this._frameLoaded || event.origin !== origin || event.source !== this.frame.contentWindow) return;
       const data = event.data;
       if (!data || data.channel !== channel || data.type !== 'state' ||
           data.token !== this.token || data.songId !== this.songId) return;

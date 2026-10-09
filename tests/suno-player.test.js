@@ -17,6 +17,8 @@ function setup() {
   });
   const player = new window.HBSunoAudio(frame, status);
   player.load({ sunoId: songId, title: 'Test', duration: 329.84 });
+  frame.dispatchEvent(new Event('load'));
+  messages.length = 0;
   function state(extra = {}, envelope = {}) {
     const event = Object.assign(new Event('message'), {
       origin: 'https://suno.com', source: frame.contentWindow,
@@ -51,6 +53,22 @@ test('queues play/resume until bridge and real audio metadata are ready', async 
   assert.equal(messages.at(-1).message.command, 'seek');
   assert.equal(messages.at(-1).message.seconds, 120);
   assert.ok(messages.every(x => x.origin === 'https://suno.com'));
+});
+
+test('ignores the outgoing document until the new embed has loaded', async () => {
+  const { player, frame, state, messages } = setup();
+  state();
+  assert.equal(player.connected, true);
+  player.load({ sunoId: songId, title: 'Reload', duration: 329.84 });
+  messages.length = 0;
+  await player.play();
+  state({ readyState: 4, duration: 329.84 });
+  assert.equal(player.connected, false);
+  assert.equal(messages.length, 0);
+  frame.dispatchEvent(new Event('load'));
+  assert.equal(messages.at(-1).message.command, 'hello');
+  state();
+  assert.equal(messages.at(-1).message.command, 'play');
 });
 
 test('ended reason advances even when Suno has already rewound the snapshot', () => {
