@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex">
+  <title>ひと駅ぶんの逃避行 — 埋め込み再生テスト</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0d0d0d; color: #f0f0f0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Yu Gothic", sans-serif; }
+    main { max-width: 820px; margin: 0 auto; padding: 48px 20px; }
+    header { display: flex; align-items: center; gap: 14px; margin-bottom: 48px; }
+    .logo { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: #ffa600; color: #0d0d0d; font-size: 26px; }
+    .brand { font-size: 20px; font-weight: 750; letter-spacing: .07em; }
+    .preview { color: #999; font-size: 12px; margin-top: 5px; }
+    .eyebrow { color: #ffa600; font-size: 12px; font-weight: 700; letter-spacing: .18em; }
+    h1 { margin: 14px 0 20px; font-size: clamp(26px, 5vw, 38px); line-height: 1.45; }
+    .description { color: #bbb; font-size: 15px; line-height: 1.9; margin-bottom: 28px; }
+    .player { padding: 14px; border: 1px solid #333; border-radius: 18px; background: #161616; overflow: hidden; }
+    iframe { display: block; width: 100%; height: 180px; border: 0; border-radius: 10px; }
+    .footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; font-size: 13px; color: #999; }
+    a { color: #ffa600; text-underline-offset: 4px; }
+    @media (max-width: 480px) { main { padding: 28px 16px; } header { margin-bottom: 32px; } .player { padding: 6px; } iframe { height: 200px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo" aria-hidden="true">♪</div>
+      <div><div class="brand">HINATA AI MUSIC</div><div class="preview">埋め込み再生テスト</div></div>
+    </header>
+    <p class="eyebrow">NEW SONG · ORCHESTRAL J-POP</p>
+    <h1>ひと駅ぶんの逃避行</h1>
+    <p class="description">いつもの駅で降りずに、ひと駅だけ先へ。<br>夏の名残と秋の風のあいだを駆ける、放課後の小さな冒険。</p>
+    <section class="player" aria-label="楽曲プレイヤー">
+      <iframe src="https://suno.com/embed/5af0c312-53e0-4ad1-a153-68d13bef02c6" title="ひと駅ぶんの逃避行 — Sunoプレイヤー" allow="autoplay" loading="eager"></iframe>
+    </section>
+    <div class="footer">
+      <span>HINATABOKKURI · Sunoで配信</span>
+      <a href="https://suno.com/song/5af0c312-53e0-4ad1-a153-68d13bef02c6" target="_blank" rel="noopener noreferrer">Sunoで曲を開く ↗</a>
+    </div>
+    <p style="margin-top:40px;font-size:13px"><a href="/">← 楽曲一覧に戻る</a></p>
+  </main>
+</body>
+</html>
