@@ -59,7 +59,17 @@
     if (!audio) { send('unavailable', data.requestId, 'AudioUnavailable'); return; }
     try {
       switch (data.command) {
-        case 'play': await audio.play(); break;
+        case 'play':
+          // The embed sets its media source on the first native Play action.
+          if (!audio.currentSrc && !audio.getAttribute('src') && !audio.querySelector('source')) {
+            const buttons = document.querySelectorAll('button');
+            if (buttons.length !== 1 || buttons[0].disabled) throw new DOMException('SunoPlayerNotReady', 'InvalidStateError');
+            buttons[0].click();
+            send('initializing', data.requestId);
+            return;
+          }
+          await audio.play();
+          break;
         case 'pause': audio.pause(); break;
         case 'seek':
           if (!Number.isFinite(data.seconds) || data.seconds < 0 || !Number.isFinite(audio.duration)) throw new RangeError('InvalidSeek');
