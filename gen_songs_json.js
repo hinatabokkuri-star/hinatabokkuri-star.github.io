@@ -31,7 +31,13 @@ const BASE = 'https://hinatabokkuri-star.github.io';
 const enriched = songs.map(s => ({
   title: s.title,
   file: s.file,
-  file_url: `${BASE}/music/${s.file}`,
+  file_url: s.playback === 'suno' ? null : `${BASE}/music/${s.file}`,
+  playback_type: s.playback === 'suno' ? 'suno' : 'file',
+  ...(s.playback === 'suno' ? {
+    suno_url: `https://suno.com/song/${s.sunoId}`,
+    embed_url: `https://suno.com/embed/${s.sunoId}`,
+    lyrics_text: s.lyricsText || '',
+  } : {}),
   cover: s.cover,
   cover_url: s.cover.startsWith('http') ? s.cover : `${BASE}/${s.cover}`,
   genre: s.genre,
@@ -43,7 +49,7 @@ const enriched = songs.map(s => ({
 }));
 
 const out = {
-  schema_version: 1,
+  schema_version: 2,
   updated: new Date().toISOString(),
   base_url: BASE,
   count: enriched.length,

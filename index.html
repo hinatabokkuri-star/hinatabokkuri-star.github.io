@@ -402,6 +402,17 @@
   .np-btn:hover { background: var(--bg2); }
   .np-btn.primary { background: var(--amber); color: #000; font-size: 1.1rem; }
   .np-btn.active { color: var(--amber); }
+  .np-btn:disabled { opacity: 0.35; cursor: default; }
+  .np-suno-player { margin-top: 0.6rem; }
+  .np-suno-player[hidden] { display: none; }
+  .np-suno-player iframe { display: block; width: 100%; height: 165px; border: 0; border-radius: 10px; }
+  .np-suno-status { margin: 0.35rem 0 0; color: var(--text-dim); font-size: 0.72rem; line-height: 1.5; }
+  .np-suno-status a { color: var(--amber); }
+  .now-playing.suno-track { max-height: 92dvh; overflow-y: auto; }
+  .np-progress[aria-disabled="true"] { opacity: 0.35; cursor: default; }
+  .np-progress[aria-disabled="true"] .np-scrub-tooltip { display: none; }
+  .np-lyrics-full .lyric-line.untimed { cursor: default; }
+  .np-lyrics-note { color: var(--text-dim); font-size: 0.75rem; padding: 0 1rem; }
   .np-progress {
     margin-top: 0.5rem;
     height: 6px;
@@ -2068,6 +2079,10 @@
       </div>
     </div>
   </div>
+  <div class="np-suno-player" id="npSunoPlayer" hidden>
+    <iframe id="npSunoFrame" title="Sunoプレイヤー" allow="autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <p class="np-suno-status"><span id="npSunoStatus"></span> · <a href="suno-bridge/README.md" target="_blank" rel="noopener">Edge連携の設定</a></p>
+  </div>
   <div class="np-progress" id="npProgress">
     <div class="np-progress-fill" id="npProgressFill"></div>
     <div class="np-scrub-tooltip" id="npScrubTooltip">0:00</div>
@@ -2091,6 +2106,7 @@
 <audio id="audioB" preload="none" playsinline></audio>
 
 <script src="songs.js?v=1"></script>
+<script src="suno-player.js?v=1"></script>
 <script>
 const SONGS = window.HB_SONGS || [];
 
@@ -2100,7 +2116,7 @@ const SONGS = window.HB_SONGS || [];
   const tagEl = document.getElementById('tagline');
   const heroEl = document.getElementById('heroSub');
   if (tagEl) tagEl.textContent = `AI Music · ${n} Tracks · Shuffle Forever`;
-  if (heroEl) heroEl.textContent = `全${n}曲をランダム永遠再生、iPhoneバックグラウンド対応`;
+  if (heroEl) heroEl.textContent = `全${n}曲をシャッフル再生 · MP3とSunoストリーミング`;
 })();
 
 // Dance Instinct 9-track sequence (order matters)
@@ -2174,18 +2190,6 @@ function renderRecentRow() {
   });
 }
 renderRecentRow();
-
-// Deep link: ?play=<basename> auto-plays that song on load
-(() => {
-  const basename = new URLSearchParams(location.search).get('play');
-  if (!basename) return;
-  const target = SONGS.find(x => x.file.replace(/\.mp3$/, '') === basename);
-  if (!target) return;
-  queue = [...SONGS];
-  currentIdx = SONGS.indexOf(target);
-  // Defer a tick so player UI is ready
-  setTimeout(() => playCurrent(), 200);
-})();
 
 // Resume banner
 function showResumeBanner() {
@@ -2262,6 +2266,7 @@ const npProgress = document.getElementById('npProgress');
 const npProgressFill = document.getElementById('npProgressFill');
 let audio = document.getElementById('audio');
 const _audioA = audio;
+const sunoAudio = new window.HBSunoAudio(document.getElementById('npSunoFrame'), document.getElementById('npSunoStatus'));
 const btnShuffle = document.getElementById('btnShuffle');
 const btnPrev = document.getElementById('btnPrev');
 const btnNext = document.getElementById('btnNext');
@@ -2496,11 +2501,30 @@ function shuffle(arr) {
 function playCurrent() {
   if (currentIdx < 0 || currentIdx >= queue.length) return;
   const s = queue[currentIdx];
+  const isSuno = s.playback === 'suno';
+  const playbackRate = audio.playbackRate;
+  const volume = parseFloat(document.getElementById('volumeSlider').value);
+  crossfadeGeneration++;
+  clearInterval(crossfadeTimer);
+  crossfadeInProgress = false;
+  if (audio !== _audioA) _audioA.pause();
+  if (audio !== audioB) audioB.pause();
+  if (isSuno) {
+    _audioA.pause();
+    audioB.pause();
+    audio = sunoAudio;
+    sunoAudio.load(s);
+  } else if (audio === sunoAudio) {
+    sunoAudio.deactivate();
+    audio = _audioA;
+  }
+  audio.volume = volume;
+  audio.playbackRate = playbackRate;
   // --- CRITICAL PATH: iOS requires src + play() to stay within the
   //     media-event continuation window (fires from `ended`). Any sync
   //     work before play() can break continuity and cause background
   //     play() promise rejection. Keep this block minimal & synchronous.
-  audio.src = 'music/' + s.file;
+  if (!isSuno) audio.src = 'music/' + s.file;
   parsedLyrics = parseLRC(s.lyrics); // needed for timeupdate lyric sync
   const playPromise = audio.play();
   if (playPromise && typeof playPromise.catch === 'function') {
@@ -2516,12 +2540,20 @@ function playCurrent() {
   // --- END CRITICAL PATH ---
 
   // Deferred UI/state updates (safe to run after play started)
+  np.classList.toggle('suno-track', isSuno);
+  document.getElementById('npSunoPlayer').hidden = !isSuno;
+  updateSunoControls();
   const resumeBanner = document.getElementById('resumeBanner');
   if (resumeBanner?.classList.contains('show')) {
     setTimeout(() => resumeBanner.classList.remove('show'), 10000);
   }
   npCover.style.backgroundImage = `url('${s.cover}')`;
   npTitle.textContent = s.title;
+  npLyricInline.textContent = '';
+  npProgressFill.style.width = '0%';
+  document.getElementById('npTimeCurrent').textContent = isSuno && !sunoAudio.connected ? '—' : '0:00';
+  btnPlayPause.textContent = audio.paused ? '▶' : '⏸';
+  np.classList.toggle('spinning', !audio.paused);
   updateAlbumTag();
   document.getElementById('npTimeTotal').textContent = '--:--';
   let durationPolls = 0;
@@ -2552,6 +2584,18 @@ function playCurrent() {
     });
   }
 }
+
+function updateSunoControls() {
+  const unavailable = audio === sunoAudio && !sunoAudio.connected;
+  btnPlayPause.disabled = unavailable;
+  document.getElementById('volumeSlider').disabled = unavailable;
+  document.getElementById('btnSpeed').disabled = unavailable;
+  document.getElementById('btnSleep').disabled = unavailable;
+  document.getElementById('btnRepeat').disabled = unavailable;
+  npProgress.setAttribute('aria-disabled', String(audio === sunoAudio && (!sunoAudio.connected || sunoAudio.readyState < 1)));
+  if (unavailable) document.getElementById('npTimeCurrent').textContent = '—';
+}
+sunoAudio.addEventListener('connectionchange', updateSunoControls);
 
 // Save last played position for Resume (includes queue, shuffle, repeat state)
 let resumeSaveHandle = null;
@@ -2861,6 +2905,7 @@ _audioA.addEventListener('timeupdate', (e) => {
   });
 });
 npProgress.addEventListener('click', (e) => {
+  if (npProgress.getAttribute('aria-disabled') === 'true') return;
   const r = npProgress.getBoundingClientRect();
   const pct = (e.clientX - r.left) / r.width;
   audio.currentTime = audio.duration * pct;
@@ -2961,6 +3006,8 @@ function attachMirrorListeners(el) {
   el.addEventListener('error', function() { handlePlayError(this); });
 }
 attachMirrorListeners(audioB);
+attachMirrorListeners(sunoAudio);
+sunoAudio.addEventListener('timeupdate', resumeSaveTick);
 
 // Unlock audioB on first user gesture (iOS Safari autoplay restriction workaround)
 let audioBUnlocked = false;
@@ -2985,6 +3032,7 @@ function unlockAudioB() {
 const CROSSFADE_SEC = 3;
 let crossfadeInProgress = false;
 let crossfadeTimer = null;
+let crossfadeGeneration = 0;
 
 // Sync volume across both
 function applyVolumeToAll(v) {
@@ -2999,6 +3047,7 @@ setInterval(() => {
   if (currentAlbumId && ALBUM_CONFIG[currentAlbumId] && ALBUM_CONFIG[currentAlbumId].crossfade === false) return;
   if (currentIdx < 0 || currentIdx >= queue.length - 1) return;
   const active = audio;
+  if (active === sunoAudio || queue[currentIdx + 1]?.playback === 'suno') return;
   if (!active.duration || active.paused) return;
   const remaining = active.duration - active.currentTime;
   if (remaining > 0 && remaining < CROSSFADE_SEC) startCrossfade();
@@ -3006,6 +3055,7 @@ setInterval(() => {
 
 async function startCrossfade() {
   crossfadeInProgress = true;
+  const generation = crossfadeGeneration;
   const nextIdx = currentIdx + 1;
   const nextSong = queue[nextIdx];
   if (!nextSong) { crossfadeInProgress = false; return; }
@@ -3032,6 +3082,7 @@ async function startCrossfade() {
         incoming.addEventListener('canplay', onReady, { once: true });
       }
     });
+    if (generation !== crossfadeGeneration) return;
     incoming.currentTime = 0;
     await incoming.play();
   } catch (e) {
@@ -3042,6 +3093,7 @@ async function startCrossfade() {
 
   // Verify playing actually started (iOS sometimes silently fails)
   await new Promise(r => setTimeout(r, 80));
+  if (generation !== crossfadeGeneration) return;
   if (incoming.paused) {
     console.log('incoming paused after play, retrying...');
     try { await incoming.play(); await new Promise(r => setTimeout(r, 50)); } catch {}
@@ -3082,13 +3134,14 @@ async function startCrossfade() {
   const durMs = CROSSFADE_SEC * 1000;
   const stepMs = durMs / steps;
   let step = 0;
-  const fade = setInterval(() => {
+  crossfadeTimer = setInterval(() => {
     step++;
     const progress = step / steps;
     outgoing.volume = Math.max(0, startVol * (1 - progress));
     incoming.volume = Math.min(targetVol, targetVol * progress);
     if (step >= steps) {
-      clearInterval(fade);
+      clearInterval(crossfadeTimer);
+      crossfadeTimer = null;
       outgoing.pause();
       // Keep outgoing.src for fast re-use; reset position
       try { outgoing.currentTime = 0; } catch {}
@@ -3166,7 +3219,10 @@ function renderAbout() {
     s.bpm   ? `BPM: ${s.bpm}` : '',
     s.album ? `アルバム: ${s.album}${s.track_no ? ` #${s.track_no}` : ''}` : '',
   ].filter(Boolean).join('　/　');
-  el.innerHTML = `<div>${s.comment || '（説明なし）'}</div>${meta ? `<div class="np-about-meta">${meta}</div>` : ''}<a class="np-dl-btn" href="music/${s.file}" download="${s.title}.mp3">⬇ MP3 ダウンロード</a>`;
+  const mediaLink = s.playback === 'suno'
+    ? `<a class="np-dl-btn" href="https://suno.com/song/${s.sunoId}" target="_blank" rel="noopener">↗ Sunoで開く</a>`
+    : `<a class="np-dl-btn" href="music/${s.file}" download="${s.title}.mp3">⬇ MP3 ダウンロード</a>`;
+  el.innerHTML = `<div>${s.comment || '（説明なし）'}</div>${meta ? `<div class="np-about-meta">${meta}</div>` : ''}${mediaLink}`;
 }
 
 function renderQueue() {
@@ -3627,7 +3683,10 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
 
 function renderFullLyrics() {
   if (parsedLyrics.length === 0) {
-    npLyricsFull.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem;">歌詞データ未登録（プレビュー版は最新3曲のみ対応）</p>';
+    const text = queue[currentIdx]?.lyricsText;
+    npLyricsFull.innerHTML = text
+      ? '<p class="np-lyrics-note">歌詞の時刻合わせは未設定です。</p>' + text.split('\n').filter(line => line.trim()).map(line => `<div class="lyric-line untimed">${renderRuby(line)}</div>`).join('')
+      : '<p style="color:var(--text-dim);text-align:center;padding:2rem;">歌詞データ未登録</p>';
     return;
   }
   npLyricsFull.innerHTML = parsedLyrics.map((l, i) =>
@@ -3801,6 +3860,17 @@ document.addEventListener('keydown', (e) => {
 });
 
 render();
+
+// Wait until the player references and queue state have all been initialized.
+(() => {
+  const basename = new URLSearchParams(location.search).get('play');
+  if (!basename) return;
+  const target = SONGS.find(x => x.file.replace(/\.mp3$/, '') === basename);
+  if (!target) return;
+  queue = [...SONGS];
+  currentIdx = SONGS.indexOf(target);
+  setTimeout(() => playCurrent(), 200);
+})();
 
 // Debug: URL ?testUpdate で通知バナーを手動テスト
 if (new URLSearchParams(location.search).has('testUpdate')) {

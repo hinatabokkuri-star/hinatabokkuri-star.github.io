@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         HINATA Suno player bridge (test)
+// @name         HINATA Suno player bridge
 // @namespace    https://hinatabokkuri-star.github.io/
-// @version      0.1.0
-// @description  Relay playback state and controls for the HINATA test page. No audio capture.
-// @match        https://suno.com/embed/5af0c312-53e0-4ad1-a153-68d13bef02c6
+// @version      0.2.0
+// @description  Relay playback state and controls for HINATA AI MUSIC. No audio capture.
+// @match        https://suno.com/embed/*
 // @run-at       document-idle
 // @grant        none
 // ==/UserScript==
@@ -11,16 +11,17 @@
 (() => {
   'use strict';
   const parentOrigin = 'https://hinatabokkuri-star.github.io';
-  const songId = '5af0c312-53e0-4ad1-a153-68d13bef02c6';
+  const match = location.pathname.match(/^\/embed\/([0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12})\/?$/i);
+  const songId = match?.[1];
   const channel = 'hinata-suno-player-v1';
-  if (location.origin !== 'https://suno.com' || location.pathname !== `/embed/${songId}` || window.parent === window) return;
+  if (location.origin !== 'https://suno.com' || !songId || window.parent === window) return;
   if (window.__hinataSunoBridgeDispose) window.__hinataSunoBridgeDispose();
 
   let audio = null;
   let token = null;
   let disposed = false;
   let bootstrapping = false;
-  const events = ['loadedmetadata', 'durationchange', 'timeupdate', 'play', 'playing', 'pause', 'seeking', 'seeked', 'waiting', 'ended', 'ratechange', 'error'];
+  const events = ['loadedmetadata', 'durationchange', 'timeupdate', 'play', 'playing', 'pause', 'seeking', 'seeked', 'waiting', 'ended', 'ratechange', 'volumechange', 'error'];
   const finite = value => Number.isFinite(value) ? value : null;
   const send = (reason, requestId = null, error = null) => {
     if (disposed || !token) return;
@@ -32,7 +33,9 @@
       ended: audio ? audio.ended : false,
       seeking: audio ? audio.seeking : false,
       readyState: audio ? audio.readyState : 0,
-      available: Boolean(audio)
+      available: Boolean(audio),
+      volume: audio ? finite(audio.volume) : null,
+      playbackRate: audio ? finite(audio.playbackRate) : null
     }, parentOrigin);
   };
   const onAudioEvent = event => {
@@ -81,6 +84,14 @@
         case 'seek':
           if (!Number.isFinite(data.seconds) || data.seconds < 0 || !Number.isFinite(audio.duration)) throw new RangeError('InvalidSeek');
           audio.currentTime = Math.min(data.seconds, audio.duration);
+          break;
+        case 'volume':
+          if (!Number.isFinite(data.value) || data.value < 0 || data.value > 1) throw new RangeError('InvalidVolume');
+          audio.volume = data.value;
+          break;
+        case 'rate':
+          if (!Number.isFinite(data.value) || data.value < 0.25 || data.value > 4) throw new RangeError('InvalidRate');
+          audio.playbackRate = data.value;
           break;
         case 'stamp': break;
         default: return;
