@@ -413,6 +413,11 @@
   .np-progress[aria-disabled="true"] .np-scrub-tooltip { display: none; }
   .np-lyrics-full .lyric-line.untimed { cursor: default; }
   .np-lyrics-note { color: var(--text-dim); font-size: 0.75rem; padding: 0 1rem; }
+  .np-lyrics-full.untimed { padding: 1rem 0; -webkit-mask-image: none; mask-image: none; }
+  @media (max-width: 560px) {
+    .now-playing .np-row { grid-template-columns: 44px minmax(0, 1fr); }
+    .now-playing .np-actions { grid-column: 1 / -1; justify-content: center; flex-wrap: wrap; }
+  }
   .np-progress {
     margin-top: 0.5rem;
     height: 6px;
@@ -3682,6 +3687,7 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
 }
 
 function renderFullLyrics() {
+  npLyricsFull.classList.toggle('untimed', parsedLyrics.length === 0);
   if (parsedLyrics.length === 0) {
     const text = queue[currentIdx]?.lyricsText;
     npLyricsFull.innerHTML = text
@@ -3717,6 +3723,7 @@ function scrollToActiveLyric() {
 
 // Detect manual scroll to pause auto-follow
 npLyricsFull.addEventListener('scroll', () => {
+  if (parsedLyrics.length === 0) return;
   if (programmaticScroll) return;
   lyricAutoScrollPaused = true;
   document.getElementById('lyricReturnBtn').classList.add('show');
@@ -3904,7 +3911,7 @@ if ('serviceWorker' in navigator) {
       const dismissed = localStorage.getItem(DISMISS_KEY);
       if (dismissed === String(version)) return;
       // If audio not actively playing, reload silently
-      if (!audio || audio.paused) {
+      if (!audio || (audio.paused && !(audio === sunoAudio && !sunoAudio.connected))) {
         location.reload();
         return;
       }
