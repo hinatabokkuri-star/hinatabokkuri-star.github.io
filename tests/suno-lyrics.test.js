@@ -62,3 +62,34 @@ test('published song covers all 76 original lines with bounded cues and distinct
   assert.ok(lyrics[20].time - song.lyricsEnds[19] > 10);
   assert.ok(lyrics[40].time - song.lyricsEnds[39] > 10);
 });
+
+test('the lyric card holds through breathing pauses and clears for real instrumental gaps', () => {
+  const root = path.join(__dirname, '..');
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const updater = html.slice(html.indexOf('function updateLyric(t) {'), html.indexOf('// Search input'));
+  const song = JSON.parse(fs.readFileSync(path.join(root, 'data/songs.json'), 'utf8')).songs.at(-1);
+  const nodes = song.lyrics_parsed.map(() => ({
+    classes: new Set(),
+    classList: { toggle() {} }, setAttribute() {}, removeAttribute() {},
+  }));
+  nodes.forEach(node => {
+    node.classList.toggle = (name, on) => on ? node.classes.add(name) : node.classes.delete(name);
+  });
+  const player = { connected: true };
+  const context = {
+    parsedLyrics: song.lyrics_parsed, audio: player, sunoAudio: player,
+    npLyricInline: {}, npLyricsFull: { querySelectorAll: () => nodes },
+    np: { classList: { contains: () => false } }, renderRuby: text => text,
+    lastLyricIndex: -2, lyricAutoScrollPaused: false,
+  };
+  vm.createContext(context);
+  vm.runInContext(updater, context);
+  context.updateLyric(266.8);
+  assert.equal(nodes.findIndex(node => node.classes.has('active')), 62);
+  context.updateLyric(95);
+  assert.equal(nodes.findIndex(node => node.classes.has('active')), -1);
+  assert.equal(context.npLyricInline.innerHTML, '♪ 間奏');
+  context.updateLyric(318);
+  assert.equal(nodes.findIndex(node => node.classes.has('active')), -1);
+  assert.equal(context.npLyricInline.innerHTML, '♪ 後奏');
+});
