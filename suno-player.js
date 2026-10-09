@@ -13,6 +13,8 @@
       this.status = status;
       this.active = false;
       this.connected = false;
+      this.nativeControlsRequired = false;
+      this._playStartedAt = 0;
       this._volume = 1;
       this._rate = 1;
       this._state = { paused: true, currentTime: 0, duration: NaN, readyState: 0 };
@@ -29,6 +31,12 @@
           this._show('連携を再確認中です。Suno枠内からも再生できます。');
           this.dispatchEvent(new Event('connectionchange'));
         }
+        if (this.connected && this._playStartedAt && Date.now() - this._playStartedAt > 12000) {
+          this._playStartedAt = 0;
+          this.nativeControlsRequired = true;
+          this._show('再生の確認ができませんでした。Suno枠内の ▶ を押してください。');
+          this.dispatchEvent(new Event('connectionchange'));
+        }
         this._send('hello');
       }, 1000);
     }
@@ -37,6 +45,8 @@
       if (!validId.test(song.sunoId || '')) throw new TypeError('Invalid Suno song ID');
       this.active = true;
       this.connected = false;
+      this.nativeControlsRequired = false;
+      this._playStartedAt = 0;
       this._frameLoaded = false;
       this.songId = song.sunoId;
       this.token = crypto.randomUUID();
@@ -54,6 +64,8 @@
     deactivate() {
       this.active = false;
       this.connected = false;
+      this.nativeControlsRequired = false;
+      this._playStartedAt = 0;
       this._frameLoaded = false;
       this.token = null;
       this._pendingPlay = false;
@@ -91,6 +103,7 @@
       if (this.connected) {
         this._pendingPlay = false;
         this._show('Sunoで再生を開始しています…');
+        this._playStartedAt = Date.now();
         this._send('play');
       }
       return Promise.resolve();
@@ -98,6 +111,7 @@
 
     pause() {
       this._pendingPlay = false;
+      this._playStartedAt = 0;
       if (!this.active) return;
       if (this.connected) this._send('pause');
       else {
@@ -131,6 +145,7 @@
           data.token !== this.token || data.songId !== this.songId) return;
       this._lastSeen = Date.now();
       const wasConnected = this.connected;
+      const neededNativeControls = this.nativeControlsRequired;
       const previous = this._state;
       this.connected = data.available === true;
       const duration = Number.isFinite(data.duration) && data.duration > 0 ? data.duration : previous.duration;
@@ -145,14 +160,23 @@
         this._send('rate', { value: this._rate });
         if (this._pendingPlay) {
           this._pendingPlay = false;
+          this._playStartedAt = Date.now();
           this._send('play');
         }
       }
       this._flushSeek();
-      if (data.error) this._show('再生を開始できませんでした。Suno枠内の ▶ を押してください。');
+      if (data.error || data.reason === 'error') {
+        this.nativeControlsRequired = true;
+        this._playStartedAt = 0;
+      } else if (data.reason === 'playing' || (data.reason === 'play' && !this.paused && this.readyState > 0)) {
+        this.nativeControlsRequired = false;
+        this._playStartedAt = 0;
+      }
+      if (this.nativeControlsRequired) this._show('再生を開始できませんでした。Suno枠内の ▶ を押してください。');
       else if (this.connected) this._show('Suno連携中 · 再生・停止・シーク・音量・速度を操作できます');
       else this._show('Sunoプレイヤーを読み込み中です…');
-      if (wasConnected !== this.connected || previous.readyState !== this.readyState) {
+      if (wasConnected !== this.connected || previous.readyState !== this.readyState ||
+          neededNativeControls !== this.nativeControlsRequired) {
         this.dispatchEvent(new Event('connectionchange'));
       }
       if (duration !== previous.duration || data.reason === 'loadedmetadata') {

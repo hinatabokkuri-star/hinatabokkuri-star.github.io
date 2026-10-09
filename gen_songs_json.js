@@ -14,9 +14,9 @@ vm.runInContext(src, context);
 const songs = context.window.HB_SONGS || [];
 
 // Parse LRC string into structured timestamps for rhythm game use
-function parseLRC(lrc) {
+function parseLRC(lrc, ends = []) {
   if (!lrc) return [];
-  return lrc.split('\n').map(line => {
+  const lines = lrc.split('\n').map(line => {
     const m = line.match(/^\[(\d+):(\d+(?:\.\d+)?)\](.*)$/);
     if (!m) return null;
     const t = parseInt(m[1]) * 60 + parseFloat(m[2]);
@@ -24,6 +24,8 @@ function parseLRC(lrc) {
     if (!txt || txt.startsWith('[')) return null;
     return { time: t, text: txt };
   }).filter(Boolean);
+  return lines.map((line, index) => Number.isFinite(ends[index]) && ends[index] >= line.time
+    ? { ...line, end: ends[index] } : line);
 }
 
 // Resolve cover/file URLs to absolute (for cross-origin consumers)
@@ -45,7 +47,7 @@ const enriched = songs.map(s => ({
   album: s.album || null,
   comment: s.comment,
   lyrics_lrc: s.lyrics || '',
-  lyrics_parsed: parseLRC(s.lyrics),
+  lyrics_parsed: parseLRC(s.lyrics, s.lyricsEnds),
 }));
 
 const out = {

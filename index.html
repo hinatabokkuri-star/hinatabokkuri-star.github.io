@@ -406,6 +406,10 @@
   .np-suno-player { margin-top: 0.6rem; }
   .np-suno-player[hidden] { display: none; }
   .np-suno-player iframe { display: block; width: 100%; height: 165px; border: 0; border-radius: 10px; }
+  /* Keep Suno's playback engine mounted while the site's controls take over. */
+  .np-suno-player.bridged { position: relative; height: 0; margin: 0; }
+  .np-suno-player.bridged iframe { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); pointer-events: none; }
+  .np-suno-player.bridged .np-suno-status { display: none; }
   .np-suno-status { margin: 0.35rem 0 0; color: var(--text-dim); font-size: 0.72rem; line-height: 1.5; }
   .np-suno-status a { color: var(--amber); }
   .now-playing.suno-track { max-height: 92dvh; overflow-y: auto; }
@@ -464,6 +468,12 @@
   }
   .now-playing.expanded .np-lyrics-full { display: block; }
   .np-lyrics-full .lyric-line {
+    display: block;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    font-family: inherit;
     padding: 0.4rem 1rem;
     color: var(--text-dim);
     font-size: 1rem;
@@ -482,6 +492,8 @@
     opacity: 1;
   }
   .np-lyrics-full .lyric-line.past { opacity: 0.35; }
+  .np-lyrics-full .lyric-line:focus-visible { outline: 2px solid var(--amber); outline-offset: -2px; }
+  .np-lyrics-full .lyric-line:disabled { cursor: default; }
 
   /* Update notification */
   .update-banner {
@@ -2249,9 +2261,9 @@ function renderRuby(text) {
   return escape(text).replace(/\{([^|{}]+)\|([^{}]+)\}/g, (_, base, rt) => `<ruby>${base}<rt>${rt}</rt></ruby>`);
 }
 
-function parseLRC(text) {
+function parseLRC(text, ends = []) {
   if (!text) return [];
-  return text.split('\n').map(line => {
+  const lines = text.split('\n').map(line => {
     const m = line.match(/^\[(\d+):(\d+(?:\.\d+)?)\](.*)$/);
     if (!m) return null;
     const t = parseInt(m[1]) * 60 + parseFloat(m[2]);
@@ -2259,6 +2271,8 @@ function parseLRC(text) {
     if (!txt || txt.startsWith('[')) return null;
     return { time: t, text: txt };
   }).filter(Boolean);
+  return lines.map((line, index) => Number.isFinite(ends[index]) && ends[index] >= line.time
+    ? { ...line, end: ends[index] } : line);
 }
 
 const grid = document.getElementById('songs');
@@ -2530,7 +2544,7 @@ function playCurrent() {
   //     work before play() can break continuity and cause background
   //     play() promise rejection. Keep this block minimal & synchronous.
   if (!isSuno) audio.src = 'music/' + s.file;
-  parsedLyrics = parseLRC(s.lyrics); // needed for timeupdate lyric sync
+  parsedLyrics = parseLRC(s.lyrics, s.lyricsEnds); // needed for timeupdate lyric sync
   const playPromise = audio.play();
   if (playPromise && typeof playPromise.catch === 'function') {
     playPromise.catch(err => {
@@ -2592,15 +2606,24 @@ function playCurrent() {
 
 function updateSunoControls() {
   const unavailable = audio === sunoAudio && !sunoAudio.connected;
+  const bridged = audio === sunoAudio && sunoAudio.connected && !sunoAudio.nativeControlsRequired;
+  const nativePlayer = document.getElementById('npSunoPlayer');
+  nativePlayer.classList.toggle('bridged', bridged);
+  nativePlayer.setAttribute('aria-hidden', String(bridged));
+  sunoAudio.frame.tabIndex = bridged ? -1 : 0;
   btnPlayPause.disabled = unavailable;
   document.getElementById('volumeSlider').disabled = unavailable;
   document.getElementById('btnSpeed').disabled = unavailable;
   document.getElementById('btnSleep').disabled = unavailable;
   document.getElementById('btnRepeat').disabled = unavailable;
   npProgress.setAttribute('aria-disabled', String(audio === sunoAudio && (!sunoAudio.connected || sunoAudio.readyState < 1)));
+  npLyricsFull.querySelectorAll('button.lyric-line').forEach(line => { line.disabled = unavailable; });
   if (unavailable) document.getElementById('npTimeCurrent').textContent = '—';
 }
-sunoAudio.addEventListener('connectionchange', updateSunoControls);
+sunoAudio.addEventListener('connectionchange', () => {
+  updateSunoControls();
+  if (audio === sunoAudio) updateLyric(audio.currentTime);
+});
 
 // Save last played position for Resume (includes queue, shuffle, repeat state)
 let resumeSaveHandle = null;
@@ -3124,7 +3147,7 @@ async function startCrossfade() {
   } else {
     document.getElementById('npTimeTotal').textContent = '--:--';
   }
-  parsedLyrics = parseLRC(s.lyrics);
+  parsedLyrics = parseLRC(s.lyrics, s.lyricsEnds);
   renderFullLyrics();
   updateMediaSession(s);
   markPlayingTile();
@@ -3199,7 +3222,10 @@ document.querySelectorAll('[data-view]').forEach(b => {
   });
 });
 
-function toggleExpand() { np.classList.toggle('expanded'); }
+function toggleExpand() {
+  np.classList.toggle('expanded');
+  if (np.classList.contains('expanded') && !lyricAutoScrollPaused) scrollToActiveLyric();
+}
 btnExpand.addEventListener('click', toggleExpand);
 npInfoClick.addEventListener('click', toggleExpand);
 
@@ -3212,6 +3238,7 @@ document.querySelectorAll('.np-tab').forEach(tab => {
     np.classList.toggle('about-view', tab.dataset.tab === 'about');
     if (tab.dataset.tab === 'queue') renderQueue();
     if (tab.dataset.tab === 'about') renderAbout();
+    if (tab.dataset.tab === 'lyrics' && !lyricAutoScrollPaused) scrollToActiveLyric();
   });
 });
 
@@ -3687,6 +3714,14 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
 }
 
 function renderFullLyrics() {
+  lyricAutoScrollPaused = false;
+  lastLyricIndex = -2;
+  clearTimeout(lyricAutoResumeTimer);
+  document.getElementById('lyricReturnBtn').classList.remove('show');
+  programmaticScroll = true;
+  clearTimeout(programmaticScrollTimer);
+  npLyricsFull.scrollTop = 0;
+  programmaticScrollTimer = setTimeout(() => { programmaticScroll = false; }, 900);
   npLyricsFull.classList.toggle('untimed', parsedLyrics.length === 0);
   if (parsedLyrics.length === 0) {
     const text = queue[currentIdx]?.lyricsText;
@@ -3696,30 +3731,48 @@ function renderFullLyrics() {
     return;
   }
   npLyricsFull.innerHTML = parsedLyrics.map((l, i) =>
-    `<div class="lyric-line" data-idx="${i}" data-time="${l.time}">${renderRuby(l.text)}</div>`
+    `<button type="button" class="lyric-line" data-idx="${i}" data-time="${l.time}">${renderRuby(l.text)}</button>`
   ).join('');
   npLyricsFull.querySelectorAll('.lyric-line').forEach(el => {
     el.addEventListener('click', () => {
       const t = parseFloat(el.dataset.time);
       if (!isNaN(t)) {
-        audio.currentTime = t;
+        lyricAutoScrollPaused = false;
+        clearTimeout(lyricAutoResumeTimer);
+        document.getElementById('lyricReturnBtn').classList.remove('show');
+        audio.currentTime = Math.max(0, t - (audio === sunoAudio ? 0.25 : 0));
         if (audio.paused) audio.play();
       }
     });
   });
+  updateSunoControls();
+  updateLyric(audio.currentTime);
 }
 
 let lyricAutoScrollPaused = false;
 let lyricAutoResumeTimer = null;
 let programmaticScroll = false;
+let programmaticScrollTimer = null;
+let lastLyricIndex = -2;
 
 function scrollToActiveLyric() {
+  if (!np.classList.contains('expanded') || np.classList.contains('about-view') || np.classList.contains('queue-view')) return;
   const active = npLyricsFull.querySelector('.lyric-line.active');
   if (!active) return;
   programmaticScroll = true;
-  active.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  setTimeout(() => { programmaticScroll = false; }, 600);
+  const containerRect = npLyricsFull.getBoundingClientRect();
+  const activeRect = active.getBoundingClientRect();
+  npLyricsFull.scrollTo({
+    top: npLyricsFull.scrollTop + activeRect.top - containerRect.top - (npLyricsFull.clientHeight - activeRect.height) / 2,
+    behavior: 'smooth'
+  });
+  clearTimeout(programmaticScrollTimer);
+  programmaticScrollTimer = setTimeout(() => { programmaticScroll = false; }, 900);
 }
+
+['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(name => {
+  npLyricsFull.addEventListener(name, () => { programmaticScroll = false; }, { passive: true });
+});
 
 // Detect manual scroll to pause auto-follow
 npLyricsFull.addEventListener('scroll', () => {
@@ -3745,24 +3798,38 @@ document.getElementById('lyricReturnBtn').addEventListener('click', () => {
 
 function updateLyric(t) {
   if (parsedLyrics.length === 0) { npLyricInline.textContent = ''; return; }
-  let activeIdx = -1;
-  for (let i = parsedLyrics.length - 1; i >= 0; i--) {
-    if (t >= parsedLyrics[i].time) { activeIdx = i; break; }
+  if (audio === sunoAudio && !sunoAudio.connected) {
+    npLyricInline.textContent = '';
+    npLyricsFull.querySelectorAll('.lyric-line').forEach(line => {
+      line.classList.remove('active', 'past');
+      line.removeAttribute('aria-current');
+    });
+    lastLyricIndex = -2;
+    return;
   }
-  npLyricInline.innerHTML = activeIdx >= 0 ? renderRuby(parsedLyrics[activeIdx].text) : '';
+  let activeIdx = -1;
+  let latestIdx = -1;
+  for (let i = parsedLyrics.length - 1; i >= 0; i--) {
+    if (t >= parsedLyrics[i].time) {
+      latestIdx = i;
+      if (!Number.isFinite(parsedLyrics[i].end) || t < parsedLyrics[i].end) activeIdx = i;
+      break;
+    }
+  }
+  npLyricInline.innerHTML = activeIdx >= 0 ? renderRuby(parsedLyrics[activeIdx].text)
+    : (latestIdx < 0 ? '♪ 前奏' : latestIdx === parsedLyrics.length - 1 ? '♪ 後奏' : '♪ 間奏');
   const lines = npLyricsFull.querySelectorAll('.lyric-line');
   lines.forEach((el, i) => {
     el.classList.toggle('active', i === activeIdx);
-    el.classList.toggle('past', i < activeIdx);
+    el.classList.toggle('past', i < latestIdx || (i === latestIdx && activeIdx < 0));
+    if (i === activeIdx) el.setAttribute('aria-current', 'true');
+    else el.removeAttribute('aria-current');
   });
-  if (activeIdx >= 0 && np.classList.contains('expanded') && !lyricAutoScrollPaused) {
-    const active = lines[activeIdx];
-    if (active) {
-      programmaticScroll = true;
-      active.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setTimeout(() => { programmaticScroll = false; }, 600);
-    }
+  if (activeIdx >= 0 && activeIdx !== lastLyricIndex && np.classList.contains('expanded') &&
+      !np.classList.contains('about-view') && !np.classList.contains('queue-view') && !lyricAutoScrollPaused) {
+    scrollToActiveLyric();
   }
+  lastLyricIndex = activeIdx;
 }
 
 // Search input

@@ -10,10 +10,11 @@ function setup() {
   const window = new EventTarget();
   const frame = new EventTarget();
   const messages = [];
+  const timers = [];
   frame.contentWindow = { postMessage: (message, origin) => messages.push({ message, origin }) };
   const status = { textContent: '' };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../suno-player.js'), 'utf8'), {
-    window, EventTarget, Event, crypto: { randomUUID }, setInterval() {}, Date, console
+    window, EventTarget, Event, crypto: { randomUUID }, setInterval(callback) { timers.push(callback); }, Date, console
   });
   const player = new window.HBSunoAudio(frame, status);
   player.load({ sunoId: songId, title: 'Test', duration: 329.84 });
@@ -28,7 +29,7 @@ function setup() {
     });
     window.dispatchEvent(event);
   }
-  return { player, frame, messages, state, status };
+  return { player, frame, messages, state, status, timers };
 }
 
 test('rejects other origins, frames, song IDs and stale tokens', () => {
@@ -101,4 +102,40 @@ test('volume/rate reject invalid values and send valid settings', () => {
   player.volume = 0.4;
   player.playbackRate = 1.25;
   assert.deepEqual(messages.slice(-2).map(x => [x.message.command, x.message.value]), [['volume', 0.4], ['rate', 1.25]]);
+});
+
+test('playback failures keep native controls visible through heartbeats until playback succeeds', () => {
+  const { player, state, status } = setup();
+  let changed = 0;
+  player.addEventListener('connectionchange', () => changed++);
+  state({ error: 'NotAllowedError', reason: 'command-error' });
+  assert.equal(player.connected, true);
+  assert.equal(player.nativeControlsRequired, true);
+  state({ reason: 'heartbeat' });
+  assert.equal(player.nativeControlsRequired, true);
+  assert.match(status.textContent, /Suno枠内/);
+  state({ reason: 'playing', readyState: 4, duration: 329.84, paused: false });
+  assert.equal(player.nativeControlsRequired, false);
+  assert.equal(changed, 2);
+});
+
+test('native media errors also reveal the fallback and track changes reset it', () => {
+  const { player, state } = setup();
+  state({ reason: 'error' });
+  assert.equal(player.nativeControlsRequired, true);
+  player.load({ sunoId: songId, title: 'Reload', duration: 329.84 });
+  assert.equal(player.nativeControlsRequired, false);
+  assert.equal(player.connected, false);
+});
+
+test('a stalled first play reveals native controls instead of leaving a hidden unresponsive player', async () => {
+  const { player, state, timers } = setup();
+  state();
+  await player.play();
+  player._playStartedAt = Date.now() - 13000;
+  timers[0]();
+  assert.equal(player.connected, true);
+  assert.equal(player.nativeControlsRequired, true);
+  state({ reason: 'heartbeat' });
+  assert.equal(player.nativeControlsRequired, true);
 });
