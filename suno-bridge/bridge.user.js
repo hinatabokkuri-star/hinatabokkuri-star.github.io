@@ -19,6 +19,7 @@
   let audio = null;
   let token = null;
   let disposed = false;
+  let bootstrapping = false;
   const events = ['loadedmetadata', 'durationchange', 'timeupdate', 'play', 'playing', 'pause', 'seeking', 'seeked', 'waiting', 'ended', 'ratechange', 'error'];
   const finite = value => Number.isFinite(value) ? value : null;
   const send = (reason, requestId = null, error = null) => {
@@ -34,12 +35,16 @@
       available: Boolean(audio)
     }, parentOrigin);
   };
-  const onAudioEvent = event => send(event.type);
+  const onAudioEvent = event => {
+    if (['loadedmetadata', 'playing', 'error'].includes(event.type)) bootstrapping = false;
+    send(event.type);
+  };
   const findAudio = () => {
     const next = document.querySelector('audio');
     if (next === audio) return;
     if (audio) events.forEach(name => audio.removeEventListener(name, onAudioEvent));
     audio = next;
+    bootstrapping = false;
     if (audio) events.forEach(name => audio.addEventListener(name, onAudioEvent));
     send('ready');
   };
@@ -61,9 +66,11 @@
       switch (data.command) {
         case 'play':
           // The embed sets its media source on the first native Play action.
-          if (!audio.currentSrc && !audio.getAttribute('src') && !audio.querySelector('source')) {
+          if (bootstrapping) { send('initializing', data.requestId); return; }
+          if (audio.readyState === 0 && !Number.isFinite(audio.duration)) {
             const buttons = document.querySelectorAll('button');
             if (buttons.length !== 1 || buttons[0].disabled) throw new DOMException('SunoPlayerNotReady', 'InvalidStateError');
+            bootstrapping = true;
             buttons[0].click();
             send('initializing', data.requestId);
             return;
