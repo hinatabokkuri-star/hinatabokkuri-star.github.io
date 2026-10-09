@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "updated": "2026-10-09T14:02:11.515Z",
+  "updated": "2026-10-09T14:48:58.443Z",
   "base_url": "https://hinatabokkuri-star.github.io",
-  "count": 70,
+  "count": 71,
   "songs": [
     {
       "title": "雪の底",
@@ -9853,6 +9853,304 @@
           "time": 308.298,
           "text": "わたしが選んだ　帰り道",
           "end": 316.835
+        }
+      ]
+    },
+    {
+      "title": "Burning Countdown AnotherWorld",
+      "file": "suno_15612953-0b67-4628-a607-b3aa1783bf5e",
+      "file_url": null,
+      "playback_type": "suno",
+      "suno_url": "https://suno.com/song/15612953-0b67-4628-a607-b3aa1783bf5e",
+      "embed_url": "https://suno.com/embed/15612953-0b67-4628-a607-b3aa1783bf5e",
+      "lyrics_text": "Ten... nine... eight...\n笑顔の裏に hiding something\n誰も気づかない this little game\nキラキラ光る broken promise\nBeautiful, isn't it? 全部嘘でも\n手を繋いで walking on the edge\n平和な街に silent countdown\n知らぬふりして smile and wave\nThe clock is ticking, さあ始めよう\nOne more song, 一曲だけ\nDon't look outside, 見ないで\nTake my hand, このまま\nUntil the end of time\nWe're perfectly fine, 大丈夫\nNothing to see here, 心配しないで\nLaugh it off, 笑い飛ばせ\nBut deep inside we're burning bright\n燃え尽きるまで let's dance tonight\nFine, fine, perfectly fine\nLie, lie, one more pretty lie\nSeven... six...\nグラス鳴らして toast to nothing\nニュースは消して shut it down\nPretty lies, 甘く響いて\nThis is fine, fine, fine, fine\nSirens far away, 構わない\n嘘で建てた tower of dreams\nCrumbling down so beautifully\nLet it burn, もう少しだけ\nJust one more dance, もう一曲\nJust one more lie, もう一つだけ\nHold me close, 離さないで\nUntil the silence\nWe're perfectly fine, 大丈夫\nNothing to see here, 心配しないで\nLaugh it off, 笑い飛ばせ\nBut deep inside we're burning bright\n燃え尽きるまで let's dance tonight\nFine, fine, perfectly fine\nTick-tock, running out of time\nこれが正しいと信じていた\nMaybe we were wrong from the start\nでも今更戻れない\nNo way back, no way back\nFive... four... three... two... one...\nWe're perfectly fine, 大丈夫\nNothing to see here, 心配しないで\nLaugh it off, 笑い飛ばせ\nBut deep inside we're burning bright\n燃え尽きるまで let's dance tonight\n燃え尽きるまで dance with me tonight\nWe're perfectly...\n...大丈夫\nZero.",
+      "cover": "covers/burning_countdown_anotherworld.jpg",
+      "cover_url": "https://hinatabokkuri-star.github.io/covers/burning_countdown_anotherworld.jpg",
+      "genre": "rock",
+      "bpm": 145,
+      "album": null,
+      "comment": "同じ言葉が、別の世界を映し出す。終末を笑い飛ばす男女のデュエットに、歪むシンセと鋭いギター、切り替わるリズム。Burning Countdownの歌詞の核を引き継ぎ、曲のテイストを大胆に変えたAnotherWorld。",
+      "lyrics_lrc": "[0:00.479]Ten... nine... eight...\n[0:07.899]Ten... nine... eight...\n[0:22.340]笑顔の裏に hiding something\n[0:25.691]誰も気づかない this little game\n[0:28.803]キラキラ光る broken promise\n[0:32.154]Beautiful, isn't it? 全部嘘でも\n[0:35.266]手を繋いで walking on the edge\n[0:36.782]平和な街に silent countdown\n[0:38.617]知らぬふりして smile and wave\n[0:39.973]The clock is ticking, さあ始めよう\n[0:41.888]One more song, 一曲だけ\n[0:43.484]Don't look outside, 見ないで\n[0:45.080]Take my hand, このまま\n[0:46.755]Until the end of time\n[0:48.989]We're perfectly fine, 大丈夫\n[0:52.420]Nothing to see here, 心配しないで\n[0:55.931]Laugh it off, 笑い飛ばせ\n[0:58.644]But deep inside we're burning bright\n[1:00.718]燃え尽きるまで let's dance tonight\n[1:03.750]Fine, fine, perfectly fine\n[1:07.101]Lie, lie, one more pretty lie\n[1:11.569]Seven... six...\n[1:13.404]グラス鳴らして toast to nothing\n[1:16.755]ニュースは消して shut it down\n[1:19.867]Pretty lies, 甘く響いて\n[1:22.580]This is fine, fine, fine, fine\n[1:26.170]Sirens far away, 構わない\n[1:28.245]嘘で建てた tower of dreams\n[1:29.840]Crumbling down so beautifully\n[1:31.277]Let it burn, もう少しだけ\n[1:33.032]Just one more dance, もう一曲\n[1:34.707]Just one more lie, もう一つだけ\n[1:36.463]Hold me close, 離さないで\n[1:38.457]Until the silence\n[1:40.372]We're perfectly fine, 大丈夫\n[1:43.723]Nothing to see here, 心配しないで\n[1:47.154]Laugh it off, 笑い飛ばせ\n[1:49.867]But deep inside we're burning bright\n[1:51.941]燃え尽きるまで let's dance tonight\n[1:55.053]Fine, fine, perfectly fine\n[1:58.404]Tick-tock, running out of time\n[2:01.117]これが正しいと信じていた\n[2:08.138]これが正しいと信じていた\n[2:11.649]Maybe we were wrong from the start\n[2:14.521]でも今更戻れない\n[2:17.952]No way back, no way back\n[2:21.543]Five... four... three... two... one...\n[2:36.622]We're perfectly fine, 大丈夫\n[2:39.973]Nothing to see here, 心配しないで\n[2:43.564]Laugh it off, 笑い飛ばせ\n[2:46.197]But deep inside we're burning bright\n[2:48.271]燃え尽きるまで let's dance tonight\n[2:54.814]燃え尽きるまで dance with me tonight\n[3:03.112]We're perfectly...\n[3:06.702]...大丈夫\n[3:09.973]Zero.",
+      "lyrics_parsed": [
+        {
+          "time": 0.479,
+          "text": "Ten... nine... eight...",
+          "end": 1.995
+        },
+        {
+          "time": 7.899,
+          "text": "Ten... nine... eight...",
+          "end": 9.415
+        },
+        {
+          "time": 22.34,
+          "text": "笑顔の裏に hiding something",
+          "end": 25.612
+        },
+        {
+          "time": 25.691,
+          "text": "誰も気づかない this little game",
+          "end": 28.564
+        },
+        {
+          "time": 28.803,
+          "text": "キラキラ光る broken promise",
+          "end": 31.755
+        },
+        {
+          "time": 32.154,
+          "text": "Beautiful, isn't it? 全部嘘でも",
+          "end": 34.707
+        },
+        {
+          "time": 35.266,
+          "text": "手を繋いで walking on the edge",
+          "end": 36.782
+        },
+        {
+          "time": 36.782,
+          "text": "平和な街に silent countdown",
+          "end": 38.617
+        },
+        {
+          "time": 38.617,
+          "text": "知らぬふりして smile and wave",
+          "end": 39.973
+        },
+        {
+          "time": 39.973,
+          "text": "The clock is ticking, さあ始めよう",
+          "end": 41.729
+        },
+        {
+          "time": 41.888,
+          "text": "One more song, 一曲だけ",
+          "end": 43.245
+        },
+        {
+          "time": 43.484,
+          "text": "Don't look outside, 見ないで",
+          "end": 45.08
+        },
+        {
+          "time": 45.08,
+          "text": "Take my hand, このまま",
+          "end": 46.277
+        },
+        {
+          "time": 46.755,
+          "text": "Until the end of time",
+          "end": 48.59
+        },
+        {
+          "time": 48.989,
+          "text": "We're perfectly fine, 大丈夫",
+          "end": 51.622
+        },
+        {
+          "time": 52.42,
+          "text": "Nothing to see here, 心配しないで",
+          "end": 55.771
+        },
+        {
+          "time": 55.931,
+          "text": "Laugh it off, 笑い飛ばせ",
+          "end": 58.245
+        },
+        {
+          "time": 58.644,
+          "text": "But deep inside we're burning bright",
+          "end": 60.638
+        },
+        {
+          "time": 60.718,
+          "text": "燃え尽きるまで let's dance tonight",
+          "end": 63.75
+        },
+        {
+          "time": 63.75,
+          "text": "Fine, fine, perfectly fine",
+          "end": 67.021
+        },
+        {
+          "time": 67.101,
+          "text": "Lie, lie, one more pretty lie",
+          "end": 69.814
+        },
+        {
+          "time": 71.569,
+          "text": "Seven... six...",
+          "end": 73.404
+        },
+        {
+          "time": 73.404,
+          "text": "グラス鳴らして toast to nothing",
+          "end": 76.755
+        },
+        {
+          "time": 76.755,
+          "text": "ニュースは消して shut it down",
+          "end": 79.787
+        },
+        {
+          "time": 79.867,
+          "text": "Pretty lies, 甘く響いて",
+          "end": 82.101
+        },
+        {
+          "time": 82.58,
+          "text": "This is fine, fine, fine, fine",
+          "end": 86.09
+        },
+        {
+          "time": 86.17,
+          "text": "Sirens far away, 構わない",
+          "end": 88.245
+        },
+        {
+          "time": 88.245,
+          "text": "嘘で建てた tower of dreams",
+          "end": 89.84
+        },
+        {
+          "time": 89.84,
+          "text": "Crumbling down so beautifully",
+          "end": 91.197
+        },
+        {
+          "time": 91.277,
+          "text": "Let it burn, もう少しだけ",
+          "end": 92.713
+        },
+        {
+          "time": 93.032,
+          "text": "Just one more dance, もう一曲",
+          "end": 94.309
+        },
+        {
+          "time": 94.707,
+          "text": "Just one more lie, もう一つだけ",
+          "end": 96.223
+        },
+        {
+          "time": 96.463,
+          "text": "Hold me close, 離さないで",
+          "end": 98.138
+        },
+        {
+          "time": 98.457,
+          "text": "Until the silence",
+          "end": 99.574
+        },
+        {
+          "time": 100.372,
+          "text": "We're perfectly fine, 大丈夫",
+          "end": 102.926
+        },
+        {
+          "time": 103.723,
+          "text": "Nothing to see here, 心配しないで",
+          "end": 106.995
+        },
+        {
+          "time": 107.154,
+          "text": "Laugh it off, 笑い飛ばせ",
+          "end": 109.548
+        },
+        {
+          "time": 109.86699999999999,
+          "text": "But deep inside we're burning bright",
+          "end": 111.862
+        },
+        {
+          "time": 111.941,
+          "text": "燃え尽きるまで let's dance tonight",
+          "end": 115.053
+        },
+        {
+          "time": 115.053,
+          "text": "Fine, fine, perfectly fine",
+          "end": 118.324
+        },
+        {
+          "time": 118.404,
+          "text": "Tick-tock, running out of time",
+          "end": 121.117
+        },
+        {
+          "time": 121.117,
+          "text": "これが正しいと信じていた",
+          "end": 122.713
+        },
+        {
+          "time": 128.138,
+          "text": "これが正しいと信じていた",
+          "end": 131.17
+        },
+        {
+          "time": 131.649,
+          "text": "Maybe we were wrong from the start",
+          "end": 134.122
+        },
+        {
+          "time": 134.52100000000002,
+          "text": "でも今更戻れない",
+          "end": 136.995
+        },
+        {
+          "time": 137.952,
+          "text": "No way back, no way back",
+          "end": 140.665
+        },
+        {
+          "time": 141.543,
+          "text": "Five... four... three... two... one...",
+          "end": 144.096
+        },
+        {
+          "time": 156.622,
+          "text": "We're perfectly fine, 大丈夫",
+          "end": 159.255
+        },
+        {
+          "time": 159.973,
+          "text": "Nothing to see here, 心配しないで",
+          "end": 163.245
+        },
+        {
+          "time": 163.564,
+          "text": "Laugh it off, 笑い飛ばせ",
+          "end": 165.798
+        },
+        {
+          "time": 166.197,
+          "text": "But deep inside we're burning bright",
+          "end": 168.191
+        },
+        {
+          "time": 168.27100000000002,
+          "text": "燃え尽きるまで let's dance tonight",
+          "end": 171.303
+        },
+        {
+          "time": 174.814,
+          "text": "燃え尽きるまで dance with me tonight",
+          "end": 181.516
+        },
+        {
+          "time": 183.112,
+          "text": "We're perfectly...",
+          "end": 183.91
+        },
+        {
+          "time": 186.702,
+          "text": "...大丈夫",
+          "end": 187.58
+        },
+        {
+          "time": 189.973,
+          "text": "Zero.",
+          "end": 193.085
         }
       ]
     }
