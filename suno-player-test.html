@@ -20,6 +20,24 @@
     .player { padding: 14px; border: 1px solid #333; border-radius: 18px; background: #161616; overflow: hidden; }
     iframe { display: block; width: 100%; height: 180px; border: 0; border-radius: 10px; }
     .footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; font-size: 13px; color: #999; }
+    .panel { margin-top: 28px; padding: 22px; border: 1px solid #333; border-radius: 18px; background: #161616; }
+    h2 { margin: 0 0 16px; font-size: 20px; }
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    button { border: 1px solid #555; border-radius: 9px; padding: 10px 14px; background: #292929; color: #eee; font: inherit; cursor: pointer; }
+    button:disabled { opacity: .4; cursor: default; }
+    button.primary { background: #ffa600; color: #0d0d0d; border-color: #ffa600; font-weight: 700; }
+    button:focus-visible, .lyric-row:focus-visible { outline: 2px solid #ffa600; outline-offset: 3px; }
+    .status, .hint { color: #aaa; font-size: 13px; line-height: 1.8; }
+    .status.connected { color: #c5e8b4; }
+    .time { font-variant-numeric: tabular-nums; font-size: 22px; margin: 18px 0 6px; }
+    input[type=range] { width: 100%; accent-color: #ffa600; margin: 12px 0; }
+    .lyrics { margin-top: 18px; max-height: 430px; overflow: auto; scrollbar-gutter: stable; }
+    .section { color: #aaa; font-size: 12px; margin: 22px 0 8px; }
+    .lyric-row { display: grid; grid-template-columns: 68px 1fr; gap: 12px; width: 100%; border: 1px solid transparent; border-radius: 8px; background: transparent; text-align: left; padding: 10px 8px; line-height: 1.65; }
+    .lyric-row.selected { border-color: #6f551e; }
+    .lyric-row.active { background: #392b13; color: #ffd27a; }
+    .lyric-row time { color: #999; font-variant-numeric: tabular-nums; font-size: 12px; }
+    .notice { color: #ddd; font-size: 14px; line-height: 1.8; }
     a { color: #ffa600; text-underline-offset: 4px; }
     @media (max-width: 480px) { main { padding: 28px 16px; } header { margin-bottom: 32px; } .player { padding: 6px; } iframe { height: 200px; } }
   </style>
@@ -34,13 +52,41 @@
     <h1>ひと駅ぶんの逃避行</h1>
     <p class="description">いつもの駅で降りずに、ひと駅だけ先へ。<br>夏の名残と秋の風のあいだを駆ける、放課後の小さな冒険。</p>
     <section class="player" aria-label="楽曲プレイヤー">
-      <iframe src="https://suno.com/embed/5af0c312-53e0-4ad1-a153-68d13bef02c6" title="ひと駅ぶんの逃避行 — Sunoプレイヤー" allow="autoplay" loading="eager"></iframe>
+      <iframe id="suno-frame" src="https://suno.com/embed/5af0c312-53e0-4ad1-a153-68d13bef02c6" title="ひと駅ぶんの逃避行 — Sunoプレイヤー" allow="autoplay" loading="eager"></iframe>
     </section>
     <div class="footer">
       <span>HINATABOKKURI · Sunoで配信</span>
       <a href="https://suno.com/song/5af0c312-53e0-4ad1-a153-68d13bef02c6" target="_blank" rel="noopener noreferrer">Sunoで曲を開く ↗</a>
     </div>
+    <section class="panel" aria-label="サイトからの再生操作">
+      <h2>サイトからの再生操作</h2>
+      <p id="connection" class="status" role="status">連携スクリプトの接続待ち。Suno枠内の再生ボタンはそのまま使えます。</p>
+      <div class="controls">
+        <button id="play" class="primary" disabled>再生</button>
+        <button id="pause" disabled>一時停止</button>
+        <button id="restart" disabled>先頭へ</button>
+      </div>
+      <div id="clock" class="time">0:00.0 / —</div>
+      <label for="seek" class="hint">再生位置</label>
+      <input id="seek" type="range" min="0" max="1" value="0" step="0.1" disabled>
+      <p id="playback-state" class="hint">再生状態を待っています。</p>
+      <p class="hint">自分のブラウザーでも操作する場合は、<a href="suno-bridge/bridge.user.js" download>連携スクリプト</a>を使用します。<a href="https://github.com/hinatabokkuri-star/hinatabokkuri-star.github.io/tree/main/suno-bridge" target="_blank" rel="noopener noreferrer">使い方 ↗</a></p>
+    </section>
+    <section class="panel" aria-label="歌詞の時刻付け">
+      <h2>聴きながら歌詞に時刻を付ける</h2>
+      <p class="notice">行を選び、その歌詞が始まった瞬間にボタンを押してください。Sunoの実際の再生時刻を記録し、次の行を選びます。</p>
+      <div class="controls">
+        <button id="stamp" class="primary" disabled>選んだ行に現在時刻を付ける</button>
+        <button id="jump" disabled>選んだ行へ移動</button>
+        <button id="clear-cue" disabled>選んだ時刻を消す</button>
+        <button id="export-lrc" disabled>LRCを保存</button>
+      </div>
+      <p id="cue-status" class="status" role="status">歌詞を読み込んでいます。</p>
+      <div id="lyrics" class="lyrics" aria-label="歌詞一覧"></div>
+      <p class="hint">時刻を付けた行だけが再生位置に追従します。記録するのは歌詞と時刻です。音声の保存・録音・外部送信は行いません。</p>
+    </section>
     <p style="margin-top:40px;font-size:13px"><a href="/">← 楽曲一覧に戻る</a></p>
   </main>
+  <script src="suno-player-test.js" defer></script>
 </body>
 </html>

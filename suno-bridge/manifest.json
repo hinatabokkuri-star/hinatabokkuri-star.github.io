@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "HINATA Suno player bridge (test)",
+  "version": "0.1.0",
+  "description": "Connect the selected Suno embed player to the HINATA test page without capturing audio.",
+  "content_scripts": [
+    {
+      "matches": ["https://suno.com/embed/5af0c312-53e0-4ad1-a153-68d13bef02c6"],
+      "js": ["bridge.user.js"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ]
+}
