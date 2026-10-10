@@ -67,7 +67,8 @@ test('the lyric card holds through breathing pauses and clears for real instrume
   const root = path.join(__dirname, '..');
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const updater = html.slice(html.indexOf('function updateLyric(t) {'), html.indexOf('// Search input'));
-  const song = JSON.parse(fs.readFileSync(path.join(root, 'data/songs.json'), 'utf8')).songs.at(-1);
+  const song = JSON.parse(fs.readFileSync(path.join(root, 'data/songs.json'), 'utf8')).songs
+    .find(song => song.suno_url === 'https://suno.com/song/5af0c312-53e0-4ad1-a153-68d13bef02c6');
   const nodes = song.lyrics_parsed.map(() => ({
     classes: new Set(),
     classList: { toggle() {} }, setAttribute() {}, removeAttribute() {},
